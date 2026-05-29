@@ -98,7 +98,7 @@
   .sheet .rule{width:46px;height:1px;background:var(--amber);opacity:0.5;margin:22px auto;}
   .btn{display:inline-block;margin-top:18px;background:transparent;border:1px solid var(--amber);color:var(--amber);
     font-family:'Fraunces',serif;font-size:15px;letter-spacing:1px;padding:12px 28px;border-radius:30px;cursor:pointer;
-    white-space:nowrap;transition:background .25s,color .25s;}
+    transition:background .25s,color .25s;}
   .btn:hover{background:var(--amber);color:var(--bg);}
   .btn{margin-top:0;}
   .btn.ghost{border-color:var(--line);color:var(--ink-dim);}
@@ -132,7 +132,7 @@
   .mark .v{font-family:'Fraunces';font-size:18px;color:var(--amber);}
   .mark .l{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-faint);margin-top:3px;}
   .lineage{margin-top:18px;}
-  .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:14px;}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px;}
   .tab{background:transparent;border:1px solid var(--line);color:var(--ink-dim);font-family:'Fraunces',serif;
     font-size:13px;letter-spacing:.5px;padding:7px 16px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:all .2s;}
   .tab.on{border-color:var(--amber);color:var(--amber);background:rgba(224,169,75,0.1);}
