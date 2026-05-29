@@ -3,6 +3,22 @@
    writing, choices, faces, and time.
    ============================================================ */
 
+/* ---------- storage adapter ----------
+   The save system talks to an async key-value store via window.storage
+   (get / set / delete / list). A sandboxed host (e.g. an embedded artifact)
+   may supply one; a plain browser does not. When it's absent we back it with
+   localStorage, so saves persist when the game is opened as a file or served
+   on GitHub Pages — exactly as the README promises. A host-provided store is
+   left untouched. */
+if(typeof window!=='undefined' && !window.storage){
+  window.storage={
+    async get(k){ try{ const v=localStorage.getItem(k); return v==null?null:{value:v}; }catch(e){ return null; } },
+    async set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} },
+    async delete(k){ try{ localStorage.removeItem(k); }catch(e){} },
+    async list(prefix){ const keys=[]; try{ const pre=prefix||''; for(let i=0;i<localStorage.length;i++){ const key=localStorage.key(i); if(key&&key.indexOf(pre)===0) keys.push(key); } }catch(e){} return {keys}; },
+  };
+}
+
 /* ---------- names ---------- */
 const GIVEN_M=['Tomas','Elias','Henrik','Caleb','Aldous','Mateo','Ren','Soren','Idris','Cassian','Otto','Bram','Lucan','Emory','Hale'];
 const GIVEN_F=['Mira','Iris','Lena','Cosima','Noor','Saoirse','Adaline','Yara','Esme','Theda','Liv','Marguerite','Ronja','Calla','Vesna'];
@@ -109,7 +125,7 @@ function fx(p, d){
   // every choice writes to the life's aura, so the world reflects who you're becoming
   if(p.aura){
     const warmD = (d.heart||0)*0.6 + (d.spirit||0)*0.3 + (d.means||0)*0.05;
-    const lightD = (d.spirit||0)*0.6 + (d.heart||0)*0.2 + (d.mind||0)*0.15 - (d.vit&&d.vit<0?0:0);
+    const lightD = (d.spirit||0)*0.6 + (d.heart||0)*0.2 + (d.mind||0)*0.15;
     p.aura.warmth = clamp((p.aura.warmth||0) + warmD*0.5, -40, 40);
     p.aura.light  = clamp((p.aura.light||0)  + lightD*0.5, -40, 40);
     p.aura.turns  = (p.aura.turns||0)+1;
@@ -374,6 +390,12 @@ function haveChild(){
   const c=addRel('child',given,sex,72,0);
   // seed the child's nature now (genetics + regression), store for heir handoff
   const partner=rel('spouse')||rel('love');
+  // the other parent carries a hidden nature too, so a child genuinely blends two
+  // lines before regressing toward the mean. Seeded lazily (covers older saves).
+  if(partner){
+    if(!partner.seedStats) partner.seedStats={vit:ri(50,72),mind:ri(40,68),heart:ri(45,72),means:ri(20,45),spirit:ri(48,70)};
+    if(!partner.traitsSeed) partner.traitsSeed=rollTraits();
+  }
   c.seed=seedChildStats(P, partner);
   c.traitsSeed=inheritTraits([...P.traits, ...(partner&&partner.traitsSeed?partner.traitsSeed:[])]);
   P.childrenIds.push(given);
@@ -793,7 +815,6 @@ function makeFounder(gen=1, surname){
   return p;
 }
 function seedParents(p){
-  const ms=chance(0.5)?'f':'f'; // mother
   P=p;
   addRel('mother',pick(GIVEN_F),'f',64,ri(22,34));
   if(chance(0.85)) addRel('father',pick(GIVEN_M),'m',58,ri(24,38));
@@ -849,8 +870,7 @@ function renderLogTail(){
   if(!e) return;
   const div=document.createElement('div');
   div.className='entry '+(e.cls||'');
-  div.innerHTML=`<span class="a">${e.age}</span>${e.text.replace(/\{[^}]+\}/g,'')}`;
-  // fix tokens for stored lines (they were already fmt'd at push, but obs use tokens) — refmt:
+  // stored lines keep their pronoun tokens (obs/echo lines use them); resolve at render time
   div.innerHTML=`<span class="a">${e.age}</span>${reTok(e.text)}`;
   log.appendChild(div);
   log.scrollTop=log.scrollHeight;

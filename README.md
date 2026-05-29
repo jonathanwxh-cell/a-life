@@ -23,10 +23,10 @@ There are no visible numbers. The game is reading and pacing, not stats. What yo
 ## How to play
 
 1. Open the game and tap **Begin a new line.**
-2. Let the years pass. Pause any time with the â–®â–® button.
+2. Let the years pass. Pause any time with the ▮▮ button.
 3. When a moment arrives, read it and choose. There's no undo.
 4. When you die, read the eulogy and **become your heir** to continue the line — or, if there's no heir, begin anew.
-5. Tap **âœ¦ the constellation** (top-right) to see your whole bloodline; the **Chronicle** holds *This Life*, *The Line* (the house and its ancestors), and the *Constellation*.
+5. Tap **✦ the constellation** (top-right) to see your whole bloodline; the **Chronicle** holds *This Life*, *The Line* (the house and its ancestors), and the *Constellation*.
 
 ## Saving &amp; backups — please read
 
@@ -34,7 +34,7 @@ Progress autosaves to the browser's local storage, with up to six save slots.
 
 **Browser storage can be cleared** — by the browser, by privacy settings, or by the environment the game is embedded in. So the game also gives you a save you hold yourself:
 
-- **Menu â†’ Load a chronicle â†’ Export current line** copies your entire dynasty to the clipboard as a portable code (it also appears in the text box). Paste it somewhere safe.
+- **Menu → Load a chronicle → Export current line** copies your entire dynasty to the clipboard as a portable code (it also appears in the text box). Paste it somewhere safe.
 - **Import from code** restores a dynasty from such a code, into a fresh slot.
 - The eulogy screen has a one-tap **back up this bloodline** link at each natural stopping point.
 
