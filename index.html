@@ -2,27 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A Life</title>
-<!--
-  A Life — a meditative, generational life-sim.
-  This is the canonical build. The full source lives in this one file.
-  The authoritative copy is maintained by the author; this index.html
-  is what GitHub Pages serves. See README.md for details.
--->
-<script>
-/* The full game is large; it is committed in full via the project tooling.
-   If you are reading this on GitHub and the body below looks truncated,
-   pull the raw file — it is a complete, self-contained single-file app. */
-</script>
 <meta name="description" content="A Life — live one person from birth to death; your choices compound silently across generations into a dynasty.">
+<link rel="canonical" href="./a-life.html">
+<meta http-equiv="refresh" content="0; url=./a-life.html">
+<style>
+  html,body{height:100%;margin:0;background:#16110d;color:#ece1cf;
+    font-family:Georgia,'Times New Roman',serif;-webkit-font-smoothing:antialiased;}
+  .wrap{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;}
+  h1{font-size:42px;font-weight:500;letter-spacing:.5px;margin:0 0 10px;}
+  p{color:#a99c87;font-style:italic;margin:0 0 26px;line-height:1.6;}
+  a{display:inline-block;border:1px solid #e0a94b;color:#e0a94b;text-decoration:none;
+    padding:12px 28px;border-radius:30px;letter-spacing:1px;transition:background .25s,color .25s;}
+  a:hover{background:#e0a94b;color:#16110d;}
+</style>
 </head>
 <body>
-<noscript>A Life requires JavaScript.</noscript>
-<p style="font-family:serif;max-width:40rem;margin:4rem auto;line-height:1.6;color:#444">
-This placeholder is replaced by the full game build. If you are seeing this text,
-the complete <code>index.html</code> has not finished uploading yet — check the
-repository's latest commit or the Releases page for the full single-file game.
-</p>
+  <div class="wrap">
+    <h1>A Life</h1>
+    <p>One person, born into the world.<br>Then the next. A line drawn across time.</p>
+    <a href="./a-life.html">Enter &rarr;</a>
+  </div>
+  <script>location.replace('./a-life.html');</script>
 </body>
 </html>
