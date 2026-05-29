@@ -225,8 +225,8 @@
       const sw=stageWord(age);
       if(sw!==lastStage){
         if(lastStage!==null){
-          st.textContent=sw; st.classList.add('show'); setTimeout(()=>st.classList.remove('show'),2600);
-          if(stArt && STAGE_ART[sw]){ stArt.style.backgroundImage="url('assets/"+STAGE_ART[sw]+".webp')"; stArt.classList.add('show'); setTimeout(()=>stArt.classList.remove('show'),2600); }
+          st.textContent=sw; st.classList.add('show'); setTimeout(()=>st.classList.remove('show'),3500);
+          if(stArt && STAGE_ART[sw]){ stArt.style.backgroundImage="url('assets/"+STAGE_ART[sw]+".webp')"; stArt.classList.add('show'); setTimeout(()=>stArt.classList.remove('show'),5000); }
         }
         lastStage=sw;
       }
