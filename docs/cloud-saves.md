@@ -1,6 +1,6 @@
 # Cloud saves — design spec
 
-*Status: implemented 2026-05-29. Cloud activates once `SUPABASE_SERVICE_ROLE_KEY` is set on the Vercel project; until then `/api/chronicle` returns 503 and the game stays local-only. Date: 2026-05-29.*
+*Status: live as of 2026-05-29 — `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` set on Vercel, and the route PUT/GET round-trip verified against production. Falls back to local-only whenever the cloud is unreachable. Date: 2026-05-29.*
 
 ## Goal
 
