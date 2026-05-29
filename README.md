@@ -1,6 +1,6 @@
 # A Life
 
-*A meditative, generational life-sim that fits in a single HTML file.*
+*A meditative, generational life-sim in a handful of small, plain files — no build step, no dependencies.*
 
 You live one person, from birth to death. The years pass on their own; now and then a moment asks something of you. You choose, and the choice is permanent. When that life ends, you become its heir — and everything the last life accumulated, in wealth and reputation and quiet damage, settles onto the next. Played long enough, a family takes shape: a **dynasty** with a standing, a name, heirlooms, and secrets, drawn across generations.
 
@@ -53,13 +53,21 @@ python3 -m http.server 8000
 
 | File | What it is |
 | --- | --- |
-| `a-life.html` | The game's structure and styles; loads `game.js`. The page you open to play. |
-| `game.js` | All game logic — the life engine, event cards, the dynasty/house system, persistence, backup/restore, the living scene, and the constellation. |
+| `a-life.html` | The page you open to play — markup only; pulls in the stylesheet and the scripts below. |
+| `styles.css` | All styling, lifted out of the HTML. |
+| `core.js` | Shared foundation: the storage adapter, helpers, game state, the person factory, traits, relationships, logging, and memory. |
+| `content.js` | The event cards — every moment the game can present. |
+| `engine.js` | The life simulation: time, drift, ageing, death, and drawing/presenting cards. |
+| `dynasty.js` | Death & succession, and the house that accrues across generations (seats, reputation, heirlooms, secrets). |
+| `ui.js` | Rendering — the header, the living "being" line, the log, and the chronicle panes. |
+| `persistence.js` | Save slots, export/import backup codes, storage recovery, and boot. |
+| `scene.js` | The living scene — sky, sun and moon, the growing tree, and particles, on the background canvas. |
+| `constellation.js` | The bloodline star-map. |
 | `index.html` | A small entry page that opens `a-life.html` (so GitHub Pages serves the game at the root). |
 
 ## Tech
 
-Plain HTML, CSS, and vanilla JavaScript. No build step, no framework, no dependencies. All rendering is Canvas 2D. Fonts are loaded from Google Fonts; everything else is self-contained.
+Plain HTML, CSS, and vanilla JavaScript — split into small scripts loaded in dependency order, with no ES modules, so it still runs straight off the filesystem. No build step, no framework, no dependencies. All rendering is Canvas 2D. Fonts are loaded from Google Fonts; everything else is self-contained.
 
 ## License
 
