@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>A Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#16110d;
+    --bg2:#1f1813;
+    --ink:#ece1cf;
+    --ink-dim:#a99c87;
+    --ink-faint:#6f6354;
+    --amber:#e0a94b;
+    --rose:#d08a86;
+    --sage:#9bbf9a;
+    --line:rgba(236,225,207,0.11);
+    --card:rgba(35,27,21,0.9);
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  #sky{position:fixed;inset:0;z-index:0;display:block;width:100%;height:100%;}
+  #stageTitle{position:fixed;top:42%;left:0;right:0;z-index:3;text-align:center;pointer-events:none;
+    font-family:'Fraunces',serif;font-weight:400;font-size:13px;letter-spacing:8px;text-transform:uppercase;
+    color:var(--amber);opacity:0;transition:opacity 1.4s ease;text-shadow:0 0 24px rgba(224,169,75,0.6);}
+  #stageTitle.show{opacity:0.92;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Newsreader',serif;
+    overflow:hidden;
+    -webkit-tap-highlight-color:transparent;
+    -webkit-font-smoothing:antialiased;
+  }
+  .grain{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:0.045;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .glow{position:fixed;inset:0;pointer-events:none;z-index:1;
+    background:radial-gradient(120% 90% at 50% 8%, rgba(224,169,75,0.10), transparent 55%),
+               radial-gradient(140% 120% at 50% 120%, rgba(0,0,0,0.55), transparent 60%);}
+  #app{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;max-width:560px;margin:0 auto;}
+  header{display:flex;justify-content:space-between;align-items:baseline;padding:18px 22px 10px;}
+  .who{display:flex;flex-direction:column;gap:2px;}
+  .who .name{font-family:'Fraunces',serif;font-weight:500;font-size:21px;letter-spacing:0.2px;}
+  .who .meta{font-size:12px;color:var(--ink-dim);letter-spacing:0.4px;}
+  .gen{font-size:10.5px;color:var(--ink-faint);letter-spacing:2px;text-transform:uppercase;text-align:right;line-height:1.7;}
+  .gen .chron{cursor:pointer;color:var(--amber);opacity:0.9;}
+  .gen .chron:hover{opacity:1;}
+  .gen .chron2{cursor:pointer;color:var(--ink-faint);opacity:0.8;font-size:9.5px;}
+  .gen .chron2:hover{opacity:1;color:var(--ink-dim);}
+  .being{padding:2px 22px 0;color:var(--ink-dim);font-size:13.5px;font-style:italic;min-height:20px;
+    opacity:0.9;transition:opacity .6s;}
+  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 22px;min-height:0;}
+  .passing{text-align:center;opacity:0;transition:opacity 1s;}
+  .passing.show{opacity:1;}
+  .passing .yr{font-family:'Fraunces',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--ink-faint);}
+  .passing .age{font-family:'Fraunces',serif;font-weight:400;font-size:54px;line-height:1.05;margin:14px 0 6px;
+    text-shadow:0 2px 30px rgba(0,0,0,0.55);}
+  .passing .age small{font-size:15px;color:var(--ink-dim);letter-spacing:1px;display:block;margin-top:4px;font-family:'Newsreader';}
+  .breath{display:none;}
+  .card{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1);}
+  .card.show{opacity:1;transform:none;}
+  .card .scene{font-family:'Fraunces',serif;font-weight:400;font-size:23px;line-height:1.42;letter-spacing:0.1px;}
+  .card .scene em{font-style:italic;color:var(--amber);}
+  .choices{margin-top:26px;display:flex;flex-direction:column;gap:11px;}
+  .choice{
+    text-align:left;background:var(--card);border:1px solid var(--line);border-radius:13px;
+    padding:14px 17px;color:var(--ink);font-family:'Newsreader',serif;font-size:16px;line-height:1.4;
+    cursor:pointer;transition:border-color .2s,background .2s,transform .08s;position:relative;
+  }
+  .choice:hover{border-color:rgba(224,169,75,0.5);background:rgba(46,35,27,0.95);}
+  .choice:active{transform:scale(0.985);}
+  .choice.chosen{border-color:var(--amber);background:rgba(224,169,75,0.18);animation:chosenPulse .5s ease;}
+  @keyframes chosenPulse{0%{box-shadow:0 0 0 0 rgba(224,169,75,0.5);}100%{box-shadow:0 0 0 14px rgba(224,169,75,0);}}
+  .choice .h{display:block;font-style:italic;color:var(--ink-faint);font-size:13px;margin-top:5px;opacity:0;
+    max-height:0;overflow:hidden;transition:opacity .3s,max-height .3s,margin .3s;}
+  .choice:hover .h{opacity:0.9;max-height:40px;margin-top:6px;}
+  .log{height:148px;overflow-y:auto;padding:12px 22px 4px;border-top:1px solid var(--line);
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 22px);mask-image:linear-gradient(180deg,transparent,#000 22px);}
+  .log::-webkit-scrollbar{width:0;}
+  .entry{font-size:14.5px;line-height:1.5;margin-bottom:9px;color:var(--ink-dim);opacity:0;animation:rise .6s forwards;}
+  .entry .a{color:var(--ink-faint);font-size:11px;letter-spacing:1px;margin-right:8px;}
+  .entry.obs{font-style:italic;color:var(--ink);}
+  .entry.joy{color:var(--sage);}
+  .entry.loss{color:var(--rose);}
+  .entry.echo{color:var(--ink);font-style:italic;padding-left:13px;border-left:2px solid rgba(224,169,75,0.45);}
+  @keyframes rise{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  footer{display:flex;align-items:center;gap:14px;padding:10px 22px calc(16px + env(safe-area-inset-bottom));}
+  .flow{display:flex;align-items:center;gap:9px;flex:1;color:var(--ink-faint);font-size:12px;letter-spacing:0.5px;}
+  .pp{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:rgba(236,225,207,0.04);
+    color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:background .2s,transform .1s;flex:0 0 38px;}
+  .pp:hover{background:rgba(236,225,207,0.1);}
+  .pp:active{transform:scale(0.93);}
+  .pp svg{width:14px;height:14px;}
+  .veil{position:fixed;inset:0;z-index:10;background:rgba(12,9,7,0.86);backdrop-filter:blur(7px);
+    display:flex;align-items:center;justify-content:center;padding:26px;opacity:0;pointer-events:none;
+    transition:opacity .6s;}
+  .veil.show{opacity:1;pointer-events:auto;}
+  .sheet{max-width:430px;width:100%;text-align:center;max-height:88vh;overflow-y:auto;}
+  .sheet::-webkit-scrollbar{width:0;}
+  .sheet h1{font-family:'Fraunces',serif;font-weight:500;font-size:40px;letter-spacing:0.5px;margin-bottom:6px;}
+  .sheet h1.small{font-size:27px;}
+  .sheet .tag{color:var(--ink-dim);font-style:italic;font-size:15px;margin-bottom:26px;line-height:1.5;}
+  .sheet p{font-size:16px;line-height:1.62;color:var(--ink);margin-bottom:14px;}
+  .sheet p.dim{color:var(--ink-dim);font-size:14.5px;}
+  .sheet .rule{width:46px;height:1px;background:var(--amber);opacity:0.5;margin:22px auto;}
+  .btn{display:inline-block;margin-top:18px;background:transparent;border:1px solid var(--amber);color:var(--amber);
+    font-family:'Fraunces',serif;font-size:15px;letter-spacing:1px;padding:12px 28px;border-radius:30px;cursor:pointer;
+    transition:background .25s,color .25s;}
+  .btn:hover{background:var(--amber);color:var(--bg);}
+  .btn{margin-top:0;}
+  .btn.ghost{border-color:var(--line);color:var(--ink-dim);}
+  .btn.ghost:hover{background:rgba(236,225,207,0.08);color:var(--ink);}
+  .slot{display:flex;align-items:center;gap:12px;background:rgba(236,225,207,0.04);border:1px solid var(--line);
+    border-radius:14px;padding:13px 15px;margin-bottom:10px;cursor:pointer;transition:border-color .2s,background .2s;}
+  .slot:hover{border-color:rgba(224,169,75,0.45);background:rgba(46,35,27,0.6);}
+  .slot .body{flex:1;min-width:0;}
+  .slot .nm{font-family:'Fraunces';font-size:16px;color:var(--ink);}
+  .slot .sub{font-size:11.5px;color:var(--ink-dim);margin-top:3px;letter-spacing:.3px;}
+  .slot .sub .dead{color:var(--rose);}
+  .slot .del{flex:0 0 auto;color:var(--ink-faint);font-size:13px;padding:6px 8px;border-radius:8px;cursor:pointer;}
+  .slot .del:hover{color:var(--rose);background:rgba(208,138,134,0.12);}
+  .slot.empty{justify-content:center;color:var(--ink-faint);font-style:italic;cursor:default;}
+  .slot.empty:hover{border-color:var(--line);background:rgba(236,225,207,0.04);}
+  .backup{margin:14px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(236,225,207,0.03);text-align:center;}
+  .backupTitle{font-family:'Fraunces',serif;font-size:13px;color:var(--amber);letter-spacing:.5px;margin-bottom:10px;opacity:.9;}
+  #codeBox{width:100%;height:64px;resize:none;background:rgba(12,9,7,0.5);border:1px solid var(--line);border-radius:10px;
+    color:var(--ink-dim);font-family:'DM Mono',monospace;font-size:10px;padding:9px 11px;line-height:1.4;outline:none;word-break:break-all;}
+  #codeBox:focus{border-color:rgba(224,169,75,0.4);}
+  .backupRow{display:flex;gap:9px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
+  .backupRow .btn{font-size:12px;padding:9px 16px;}
+  .backupMsg{font-size:11.5px;color:var(--sage);margin-top:9px;min-height:15px;font-style:italic;}
+  .backupMsg.warn{color:var(--rose);}
+  .eul-line{font-family:'Newsreader';font-style:italic;font-size:16px;color:var(--ink);line-height:1.6;}
+  .survivors{font-size:13.5px;color:var(--ink-dim);margin-top:8px;line-height:1.7;}
+  .tree{text-align:left;}
+  .tree h1{text-align:center;}
+  .marks{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 8px;}
+  .mark{background:rgba(236,225,207,0.05);border:1px solid var(--line);border-radius:10px;padding:8px 12px;text-align:center;min-width:84px;}
+  .mark .v{font-family:'Fraunces';font-size:18px;color:var(--amber);}
+  .mark .l{font-size:9.5px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-faint);margin-top:3px;}
+  .lineage{margin-top:18px;}
+  .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:14px;}
+  .tab{background:transparent;border:1px solid var(--line);color:var(--ink-dim);font-family:'Fraunces',serif;
+    font-size:13px;letter-spacing:.5px;padding:7px 16px;border-radius:20px;cursor:pointer;transition:all .2s;}
+  .tab.on{border-color:var(--amber);color:var(--amber);background:rgba(224,169,75,0.1);}
+  .lifeHead{text-align:center;margin-bottom:14px;}
+  .lifeHead .nm{font-family:'Fraunces';font-size:19px;color:var(--ink);}
+  .lifeHead .sub{font-size:12px;color:var(--ink-dim);font-style:italic;margin-top:4px;line-height:1.5;}
+  .memoir{text-align:left;max-height:46vh;overflow-y:auto;padding-right:4px;
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 14px,#000 calc(100% - 14px),transparent);
+    mask-image:linear-gradient(180deg,transparent,#000 14px,#000 calc(100% - 14px),transparent);}
+  .memoir::-webkit-scrollbar{width:0;}
+  .mline{display:flex;gap:11px;padding:7px 0;border-bottom:1px solid rgba(236,225,207,0.05);font-size:14px;line-height:1.5;}
+  .mline .ma{font-family:'Fraunces';font-size:11px;color:var(--ink-faint);flex:0 0 26px;text-align:right;padding-top:2px;}
+  .mline .mt{flex:1;color:var(--ink-dim);}
+  .mline.obs .mt{font-style:italic;color:var(--ink);}
+  .mline.joy .mt{color:var(--sage);}
+  .mline.loss .mt{color:var(--rose);}
+  .mline.echo .mt{font-style:italic;color:var(--ink);padding-left:11px;border-left:2px solid rgba(224,169,75,0.4);}
+  .mline .stage-sep{font-family:'Fraunces';font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--amber);opacity:.6;}
+  .starWrap{position:relative;width:100%;height:54vh;border-radius:16px;overflow:hidden;
+    background:radial-gradient(130% 100% at 50% 0%, #1a1830, #0c0a14 70%);border:1px solid var(--line);}
+  #starCanvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab;}
+  #starCanvas:active{cursor:grabbing;}
+  .starTip{position:absolute;pointer-events:none;background:rgba(12,9,7,0.9);border:1px solid rgba(224,169,75,0.4);
+    border-radius:10px;padding:8px 11px;font-size:12px;line-height:1.4;max-width:200px;color:var(--ink);
+    opacity:0;transition:opacity .15s;transform:translate(-50%,-115%);z-index:2;}
+  .starTip .age{color:var(--amber);font-family:'Fraunces';font-size:11px;letter-spacing:1px;}
+  .starTip .alt{color:var(--ink-faint);font-style:italic;font-size:11px;margin-top:3px;}
+  .starLegend{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;
+    margin-top:11px;font-size:11px;color:var(--ink-dim);}
+  .starLegend i.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+  .starLegend i.dot.chose{background:var(--amber);box-shadow:0 0 6px var(--amber);}
+  .starLegend i.dot.alt{background:rgba(160,170,210,0.5);}
+  .starLegend .starHint{opacity:.5;font-style:italic;letter-spacing:.3px;}
+  .anc{padding:11px 0;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline;}
+  .anc .o{font-family:'Fraunces';font-size:11px;color:var(--ink-faint);width:30px;flex:0 0 30px;}
+  .anc .nm{font-family:'Fraunces';font-size:16px;}
+  .anc .sp{font-size:12px;color:var(--ink-faint);margin-left:auto;white-space:nowrap;}
+  .anc .ep{font-size:13px;color:var(--ink-dim);font-style:italic;display:block;margin-top:2px;}
+  .anc.alive .nm{color:var(--amber);}
+  .house{margin:14px 0 4px;padding:14px 16px;background:rgba(224,169,75,0.06);border:1px solid rgba(224,169,75,0.22);border-radius:14px;text-align:left;}
+  .house .seat{font-family:'Fraunces';font-size:17px;color:var(--ink);}
+  .house .seat b{color:var(--amber);font-weight:600;}
+  .house .rep{font-size:12.5px;color:var(--ink-dim);font-style:italic;margin-top:5px;}
+  .house .motto{font-family:'Fraunces';font-style:italic;font-size:14px;color:var(--amber);margin-top:9px;text-align:center;opacity:0.9;}
+  .house .item{font-size:12.5px;color:var(--ink-dim);margin-top:7px;padding-left:13px;border-left:2px solid rgba(224,169,75,0.4);line-height:1.45;}
+  .house .item.secret{border-color:var(--rose);color:var(--rose);}
+</style>
+</head>
+<body>
+<canvas id="sky"></canvas>
+<div id="stageTitle"></div>
+<div class="grain"></div><div class="glow"></div>
+
+<div id="app">
+  <header>
+    <div class="who">
+      <div class="name" id="hName">&mdash;</div>
+      <div class="meta" id="hMeta">&mdash;</div>
+    </div>
+    <div class="gen" id="hGen"></div>
+  </header>
+  <div class="being" id="being"></div>
+  <div class="stage">
+    <div class="passing" id="passing">
+      <div class="yr" id="pYr"></div>
+      <div class="age" id="pAge">0<small id="pAgeSub">years</small></div>
+      <div class="breath"></div>
+    </div>
+    <div class="card" id="card">
+      <div class="scene" id="scene"></div>
+      <div class="choices" id="choices"></div>
+    </div>
+  </div>
+  <div class="log" id="log"></div>
+  <footer>
+    <button class="pp" id="pp" aria-label="pause"></button>
+    <div class="flow" id="flow">the years are passing</div>
+    <button class="pp" id="menuBtn" aria-label="menu" title="save & menu" style="flex:0 0 38px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+  </footer>
+</div>
+
+<div class="veil show" id="vTitle">
+  <div class="sheet">
+    <h1>A Life</h1>
+    <div class="tag">One person, born into the world.<br>Then the next. Then the next.<br>A line drawn across time.</div>
+    <div class="rule"></div>
+    <p class="dim">Years pass on their own. Now and then a moment asks something of you. Nothing can be undone.</p>
+    <div style="display:flex;flex-direction:column;gap:11px;align-items:center;margin-top:8px;">
+      <button class="btn" id="begin">Begin a new line</button>
+      <button class="btn ghost" id="openLoad">Load a chronicle</button>
+    </div>
+  </div>
+</div>
+
+<div class="veil" id="vLoad">
+  <div class="sheet">
+    <h1 class="small">Chronicles</h1>
+    <div class="tag" id="loadHint">Choose a line to continue, or start another.</div>
+    <div id="slotList" style="margin:8px 0 4px;text-align:left;"></div>
+    <button class="btn ghost" id="inspectBtn" style="font-size:12px;padding:8px 16px;">Inspect storage</button>
+    <div id="inspectOut" style="text-align:left;font-size:11px;color:var(--ink-dim);margin:10px 0;white-space:pre-wrap;word-break:break-word;line-height:1.5;"></div>
+    <div class="backup">
+      <div class="backupTitle">Backup &amp; restore &mdash; keep your line safe</div>
+      <textarea id="codeBox" placeholder="Your save code appears here when you Export. To restore a line, paste a code here and tap Import." spellcheck="false"></textarea>
+      <div class="backupRow">
+        <button class="btn ghost" id="exportBtn">Export current line</button>
+        <button class="btn ghost" id="importBtn">Import from code</button>
+      </div>
+      <div id="backupMsg" class="backupMsg"></div>
+    </div>
+    <button class="btn ghost" id="loadBack">Back</button>
+  </div>
+</div>
+
+<div class="veil" id="vDeath">
+  <div class="sheet">
+    <div class="yr" style="font-family:'Fraunces';font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;">an ending</div>
+    <h1 class="small" id="dName">&mdash;</h1>
+    <div class="tag" id="dSpan">&mdash;</div>
+    <p class="eul-line" id="dEul">&mdash;</p>
+    <div class="rule"></div>
+    <div class="survivors" id="dSurv"></div>
+    <button class="btn" id="dNext">&mdash;</button>
+    <div style="margin-top:14px;"><span class="chron2" id="dBackup" style="cursor:pointer;font-size:11px;color:var(--ink-faint);">&#8675; back up this bloodline</span></div>
+  </div>
+</div>
+
+<div class="veil" id="vHeir">
+  <div class="sheet">
+    <div class="yr" style="font-family:'Fraunces';font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;" id="heirKick">the line continues</div>
+    <h1 class="small" id="heirName">&mdash;</h1>
+    <div class="tag" id="heirTag">&mdash;</div>
+    <p class="dim" id="heirInherit">&mdash;</p>
+    <button class="btn" id="heirGo">Live this life</button>
+  </div>
+</div>
+
+<div class="veil" id="vChron">
+  <div class="sheet tree">
+    <h1 class="small">The Chronicle</h1>
+    <div class="tag" id="chronName" style="margin-bottom:10px;"></div>
+    <div class="tabs">
+      <button class="tab on" data-tab="life" id="tabLife">This Life</button>
+      <button class="tab" data-tab="line" id="tabLine">The Line</button>
+      <button class="tab" data-tab="stars" id="tabStars">Constellation</button>
+    </div>
+    <div id="paneLife" class="pane">
+      <div class="lifeHead" id="lifeHead"></div>
+      <div class="memoir" id="memoir"></div>
+    </div>
+    <div id="paneLine" class="pane" style="display:none;">
+      <div class="house" id="housePanel"></div>
+      <div class="marks" id="marks"></div>
+      <div class="lineage" id="lineage"></div>
+    </div>
+    <div id="paneStars" class="pane" style="display:none;">
+      <div class="starWrap"><canvas id="starCanvas"></canvas><div class="starTip" id="starTip"></div></div>
+      <div class="starLegend">
+        <span><i class="dot chose"></i> chosen</span>
+        <span><i class="dot alt"></i> the road not taken</span>
+        <span class="starHint">drag to roam &middot; pinch / scroll to zoom</span>
+      </div>
+    </div>
+    <button class="btn" id="chronClose">Return</button>
+  </div>
+</div>
+
+<!-- The game logic is in game.js (kept separate so this file stays readable on GitHub). -->
+<script src="game.js"></script>
+</body>
+</html>
