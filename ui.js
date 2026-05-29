@@ -29,26 +29,34 @@ function renderLogTail(){
   const log=document.getElementById('log');
   const e=P.log[P.log.length-1];
   if(!e) return;
+  addEphemeralEntry(log, e);
+}
+// the in-play log is ephemeral: a line fades in, lingers, then fades out, so the
+// scene stays clear between moments. The full history lives in the Chronicle.
+function addEphemeralEntry(log, e){
   const div=document.createElement('div');
   div.className='entry '+(e.cls||'');
-  // stored lines keep their pronoun tokens (obs/echo lines use them); resolve at render time
+  // stored lines keep their pronoun tokens (obs/echo use them); resolve at render time
   div.innerHTML=`<span class="a">${e.age}</span>${reTok(e.text)}`;
   log.appendChild(div);
-  log.scrollTop=log.scrollHeight;
-  // trim DOM
-  while(log.children.length>60) log.removeChild(log.firstChild);
+  const live=[...log.children].filter(c=>!c.dataset.out);
+  while(live.length>3) fadeOutEntry(live.shift());      // cap simultaneous lines
+  div._t=setTimeout(()=>fadeOutEntry(div), 6500);        // and let this one fade after a breath
+}
+function fadeOutEntry(div){
+  if(!div || div.dataset.out) return;
+  div.dataset.out='1'; clearTimeout(div._t);
+  div.style.animation='none'; div.style.transition='opacity 1.4s ease';
+  void div.offsetWidth; div.style.opacity='0';
+  setTimeout(()=>{ if(div.parentNode) div.parentNode.removeChild(div); }, 1500);
 }
 function reTok(s){const px=P.px;return s.replace(/\{they\}/g,px.they).replace(/\{them\}/g,px.them).replace(/\{their\}/g,px.their).replace(/\{They\}/g,px.They).replace(/\{Their\}/g,px.Their);}
 function renderLogFull(){
-  const log=document.getElementById('log'); log.innerHTML='';
-  for(const e of P.log.slice(-50)){
-    const div=document.createElement('div');
-    div.className='entry '+(e.cls||'');
-    div.innerHTML=`<span class="a">${e.age}</span>${reTok(e.text)}`;
-    div.style.animation='none'; div.style.opacity=1;
-    log.appendChild(div);
-  }
-  log.scrollTop=log.scrollHeight;
+  // ephemeral model: only seed the latest beat when the log is empty (a fresh
+  // load / new life); otherwise leave the fading entries be (no flicker on choices).
+  const log=document.getElementById('log');
+  if(log.children.length) return;
+  for(const e of P.log.slice(-1)) addEphemeralEntry(log, e);
 }
 function renderAll(){ renderHeader(); renderBeing(); renderLogFull(); showPassing(); }
 
