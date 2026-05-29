@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Life — image preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Newsreader:opsz,wght@6..72,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#16110d; --ink:#ece1cf; --amber:#e0a94b; --line:rgba(236,225,207,.14); }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; background:var(--bg); color:var(--ink);
+      font-family:"Newsreader",Georgia,serif; }
+    main { width:min(1100px, calc(100% - 40px)); margin:0 auto; padding:48px 0 64px; }
+    h1 { margin:0 0 6px; font-family:"Fraunces",Georgia,serif; font-weight:500;
+      font-size:clamp(2rem,5vw,3.6rem); }
+    p.note { color:var(--amber); opacity:.85; font-style:italic; margin:0 0 30px; font-size:.95rem; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:20px; }
+    .card { border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#000; }
+    .card img { display:block; width:100%; aspect-ratio:1/1; object-fit:cover; }
+    .key { padding:10px 12px; color:var(--amber); font-family:"Fraunces",Georgia,serif;
+      font-size:.82rem; letter-spacing:.3px; border-top:1px solid var(--line); background:var(--bg); }
+    .key span { color:var(--ink); opacity:.7; font-family:"Newsreader",serif; font-style:italic; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>A Life — image preview</h1>
+    <p class="note">Generated key-free via Codex's built-in image tool. Full-size originals — will be optimized before use.</p>
+    <div class="grid" id="grid"></div>
+  </main>
+  <script>
+    const IMAGES = [
+      ["title",        "title screen"],
+      ["stage-child",  "childhood"],
+      ["stage-youth",  "youth"],
+      ["stage-adult",  "adulthood"],
+      ["stage-midlife","midlife"],
+      ["stage-elder",  "old age"],
+      ["eulogy",       "an ending"],
+      ["heir",         "the line continues"],
+    ];
+    const grid = document.getElementById('grid');
+    IMAGES.forEach(([file, label]) => {
+      const card = document.createElement('article');
+      card.className = 'card';
+      const img = document.createElement('img');
+      img.src = 'assets/' + file + '.png';
+      img.loading = 'lazy';
+      img.alt = label;
+      const key = document.createElement('div');
+      key.className = 'key';
+      key.innerHTML = file + ' &nbsp;<span>' + label + '</span>';
+      card.append(img, key);
+      grid.append(card);
+    });
+  </script>
+</body>
+</html>
