@@ -30,15 +30,14 @@ There are no visible numbers. The game is reading and pacing, not stats. What yo
 
 ## Saving &amp; backups — please read
 
-Progress autosaves to the browser's local storage, with up to six save slots.
+Progress autosaves to the browser's local storage, with up to six save slots. When the game is served from the web (not opened as a bare file), it also syncs each line to the **cloud** under a private **chronicle code**, so a dynasty can follow you across devices and survive a cleared browser.
 
-**Browser storage can be cleared** — by the browser, by privacy settings, or by the environment the game is embedded in. So the game also gives you a save you hold yourself:
+- **Menu → Load a chronicle → Sync & copy code** makes sure the current line is in the cloud and copies its short chronicle code.
+- On another device, paste that code into the box and tap **Continue from code** to pick the line up where you left off.
+- The code *is* the key — anyone who has it can load that dynasty, so keep it to yourself.
+- Offline, or opened as a local file, the game quietly falls back to local-only saves. The same box can still produce and restore a self-contained **offline backup code** when the cloud isn't reachable.
 
-- **Menu → Load a chronicle → Export current line** copies your entire dynasty to the clipboard as a portable code (it also appears in the text box). Paste it somewhere safe.
-- **Import from code** restores a dynasty from such a code, into a fresh slot.
-- The eulogy screen has a one-tap **back up this bloodline** link at each natural stopping point.
-
-If you care about a long-running dynasty, export a code now and then. A pasted code is the only backup that survives a cleared browser.
+If you care about a long-running dynasty, copy its chronicle code now and then. The cloud copy — or a saved code — is what survives a cleared browser.
 
 ## Running locally
 
@@ -60,14 +59,19 @@ python3 -m http.server 8000
 | `engine.js` | The life simulation: time, drift, ageing, death, and drawing/presenting cards. |
 | `dynasty.js` | Death & succession, and the house that accrues across generations (seats, reputation, heirlooms, secrets). |
 | `ui.js` | Rendering — the header, the living "being" line, the log, and the chronicle panes. |
-| `persistence.js` | Save slots, export/import backup codes, storage recovery, and boot. |
+| `persistence.js` | Save slots, export/import codes, storage recovery, and boot. |
+| `cloud.js` | Optional cross-device sync — shadows the active save to the cloud under a chronicle code; no-ops offline. |
 | `scene.js` | The living scene — sky, sun and moon, the growing tree, and particles, on the background canvas. |
 | `constellation.js` | The bloodline star-map. |
-| `index.html` | A small entry page that opens `a-life.html` (so GitHub Pages serves the game at the root). |
+| `api/chronicle.js` | Serverless route (Vercel) that reads/writes a save to Supabase with the service-role key — the only thing that touches the database. |
+| `index.html` | A small entry page that opens `a-life.html` (so GitHub Pages / Vercel serves the game at the root). |
+| `docs/cloud-saves.md` | Design spec for the cloud-save feature. |
 
 ## Tech
 
-Plain HTML, CSS, and vanilla JavaScript — split into small scripts loaded in dependency order, with no ES modules, so it still runs straight off the filesystem. No build step, no framework, no dependencies. All rendering is Canvas 2D. Fonts are loaded from Google Fonts; everything else is self-contained.
+The frontend is plain HTML, CSS, and vanilla JavaScript — split into small scripts loaded in dependency order, with no ES modules, so it still runs straight off the filesystem. No build step, no framework, no client dependencies. All rendering is Canvas 2D; fonts come from Google Fonts.
+
+Optional **cloud saves** add one serverless function (`api/chronicle.js` on Vercel) talking to **Supabase** with a service-role key — the browser never sees the key, and the table is service-role-only. If the function or network is unavailable (e.g. opened as a local file), the game falls back to local-only saves and plays exactly the same. See [`docs/cloud-saves.md`](./docs/cloud-saves.md).
 
 ## License
 

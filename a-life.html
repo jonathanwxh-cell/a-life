@@ -13,6 +13,7 @@
 <canvas id="sky"></canvas>
 <div id="stageTitle"></div>
 <div class="grain"></div><div class="glow"></div>
+<div class="cloudStatus" id="cloudStatus"></div>
 
 <div id="app">
   <header>
@@ -63,11 +64,11 @@
     <button class="btn ghost" id="inspectBtn" style="font-size:12px;padding:8px 16px;">Inspect storage</button>
     <div id="inspectOut" style="text-align:left;font-size:11px;color:var(--ink-dim);margin:10px 0;white-space:pre-wrap;word-break:break-word;line-height:1.5;"></div>
     <div class="backup">
-      <div class="backupTitle">Backup &amp; restore &mdash; keep your line safe</div>
-      <textarea id="codeBox" placeholder="Your save code appears here when you Export. To restore a line, paste a code here and tap Import." spellcheck="false"></textarea>
+      <div class="backupTitle">Your chronicle code &mdash; continue on any device</div>
+      <textarea id="codeBox" placeholder="Tap “Sync &amp; copy code” for your chronicle code. To continue a line on another device, paste its code here and tap “Continue from code”." spellcheck="false"></textarea>
       <div class="backupRow">
-        <button class="btn ghost" id="exportBtn">Export current line</button>
-        <button class="btn ghost" id="importBtn">Import from code</button>
+        <button class="btn ghost" id="exportBtn">Sync &amp; copy code</button>
+        <button class="btn ghost" id="importBtn">Continue from code</button>
       </div>
       <div id="backupMsg" class="backupMsg"></div>
     </div>
@@ -135,6 +136,7 @@
 <script src="dynasty.js"></script>
 <script src="ui.js"></script>
 <script src="persistence.js"></script>
+<script src="cloud.js"></script>
 <script src="scene.js"></script>
 <script src="constellation.js"></script>
 </body>

@@ -1,6 +1,6 @@
 # Cloud saves — design spec
 
-*Status: approved design, pre-implementation. Date: 2026-05-29.*
+*Status: implemented 2026-05-29. Cloud activates once `SUPABASE_SERVICE_ROLE_KEY` is set on the Vercel project; until then `/api/chronicle` returns 503 and the game stays local-only. Date: 2026-05-29.*
 
 ## Goal
 

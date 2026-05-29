@@ -32,6 +32,7 @@ async function save(){
     if(i>=0) idx[i]=meta; else idx.push(meta);
     await writeIndex(idx);
   }catch(e){}
+  if(window.AL_cloud) window.AL_cloud.schedulePush();   // shadow the save up to the cloud (debounced, optional)
 }
 async function loadSlot(slot){
   try{
@@ -102,6 +103,7 @@ async function openLoadMenu(){
     row.querySelector('.body').onclick=async()=>{
       const ok=await loadSlot(m.slot);
       if(ok){
+        if(window.AL_cloud) await window.AL_cloud.reconcile();   // adopt a newer cloud copy before resuming
         document.getElementById('vLoad').classList.remove('show');
         document.getElementById('vTitle').classList.remove('show');
         offlineCatchUp();
@@ -191,27 +193,54 @@ async function exportCurrent(){
       if(idx.length){ const r=await window.storage.get('alife:slot:'+idx[0].slot); if(r) data=JSON.parse(r.value); }
     }
     if(!data){ setBackupMsg('No line to export yet — begin one first.',true); return; }
+    const box=document.getElementById('codeBox');
+    // Cloud path: a short chronicle code that follows you across devices.
+    if(window.AL_cloud && window.AL_cloud.enabled && data===S){
+      if(!data.code) data.code=window.AL_cloud.mintCode();
+      await save();                  // persist the code locally + schedule a push
+      await window.AL_cloud.flush(); // push now so the code resolves immediately elsewhere
+      box.value=data.code; box.focus(); box.select();
+      let copied=false;
+      try{ await navigator.clipboard.writeText(data.code); copied=true; }
+      catch(e){ try{ document.execCommand('copy'); }catch(_){ } }
+      setBackupMsg((copied?'Copied your chronicle code. ':'Your chronicle code is above. ')
+        + 'On another device, paste it and tap “Continue from code”.');
+      return;
+    }
+    // Offline fallback: a self-contained base64 backup (works with no network).
     const code=encodeSave(data);
-    const box=document.getElementById('codeBox'); box.value=code;
-    box.focus(); box.select();
+    box.value=code; box.focus(); box.select();
     let copied=false;
     try{ await navigator.clipboard.writeText(code); copied=true; }
     catch(e){ try{ document.execCommand('copy'); copied=true; }catch(_){} }
     setBackupMsg(copied
-      ? 'Copied House '+data.surname+' to your clipboard. Paste it somewhere safe.'
-      : 'Save code ready above — long-press to select and copy it.');
+      ? 'Offline backup code copied (cloud unavailable here) — keep it safe.'
+      : 'Offline backup code ready above — long-press to copy.');
   }catch(e){ setBackupMsg('Export failed: '+e.message,true); }
 }
 
 async function importFromCode(){
   const box=document.getElementById('codeBox');
-  const code=box.value;
-  if(!code || !code.trim()){ setBackupMsg('Paste a save code into the box first.',true); return; }
+  const raw=box.value;
+  if(!raw || !raw.trim()){ setBackupMsg('Paste a code into the box first.',true); return; }
+  // A short chronicle code -> pull that dynasty from the cloud.
+  if(window.AL_cloud && window.AL_cloud.isCode(raw)){
+    setBackupMsg('Looking up that chronicle code…');
+    const res=await window.AL_cloud.fetchByCode(raw);
+    if(res.data){ await adoptIntoSlot(res.data, 'Continued House '+res.data.surname+' from the cloud.'); return; }
+    if(res.error && res.error!=='not-a-code'){ setBackupMsg(res.error,true); return; }
+    // 'not-a-code' falls through to the base64 path below
+  }
+  // Otherwise treat it as a self-contained base64 backup.
   let obj;
-  try{ obj=decodeSave(code); }
+  try{ obj=decodeSave(raw); }
   catch(e){ setBackupMsg('That code could not be read: '+e.message,true); return; }
+  await adoptIntoSlot(obj, 'Restored House '+obj.surname+'.');
+}
+
+// write a save into a free slot, load it, and resume play
+async function adoptIntoSlot(obj, okMsg){
   try{
-    // write into a free slot (or the lowest) and load it
     let slot=await nextFreeSlot(); if(slot==null) slot=1;
     await window.storage.set('alife:slot:'+slot, JSON.stringify(obj));
     const idx=(await readIndex()).filter(e=>e.slot!==slot);
@@ -221,7 +250,7 @@ async function importFromCode(){
     await writeIndex(idx);
     const ok=await loadSlot(slot);
     if(ok){
-      setBackupMsg('Restored House '+obj.surname+'. Welcome back.');
+      setBackupMsg(okMsg);
       document.getElementById('vLoad').classList.remove('show');
       document.getElementById('vTitle').classList.remove('show');
       offlineCatchUp(); setPP();
@@ -304,7 +333,8 @@ async function migrateLegacy(){
     cont.className='btn'; cont.textContent='Continue House '+most.surname;
     cont.onclick=async()=>{
       const ok=await loadSlot(most.slot);
-      if(ok){ document.getElementById('vTitle').classList.remove('show'); offlineCatchUp(); setPP();
+      if(ok){ if(window.AL_cloud) await window.AL_cloud.reconcile();
+        document.getElementById('vTitle').classList.remove('show'); offlineCatchUp(); setPP();
         if(P.alive){renderAll();scheduleTick();} else {renderAll();showEulogy(P);} }
     };
     t.insertBefore(cont, t.firstChild);
