@@ -101,6 +101,8 @@
     transition:background .25s,color .25s;}
   .btn:hover{background:var(--amber);color:var(--bg);}
   .btn{margin-top:0;}
+  /* breathing room above the dismiss buttons at the foot of scrollable panels */
+  #chronClose,#loadBack{margin-top:22px;}
   .btn.ghost{border-color:var(--line);color:var(--ink-dim);}
   .btn.ghost:hover{background:rgba(236,225,207,0.08);color:var(--ink);}
   .slot{display:flex;align-items:center;gap:12px;background:rgba(236,225,207,0.04);border:1px solid var(--line);
