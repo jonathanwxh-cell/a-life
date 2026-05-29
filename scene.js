@@ -69,7 +69,8 @@
   const motes=Array.from({length:46},()=>({x:Math.random(),y:Math.random(),s:Math.random()*1.6+0.4,v:Math.random()*0.4+0.1,ph:Math.random()*6.3}));
 
   function stageWord(age){return age<13?'childhood':age<26?'youth':age<46?'adulthood':age<66?'midlife':'old age';}
-  let lastStage=null, st=document.getElementById('stageTitle');
+  let lastStage=null, st=document.getElementById('stageTitle'), stArt=document.getElementById('stageArt');
+  const STAGE_ART={childhood:'stage-child',youth:'stage-youth',adulthood:'stage-adult',midlife:'stage-midlife','old age':'stage-elder'};
 
   let t=0, last=performance.now();
   function frame(now){
@@ -223,7 +224,10 @@
     if(P&&alive){
       const sw=stageWord(age);
       if(sw!==lastStage){
-        if(lastStage!==null){ st.textContent=sw; st.classList.add('show'); setTimeout(()=>st.classList.remove('show'),2600); }
+        if(lastStage!==null){
+          st.textContent=sw; st.classList.add('show'); setTimeout(()=>st.classList.remove('show'),2600);
+          if(stArt && STAGE_ART[sw]){ stArt.style.backgroundImage="url('assets/"+STAGE_ART[sw]+".webp')"; stArt.classList.add('show'); setTimeout(()=>stArt.classList.remove('show'),2600); }
+        }
         lastStage=sw;
       }
     }
