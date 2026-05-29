@@ -98,7 +98,7 @@
   .sheet .rule{width:46px;height:1px;background:var(--amber);opacity:0.5;margin:22px auto;}
   .btn{display:inline-block;margin-top:18px;background:transparent;border:1px solid var(--amber);color:var(--amber);
     font-family:'Fraunces',serif;font-size:15px;letter-spacing:1px;padding:12px 28px;border-radius:30px;cursor:pointer;
-    transition:background .25s,color .25s;}
+    white-space:nowrap;transition:background .25s,color .25s;}
   .btn:hover{background:var(--amber);color:var(--bg);}
   .btn{margin-top:0;}
   .btn.ghost{border-color:var(--line);color:var(--ink-dim);}
@@ -119,8 +119,8 @@
   #codeBox{width:100%;height:64px;resize:none;background:rgba(12,9,7,0.5);border:1px solid var(--line);border-radius:10px;
     color:var(--ink-dim);font-family:'DM Mono',monospace;font-size:10px;padding:9px 11px;line-height:1.4;outline:none;word-break:break-all;}
   #codeBox:focus{border-color:rgba(224,169,75,0.4);}
-  .backupRow{display:flex;gap:9px;justify-content:center;margin-top:10px;flex-wrap:wrap;}
-  .backupRow .btn{font-size:12px;padding:9px 16px;}
+  .backupRow{margin:10px auto 0;max-width:240px;}
+  .backupRow .btn{display:block;width:100%;margin:9px auto 0;font-size:12px;padding:9px 16px;}
   .backupMsg{font-size:11.5px;color:var(--sage);margin-top:9px;min-height:15px;font-style:italic;}
   .backupMsg.warn{color:var(--rose);}
   .eul-line{font-family:'Newsreader';font-style:italic;font-size:16px;color:var(--ink);line-height:1.6;}
@@ -134,7 +134,7 @@
   .lineage{margin-top:18px;}
   .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:14px;}
   .tab{background:transparent;border:1px solid var(--line);color:var(--ink-dim);font-family:'Fraunces',serif;
-    font-size:13px;letter-spacing:.5px;padding:7px 16px;border-radius:20px;cursor:pointer;transition:all .2s;}
+    font-size:13px;letter-spacing:.5px;padding:7px 16px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:all .2s;}
   .tab.on{border-color:var(--amber);color:var(--amber);background:rgba(224,169,75,0.1);}
   .lifeHead{text-align:center;margin-bottom:14px;}
   .lifeHead .nm{font-family:'Fraunces';font-size:19px;color:var(--ink);}
