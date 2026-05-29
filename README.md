@@ -6,7 +6,7 @@ You live one person, from birth to death. The years pass on their own; now and t
 
 There are no visible numbers. The game is reading and pacing, not stats. What you see is writing, a handful of choices, a sky that slowly turns, and a tree that grows with the years.
 
-**▶ Play it:** open [`a-life.html`](./a-life.html) in any modern browser — desktop or mobile. Nothing to install. *(If you enable GitHub Pages on this repo, the root URL plays it directly.)*
+**▶ Play it live:** **[a-life-chi.vercel.app](https://a-life-chi.vercel.app)** — or open [`a-life.html`](./a-life.html) in any modern browser; nothing to install. Every push to `main` redeploys automatically.
 
 ---
 
