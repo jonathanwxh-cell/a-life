@@ -134,8 +134,9 @@ Supporting files:
 
 ## Known issues / TODO
 
-- **Deleting the *active* save doesn't stop it.** The Load-menu ✕ (`deleteSlot` in
-  `persistence.js`) removes the slot from storage but leaves the in-memory game
-  running — it can re-save and effectively resurrect the deleted line. Fix: when
-  `slot === SLOT`, also clear `S`/`P`/`SLOT`, stop the tick, and return to the title.
-- The ✕ deletes **locally only**; a synced dynasty's cloud row persists under its code.
+- The Load-menu ✕ deletes **locally only** — a synced dynasty's cloud row persists
+  under its chronicle code (re-importing that code would bring it back). A full
+  delete would need a `DELETE /api/chronicle` plus a call to it from `deleteSlot`.
+
+*Fixed previously: deleting the **active** save now stops the tick and clears
+`S`/`P`/`SLOT` (it used to keep ticking and re-save itself).*

@@ -60,6 +60,13 @@ async function deleteSlot(slot){
     const idx=(await readIndex()).filter(e=>e.slot!==slot);
     await writeIndex(idx);
   }catch(e){}
+  // if we just deleted the line being played, stop and clear it — otherwise the
+  // in-memory game keeps ticking and re-saves itself, resurrecting the slot.
+  if(slot===SLOT){
+    running=false; busy=false; clearTimeout(timer);
+    S=null; P=null; SLOT=null; firedObs={};
+    setPP();
+  }
 }
 async function nextFreeSlot(){
   const idx=await readIndex();
