@@ -15,3 +15,4 @@ tmp/
 # Local scratch (not part of the game)
 scratch/
 *.local
+.vercel
