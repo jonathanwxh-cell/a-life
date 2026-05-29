@@ -188,3 +188,8 @@
   .cloudStatus.show{opacity:0.85;}
   .cloudStatus.ok{color:var(--sage);}
   .cloudStatus.dim{color:var(--ink-faint);}
+  /* desktop: let the Chronicle (and especially the constellation) use the wider screen;
+     the rest of the game keeps its narrow reading column */
+  @media (min-width:760px){
+    #vChron .sheet{max-width:700px;}
+  }
