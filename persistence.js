@@ -328,7 +328,7 @@ async function migrateLegacy(){
   const idx=await migrateLegacy();
   if(idx.length){
     const most=idx.slice().sort((a,b)=>b.updated-a.updated)[0];
-    const t=document.querySelector('#vTitle .sheet > div');
+    const t=document.getElementById('begin').parentNode;   // the button group, not the tagline
     const cont=document.createElement('button');
     cont.className='btn'; cont.textContent='Continue House '+most.surname;
     cont.onclick=async()=>{
