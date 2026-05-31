@@ -159,37 +159,37 @@ function succeed(childRel){
   const seatFloor=[0,6,14,26,40,56,72][h.seat]||0;
   const inheritMeans = Math.max(seatFloor, Math.round(dead.peakMeans*0.55) - 6) - 6;
   const nurture = Math.round((dead.stats.mind-50)*0.18 + (childRel.bond-50)*0.10);
+  // the heir is BORN — startAge 0 — and lives the whole arc. Inheritance applies
+  // as starting conditions (estate share, blended traits, the house's standing,
+  // a parent's sharpening), not as a head start in years.
   const child=newPerson({
     given:childRel.given, sex:childRel.sex, gen:dead.gen+1,
     parentName:dead.name,
     seedStats: childRel.seed || seedChildStats(dead,null),
     traits: childRel.traitsSeed || inheritTraits(dead.traits),
-    startAge: childRel.age,
+    startAge: 0,
     inheritMeans: Math.max(0,inheritMeans),
     nurture: nurture,
     bornYear: dead.bornYear + (dead.deathAge - childRel.age),
   });
-  // the heir is BORN INTO the house — heirlooms & the family secret arrive as memories
+  // born into the house — heirlooms & the family secret arrive as latent memories
   child.mem = child.mem || {};
   for(const hl of (h.heirlooms||[])){
     if(hl.tag==='book') child.mem.child_books={age:0,inherited:true};
     if(hl.tag==='stray') child.mem.kept_stray={age:0,inherited:true};
     if(hl.tag==='teaching') child.mem.had_mentor={age:0,inherited:true};
   }
-  if(h.secret && !h.secret.known){ child.mem.inherited_secret={age:childRel.age, from:h.secret.from}; }
-  // seed the heir's relationships: surviving family carry over as kin
-  const carry=dead.rels.filter(r=>r.alive&&r.kind!=='ex'&&r.given!==childRel.given);
-  for(const r of carry){
-    let k=r.kind;
-    if(k==='spouse'||k==='love') k= (r.given===childRel.given)?null:'mother'; // surviving parent
-    if(r.kind==='child') k='sibling';
-    if(r.kind==='friend') continue; // friends don't transfer
-    if(k) child.rels.push({kind:k,given:r.given,name:r.given,sex:r.sex,px:pronouns(r.sex),bond:clamp(r.bond-10),age:r.age,alive:true});
-  }
-  // the dead parent becomes a remembered presence
+  if(h.secret && !h.secret.known){ child.mem.inherited_secret={age:0, from:h.secret.from}; }
   S.person=child; P=child; firedObs={};
   if(window.AL_reseed) window.AL_reseed();
-  // opening line reflects the standing the family has reached
+  // a newborn with its own childhood family, seeded fresh like a founder's — but the
+  // parent on the bloodline carries the departed ancestor's name, so the line continues
+  // as a living echo rather than re-simulating the dead. No other relations carry over.
+  const lineKind = dead.sex==='m'?'father':'mother';
+  const otherSex = dead.sex==='m'?'f':'m', otherKind = dead.sex==='m'?'mother':'father';
+  addRel(lineKind, dead.given, dead.sex, 74, ri(24,38));
+  addRel(otherKind, pick(otherSex==='m'?GIVEN_M:GIVEN_F), otherSex, 68, ri(22,34));
+  // opening lines reflect being born a child of the house it has become
   const seat=seatOf(h.seat);
   logLine("Was born into "+seat.name+", and a family that already had a story.","obs");
   if(h.motto) logLine("Raised on the family words: “"+h.motto+"”","obs");

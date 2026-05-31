@@ -104,6 +104,11 @@ function ageRelations(){
 }
 
 /* death check */
+// rare early mortality: a small, vitality-modulated baseline before 55 so some
+// lives end before their season (a fever, a fall, a foolish risk). Tuned so
+// ~8–12% of lives end before 55. A recent reckless choice raises the odds for a
+// short while via P.flags.peril (the age at which the elevated risk lifts).
+const EARLY_MORTALITY=0.0024, PERIL_MULT=2.2;
 function deathRoll(){
   const a=P.age, v=P.stats.vit;
   let p=0;
@@ -112,6 +117,9 @@ function deathRoll(){
   if(a>85) p+=(a-85)/80;
   p*=(1.7 - v/100);
   if(P.traits.includes('frail')) p*=1.3;
+  // baseline begins at 6 — infancy is survived, so no life ends before a single choice
+  if(a>=6 && a<55) p += EARLY_MORTALITY*(1.5 - v/100);
+  if(P.flags.peril && a < P.flags.peril) p *= PERIL_MULT;
   return chance(p) || (v<=2 && a>40 && chance(0.4));
 }
 
@@ -144,8 +152,12 @@ function tick(){
 function eligible(){
   const stage=stageOf(P.age);
   return CARDS.filter(c=>{
-    if(c.stage!=='*'&&c.stage!==stage) return false;
+    // age band, when present, replaces the broad stage check (cards can span stages)
+    if(c.age){ if(P.age<c.age[0]||P.age>c.age[1]) return false; }
+    else if(c.stage!=='*'&&c.stage!==stage) return false;
     if(c.once && P.flags['card_'+c.id]) return false;
+    // no-repeat cooldown: a non-`once` card can't redraw within ~10 years (or c.cool)
+    if(!c.once && P.drewAt && P.drewAt[c.id]!=null && P.age-P.drewAt[c.id] < (c.cool||10)) return false;
     if(c.cond && !c.cond()) return false;
     return true;
   });
@@ -162,6 +174,7 @@ function drawCard(){
 function presentCard(c){
   busy=true; clearTimeout(timer);
   P.sinceCard=0;
+  P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age;   // for the no-repeat cooldown
   if(c.once) P.flags['card_'+c.id]=1;
   const card=document.getElementById('card'), pass=document.getElementById('passing');
   pass.classList.remove('show');
