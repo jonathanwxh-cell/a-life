@@ -61,6 +61,16 @@ Supporting files:
   drive everything but are never shown as numbers; the player sees prose + a few
   choices. `fx()` applies stat deltas and updates a per-life *aura* (warmth/light)
   that subtly tints the scene.
+- **Life arc & succession.** Cards gate to the years and circumstances they
+  belong to (`age:[lo,hi]` + `cond`; see "Add an event card"). **Every heir is
+  born at age 0** and lives a full childhood→elder arc — succession (`succeed`)
+  seeds a fresh childhood family (the bloodline parent named for the departed
+  ancestor) and applies the inheritance — estate share, the house's standing,
+  blended traits, heirlooms/secret, a parent's `nurture` — as *starting state*,
+  not a head start in years. `deathRoll` adds a small vitality-modulated baseline
+  mortality from age 6–54 (rare early death; infancy protected), and a reckless
+  choice can set `P.flags.peril` to raise the odds briefly. Design + verified
+  results: [docs/story-overhaul.md](./docs/story-overhaul.md).
 - **Persistence (`core.js` + `persistence.js`).** All reads/writes go through an
   async `window.storage` (`get/set/delete/list`). A sandbox host may supply one;
   otherwise `core.js` shims it with `localStorage`. Keys: `alife:index` (slot
@@ -109,7 +119,14 @@ Supporting files:
   entry's shape: `id`, `stage` (`child|youth|adult|midlife|elder|*`), weight `w`,
   `text` (string or `p => …`), and `choices[]` each with `t`, optional `h` (hint),
   and `do: p => { … }`. In `do`, use `fx(p, {…})`, `logLine(...)`, and
-  `remember`/`held`/`recall` for callbacks that fire in later cards.
+  `remember`/`held`/`recall` for callbacks that fire in later cards. Optional
+  gating fields (prefer these — moments should fit the years/situation):
+  `age:[lo,hi]` (eligible only while `lo ≤ P.age ≤ hi`; **replaces** the `stage`
+  check when present), `cond: () => bool` (situation gate — reads the global `P`),
+  `once: true` (fires at most once a life), `cool: N` (min years before a non-`once`
+  card may redraw; default 10). A choice may set `p.flags.peril = p.age + N` to
+  raise death odds for N years (earned risk — see `deathRoll`). The full field
+  reference is in the header comment of `content.js`.
 - **Add / regenerate an image** → see [docs/images.md](./docs/images.md). Generate
   via Codex's built-in `image_gen` tool (key-free), optimize to WebP, place in `assets/`.
 - **Tune scene / transitions** → `scene.js` (e.g. the `STAGE_ART` map and the

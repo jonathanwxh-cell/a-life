@@ -1,6 +1,18 @@
 # Story & decisions overhaul — design spec
 
-*Status: approved design, pre-implementation. Date: 2026-05-31.*
+*Status: **implemented** 2026-05-31 (commits: engine/succession, then content). Design dated 2026-05-31.*
+
+> **Implemented & verified.** All four pillars shipped. A headless sim harness
+> (the real `core`/`content`/`engine`/`dynasty` run in a Node `vm` with a DOM
+> stub) over 5–6k lines confirms: **0** age-band / stage / cooldown / `once`
+> violations; **early death ≈ 9% before 55** (target 8–12), with infancy (age
+> <6) protected; **every heir starts at age 0** and lives childhood→elder; the
+> card set grew **39 → 57**; and with the new late-love path a player who wants a
+> line continues it **~47% per generation** (was ~10%). A real-browser smoke test
+> confirms the heir screen, card render, and death/eulogy all draw correctly with
+> a clean console. Tuning knobs that landed: `EARLY_MORTALITY=0.0024`,
+> `PERIL_MULT=2.2` (engine.js); `a_child` w7/age[26,46]/cool5; `a_meet_late` w3;
+> `u_windfall`/`u_loss` cool14.
 
 Makes the game's decisions feel relevant to a person's **age** and **situation**,
 lets **every generation live a full life** (not just the founder), adds **more and
