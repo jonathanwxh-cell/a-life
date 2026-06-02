@@ -20,9 +20,9 @@ if(typeof window!=='undefined' && !window.storage){
 }
 
 /* ---------- names ---------- */
-const GIVEN_M=['Tomas','Elias','Henrik','Caleb','Aldous','Mateo','Ren','Soren','Idris','Cassian','Otto','Bram','Lucan','Emory','Hale'];
-const GIVEN_F=['Mira','Iris','Lena','Cosima','Noor','Saoirse','Adaline','Yara','Esme','Theda','Liv','Marguerite','Ronja','Calla','Vesna'];
-const SURNAMES=['Aldecott','Vane','Mercer','Holloway','Brandt','Okonkwo','Salvedi','Lindqvist','Fenn','Castellane','Ashby','Reyes','Voss','Marlowe','Thorne'];
+const GIVEN_M=['Tomas','Elias','Henrik','Caleb','Aldous','Mateo','Ren','Soren','Idris','Cassian','Otto','Bram','Lucan','Emory','Hale','Anders','Felix','Rafael','Tobias','Niall','Edmund','Lazlo','Gideon','Matthias','Cyrus','Roman','Ambrose','Tariq','Joaquin','Pavel'];
+const GIVEN_F=['Mira','Iris','Lena','Cosima','Noor','Saoirse','Adaline','Yara','Esme','Theda','Liv','Marguerite','Ronja','Calla','Vesna','Sabine','Ottilie','Junia','Anouk','Greta','Linnea','Beatrix','Carys','Ingrid','Selma','Naima','Cleo','Annika','Vera','Tamsin'];
+const SURNAMES=['Aldecott','Vane','Mercer','Holloway','Brandt','Okonkwo','Salvedi','Lindqvist','Fenn','Castellane','Ashby','Reyes','Voss','Marlowe','Thorne','Ashcroft','Delacroix','Okafor','Calloway','Renner','Vasquez','Lindholm','Whitlock','Sereno','Halloran','Bjornsen','Quint','Marchetti','Sorrelle','Achterberg'];
 
 const rnd=(a,b)=>a+Math.random()*(b-a);
 const ri=(a,b)=>Math.floor(rnd(a,b+1));
