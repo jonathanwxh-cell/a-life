@@ -15,7 +15,7 @@ function epitaphFor(p){
   if(m.kept_stray && s.heart>60) return "Loved small helpless things {their} whole life long.".replace(/\{their\}/g,p.px.their);
   if(m.became_teacher) return "Gave away everything {they} knew, and so kept it.".replace(/\{they\}/g,p.px.they);
   if(m.strayed && !m.confessed) return "Carried one secret all the way to the end.";
-  if(leg==='kind'||s.heart>72) return "Remembered, above all, as kind.";
+  if(leg==='kind'||s.heart>78) return "Remembered, above all, as kind.";
   if(leg==='built'||p.peakMeans>78) return "Built something that outlasted the building of it.";
   if(s.mind>78) return "Lived half in the world and half in {their} own head.".replace(/\{their\}/g,p.px.their);
   if(s.spirit>74) return "Carried a lightness the years never managed to take.";
@@ -25,7 +25,8 @@ function epitaphFor(p){
   // mid-tier lives — broadly decent without peaking — get their own quiet lines,
   // so the default below stays reserved for the genuinely unremarkable.
   if(s.spirit>=52&&s.heart>=52&&s.means>=38) return "Held more than most, and seldom needed to say so.";
-  if(s.heart>=55) return "Had little to spare, and spared it anyway.";
+  if(s.heart>=55&&s.means<45) return "Had little to spare, and spared it anyway.";
+  if(s.heart>=60) return "Easy to love, and not always easy to live with.";
   if(p.deathAge>=82) return "Lived a long time, and left the rooms quieter for the leaving.";
   return "An ordinary life, which is to say, a whole world.";
 }
@@ -86,6 +87,12 @@ function updateHouse(p){
   if(s.means>80&&s.heart<40) bump('ruthless');
   if(p.flags.legacy==='built'||s.means>82) bump('industrious');
   if(m.kind_to_outcast) bump('generous',0.5);
+
+  // a family can also climb on a strong, sustained reputation — not only on wealth.
+  // A scholarly or kind or hard-working line earns standing the modest can reach
+  // (capped below the very top, which stays the province of fortune).
+  const repTop=reputeTop(h);
+  if(repTop && h.repute[repTop]>=3 && h.seat<5 && Math.random()<0.5) h.seat=Math.min(5,h.seat+1);
 
   // --- heirlooms: certain lives leave an object behind ---
   if(m.child_books && !h.heirlooms.some(x=>x.tag==='book'))
@@ -198,7 +205,10 @@ function succeed(childRel){
   addRel(otherKind, pick(otherSex==='m'?GIVEN_M:GIVEN_F), otherSex, 68, ri(22,34));
   // opening lines reflect being born a child of the house it has become
   const seat=seatOf(h.seat);
-  logLine("Was born into "+seat.name+", and a family that already had a story.","obs");
+  const births=["Was born into "+seat.name+", and a family that already had a story.",
+    "Was born where the last life ended — into "+seat.name+", and a name already partly spent.",
+    "Came into the world already inside a story someone else had begun, in "+seat.name+"."];
+  logLine(births[child.gen % births.length],"obs");
   if(h.motto) logLine("Raised on the family words: “"+h.motto+"”","obs");
   showHeir(child, dead, inheritMeans, nurture, h);
 }
@@ -251,6 +261,8 @@ function startLife(p){
   if(window.AL_reseed) window.AL_reseed();
   seedParents(p);
   logLine("Was born.","obs");
+  // a gentle one-time orientation for a first-ever player (non-persisted; fades)
+  if(window.hintOnce) setTimeout(()=>{ if(P&&P.alive) hintOnce('seenIntro',"The years move on their own — pause any time with the ▮▮ below. Now and then, a moment will ask something of you."); },1600);
   running=true; busy=false;
 }
 

@@ -55,7 +55,7 @@ const CARDS=[
  ]},
 {id:'y_leave',stage:'youth',w:2,once:true,age:[17,24],text:"The town is small and {n} can feel its edges. There is a city somewhere, indifferent and enormous.",
  choices:[
-  {t:"Go. Don't look back.",h:"the world widens",do:p=>{fx(p,{mind:6,heart:-3,spirit:5,means:-4});const m=rel('mother');if(m)m.bond=clamp(m.bond-8);p.flags.left=1;remember('left_home');logLine("Left home for the city, carrying one bag and every hope.");}},
+  {t:"Go. Don't look back.",h:"the world widens",do:p=>{fx(p,{mind:6,heart:-3,spirit:5,means:-4});const m=rel('mother');if(m)m.bond=clamp(m.bond-8);p.flags.left=1;remember('left_home');logLine("Left home for the city, carrying one bag and a life not yet started.");}},
   {t:"Stay. The roots are here.",h:"",do:p=>{fx(p,{heart:5,spirit:2,mind:-2});remember('stayed_home');logLine("Stayed where {they} was known, and was, mostly, content.");}},
  ]},
 {id:'y_drink',stage:'youth',w:2,age:[18,26],text:"There is a season where the nights run long and the mornings cost more each time.",
@@ -100,7 +100,7 @@ const CARDS=[
 /* ---- MIDLIFE ---- */
 {id:'m_parent_age',stage:'midlife',w:3,age:[40,68],
  cond:()=>{const pa=agingParent();return !!pa;},
- text:()=>{const pa=agingParent();return `${pa.given}, {n}'s ${pa.kind}, is old now, and frightened in the small hours. They need someone, and {n} has a life of {their} own.`;},
+ text:()=>{const pa=agingParent();return `${pa.given}, {n}'s ${pa.kind}, is old now, and frightened in the small hours. ${pa.px.They} needs someone, and {n} has a life of {their} own.`;},
  choices:[
   {t:"Take them in.",h:"",do:p=>{const pa=agingParent();if(pa){pa.bond=clamp(pa.bond+14);pa.caredFor=true;}fx(p,{means:-8,spirit:-2,heart:6});logLine("Made room for an aging parent, and lost some sleep and gained some grace.");}},
   {t:"Pay for their care, from afar.",h:"",do:p=>{const pa=agingParent();if(pa){pa.bond=clamp(pa.bond-4);pa.caredFor=true;}fx(p,{means:-12});logLine("Did right by a parent at a careful distance.","obs");}},
@@ -113,8 +113,8 @@ const CARDS=[
  ]},
 {id:'m_health',stage:'midlife',w:3,once:true,age:[45,68],text:"The body sends its first real letter. A scare, a doctor's careful voice, a word {n} has to look up.",
  choices:[
-  {t:"Change everything. Now.",h:"",do:p=>{fx(p,{vit:10,spirit:-2,means:-4});logLine("Took the warning seriously, and bought {them}self years.","obs");}},
-  {t:"Carry on as before.",h:"the warning, unheeded",do:p=>{fx(p,{vit:-8,spirit:2});p.flags.peril=p.age+8;logLine("Heard the warning, folded the doctor's letter away, and went on as before.","obs");}},
+  {t:"Change everything. Now.",h:"health, at a cost",do:p=>{fx(p,{vit:10,spirit:-3,means:-6});logLine("Took the warning seriously — changed the work, the food, the hours — and bought {them}self years.","obs");}},
+  {t:"Carry on as before.",h:"the life, unbroken",do:p=>{fx(p,{vit:-8,spirit:4,means:3});p.flags.peril=p.age+8;logLine("Heard the warning, folded the doctor's letter away, and kept the life {they} had built.","obs");}},
  ]},
 {id:'m_money',stage:'midlife',w:2,age:[42,70],cond:()=>P.stats.means>50,text:"The savings have grown into something with weight. {n} could keep building, or finally use some of it to live.",
  choices:[
@@ -124,7 +124,7 @@ const CARDS=[
 
 /* ---- ELDER ---- */
 {id:'e_reconcile',stage:'elder',w:3,age:[64,95],cond:()=>P.rels.some(r=>r.bond<35&&(r.kind==='child'||r.kind==='friend'||r.kind==='spouse')),
- text:"There is a name {n} has not said in too long. The phone is right there. So is the pride.",
+ text:"There is a name {n} has not said in too long. A letter would reach them by week's end. So would the pride, if {they} let it.",
  choices:[
   {t:"Call. Say the hard thing.",h:"",do:p=>{const r=p.rels.filter(r=>r.alive&&r.bond<35)[0];if(r){r.bond=clamp(r.bond+25);logLine("Reached across years of silence to "+r.given+".","joy");}fx(p,{spirit:10});}},
   {t:"Let it lie. Too late now.",h:"",do:p=>{fx(p,{spirit:-6});logLine("Decided it was too late to mend it. It was not, but {they} would never know.","loss");}},
@@ -142,15 +142,15 @@ const CARDS=[
  ]},
 
 /* ---- UNIVERSAL / ENTROPY ---- */
-{id:'u_windfall',stage:'*',w:1,cool:14,text:"An envelope, a forgotten debt repaid, a stroke of plain luck. Money {n} did not expect.",
+{id:'u_windfall',stage:'*',w:1,cool:14,text:p=>p.flags.sawWindfall?"Another envelope, another stroke of plain luck — the world handing {n} something unasked, again.":"An envelope, a forgotten debt repaid, a stroke of plain luck. Money {n} did not expect.",
  choices:[
-  {t:"Save it.",h:"",do:p=>{fx(p,{means:12});logLine("Came into unexpected money and, sensibly, kept it.");}},
-  {t:"Share it out.",h:"",do:p=>{fx(p,{means:4,heart:6,spirit:5});logLine("Came into money and gave most of it away.","joy");}},
+  {t:"Save it.",h:"",do:p=>{p.flags.sawWindfall=1;fx(p,{means:12});logLine(nth(p,'wind_save')>1?"Folded the second windfall away with the first, and said nothing.":"Came into unexpected money and, sensibly, kept it.");}},
+  {t:"Share it out.",h:"",do:p=>{p.flags.sawWindfall=1;fx(p,{means:4,heart:6,spirit:5});logLine("Came into money and gave most of it away.","joy");}},
  ]},
-{id:'u_loss',stage:'*',w:1,cool:16,cond:()=>P.stats.means>30,text:"A bad year. A failure not entirely {n}'s fault, but the bill comes to {them} all the same.",
+{id:'u_loss',stage:'*',w:1,cool:16,cond:()=>P.stats.means>30,text:p=>p.flags.sawLoss?"Another bad year. Another bill that wasn't entirely {n}'s to pay, arriving all the same.":"A bad year. A failure not entirely {n}'s fault, but the bill comes to {them} all the same.",
  choices:[
-  {t:"Absorb it. Rebuild.",h:"steady, and slow",do:p=>{fx(p,{means:-16,spirit:-4,mind:3});logLine(nth(p,'u_loss')>1?"Took another hard loss, and knew, this time, the shape of starting over.":"Took a hard loss and started, again, from lower down.","loss");}},
-  {t:"Fight to recover it.",h:"fortune is fickle",do:p=>{if(chance(0.5)){fx(p,{means:-4,spirit:-2,mind:2});logLine("Fought the loss nearly to a standstill, and kept most of what {they} had.");}else{fx(p,{means:-24,spirit:-7});logLine("Threw good money after bad, and lost more in the fighting of it.","loss");}}},
+  {t:"Absorb it. Rebuild.",h:"steady, and slow",do:p=>{p.flags.sawLoss=1;fx(p,{means:-16,spirit:-4,mind:3});logLine(nth(p,'loss_absorb')>1?"Took another hard loss, and knew, this time, the shape of starting over.":"Took a hard loss and started, again, from lower down.","loss");}},
+  {t:"Fight to recover it.",h:"fortune is fickle",do:p=>{p.flags.sawLoss=1;if(chance(0.5)){fx(p,{means:-4,spirit:-2,mind:2});logLine(nth(p,'loss_fight')>1?"Fought it again, older, and knew better the cost of the fighting.":"Fought the loss nearly to a standstill, and kept most of what {they} had.");}else{fx(p,{means:-24,spirit:-7});logLine("Threw good money after bad, and lost more in the fighting of it.","loss");}}},
  ]},
 
 /* ============================================================
@@ -164,7 +164,7 @@ const CARDS=[
   {t:"Pass it to a young one.",h:"",do:p=>{const c=rels('child')[0];echo("Gave the book that shaped {them} to "+(c?c.given:'a child')+", saying nothing of why.");if(c)c.bond=clamp(c.bond+8);fx(p,{spirit:6,heart:4});}},
  ]},
 {id:'cb_outcast_return',stage:'adult',w:4,cond:()=>held('kind_to_outcast')&&rel('friend'),once:true,
- text:()=>{const f=rel('friend');return `The child from the yard — ${f.given}, grown — is somebody now, and has not forgotten who sat beside ${P.given} when no one else would.`;},
+ text:()=>{const f=rel('friend');return `The child from the yard — ${f.given}, grown — is somebody now, and has not forgotten that ${P.given} sat beside them when no one else would.`;},
  choices:[
   {t:"Accept the hand up.",h:"kindness, returned with interest",do:p=>{const f=rel('friend');echo("A kindness done at "+recall('kind_to_outcast').age+" came back, decades later, as a door held open.","joy");fx(p,{means:14,spirit:8});f.bond=clamp(f.bond+10);}},
   {t:"Decline. You didn't do it for this.",h:"",do:p=>{echo("Refused to be repaid for a kindness {they} barely remembered giving.","obs");fx(p,{spirit:6,heart:5});}},
@@ -194,7 +194,7 @@ const CARDS=[
   {t:"Let it stay a memory.",h:"",do:p=>{echo("Chose not to return, and kept the town perfect and unvisited.","obs");fx(p,{spirit:-2,mind:3});}},
  ]},
 {id:'cb_unspoken',stage:'elder',w:3,cond:()=>held('unspoken_love'),once:true,
- text:"In the slow evenings, {n} thinks again of the one {they} never answered, all those years ago. {They} learns that name is in the paper — still living, a town away.",
+ text:"In the slow evenings, {n} thinks again of the one {they} never answered, all those years ago. {They} finds that name in a newspaper column — still living, a town away.",
  choices:[
   {t:"Write the letter, finally.",h:"",do:p=>{echo("Wrote, at last, to the love {they} let pass in silence half a life ago.","joy");fx(p,{spirit:10,heart:6});}},
   {t:"Some doors stay closed.",h:"",do:p=>{echo("Let the oldest 'what if' remain one, on purpose, at the end.","obs");fx(p,{spirit:2});}},
@@ -222,8 +222,8 @@ const CARDS=[
  ]},
 {id:'y_mentor',stage:'youth',w:3,once:true,age:[14,22],text:"An older stranger sees something in {n} and offers to teach {them} — for nothing, just because someone once did it for them.",
  choices:[
-  {t:"Show up every day.",h:"",do:p=>{remember('had_mentor');fx(p,{mind:11,spirit:5});const s=chance(.5)?'m':'f';addRel('mentor',pick(s==='m'?GIVEN_M:GIVEN_F),s,66,p.age+ri(28,40));logLine("Was taken under a wing, and never forgot the debt of it.","joy");}},
-  {t:"Be too proud to need it.",h:"",do:p=>{fx(p,{spirit:-3,mind:-2});logLine("Turned down a teacher out of pride {they} mistook for strength.");}},
+  {t:"Show up every day.",h:"a wing to learn under",do:p=>{remember('had_mentor');fx(p,{mind:11,spirit:5});const s=chance(.5)?'m':'f';addRel('mentor',pick(s==='m'?GIVEN_M:GIVEN_F),s,66,p.age+ri(28,40));logLine("Was taken under a wing, and never forgot the debt of it.","joy");}},
+  {t:"Teach yourself instead.",h:"alone, and wholly your own",do:p=>{remember('self_made');fx(p,{mind:5,spirit:2,heart:-2});logLine("Turned the teacher down, and taught {them}self — slower, lonelier, owing the result to no one.");}},
  ]},
 {id:'a_fork_career',stage:'adult',w:3,once:true,age:[30,58],cond:()=>P.stats.means>40,text:"{n} can buy security — a dull, safe thing that will hold for thirty years — or risk it all on work that might mean something.",
  choices:[
@@ -303,13 +303,13 @@ const CARDS=[
 {id:'y_principle',stage:'youth',w:2,age:[16,25],once:true,
  text:"Something unfair is happening, and {n} is the only one in the room who seems to see it. Speaking up will cost something.",
  choices:[
-  {t:"Speak. Pay for it.",h:"",do:p=>{fx(p,{spirit:8,means:-5,heart:3});remember('took_a_stand');logLine("Stood up young against something unfair, and wore the cost of it.","joy");}},
-  {t:"Stay quiet. Stay safe.",h:"",do:p=>{fx(p,{spirit:-5,mind:3});logLine("Saw the wrong of it, and said nothing, and remembered saying nothing.");}},
+  {t:"Speak. Pay for it.",h:"integrity, at a price",do:p=>{fx(p,{spirit:8,means:-5,heart:3});remember('took_a_stand');logLine("Stood up young against something unfair, and wore the cost of it.","joy");}},
+  {t:"Stay quiet. Keep your place.",h:"safe, and a little smaller",do:p=>{fx(p,{spirit:-5,mind:3,means:4});logLine("Saw the wrong of it, said nothing, kept {their} place, and remembered the silence.");}},
  ]},
 {id:'y_dare',stage:'youth',w:2,age:[16,23],
  text:"A dare, a height, a fast machine — a chance to feel, for a few seconds, completely alive and entirely breakable.",
  choices:[
-  {t:"Do the reckless thing.",h:"alive and breakable",do:p=>{fx(p,{spirit:7,vit:-2,heart:2});p.flags.peril=p.age+4;logLine("Did the dangerous, beautiful, stupid thing, and the seconds of it lasted years.");}},
+  {t:"Do the reckless thing.",h:"alive and breakable",do:p=>{fx(p,{spirit:7,vit:-2,heart:2});p.flags.peril=p.age+4;logLine("Did the dangerous, beautiful, breakable thing, and the seconds of it lasted years.");}},
   {t:"Keep both feet down.",h:"",do:p=>{fx(p,{mind:3,spirit:-2});logLine("Watched the others leap, and kept {their} own feet on the ground.");}},
  ]},
 

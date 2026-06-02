@@ -32,8 +32,9 @@ function observe(){
   const s=P.stats, a=P.age;
   const ob=(key,cond,line,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(line,cls||'obs');} };
   if(a>40) ob('vit_tire',s.vit<35,"The stairs have started to ask a question of {them}.");
+  if(a>35) ob('vit_warn',s.vit<28,"The body is asking harder questions than {they} has good answers for.");
   if(a>55) ob('vit_neg',s.vit<18,"{Their} body has become a small daily negotiation.");
-  ob('mind_hi',s.mind>78&&a>20,"Books have become a country {they} can live in.");
+  ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does and become somewhere {they} goes."][(P.gen-1)%3]);
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
   ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
   ob('spirit_lo',s.spirit<22,"A greyness has moved quietly into the rooms of {them}.");
@@ -143,7 +144,7 @@ function tick(){
   // event probability rises the longer it's been quiet (quiet, then weight)
   // quiet, then weight: a hard floor of silent years, then a steep ramp
   if(P.sinceCard < 2){ save(); return; }            // never two moments back-to-back
-  const base=0.07, ramp=Math.min(0.6, Math.pow(Math.max(0,P.sinceCard-2),1.5)*0.045);
+  const base=(P.age<13?0.11:0.07), ramp=Math.min(0.6, Math.pow(Math.max(0,P.sinceCard-2),1.5)*0.045);
   if(chance(base+ramp)) drawCard();
   save();
 }
@@ -173,6 +174,11 @@ function drawCard(){
     const lc=pool.find(c=>c.opensLove);
     if(lc && ((lc.age && P.age>=lc.age[1]-5) || chance(0.6))){ presentCard(lc); return; }
   }
+  // callbacks are rare, memory-gated payoffs (cb_*) — the reach-back that gives a life
+  // its particular shape. When one is finally eligible, strongly prefer it so the long
+  // arc actually closes instead of being crowded out by ordinary moments.
+  const cb=pool.find(c=>c.id.indexOf('cb_')===0);
+  if(cb && chance(0.7)){ presentCard(cb); return; }
   // weighted pick
   let tot=0; for(const c of pool) tot+=c.w;
   let r=Math.random()*tot, chosen=pool[0];
@@ -184,6 +190,8 @@ function presentCard(c){
   P.sinceCard=0;
   P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age;   // for the no-repeat cooldown
   if(c.once) P.flags['card_'+c.id]=1;
+  // once the player has made a choice, point them to where it's all recorded
+  if(window.hintOnce && P.decisions && P.decisions.length>=1) hintOnce('seenChron',"Every choice is being written into your chronicle — tap “✦ the constellation” (top) to see the whole line.");
   const card=document.getElementById('card'), pass=document.getElementById('passing');
   pass.classList.remove('show');
   document.getElementById('scene').innerHTML=fmt(c.text);
