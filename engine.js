@@ -15,13 +15,16 @@ function haveChild(){
   }
   c.seed=seedChildStats(P, partner);
   c.traitsSeed=inheritTraits([...P.traits, ...(partner&&partner.traitsSeed?partner.traitsSeed:[])]);
-  P.childrenIds.push(given);
+  const cn=c.given;   // addRel may have re-picked the name to avoid a collision — use the real one
+  P.childrenIds.push(cn);
   const kn=P.childrenIds.length;
-  logLine([
-    "Had a child, "+given+". The world rearranged itself around a small weight.",
-    "Had a second child, "+given+". The house made room again, more easily this time.",
-    "Had another child, "+given+". By now {they} knew the shape of it, and was no less moved."
-  ][Math.min(kn,3)-1],"joy");
+  const first=[
+    "Had a child, "+cn+". The world rearranged itself around a small weight.",
+    "Had a child, "+cn+", and nothing afterward was ever quite the same size.",
+    "Had a child, "+cn+". A new centre the whole house quietly turned toward."];
+  logLine(kn>=3 ? "Had another child, "+cn+". By now {they} knew the shape of it, and was no less moved."
+        : kn===2 ? "Had a second child, "+cn+". The house made room again, more easily this time."
+        : first[(P.gen-1)%3], "joy");
 }
 function seedChildStats(parent, partner){
   const mean=50;
@@ -42,7 +45,7 @@ function observe(){
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
   ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
   ob('spirit_lo',s.spirit<22,"A greyness has moved quietly into the rooms of {them}.");
-  ob('spirit_hi',s.spirit>85&&a>30,"There is a lightness to {them} that the years did not take.");
+  ob('spirit_hi',s.spirit>85&&a>30,"Something in {them} has refused, all these years, to grow heavy.");
   ob('heart_lo',s.heart<20,"{They} has grown hard to reach, even for {them}self.");
 }
 
@@ -201,7 +204,7 @@ function presentCard(c){
   document.getElementById('scene').innerHTML=fmt(c.text);
   const cw=document.getElementById('choices'); cw.innerHTML='';
   c.choices.forEach((ch,ci)=>{
-    const b=document.createElement('button'); b.className='choice';
+    const b=document.createElement('button'); b.type='button'; b.className='choice';
     b.innerHTML=fmt(ch.t)+(ch.h?`<span class="h">${fmt(ch.h)}</span>`:'');
     b.onclick=()=>{
       if(b.dataset.done) return; b.dataset.done=1;
@@ -227,5 +230,5 @@ function presentCard(c){
     };
     cw.appendChild(b);
   });
-  requestAnimationFrame(()=>card.classList.add('show'));
+  requestAnimationFrame(()=>{ card.classList.add('show'); try{ card.focus(); }catch(e){} });
 }

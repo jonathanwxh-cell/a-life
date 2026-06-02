@@ -15,8 +15,11 @@ function epitaphFor(p){
   if(m.kept_stray && s.heart>60) return "Loved small helpless things {their} whole life long.".replace(/\{their\}/g,p.px.their);
   if(m.became_teacher) return "Gave away everything {they} knew, and so kept it.".replace(/\{they\}/g,p.px.they);
   if(m.strayed && !m.confessed) return "Carried one secret all the way to the end.";
+  // an explicit legacy choice (e_legacy) wins over stat-derived epitaphs below
+  if(leg==='built') return "Built something that outlasted the building of it.";
+  if(leg==='here') return "Asked for no monument — only that the years had been real.";
   if(leg==='kind'||s.heart>82) return "Remembered, above all, as kind.";
-  if(leg==='built'||p.peakMeans>78) return "Built something that outlasted the building of it.";
+  if(p.peakMeans>78) return "Built something that outlasted the building of it.";
   if(s.mind>78) return "Lived half in the world and half in {their} own head.".replace(/\{their\}/g,p.px.their);
   if(s.spirit>74) return "Carried a lightness the years never managed to take.";
   if(s.spirit<28) return "Knew more sorrow than {they} ever said aloud.".replace(/\{they\}/g,p.px.they);
