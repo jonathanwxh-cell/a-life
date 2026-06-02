@@ -7,9 +7,11 @@ function renderHeader(){
   const sp=rel('spouse'); if(sp)kin.push(P.px.spouse+' of '+sp.given);
   const kids=rels('child'); if(kids.length)kin.push(kids.length===1?'parent of one':'parent of '+kids.length);
   document.getElementById('hMeta').textContent = (P.age<13?'a child':stageOf(P.age))+ (kin.length?' · '+kin[0]:'');
-  document.getElementById('hGen').innerHTML = ordinal(P.gen)+' of the line<br><span class="chron" id="openStars">✦ the constellation</span><br><span class="chron2" id="openChron">the chronicle ↗</span>';
-  document.getElementById('openStars').onclick=()=>openChronicle('stars');
-  document.getElementById('openChron').onclick=()=>openChronicle('life');
+  document.getElementById('hGen').innerHTML = ordinal(P.gen)+' of the line<br><span class="chron" id="openStars" tabindex="0" role="button" aria-label="open the constellation">✦ the constellation</span><br><span class="chron2" id="openChron" tabindex="0" role="button" aria-label="open the chronicle">the chronicle ↗</span>';
+  const _os=document.getElementById('openStars'), _oc=document.getElementById('openChron');
+  const _key=fn=>e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fn(); } };
+  _os.onclick=()=>openChronicle('stars'); _os.onkeydown=_key(()=>openChronicle('stars'));
+  _oc.onclick=()=>openChronicle('life');  _oc.onkeydown=_key(()=>openChronicle('life'));
 }
 function renderBeing(){
   const b=document.getElementById('being');
@@ -51,6 +53,12 @@ function fadeOutEntry(div){
   setTimeout(()=>{ if(div.parentNode) div.parentNode.removeChild(div); }, 1500);
 }
 function reTok(s){const px=P.px;return s.replace(/\{they\}/g,px.they).replace(/\{them\}/g,px.them).replace(/\{their\}/g,px.their).replace(/\{They\}/g,px.They).replace(/\{Their\}/g,px.Their);}
+// a one-time, non-persisted orientation line (fades like any log entry, never saved to
+// the chronicle). Gated per key in localStorage so a returning player never sees it.
+function hintOnce(key, text){
+  try{ if(!window.localStorage || localStorage.getItem('alife:'+key)) return; localStorage.setItem('alife:'+key,'1'); }catch(e){ return; }
+  const log=document.getElementById('log'); if(log) addEphemeralEntry(log, {age:'', text, cls:'obs'});
+}
 function renderLogFull(){
   // ephemeral model: only seed the latest beat when the log is empty (a fresh
   // load / new life); otherwise leave the fading entries be (no flicker on choices).

@@ -98,7 +98,7 @@
       g.strokeStyle='rgba(224,194,130,0.5)'; g.lineWidth=1.2/view.z;
       g.beginPath(); g.arc(nd.x,nd.y,4.5,0,6.29); g.stroke();
       g.fillStyle='rgba(255,236,190,0.9)'; g.beginPath(); g.arc(nd.x,nd.y,1.8,0,6.29); g.fill();
-      g.fillStyle='rgba(236,225,207,0.8)'; g.font=`${Math.max(8,11/view.z)}px Fraunces, serif`; g.textAlign='center';
+      g.fillStyle='rgba(236,225,207,0.8)'; g.font=`${Math.max(10,11/view.z)}px Fraunces, serif`; g.textAlign='center';
       g.fillText(nd.label, nd.x, nd.y-10/view.z);
     }
     for(const s of stars){

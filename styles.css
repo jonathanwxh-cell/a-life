@@ -3,7 +3,7 @@
     --bg2:#1f1813;
     --ink:#ece1cf;
     --ink-dim:#a99c87;
-    --ink-faint:#6f6354;
+    --ink-faint:#8a7d6e;
     --amber:#e0a94b;
     --rose:#d08a86;
     --sage:#9bbf9a;
@@ -218,7 +218,11 @@
   /* the narrative prose sits directly over the open sky — give it its own soft dark
      backing so it stays legible even on the pale youth/midday skies */
   .card .scene{text-shadow:0 1px 10px rgba(8,6,4,0.72), 0 0 34px rgba(8,6,4,0.55);}
-  .being{text-shadow:0 1px 6px rgba(8,6,4,0.85);}
+  .being{text-shadow:0 1px 14px rgba(8,6,4,0.9), 0 0 28px rgba(8,6,4,0.6);}
+  /* ghost buttons sit over painterly veil backdrops — keep their outline readable */
+  .veil .btn.ghost{border-color:rgba(236,225,207,0.38);color:var(--ink);}
+  /* delete control: a comfortable 44px touch target */
+  .slot .del{min-width:44px;min-height:44px;}
   /* the time control reads as primary and distinct from the menu (amber = actionable) */
   #pp{border-color:rgba(224,169,75,0.42);background:rgba(224,169,75,0.07);}
   #pp:hover{background:rgba(224,169,75,0.16);}

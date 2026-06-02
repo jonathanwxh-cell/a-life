@@ -131,7 +131,7 @@ document.getElementById('openLoad').onclick=openLoadMenu;
 document.getElementById('inspectBtn').onclick=inspectStorage;
 document.getElementById('exportBtn').onclick=exportCurrent;
 document.getElementById('importBtn').onclick=importFromCode;
-document.getElementById('dBackup').onclick=async()=>{
+const _doBackup=async()=>{
   await save();
   try{
     const code=encodeSave(S);
@@ -142,6 +142,8 @@ document.getElementById('dBackup').onclick=async()=>{
     el.style.color='var(--sage)';
   }catch(e){ document.getElementById('dBackup').textContent='backup failed — use Menu → Load'; }
 };
+(function(){ const b=document.getElementById('dBackup'); b.onclick=_doBackup;
+  b.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); _doBackup(); } }; })();
 document.getElementById('menuBtn').onclick=async()=>{
   running=false; clearTimeout(timer); setPP();
   await save();
