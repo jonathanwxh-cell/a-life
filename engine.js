@@ -39,8 +39,8 @@ function seedChildStats(parent, partner){
 function observe(){
   const s=P.stats, a=P.age;
   const ob=(key,cond,line,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(line,cls||'obs');} };
-  if(a>40) ob('vit_tire',s.vit<35,"The stairs have started to ask a question of {them}.");
-  if(a>55) ob('vit_neg',s.vit<18,"{Their} body has become a small daily negotiation.");
+  if(a>40) ob('vit_tire',s.vit<35,["The stairs have started to ask a question of {them}.","The body has begun keeping its own quiet counsel.","{Their} legs know something the rest of {them} is not yet ready to hear."][(P.gen-1)%3]);
+  if(a>55) ob('vit_neg',s.vit<18,["{Their} body has become a small daily negotiation.","Each day now asks something {they} did not used to have to pay.","The body keeps its own ledger now, and the sums are getting harder."][(P.gen-1)%3]);
   ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does and become somewhere {they} goes."][(P.gen-1)%3]);
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
   ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
@@ -184,22 +184,22 @@ function drawCard(){
     // gentle preference otherwise — leaving room for the other characterful youth moments.
     if(lc && ((lc.age && P.age>=lc.age[1]-5) || chance(0.32))){ presentCard(lc); return; }
   }
-  // callbacks are rare, memory-gated payoffs (cb_*) — the reach-back that gives a life
-  // its particular shape. When one is finally eligible, strongly prefer it so the long
-  // arc actually closes instead of being crowded out by ordinary moments.
-  const cb=pool.find(c=>c.id.indexOf('cb_')===0);
-  if(cb && chance(0.7)){ presentCard(cb); return; }
-  // a willing couple is certainly offered a first child before the window shuts, so a
-  // line is never foreclosed by draw-luck — the player still chooses yes or no.
+  // a willing couple is certainly offered marriage and a first child before those windows
+  // shut, so a line is never foreclosed by draw-luck. This offer OUTRANKS even a callback
+  // (it must not be silently pre-empted). The player still chooses yes or no.
   if((rel('spouse')||rel('love')) && !rels('child').length){
     const cc=pool.find(c=>c.id==='a_child');
     if(cc && cc.age && P.age>=cc.age[1]-5){ presentCard(cc); return; }
   }
-  // and a settled couple is offered marriage before that window shuts, too
   if(rel('love') && !P.flags.married){
     const mc=pool.find(c=>c.id==='a_marry');
     if(mc && mc.age && P.age>=mc.age[1]-6){ presentCard(mc); return; }
   }
+  // callbacks are rare, memory-gated payoffs (cb_*) — the reach-back that gives a life its
+  // particular shape. When one is finally eligible, strongly prefer it so the long arc
+  // closes instead of being crowded out by ordinary moments.
+  const cb=pool.find(c=>c.id.indexOf('cb_')===0);
+  if(cb && chance(0.7)){ presentCard(cb); return; }
   // weighted pick
   let tot=0; for(const c of pool) tot+=c.w;
   let r=Math.random()*tot, chosen=pool[0];
