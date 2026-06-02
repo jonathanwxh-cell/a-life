@@ -13,12 +13,12 @@ function epitaphFor(p){
   const s=p.stats, leg=p.flags.legacy, m=p.mem||{};
   // a defining memory can claim the epitaph
   if(m.kept_stray && s.heart>60) return "Loved small helpless things {their} whole life long.".replace(/\{their\}/g,p.px.their);
-  if(m.became_teacher) return "Gave away everything {they} knew, and so kept it.".replace(/\{they\}/g,p.px.they);
+  if(m.became_teacher) return ["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned."][p.gen%3];
   if(m.strayed && !m.confessed) return "Carried one secret all the way to the end.";
   // an explicit legacy choice (e_legacy) wins over stat-derived epitaphs below
   if(leg==='built') return "Built something that outlasted the building of it.";
   if(leg==='here') return "Asked for no monument — only that the years had been real.";
-  if(leg==='kind'||s.heart>82) return "Remembered, above all, as kind.";
+  if(leg==='kind'||s.heart>82) return ["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones."][p.gen%3];
   if(p.peakMeans>78) return "Built something that outlasted the building of it.";
   if(s.mind>78) return "Lived half in the world and half in {their} own head.".replace(/\{their\}/g,p.px.their);
   if(s.spirit>74) return "Carried a lightness the years never managed to take.";

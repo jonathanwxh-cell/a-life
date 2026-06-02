@@ -70,7 +70,7 @@ const CARDS=[
   {t:"Ask. Build a life.",h:"two become a household",do:p=>{const l=rel('love');l.kind='spouse';p.flags.married=1;fx(p,{spirit:11,heart:6});logLine("Married "+l.given+". "+["The day was small and the meaning was not.","Nobody made a speech; the years that followed were the speech.","They made it formal on an ordinary day, and meant every word of it."][(p.gen-1)%3],"joy");}},
   {t:"Not yet. Maybe never.",h:"",do:p=>{const l=rel('love');l.bond=clamp(l.bond-14);fx(p,{spirit:-6});logLine("Could not say yes, and watched a good thing strain.","loss");}},
  ]},
-{id:'a_child',stage:'adult',w:7,age:[26,50],cool:5,cond:()=>(rel('spouse')||rel('love'))&&rels('child').length<3,
+{id:'a_child',stage:'adult',w:5,age:[26,50],cool:5,cond:()=>(rel('spouse')||rel('love'))&&rels('child').length<3,
  text:p=>{const k=rels('child').length;return k===0?"The question of a child arrives, the way it does — half decision, half tide.":k===1?"The question of another child arrives — familiar now, and still not small.":"The question of one more arrives, the way it does, and {n} already knows the weight of the answer.";},
  choices:[
   {t:"Yes. Make room in the world.",h:"the line may continue",do:p=>{haveChild();fx(p,{spirit:8,means:-6,vit:-3});}},
@@ -138,11 +138,11 @@ const CARDS=[
 {id:'e_garden',stage:'elder',w:2,age:[66,95],once:true,text:"The days are slow and wide. {n} takes up something small — a garden, a craft, a quiet ritual.",
  choices:[
   {t:"Tend it daily.",h:"",do:p=>{fx(p,{spirit:8,vit:3});logLine("Found a late, gentle happiness in small daily things.","joy");}},
-  {t:"Sit in the window instead.",h:"",do:p=>{fx(p,{spirit:-2,mind:3});logLine("Spent the last years mostly in thought, at the window.","obs");}},
+  {t:"Sit in the window instead.",h:"a quieter happiness",do:p=>{fx(p,{spirit:4,mind:5});logLine("Spent the last years mostly in thought, at the window, and did not find it empty.","obs");}},
  ]},
 
 /* ---- UNIVERSAL / ENTROPY ---- */
-{id:'u_windfall',stage:'*',w:1,age:[10,95],cool:14,text:p=>p.flags.sawWindfall?"Another envelope, another stroke of plain luck — the world handing {n} something unasked, again.":"An envelope, a forgotten debt repaid, a stroke of plain luck. Money {n} did not expect.",
+{id:'u_windfall',stage:'*',w:1,age:[16,95],cool:14,text:p=>p.flags.sawWindfall?"Another envelope, another stroke of plain luck — the world handing {n} something unasked, again.":"An envelope, a forgotten debt repaid, a stroke of plain luck. Money {n} did not expect.",
  choices:[
   {t:"Save it.",h:"",do:p=>{p.flags.sawWindfall=1;fx(p,{means:12});logLine(nth(p,'wind_save')>1?"Folded the second windfall away with the first, and said nothing.":"Came into unexpected money and, sensibly, kept it.");}},
   {t:"Share it out.",h:"",do:p=>{p.flags.sawWindfall=1;fx(p,{means:4,heart:6,spirit:5});logLine("Came into money and gave most of it away.","joy");}},

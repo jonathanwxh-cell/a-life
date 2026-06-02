@@ -188,6 +188,12 @@ function drawCard(){
   // arc actually closes instead of being crowded out by ordinary moments.
   const cb=pool.find(c=>c.id.indexOf('cb_')===0);
   if(cb && chance(0.7)){ presentCard(cb); return; }
+  // a willing couple is certainly offered a first child before the window shuts, so a
+  // line is never foreclosed by draw-luck — the player still chooses yes or no.
+  if((rel('spouse')||rel('love')) && !rels('child').length){
+    const cc=pool.find(c=>c.id==='a_child');
+    if(cc && cc.age && P.age>=cc.age[1]-5){ presentCard(cc); return; }
+  }
   // weighted pick
   let tot=0; for(const c of pool) tot+=c.w;
   let r=Math.random()*tot, chosen=pool[0];
