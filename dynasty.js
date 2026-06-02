@@ -22,7 +22,7 @@ function epitaphFor(p){
   const recent=lin.map(a=>a&&a.epitaph), recentC=lin.map(a=>a&&a.cluster);
   const blocked=k=>recentC.filter(c=>c===k).length>=2;
   const out=(k,txt)=>{ p._epiCluster=k; return txt; };
-  const pr=arr=>{ const opts=arr.map(sub); const fresh=opts.filter(o=>!recent.includes(o)); const pool=fresh.length?fresh:opts; return pool[p.gen%pool.length]; };
+  const pr=arr=>{ const opts=arr.map(sub); const fresh=opts.filter(o=>!recent.includes(o)); const pool=fresh.length?fresh:opts; return pool[((p.gen-1+(typeof houseOff==='function'?houseOff():0))%pool.length+pool.length)%pool.length]; };
   const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains."];
   const kind=["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones.","Left people gentler than {they} found them.","Carried a warmth into every room, and left it there."];
   // a defining memory or chosen legacy claims the epitaph (identity — always honored)
@@ -237,13 +237,18 @@ function succeed(childRel){
   const lineKind = dead.sex==='m'?'father':'mother';
   const otherSex = dead.sex==='m'?'f':'m', otherKind = dead.sex==='m'?'mother':'father';
   addRel(lineKind, dead.given, dead.sex, 74, ri(24,38));
-  addRel(otherKind, pick(otherSex==='m'?GIVEN_M:GIVEN_F), otherSex, 68, ri(22,34));
+  // the heir's other parent gets a name not already worn by an ancestor, so the
+  // chronicle never reads one given name in two unrelated roles down the generations
+  const taken=new Set((S.lineage||[]).map(a=>a&&a.given)); taken.add(dead.given);
+  let oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F), g=0;
+  while(taken.has(oNm) && g++<20) oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F);
+  addRel(otherKind, oNm, otherSex, 68, ri(22,34));
   // opening lines reflect being born a child of the house it has become
   const seat=seatOf(h.seat);
   const births=["Was born into "+seat.name+", and a family that already had a story.",
     "Was born where the last life ended — into "+seat.name+", and even that already partly spent.",
     "Came into the world already inside a story someone else had begun, with "+seat.name+" for an inheritance."];
-  logLine(births[child.gen % births.length],"obs");
+  logLine(births[rotI(child, births.length)],"obs");
   if(h.motto) logLine("Raised on the family words: “"+h.motto+"”","obs");
   showHeir(child, dead, inheritMeans, nurture, h);
 }
