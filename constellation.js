@@ -9,7 +9,7 @@
   if(!cv) return;
   const g=cv.getContext('2d');
   const tip=document.getElementById('starTip');
-  let W=0,H=0,DPR=1, view={x:0,y:0,z:1}, stars=[], threads=[], nodes=[];
+  let W=0,H=0,DPR=1, view={x:0,y:0,z:1}, stars=[], threads=[], nodes=[], chosenStars=[], kbIdx=-1;
   let anim=null;
 
   function fit(){
@@ -68,6 +68,7 @@
     const xs=stars.concat(nodes).map(s=>s.x);
     const cxAll=xs.length?(Math.min(...xs)+Math.max(...xs))/2:W/2;
     view.x=W/2-cxAll; view.y=0; view.z=1;
+    chosenStars=stars.filter(s=>s.chosen); kbIdx=-1;   // ordered chronologically for keyboard traversal
   }
 
   const TONE={joy:[150,210,160], loss:[224,138,134], obs:[244,214,150]};
@@ -132,6 +133,29 @@
     else tip.style.opacity=0;
   }
   function panBy(dx,dy){ view.x+=dx; view.y+=dy; }
+
+  // ---- KEYBOARD (the canvas is aria-hidden; the tabpanel is focusable and owns
+  // arrow-key traversal of the chosen decisions, announced to assistive tech) ----
+  function announce(txt){ const a=document.getElementById('starA11y'); if(a) a.textContent=txt; }
+  function focusStarByIndex(i){
+    if(!chosenStars.length) return;
+    kbIdx=Math.max(0,Math.min(chosenStars.length-1,i));
+    const s=chosenStars[kbIdx];
+    if(view.z<1) view.z=1;
+    view.x=W/2 - s.x*view.z; view.y=H/2 - s.y*view.z;          // centre the focused decision
+    tip.style.opacity=1; tip.style.left=(s.x*view.z+view.x)+'px'; tip.style.top=(s.y*view.z+view.y)+'px';
+    tip.innerHTML=`<span class="age">age ${s.age}</span><br>${s.label}`+(s.alt?`<div class="alt">instead of: ${s.alt}</div>`:'');
+    const clean=t=>String(t||'').replace(/[.\s]+$/,'');   // avoid a double full-stop in the spoken string
+    announce(`Age ${s.age}: ${clean(s.label)}.`+(s.alt?` Instead of ${clean(s.alt)}.`:'')+` Decision ${kbIdx+1} of ${chosenStars.length}.`);
+  }
+  const pane=document.getElementById('paneStars');
+  if(pane) pane.addEventListener('keydown',e=>{
+    if(!chosenStars.length) return;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'){ e.preventDefault(); focusStarByIndex(kbIdx+1); }
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){ e.preventDefault(); focusStarByIndex(kbIdx<0?0:kbIdx-1); }
+    else if(e.key==='Home'){ e.preventDefault(); focusStarByIndex(0); }
+    else if(e.key==='End'){ e.preventDefault(); focusStarByIndex(chosenStars.length-1); }
+  });
 
   // ---- MOUSE (pointer events, mouse only) ----
   cv.addEventListener('pointerdown',e=>{ if(e.pointerType==='touch') return; dragging=true;lastP={x:e.clientX,y:e.clientY};try{cv.setPointerCapture(e.pointerId);}catch(_){}});

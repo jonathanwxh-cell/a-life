@@ -106,7 +106,7 @@ async function openLoadMenu(){
     row.innerHTML=`<div class="body" tabindex="0" role="button" aria-label="Load House ${m.surname}"><div class="nm">House ${m.surname}</div>
       <div class="sub">${m.gens} generation${m.gens>1?'s':''} · ${m.souls} live${m.souls===1?'':'s'} lived · ${seatOf(m.seat).adj}<br>
       <span class="${m.alive?'':'dead'}">${status}</span> · ${when}</div></div>
-      <button class="del" type="button" aria-label="Delete this chronicle" title="delete">✕</button>`;
+      <button class="del" type="button" aria-label="Delete House ${m.surname}" title="delete House ${m.surname}">✕</button>`;
     const _loadRow=async()=>{
       const ok=await loadSlot(m.slot);
       if(ok){
@@ -121,9 +121,25 @@ async function openLoadMenu(){
     };
     const _bodyEl=row.querySelector('.body'); _bodyEl.onclick=_loadRow;
     _bodyEl.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); _loadRow(); } };
-    row.querySelector('.del').onclick=async(e)=>{
+    const delBtn=row.querySelector('.del');
+    // inline two-step confirm — no native confirm() dialog (it ruptures the mood,
+    // loses focus, and is silently suppressed inside sandboxed iframes). Keeps
+    // keyboard focus in the list and reads cleanly to assistive tech.
+    delBtn.onclick=(e)=>{
       e.stopPropagation();
-      if(confirm('Delete House '+m.surname+' forever? This cannot be undone.')){ await deleteSlot(m.slot); openLoadMenu(); }
+      if(delBtn.classList.contains('armed')) return;
+      delBtn.classList.add('armed');
+      const glyph=delBtn.textContent; delBtn.textContent=''; delBtn.setAttribute('aria-hidden','true'); delBtn.tabIndex=-1;
+      const conf=document.createElement('span'); conf.className='delConfirm';
+      const yes=document.createElement('button'); yes.type='button'; yes.className='delYes'; yes.textContent='delete'; yes.setAttribute('aria-label','Confirm: delete House '+m.surname+' forever');
+      const no=document.createElement('button'); no.type='button'; no.className='delNo'; no.textContent='keep'; no.setAttribute('aria-label','Cancel: keep House '+m.surname);
+      conf.appendChild(yes); conf.appendChild(no);
+      delBtn.parentNode.insertBefore(conf, delBtn);
+      yes.focus();
+      const disarm=()=>{ conf.remove(); delBtn.textContent=glyph; delBtn.classList.remove('armed'); delBtn.removeAttribute('aria-hidden'); delBtn.tabIndex=0; delBtn.focus(); };
+      no.onclick=(ev)=>{ ev.stopPropagation(); disarm(); };
+      yes.onclick=async(ev)=>{ ev.stopPropagation(); await deleteSlot(m.slot); openLoadMenu(); };
+      conf.addEventListener('keydown',ev=>{ if(ev.key==='Escape'){ ev.stopPropagation(); disarm(); } });
     };
     list.appendChild(row);
   }

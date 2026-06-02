@@ -41,7 +41,7 @@
   <footer>
     <button class="pp" id="pp" aria-label="pause"></button>
     <div class="flow" id="flow">the years are passing</div>
-    <button class="pp" id="menuBtn" aria-label="menu" title="save &amp; menu" style="flex:0 0 44px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+    <button class="pp" id="menuBtn" aria-label="save and menu" title="save &amp; menu" style="flex:0 0 44px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   </footer>
 </div>
 
@@ -62,7 +62,7 @@
 <div class="veil" id="vLoad" role="dialog" aria-modal="true" aria-label="Chronicles">
   <div class="sheet">
     <h1 class="small">Chronicles</h1>
-    <div class="tag" id="loadHint">Choose a line to continue, or start another.</div>
+    <div class="tag" id="loadHint" aria-live="polite" aria-atomic="true">Choose a line to continue, or start another.</div>
     <div id="slotList" style="margin:8px 0 4px;text-align:left;"></div>
     <button class="btn ghost" id="inspectBtn" style="font-size:12px;padding:8px 16px;">Inspect storage</button>
     <div id="inspectOut" style="text-align:left;font-size:11px;color:var(--ink-dim);margin:10px 0;white-space:pre-wrap;word-break:break-word;line-height:1.5;"></div>
@@ -73,7 +73,7 @@
         <button class="btn ghost" id="exportBtn">Sync &amp; copy code</button>
         <button class="btn ghost" id="importBtn">Continue from code</button>
       </div>
-      <div id="backupMsg" class="backupMsg"></div>
+      <div id="backupMsg" class="backupMsg" role="status" aria-live="polite" aria-atomic="true"></div>
     </div>
     <button class="btn ghost" id="loadBack">Back</button>
   </div>
@@ -128,8 +128,9 @@
       <div class="starLegend">
         <span><i class="dot chose"></i> chosen</span>
         <span><i class="dot alt"></i> the road not taken</span>
-        <span class="starHint">drag to roam &middot; pinch / scroll to zoom</span>
+        <span class="starHint">each strand is one life &middot; drag or arrow keys to roam &middot; pinch / scroll to zoom</span>
       </div>
+      <div id="starA11y" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     </div>
     <button class="btn" id="chronClose">Return</button>
   </div>
