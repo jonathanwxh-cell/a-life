@@ -196,7 +196,7 @@
   /* atmospheric image backdrops behind the text at key beats (title/eulogy/heir) */
   .veil-art{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;pointer-events:none;}
   .veil-art::after{content:'';position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(12,9,7,.60), rgba(12,9,7,.80));}
+    background:linear-gradient(180deg, rgba(12,9,7,.74) 0%, rgba(12,9,7,.56) 42%, rgba(12,9,7,.84) 100%);}
   .veil .sheet{position:relative;z-index:1;}
   /* a dim image wash that rides the stage-title transitions */
   #stageArt{position:fixed;inset:0;z-index:4;background-size:cover;background-position:center;
@@ -230,7 +230,7 @@
   .pp{width:44px;height:44px;flex:0 0 44px;}
   .pp svg{width:15px;height:15px;}
   /* the slot delete control is a <button> now — strip default chrome */
-  .slot .del{background:transparent;border:0;font-family:inherit;line-height:1;display:grid;place-items:center;min-width:32px;min-height:32px;}
+  .slot .del{background:transparent;border:0;font-family:inherit;line-height:1;display:grid;place-items:center;min-width:44px;min-height:44px;}
   /* the Chronicle / constellation entry points were too small to discover */
   .gen{line-height:1.95;}
   .gen .chron{font-size:12.5px;letter-spacing:1px;}
@@ -249,3 +249,19 @@
     }
     .card{transform:none;}
   }
+
+  /* ---- review pass 3: card edges, AA contrast, keyboard rows ---- */
+  .choice{border-color:rgba(236,225,207,0.18);}        /* keep a defined edge over any sky */
+  .choice .h{color:var(--ink-dim);}                    /* hint text clears AA (was ink-faint) */
+  .mark .l{color:var(--ink-dim);}                      /* 9.5px stat labels clear AA */
+  .starLegend .starHint{opacity:0.85;}                 /* constellation hint clears AA */
+  .tab{background:rgba(236,225,207,0.07);}             /* inactive tabs read as pressable */
+  /* the load-slot row and ancestor rows are keyboard controls now — same amber ring */
+  .slot .body{border-radius:9px;}
+  .slot .body:focus-visible, .anc:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:8px;}
+  /* a quiet running-state cue: the age numeral breathes while time flows, holds still when paused */
+  body:not(.paused) .passing .age{animation:ageBreath 4.5s ease-in-out infinite;}
+  @keyframes ageBreath{0%,100%{opacity:1;}50%{opacity:0.8;}}
+  /* a one-time beckon so a new player finds the chronicle control */
+  .gen .chron.beckon{animation:beckon 1.4s ease-in-out 3;}
+  @keyframes beckon{0%,100%{text-shadow:none;}50%{text-shadow:0 0 11px var(--amber);}}

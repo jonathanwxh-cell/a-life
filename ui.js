@@ -58,6 +58,8 @@ function reTok(s){const px=P.px;return s.replace(/\{they\}/g,px.they).replace(/\
 function hintOnce(key, text){
   try{ if(!window.localStorage || localStorage.getItem('alife:'+key)) return; localStorage.setItem('alife:'+key,'1'); }catch(e){ return; }
   const log=document.getElementById('log'); if(log) addEphemeralEntry(log, {age:'', text, cls:'obs'});
+  // briefly draw the eye to the actual chronicle control the hint refers to
+  if(key==='seenChron'){ const s=document.getElementById('openStars'); if(s){ s.classList.add('beckon'); setTimeout(()=>s.classList.remove('beckon'),5400); } }
 }
 function renderLogFull(){
   // ephemeral model: only seed the latest beat when the log is empty (a fresh
@@ -134,13 +136,15 @@ function openChronicle(startTab){
     const d=document.createElement('div'); d.className='anc';
     const readable = a.log && a.log.length;
     d.innerHTML=`<div class="o">${ordinal(a.gen)}</div><div><div class="nm">${a.given} ${a.surname||S.surname}${readable?' <span style="color:var(--amber);font-size:11px;opacity:.7">— read ↗</span>':''}</div><span class="ep">${a.epitaph}${a.extinct?' — the line ended here.':''}</span></div><div class="sp">${a.span} yrs</div>`;
-    if(readable){ d.style.cursor='pointer'; d.onclick=()=>showAncestorLife(a); }
+    if(readable){ d.style.cursor='pointer'; d.tabIndex=0; d.setAttribute('role','button'); d.setAttribute('aria-label','Read the life of '+a.given);
+      d.onclick=()=>showAncestorLife(a); d.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showAncestorLife(a); } }; }
     L.appendChild(d);
   }
   // current living person — tap to jump to This Life
-  const d=document.createElement('div'); d.className='anc alive'; d.style.cursor='pointer';
+  const d=document.createElement('div'); d.className='anc alive'; d.style.cursor='pointer'; d.tabIndex=0; d.setAttribute('role','button'); d.setAttribute('aria-label','Read this life');
   d.innerHTML=`<div class="o">${ordinal(P.gen)}</div><div><div class="nm">${P.given} ${S.surname} <span style="color:var(--amber);font-size:11px;opacity:.7">— read ↗</span></div><span class="ep">living — ${beingLine()}</span></div><div class="sp">age ${P.age}</div>`;
-  d.onclick=()=>{ renderMemoir(); switchTab('life'); };
+  const _jump=()=>{ renderMemoir(); switchTab('life'); };
+  d.onclick=_jump; d.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); _jump(); } };
   L.appendChild(d);
   document.getElementById('vChron').classList.add('show');
   // if we opened straight to the constellation, rebuild now that the canvas has size
@@ -175,5 +179,27 @@ document.getElementById('chronClose').onclick=()=>{
 const pp=document.getElementById('pp');
 function setPP(){pp.innerHTML=running?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>':'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
   pp.setAttribute('aria-label',running?'pause':'play'); pp.setAttribute('title',running?'pause':'play');
-  document.getElementById('flow').textContent=running?'the years are passing':'time held still';}
+  document.getElementById('flow').textContent=running?'the years are passing':'time held still';
+  document.body.classList.toggle('paused',!running);}
 pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleTick(); else clearTimeout(timer); };
+
+// ---- modal focus management ----
+// when a veil opens, remember where focus was and move it into the dialog; when it
+// closes, return focus to the trigger. Centralised via a class observer so the many
+// show/hide call-sites stay untouched.
+(function(){
+  if(typeof MutationObserver==='undefined') return;
+  let prevFocus=null;
+  ['vTitle','vLoad','vDeath','vHeir','vChron'].forEach(id=>{
+    const v=document.getElementById(id); if(!v) return;
+    new MutationObserver(()=>{
+      if(v.classList.contains('show')){
+        if(document.activeElement && !v.contains(document.activeElement) && document.activeElement!==document.body) prevFocus=document.activeElement;
+        const el=v.querySelector('.btn:not([disabled]), button:not([disabled]), [tabindex], textarea');
+        if(el&&el.focus) setTimeout(()=>{ try{ el.focus(); }catch(e){} },40);
+      } else if(prevFocus){
+        try{ prevFocus.focus(); }catch(e){} prevFocus=null;
+      }
+    }).observe(v,{attributes:true,attributeFilter:['class']});
+  });
+})();

@@ -103,11 +103,11 @@ async function openLoadMenu(){
     const row=document.createElement('div'); row.className='slot';
     const when=timeAgo(m.updated);
     const status = m.alive ? `${m.living}, age ${m.age}` : `${m.living} — the line rests`;
-    row.innerHTML=`<div class="body"><div class="nm">House ${m.surname}</div>
+    row.innerHTML=`<div class="body" tabindex="0" role="button" aria-label="Load House ${m.surname}"><div class="nm">House ${m.surname}</div>
       <div class="sub">${m.gens} generation${m.gens>1?'s':''} · ${m.souls} live${m.souls===1?'':'s'} lived · ${seatOf(m.seat).adj}<br>
       <span class="${m.alive?'':'dead'}">${status}</span> · ${when}</div></div>
       <button class="del" type="button" aria-label="Delete this chronicle" title="delete">✕</button>`;
-    row.querySelector('.body').onclick=async()=>{
+    const _loadRow=async()=>{
       const ok=await loadSlot(m.slot);
       if(ok){
         if(window.AL_cloud) await window.AL_cloud.reconcile();   // adopt a newer cloud copy before resuming
@@ -119,6 +119,8 @@ async function openLoadMenu(){
         else { renderAll(); showEulogy(P); }
       }
     };
+    const _bodyEl=row.querySelector('.body'); _bodyEl.onclick=_loadRow;
+    _bodyEl.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); _loadRow(); } };
     row.querySelector('.del').onclick=async(e)=>{
       e.stopPropagation();
       if(confirm('Delete House '+m.surname+' forever? This cannot be undone.')){ await deleteSlot(m.slot); openLoadMenu(); }

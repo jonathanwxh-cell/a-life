@@ -98,8 +98,10 @@
       g.strokeStyle='rgba(224,194,130,0.5)'; g.lineWidth=1.2/view.z;
       g.beginPath(); g.arc(nd.x,nd.y,4.5,0,6.29); g.stroke();
       g.fillStyle='rgba(255,236,190,0.9)'; g.beginPath(); g.arc(nd.x,nd.y,1.8,0,6.29); g.fill();
-      g.fillStyle='rgba(236,225,207,0.8)'; g.font=`${Math.max(10,11/view.z)}px Fraunces, serif`; g.textAlign='center';
+      g.fillStyle='rgba(236,225,207,0.86)'; g.font=`${Math.max(12,13/view.z)}px Fraunces, serif`; g.textAlign='center';
+      g.shadowColor='rgba(10,8,18,0.95)'; g.shadowBlur=4;
       g.fillText(nd.label, nd.x, nd.y-10/view.z);
+      g.shadowBlur=0;
     }
     for(const s of stars){
       const tw=0.6+0.4*Math.sin(t*0.002+s.ph);
