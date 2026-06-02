@@ -5,7 +5,7 @@
     --ink-dim:#a99c87;
     --ink-faint:#8a7d6e;
     --amber:#e0a94b;
-    --rose:#d08a86;
+    --rose:#db9d9a;
     --sage:#9bbf9a;
     --line:rgba(236,225,207,0.11);
     --card:rgba(35,27,21,0.9);
@@ -208,7 +208,7 @@
      ============================================================ */
   /* keyboard focus — a clear amber ring on every interactive control */
   .choice:focus-visible, .btn:focus-visible, .tab:focus-visible, .pp:focus-visible,
-  .gen .chron:focus-visible, .gen .chron2:focus-visible, #dBackup:focus-visible,
+  .gen .chron:focus-visible, .gen .chron2:focus-visible, #dBackup:focus-visible, #dChron:focus-visible,
   .slot .del:focus-visible, .slot .body:focus-visible{
     outline:2px solid var(--amber); outline-offset:2px; border-radius:8px;
   }
@@ -231,10 +231,12 @@
   .pp svg{width:15px;height:15px;}
   /* the slot delete control is a <button> now — strip default chrome */
   .slot .del{background:transparent;border:0;font-family:inherit;line-height:1;display:grid;place-items:center;min-width:44px;min-height:44px;}
-  /* the Chronicle / constellation entry points were too small to discover */
-  .gen{line-height:1.95;}
-  .gen .chron{font-size:12.5px;letter-spacing:1px;}
-  .gen .chron2{font-size:11px;}
+  /* the Chronicle / constellation entry points were too small to discover/tap */
+  .gen{line-height:2.0;}
+  .gen .chron, .gen .chron2{display:inline-block;padding:7px 3px;min-height:34px;box-sizing:border-box;}
+  .gen .chron{font-size:13px;letter-spacing:1px;border-bottom:1px solid rgba(224,169,75,0.4);}
+  .gen .chron2{font-size:11.5px;color:var(--ink-dim);opacity:1;border-bottom:1px solid rgba(169,156,135,0.45);}
+  .gen .chron2:hover{color:var(--ink);}
   /* inactive Chronicle tabs get a faint surface so selection reads by more than hue */
   .tab{background:rgba(236,225,207,0.035);}
   .tab.on{background:rgba(224,169,75,0.12);}
@@ -256,6 +258,7 @@
   .mark .l{color:var(--ink-dim);}                      /* 9.5px stat labels clear AA */
   .starLegend .starHint{opacity:0.85;}                 /* constellation hint clears AA */
   .tab{background:rgba(236,225,207,0.07);}             /* inactive tabs read as pressable */
+  .stage{overflow-y:auto;}                             /* tall (3-choice) cards stay reachable on short screens */
   /* the load-slot row and ancestor rows are keyboard controls now — same amber ring */
   .slot .body{border-radius:9px;}
   .slot .body:focus-visible, .anc:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:8px;}

@@ -192,32 +192,35 @@ pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleT
 // show/hide call-sites stay untouched.
 (function(){
   if(typeof MutationObserver==='undefined') return;
-  let prevFocus=null, openVeil=null;
   const FOCUSABLE='a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
   const ESC_CLOSE={vChron:'chronClose', vLoad:'loadBack'};   // dismissable modals (not the narrative gates)
   const visibles=v=>[...v.querySelectorAll(FOCUSABLE)].filter(el=>el.offsetParent!==null || el===document.activeElement);
+  const focusIn=v=>{ const el=v.querySelector(FOCUSABLE); if(el&&el.focus) setTimeout(()=>{ try{ el.focus(); }catch(e){} },40); };
+  let stack=[]; const top=()=>stack[stack.length-1]||null;     // support nested veils (e.g. chronicle over eulogy)
   document.addEventListener('keydown',e=>{
-    if(!openVeil) return;
-    if(e.key==='Escape'){ const id=ESC_CLOSE[openVeil.id], btn=id&&document.getElementById(id); if(btn){ e.preventDefault(); btn.click(); } return; }
-    if(e.key==='Tab'){                                        // trap focus inside the open veil
-      const f=visibles(openVeil); if(!f.length) return;
+    const v=top(); if(!v) return;
+    if(e.key==='Escape'){ const id=ESC_CLOSE[v.id], btn=id&&document.getElementById(id); if(btn){ e.preventDefault(); btn.click(); } return; }
+    if(e.key==='Tab'){                                        // trap focus inside the topmost veil
+      const f=visibles(v); if(!f.length) return;
       const first=f[0], last=f[f.length-1];
       if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
       else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
-      else if(!openVeil.contains(document.activeElement)){ e.preventDefault(); first.focus(); }
+      else if(!v.contains(document.activeElement)){ e.preventDefault(); first.focus(); }
     }
   });
   ['vTitle','vLoad','vDeath','vHeir','vChron'].forEach(id=>{
     const v=document.getElementById(id); if(!v) return;
     new MutationObserver(()=>{
       if(v.classList.contains('show')){
-        openVeil=v;
-        if(document.activeElement && !v.contains(document.activeElement) && document.activeElement!==document.body) prevFocus=document.activeElement;
-        const el=v.querySelector(FOCUSABLE);
-        if(el&&el.focus) setTimeout(()=>{ try{ el.focus(); }catch(e){} },40);
+        if(stack.indexOf(v)<0){
+          if(document.activeElement && !v.contains(document.activeElement) && document.activeElement!==document.body) v._prevFocus=document.activeElement;
+          stack.push(v);
+        }
+        focusIn(v);
       } else {
-        if(openVeil===v) openVeil=null;
-        if(prevFocus){ try{ prevFocus.focus(); }catch(e){} prevFocus=null; }
+        const i=stack.indexOf(v); if(i>=0) stack.splice(i,1);
+        if(v._prevFocus){ try{ v._prevFocus.focus(); }catch(e){} v._prevFocus=null; }
+        else { const t=top(); if(t) focusIn(t); }            // re-trap the veil underneath
       }
     }).observe(v,{attributes:true,attributeFilter:['class']});
   });
