@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<canvas id="sky"></canvas>
+<canvas id="sky" aria-hidden="true"></canvas>
 <div id="stageArt"></div>
 <div id="stageTitle"></div>
 <div class="grain"></div><div class="glow"></div>
@@ -32,8 +32,8 @@
       <div class="age" id="pAge">0<small id="pAgeSub">years</small></div>
       <div class="breath"></div>
     </div>
-    <div class="card" id="card">
-      <div class="scene" id="scene"></div>
+    <div class="card" id="card" tabindex="-1" role="group" aria-label="a moment">
+      <div class="scene" id="scene" aria-live="polite" aria-atomic="true"></div>
       <div class="choices" id="choices"></div>
     </div>
   </div>
@@ -45,7 +45,7 @@
   </footer>
 </div>
 
-<div class="veil show" id="vTitle">
+<div class="veil show" id="vTitle" role="dialog" aria-modal="true" aria-label="A Life">
   <div class="veil-art" style="background-image:url('assets/title.webp')"></div>
   <div class="sheet">
     <h1>A Life</h1>
@@ -88,7 +88,8 @@
     <p class="eul-line" id="dEul">&mdash;</p>
     <div class="rule"></div>
     <div class="survivors" id="dSurv"></div>
-    <button class="btn" id="dNext">&mdash;</button>
+    <div style="margin-top:14px;"><span id="dChron" tabindex="0" role="button" aria-label="read this life in the chronicle" style="cursor:pointer;font-size:13px;color:var(--amber);opacity:.9;letter-spacing:.3px;">&#10022; read this life &amp; the line &#8599;</span></div>
+    <button class="btn" id="dNext" style="margin-top:16px;">&mdash;</button>
     <div style="margin-top:16px;"><span id="dBackup" tabindex="0" role="button" aria-label="back up this bloodline" style="cursor:pointer;font-size:13px;color:var(--amber);opacity:.88;letter-spacing:.3px;border-bottom:1px solid rgba(224,169,75,.35);padding-bottom:1px;">&#8675; back up this bloodline</span></div>
   </div>
 </div>
@@ -123,7 +124,7 @@
       <div class="lineage" id="lineage"></div>
     </div>
     <div id="paneStars" class="pane" style="display:none;">
-      <div class="starWrap"><canvas id="starCanvas"></canvas><div class="starTip" id="starTip"></div></div>
+      <div class="starWrap"><canvas id="starCanvas" aria-hidden="true"></canvas><div class="starTip" id="starTip"></div></div>
       <div class="starLegend">
         <span><i class="dot chose"></i> chosen</span>
         <span><i class="dot alt"></i> the road not taken</span>

@@ -107,6 +107,9 @@ function switchTab(which){
 document.getElementById('tabLife').onclick=()=>switchTab('life');
 document.getElementById('tabLine').onclick=()=>switchTab('line');
 document.getElementById('tabStars').onclick=()=>switchTab('stars');
+// the eulogy screen's link into the Chronicle (a natural moment to look back)
+(function(){ const dc=document.getElementById('dChron'); if(dc){ const open=()=>openChronicle('life');
+  dc.onclick=open; dc.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } }; } })();
 
 function openChronicle(startTab){
   running=false; clearTimeout(timer);
@@ -189,16 +192,32 @@ pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleT
 // show/hide call-sites stay untouched.
 (function(){
   if(typeof MutationObserver==='undefined') return;
-  let prevFocus=null;
+  let prevFocus=null, openVeil=null;
+  const FOCUSABLE='a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  const ESC_CLOSE={vChron:'chronClose', vLoad:'loadBack'};   // dismissable modals (not the narrative gates)
+  const visibles=v=>[...v.querySelectorAll(FOCUSABLE)].filter(el=>el.offsetParent!==null || el===document.activeElement);
+  document.addEventListener('keydown',e=>{
+    if(!openVeil) return;
+    if(e.key==='Escape'){ const id=ESC_CLOSE[openVeil.id], btn=id&&document.getElementById(id); if(btn){ e.preventDefault(); btn.click(); } return; }
+    if(e.key==='Tab'){                                        // trap focus inside the open veil
+      const f=visibles(openVeil); if(!f.length) return;
+      const first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+      else if(!openVeil.contains(document.activeElement)){ e.preventDefault(); first.focus(); }
+    }
+  });
   ['vTitle','vLoad','vDeath','vHeir','vChron'].forEach(id=>{
     const v=document.getElementById(id); if(!v) return;
     new MutationObserver(()=>{
       if(v.classList.contains('show')){
+        openVeil=v;
         if(document.activeElement && !v.contains(document.activeElement) && document.activeElement!==document.body) prevFocus=document.activeElement;
-        const el=v.querySelector('.btn:not([disabled]), button:not([disabled]), [tabindex], textarea');
+        const el=v.querySelector(FOCUSABLE);
         if(el&&el.focus) setTimeout(()=>{ try{ el.focus(); }catch(e){} },40);
-      } else if(prevFocus){
-        try{ prevFocus.focus(); }catch(e){} prevFocus=null;
+      } else {
+        if(openVeil===v) openVeil=null;
+        if(prevFocus){ try{ prevFocus.focus(); }catch(e){} prevFocus=null; }
       }
     }).observe(v,{attributes:true,attributeFilter:['class']});
   });
