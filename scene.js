@@ -218,7 +218,7 @@
 
     // --- legibility scrims top & bottom ---
     const stop=g.createLinearGradient(0,0,0,h*0.28);
-    stop.addColorStop(0,'rgba(12,9,7,0.55)'); stop.addColorStop(1,'rgba(12,9,7,0)');
+    stop.addColorStop(0,'rgba(12,9,7,0.7)'); stop.addColorStop(1,'rgba(12,9,7,0)');
     g.fillStyle=stop; g.fillRect(0,0,w,h*0.28);
     const sbot=g.createLinearGradient(0,h*0.62,0,h);
     sbot.addColorStop(0,'rgba(12,9,7,0)'); sbot.addColorStop(1,'rgba(12,9,7,0.7)');

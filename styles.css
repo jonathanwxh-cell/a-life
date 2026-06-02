@@ -259,6 +259,8 @@
   .starLegend .starHint{opacity:0.85;}                 /* constellation hint clears AA */
   .tab{background:rgba(236,225,207,0.07);}             /* inactive tabs read as pressable */
   .stage{overflow-y:auto;}                             /* tall (3-choice) cards stay reachable on short screens */
+  #dChron, #dBackup{display:inline-block;padding:10px 6px;}  /* comfortable eulogy tap targets */
+  .tab{min-height:44px;}                               /* chronicle tabs meet the touch-target minimum */
   /* the load-slot row and ancestor rows are keyboard controls now — same amber ring */
   .slot .body{border-radius:9px;}
   .slot .body:focus-visible, .anc:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:8px;}

@@ -109,10 +109,10 @@
   <div class="sheet tree">
     <h1 class="small">The Chronicle</h1>
     <div class="tag" id="chronName" style="margin-bottom:10px;"></div>
-    <div class="tabs">
-      <button class="tab on" data-tab="life" id="tabLife">This Life</button>
-      <button class="tab" data-tab="line" id="tabLine">The Line</button>
-      <button class="tab" data-tab="stars" id="tabStars">Constellation</button>
+    <div class="tabs" role="tablist" aria-label="Chronicle views">
+      <button class="tab on" data-tab="life" id="tabLife" role="tab" aria-selected="true">This Life</button>
+      <button class="tab" data-tab="line" id="tabLine" role="tab" aria-selected="false">The Line</button>
+      <button class="tab" data-tab="stars" id="tabStars" role="tab" aria-selected="false">Constellation</button>
     </div>
     <div id="paneLife" class="pane">
       <div class="lifeHead" id="lifeHead"></div>

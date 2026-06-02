@@ -96,9 +96,10 @@ function renderMemoir(){
   }
 }
 function switchTab(which){
-  document.getElementById('tabLife').classList.toggle('on',which==='life');
-  document.getElementById('tabLine').classList.toggle('on',which==='line');
-  document.getElementById('tabStars').classList.toggle('on',which==='stars');
+  [['tabLife','life'],['tabLine','line'],['tabStars','stars']].forEach(([id,t])=>{
+    const el=document.getElementById(id); const on=which===t;
+    el.classList.toggle('on',on); el.setAttribute('aria-selected',on?'true':'false');
+  });
   document.getElementById('paneLife').style.display=which==='life'?'':'none';
   document.getElementById('paneLine').style.display=which==='line'?'':'none';
   document.getElementById('paneStars').style.display=which==='stars'?'':'none';
