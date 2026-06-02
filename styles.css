@@ -283,3 +283,14 @@
   .slot .delYes:hover{background:rgba(208,138,134,0.14);}
   .slot .delNo{color:var(--ink-dim);border-color:var(--line);}
   .slot .delNo:hover{background:rgba(236,225,207,0.06);}
+
+  /* ---- review pass 5 (round 10): reachable dismiss on short screens + last AA touch-ups ---- */
+  /* the sheet scrolls with a hidden scrollbar; pin the dismiss button to the foot and
+     fade content into the dark behind it, so 'Back'/'Return' is always visible/reachable
+     on a short phone with several saved slots (no off-screen, no missing scroll cue) */
+  #loadBack, #chronClose{position:sticky; bottom:0; z-index:2;}
+  #loadBack::before, #chronClose::before{content:''; position:absolute; left:50%; transform:translateX(-50%);
+    bottom:-1px; width:100vw; height:calc(100% + 30px); z-index:-1; pointer-events:none;
+    background:linear-gradient(to bottom, transparent, var(--bg) 62%);}
+  /* the running-state readouts carry meaning — lift them off ink-faint (~3.8:1) to ink-dim for AA */
+  .passing .yr, .flow{color:var(--ink-dim);}
