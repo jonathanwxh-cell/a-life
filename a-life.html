@@ -64,8 +64,11 @@
     <h1 class="small">Chronicles</h1>
     <div class="tag" id="loadHint" aria-live="polite" aria-atomic="true">Choose a line to continue, or start another.</div>
     <div id="slotList" style="margin:8px 0 4px;text-align:left;"></div>
-    <button class="btn ghost" id="inspectBtn" style="font-size:12px;padding:8px 16px;">Inspect storage</button>
-    <div id="inspectOut" style="text-align:left;font-size:11px;color:var(--ink-dim);margin:10px 0;white-space:pre-wrap;word-break:break-word;line-height:1.5;"></div>
+    <details class="troubleshoot">
+      <summary>Trouble finding a saved line?</summary>
+      <button class="btn ghost" id="inspectBtn" style="font-size:12px;padding:8px 16px;">Inspect storage</button>
+      <div id="inspectOut" style="text-align:left;font-size:11px;color:var(--ink-dim);margin:10px 0;white-space:pre-wrap;word-break:break-word;line-height:1.5;"></div>
+    </details>
     <div class="backup">
       <div class="backupTitle">Your chronicle code &mdash; continue on any device</div>
       <textarea id="codeBox" placeholder="Tap “Sync &amp; copy code” for your chronicle code. To continue a line on another device, paste its code here and tap “Continue from code”." spellcheck="false"></textarea>
