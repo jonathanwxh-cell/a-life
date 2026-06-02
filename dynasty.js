@@ -22,6 +22,11 @@ function epitaphFor(p){
   if(s.spirit<28) return "Knew more sorrow than {they} ever said aloud.".replace(/\{they\}/g,p.px.they);
   if(p.deathAge<40) return "Gone too soon, with so much unspent.";
   if(s.means<18) return "Never had much, and gave away some of that.";
+  // mid-tier lives — broadly decent without peaking — get their own quiet lines,
+  // so the default below stays reserved for the genuinely unremarkable.
+  if(s.spirit>=52&&s.heart>=52&&s.means>=38) return "Held more than most, and seldom needed to say so.";
+  if(s.heart>=55) return "Had little to spare, and spared it anyway.";
+  if(p.deathAge>=82) return "Lived a long time, and left the rooms quieter for the leaving.";
   return "An ordinary life, which is to say, a whole world.";
 }
 /* ============================================================
@@ -63,11 +68,13 @@ function updateHouse(p){
   const h=S.house;
   const s=p.stats, m=p.mem||{};
   // --- seat moves with how much fortune the life ended holding, relative to its peak ---
-  const endMeans=s.means;
-  if(endMeans>78) h.seat=Math.min(6,h.seat+ (endMeans>90?2:1));
-  else if(endMeans>58) h.seat=Math.min(6,h.seat+ (Math.random()<0.5?1:0));
-  else if(endMeans<22) h.seat=Math.max(0,h.seat-1);
-  else if(endMeans<10) h.seat=Math.max(0,h.seat-2);
+  // the house rises on what a life ACHIEVED at its height (peakMeans), not only what
+  // it ended holding — so building wealth and then living on it still lifts the family.
+  // Falls require genuine end-of-life hardship. This lets a tended line accumulate.
+  const endMeans=s.means, peak=p.peakMeans;
+  if(peak>=80) h.seat=Math.min(6,h.seat+ (peak>=92?2:1));
+  else if(peak>=58) h.seat=Math.min(6,h.seat+ (Math.random()<0.6?1:0));
+  else if(endMeans<14) h.seat=Math.max(0,h.seat- (endMeans<8?2:1));
 
   // --- reputation drifts with the defining qualities of the life ---
   const bump=(tag,n=1)=>{h.repute[tag]=(h.repute[tag]||0)+n;};
@@ -92,7 +99,7 @@ function updateHouse(p){
 
   // --- secret: a strayed-and-unconfessed life buries one for descendants to inherit ---
   if(m.strayed && !m.confessed && !h.secret)
-    h.secret={text:p.given+" did something to their marriage that the family still does not speak of",from:p.given,gen:p.gen,known:false};
+    h.secret={text:p.given+" did something to "+p.px.their+" marriage that the family still does not speak of",from:p.given,gen:p.gen,known:false};
   // a confession lays an existing secret to rest
   if(m.confessed && h.secret) h.secret=null;
 

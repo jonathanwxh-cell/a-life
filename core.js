@@ -82,10 +82,21 @@ function inheritTraits(parentTraits){
 
 /* relationships */
 let _relId=1;
+// a same-sex name not already worn by the player or a living relative — so the
+// generated prose never collides ("Cosima, Cosima's sister"; "Bram, Bram's father").
+function freshName(sex){
+  const used=new Set(); if(P){ used.add(P.given); for(const r of P.rels) used.add(r.given); }
+  const pool=(sex==='m'?GIVEN_M:GIVEN_F).filter(n=>!used.has(n));
+  return pool.length?pick(pool):pick(sex==='m'?GIVEN_M:GIVEN_F);
+}
 function addRel(kind, given, sex, bond, age){
+  if(P){ const used=new Set([P.given]); for(const r of P.rels) used.add(r.given); if(used.has(given)) given=freshName(sex); }
   const r={rid:_relId++, kind, given, name:given, sex, px:pronouns(sex), bond:clamp(bond), age:age|0, alive:true};
   P.rels.push(r); return r;
 }
+// returns how many times this keyed moment has occurred this life (1,2,3…), so a
+// recurring card can vary its prose instead of repeating a sentence verbatim.
+function nth(p, key){ p.flags=p.flags||{}; const k='n_'+key; return (p.flags[k]=(p.flags[k]||0)+1); }
 const rel=kind=>P.rels.find(r=>r.kind===kind&&r.alive);
 const rels=kind=>P.rels.filter(r=>r.kind===kind&&r.alive);
 // the single oldest living parent who is genuinely old and not yet cared for (deterministic)

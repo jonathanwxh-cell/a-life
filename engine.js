@@ -33,7 +33,7 @@ function observe(){
   const ob=(key,cond,line,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(line,cls||'obs');} };
   if(a>40) ob('vit_tire',s.vit<35,"The stairs have started to ask a question of {them}.");
   if(a>55) ob('vit_neg',s.vit<18,"{Their} body has become a small daily negotiation.");
-  ob('mind_hi',s.mind>78&&a>20,"Books have become a country {they} live in.");
+  ob('mind_hi',s.mind>78&&a>20,"Books have become a country {they} can live in.");
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
   ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
   ob('spirit_lo',s.spirit<22,"A greyness has moved quietly into the rooms of {them}.");
@@ -165,6 +165,14 @@ function eligible(){
 function drawCard(){
   const pool=eligible();
   if(!pool.length) return;
+  // never let the line be foreclosed by draw-luck: if {they} is single, strongly
+  // prefer a love-opening card — and make it certain in the last 5 years of its
+  // window. The player still chooses whether to take it; they're just never denied
+  // the chance. (cooldown still applies — the card must be in the eligible pool.)
+  if(!rel('love')&&!rel('spouse')){
+    const lc=pool.find(c=>c.opensLove);
+    if(lc && ((lc.age && P.age>=lc.age[1]-5) || chance(0.6))){ presentCard(lc); return; }
+  }
   // weighted pick
   let tot=0; for(const c of pool) tot+=c.w;
   let r=Math.random()*tot, chosen=pool[0];
@@ -203,7 +211,7 @@ function presentCard(c){
       setTimeout(()=>{
         card.classList.remove('show');
         setTimeout(()=>{ busy=false; renderAll(); scheduleTick(); }, 520);
-      }, 360);
+      }, 560);
     };
     cw.appendChild(b);
   });
