@@ -98,7 +98,7 @@ function renderMemoir(){
 function switchTab(which){
   [['tabLife','life'],['tabLine','line'],['tabStars','stars']].forEach(([id,t])=>{
     const el=document.getElementById(id); const on=which===t;
-    el.classList.toggle('on',on); el.setAttribute('aria-selected',on?'true':'false');
+    el.classList.toggle('on',on); el.setAttribute('aria-selected',on?'true':'false'); el.tabIndex=on?0:-1;  // roving tabindex
   });
   document.getElementById('paneLife').style.display=which==='life'?'':'none';
   document.getElementById('paneLine').style.display=which==='line'?'':'none';
@@ -111,6 +111,17 @@ document.getElementById('tabStars').onclick=()=>switchTab('stars');
 // the eulogy screen's link into the Chronicle (a natural moment to look back)
 (function(){ const dc=document.getElementById('dChron'); if(dc){ const open=()=>openChronicle('life');
   dc.onclick=open; dc.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); } }; } })();
+// arrow-key roving for the Chronicle tablist (ARIA tabs pattern)
+(function(){ const order=['life','line','stars'], tabs={life:'tabLife',line:'tabLine',stars:'tabStars'};
+  const tl=document.querySelector('.tabs'); if(!tl) return;
+  tl.addEventListener('keydown',e=>{
+    if(['ArrowLeft','ArrowRight','Home','End'].indexOf(e.key)<0) return; e.preventDefault();
+    const cur=order.findIndex(t=>document.getElementById(tabs[t]).getAttribute('aria-selected')==='true');
+    let i=cur<0?0:cur;
+    if(e.key==='ArrowRight') i=(i+1)%3; else if(e.key==='ArrowLeft') i=(i+2)%3; else if(e.key==='Home') i=0; else i=2;
+    switchTab(order[i]); document.getElementById(tabs[order[i]]).focus();
+  });
+})();
 
 function openChronicle(startTab){
   running=false; clearTimeout(timer);

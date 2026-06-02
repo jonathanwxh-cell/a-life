@@ -35,7 +35,7 @@
   .who{display:flex;flex-direction:column;gap:2px;}
   .who .name{font-family:'Fraunces',serif;font-weight:500;font-size:21px;letter-spacing:0.2px;}
   .who .meta{font-size:12px;color:var(--ink-dim);letter-spacing:0.4px;}
-  .gen{font-size:10.5px;color:var(--ink-faint);letter-spacing:2px;text-transform:uppercase;text-align:right;line-height:1.7;}
+  .gen{font-size:10.5px;color:var(--ink-dim);letter-spacing:2px;text-transform:uppercase;text-align:right;line-height:1.7;}
   .gen .chron{cursor:pointer;color:var(--amber);opacity:0.9;}
   .gen .chron:hover{opacity:1;}
   .gen .chron2{cursor:pointer;color:var(--ink-faint);opacity:0.8;font-size:9.5px;}
@@ -196,7 +196,7 @@
   /* atmospheric image backdrops behind the text at key beats (title/eulogy/heir) */
   .veil-art{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;pointer-events:none;}
   .veil-art::after{content:'';position:absolute;inset:0;
-    background:linear-gradient(180deg, rgba(12,9,7,.74) 0%, rgba(12,9,7,.56) 42%, rgba(12,9,7,.84) 100%);}
+    background:linear-gradient(180deg, rgba(12,9,7,.76) 0%, rgba(12,9,7,.72) 42%, rgba(12,9,7,.86) 100%);}
   .veil .sheet{position:relative;z-index:1;}
   /* a dim image wash that rides the stage-title transitions */
   #stageArt{position:fixed;inset:0;z-index:4;background-size:cover;background-position:center;
