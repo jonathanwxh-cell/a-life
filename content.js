@@ -43,7 +43,7 @@ const CARDS=[
   {t:"Take the trade. Eat today.",h:"steady means, narrow door",do:p=>{fx(p,{means:14,mind:-2,vit:2});p.flags.trade=1;remember('chose_trade');logLine("Chose the wage over the wager. Was never quite poor, never quite free.");}},
   {t:"Study. Gamble on the mind.",h:"hungry now, wider door",do:p=>{fx(p,{mind:16,means:-8,spirit:2});p.flags.scholar=1;remember('chose_study');logLine("Chose study, and hunger, and the long bet on {their} own head.");}},
  ]},
-{id:'y_love1',stage:'youth',w:4,age:[16,25],opensLove:true,cond:()=>!rel('love'),text:p=>["Someone keeps finding reasons to be where {n} is. The reasons are getting thinner.","There is someone who keeps turning up where {n} is. {They} has noticed. So, clearly, have they.","Someone has started to matter — turning up, lingering, the way only a few people ever do."][rotI(p,3)],
+{id:'y_love1',stage:'youth',w:4,age:[16,25],opensLove:true,cond:()=>!rel('love'),text:p=>["Someone keeps finding reasons to be where {n} is. The reasons are getting thinner.","There is someone who keeps turning up where {n} is. {They} has noticed. So, clearly, have they.","Someone has started to matter — turning up, lingering, the way only a few people ever do.","The same face keeps appearing at the edges of {n}'s days, and the days have begun to arrange themselves around it.","There is a particular person now — nothing announced, nothing decided, just a quiet fact getting truer."][rotI(p,5)],
  choices:[
   {t:"Meet them halfway.",h:"the heart opens",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,62,p.age+ri(-2,2));fx(p,{spirit:9,heart:6});logLine(["Fell in love, clumsily and completely.","Fell in love — the kind that quietly rearranges the furniture of a life.","Fell in love, and was surprised, as everyone is, that it was {them} this time."][rotI(p,3)],"joy");}},
   {t:"Pretend not to notice.",h:"",do:p=>{remember('unspoken_love');fx(p,{spirit:-4,mind:2});logLine("Let someone slip away by saying nothing. Wondered, later, often.","obs");}},
@@ -382,6 +382,6 @@ const CARDS=[
  text:"The body has begun sending letters {n} would rather not open — a stiffness, a slowness, a quiet new arithmetic to the days.",
  choices:[
   {t:"Slow down. Listen to it.",h:"the body, heeded",do:p=>{fx(p,{vit:6,spirit:-2,mind:2});logLine("Began, late, to move at the body's pace, and found a little more room inside the days.","obs");}},
-  {t:"Push on regardless.",h:"the body, defied",do:p=>{fx(p,{vit:-6,spirit:5});p.flags.peril=p.age+6;logLine("Refused to be slowed, and paid for the refusing, and would not have chosen otherwise.","obs");}},
+  {t:"Push on regardless.",h:"the body, defied",do:p=>{fx(p,{vit:-6,spirit:5});p.flags.peril=p.age+6;logLine("Drove the body on past what it asked, paid for it, and would not have chosen otherwise.","obs");}},
  ]},
 ];

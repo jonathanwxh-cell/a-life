@@ -97,11 +97,18 @@ function addRel(kind, given, sex, bond, age){
 // returns how many times this keyed moment has occurred this life (1,2,3…), so a
 // recurring card can vary its prose instead of repeating a sentence verbatim.
 function nth(p, key){ p.flags=p.flags||{}; const k='n_'+key; return (p.flags[k]=(p.flags[k]||0)+1); }
-// A stable per-house offset that spreads dynasties across variants. Weighting the
-// first char, last char, and length by different primes avoids the "same initial +
-// same length" collisions (e.g. Voss/Vane/Thorne) that a plain charCode+length gave.
-function houseOff(){ const sn=(typeof S!=='undefined'&&S&&S.surname)?S.surname:'';
-  return sn?(sn.charCodeAt(0)*3 + sn.charCodeAt(sn.length-1)*5 + sn.length*7):0; }
+// A per-house offset that spreads dynasties across variants. Prefer an explicit
+// random offset stamped at founding (S.vrot) — uniform, never tied to the surname.
+// Fall back to a base-2 polynomial hash of the surname for saves made before vrot
+// existed (multiplying by powers of 2, which are coprime to small variant counts,
+// mixes every character into the residue — unlike a *3 weight, which vanishes mod 3).
+function houseOff(){
+  if(typeof S!=='undefined' && S){
+    if(typeof S.vrot==='number') return S.vrot;
+    if(S.surname){ let h=0; for(let i=0;i<S.surname.length;i++) h=(h*2+S.surname.charCodeAt(i))&2047; return h; }
+  }
+  return 0;
+}
 // Index a per-generation variant array, offset per-house so founders across dynasties
 // don't all land on variant 0 (and consecutive generations still differ).
 function rotI(who, len){ who=who||(typeof P!=='undefined'?P:null);
