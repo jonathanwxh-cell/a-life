@@ -43,7 +43,7 @@ const CARDS=[
   {t:"Take the trade. Eat today.",h:"steady means, narrow door",do:p=>{fx(p,{means:14,mind:-2,vit:2});p.flags.trade=1;remember('chose_trade');logLine("Chose the wage over the wager. Was never quite poor, never quite free.");}},
   {t:"Study. Gamble on the mind.",h:"hungry now, wider door",do:p=>{fx(p,{mind:16,means:-8,spirit:2});p.flags.scholar=1;remember('chose_study');logLine("Chose study, and hunger, and the long bet on {their} own head.");}},
  ]},
-{id:'y_love1',stage:'youth',w:4,age:[16,25],opensLove:true,cond:()=>!rel('love'),text:"Someone keeps finding reasons to be where {n} is. The reasons are getting thinner.",
+{id:'y_love1',stage:'youth',w:4,age:[16,25],opensLove:true,cond:()=>!rel('love'),text:p=>["Someone keeps finding reasons to be where {n} is. The reasons are getting thinner.","There is someone who keeps turning up where {n} is. {They} has noticed. So, clearly, have they.","Someone has started to matter — turning up, lingering, the way only a few people ever do."][(p.gen-1)%3],
  choices:[
   {t:"Meet them halfway.",h:"the heart opens",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,62,p.age+ri(-2,2));fx(p,{spirit:9,heart:6});logLine(["Fell in love, clumsily and completely.","Fell in love — the kind that quietly rearranges the furniture of a life.","Fell in love, and was surprised, as everyone is, that it was {them} this time."][(p.gen-1)%3],"joy");}},
   {t:"Pretend not to notice.",h:"",do:p=>{remember('unspoken_love');fx(p,{spirit:-4,mind:2});logLine("Let someone slip away by saying nothing. Wondered, later, often.","obs");}},
@@ -65,19 +65,19 @@ const CARDS=[
  ]},
 
 /* ---- ADULT ---- */
-{id:'a_marry',stage:'adult',w:5,age:[24,58],cond:()=>rel('love')&&!P.flags.married,text:()=>{const l=rel('love');return `${P.given} and ${l.given} have been a quiet certainty for years now. ${l.given} is waiting for a question.`;},
+{id:'a_marry',stage:'adult',w:5,age:[24,58],cond:()=>rel('love')&&!P.flags.married,text:()=>{const l=rel('love');return [`${P.given} and ${l.given} have been a quiet certainty for years now. ${l.given} is waiting for a question.`,`There is no good reason left to keep waiting. ${P.given} knows it; ${l.given} knows it. Only the words are missing.`,`The question has been in the room for years — between ${P.given} and ${l.given}, just words now, standing between here and the answer.`][(P.gen-1)%3];},
  choices:[
   {t:"Ask. Build a life.",h:"two become a household",do:p=>{const l=rel('love');l.kind='spouse';p.flags.married=1;fx(p,{spirit:11,heart:6});logLine("Married "+l.given+". "+["The day was small and the meaning was not.","Nobody made a speech; the years that followed were the speech.","They made it formal on an ordinary day, and meant every word of it."][(p.gen-1)%3],"joy");}},
   {t:"Not yet. Maybe never.",h:"",do:p=>{const l=rel('love');l.bond=clamp(l.bond-14);fx(p,{spirit:-6});logLine("Could not say yes, and watched a good thing strain.","loss");}},
  ]},
 {id:'a_child',stage:'adult',w:5,age:[26,50],cool:5,cond:()=>(rel('spouse')||rel('love'))&&rels('child').length<3,
- text:p=>{const k=rels('child').length;return k===0?"The question of a child arrives, the way it does — half decision, half tide.":k===1?"The question of another child arrives — familiar now, and still not small.":"The question of one more arrives, the way it does, and {n} already knows the weight of the answer.";},
+ text:p=>{const k=rels('child').length;if(k===0)return ["The question of a child arrives, the way it does — half decision, half tide.","It arrives sideways, the way it does — not quite a question yet, not quite not.","They have not spoken of it in a while. The silence on the subject has its own shape now."][(p.gen-1)%3];return k===1?"The question of another child arrives — familiar now, and still not small.":"The question of one more arrives, the way it does, and {n} already knows the weight of the answer.";},
  choices:[
   {t:"Yes. Make room in the world.",h:"the line may continue",do:p=>{haveChild();fx(p,{spirit:8,means:-6,vit:-3});}},
   {t:"No. This life, as it is.",h:"",do:p=>{fx(p,{spirit:2,means:4});logLine("Chose a life without children, with clear eyes.","obs");}},
  ]},
 {id:'a_work',stage:'adult',w:3,age:[28,60],cond:()=>(P.age-(P.flags.lastWork||-12))>=10,
- text:"There is a promotion, but it eats the evenings. The home gets the leftovers of {n}.",
+ text:p=>["There is a promotion, but it eats the evenings. The home gets the leftovers of {n}.","The work wants more — a better title, longer hours. The family would get whatever was left.","An offer comes: more money for more of {n}'s time. There is only ever so much of it."][(p.gen-1)%3],
  choices:[
   {t:"Take it. Provide.",h:"means up, hours gone",do:p=>{p.flags.lastWork=p.age;fx(p,{means:16,spirit:-3});const f=rels('child')[0]||rel('spouse');if(f)f.bond=clamp(f.bond-7);logLine(nth(p,'work_take')>1?"Climbed again, and the family learned, again, to fit around the work.":["Worked for the family until the family barely saw {them}.","Gave the work its due, and the family what was left of {them}.","Took the better title, and paid for it in evenings."][(p.gen-1)%3],"obs");}},
   {t:"Refuse it. Be present.",h:"less money, more evenings",do:p=>{p.flags.lastWork=p.age;fx(p,{means:-2,spirit:6});const f=rels('child')[0]||rel('spouse');if(f)f.bond=clamp(f.bond+8);logLine(nth(p,'work_refuse')>1?"Chose the table over the ladder once more, with less doubt this time.":["Turned down more money to be home for dinner.","Said no to the title, and yes to the evenings.","Chose the table, the window, the ordinary hour."][(p.gen-1)%3],"joy");}},

@@ -100,7 +100,8 @@ function ageRelations(){
     r.bond=clamp(r.bond-0.4); // quiet decay without tending
     // elder relations may die
     if(r.age>62){
-      const p=Math.max(0,(r.age-62)/650);
+      let p=Math.max(0,(r.age-62)/650);
+      if(r.age>92) p=Math.max(p,0.22);   // centenarians are rare — a lineage parent shouldn't implausibly outlive the heir
       if(chance(p)){
         r.alive=false;
         const term=r.kind==='mother'?'{their} mother':r.kind==='father'?'{their} father':
@@ -193,6 +194,11 @@ function drawCard(){
   if((rel('spouse')||rel('love')) && !rels('child').length){
     const cc=pool.find(c=>c.id==='a_child');
     if(cc && cc.age && P.age>=cc.age[1]-5){ presentCard(cc); return; }
+  }
+  // and a settled couple is offered marriage before that window shuts, too
+  if(rel('love') && !P.flags.married){
+    const mc=pool.find(c=>c.id==='a_marry');
+    if(mc && mc.age && P.age>=mc.age[1]-6){ presentCard(mc); return; }
   }
   // weighted pick
   let tot=0; for(const c of pool) tot+=c.w;
