@@ -16,7 +16,12 @@ function haveChild(){
   c.seed=seedChildStats(P, partner);
   c.traitsSeed=inheritTraits([...P.traits, ...(partner&&partner.traitsSeed?partner.traitsSeed:[])]);
   P.childrenIds.push(given);
-  logLine("Had a child, "+given+". The world rearranged itself around a small weight.","joy");
+  const kn=P.childrenIds.length;
+  logLine([
+    "Had a child, "+given+". The world rearranged itself around a small weight.",
+    "Had a second child, "+given+". The house made room again, more easily this time.",
+    "Had another child, "+given+". By now {they} knew the shape of it, and was no less moved."
+  ][Math.min(kn,3)-1],"joy");
 }
 function seedChildStats(parent, partner){
   const mean=50;
@@ -32,7 +37,6 @@ function observe(){
   const s=P.stats, a=P.age;
   const ob=(key,cond,line,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(line,cls||'obs');} };
   if(a>40) ob('vit_tire',s.vit<35,"The stairs have started to ask a question of {them}.");
-  if(a>35) ob('vit_warn',s.vit<28,"The body is asking harder questions than {they} has good answers for.");
   if(a>55) ob('vit_neg',s.vit<18,"{Their} body has become a small daily negotiation.");
   ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does and become somewhere {they} goes."][(P.gen-1)%3]);
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
@@ -97,7 +101,7 @@ function ageRelations(){
       if(chance(p)){
         r.alive=false;
         const term=r.kind==='mother'?'{their} mother':r.kind==='father'?'{their} father':
-          r.kind==='spouse'?'{their} '+P.px.spouse:r.kind==='friend'?'an old friend, '+r.given:r.given;
+          r.kind==='spouse'?'{their} '+r.px.spouse:r.kind==='friend'?'an old friend, '+r.given:r.given;
         logLine("Lost "+term+".","loss");
       }
     }

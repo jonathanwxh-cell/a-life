@@ -15,7 +15,7 @@ function epitaphFor(p){
   if(m.kept_stray && s.heart>60) return "Loved small helpless things {their} whole life long.".replace(/\{their\}/g,p.px.their);
   if(m.became_teacher) return "Gave away everything {they} knew, and so kept it.".replace(/\{they\}/g,p.px.they);
   if(m.strayed && !m.confessed) return "Carried one secret all the way to the end.";
-  if(leg==='kind'||s.heart>78) return "Remembered, above all, as kind.";
+  if(leg==='kind'||s.heart>82) return "Remembered, above all, as kind.";
   if(leg==='built'||p.peakMeans>78) return "Built something that outlasted the building of it.";
   if(s.mind>78) return "Lived half in the world and half in {their} own head.".replace(/\{their\}/g,p.px.their);
   if(s.spirit>74) return "Carried a lightness the years never managed to take.";
@@ -79,7 +79,7 @@ function updateHouse(p){
 
   // --- reputation drifts with the defining qualities of the life ---
   const bump=(tag,n=1)=>{h.repute[tag]=(h.repute[tag]||0)+n;};
-  const fade=()=>{for(const k in h.repute){h.repute[k]=Math.max(0,h.repute[k]-0.34);if(h.repute[k]<0.5)delete h.repute[k];}};
+  const fade=()=>{for(const k in h.repute){h.repute[k]=Math.max(0,h.repute[k]-0.18);if(h.repute[k]<0.4)delete h.repute[k];}};
   fade(); // reputations soften over generations if not renewed
   if(s.mind>74||m.chose_study||m.became_teacher) bump('scholarly');
   if(s.heart>74||m.kept_stray||p.flags.legacy==='kind') bump('kind');
@@ -92,7 +92,7 @@ function updateHouse(p){
   // A scholarly or kind or hard-working line earns standing the modest can reach
   // (capped below the very top, which stays the province of fortune).
   const repTop=reputeTop(h);
-  if(repTop && h.repute[repTop]>=3 && h.seat<5 && Math.random()<0.5) h.seat=Math.min(5,h.seat+1);
+  if(repTop && h.repute[repTop]>=2.5 && h.seat<5 && Math.random()<0.55) h.seat=Math.min(5,h.seat+1);
 
   // --- heirlooms: certain lives leave an object behind ---
   if(m.child_books && !h.heirlooms.some(x=>x.tag==='book'))
@@ -207,7 +207,7 @@ function succeed(childRel){
   const seat=seatOf(h.seat);
   const births=["Was born into "+seat.name+", and a family that already had a story.",
     "Was born where the last life ended — into "+seat.name+", and a name already partly spent.",
-    "Came into the world already inside a story someone else had begun, in "+seat.name+"."];
+    "Came into the world already inside a story someone else had begun, with "+seat.name+" for an inheritance."];
   logLine(births[child.gen % births.length],"obs");
   if(h.motto) logLine("Raised on the family words: “"+h.motto+"”","obs");
   showHeir(child, dead, inheritMeans, nurture, h);
