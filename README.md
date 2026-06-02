@@ -75,6 +75,7 @@ Hosted on **Vercel** — every push to `main` auto-deploys. It's also a plain st
 | **`AGENTS.md`** | **Guide for contributors & AI agents** — architecture, conventions, deployment, gotchas. Start here to work on the code. |
 | `docs/cloud-saves.md` | Design spec for the cloud-save feature. |
 | `docs/images.md` | How the backdrop images are generated, optimized, and wired in. |
+| `docs/five-critics-goal-journey.md` | How the game was hardened across 15 critic-driven rounds — to unanimous sign-off from five independent reviewers (UX, writing, design, visual, accessibility). The methodology, the round-by-round findings, and the fixes. |
 
 ## Tech
 
