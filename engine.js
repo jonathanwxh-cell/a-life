@@ -44,8 +44,8 @@ function observe(){
   ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does and become somewhere {they} goes."][(P.gen-1)%3]);
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
   ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
-  ob('spirit_lo',s.spirit<22,"A greyness has moved quietly into the rooms of {them}.");
-  ob('spirit_hi',s.spirit>88&&a>30,["Something in {them} has refused, all these years, to grow heavy.","Whatever the years took, they did not take the lightness in {them}.","There is a buoyancy in {them} the decades never managed to weigh down."][(P.gen-1)%3]);
+  ob('spirit_lo',s.spirit<22,"A greyness has moved quietly into {their} rooms.");
+  ob('spirit_hi',s.spirit>88&&a>30,["Something in {them} has refused, all these years, to grow heavy.","Whatever the years took, they did not take the lightness in {them}.","There is a lightness in {them} the decades never managed to press flat."][(P.gen-1)%3]);
   ob('heart_lo',s.heart<20,"{They} has grown hard to reach, even for {them}self.");
 }
 
@@ -105,7 +105,9 @@ function ageRelations(){
       if(chance(p)){
         r.alive=false;
         const term=r.kind==='mother'?'{their} mother':r.kind==='father'?'{their} father':
-          r.kind==='spouse'?'{their} '+r.px.spouse:r.kind==='friend'?'an old friend, '+r.given:r.given;
+          r.kind==='spouse'?'{their} '+r.px.spouse:r.kind==='friend'?'an old friend, '+r.given:
+          r.kind==='mentor'?'a mentor, '+r.given:r.kind==='sibling'?'{their} '+(r.sex==='m'?'brother':'sister'):
+          r.kind==='love'?'someone {they} once loved, '+r.given:r.given;
         logLine("Lost "+term+".","loss");
       }
     }

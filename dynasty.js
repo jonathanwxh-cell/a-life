@@ -11,31 +11,34 @@ function die(){
 }
 function epitaphFor(p){
   const s=p.stats, leg=p.flags.legacy, m=p.mem||{}, px=p.px;
-  // rotate a variant by generation so even a memory or legacy shared down a whole
-  // line never prints the same final sentence twice in a row. Safe for any length.
-  const pr=a=>a[p.gen%a.length].replace(/\{they\}/g,px.they).replace(/\{their\}/g,px.their).replace(/\{them\}/g,px.them);
-  const built=pr(["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains."]);
+  // Rotate a per-generation variant AND avoid repeating either of the last two
+  // ancestors' epitaphs, so no final line in a house ever lands twice in a row
+  // (or near it) — even when a memory, legacy, or trait is shared down the line.
+  const sub=t=>t.replace(/\{they\}/g,px.they).replace(/\{their\}/g,px.their).replace(/\{them\}/g,px.them);
+  const recent=(typeof S!=='undefined'&&S.lineage)?S.lineage.slice(-2).map(a=>a&&a.epitaph):[];
+  const pr=arr=>{ const opts=arr.map(sub); const fresh=opts.filter(o=>!recent.includes(o)); const pool=fresh.length?fresh:opts; return pool[p.gen%pool.length]; };
+  const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains."];
   // a defining memory can claim the epitaph
   if(m.kept_stray && s.heart>60) return pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it."]);
   if(m.became_teacher) return pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned."]);
-  if(m.strayed && !m.confessed) return "Carried one secret all the way to the end.";
+  if(m.strayed && !m.confessed) return pr(["Carried one secret all the way to the end.","Kept the one thing {they} could not say, and carried it the whole way.","Took one door, unopened, all the way into the ground."]);
   // an explicit legacy choice (e_legacy) wins over stat-derived epitaphs below
-  if(leg==='built') return built;
-  if(leg==='here') return "Asked for no monument — only that the years had been real.";
+  if(leg==='built') return pr(built);
+  if(leg==='here') return pr(["Asked for no monument — only that the years had been real.","Wanted no marker but the fact of having been here.","Left no monument, and would have refused one."]);
   if(leg==='kind'||s.heart>82) return pr(["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones."]);
-  if(p.peakMeans>78) return built;
-  if(s.mind>78) return "Lived half in the world and half in {their} own head.".replace(/\{their\}/g,p.px.their);
-  if(s.spirit>74) return "Carried a lightness the years never managed to take.";
-  if(s.spirit<28) return "Knew more sorrow than {they} ever said aloud.".replace(/\{they\}/g,p.px.they);
-  if(p.deathAge<40) return "Gone too soon, with so much unspent.";
-  if(s.means<18) return "Never had much, and gave away some of that.";
+  if(p.peakMeans>78) return pr(built);
+  if(s.mind>78) return pr(["Lived half in the world and half in {their} own head.","Kept a whole country behind the eyes, and lived there often.","Was elsewhere as often as here, and the elsewhere was wide."]);
+  if(s.spirit>74) return pr(["Carried a lightness the years never managed to take.","Stayed light, somehow, the whole way down the years.","Was never quite weighed down, right to the end."]);
+  if(s.spirit<28) return pr(["Knew more sorrow than {they} ever said aloud.","Carried a weight {they} rarely named.","Held more grief than the quiet face ever let on."]);
+  if(p.deathAge<40) return pr(["Gone too soon, with so much unspent.","Gone early, with the better part still ahead.","Left before the story had found its middle."]);
+  if(s.means<18) return pr(["Never had much, and gave away some of that.","Owned little, and shared even that.","Was poor in all but the giving of it."]);
   // mid-tier lives — broadly decent without peaking — get their own quiet lines,
   // so the default below stays reserved for the genuinely unremarkable.
-  if(s.spirit>=52&&s.heart>=52&&s.means>=38) return "Held more than most, and seldom needed to say so.";
-  if(s.heart>=55&&s.means<45) return "Had little to spare, and spared it anyway.";
-  if(s.heart>=60) return "Easy to love, and not always easy to live with.";
-  if(p.deathAge>=82) return "Lived a long time, and left the rooms quieter for the leaving.";
-  return "An ordinary life, which is to say, a whole world.";
+  if(s.spirit>=52&&s.heart>=52&&s.means>=38) return pr(["Held more than most, and seldom needed to say so.","Had enough, and knew it, which is rarer than plenty.","Lived well within the life {they} were handed."]);
+  if(s.heart>=55&&s.means<45) return pr(["Had little to spare, and spared it anyway.","Gave past what {they} could afford, and mentioned it to no one.","Was generous in the way only the un-rich manage."]);
+  if(s.heart>=60) return pr(["Easy to love, and not always easy to live with.","Loved well, and was a little hard to live beside.","Warm at the centre, and sharp at the odd edge."]);
+  if(p.deathAge>=82) return pr(["Lived a long time, and left the rooms quieter for the leaving.","Outlasted nearly everyone, and was missed by the few still there.","Stayed a long while, and still left too soon for some."]);
+  return pr(["An ordinary life, which is to say, a whole world.","A quiet life, complete within its own small compass.","An unremarkable life, and entirely {their} own."]);
 }
 /* ============================================================
    DYNASTY STATE — the house accumulates across generations.
@@ -50,6 +53,7 @@ const SEATS=[
   {min:4,  name:"a fine townhouse",        adj:"well-to-do"},
   {min:5,  name:"a grand estate",          adj:"landed"},
   {min:6,  name:"an old and famous house", adj:"illustrious"},
+  {min:7,  name:"a house written into the histories", adj:"storied"},
 ];
 function seatOf(lvl){ let s=SEATS[0]; for(const x of SEATS) if(lvl>=x.min) s=x; return s; }
 
@@ -80,9 +84,11 @@ function updateHouse(p){
   // it ended holding — so building wealth and then living on it still lifts the family.
   // Falls require genuine end-of-life hardship. This lets a tended line accumulate.
   const endMeans=s.means, peak=p.peakMeans;
-  if(peak>=80) h.seat=Math.min(6,h.seat+ (peak>=92?2:1));
-  else if(peak>=58) h.seat=Math.min(6,h.seat+ (Math.random()<0.6?1:0));
-  else if(endMeans<14) h.seat=Math.max(0,h.seat- (endMeans<8?2:1));
+  // wealth can lift a house as far as seat 6, but never PULLS a higher house down
+  // (Math.max guards a storied seat-7 line from being demoted by a merely-rich heir).
+  if(peak>=80) h.seat=Math.max(h.seat, Math.min(6,h.seat+ (peak>=92?2:1)));
+  else if(peak>=58) h.seat=Math.max(h.seat, Math.min(6,h.seat+ (Math.random()<0.6?1:0)));
+  else if(endMeans<14) h.seat=Math.max(0,h.seat- (endMeans<8?2:1));   // genuine hardship can still topple even a storied house
 
   // --- reputation drifts with the defining qualities of the life ---
   const bump=(tag,n=1)=>{h.repute[tag]=(h.repute[tag]||0)+n;};
@@ -100,6 +106,15 @@ function updateHouse(p){
   // (capped below the very top, which stays the province of fortune).
   const repTop=reputeTop(h);
   if(repTop && h.repute[repTop]>=2.0 && h.seat<5 && Math.random()<0.6) h.seat=Math.min(5,h.seat+1);
+
+  // the very top — "a house written into the histories" — is not a status you reach
+  // and keep; it must be RE-EARNED every generation. It needs a seat-6 house, a single
+  // reputation held strong across many lives (repute >= 5), and a life that itself peaked
+  // remarkably (peakMeans >= 86) — and even then only sometimes. If a later generation
+  // fails to clear that bar, the house lapses back to "old and famous." This keeps the
+  // pinnacle genuinely rare and makes the very top precarious rather than won-and-done.
+  if(h.seat>=6 && repTop && h.repute[repTop]>=7.5 && p.peakMeans>=92 && Math.random()<0.25) h.seat=7;
+  else if(h.seat===7) h.seat=6;
 
   // --- heirlooms: certain lives leave an object behind ---
   if(m.child_books && !h.heirlooms.some(x=>x.tag==='book'))
@@ -130,10 +145,16 @@ function updateHouse(p){
 function recordAncestor(p){
   if(!S.house) S.house=initHouse();
   updateHouse(p);
+  // Compute the epitaph exactly ONCE, here, while S.lineage still holds only prior
+  // generations — so the look-back in epitaphFor() is correct. Everything downstream
+  // (the eulogy screen, the chronicle, the constellation) reuses this stored string
+  // instead of recomputing, which would see this very life already in the lineage and
+  // drift to a different variant.
+  p.epitaph = fmt(epitaphFor(p));
   S.lineage.push({
     given:p.given, surname:S.surname, gen:p.gen, sex:p.sex,
     born:p.bornYear, died:p.bornYear+p.deathAge, span:p.deathAge,
-    epitaph:fmt(epitaphFor(p)),
+    epitaph:p.epitaph,
     peakMeans:Math.round(p.peakMeans),
     hadHeir: rels('child').length>0,
     seatAfter: S.house.seat,
@@ -150,7 +171,7 @@ function recordAncestor(p){
 function showEulogy(p){
   document.getElementById('dName').textContent=p.name;
   document.getElementById('dSpan').textContent=`${p.gen===1?'Founder of the line':ordinal(p.gen)+' of the line'} · lived ${p.deathAge} years`;
-  document.getElementById('dEul').textContent='“'+fmt(epitaphFor(p))+'”';
+  document.getElementById('dEul').textContent='“'+(p.epitaph||fmt(epitaphFor(p)))+'”';
   // survivors
   const surv=p.rels.filter(r=>r.alive&&r.kind!=='ex');
   const kids=rels('child');
@@ -177,7 +198,7 @@ function succeed(childRel){
   const h=S.house||initHouse();
   // estate passes with entropy — but the family SEAT sets a floor, so a great house
   // cushions a poor heir and a fallen house gives even a rich parent's child less.
-  const seatFloor=[0,6,14,26,40,56,72][h.seat]||0;
+  const seatFloor=[0,6,14,26,40,56,72,72][h.seat]||0;   // seat 7 grants prestige, not extra wealth — same floor as 6, so the pinnacle can't self-perpetuate on money
   const inheritMeans = Math.max(seatFloor, Math.round(dead.peakMeans*0.55) - 6) - 6;
   const nurture = Math.round((dead.stats.mind-50)*0.18 + (childRel.bond-50)*0.10);
   // the heir is BORN — startAge 0 — and lives the whole arc. Inheritance applies

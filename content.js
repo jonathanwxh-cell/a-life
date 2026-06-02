@@ -135,14 +135,14 @@ const CARDS=[
   {t:"\"That I built something.\"",h:"",do:p=>{fx(p,{spirit:4});p.flags.legacy='built';logLine("Said {they} hoped to be remembered for what {they} made.","obs");}},
   {t:"\"That I was here at all.\"",h:"",do:p=>{fx(p,{spirit:2});p.flags.legacy='here';logLine("Said {they} only hoped to be remembered.","obs");}},
  ]},
-{id:'e_garden',stage:'elder',w:2,age:[66,95],once:true,text:"The days are slow and wide. {n} takes up something small — a garden, a craft, a quiet ritual.",
+{id:'e_garden',stage:'elder',w:2,age:[68,95],once:true,text:"The days are slow and wide. {n} takes up something small — a garden, a craft, a quiet ritual.",
  choices:[
   {t:"Tend it daily.",h:"",do:p=>{fx(p,{spirit:8,vit:3});logLine("Found a late, gentle happiness in small daily things.","joy");}},
   {t:"Sit in the window instead.",h:"a quieter happiness",do:p=>{fx(p,{spirit:4,mind:5});logLine("Spent the last years mostly in thought, at the window, and did not find it empty.","obs");}},
  ]},
 
 /* ---- UNIVERSAL / ENTROPY ---- */
-{id:'u_windfall',stage:'*',w:1,age:[16,95],cool:14,text:p=>p.flags.sawWindfall?"Another envelope, another stroke of plain luck — the world handing {n} something unasked, again.":"An envelope, a forgotten debt repaid, a stroke of plain luck. Money {n} did not expect.",
+{id:'u_windfall',stage:'*',w:1,age:[16,95],cool:14,cond:()=>P.stats.means<80,text:p=>p.flags.sawWindfall?"Another envelope, another stroke of plain luck — the world handing {n} something unasked, again.":"An envelope, a forgotten debt repaid, a stroke of plain luck. Money {n} did not expect.",
  choices:[
   {t:"Save it.",h:"",do:p=>{p.flags.sawWindfall=1;fx(p,{means:12});logLine(nth(p,'wind_save')>1?"Folded the second windfall away with the first, and said nothing.":"Came into unexpected money and, sensibly, kept it.");}},
   {t:"Share it out.",h:"",do:p=>{p.flags.sawWindfall=1;fx(p,{means:4,heart:6,spirit:5});logLine("Came into money and gave most of it away.","joy");}},
@@ -360,13 +360,13 @@ const CARDS=[
  ]},
 
 /* ---- ELDER — handing on, last journeys, peace ---- */
-{id:'e_craft',stage:'elder',w:2,age:[66,90],cond:()=>P.stats.mind>50||held('became_teacher'),
+{id:'e_craft',stage:'elder',w:2,age:[70,90],cond:()=>P.stats.mind>50||held('became_teacher'),
  text:"In {n}'s hands is a craft, a trade, a way of doing some small thing well — and the hands are slower now. It could go on, or go with {them}.",
  choices:[
   {t:"Teach it to someone young.",h:"",do:p=>{remember('became_teacher');fx(p,{heart:6,spirit:7});logLine("Handed a lifetime's craft to younger hands, and so refused to take it underground.","joy");}},
   {t:"Let it retire with you.",h:"",do:p=>{fx(p,{spirit:-2,mind:2});logLine("Kept {their} craft to the end, and let it end with {them}.","obs");}},
  ]},
-{id:'e_journey',stage:'elder',w:2,age:[66,86],once:true,cond:()=>P.stats.vit>32,
+{id:'e_journey',stage:'elder',w:2,age:[72,86],once:true,cond:()=>P.stats.vit>32,
  text:"There is a place {n} has meant, {their} whole life, to stand in just once. The body can still, barely, be asked to go.",
  choices:[
   {t:"Go. While you still can.",h:"",do:p=>{fx(p,{spirit:12,vit:-4,means:-8,mind:3});remember('last_journey');logLine("Made the long-deferred journey at last, and stood where {they} had always meant to.","joy");}},
