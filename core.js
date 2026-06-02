@@ -97,13 +97,20 @@ function addRel(kind, given, sex, bond, age){
 // returns how many times this keyed moment has occurred this life (1,2,3…), so a
 // recurring card can vary its prose instead of repeating a sentence verbatim.
 function nth(p, key){ p.flags=p.flags||{}; const k='n_'+key; return (p.flags[k]=(p.flags[k]||0)+1); }
-// Index into a per-generation variant array, but offset by a stable per-house amount
-// so different dynasties don't all show variant 0 to their founder (and consecutive
-// generations still differ). Used wherever prose rotates on generation.
+// A stable per-house offset that spreads dynasties across variants. Weighting the
+// first char, last char, and length by different primes avoids the "same initial +
+// same length" collisions (e.g. Voss/Vane/Thorne) that a plain charCode+length gave.
+function houseOff(){ const sn=(typeof S!=='undefined'&&S&&S.surname)?S.surname:'';
+  return sn?(sn.charCodeAt(0)*3 + sn.charCodeAt(sn.length-1)*5 + sn.length*7):0; }
+// Index a per-generation variant array, offset per-house so founders across dynasties
+// don't all land on variant 0 (and consecutive generations still differ).
 function rotI(who, len){ who=who||(typeof P!=='undefined'?P:null);
   const g=(who&&who.gen)?who.gen:1;
-  const off=(typeof S!=='undefined'&&S&&S.surname)?(S.surname.charCodeAt(0)+S.surname.length):0;
-  return (((g-1)+off)%len+len)%len; }
+  return (((g-1)+houseOff())%len+len)%len; }
+// Index by an explicit per-life counter (e.g. how many times a card has been drawn),
+// so a repeating card shows a different face each time within one life — still
+// decorrelated across dynasties by the same house offset.
+function rotN(n, len){ return (((n|0)+houseOff())%len+len)%len; }
 const rel=kind=>P.rels.find(r=>r.kind===kind&&r.alive);
 const rels=kind=>P.rels.filter(r=>r.kind===kind&&r.alive);
 // the single oldest living parent who is genuinely old and not yet cared for (deterministic)

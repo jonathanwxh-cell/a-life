@@ -26,12 +26,12 @@ function epitaphFor(p){
   const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains."];
   const kind=["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones.","Left people gentler than {they} found them.","Carried a warmth into every room, and left it there."];
   // a defining memory or chosen legacy claims the epitaph (identity — always honored)
-  if(m.kept_stray && s.heart>60) return out('stray', pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it."]));
-  if(m.became_teacher) return out('teacher', pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned."]));
-  if(m.strayed && !m.confessed) return out('secret', pr(["Carried one secret all the way to the end.","Kept the one thing {they} could not say, and carried it the whole way.","Took one door, unopened, all the way into the ground."]));
-  if(leg==='built') return out('built', pr(built));
-  if(leg==='here') return out('here', pr(["Asked for no monument — only that the years had been real.","Wanted no marker but the fact of having been here.","Left no monument, and would have refused one."]));
-  if(leg==='kind') return out('kind', pr(kind));
+  if(m.kept_stray && s.heart>60 && !blocked('stray')) return out('stray', pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it."]));
+  if(m.became_teacher && !blocked('teacher')) return out('teacher', pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned."]));
+  if(m.strayed && !m.confessed && !blocked('secret')) return out('secret', pr(["Carried one secret all the way to the end.","Kept the one thing {they} could not say, and carried it the whole way.","Took one door, unopened, all the way into the ground."]));
+  if(leg==='built' && !blocked('built')) return out('built', pr(built));
+  if(leg==='here' && !blocked('here')) return out('here', pr(["Asked for no monument — only that the years had been real.","Wanted no marker but the fact of having been here.","Left no monument, and would have refused one."]));
+  if(leg==='kind' && !blocked('kind')) return out('kind', pr(kind));
   // stat-derived themes step aside if the last two ancestors already shared them
   if(s.heart>82 && !blocked('kind')) return out('kind', pr(kind));
   if(p.peakMeans>78 && !blocked('built')) return out('built', pr(built));
@@ -241,7 +241,7 @@ function succeed(childRel){
   // opening lines reflect being born a child of the house it has become
   const seat=seatOf(h.seat);
   const births=["Was born into "+seat.name+", and a family that already had a story.",
-    "Was born where the last life ended — into "+seat.name+", and a name already partly spent.",
+    "Was born where the last life ended — into "+seat.name+", and even that already partly spent.",
     "Came into the world already inside a story someone else had begun, with "+seat.name+" for an inheritance."];
   logLine(births[child.gen % births.length],"obs");
   if(h.motto) logLine("Raised on the family words: “"+h.motto+"”","obs");

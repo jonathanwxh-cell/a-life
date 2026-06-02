@@ -40,7 +40,7 @@ function observe(){
   const s=P.stats, a=P.age;
   const ob=(key,cond,line,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(line,cls||'obs');} };
   if(a>40) ob('vit_tire',s.vit<35,["The stairs have started to ask a question of {them}.","The body has begun keeping its own quiet counsel.","{Their} legs know something the rest of {them} is not yet ready to hear."][rotI(P,3)]);
-  if(a>55) ob('vit_neg',s.vit<18,["{Their} body has become a small daily negotiation.","Each day now asks something {they} did not used to have to pay.","The body keeps its own ledger now, and the sums are getting harder."][rotI(P,3)]);
+  if(a>55) ob('vit_neg',s.vit<18,["{Their} body has become a small daily negotiation.","Each day now asks a little more of {them} than the last did.","The body keeps its own ledger now, and the sums are getting harder."][rotI(P,3)]);
   ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does and become somewhere {they} goes."][rotI(P,3)]);
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
   ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
