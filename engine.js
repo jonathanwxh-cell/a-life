@@ -45,7 +45,7 @@ function observe(){
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
   ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
   ob('spirit_lo',s.spirit<22,"A greyness has moved quietly into the rooms of {them}.");
-  ob('spirit_hi',s.spirit>85&&a>30,"Something in {them} has refused, all these years, to grow heavy.");
+  ob('spirit_hi',s.spirit>88&&a>30,["Something in {them} has refused, all these years, to grow heavy.","Whatever the years took, they did not take the lightness in {them}.","There is a buoyancy in {them} the decades never managed to weigh down."][(P.gen-1)%3]);
   ob('heart_lo',s.heart<20,"{They} has grown hard to reach, even for {them}self.");
 }
 
@@ -179,7 +179,9 @@ function drawCard(){
   // the chance. (cooldown still applies — the card must be in the eligible pool.)
   if(!rel('love')&&!rel('spouse')){
     const lc=pool.find(c=>c.opensLove);
-    if(lc && ((lc.age && P.age>=lc.age[1]-5) || chance(0.6))){ presentCard(lc); return; }
+    // certain in the window's last 5 years (so the line is never foreclosed), but only a
+    // gentle preference otherwise — leaving room for the other characterful youth moments.
+    if(lc && ((lc.age && P.age>=lc.age[1]-5) || chance(0.32))){ presentCard(lc); return; }
   }
   // callbacks are rare, memory-gated payoffs (cb_*) — the reach-back that gives a life
   // its particular shape. When one is finally eligible, strongly prefer it so the long

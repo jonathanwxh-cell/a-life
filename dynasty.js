@@ -82,10 +82,10 @@ function updateHouse(p){
 
   // --- reputation drifts with the defining qualities of the life ---
   const bump=(tag,n=1)=>{h.repute[tag]=(h.repute[tag]||0)+n;};
-  const fade=()=>{for(const k in h.repute){h.repute[k]=Math.max(0,h.repute[k]-0.18);if(h.repute[k]<0.4)delete h.repute[k];}};
+  const fade=()=>{for(const k in h.repute){h.repute[k]=Math.max(0,h.repute[k]-0.12);if(h.repute[k]<0.4)delete h.repute[k];}};
   fade(); // reputations soften over generations if not renewed
-  if(s.mind>74||m.chose_study||m.became_teacher) bump('scholarly');
-  if(s.heart>74||m.kept_stray||p.flags.legacy==='kind') bump('kind');
+  if(s.mind>74||m.chose_study||m.became_teacher) bump('scholarly', s.mind>74?1.5:1);
+  if(s.heart>74||m.kept_stray||p.flags.legacy==='kind') bump('kind', s.heart>74?1.5:1);
   if(m.strayed&&!m.confessed) bump('tainted');
   if(s.means>80&&s.heart<40) bump('ruthless');
   if(p.flags.legacy==='built'||s.means>82) bump('industrious');
@@ -95,7 +95,7 @@ function updateHouse(p){
   // A scholarly or kind or hard-working line earns standing the modest can reach
   // (capped below the very top, which stays the province of fortune).
   const repTop=reputeTop(h);
-  if(repTop && h.repute[repTop]>=2.5 && h.seat<5 && Math.random()<0.55) h.seat=Math.min(5,h.seat+1);
+  if(repTop && h.repute[repTop]>=2.0 && h.seat<5 && Math.random()<0.6) h.seat=Math.min(5,h.seat+1);
 
   // --- heirlooms: certain lives leave an object behind ---
   if(m.child_books && !h.heirlooms.some(x=>x.tag==='book'))
