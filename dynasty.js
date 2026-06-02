@@ -10,16 +10,20 @@ function die(){
   save();
 }
 function epitaphFor(p){
-  const s=p.stats, leg=p.flags.legacy, m=p.mem||{};
+  const s=p.stats, leg=p.flags.legacy, m=p.mem||{}, px=p.px;
+  // rotate a variant by generation so even a memory or legacy shared down a whole
+  // line never prints the same final sentence twice in a row. Safe for any length.
+  const pr=a=>a[p.gen%a.length].replace(/\{they\}/g,px.they).replace(/\{their\}/g,px.their).replace(/\{them\}/g,px.them);
+  const built=pr(["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains."]);
   // a defining memory can claim the epitaph
-  if(m.kept_stray && s.heart>60) return "Loved small helpless things {their} whole life long.".replace(/\{their\}/g,p.px.their);
-  if(m.became_teacher) return ["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned."][p.gen%3];
+  if(m.kept_stray && s.heart>60) return pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it."]);
+  if(m.became_teacher) return pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned."]);
   if(m.strayed && !m.confessed) return "Carried one secret all the way to the end.";
   // an explicit legacy choice (e_legacy) wins over stat-derived epitaphs below
-  if(leg==='built') return "Built something that outlasted the building of it.";
+  if(leg==='built') return built;
   if(leg==='here') return "Asked for no monument — only that the years had been real.";
-  if(leg==='kind'||s.heart>82) return ["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones."][p.gen%3];
-  if(p.peakMeans>78) return "Built something that outlasted the building of it.";
+  if(leg==='kind'||s.heart>82) return pr(["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones."]);
+  if(p.peakMeans>78) return built;
   if(s.mind>78) return "Lived half in the world and half in {their} own head.".replace(/\{their\}/g,p.px.their);
   if(s.spirit>74) return "Carried a lightness the years never managed to take.";
   if(s.spirit<28) return "Knew more sorrow than {they} ever said aloud.".replace(/\{they\}/g,p.px.they);

@@ -160,7 +160,7 @@ const CARDS=[
 {id:'cb_books_late',stage:'midlife',w:4,cond:()=>held('child_books')&&P.stats.mind>52,once:true,
  text:"{n} finds the old book on a high shelf — the one too hard for a child's hands, kept all these years.",
  choices:[
-  {t:"Read it again, slowly.",h:"a circle closes",do:p=>{echo("Read, at last with ease, the book that began everything at age "+recall('child_books').age+".");fx(p,{spirit:9,mind:4});}},
+  {t:"Read it again, slowly.",h:"a circle closes",do:p=>{const bk=recall('child_books')||{};echo(bk.inherited?"Read, at last with ease, the book the family has always kept.":"Read, at last with ease, the book that began everything at age "+bk.age+".");fx(p,{spirit:9,mind:4});}},
   {t:"Pass it to a young one.",h:"",do:p=>{const c=rels('child')[0];echo("Gave the book that shaped {them} to "+(c?c.given:'a child')+", saying nothing of why.");if(c)c.bond=clamp(c.bond+8);fx(p,{spirit:6,heart:4});}},
  ]},
 {id:'cb_outcast_return',stage:'adult',w:4,cond:()=>held('kind_to_outcast'),once:true,
