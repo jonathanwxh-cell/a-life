@@ -24,7 +24,7 @@ function haveChild(){
     "Had a child, "+cn+". A new centre the whole house quietly turned toward."];
   logLine(kn>=3 ? "Had another child, "+cn+". By now {they} knew the shape of it, and was no less moved."
         : kn===2 ? "Had a second child, "+cn+". The house made room again, more easily this time."
-        : first[(P.gen-1)%3], "joy");
+        : first[rotI(P,3)], "joy");
 }
 function seedChildStats(parent, partner){
   const mean=50;
@@ -39,13 +39,13 @@ function seedChildStats(parent, partner){
 function observe(){
   const s=P.stats, a=P.age;
   const ob=(key,cond,line,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(line,cls||'obs');} };
-  if(a>40) ob('vit_tire',s.vit<35,["The stairs have started to ask a question of {them}.","The body has begun keeping its own quiet counsel.","{Their} legs know something the rest of {them} is not yet ready to hear."][(P.gen-1)%3]);
-  if(a>55) ob('vit_neg',s.vit<18,["{Their} body has become a small daily negotiation.","Each day now asks something {they} did not used to have to pay.","The body keeps its own ledger now, and the sums are getting harder."][(P.gen-1)%3]);
-  ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does and become somewhere {they} goes."][(P.gen-1)%3]);
+  if(a>40) ob('vit_tire',s.vit<35,["The stairs have started to ask a question of {them}.","The body has begun keeping its own quiet counsel.","{Their} legs know something the rest of {them} is not yet ready to hear."][rotI(P,3)]);
+  if(a>55) ob('vit_neg',s.vit<18,["{Their} body has become a small daily negotiation.","Each day now asks something {they} did not used to have to pay.","The body keeps its own ledger now, and the sums are getting harder."][rotI(P,3)]);
+  ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does and become somewhere {they} goes."][rotI(P,3)]);
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
   ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
   ob('spirit_lo',s.spirit<22,"A greyness has moved quietly into {their} rooms.");
-  ob('spirit_hi',s.spirit>88&&a>30,["Something in {them} has refused, all these years, to grow heavy.","Whatever the years took, they did not take the lightness in {them}.","There is a lightness in {them} the decades never managed to press flat."][(P.gen-1)%3]);
+  ob('spirit_hi',s.spirit>88&&a>30,["Something in {them} has refused, all these years, to grow heavy.","Whatever the years took, they did not take the lightness in {them}.","There is a lightness in {them} the decades never managed to press flat."][rotI(P,3)]);
   ob('heart_lo',s.heart<20,"{They} has grown hard to reach, even for {them}self.");
 }
 

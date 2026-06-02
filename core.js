@@ -97,6 +97,13 @@ function addRel(kind, given, sex, bond, age){
 // returns how many times this keyed moment has occurred this life (1,2,3…), so a
 // recurring card can vary its prose instead of repeating a sentence verbatim.
 function nth(p, key){ p.flags=p.flags||{}; const k='n_'+key; return (p.flags[k]=(p.flags[k]||0)+1); }
+// Index into a per-generation variant array, but offset by a stable per-house amount
+// so different dynasties don't all show variant 0 to their founder (and consecutive
+// generations still differ). Used wherever prose rotates on generation.
+function rotI(who, len){ who=who||(typeof P!=='undefined'?P:null);
+  const g=(who&&who.gen)?who.gen:1;
+  const off=(typeof S!=='undefined'&&S&&S.surname)?(S.surname.charCodeAt(0)+S.surname.length):0;
+  return (((g-1)+off)%len+len)%len; }
 const rel=kind=>P.rels.find(r=>r.kind===kind&&r.alive);
 const rels=kind=>P.rels.filter(r=>r.kind===kind&&r.alive);
 // the single oldest living parent who is genuinely old and not yet cared for (deterministic)

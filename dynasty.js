@@ -11,34 +11,41 @@ function die(){
 }
 function epitaphFor(p){
   const s=p.stats, leg=p.flags.legacy, m=p.mem||{}, px=p.px;
-  // Rotate a per-generation variant AND avoid repeating either of the last two
-  // ancestors' epitaphs, so no final line in a house ever lands twice in a row
-  // (or near it) — even when a memory, legacy, or trait is shared down the line.
+  // Three layers keep a chronicle from reading repetitively down the generations:
+  //  1. pr() rotates a per-generation variant and skips either of the last two
+  //     ancestors' exact lines (no phrase ever lands twice in a row);
+  //  2. blocked() steps a STAT-derived life aside when the last two ancestors
+  //     already shared its theme, so a house never reads three of one note running;
+  //  3. out() tags the chosen theme so recordAncestor can remember it for (2).
   const sub=t=>t.replace(/\{they\}/g,px.they).replace(/\{their\}/g,px.their).replace(/\{them\}/g,px.them);
-  const recent=(typeof S!=='undefined'&&S.lineage)?S.lineage.slice(-2).map(a=>a&&a.epitaph):[];
+  const lin=(typeof S!=='undefined'&&S.lineage)?S.lineage.slice(-2):[];
+  const recent=lin.map(a=>a&&a.epitaph), recentC=lin.map(a=>a&&a.cluster);
+  const blocked=k=>recentC.filter(c=>c===k).length>=2;
+  const out=(k,txt)=>{ p._epiCluster=k; return txt; };
   const pr=arr=>{ const opts=arr.map(sub); const fresh=opts.filter(o=>!recent.includes(o)); const pool=fresh.length?fresh:opts; return pool[p.gen%pool.length]; };
   const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains."];
-  // a defining memory can claim the epitaph
-  if(m.kept_stray && s.heart>60) return pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it."]);
-  if(m.became_teacher) return pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned."]);
-  if(m.strayed && !m.confessed) return pr(["Carried one secret all the way to the end.","Kept the one thing {they} could not say, and carried it the whole way.","Took one door, unopened, all the way into the ground."]);
-  // an explicit legacy choice (e_legacy) wins over stat-derived epitaphs below
-  if(leg==='built') return pr(built);
-  if(leg==='here') return pr(["Asked for no monument — only that the years had been real.","Wanted no marker but the fact of having been here.","Left no monument, and would have refused one."]);
-  if(leg==='kind'||s.heart>82) return pr(["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones."]);
-  if(p.peakMeans>78) return pr(built);
-  if(s.mind>78) return pr(["Lived half in the world and half in {their} own head.","Kept a whole country behind the eyes, and lived there often.","Was elsewhere as often as here, and the elsewhere was wide."]);
-  if(s.spirit>74) return pr(["Carried a lightness the years never managed to take.","Stayed light, somehow, the whole way down the years.","Was never quite weighed down, right to the end."]);
-  if(s.spirit<28) return pr(["Knew more sorrow than {they} ever said aloud.","Carried a weight {they} rarely named.","Held more grief than the quiet face ever let on."]);
-  if(p.deathAge<40) return pr(["Gone too soon, with so much unspent.","Gone early, with the better part still ahead.","Left before the story had found its middle."]);
-  if(s.means<18) return pr(["Never had much, and gave away some of that.","Owned little, and shared even that.","Was poor in all but the giving of it."]);
-  // mid-tier lives — broadly decent without peaking — get their own quiet lines,
-  // so the default below stays reserved for the genuinely unremarkable.
-  if(s.spirit>=52&&s.heart>=52&&s.means>=38) return pr(["Held more than most, and seldom needed to say so.","Had enough, and knew it, which is rarer than plenty.","Lived well within the life {they} were handed."]);
-  if(s.heart>=55&&s.means<45) return pr(["Had little to spare, and spared it anyway.","Gave past what {they} could afford, and mentioned it to no one.","Was generous in the way only the un-rich manage."]);
-  if(s.heart>=60) return pr(["Easy to love, and not always easy to live with.","Loved well, and was a little hard to live beside.","Warm at the centre, and sharp at the odd edge."]);
-  if(p.deathAge>=82) return pr(["Lived a long time, and left the rooms quieter for the leaving.","Outlasted nearly everyone, and was missed by the few still there.","Stayed a long while, and still left too soon for some."]);
-  return pr(["An ordinary life, which is to say, a whole world.","A quiet life, complete within its own small compass.","An unremarkable life, and entirely {their} own."]);
+  const kind=["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones.","Left people gentler than {they} found them.","Carried a warmth into every room, and left it there."];
+  // a defining memory or chosen legacy claims the epitaph (identity — always honored)
+  if(m.kept_stray && s.heart>60) return out('stray', pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it."]));
+  if(m.became_teacher) return out('teacher', pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned."]));
+  if(m.strayed && !m.confessed) return out('secret', pr(["Carried one secret all the way to the end.","Kept the one thing {they} could not say, and carried it the whole way.","Took one door, unopened, all the way into the ground."]));
+  if(leg==='built') return out('built', pr(built));
+  if(leg==='here') return out('here', pr(["Asked for no monument — only that the years had been real.","Wanted no marker but the fact of having been here.","Left no monument, and would have refused one."]));
+  if(leg==='kind') return out('kind', pr(kind));
+  // stat-derived themes step aside if the last two ancestors already shared them
+  if(s.heart>82 && !blocked('kind')) return out('kind', pr(kind));
+  if(p.peakMeans>78 && !blocked('built')) return out('built', pr(built));
+  if(s.mind>78 && !blocked('mind')) return out('mind', pr(["Lived half in the world and half in {their} own head.","Kept a whole country behind the eyes, and lived there often.","Was elsewhere as often as here, and the elsewhere was wide."]));
+  if(s.spirit>74 && !blocked('light')) return out('light', pr(["Carried a lightness the years never managed to take.","Stayed light, somehow, the whole way down the years.","Was never quite weighed down, right to the end."]));
+  if(s.spirit<28 && !blocked('dark')) return out('dark', pr(["Knew more sorrow than {they} ever said aloud.","Carried a weight {they} rarely named.","Held more grief than the quiet face ever let on."]));
+  if(p.deathAge<40) return out('early', pr(["Gone too soon, with so much unspent.","Gone early, with the better part still ahead.","Left before the story had found its middle."]));
+  if(s.means<18 && !blocked('poor')) return out('poor', pr(["Never had much, and gave away some of that.","Owned little, and shared even that.","Was poor in all but the giving of it."]));
+  // mid-tier lives — broadly decent without peaking — get their own quiet lines.
+  if(s.spirit>=52&&s.heart>=52&&s.means>=38 && !blocked('content')) return out('content', pr(["Held more than most, and seldom needed to say so.","Had enough, and knew it, which is rarer than plenty.","Lived well within the life {they} were handed."]));
+  if(s.heart>=55&&s.means<45 && !blocked('generous')) return out('generous', pr(["Had little to spare, and spared it anyway.","Gave past what {they} could afford, and mentioned it to no one.","Was generous in the way only the un-rich manage."]));
+  if(s.heart>=60 && !blocked('warm')) return out('warm', pr(["Easy to love, and not always easy to live with.","Loved well, and was a little hard to live beside.","Warm at the centre, and sharp at the odd edge."]));
+  if(p.deathAge>=82) return out('long', pr(["Lived a long time, and left the rooms quieter for the leaving.","Outlasted nearly everyone, and was missed by the few still there.","Stayed a long while, and still left too soon for some."]));
+  return out('ordinary', pr(["An ordinary life, which is to say, a whole world.","A quiet life, complete within its own small compass.","An unremarkable life, and entirely {their} own."]));
 }
 /* ============================================================
    DYNASTY STATE — the house accumulates across generations.
@@ -154,7 +161,7 @@ function recordAncestor(p){
   S.lineage.push({
     given:p.given, surname:S.surname, gen:p.gen, sex:p.sex,
     born:p.bornYear, died:p.bornYear+p.deathAge, span:p.deathAge,
-    epitaph:p.epitaph,
+    epitaph:p.epitaph, cluster:p._epiCluster,
     peakMeans:Math.round(p.peakMeans),
     hadHeir: rels('child').length>0,
     seatAfter: S.house.seat,
