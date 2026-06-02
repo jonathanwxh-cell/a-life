@@ -23,11 +23,11 @@ function epitaphFor(p){
   const blocked=k=>recentC.filter(c=>c===k).length>=2;
   const out=(k,txt)=>{ p._epiCluster=k; return txt; };
   const pr=arr=>{ const opts=arr.map(sub); const fresh=opts.filter(o=>!recent.includes(o)); const pool=fresh.length?fresh:opts; return pool[((p.gen-1+(typeof houseOff==='function'?houseOff():0))%pool.length+pool.length)%pool.length]; };
-  const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains."];
+  const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains.","Put something into the world that stayed there after {them}."];
   const kind=["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones.","Left people gentler than {they} found them.","Carried a warmth into every room, and left it there."];
   // a defining memory or chosen legacy claims the epitaph (identity — always honored)
-  if(m.kept_stray && s.heart>60 && !blocked('stray')) return out('stray', pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it."]));
-  if(m.became_teacher && !blocked('teacher')) return out('teacher', pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned."]));
+  if(m.kept_stray && s.heart>60 && !m.turned_stray && !blocked('stray')) return out('stray', pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it.","Gave shelter to whatever could not fend for itself, all {their} days."]));
+  if(m.became_teacher && !blocked('teacher')) return out('teacher', pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned.","Left {their} knowing in other heads, where it kept on being used."]));
   if(m.strayed && !m.confessed && !blocked('secret')) return out('secret', pr(["Carried one secret all the way to the end.","Kept the one thing {they} could not say, and carried it the whole way.","Took one door, unopened, all the way into the ground."]));
   if(leg==='built' && !blocked('built')) return out('built', pr(built));
   if(leg==='here' && !blocked('here')) return out('here', pr(["Asked for no monument — only that the years had been real.","Wanted no marker but the fact of having been here.","Left no monument, and would have refused one."]));

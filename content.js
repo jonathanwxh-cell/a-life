@@ -58,7 +58,7 @@ const CARDS=[
   {t:"Go. Don't look back.",h:"the world widens",do:p=>{fx(p,{mind:6,heart:-3,spirit:5,means:-4});const m=rel('mother');if(m)m.bond=clamp(m.bond-8);p.flags.left=1;remember('left_home');logLine("Left home for the city, carrying one bag and a life not yet started.");}},
   {t:"Stay. The roots are here.",h:"",do:p=>{fx(p,{heart:5,spirit:2,mind:-2});remember('stayed_home');logLine("Stayed where {they} was known, and was, mostly, content.");}},
  ]},
-{id:'y_drink',stage:'youth',w:2,age:[18,26],text:"There is a season where the nights run long and the mornings cost more each time.",
+{id:'y_drink',stage:'youth',w:2,age:[18,26],once:true,text:"There is a season where the nights run long and the mornings cost more each time.",
  choices:[
   {t:"Burn through it.",h:"a reckless season",do:p=>{fx(p,{vit:-6,spirit:4,heart:3});p.flags.peril=p.age+5;logLine("Spent a reckless year {they} would not, on balance, trade away.");}},
   {t:"Pull back early.",h:"",do:p=>{fx(p,{vit:3,spirit:-1,mind:3});logLine("Left the party before it turned.");}},
@@ -218,7 +218,7 @@ const CARDS=[
 {id:'c_animal',stage:'child',w:2,once:true,age:[6,11],text:"A stray follows {n} home. It is thin and trusting and not, by any measure, theirs to keep.",
  choices:[
   {t:"Hide it. Feed it anyway.",h:"",do:p=>{remember('kept_stray');fx(p,{heart:8,spirit:4});logLine("Kept a secret animal alive on stolen scraps, and loved it fiercely.","joy");}},
-  {t:"Do the sensible thing.",h:"",do:p=>{fx(p,{heart:-3,mind:3});logLine("Turned the stray away, because it was sensible, and felt the sense of it like a bruise.");}},
+  {t:"Do the sensible thing.",h:"",do:p=>{remember('turned_stray');fx(p,{heart:-3,mind:3});logLine("Turned the stray away, because it was sensible, and felt the sense of it like a bruise.");}},
  ]},
 {id:'y_mentor',stage:'youth',w:3,once:true,age:[14,22],text:"An older stranger sees something in {n} and offers to teach {them} — for nothing, just because someone once did it for them.",
  choices:[
@@ -306,7 +306,7 @@ const CARDS=[
   {t:"Speak. Pay for it.",h:"integrity, at a price",do:p=>{fx(p,{spirit:8,means:-5,heart:3});remember('took_a_stand');logLine("Stood up young against something unfair, and wore the cost of it.","joy");}},
   {t:"Stay quiet. Keep your place.",h:"safe, and a little smaller",do:p=>{fx(p,{spirit:-5,mind:3,means:4});logLine("Saw the wrong of it, said nothing, kept {their} place, and remembered the silence.");}},
  ]},
-{id:'y_dare',stage:'youth',w:2,age:[16,23],
+{id:'y_dare',stage:'youth',w:2,age:[16,23],once:true,
  text:"A dare, a height, a fast machine — a chance to feel, for a few seconds, completely alive and entirely breakable.",
  choices:[
   {t:"Do the reckless thing.",h:"alive and breakable",do:p=>{fx(p,{spirit:7,vit:-2,heart:2});p.flags.peril=p.age+4;logLine("Did the dangerous, beautiful, breakable thing, and the seconds of it lasted years.");}},
