@@ -202,3 +202,46 @@
   #stageArt{position:fixed;inset:0;z-index:4;background-size:cover;background-position:center;
     opacity:0;transition:opacity 1.6s ease;pointer-events:none;}
   #stageArt.show{opacity:0.42;}
+
+  /* ============================================================
+     Accessibility, touch & polish pass (review-driven)
+     ============================================================ */
+  /* keyboard focus — a clear amber ring on every interactive control */
+  .choice:focus-visible, .btn:focus-visible, .tab:focus-visible, .pp:focus-visible,
+  .gen .chron:focus-visible, .gen .chron2:focus-visible, #dBackup:focus-visible,
+  .slot .del:focus-visible, .slot .body:focus-visible{
+    outline:2px solid var(--amber); outline-offset:2px; border-radius:8px;
+  }
+  /* reveal each choice's hint for keyboard users and on touch devices (which have no hover) */
+  .choice:focus-visible .h{opacity:0.9;max-height:40px;margin-top:6px;}
+  @media (hover:none){ .choice .h{opacity:0.82;max-height:44px;margin-top:6px;} }
+  /* the narrative prose sits directly over the open sky — give it its own soft dark
+     backing so it stays legible even on the pale youth/midday skies */
+  .card .scene{text-shadow:0 1px 10px rgba(8,6,4,0.72), 0 0 34px rgba(8,6,4,0.55);}
+  .being{text-shadow:0 1px 6px rgba(8,6,4,0.85);}
+  /* the time control reads as primary and distinct from the menu (amber = actionable) */
+  #pp{border-color:rgba(224,169,75,0.42);background:rgba(224,169,75,0.07);}
+  #pp:hover{background:rgba(224,169,75,0.16);}
+  /* comfortable footer tap targets (>=44px) */
+  .pp{width:44px;height:44px;flex:0 0 44px;}
+  .pp svg{width:15px;height:15px;}
+  /* the slot delete control is a <button> now — strip default chrome */
+  .slot .del{background:transparent;border:0;font-family:inherit;line-height:1;display:grid;place-items:center;min-width:32px;min-height:32px;}
+  /* the Chronicle / constellation entry points were too small to discover */
+  .gen{line-height:1.95;}
+  .gen .chron{font-size:12.5px;letter-spacing:1px;}
+  .gen .chron2{font-size:11px;}
+  /* inactive Chronicle tabs get a faint surface so selection reads by more than hue */
+  .tab{background:rgba(236,225,207,0.035);}
+  .tab.on{background:rgba(224,169,75,0.12);}
+  /* a more legible stage-transition title (was 13px / 8px tracking) */
+  #stageTitle{font-size:15px;letter-spacing:5px;}
+  /* respect prefers-reduced-motion — kill transitions/animations/smooth-scroll;
+     the canvases freeze their own clocks in JS (scene.js / constellation.js) */
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:0.001ms !important; animation-iteration-count:1 !important;
+      transition-duration:0.001ms !important; scroll-behavior:auto !important;
+    }
+    .card{transform:none;}
+  }

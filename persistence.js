@@ -106,7 +106,7 @@ async function openLoadMenu(){
     row.innerHTML=`<div class="body"><div class="nm">House ${m.surname}</div>
       <div class="sub">${m.gens} generation${m.gens>1?'s':''} · ${m.souls} live${m.souls===1?'':'s'} lived · ${seatOf(m.seat).adj}<br>
       <span class="${m.alive?'':'dead'}">${status}</span> · ${when}</div></div>
-      <div class="del" title="delete">✕</div>`;
+      <button class="del" type="button" aria-label="Delete this chronicle" title="delete">✕</button>`;
     row.querySelector('.body').onclick=async()=>{
       const ok=await loadSlot(m.slot);
       if(ok){

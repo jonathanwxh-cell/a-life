@@ -73,8 +73,12 @@
   const STAGE_ART={childhood:'stage-child',youth:'stage-youth',adulthood:'stage-adult',midlife:'stage-midlife','old age':'stage-elder'};
 
   let t=0, last=performance.now();
+  // honour prefers-reduced-motion: freeze the animation clock (so sway, motes,
+  // birds, twinkle all hold still) and throttle the loop; the scene still updates
+  // with age/stage, just without continuous motion.
+  const REDUCE = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   function frame(now){
-    const dt=Math.min(now-last,60); last=now; t+=dt;
+    const dt=REDUCE?0:Math.min(now-last,60); last=now; if(!REDUCE) t+=dt;
     const P=window.AL_P?window.AL_P():null; // resolved below
     const alive = P && P.alive!==false;
     const age = P? P.age : 0;
@@ -116,7 +120,7 @@
     // --- stars at dusk/night ---
     if(prog>0.74){
       const sa=clamp((prog-0.74)/0.2,0,1);
-      for(let i=0;i<70;i++){const x=(i*89%w),y=(i*53%(horizonY*0.9));const tw=0.4+0.5*Math.sin(t*0.002+i);
+      for(let i=0;i<70;i++){const x=(Math.abs(Math.sin(i*12.9898))*w)%w, y=(Math.abs(Math.sin(i*78.233))*(horizonY*0.9))%(horizonY*0.9);const tw=0.4+0.5*Math.sin(t*0.002+i);
         g.fillStyle=`rgba(255,250,235,${sa*tw*0.8})`; g.fillRect(x,y,1.4,1.4);}
     }
 
@@ -232,7 +236,7 @@
       }
     }
 
-    requestAnimationFrame(frame);
+    if(REDUCE){ setTimeout(function(){ frame(performance.now()); }, 250); } else { requestAnimationFrame(frame); }
   }
   // expose current person to the visual loop without touching game scope
   window.AL_P=()=>{ try{ return P; }catch(e){ return null; } };

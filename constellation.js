@@ -72,8 +72,11 @@
 
   const TONE={joy:[150,210,160], loss:[224,138,134], obs:[244,214,150]};
   let t=0,last=performance.now();
+  // prefers-reduced-motion: freeze the twinkle clock (no auto-motion); pan/zoom,
+  // being user-initiated, stays responsive via the same loop.
+  const RM = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
   function draw(now){
-    const dt=now-last; last=now; t+=dt;
+    const dt=now-last; last=now; if(!RM) t+=dt;
     g.clearRect(0,0,W,H);
     const neb=g.createRadialGradient(W/2,H*0.2,0,W/2,H*0.2,H);
     neb.addColorStop(0,'rgba(60,54,110,0.20)'); neb.addColorStop(1,'rgba(10,8,18,0)');
