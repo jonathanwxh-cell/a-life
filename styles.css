@@ -120,7 +120,7 @@
   .backupTitle{font-family:'Fraunces',serif;font-size:13px;color:var(--amber);letter-spacing:.5px;margin-bottom:10px;opacity:.9;}
   #codeBox{width:100%;height:64px;resize:none;background:rgba(12,9,7,0.5);border:1px solid var(--line);border-radius:10px;
     color:var(--ink-dim);font-family:'DM Mono',monospace;font-size:10px;padding:9px 11px;line-height:1.4;outline:none;word-break:break-all;}
-  #codeBox:focus{border-color:rgba(224,169,75,0.4);}
+  #codeBox:focus{border-color:var(--amber);outline:2px solid var(--amber);outline-offset:1px;}
   .backupRow{margin:10px auto 0;max-width:240px;}
   .backupRow .btn{display:block;width:100%;margin:9px auto 0;font-size:12px;padding:9px 16px;}
   .backupMsg{font-size:11.5px;color:var(--sage);margin-top:9px;min-height:15px;font-style:italic;}
@@ -187,7 +187,7 @@
     color:var(--ink-faint);opacity:0;transition:opacity .6s ease;}
   .cloudStatus.show{opacity:0.85;}
   .cloudStatus.ok{color:var(--sage);}
-  .cloudStatus.dim{color:var(--ink-faint);}
+  .cloudStatus.dim{color:var(--ink-dim);}
   /* desktop: let the Chronicle (and especially the constellation) use the wider screen;
      the rest of the game keeps its narrow reading column */
   @media (min-width:760px){
@@ -232,10 +232,10 @@
   /* the slot delete control is a <button> now — strip default chrome */
   .slot .del{background:transparent;border:0;font-family:inherit;line-height:1;display:grid;place-items:center;min-width:44px;min-height:44px;}
   /* the Chronicle / constellation entry points were too small to discover/tap */
-  .gen{line-height:2.0;}
-  .gen .chron, .gen .chron2{display:inline-block;padding:7px 3px;min-height:34px;box-sizing:border-box;}
-  .gen .chron{font-size:13px;letter-spacing:1px;border-bottom:1px solid rgba(224,169,75,0.4);}
-  .gen .chron2{font-size:11.5px;color:var(--ink-dim);opacity:1;border-bottom:1px solid rgba(169,156,135,0.45);}
+  .gen{line-height:2.0;font-size:11px;}
+  .gen .chron, .gen .chron2{display:inline-block;padding:11px 3px;min-height:44px;box-sizing:border-box;}
+  .gen .chron{font-size:13.5px;letter-spacing:1px;border-bottom:1px solid rgba(224,169,75,0.45);}
+  .gen .chron2{font-size:12px;color:var(--ink-dim);opacity:1;border-bottom:1px solid rgba(169,156,135,0.5);}
   .gen .chron2:hover{color:var(--ink);}
   /* inactive Chronicle tabs get a faint surface so selection reads by more than hue */
   .tab{background:rgba(236,225,207,0.035);}
@@ -259,7 +259,7 @@
   .starLegend .starHint{opacity:0.85;}                 /* constellation hint clears AA */
   .tab{background:rgba(236,225,207,0.07);}             /* inactive tabs read as pressable */
   .stage{overflow-y:auto;}                             /* tall (3-choice) cards stay reachable on short screens */
-  #dChron, #dBackup{display:inline-block;padding:10px 6px;}  /* comfortable eulogy tap targets */
+  #dChron, #dBackup{display:inline-block;padding:12px 6px;min-height:44px;box-sizing:border-box;}  /* comfortable eulogy tap targets */
   .tab{min-height:44px;}                               /* chronicle tabs meet the touch-target minimum */
   /* the load-slot row and ancestor rows are keyboard controls now — same amber ring */
   .slot .body{border-radius:9px;}

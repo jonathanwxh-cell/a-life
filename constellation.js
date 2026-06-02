@@ -92,7 +92,7 @@
       g.beginPath(); g.moveTo(th.a.x,th.a.y); g.quadraticCurveTo(mx,my,th.b.x,th.b.y); g.stroke();
     }
     g.setLineDash([]);
-    for(const s of stars){ if(!s.chosen&&s.from){ g.strokeStyle='rgba(150,160,210,0.32)'; g.lineWidth=1.2/view.z;
+    for(const s of stars){ if(!s.chosen&&s.from){ g.strokeStyle='rgba(160,170,220,0.52)'; g.lineWidth=1.8/view.z;
       g.beginPath(); g.moveTo(s.from.x,s.from.y); g.lineTo(s.x,s.y); g.stroke(); }}
     for(const nd of nodes){
       g.strokeStyle='rgba(224,194,130,0.5)'; g.lineWidth=1.2/view.z;

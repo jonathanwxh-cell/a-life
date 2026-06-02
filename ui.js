@@ -1,17 +1,23 @@
 /* ============================================================
    RENDER
    ============================================================ */
+let _hGenGen=-1;
 function renderHeader(){
   document.getElementById('hName').textContent=P.name;
   const kin=[];
   const sp=rel('spouse'); if(sp)kin.push(P.px.spouse+' of '+sp.given);
   const kids=rels('child'); if(kids.length)kin.push(kids.length===1?'parent of one':'parent of '+kids.length);
   document.getElementById('hMeta').textContent = (P.age<13?'a child':stageOf(P.age))+ (kin.length?' · '+kin[0]:'');
-  document.getElementById('hGen').innerHTML = ordinal(P.gen)+' of the line<br><span class="chron" id="openStars" tabindex="0" role="button" aria-label="open the constellation">✦ the constellation</span><br><span class="chron2" id="openChron" tabindex="0" role="button" aria-label="open the chronicle">the chronicle ↗</span>';
-  const _os=document.getElementById('openStars'), _oc=document.getElementById('openChron');
-  const _key=fn=>e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fn(); } };
-  _os.onclick=()=>openChronicle('stars'); _os.onkeydown=_key(()=>openChronicle('stars'));
-  _oc.onclick=()=>openChronicle('life');  _oc.onkeydown=_key(()=>openChronicle('life'));
+  // only rebuild the chronicle links when the generation ordinal changes — rebuilding them
+  // every tick (via renderPassing) was destroying a keyboard user's focus mid-navigation.
+  if(_hGenGen!==P.gen){
+    _hGenGen=P.gen;
+    document.getElementById('hGen').innerHTML = ordinal(P.gen)+' of the line<br><span class="chron" id="openStars" tabindex="0" role="button" aria-label="open the constellation">✦ the constellation</span><br><span class="chron2" id="openChron" tabindex="0" role="button" aria-label="open the chronicle">the chronicle ↗</span>';
+    const _os=document.getElementById('openStars'), _oc=document.getElementById('openChron');
+    const _key=fn=>e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); fn(); } };
+    _os.onclick=()=>openChronicle('stars'); _os.onkeydown=_key(()=>openChronicle('stars'));
+    _oc.onclick=()=>openChronicle('life');  _oc.onkeydown=_key(()=>openChronicle('life'));
+  }
 }
 function renderBeing(){
   const b=document.getElementById('being');
@@ -235,5 +241,11 @@ pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleT
         else { const t=top(); if(t) focusIn(t); }            // re-trap the veil underneath
       }
     }).observe(v,{attributes:true,attributeFilter:['class']});
+  });
+  // the title veil starts with .show already set, so its MutationObserver never fires on
+  // load — seed any already-open veil here so it's focus-trapped from the first Tab.
+  ['vTitle','vLoad','vDeath','vHeir','vChron'].forEach(id=>{
+    const v=document.getElementById(id);
+    if(v && v.classList.contains('show')){ if(stack.indexOf(v)<0) stack.push(v); focusIn(v); }
   });
 })();
