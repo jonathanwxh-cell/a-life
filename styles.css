@@ -119,7 +119,8 @@
   .backup{margin:14px 0;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(236,225,207,0.03);text-align:center;}
   .backupTitle{font-family:'Fraunces',serif;font-size:13px;color:var(--amber);letter-spacing:.5px;margin-bottom:10px;opacity:.9;}
   #codeBox{width:100%;height:64px;resize:none;background:rgba(12,9,7,0.5);border:1px solid var(--line);border-radius:10px;
-    color:var(--ink-dim);font-family:'DM Mono',monospace;font-size:10px;padding:9px 11px;line-height:1.4;outline:none;word-break:break-all;}
+    color:var(--ink-dim);font-family:'DM Mono',monospace;font-size:13px;padding:9px 11px;line-height:1.45;outline:none;word-break:break-all;
+    user-select:all;-webkit-user-select:all;}  /* readable on a phone, and one tap selects the whole code */
   #codeBox:focus{border-color:var(--amber);outline:2px solid var(--amber);outline-offset:1px;}
   .backupRow{margin:10px auto 0;max-width:240px;}
   .backupRow .btn{display:block;width:100%;margin:9px auto 0;font-size:12px;padding:9px 16px;}
@@ -315,3 +316,36 @@
     background:currentColor;border-radius:2px;transform:rotate(-45deg);opacity:.85;pointer-events:none;}
   /* with three footer controls now, the flow text stays on one line (clips rather than wraps on tiny screens) */
   .flow{white-space:nowrap;overflow:hidden;}
+
+  /* ---- review pass 8 (ten-juror gameplay round): readable state, pace control, last a11y ---- */
+  /* skip link — invisible until focused, then drops into view */
+  .skip{position:absolute;left:8px;top:-48px;z-index:60;background:var(--amber);color:#16110d;
+    padding:8px 14px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;transition:top .15s ease;}
+  .skip:focus{top:8px;outline:2px solid #fff;outline-offset:1px;}
+
+  /* "how things stand" — a quiet, discoverable reflect button under the being line */
+  .reflect{display:block;margin:1px auto 0;background:none;border:none;cursor:pointer;
+    font-family:'Fraunces',serif;font-size:11.5px;letter-spacing:.8px;
+    color:var(--ink-faint);opacity:.82;padding:3px 10px;border-radius:9px;transition:color .2s,opacity .2s;}
+  .reflect::before{content:'⊙ ';opacity:.75;}
+  .reflect:hover{color:var(--amber);opacity:1;}
+  .reflect:focus-visible{outline:2px solid var(--amber);outline-offset:2px;color:var(--amber);}
+  .veil.show ~ #app .reflect, body.paused .reflect{opacity:.55;}
+
+  /* the flow text is now a control: tap it to change the pace of the years */
+  .flow{cursor:pointer;border-radius:8px;transition:color .2s;}
+  .flow:hover{color:var(--ink-dim);}
+  .flow:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+  body.hurry .flow{color:var(--amber);opacity:.95;}
+  #log{cursor:pointer;}
+  #log:focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:8px;}
+
+  /* the readout panel — prose tiers, no numbers */
+  .stock{text-align:left;margin:2px 0 4px;}
+  .srow{padding:7px 2px;border-bottom:1px solid rgba(236,225,207,0.08);font-size:15px;line-height:1.5;}
+  .srow:last-child{border-bottom:none;}
+  .stock .sk{font-family:'Fraunces',serif;color:var(--amber);opacity:.92;}
+  .stock .sv{color:var(--ink);}
+  .snote{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);
+    font-size:13.5px;color:var(--ink-dim);font-style:italic;line-height:1.6;}
+  .snote b{color:var(--ink);font-style:normal;}

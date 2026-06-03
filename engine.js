@@ -20,8 +20,8 @@ function haveChild(){
   const kn=P.childrenIds.length;
   const first=[
     "Had a child, "+cn+". The world rearranged itself around a small weight.",
-    "Had a child, "+cn+", and nothing afterward was ever quite the same size.",
-    "Had a child, "+cn+". A new centre the whole house quietly turned toward."];
+    "Had a child, "+cn+" — red and furious and entirely unimpressed by any of it.",
+    "Had a child, "+cn+". Was sure of nothing, that first night, except that it had happened."];
   logLine(kn>=3 ? "Had another child, "+cn+". By now {they} knew the shape of it, and was no less moved."
         : kn===2 ? "Had a second child, "+cn+". The house made room again, more easily this time."
         : first[rotI(P,3)], "joy");
@@ -45,7 +45,7 @@ function observe(){
   ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
   ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
   ob('spirit_lo',s.spirit<22,"A greyness has moved quietly into {their} rooms.");
-  ob('spirit_hi',s.spirit>88&&a>30,["Something in {them} has refused, all these years, to grow heavy.","Whatever the years took, they did not take the lightness in {them}.","There is a lightness in {them} the decades never managed to press flat."][rotI(P,3)]);
+  ob('spirit_hi',s.spirit>88&&a>30,["{They} still laughs like someone the years have not yet learned how to reach.","The decades have arranged themselves around {them} and somehow never sat down.","Somewhere in {them} a window the years usually close has stayed open.","Whatever the years took, they did not take the lightness in {them}."][rotI(P,4)]);
   ob('heart_lo',s.heart<20,"{They} has grown hard to reach, even for {them}self.");
 }
 
@@ -98,6 +98,12 @@ function ageRelations(){
     if(!r.alive) continue;
     r.age++;
     r.bond=clamp(r.bond-0.4); // quiet decay without tending
+    // the bloodline echo-parent (the previous life) dies exactly at the age the Chronicle recorded
+    // — never by the random elder roll — so the lineage and the living world stay consistent.
+    if(r.lineageEcho && r.diesAtAge){
+      if(r.age>=r.diesAtAge){ r.alive=false; logLine("Lost "+(r.kind==='mother'?'{their} mother':'{their} father')+", "+r.given+".","loss"); }
+      continue;
+    }
     // elder relations may die
     if(r.age>62){
       let p=Math.max(0,(r.age-62)/650);
@@ -136,10 +142,11 @@ function deathRoll(){
 
 /* ---------- main tick ---------- */
 let timer=null;
+let fastFwd=false;   // the player can let the quiet years race by (tap the flow text); a moment still pauses it
 function scheduleTick(){
   clearTimeout(timer);
   if(!running||busy) return;
-  timer=setTimeout(()=>{ tick(); scheduleTick(); }, RATE);
+  timer=setTimeout(()=>{ tick(); scheduleTick(); }, fastFwd?Math.round(RATE*0.34):RATE);
 }
 function tick(){
   if(busy) return;
@@ -182,20 +189,21 @@ function drawCard(){
   // the chance. (cooldown still applies — the card must be in the eligible pool.)
   if(!rel('love')&&!rel('spouse')){
     const lc=pool.find(c=>c.opensLove);
-    // certain in the window's last 5 years (so the line is never foreclosed), but only a
-    // gentle preference otherwise — leaving room for the other characterful youth moments.
-    if(lc && ((lc.age && P.age>=lc.age[1]-5) || chance(0.32))){ presentCard(lc); return; }
+    // certain only in the window's LAST 3 years (so the line is never foreclosed), and just a
+    // light nudge otherwise — so love competes with the other youth moments instead of always
+    // pre-empting them, and two lives no longer march through the identical love→marry→child beats.
+    if(lc && ((lc.age && P.age>=lc.age[1]-3) || chance(0.18))){ presentCard(lc); return; }
   }
-  // a willing couple is certainly offered marriage and a first child before those windows
-  // shut, so a line is never foreclosed by draw-luck. This offer OUTRANKS even a callback
-  // (it must not be silently pre-empted). The player still chooses yes or no.
+  // a willing couple is still certainly offered marriage and a first child before those windows
+  // shut, so a line is never foreclosed by draw-luck — but the forcing tail is short, leaving the
+  // earlier years free to surface other content. The player still chooses yes or no.
   if((rel('spouse')||rel('love')) && !rels('child').length){
     const cc=pool.find(c=>c.id==='a_child');
-    if(cc && cc.age && P.age>=cc.age[1]-5){ presentCard(cc); return; }
+    if(cc && cc.age && P.age>=cc.age[1]-6){ presentCard(cc); return; }   // keep the child offer well-guaranteed so lines don't fizzle — a childless line is the only true foreclosure
   }
   if(rel('love') && !P.flags.married){
     const mc=pool.find(c=>c.id==='a_marry');
-    if(mc && mc.age && P.age>=mc.age[1]-6){ presentCard(mc); return; }
+    if(mc && mc.age && P.age>=mc.age[1]-5){ presentCard(mc); return; }
   }
   // callbacks are rare, memory-gated payoffs (cb_*) — the reach-back that gives a life its
   // particular shape. When one is finally eligible, strongly prefer it so the long arc
@@ -246,5 +254,7 @@ function presentCard(c){
     };
     cw.appendChild(b);
   });
-  requestAnimationFrame(()=>{ card.classList.add('show'); try{ card.focus(); }catch(e){} });
+  // focus the first choice (not the card wrapper) so a keyboard/screen-reader user lands on an
+  // actionable control; #scene is an assertive live region, so the moment's prose is announced too.
+  requestAnimationFrame(()=>{ card.classList.add('show'); try{ (cw.firstElementChild||card).focus(); }catch(e){} });
 }

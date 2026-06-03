@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<a href="#app" class="skip">Skip to the game</a>
 <canvas id="sky" aria-hidden="true"></canvas>
 <div id="stageArt" aria-hidden="true"></div>
 <div id="stageTitle" aria-live="polite" aria-atomic="true"></div>
@@ -26,6 +27,7 @@
     <div class="gen" id="hGen"></div>
   </header>
   <div class="being" id="being" aria-live="polite" aria-atomic="true"></div>
+  <button class="reflect" id="stockBtn" aria-label="how things stand — a quiet reckoning of where this life sits right now">how things stand</button>
   <div class="stage">
     <div class="passing" id="passing">
       <div class="yr" id="pYr"></div>
@@ -33,14 +35,14 @@
       <div class="breath"></div>
     </div>
     <div class="card" id="card" tabindex="-1" role="group" aria-label="a moment">
-      <div class="scene" id="scene" aria-live="polite" aria-atomic="true"></div>
+      <div class="scene" id="scene" aria-live="assertive" aria-atomic="true"></div>
       <div class="choices" id="choices"></div>
     </div>
   </div>
-  <div class="log" id="log" aria-live="polite" aria-atomic="false"></div>
+  <div class="log" id="log" aria-live="polite" aria-atomic="false" role="button" tabindex="0" aria-label="open the full record of this life"></div>
   <footer>
     <button class="pp" id="pp" aria-label="pause"></button>
-    <div class="flow" id="flow">the years are passing</div>
+    <div class="flow" id="flow" role="button" tabindex="0" aria-label="the years are passing — tap to change the pace">the years are passing</div>
     <button class="pp" id="musicBtn" aria-label="music off — tap to play" title="music" style="flex:0 0 44px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l10-2v11"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg></button>
     <button class="pp" id="menuBtn" aria-label="save and menu" title="save &amp; menu" style="flex:0 0 44px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
   </footer>
@@ -53,6 +55,7 @@
     <div class="tag">One person, born into the world.<br>Then the next. Then the next.<br>A line drawn across time.</div>
     <div class="rule"></div>
     <p class="dim">Years pass on their own. Now and then a moment asks something of you. Nothing can be undone.</p>
+    <p class="dim" style="margin-top:-3px;">Each life hands the next its name, its means, its reputation — and its secrets. Over the generations, a house takes shape.</p>
     <div style="display:flex;flex-direction:column;gap:11px;align-items:center;margin-top:8px;">
       <button class="btn" id="begin">Begin a new line</button>
       <button class="btn ghost" id="openLoad">Load a chronicle</button>
@@ -128,7 +131,7 @@
       <div class="lineage" id="lineage"></div>
     </div>
     <div id="paneStars" class="pane" role="tabpanel" aria-labelledby="tabStars" tabindex="0" style="display:none;">
-      <div class="starWrap"><canvas id="starCanvas" aria-hidden="true"></canvas><div class="starTip" id="starTip"></div></div>
+      <div class="starWrap"><canvas id="starCanvas" aria-hidden="true"></canvas><div class="starTip" id="starTip" aria-live="polite" aria-atomic="true"></div></div>
       <div class="starLegend">
         <span><i class="dot chose"></i> chosen</span>
         <span><i class="dot alt"></i> the road not taken</span>
@@ -137,6 +140,15 @@
       <div id="starA11y" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     </div>
     <button class="btn" id="chronClose">Return</button>
+  </div>
+</div>
+
+<div class="veil" id="vStock" role="dialog" aria-modal="true" aria-label="How things stand">
+  <div class="sheet">
+    <h1 class="small">How things stand</h1>
+    <div class="tag" id="stockWho" style="margin-bottom:8px;"></div>
+    <div id="stockBody" class="stock"></div>
+    <button class="btn ghost" id="stockClose" style="margin-top:14px;">Return to the years</button>
   </div>
 </div>
 

@@ -19,11 +19,16 @@ function renderHeader(){
     _oc.onclick=()=>openChronicle('life');  _oc.onkeydown=_key(()=>openChronicle('life'));
   }
 }
+const _reduceMotion=()=>{ try{ return window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){ return false; } };
 function renderBeing(){
   const b=document.getElementById('being');
+  if(_reduceMotion()){ b.textContent=beingLine(); b.style.opacity=0.9; return; }  // no invisible-text gap under reduced motion
   b.style.opacity=0;
   setTimeout(()=>{b.textContent=beingLine(); b.style.opacity=0.9;},250);
 }
+// the emotional register of a log line is shown in colour; name it for screen-reader and
+// colour-blind users so a joy never reads the same as a loss.
+function srTag(cls){ const m={joy:'Joyful',loss:'A loss',echo:'An echo'}; return m[cls]?`<span class="sr-only">${m[cls]}: </span>`:''; }
 function renderPassing(){
   document.getElementById('pAge').firstChild.textContent=P.age;
   document.getElementById('pYr').textContent='age';
@@ -45,7 +50,7 @@ function addEphemeralEntry(log, e){
   const div=document.createElement('div');
   div.className='entry '+(e.cls||'');
   // stored lines keep their pronoun tokens (obs/echo use them); resolve at render time
-  div.innerHTML=`<span class="a">${e.age}</span>${reTok(e.text)}`;
+  div.innerHTML=`<span class="a">${e.age}</span>${srTag(e.cls)}${reTok(e.text)}`;
   log.appendChild(div);
   const live=[...log.children].filter(c=>!c.dataset.out);
   while(live.length>3) fadeOutEntry(live.shift());      // cap simultaneous lines
@@ -97,7 +102,7 @@ function renderMemoir(){
       M.appendChild(sep);
     }
     const row=document.createElement('div'); row.className='mline '+(e.cls||'');
-    row.innerHTML=`<div class="ma">${e.age}</div><div class="mt">${reTok(e.text)}</div>`;
+    row.innerHTML=`<div class="ma">${e.age}</div><div class="mt">${srTag(e.cls)}${reTok(e.text)}</div>`;
     M.appendChild(row);
   }
 }
@@ -151,22 +156,24 @@ function openChronicle(startTab){
     <div class="mark"><div class="v">${m.souls||0}</div><div class="l">lives lived</div></div>
     <div class="mark"><div class="v">${m.longest||P.age}</div><div class="l">longest life</div></div>
     <div class="mark"><div class="v">${seatOf(m.peakSeat||h.seat).adj}</div><div class="l">peak standing</div></div>`;
-  const L=document.getElementById('lineage'); L.innerHTML='';
+  const L=document.getElementById('lineage'); L.innerHTML=''; L.setAttribute('role','list');
   const all=[...S.lineage];
   for(const a of all){
+    const li=document.createElement('div'); li.setAttribute('role','listitem');
     const d=document.createElement('div'); d.className='anc';
     const readable = a.log && a.log.length;
     d.innerHTML=`<div class="o">${ordinal(a.gen)}</div><div><div class="nm">${a.given} ${a.surname||S.surname}${readable?' <span style="color:var(--amber);font-size:11px;opacity:.7">— read ↗</span>':''}</div><span class="ep">${a.epitaph}${a.extinct?' — the line ended here.':''}</span></div><div class="sp">${a.span} yrs</div>`;
     if(readable){ d.style.cursor='pointer'; d.tabIndex=0; d.setAttribute('role','button'); d.setAttribute('aria-label','Read the life of '+a.given);
       d.onclick=()=>showAncestorLife(a); d.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showAncestorLife(a); } }; }
-    L.appendChild(d);
+    li.appendChild(d); L.appendChild(li);
   }
   // current living person — tap to jump to This Life
+  const li=document.createElement('div'); li.setAttribute('role','listitem');
   const d=document.createElement('div'); d.className='anc alive'; d.style.cursor='pointer'; d.tabIndex=0; d.setAttribute('role','button'); d.setAttribute('aria-label','Read this life');
   d.innerHTML=`<div class="o">${ordinal(P.gen)}</div><div><div class="nm">${P.given} ${S.surname} <span style="color:var(--amber);font-size:11px;opacity:.7">— read ↗</span></div><span class="ep">living — ${beingLine()}</span></div><div class="sp">age ${P.age}</div>`;
   const _jump=()=>{ renderMemoir(); switchTab('life'); };
   d.onclick=_jump; d.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); _jump(); } };
-  L.appendChild(d);
+  li.appendChild(d); L.appendChild(li);
   document.getElementById('vChron').classList.add('show');
   // if we opened straight to the constellation, rebuild now that the canvas has size
   if((startTab||'life')==='stars' && window.AL_buildStars){
@@ -185,7 +192,7 @@ function showAncestorLife(a){
     if(sg!==lastStage){ lastStage=sg; const sep=document.createElement('div'); sep.className='mline';
       sep.innerHTML=`<div class="ma"></div><div class="mt"><span class="stage-sep">${sg}</span></div>`; M.appendChild(sep); }
     const row=document.createElement('div'); row.className='mline '+(e.cls||'');
-    row.innerHTML=`<div class="ma">${e.age}</div><div class="mt">${e.text}</div>`;
+    row.innerHTML=`<div class="ma">${e.age}</div><div class="mt">${srTag(e.cls)}${e.text}</div>`;
     M.appendChild(row);
   }
   switchTab('life');
@@ -200,9 +207,57 @@ document.getElementById('chronClose').onclick=()=>{
 const pp=document.getElementById('pp');
 function setPP(){pp.innerHTML=running?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>':'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
   pp.setAttribute('aria-label',running?'pause':'play'); pp.setAttribute('title',running?'pause':'play');
-  document.getElementById('flow').textContent=running?'the years are passing':'time held still';
-  document.body.classList.toggle('paused',!running);}
+  document.getElementById('flow').textContent=running?(fastFwd?'the years are racing by':'the years are passing'):'time held still';
+  document.body.classList.toggle('paused',!running);
+  document.body.classList.toggle('hurry',running&&fastFwd);}
 pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleTick(); else clearTimeout(timer); };
+
+/* ---- pace control (tap the flowing-years text) & quick log → chronicle ---- */
+(function(){
+  const flow=document.getElementById('flow');
+  const toggleFast=()=>{ if(!P||P.alive===false) return;
+    if(!running){ running=true; setPP(); scheduleTick(); return; }   // paused → resume
+    fastFwd=!fastFwd; setPP(); scheduleTick(); };                     // running → toggle the quick pace
+  if(flow){ flow.onclick=toggleFast; flow.onkeydown=e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleFast(); } }; }
+  const log=document.getElementById('log');
+  const openLog=()=>{ if(P&&S) openChronicle('life'); };   // tap the fading log to read the whole life so far
+  if(log){ log.addEventListener('click',openLog); log.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openLog(); } }); }
+})();
+
+/* ---- "how things stand": a diegetic, number-free reading of where the life sits right now.
+   Opt-in (behind a quiet button), so the default view keeps its no-numbers calm — but a player
+   who wants something to plan against can read the body, mind, heart, means, and spirit in prose. */
+function _tier(v, bands){ for(const b of bands){ if(v<b[0]) return b[1]; } return bands[bands.length-1][1]; }
+function lifeReadout(){
+  const s=P.stats;
+  return [
+    ['The body',  _tier(s.vit,  [[18,'is failing'],[34,'is wearing'],[52,'holds, mostly'],[72,'is still strong enough'],[999,'is strong, and knows it']])],
+    ['The mind',  _tier(s.mind, [[28,'has gone scattered'],[45,'is getting by'],[63,'is clear enough'],[80,'is sharp'],[999,'is sharp as a blade, and restless with it']])],
+    ['The heart', _tier(s.heart,[[22,'has walled itself off'],[40,'is guarded'],[58,'is open enough'],[76,'is warm, and easily reached'],[999,'is wide open, and easily hurt']])],
+    ['The means', _tier(s.means,[[14,'never stretch far enough'],[30,'are thin'],[50,'are comfortable enough'],[70,'are comfortable, with something put by'],[86,'are ample'],[999,'are deep, and closely watched']])],
+    ['The spirit',_tier(s.spirit,[[22,'is in shadow'],[40,'is low, but holding'],[60,'is steady'],[78,'is light'],[999,'is lit from within']])],
+  ];
+}
+function openStock(){
+  if(!P) return;
+  const v=document.getElementById('vStock'); v._wasRunning=running; running=false; clearTimeout(timer);
+  document.getElementById('stockWho').textContent = P.name+' · '+(P.age<13?'a child':stageOf(P.age))+', age '+P.age;
+  const rows=lifeReadout().map(([k,val])=>`<div class="srow"><span class="sk">${k}</span> <span class="sv">${val}.</span></div>`);
+  const extra=[];
+  const h=S.house; if(h){ const seat=seatOf(h.seat); const rep=reputeTop(h);
+    extra.push(`The house holds <b>${seat.name}</b>${rep&&REPUTE_WORD[rep]?', and is known as '+REPUTE_WORD[rep]:''}.`); }
+  const tie=P.rels.filter(r=>r.alive&&r.kind!=='ex').sort((a,b)=>b.bond-a.bond)[0];
+  if(tie) extra.push(`Closest, just now, to ${tie.given}.`);
+  if(P.flags.peril && P.age<P.flags.peril) extra.push(`And something in how ${P.px.they} has been living has put the body, for a while, at risk.`);
+  if(P.age>=60 && (rels('child').length||(P.childrenIds&&P.childrenIds.length)) && !held('bequeathed')) extra.push(`There is still time to decide what to set aside for the one who comes after.`);
+  document.getElementById('stockBody').innerHTML = rows.join('') + (extra.length?`<div class="snote">${extra.join('<br>')}</div>`:'');
+  v.classList.add('show');
+}
+(function(){
+  const b=document.getElementById('stockBtn'); if(b) b.onclick=openStock;
+  const c=document.getElementById('stockClose'); if(c) c.onclick=()=>{ const v=document.getElementById('vStock'); v.classList.remove('show');
+    running=!!v._wasRunning; setPP(); if(P&&P.alive&&running) scheduleTick(); };
+})();
 
 // ---- modal focus management ----
 // when a veil opens, remember where focus was and move it into the dialog; when it
@@ -211,7 +266,7 @@ pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleT
 (function(){
   if(typeof MutationObserver==='undefined') return;
   const FOCUSABLE='a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
-  const ESC_CLOSE={vChron:'chronClose', vLoad:'loadBack'};   // dismissable modals (not the narrative gates)
+  const ESC_CLOSE={vChron:'chronClose', vLoad:'loadBack', vStock:'stockClose'};   // dismissable modals (not the narrative gates)
   const visibles=v=>[...v.querySelectorAll(FOCUSABLE)].filter(el=>el.offsetParent!==null || el===document.activeElement);
   const focusIn=v=>{ const el=v.querySelector(FOCUSABLE); if(el&&el.focus) setTimeout(()=>{ try{ el.focus(); }catch(e){} },40); };
   let stack=[]; const top=()=>stack[stack.length-1]||null;     // support nested veils (e.g. chronicle over eulogy)
@@ -226,7 +281,7 @@ pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleT
       else if(!v.contains(document.activeElement)){ e.preventDefault(); first.focus(); }
     }
   });
-  ['vTitle','vLoad','vDeath','vHeir','vChron'].forEach(id=>{
+  ['vTitle','vLoad','vDeath','vHeir','vChron','vStock'].forEach(id=>{
     const v=document.getElementById(id); if(!v) return;
     new MutationObserver(()=>{
       if(v.classList.contains('show')){
@@ -244,7 +299,7 @@ pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleT
   });
   // the title veil starts with .show already set, so its MutationObserver never fires on
   // load — seed any already-open veil here so it's focus-trapped from the first Tab.
-  ['vTitle','vLoad','vDeath','vHeir','vChron'].forEach(id=>{
+  ['vTitle','vLoad','vDeath','vHeir','vChron','vStock'].forEach(id=>{
     const v=document.getElementById(id);
     if(v && v.classList.contains('show')){ if(stack.indexOf(v)<0) stack.push(v); focusIn(v); }
   });

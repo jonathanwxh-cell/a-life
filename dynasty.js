@@ -36,7 +36,7 @@ function epitaphFor(p){
   if(s.heart>82 && !blocked('kind')) return out('kind', pr(kind));
   if(p.peakMeans>78 && !blocked('built')) return out('built', pr(built));
   if(s.mind>78 && !blocked('mind')) return out('mind', pr(["Lived half in the world and half in {their} own head.","Kept a whole country behind the eyes, and lived there often.","Was elsewhere as often as here, and the elsewhere was wide."]));
-  if(s.spirit>74 && !blocked('light')) return out('light', pr(["Carried a lightness the years never managed to take.","Stayed light, somehow, the whole way down the years.","Was never quite weighed down, right to the end."]));
+  if(s.spirit>74 && !blocked('light')) return out('light', pr(["Carried a lightness the years never managed to take.","Laughed easily to the end, in a way the hard years never quite explained.","Found the days, even the late ones, mostly worth the trouble of waking for.","Was, to the very last, difficult to discourage."]));
   if(s.spirit<28 && !blocked('dark')) return out('dark', pr(["Knew more sorrow than {they} ever said aloud.","Carried a weight {they} rarely named.","Held more grief than the quiet face ever let on."]));
   if(p.deathAge<40) return out('early', pr(["Gone too soon, with so much unspent.","Gone early, with the better part still ahead.","Left before the story had found its middle."]));
   if(s.means<18 && !blocked('poor')) return out('poor', pr(["Never had much, and gave away some of that.","Owned little, and shared even that.","Was poor in all but the giving of it."]));
@@ -94,8 +94,12 @@ function updateHouse(p){
   // wealth can lift a house as far as seat 6, but never PULLS a higher house down
   // (Math.max guards a storied seat-7 line from being demoted by a merely-rich heir).
   if(peak>=80) h.seat=Math.max(h.seat, Math.min(6,h.seat+ (peak>=92?2:1)));
-  else if(peak>=58) h.seat=Math.max(h.seat, Math.min(6,h.seat+ (Math.random()<0.6?1:0)));
+  else if(peak>=58) h.seat=Math.max(h.seat, Math.min(6,h.seat+ (Math.random()<0.5?1:0)));   // climb slightly damped, so the top isn't a foregone conclusion
   else if(endMeans<14) h.seat=Math.max(0,h.seat- (endMeans<8?2:1));   // genuine hardship can still topple even a storied house
+  // earned, choice-driven downward pressure: a reckoning the family failed to meet costs it a seat;
+  // a genuinely broken life (ending both poor and in shadow) can pull a house down a step too.
+  if(p.flags.facedReckoning==='fell') h.seat=Math.max(0,h.seat-1);
+  else if(s.spirit<24 && endMeans<32 && h.seat>1 && Math.random()<0.5) h.seat=Math.max(1,h.seat-1);
 
   // --- reputation drifts with the defining qualities of the life ---
   const bump=(tag,n=1)=>{h.repute[tag]=(h.repute[tag]||0)+n;};
@@ -107,6 +111,11 @@ function updateHouse(p){
   if(s.means>80&&s.heart<40) bump('ruthless');
   if(p.flags.legacy==='built'||s.means>82) bump('industrious');
   if(m.kind_to_outcast) bump('generous',0.5);
+  // the character paths the card set now writes — so a house can read as wild, creative, or devout,
+  // not only learned or kind (this is what lets distinct dynasties crystallize distinct mottos).
+  if(m.lived_reckless||m.driven||p.flags.peril) bump('reckless',0.8);
+  if(m.early_talent||m.made_art) bump('artistic');
+  if(m.found_faith||m.made_peace) bump('pious');
 
   // a family can also climb on a strong, sustained reputation — not only on wealth.
   // A scholarly or kind or hard-working line earns standing the modest can reach
@@ -189,8 +198,9 @@ function showEulogy(p){
   document.getElementById('dSurv').textContent=fmt(stext);
   const btn=document.getElementById('dNext');
   if(kids.length){
-    btn.textContent='Become '+kids[0].given;
-    btn.onclick=()=>succeed(kids.sort((a,b)=>b.age-a.age)[0]);
+    const heir=kids.slice().sort((a,b)=>b.age-a.age)[0];   // eldest — and the label must name the same child succession picks
+    btn.textContent='Become '+heir.given;
+    btn.onclick=()=>succeed(heir);
   } else {
     btn.textContent='The line ends. Begin anew.';
     btn.onclick=()=>{ S.lineage[S.lineage.length-1].extinct=true; beginNewLine(); };
@@ -208,19 +218,30 @@ function succeed(childRel){
   const seatFloor=[0,6,14,26,40,56,72,72][h.seat]||0;   // seat 7 grants prestige, not extra wealth — same floor as 6, so the pinnacle can't self-perpetuate on money
   const inheritMeans = Math.max(seatFloor, Math.round(dead.peakMeans*0.55) - 6) - 6;
   const nurture = Math.round((dead.stats.mind-50)*0.18 + (childRel.bond-50)*0.10);
+  // THE BEQUEST — what the dying deliberately set aside (e_bequest) becomes the heir's real
+  // starting conditions. This is the player's lever across the generation boundary: a choice made
+  // at the end of one life that visibly shapes the beginning of the next.
+  const beq = dead.flags && dead.flags.bequest;
+  let nurtureBeq=0, meansBeq=0, heartBeq=0, spiritBeq=0; const freeBeq = beq==='free';
+  if(beq==='mind') nurtureBeq=10;
+  else if(beq==='means') meansBeq=16;
+  else if(beq==='heart'){ heartBeq=8; spiritBeq=6; }
   // the heir is BORN — startAge 0 — and lives the whole arc. Inheritance applies
   // as starting conditions (estate share, blended traits, the house's standing,
-  // a parent's sharpening), not as a head start in years.
+  // a parent's sharpening, and the bequest), not as a head start in years.
   const child=newPerson({
     given:childRel.given, sex:childRel.sex, gen:dead.gen+1,
     parentName:dead.name,
     seedStats: childRel.seed || seedChildStats(dead,null),
-    traits: childRel.traitsSeed || inheritTraits(dead.traits),
+    traits: freeBeq ? rollTraits() : (childRel.traitsSeed || inheritTraits(dead.traits)),  // "their own freedom" — a nature wholly their own, not inherited
     startAge: 0,
-    inheritMeans: Math.max(0,inheritMeans),
-    nurture: nurture,
+    inheritMeans: Math.max(0,inheritMeans+meansBeq),
+    nurture: nurture+nurtureBeq,
     bornYear: dead.bornYear + (dead.deathAge - childRel.age),
   });
+  if(heartBeq) child.stats.heart = clamp(child.stats.heart+heartBeq);
+  if(spiritBeq||freeBeq) child.stats.spirit = clamp(child.stats.spirit+(spiritBeq||5));
+  child._bequest = beq;
   // born into the house — heirlooms & the family secret arrive as latent memories
   child.mem = child.mem || {};
   for(const hl of (h.heirlooms||[])){
@@ -236,7 +257,15 @@ function succeed(childRel){
   // as a living echo rather than re-simulating the dead. No other relations carry over.
   const lineKind = dead.sex==='m'?'father':'mother';
   const otherSex = dead.sex==='m'?'f':'m', otherKind = dead.sex==='m'?'mother':'father';
-  addRel(lineKind, dead.given, dead.sex, 74, ri(24,38));
+  // The bloodline parent IS the life just lived. Seed its age from the real arithmetic — the
+  // ancestor's age when this heir was born — and mark it a lineage echo that dies EXACTLY at the
+  // age the Chronicle recorded (see ageRelations). That makes the echo born and gone in precisely
+  // the years the lineage already holds, so an ancestor can never appear alive (and "frightened in
+  // the small hours") years after their recorded death — the world and the Chronicle never disagree.
+  const parentAgeAtBirth = Math.max(16, dead.deathAge - childRel.age);
+  const echoParent = addRel(lineKind, dead.given, dead.sex, 74, parentAgeAtBirth);
+  echoParent.lineageEcho = true; echoParent.diesAtAge = dead.deathAge;
+  if(beq==='heart') echoParent.bond = clamp(echoParent.bond+10);   // the warmth that was deliberately handed down
   // the heir's other parent gets a name not already worn by an ancestor, so the
   // chronicle never reads one given name in two unrelated roles down the generations
   const taken=new Set((S.lineage||[]).map(a=>a&&a.given)); taken.add(dead.given);
@@ -250,7 +279,7 @@ function succeed(childRel){
     "Came into the world already inside a story someone else had begun, with "+seat.name+" for an inheritance."];
   logLine(births[rotI(child, births.length)],"obs");
   if(h.motto) logLine("Raised on the family words: “"+h.motto+"”","obs");
-  showHeir(child, dead, inheritMeans, nurture, h);
+  showHeir(child, dead, inheritMeans, nurture+nurtureBeq, h);
 }
 function showHeir(child, dead, inh, nur, h){
   document.getElementById('heirKick').textContent=ordinal(child.gen)+' of '+(h?'House '+S.surname:'the line');
@@ -276,6 +305,14 @@ function showHeir(child, dead, inh, nur, h){
     for(const hl of (h.heirlooms||[])) lines.push('Inherits '+hl.name+' (from '+hl.from+').');
     if(h.secret && !h.secret.known) lines.push('And inherits a silence: '+h.secret.text+'.');
   }
+  // the bequest — the one thing the last life set aside on purpose — stated plainly
+  const BEQ_LINE={
+    mind:'From '+dead.given+', deliberately: everything they knew — a mind with a running start.',
+    means:'From '+dead.given+', deliberately: every coin they could spare — a softer place to begin.',
+    heart:'From '+dead.given+', deliberately: the stories and the warmth — a fuller heart to start from.',
+    free:'From '+dead.given+', deliberately: nothing but your own freedom — no weight, no debt, no map.'
+  };
+  if(child._bequest && BEQ_LINE[child._bequest]) lines.push(BEQ_LINE[child._bequest]);
   document.getElementById('heirInherit').innerHTML=lines.join('<br>');
   document.getElementById('vHeir').classList.add('show');
 }
