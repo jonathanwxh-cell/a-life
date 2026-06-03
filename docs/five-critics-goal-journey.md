@@ -36,7 +36,7 @@ Each round spawned **five fresh, blind critic subagents**, one per axis. Every c
 
 ## 2. The verification stack (how "no cheating" was enforced)
 
-The critics judged the *artifacts*; the artifacts had to be *faithful*. Three tools (in the sibling `a-life-eval/` folder, outside the repo) and one browser harness made every claim measurable:
+The critics judged the *artifacts*; the artifacts had to be *faithful*. Three tools (the same headless harness now vendored into [`../eval/`](../eval) — see [`eval/README.md`](../eval/README.md)) and one browser harness made every claim measurable:
 
 1. **`sim-harness.cjs`** — a faithful headless simulator. It loads the *real* `core/content/engine/dynasty` via Node's `vm` module against a stubbed DOM (a `Proxy` fake element + `document`/`window`), overrides `presentCard()` to resolve choices headlessly, and then calls the **real** `tick()`/`drawCard()`/`die()`/`succeed()`. Over ~38,000 simulated lives it reports: early-death rate, ever-loved/ever-child rates, `gen≥2` reach, max seat, the **house-seat distribution**, and four **violation counters** (`age` / `stage` / `cooldown` / `once`) that must stay **0**.
 2. **`transcript-gen.cjs`** — emits fully-resolved playthrough transcripts (5 dynasties, ~16–23 lives) by driving the same real engine, so the writing critic reads exactly what a player would see. Node post-checks then assert invariants: **0** consecutive-identical epitaphs, **0** three-in-a-row epitaph *themes*, **0** unresolved `{tokens}`, and per-life work-prompt variation.
@@ -132,7 +132,7 @@ Phase 1 made the generational sim *work*; this `/goal` loop made it *hold up und
 - **Writing integrity:** no epitaph repeats consecutively *or* by theme down a line; every generation-keyed rotation is decorrelated across dynasties by a random per-house offset; an heir's epitaph reflects *their* life, not just an inherited flag; **0** unresolved tokens across an entire transcript; pronoun agreement holds for both sexes everywhere.
 - **Design depth:** a rare, re-earned **7th house seat** gives long dynasties a real summit (and makes the top precarious, not won-and-done); elder cards staggered; windfalls gated to when money matters; single-moment youth beats made `once`.
 - **UX & accessibility:** native `confirm()` → inline focus-managed delete; the storage diagnostic behind a quiet disclosure; a sticky dismiss button that's always reachable on short phones; **full keyboard traversal of the constellation** with live-region announcements; AA contrast on every meaning-carrying label; reduced-motion honoured in CSS *and* both canvas clocks.
-- **Verification harness:** a faithful headless sim, resolved-transcript invariant checks, and browser smokes that together make the game's quality *measurable* — and that stay in `a-life-eval/` as a regression net.
+- **Verification harness:** a faithful headless sim, resolved-transcript invariant checks, and browser smokes that together make the game's quality *measurable* — now committed in [`../eval/`](../eval) as a regression net.
 
 Steady-state metrics at the finish (sim over ~38k lives): early-death **~10%** (target 8–12%), ever-child **~90%**, `gen≥2` **~91%**, seat-7 **~11%** of long lines, **0** rule violations of any kind.
 
