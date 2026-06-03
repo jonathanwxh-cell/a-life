@@ -279,5 +279,10 @@ function presentCard(c){
   });
   // focus the first choice (not the card wrapper) so a keyboard/screen-reader user lands on an
   // actionable control; #scene is an assertive live region, so the moment's prose is announced too.
-  requestAnimationFrame(()=>{ card.classList.add('show'); try{ (cw.firstElementChild||card).focus(); }catch(e){} });
+  requestAnimationFrame(()=>{ card.classList.add('show'); try{ (cw.firstElementChild||card).focus(); }catch(e){}
+    // a tall (3-/4-choice) card can overflow a short phone: start at the top (scene first), and flag
+    // overflow so the "more below" cue shows and every option stays reachable by scrolling.
+    const st=document.querySelector('.stage');
+    if(st){ st.scrollTop=0; st.classList.remove('at-bottom'); st.classList.toggle('scrollable', st.scrollHeight>st.clientHeight+4); }
+  });
 }

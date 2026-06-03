@@ -42,12 +42,21 @@
   .gen .chron2:hover{opacity:1;color:var(--ink-dim);}
   .being{padding:2px 22px 0;color:var(--ink-dim);font-size:13.5px;font-style:italic;min-height:20px;
     opacity:0.9;transition:opacity .6s;}
-  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 22px;min-height:0;}
-  .passing{text-align:center;opacity:0;transition:opacity 1s;}
+  .stage{flex:1;display:flex;flex-direction:column;justify-content:safe center;padding:8px 22px;min-height:0;position:relative;overflow-y:auto;}
+  /* the age sits as a centered overlay, NOT in the flow — so it never steals height from a tall
+     (3- or 4-choice) card and never gets cropped itself. 'safe center' keeps the card centred when it
+     fits but top-aligns it (fully scrollable) when it's taller than the stage. */
+  .passing{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;opacity:0;transition:opacity 1s;padding:0 22px;pointer-events:none;}
+  /* a card holds no height while the years pass, so the age overlay is alone and centred */
+  .card:not(.show){max-height:0;overflow:hidden;}
+  /* a "more below" cue when a tall card overflows the stage (toggled in presentCard) */
+  .stage.scrollable::after{content:'';position:absolute;left:0;right:0;bottom:0;height:30px;pointer-events:none;
+    background:linear-gradient(to top, var(--bg) 12%, transparent);opacity:1;transition:opacity .3s;}
+  .stage.scrollable.at-bottom::after{opacity:0;}
   .passing.show{opacity:1;}
   .passing .yr{font-family:'Fraunces',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--ink-faint);}
   .passing .age{font-family:'Fraunces',serif;font-weight:400;font-size:54px;line-height:1.05;margin:14px 0 6px;
-    text-shadow:0 2px 30px rgba(0,0,0,0.55);}
+    color:var(--ink);text-shadow:0 1px 2px rgba(0,0,0,0.85), 0 2px 16px rgba(0,0,0,0.7), 0 0 34px rgba(0,0,0,0.5);}
   .passing .age small{font-size:15px;color:var(--ink-dim);letter-spacing:1px;display:block;margin-top:4px;font-family:'Newsreader';}
   .breath{display:none;}
   .card{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.8,.2,1);}
@@ -370,3 +379,22 @@
   @keyframes flowpulse{0%,100%{opacity:.22;}50%{opacity:.85;}}
   body.paused .flow::before{animation:none;opacity:.2;}
   body.hurry .flow::before{animation-duration:1s;background:var(--amber);}
+
+  /* ---- review pass 9: card fit on short phones ---- */
+  /* On a short screen a 2-choice card should fit without scrolling, and 3-/4-choice cards
+     should scroll the shortest possible distance. Tighten the scene, the choices, and the log. */
+  @media (max-height:740px){
+    .card .scene{font-size:20px;line-height:1.36;}
+    .choices{margin-top:16px;gap:9px;}
+    .choice{padding:11px 15px;font-size:15px;}
+    .choice .h{font-size:12.5px;}
+    .log{height:64px;}
+    .being{font-size:12.5px;}
+    .passing .age{font-size:46px;margin:8px 0 4px;}
+  }
+  @media (max-height:600px){
+    .card .scene{font-size:18px;line-height:1.32;}
+    .choices{margin-top:12px;}
+    .log{height:48px;}
+    .passing .age{font-size:40px;}
+  }

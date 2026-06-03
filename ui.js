@@ -90,6 +90,10 @@ function ambientWhisper(){
   const log=document.getElementById('log'); if(log) addEphemeralEntry(log, {age:P.age, text:line, cls:'whisper'});
 }
 window.AL_ambient = ambientWhisper;
+// hide the "more below" cue once a tall card has been scrolled to the bottom
+(function(){ const st=document.querySelector('.stage'); if(!st) return;
+  st.addEventListener('scroll', ()=>{ st.classList.toggle('at-bottom', st.scrollTop+st.clientHeight >= st.scrollHeight-6); }, {passive:true});
+})();
 function renderLogFull(){
   // ephemeral model: only seed the latest beat when the log is empty (a fresh
   // load / new life); otherwise leave the fading entries be (no flicker on choices).
