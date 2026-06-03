@@ -91,7 +91,7 @@ function houseCharacter(h){
   const [k0,v0]=e[0];
   let s;
   if(v0>=2) s='The family is known, by now, as '+w(k0)+' — settled enough that it has become the house’s character'+(h.motto?' (“'+h.motto+'”)':'')+'.';
-  else if(v0>=1.2) s='The family is becoming known as '+w(k0)+'.';
+  else if(v0>=1.2) s='The family is becoming known as '+w(k0)+' — one or two more lives of the same, and it could settle into the family’s words.';
   else s='A name for being '+w(k0)+' is only just beginning to gather.';
   if(e[1] && e[1][1]>=1) s+=' There is something of the '+w(e[1][0])+' in it too.';
   if(v0>=2 && (h.seat||0)>=4 && (h.seat||0)<7) s+=' Held this strong across more lives, and raised high enough, such a name can be written into the histories.';
@@ -122,7 +122,7 @@ function updateHouse(p){
 
   // --- reputation drifts with the defining qualities of the life ---
   const bump=(tag,n=1)=>{h.repute[tag]=(h.repute[tag]||0)+n;};
-  const fade=()=>{for(const k in h.repute){h.repute[k]=Math.max(0,h.repute[k]-0.12);if(h.repute[k]<0.4)delete h.repute[k];}};
+  const fade=()=>{for(const k in h.repute){h.repute[k]=Math.max(0,h.repute[k]-0.09);if(h.repute[k]<0.4)delete h.repute[k];}};  // gentle, so a focused line isn't quietly erased between lives
   fade(); // reputations soften over generations if not renewed
   // Crucial: an INHERITED soft-spot/book (injected into every heir's mem as {inherited:true})
   // must NOT keep re-scoring a reputation — only a life that ACTUALLY lived it counts. Without
@@ -157,7 +157,7 @@ function updateHouse(p){
   // remarkably (peakMeans >= 86) — and even then only sometimes. If a later generation
   // fails to clear that bar, the house lapses back to "old and famous." This keeps the
   // pinnacle genuinely rare and makes the very top precarious rather than won-and-done.
-  if(h.seat>=6 && repTop && h.repute[repTop]>=4.5 && p.peakMeans>=88 && Math.random()<0.35) h.seat=7;   // reachable through a focused run, still re-earned each generation
+  if(h.seat>=6 && repTop && h.repute[repTop]>=4.5 && p.peakMeans>=82 && Math.random()<0.45) h.seat=7;   // reachable through a focused run, still re-earned each generation
   else if(h.seat===7) h.seat=6;
 
   // --- heirlooms: certain lives leave an object behind ---
@@ -178,9 +178,11 @@ function updateHouse(p){
   // a confession lays an existing secret to rest
   if(m.confessed && h.secret) h.secret=null;
 
-  // --- motto crystallizes once the house has a clear character ---
+  // --- motto crystallizes once the house has a clear character (a slightly lower bar than reputeTop,
+  // so a focused 3-4 generation line reliably earns its words rather than ending without any) ---
   if(!h.motto){
-    const top=reputeTop(h);
+    const me=Object.entries(h.repute||{}).filter(([k,v])=>v>=1.5).sort((a,b)=>b[1]-a[1]);
+    const top=me.length?me[0][0]:null;
     const MOTTOS={scholarly:"What the mind holds cannot be taken.",kind:"We take in what the world turns out.",
       ruthless:"We do not ask twice.",industrious:"By our own hands.",generous:"An open door, an open hand.",
       tainted:"We do not speak of everything.",pious:"In time, all is weighed.",artistic:"We leave something beautiful behind.",

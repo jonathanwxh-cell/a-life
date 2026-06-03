@@ -23,7 +23,7 @@ const CARDS=[
  ]},
 {id:'c_sick',stage:'child',w:2,once:true,age:[3,10],text:"A fever takes the house for a week. {n} is small in a large bed.",
  choices:[
-  {t:"Let mother sit through the nights.",h:"a bond is set",do:p=>{const m=rel('mother');if(m)m.bond=clamp(m.bond+12);fx(p,{vit:-4,heart:5});logLine("Was nursed through a fever; remembered a cool hand for life.","obs");}},
+  {t:"Let mother sit through the nights.",h:"a bond is set",do:p=>{const m=rel('mother');if(m)m.bond=clamp(m.bond+12);fx(p,{vit:-4,heart:5});logLine(["Was nursed through a fever, and remembered a cool hand for life.","Learned, lying small in a large bed, that to be cared for is its own kind of gift.","The fever passed; what stayed was the shape of a hand on a forehead, kept for decades."][rotI(p,3)],"obs");}},
   {t:"Insist on being brave alone.",h:"a habit is set",do:p=>{fx(p,{vit:-2,spirit:-3,mind:2});logLine("Learned early to be ill quietly.","obs");}},
  ]},
 {id:'c_friend',stage:'child',w:3,age:[6,12],cond:()=>!rel('friend'),text:"There is a child at the edge of the yard who never gets picked for anything.",
@@ -45,7 +45,7 @@ const CARDS=[
  ]},
 {id:'y_love1',stage:'youth',w:4,age:[16,25],opensLove:true,cond:()=>!rel('love'),text:p=>["Someone keeps finding reasons to be where {n} is. The reasons are getting thinner.","There is someone who keeps turning up where {n} is. {They} has noticed. And the noticing, by now, runs both ways.","Someone has started to matter — turning up, lingering, the way only a few people ever do.","The same face keeps appearing at the edges of {n}'s days, and the days have begun to arrange themselves around it.","There is a particular person now — nothing announced, nothing decided, just a quiet fact getting truer.","Someone has gone quiet for three days, and {n} is unsettled to find that the quiet has a shape.","It takes {n} a while to name it: the person whose absence, lately, has become the loudest thing in any room."][rotI(p,7)],
  choices:[
-  {t:"Meet them halfway.",h:"the heart opens",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,62,p.age+ri(-2,2));fx(p,{spirit:9,heart:6});logLine(["Started, without quite deciding to, building the days around another person.","Fell in love — the kind that quietly rearranges the furniture of a life.","Fell in love, and was surprised, as everyone is, that it was {them} this time."][rotI(p,3)],"joy");}},
+  {t:"Meet them halfway.",h:"the heart opens",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,62,p.age+ri(-2,2));fx(p,{spirit:9,heart:6});logLine(["Started, without quite deciding to, building the days around another person.","Fell in love — the kind that quietly rearranges the furniture of a life.","Fell in love, and was surprised, as everyone is, that it was {them} this time.","Fell in love, and was aware, with a cold clarity, of everything it now made possible to lose.","Started spending time with someone, and the time arranged itself, without much drama, into a life."][rotI(p,5)],"joy");}},
   {t:"Pretend not to notice.",h:"",do:p=>{remember('unspoken_love');fx(p,{spirit:-4,mind:2});logLine(["Let someone slip away by saying nothing, and wondered, later, often.","Saw the wanting coming and chose, deliberately, to be elsewhere — which was not quite the same as not wanting.","Said nothing. The person left. The moment closed over it like water."][rotI(p,3)],"obs");}},
  ]},
 {id:'y_risk',stage:'youth',w:2,age:[18,28],cond:()=>P.stats.means>20,text:"A friend has a scheme. It could double everything {n} has saved. It could take it.",
@@ -78,7 +78,7 @@ const CARDS=[
  text:p=>{const k=rels('child').length;if(k===0)return ["The question of a child arrives, the way it does — half decision, half tide.","It arrives sideways, the way it does — not quite a question yet, not quite not.","They have not spoken of it in a while. The silence on the subject has its own shape now."][rotI(p,3)];return k===1?"The question of another child arrives — familiar now, and still not small.":"The question of one more arrives, the way it does, and {n} already knows the weight of the answer.";},
  choices:[
   {t:"Yes. Make room in the world.",h:"the line may continue",do:p=>{haveChild();fx(p,{spirit:8,means:-6,vit:-3});}},
-  {t:"No. This life, as it is.",h:"",do:p=>{fx(p,{spirit:2,means:4});logLine("Chose a life without children, with clear eyes.","obs");}},
+  {t:"No. This life, as it is.",h:"",do:p=>{const k=rels('child').length;fx(p,{spirit:2,means:4});logLine(k===0?"Chose a life without children, with clear eyes.":"Chose not to have another — the family, as it already was, was enough.","obs");}},
  ]},
 {id:'a_work',stage:'adult',w:3,age:[28,60],cond:()=>(P.age-(P.flags.lastWork||-12))>=10,
  text:p=>["There is a promotion, but it eats the evenings. The home gets the leftovers of {n}.","The work wants more — a better title, longer hours. The family would get whatever was left.","An offer comes: more money for more of {n}'s time. There is only ever so much of it."][rotN((p.flags.n_work_take||0)+(p.flags.n_work_refuse||0),3)],
@@ -325,7 +325,7 @@ const CARDS=[
 {id:'a_meet_late',stage:'adult',w:5,age:[26,54],opensLove:true,cond:()=>!rel('love')&&!rel('spouse'),
  text:p=>["It is later than the stories say it should be. And still — across a room, across a counter, across an ordinary Tuesday — someone.","The time for this was supposed to have passed. And yet — a face, a second glance, an afternoon that refuses to end — someone.","Later than anyone plans for, it arrives anyway: across a table, across a season, across the better part of a life — someone."][rotI(p,3)],
  choices:[
-  {t:"Let it begin.",h:"the heart, still open",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,60,p.age+ri(-4,4));fx(p,{spirit:8,heart:6});logLine("Found love later than expected, and was almost embarrassed by the size of it.","joy");}},
+  {t:"Let it begin.",h:"the heart, still open",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,60,p.age+ri(-4,4));fx(p,{spirit:8,heart:6});logLine(["Found love later than expected, and was almost embarrassed by the size of it.","Let love in late, and was astonished how little the lateness seemed to matter to it.","Came to love past the age {they} thought it was meant for, and found it meant exactly the same."][rotI(p,3)],"joy");}},
   {t:"It's too late for that.",h:"",do:p=>{remember('closed_to_love');fx(p,{spirit:-3,mind:2});logLine("Decided the time for that had passed, and built a life around the decision.");}},
  ]},
 {id:'a_home',stage:'adult',w:2,age:[28,50],once:true,cond:()=>P.stats.means>35,
@@ -584,13 +584,13 @@ const CARDS=[
   {t:"Tell the truth. They deserve it.",h:"honesty over comfort",do:p=>{const r=P.rels.filter(x=>x.alive&&x.bond>45)[0];if(r)r.bond=clamp(r.bond-6);fx(p,{spirit:2,mind:2});logLine("Told someone {they} loved a true thing that hurt, because the truth seemed to {them} the larger love.","obs");}},
   {t:"Spare them. Some truths cost more than they're worth.",h:"mercy over candour",do:p=>{fx(p,{heart:4,spirit:-1});remember('a_kind_silence');logLine("Held a true thing back to spare someone pain, and was never afterward quite sure {they} had been right.","obs");}},
  ]},
-{id:'x_loyalty_truth',stage:'adult',w:2,age:[28,60],once:true,cond:()=>rel('friend')||rel('sibling'),
+{id:'x_loyalty_truth',stage:'adult',w:3,age:[28,60],once:true,cond:()=>rel('friend')||rel('sibling'),
  text:"{n} knows a thing about someone {they} loves — a thing that others are genuinely owed. Loyalty pulls one way and honesty the other, and both have always been {n}'s virtues.",
  choices:[
   {t:"Keep faith with your own.",h:"loyalty",do:p=>{const r=rel('friend')||rel('sibling');if(r)r.bond=clamp(r.bond+8);fx(p,{heart:3,spirit:-2});remember('chose_loyalty');logLine("Kept faith with {their} own, and carried what that cost others quietly, alone.","obs");}},
   {t:"Tell the truth that's owed.",h:"honesty",do:p=>{const r=rel('friend')||rel('sibling');if(r)r.bond=clamp(r.bond-14);fx(p,{spirit:3,mind:2});logLine("Told a truth that was owed, and lost some of someone {they} loved in the telling of it.","loss");}},
  ]},
-{id:'x_dream_or_duty',stage:'adult',w:2,age:[30,52],once:true,cond:()=>rels('child').length||rel('spouse'),
+{id:'x_dream_or_duty',stage:'adult',w:3,age:[30,52],once:true,cond:()=>rels('child').length||rel('spouse'),
  text:"The thing {n} has always meant to do with {their} one life has finally come within reach — and taking it would ask real sacrifice of the people who depend on {them}. Both, {they} knows, are forms of love.",
  choices:[
   {t:"Take the chance. A life is your own.",h:"the self",do:p=>{fx(p,{spirit:10,means:-8});const f=rels('child')[0]||rel('spouse');if(f)f.bond=clamp(f.bond-8);remember('chose_self');logLine("Reached, at last, for the thing {they} had always wanted — and asked the people {they} loved to carry the cost of it.","obs");}},
@@ -604,7 +604,7 @@ const CARDS=[
   {t:"Own it. Stand in the wreck.",h:"",do:p=>{fx(p,{spirit:5,means:-6,heart:2});remember('owned_a_failure');logLine("Stood in the wreck of a public failure and did not look away — and people remembered that longer than the failure.","obs");}},
   {t:"Bury it. Move on fast.",h:"",do:p=>{fx(p,{means:2,spirit:-4,mind:2});logLine("Buried a failure quickly and deep, and felt it settle somewhere it would keep.");}},
  ]},
-{id:'a_friend_need',stage:'adult',w:2,age:[28,60],cool:16,cond:()=>{const f=rel('friend');return f&&f.bond>40;},
+{id:'a_friend_need',stage:'adult',w:3,age:[28,60],cool:10,cond:()=>{const f=rel('friend');return f&&f.bond>40;},
  text:()=>{const f=rel('friend');return `${f.given} needs more of ${P.given} than ${P.given} has to give just now — time, presence, a shoulder for a long trouble. The friendship will register the answer either way.`;},
  choices:[
   {t:"Give more than you have.",h:"",do:p=>{const f=rel('friend');if(f)f.bond=clamp(f.bond+12);fx(p,{heart:5,spirit:-3,vit:-2});remember('let_in');logLine("Gave a friend more than {they} could spare, and was tired for it, and did not regret a minute.","joy");}},
@@ -618,7 +618,7 @@ const CARDS=[
  ]},
 
 /* ---- shadow-archetype gated content, so a ruthless / tainted house meets a different world ---- */
-{id:'r_hard_name',stage:'adult',w:3,age:[26,58],cond:()=>S.house&&reputeTop(S.house)==='ruthless',
+{id:'r_hard_name',stage:'adult',w:3,age:[26,58],cond:()=>S.house&&(reputeTop(S.house)==='ruthless'||((S.house.heirlooms||[]).some(h=>h.tag==='hardname')&&P.stats.means>45)),
  text:"The family's hard name goes into the room ahead of {n} — and a deal is on the table that the name itself could close, by being exactly as feared as the stories say.",
  choices:[
   {t:"Use the name. Close it hard.",h:"",do:p=>{fx(p,{means:14,heart:-4,spirit:-2});remember('cut_a_corner');logLine("Let the family's hard name do the work, closed the thing cold, and it stayed closed.","obs");}},
