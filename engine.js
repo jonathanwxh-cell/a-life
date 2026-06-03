@@ -18,13 +18,25 @@ function haveChild(){
   const cn=c.given;   // addRel may have re-picked the name to avoid a collision — use the real one
   P.childrenIds.push(cn);
   const kn=P.childrenIds.length;
-  const first=[
+  const lateBirth = P.age>40;
+  const base=[
     "Had a child, "+cn+". The world rearranged itself around a small weight.",
-    "Had a child, "+cn+" — red and furious and entirely unimpressed by any of it.",
-    "Had a child, "+cn+". Was sure of nothing, that first night, except that it had happened."];
+    "Had a child, "+cn+". Was sure of nothing, that first night, except that it had happened.",
+    "Had a child, "+cn+", and the whole shape of the days changed to make room.",
+    "Had a child, "+cn+" — and discovered a fear {they} had not known {they} owned.",
+    "Had a child, "+cn+". Some door {they} hadn't known was shut came quietly open.",
+    "Had a child, "+cn+", and began, that night, keeping a different kind of time."];
+  const latePool=[
+    "Had a child late, "+cn+", and felt the lateness itself as a kind of luck.",
+    "Had a child, "+cn+", at an age {they} had stopped expecting it — and was the more undone.",
+    "Had a child, "+cn+", well past when {they} had thought that particular door had closed."];
+  let firstLine;
+  // 'red and furious' is a good line, but once a dynasty is plenty — otherwise it becomes a joke
+  if(!S._usedFurious && !lateBirth && chance(0.4)){ S._usedFurious=true; firstLine="Had a child, "+cn+" — red and furious and entirely unimpressed by any of it."; }
+  else firstLine = lateBirth ? latePool[rotI(P,latePool.length)] : base[rotI(P,base.length)];
   logLine(kn>=3 ? "Had another child, "+cn+". By now {they} knew the shape of it, and was no less moved."
         : kn===2 ? "Had a second child, "+cn+". The house made room again, more easily this time."
-        : first[rotI(P,3)], "joy");
+        : firstLine, "joy");
 }
 function seedChildStats(parent, partner){
   const mean=50;
@@ -38,15 +50,17 @@ function seedChildStats(parent, partner){
 
 function observe(){
   const s=P.stats, a=P.age;
-  const ob=(key,cond,line,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(line,cls||'obs');} };
-  if(a>40) ob('vit_tire',s.vit<35,["The stairs have started to ask a question of {them}.","The body has begun keeping its own quiet counsel.","{Their} legs know something the rest of {them} is not yet ready to hear."][rotI(P,3)]);
-  if(a>55) ob('vit_neg',s.vit<18,["{Their} body has become a small daily negotiation.","Each day now asks a little more of {them} than the last did.","The body keeps its own ledger now, and the sums are getting harder."][rotI(P,3)]);
-  ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does, and has become somewhere {they} goes."][rotI(P,3)]);
-  ob('means_lo',s.means<14,"The end of the month keeps arriving before the money does.");
-  ob('means_hi',s.means>82,"Money has stopped being a worry and become a kind of weather.");
-  ob('spirit_lo',s.spirit<22,"A greyness has moved quietly into {their} rooms.");
-  ob('spirit_hi',s.spirit>88&&a>30,["{They} still laughs like someone the years have not yet learned how to reach.","The decades have arranged themselves around {them} and somehow never sat down.","Somewhere in {them} a window the years usually close has stayed open.","Whatever the years took, they did not take the lightness in {them}."][rotI(P,4)]);
-  ob('heart_lo',s.heart<20,"{They} has grown hard to reach, even for {them}self.");
+  // each line fires at most once per life; the pools are deep so that across a long dynasty the
+  // same observation rarely lands twice — the ambient prose is the game's primary texture.
+  const ob=(key,cond,pool,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(Array.isArray(pool)?pool[rotI(P,pool.length)]:pool,cls||'obs');} };
+  if(a>40) ob('vit_tire',s.vit<35,["The stairs have started to ask a question of {them}.","The body has begun keeping its own quiet counsel.","{Their} legs know something the rest of {them} is not yet ready to hear.","Mornings take longer to arrive in the body than they once did.","{They} has started to plan the day around what the body will permit.","The body has begun sending its small bills, and expecting them paid."]);
+  if(a>55) ob('vit_neg',s.vit<18,["{Their} body has become a small daily negotiation.","Each day now asks a little more of {them} than the last one did.","The body keeps its own ledger now, and the sums are getting harder.","Getting up has become the first real work of every day.","The body has stopped being something {they} has, and become something {they} tends.","{They} has grown courteous with {their} own body, the way one is with the powerful."]);
+  ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does, and has become somewhere {they} goes.","{They} has grown used to being the most interested person in the room.","Thinking has become {their} favourite weather.","There is a whole life {they} keeps behind the eyes, and visits often."]);
+  ob('means_lo',s.means<14,["The end of the month keeps arriving before the money does.","{They} has learned exactly how far a single coin can be made to stretch.","There is an arithmetic to being poor, and {they} knows it by heart.","Want has become a quiet, constant houseguest.","{They} counts things now that {they} once never had to count."]);
+  ob('means_hi',s.means>82,["Money has stopped being a worry and become a kind of weather.","{They} has reached the strange country where money is no longer the question.","The old fear of not-enough has quietly left the house.","{They} no longer does the small arithmetic {they} once did at every till.","Means have stopped being a wall and become a wide, quiet field.","{They} has enough now that enough is no longer quite the word for it."]);
+  ob('spirit_lo',s.spirit<22,["A greyness has moved quietly into {their} rooms.","Something has gone flat in the colour of the days.","{They} carries a weather {they} cannot quite step out of.","The light comes in the same as ever, and lands differently now.","A low tide has come into {them}, and stayed well past its hour."]);
+  ob('spirit_hi',s.spirit>88&&a>30,["{They} still laughs like someone the years have not yet learned how to reach.","The decades have arranged themselves around {them} and somehow never sat down.","Somewhere in {them} a window the years usually close has stayed open.","Whatever the years took, they did not take the lightness in {them}.","{They} has kept, against most of the evidence, a stubborn appetite for the days.","Time has not yet managed to talk {them} out of being glad."]);
+  ob('heart_lo',s.heart<20,["{They} has grown hard to reach, even for {them}self.","Something in {them} has closed a door and mislaid the key.","{They} keeps everyone now at the same careful distance.","Tenderness has become a language {they} no longer speaks with ease.","{They} has walled off the soft rooms, and rarely goes in."]);
 }
 
 function beingLine(){
@@ -163,6 +177,9 @@ function tick(){
   if(P.sinceCard < 2){ save(); return; }            // never two moments back-to-back
   const base=(P.age<13?0.11:0.07), ramp=Math.min(0.6, Math.pow(Math.max(0,P.sinceCard-2),1.5)*0.045);
   if(chance(base+ramp)) drawCard();
+  // otherwise, on a long-quiet year, a rare ambient whisper — weather, not event — to fill the
+  // silence the cozy/contemplative read asks for (ephemeral; never written to the chronicle).
+  else if(P.sinceCard>=4 && window.AL_ambient && chance(0.14)) window.AL_ambient();
   save();
 }
 
@@ -229,7 +246,9 @@ function presentCard(c){
   const cw=document.getElementById('choices'); cw.innerHTML='';
   c.choices.forEach((ch,ci)=>{
     const b=document.createElement('button'); b.type='button'; b.className='choice';
-    b.innerHTML=fmt(ch.t)+(ch.h?`<span class="h">${fmt(ch.h)}</span>`:'');
+    const hid = ch.h ? ('choiceh'+ci) : null;
+    b.innerHTML=fmt(ch.t)+(ch.h?`<span class="h" id="${hid}">${fmt(ch.h)}</span>`:'');
+    if(hid) b.setAttribute('aria-describedby', hid);   // keep the hint in the accessibility tree even while visually collapsed
     b.onclick=()=>{
       if(b.dataset.done) return; b.dataset.done=1;
       b.classList.add('chosen');

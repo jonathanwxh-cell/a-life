@@ -84,13 +84,19 @@ function inheritTraits(parentTraits){
 let _relId=1;
 // a same-sex name not already worn by the player or a living relative — so the
 // generated prose never collides ("Cosima, Cosima's sister"; "Bram, Bram's father").
+// names already worn by the player, a living relative, OR any ancestor on the bloodline — so a
+// generated love/friend/mentor never collides with a name the chronicle is already using (no two
+// unrelated "Adaline"s down the generations). The deliberate lineage-echo parent overrides this.
+function _takenNames(){ const used=new Set(); if(P){ used.add(P.given); for(const r of P.rels) used.add(r.given); }
+  if(typeof S!=='undefined'&&S&&S.lineage) for(const a of S.lineage){ if(a&&a.given) used.add(a.given); }
+  return used; }
 function freshName(sex){
-  const used=new Set(); if(P){ used.add(P.given); for(const r of P.rels) used.add(r.given); }
+  const used=_takenNames();
   const pool=(sex==='m'?GIVEN_M:GIVEN_F).filter(n=>!used.has(n));
   return pool.length?pick(pool):pick(sex==='m'?GIVEN_M:GIVEN_F);
 }
 function addRel(kind, given, sex, bond, age){
-  if(P){ const used=new Set([P.given]); for(const r of P.rels) used.add(r.given); if(used.has(given)) given=freshName(sex); }
+  if(P){ if(_takenNames().has(given)) given=freshName(sex); }
   const r={rid:_relId++, kind, given, name:given, sex, px:pronouns(sex), bond:clamp(bond), age:age|0, alive:true};
   P.rels.push(r); return r;
 }

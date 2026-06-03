@@ -46,7 +46,7 @@ function renderLogTail(){
 }
 // the in-play log is ephemeral: a line fades in, lingers, then fades out, so the
 // scene stays clear between moments. The full history lives in the Chronicle.
-function addEphemeralEntry(log, e){
+function addEphemeralEntry(log, e, life){
   const div=document.createElement('div');
   div.className='entry '+(e.cls||'');
   // stored lines keep their pronoun tokens (obs/echo use them); resolve at render time
@@ -54,7 +54,7 @@ function addEphemeralEntry(log, e){
   log.appendChild(div);
   const live=[...log.children].filter(c=>!c.dataset.out);
   while(live.length>3) fadeOutEntry(live.shift());      // cap simultaneous lines
-  div._t=setTimeout(()=>fadeOutEntry(div), 6500);        // and let this one fade after a breath
+  div._t=setTimeout(()=>fadeOutEntry(div), life||6500); // and let this one fade after a breath (hints linger longer)
 }
 function fadeOutEntry(div){
   if(!div || div.dataset.out) return;
@@ -68,10 +68,26 @@ function reTok(s){const px=P.px;return s.replace(/\{they\}/g,px.they).replace(/\
 // the chronicle). Gated per key in localStorage so a returning player never sees it.
 function hintOnce(key, text){
   try{ if(!window.localStorage || localStorage.getItem('alife:'+key)) return; localStorage.setItem('alife:'+key,'1'); }catch(e){ return; }
-  const log=document.getElementById('log'); if(log) addEphemeralEntry(log, {age:'', text, cls:'obs'});
+  const log=document.getElementById('log'); if(log) addEphemeralEntry(log, {age:'', text, cls:'hint'}, 13000);  // onboarding lines linger
   // briefly draw the eye to the actual chronicle control the hint refers to
   if(key==='seenChron'){ const s=document.getElementById('openStars'); if(s){ s.classList.add('beckon'); setTimeout(()=>s.classList.remove('beckon'),5400); } }
 }
+// a rare, ephemeral ambient line during the quiet years — fills the silence between moments
+// without writing anything to the chronicle (these are weather, not events worth recording).
+const AMBIENT={
+  child:["A long afternoon goes by with nothing in it but light.","Somewhere a window stays open, and the whole day comes in.","A whole season passes in the slow way only childhood seasons do."],
+  elder:["The days are wide and slow and mostly kind now.","Morning, the long noon, the longer evening; morning again.","The hours have loosened, and {they} lets them."],
+  any:["The season turns over, quietly, and turns again.","An ordinary week passes, and is not kept.","Rain comes, and stays a while, and goes.","The light lengthens, and shortens, and lengthens again.","A year goes by that no one will remember, and it is a good one.","The house settles around its own small sounds."]
+};
+let _ambN=0;
+function ambientWhisper(){
+  if(!P||!P.alive) return;
+  const stage = P.age<13?'child':(P.age>=66?'elder':null);
+  const pool = (stage?AMBIENT[stage]:[]).concat(AMBIENT.any);
+  const line = pool[(_ambN++ + (typeof houseOff==='function'?houseOff():0))%pool.length];
+  const log=document.getElementById('log'); if(log) addEphemeralEntry(log, {age:P.age, text:line, cls:'whisper'});
+}
+window.AL_ambient = ambientWhisper;
 function renderLogFull(){
   // ephemeral model: only seed the latest beat when the log is empty (a fresh
   // load / new life); otherwise leave the fading entries be (no flicker on choices).
@@ -207,7 +223,10 @@ document.getElementById('chronClose').onclick=()=>{
 const pp=document.getElementById('pp');
 function setPP(){pp.innerHTML=running?'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>':'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
   pp.setAttribute('aria-label',running?'pause':'play'); pp.setAttribute('title',running?'pause':'play');
-  document.getElementById('flow').textContent=running?(fastFwd?'the years are racing by':'the years are passing'):'time held still';
+  const flowEl=document.getElementById('flow');
+  flowEl.textContent=running?(fastFwd?'the years are racing by':'the years are passing'):'time held still';
+  flowEl.setAttribute('aria-label', running?(fastFwd?'the years are racing by — tap to return to the usual pace':'the years are passing — tap to race ahead'):'time held still — tap to let the years resume');
+  flowEl.setAttribute('aria-pressed', (running&&fastFwd)?'true':'false');   // so a screen-reader user can tell fast-forward is engaged
   document.body.classList.toggle('paused',!running);
   document.body.classList.toggle('hurry',running&&fastFwd);}
 pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleTick(); else clearTimeout(timer); };
@@ -245,7 +264,8 @@ function openStock(){
   const rows=lifeReadout().map(([k,val])=>`<div class="srow"><span class="sk">${k}</span> <span class="sv">${val}.</span></div>`);
   const extra=[];
   const h=S.house; if(h){ const seat=seatOf(h.seat); const rep=reputeTop(h);
-    extra.push(`The house holds <b>${seat.name}</b>${rep&&REPUTE_WORD[rep]?', and is known as '+REPUTE_WORD[rep]:''}.`); }
+    extra.push(`The house holds <b>${seat.name}</b>${rep&&REPUTE_WORD[rep]?', and is known as '+REPUTE_WORD[rep]:''}.`);
+    extra.push(`<span class="shint">${h.seat>=6?'The house stands as high as a house can; only a hard fall can move it now.':'The house rises on a life that ends far richer than it began — and can slip a step in a hard year met empty-handed.'}</span>`); }
   const tie=P.rels.filter(r=>r.alive&&r.kind!=='ex').sort((a,b)=>b.bond-a.bond)[0];
   if(tie) extra.push(`Closest, just now, to ${tie.given}.`);
   if(P.flags.peril && P.age<P.flags.peril) extra.push(`And something in how ${P.px.they} has been living has put the body, for a while, at risk.`);

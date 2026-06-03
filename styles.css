@@ -349,3 +349,16 @@
   .snote{margin-top:13px;padding-top:11px;border-top:1px solid var(--line);
     font-size:13.5px;color:var(--ink-dim);font-style:italic;line-height:1.6;}
   .snote b{color:var(--ink);font-style:normal;}
+  .snote .shint{display:block;margin-top:8px;opacity:.75;}
+
+  /* ambient whisper (ephemeral weather line) vs. onboarding hint (lingers, brighter) */
+  .entry.whisper{color:var(--ink-faint);font-style:italic;opacity:.72;}
+  .entry.hint{color:var(--ink);}
+
+  /* the pace text doubles as a liveness light: a slow breathing dot means the years are moving */
+  .flow{position:relative;padding-left:15px;}
+  .flow::before{content:'';position:absolute;left:1px;top:50%;width:6px;height:6px;border-radius:50%;
+    background:currentColor;transform:translateY(-50%);opacity:.5;animation:flowpulse 2.6s ease-in-out infinite;}
+  @keyframes flowpulse{0%,100%{opacity:.22;}50%{opacity:.85;}}
+  body.paused .flow::before{animation:none;opacity:.2;}
+  body.hurry .flow::before{animation-duration:1s;background:var(--amber);}

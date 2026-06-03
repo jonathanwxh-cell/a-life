@@ -91,10 +91,10 @@ const CARDS=[
  ]},
 {id:'a_affair',stage:'adult',w:2,age:[28,55],
  cond:()=>{const s=rel('spouse');return s&&!s.affairResolved&&!held('strayed')&&s.age>6;},
- text:"A door opens that {n} did not knock on. Someone new, and the old marriage feels suddenly worn.",
+ text:p=>{const s=rel('spouse');const w=s?s.given:('{their} '+p.px.spouse);return ["A door opens that "+p.given+" did not knock on. Someone new, and the old marriage feels suddenly worn.","Someone looks at "+p.given+" the way "+w+" stopped looking some years ago — and "+p.given+" notices, with a small shock, how much that look had been missed.","It would be so easy, and so quiet, and no one would ever have to know. Which is precisely what makes it dangerous."][rotN(p.gen,3)];},
  choices:[
-  {t:"Close the door.",h:"",do:p=>{const s=rel('spouse');if(s){s.bond=clamp(s.bond+5);s.affairResolved=true;}fx(p,{spirit:3});logLine("Felt the pull, and chose the marriage anyway.");}},
-  {t:"Walk through it.",h:"a door that won't close again",do:p=>{const s=rel('spouse');if(s)s.bond=clamp(s.bond-30);remember('strayed');fx(p,{spirit:-8,heart:-5});if(s&&chance(0.5)){s.alive=false;s.kind='ex';logLine("The marriage broke on what {they} did. "+s.given+" left.","loss");}else logLine("Strayed, and carried it like a stone {they} couldn't set down.","loss");}},
+  {t:"Close the door.",h:"",do:p=>{const s=rel('spouse');if(s){s.bond=clamp(s.bond+5);s.affairResolved=true;}fx(p,{spirit:3});logLine(["Felt the pull, and chose the marriage anyway.","Stood at the open door a long moment, and then, deliberately, closed it.","Wanted to, and didn't, and told no one either half of that."][rotN(p.gen,3)]);}},
+  {t:"Walk through it.",h:"a door that won't close again",do:p=>{const s=rel('spouse');if(s)s.bond=clamp(s.bond-30);remember('strayed');fx(p,{spirit:-8,heart:-5});if(s&&chance(0.5)){s.alive=false;s.kind='ex';logLine("The marriage broke on what {they} did. "+s.given+" left, and was right to.","loss");}else logLine("Strayed, and learned that a secret is a stone you carry, not one you set down.","loss");}},
  ]},
 
 /* ---- MIDLIFE ---- */
@@ -407,8 +407,8 @@ const CARDS=[
 {id:'x_reckoning',stage:'*',w:2,age:[30,80],cool:26,cond:()=>S.house&&S.house.seat>=3&&!P.flags.facedReckoning,
  text:p=>["A hard season comes for the whole house at once — a debt called in, a name questioned, a year that takes far more than it gives. What the family has put by, and who it can call on, is suddenly the only thing that matters.","Trouble arrives the way it does for houses with something to lose — a creditor, a rumour, a ruinous run of luck — and tests, all at once, how solid the ground beneath the name really is."][rotN(p.gen,2)],
  choices:[
-  {t:"Meet it head-on. Spend what it takes.",h:"the house before the purse",do:p=>{const ready=p.stats.means>45||p.stats.spirit>62;if(ready){fx(p,{means:-16,spirit:-2});p.flags.facedReckoning='held';logLine("Met the hard season head-on and, at real cost, kept the house standing.","obs");}else{fx(p,{means:-10,spirit:-8});p.flags.facedReckoning='fell';logLine("Met the hard season with too little behind {them}, and the family gave ground it had spent generations gaining.","loss");}}},
-  {t:"Protect your own. Let the name take the hit.",h:"the purse before the house",do:p=>{fx(p,{means:5,spirit:-5});p.flags.facedReckoning='fell';remember('chose_self_over_house');logLine("Shielded {them}self and let the family's standing take the blow instead.","loss");}},
+  {t:"Meet it head-on. Spend what it takes.",h:"the house holds — but a thin house pays dearly",do:p=>{p.flags.facedReckoning='held';const ready=p.stats.means>45||p.stats.spirit>62;if(ready){fx(p,{means:-15,spirit:-2});logLine("Met the hard season head-on and, at real cost, kept the house standing.","obs");}else{fx(p,{means:-22,spirit:-9});logLine("Met the hard season with little behind {them}, and kept the house standing only by paying ruinously for it.","obs");}}},
+  {t:"Protect your own. Let the name take the hit.",h:"you keep your footing; the house loses a step",do:p=>{fx(p,{means:6,spirit:-5});p.flags.facedReckoning='fell';remember('chose_self_over_house');logLine("Shielded {them}self, and let the family's standing take the blow instead.","loss");}},
  ]},
 
 /* ---- SEAT-GATED — only a house of a certain standing meets these ---- */
@@ -418,7 +418,7 @@ const CARDS=[
   {t:"Wear the name. Play the part.",h:"",do:p=>{fx(p,{means:8,spirit:-4,vit:-2});p.flags.lastWork=p.age;logLine("Carried the great name the way it asked to be carried, and felt exactly what it cost to.","obs");}},
   {t:"Refuse the performance.",h:"",do:p=>{fx(p,{spirit:7,means:-6});remember('refused_the_name');logLine("Declined to perform the family's importance, and breathed easier for the refusing.","joy");}},
  ]},
-{id:'s_from_nothing',stage:'adult',w:3,age:[26,54],cond:()=>S.house&&S.house.seat<=1,
+{id:'s_from_nothing',stage:'adult',w:3,once:true,age:[26,54],cond:()=>S.house&&S.house.seat<=1,
  text:"There is nothing behind {n} — no name that means a thing, no floor to fall back to. Only whatever {they} can make with {their} own two hands, starting now.",
  choices:[
   {t:"Build, brick by brick.",h:"slow, and wholly yours",do:p=>{fx(p,{means:10,vit:-3,spirit:2});remember('self_made');logLine("Began from nothing, and laid the first course of something, alone.","obs");}},
@@ -483,5 +483,63 @@ const CARDS=[
  choices:[
   {t:"Keep it in the family.",h:"",do:p=>{const c=rels('child')[0];echo("Made sure the house {they} bought at "+(recall('own_home').age)+" would hold someone after {them}.","joy");if(c)c.bond=clamp(c.bond+8);fx(p,{spirit:5,heart:4});}},
   {t:"Let it go to strangers.",h:"",do:p=>{echo("Let the old house pass to people {they} would never meet, and felt the loosening as a kind of peace.","obs");fx(p,{spirit:3,means:6});}},
+ ]},
+
+/* ============================================================
+   STEERING THE HOUSE — deliberate levers for a player who wants to PLAY the
+   dynasty, not only witness it: spend yourself to lift the name; choose what
+   the family becomes known for; the particular troubles only a great house
+   meets; and moments that only a certain inherited nature will face.
+   ============================================================ */
+
+/* ---- invest in the name: a means-sink that deliberately lifts the seat (plan reckonings around it) ---- */
+{id:'m_invest_name',stage:'midlife',w:2,age:[44,64],cond:()=>S.house&&S.house.seat>=2&&S.house.seat<6&&P.stats.means>48,
+ text:"There is a way to spend — money, and years — on the family's standing itself: a patronage, a marriage well made, a public work with the name carved into it. It would cost {n} personally; the house would carry it forward long after.",
+ choices:[
+  {t:"Invest in the name.",h:"the house rises; you pay for it",do:p=>{fx(p,{means:-18,spirit:-3,vit:-2});p.flags.lastWork=p.age;remember('built_the_name');if(S.house)S.house.seat=Math.min(6,S.house.seat+(Math.random()<0.6?1:0));logLine("Spent {them}self down to lift the family's standing, and watched the name climb a rung.","obs");}},
+  {t:"Keep what's yours.",h:"",do:p=>{fx(p,{means:8,spirit:2});logLine("Kept {their} money and {their} years for {them}self, and let the name be what it was.");}},
+ ]},
+
+/* ---- choose the family's character: a direct, 3-way reputation-steering decision ---- */
+{id:'a_make_name',stage:'adult',w:2,age:[30,52],once:true,cond:()=>S.house,
+ text:"{n} is at the age where a reputation sets, the way a face does. There is still a little say in which one — in what the family comes to be known for, through {them}.",
+ choices:[
+  {t:"Be known as learned.",h:"toward a scholarly house",do:p=>{fx(p,{mind:9,spirit:2});remember('chose_study');logLine("Set out, deliberately, to be the one the family came to for answers.","obs");}},
+  {t:"Be known as hard to cross.",h:"toward a hard-dealing house",do:p=>{fx(p,{means:9,heart:-3});remember('cut_a_corner');logLine("Set out, deliberately, to be the one no one tried twice.","obs");}},
+  {t:"Be known as open-handed.",h:"toward a generous house",do:p=>{fx(p,{heart:7,means:-5,spirit:3});remember('kind_to_outcast');logLine("Set out, deliberately, to be the one the door was always open at.","joy");}},
+ ]},
+
+/* ---- the particular troubles of an established house (seat-gated high) ---- */
+{id:'s_inheritance_dispute',stage:'*',w:2,age:[34,66],cool:20,cond:()=>S.house&&S.house.seat>=4,
+ text:"With a great name comes a great quarrel: someone within the family wants more of it than {n} thinks is rightly theirs. The lawyers, or the peace — and one of them will cost.",
+ choices:[
+  {t:"Hold the line. Fight for it.",h:"",do:p=>{if(chance(0.6)){fx(p,{means:8,spirit:-4});logLine("Fought {their} own blood for the estate, and kept it whole.","obs");}else{fx(p,{means:-12,spirit:-6,heart:-3});remember('chose_self_over_house');logLine("Fought {their} own blood for the estate, and it cost more than it kept.","loss");}}},
+  {t:"Give them their share. Keep the peace.",h:"",do:p=>{fx(p,{means:-10,heart:5,spirit:3});logLine("Gave way to keep the family whole, and counted the peace well worth the price.","joy");}},
+ ]},
+{id:'s_patronage',stage:'*',w:2,age:[32,64],cool:18,cond:()=>S.house&&S.house.seat>=5,
+ text:"People come to a great house for help now — a young talent needing a patron, a cause needing a name behind it. {n} can lift someone who has nothing, or stay unburdened by them.",
+ choices:[
+  {t:"Lift them. Spend the name.",h:"",do:p=>{fx(p,{means:-10,heart:6,spirit:4});remember('kind_to_outcast');remember('became_teacher');logLine("Put the family's whole weight behind someone who had none, and asked for nothing back.","joy");}},
+  {t:"Stay unburdened.",h:"",do:p=>{fx(p,{means:4,spirit:-2});logLine("Kept the family's weight for the family, and let the supplicants pass on by.");}},
+ ]},
+
+/* ---- inherited NATURE finally gates content: a few trait-specific moments ---- */
+{id:'t_bookish',stage:'midlife',w:2,age:[42,64],once:true,cond:()=>P.traits.includes('bookish'),
+ text:"For all the reading, there is a thing the books never taught {n} — and life has just set it on the table, plainly, where no page can be turned to avoid it.",
+ choices:[
+  {t:"Close the book. Be in the room.",h:"",do:p=>{fx(p,{heart:7,spirit:4,mind:-1});remember('looked_up');logLine("Set down what {they} knew to attend to what {they} didn't, and was the larger for it.","joy");}},
+  {t:"Retreat to what you know.",h:"",do:p=>{fx(p,{mind:5,heart:-3,spirit:-2});logLine("Met the one unteachable thing by reaching, again, for a book.");}},
+ ]},
+{id:'t_guarded',stage:'adult',w:2,age:[28,54],once:true,cond:()=>P.traits.includes('guarded'),
+ text:"Someone has gotten close enough to ask {n} the question the walls are up against: what is it {they} is so carefully never saying?",
+ choices:[
+  {t:"Let them in. Just this once.",h:"",do:p=>{fx(p,{heart:8,spirit:5});remember('let_in');logLine("Opened a door {they} usually kept locked, and was not, in the end, sorry for it.","joy");}},
+  {t:"Keep the wall.",h:"",do:p=>{fx(p,{spirit:-3,mind:2});logLine("Kept the wall exactly where it had always stood, and watched someone give up trying.","obs");}},
+ ]},
+{id:'t_restless',stage:'youth',w:2,age:[17,28],once:true,cond:()=>P.traits.includes('restless'),
+ text:"The old restlessness is loud in {n} this year — the certainty that the real life is happening somewhere {they} is not.",
+ choices:[
+  {t:"Chase it. Go.",h:"",do:p=>{fx(p,{spirit:6,mind:4,means:-4,heart:-2});p.flags.peril=p.age+3;remember('left_home');logLine("Followed the restlessness clean over the horizon, and let it cost what it cost.","obs");}},
+  {t:"Sit with it. Let it pass.",h:"",do:p=>{fx(p,{spirit:-2,mind:5,heart:3});logLine("Learned, young, to sit still inside the wanting, and let the worst of it pass through.","obs");}},
  ]},
 ];

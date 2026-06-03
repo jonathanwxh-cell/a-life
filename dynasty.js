@@ -26,7 +26,7 @@ function epitaphFor(p){
   const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains.","Put something into the world that stayed there after {them}."];
   const kind=["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones.","Left people gentler than {they} found them.","Carried a warmth into every room, and left it there."];
   // a defining memory or chosen legacy claims the epitaph (identity — always honored)
-  if(m.kept_stray && s.heart>60 && !m.turned_stray && !blocked('stray')) return out('stray', pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it.","Gave shelter to whatever could not fend for itself, all {their} days."]));
+  if(m.kept_stray && !m.kept_stray.inherited && s.heart>60 && !m.turned_stray && !blocked('stray')) return out('stray', pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it.","Gave shelter to whatever could not fend for itself, all {their} days."]));
   if(m.became_teacher && !blocked('teacher')) return out('teacher', pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned.","Left {their} knowing in other heads, where it kept on being used."]));
   if(m.strayed && !m.confessed && !blocked('secret')) return out('secret', pr(["Carried one secret all the way to the end.","Kept the one thing {they} could not say, and carried it the whole way.","Took one door, unopened, all the way into the ground."]));
   if(leg==='built' && !blocked('built')) return out('built', pr(built));
@@ -105,17 +105,26 @@ function updateHouse(p){
   const bump=(tag,n=1)=>{h.repute[tag]=(h.repute[tag]||0)+n;};
   const fade=()=>{for(const k in h.repute){h.repute[k]=Math.max(0,h.repute[k]-0.12);if(h.repute[k]<0.4)delete h.repute[k];}};
   fade(); // reputations soften over generations if not renewed
-  if(s.mind>74||m.chose_study||m.became_teacher) bump('scholarly', s.mind>74?1.5:1);
-  if(s.heart>74||m.kept_stray||p.flags.legacy==='kind') bump('kind', s.heart>74?1.5:1);
-  if(m.strayed&&!m.confessed) bump('tainted');
-  if(s.means>80&&s.heart<40) bump('ruthless');
-  if(p.flags.legacy==='built'||s.means>82) bump('industrious');
-  if(m.kind_to_outcast) bump('generous',0.5);
-  // the character paths the card set now writes — so a house can read as wild, creative, or devout,
-  // not only learned or kind (this is what lets distinct dynasties crystallize distinct mottos).
-  if(m.lived_reckless||m.driven||p.flags.peril) bump('reckless',0.8);
-  if(m.early_talent||m.made_art) bump('artistic');
-  if(m.found_faith||m.made_peace) bump('pious');
+  // Crucial: an INHERITED soft-spot/book (injected into every heir's mem as {inherited:true})
+  // must NOT keep re-scoring a reputation — only a life that ACTUALLY lived it counts. Without
+  // this guard the stray heirloom silently forced 'kind' onto nearly every dynasty, collapsing
+  // every house to the same motto. A reputation must be re-earned, not merely carried.
+  const lived=k=>m[k] && !m[k].inherited;
+  // Reputation is driven FIRST by what a life DID (choices/memories), and only lightly by a raw stat
+  // as a fallback — so distinct play yields distinct houses, instead of every line drifting toward
+  // whichever stat happened to run high (which collapsed all mottos to one).
+  if(m.chose_study||m.became_teacher||lived('child_books')) bump('scholarly',1.2); else if(s.mind>80) bump('scholarly',0.6);
+  if(lived('kept_stray')||p.flags.legacy==='kind'||m.let_in||m.looked_up) bump('kind',1.2); else if(s.heart>82) bump('kind',0.6);
+  if(m.strayed&&!m.confessed) bump('tainted',1.3);
+  if(m.cut_a_corner||m.chose_self_over_house||(s.means>82&&s.heart<40)) bump('ruthless',1.2);
+  if(p.flags.legacy==='built'||m.self_made||m.built_the_name||m.driven) bump('industrious',1.1); else if(s.means>84) bump('industrious',0.6);
+  if(m.kind_to_outcast) bump('generous',1.0);
+  // the character paths the card set now writes — so a house can read as wild, creative, devout,
+  // or hard-driving, not only learned or kind (this is what lets distinct dynasties crystallize
+  // distinct mottos; with the inherited-heirloom guard above, these now actually win sometimes).
+  if(m.lived_reckless||p.flags.peril) bump('reckless',1.2);
+  if(m.early_talent||m.made_art) bump('artistic',1.2);
+  if(m.found_faith||m.made_peace) bump('pious',1.2);
 
   // a family can also climb on a strong, sustained reputation — not only on wealth.
   // A scholarly or kind or hard-working line earns standing the modest can reach
@@ -153,7 +162,8 @@ function updateHouse(p){
     const top=reputeTop(h);
     const MOTTOS={scholarly:"What the mind holds cannot be taken.",kind:"We take in what the world turns out.",
       ruthless:"We do not ask twice.",industrious:"By our own hands.",generous:"An open door, an open hand.",
-      tainted:"We do not speak of everything.",pious:"In time, all is weighed.",artistic:"We leave something beautiful behind."};
+      tainted:"We do not speak of everything.",pious:"In time, all is weighed.",artistic:"We leave something beautiful behind.",
+      reckless:"We burn bright, and we burn."};
     if(top&&MOTTOS[top]&&p.gen>=2) h.motto=MOTTOS[top];
   }
 }
@@ -195,6 +205,14 @@ function showEulogy(p){
   if(surv.length){
     stext='Survived by '+surv.map(r=>r.given).join(', ')+'.';
   } else stext='No one was left to grieve {them}.'.replace(/\{them\}/g,p.px.them);
+  // a short life is framed as complete, not cut off — so an early death deepens the mood rather than punishing
+  if(p.deathAge<45) stext = 'A short life — and, taken on its own terms, a whole one.  ' + stext;
+  // when the line ends here, close with a tally of what the house became — the run's summary
+  if(!kids.length){
+    const mk=S.marks||{}, seat=seatOf((S.house&&S.house.seat)||0), rep=S.house?reputeTop(S.house):null;
+    const gens=mk.gens||p.gen, souls=mk.souls||1;
+    stext += '  House '+S.surname+' ends here — '+gens+' generation'+(gens>1?'s':'')+', '+souls+' live'+(souls>1?'s':'')+', risen to '+seat.name+(rep&&REPUTE_WORD[rep]?', and known as '+REPUTE_WORD[rep]:'')+'.';
+  }
   document.getElementById('dSurv').textContent=fmt(stext);
   const btn=document.getElementById('dNext');
   if(kids.length){
@@ -264,6 +282,7 @@ function succeed(childRel){
   // the small hours") years after their recorded death — the world and the Chronicle never disagree.
   const parentAgeAtBirth = Math.max(16, dead.deathAge - childRel.age);
   const echoParent = addRel(lineKind, dead.given, dead.sex, 74, parentAgeAtBirth);
+  echoParent.given = dead.given; echoParent.name = dead.given;   // deliberately the ancestor — keep the name even though addRel now avoids lineage names
   echoParent.lineageEcho = true; echoParent.diesAtAge = dead.deathAge;
   if(beq==='heart') echoParent.bond = clamp(echoParent.bond+10);   // the warmth that was deliberately handed down
   // the heir's other parent gets a name not already worn by an ancestor, so the
@@ -285,7 +304,8 @@ function showHeir(child, dead, inh, nur, h){
   document.getElementById('heirKick').textContent=ordinal(child.gen)+' of '+(h?'House '+S.surname:'the line');
   document.getElementById('heirName').textContent=child.name;
   const t=[];
-  t.push(`Child of ${dead.given}.`);
+  // make the identity hand-off explicit — a first-timer needs to know they BECOME the heir
+  t.push(`You are no longer ${dead.given}. You are ${child.given}, ${dead.px.their} ${child.sex==='m'?'son':'daughter'} — born into the world ${dead.px.they} left behind.`);
   const rep = h?reputeTop(h):null;
   if(rep&&REPUTE_WORD[rep]) t.push('Of a family known as '+REPUTE_WORD[rep]+'.');
   if(child.traits.length) t.push('Said, already, to be '+child.traits.join(' and ')+'.');

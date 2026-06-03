@@ -94,13 +94,13 @@ document.getElementById('begin').onclick=startFreshGame;
 async function openLoadMenu(){
   await migrateLegacy();                          // also recover any old save when browsing slots
   const idx=(await readIndex()).sort((a,b)=>b.updated-a.updated);
-  const list=document.getElementById('slotList'); list.innerHTML='';
+  const list=document.getElementById('slotList'); list.innerHTML=''; list.setAttribute('role','list');
   if(!idx.length){
-    const e=document.createElement('div'); e.className='slot empty'; e.textContent='No chronicles yet.';
+    const e=document.createElement('div'); e.className='slot empty'; e.setAttribute('role','listitem'); e.textContent='No chronicles yet.';
     list.appendChild(e);
   }
   for(const m of idx){
-    const row=document.createElement('div'); row.className='slot';
+    const row=document.createElement('div'); row.className='slot'; row.setAttribute('role','listitem');
     const when=timeAgo(m.updated);
     const status = m.alive ? `${m.living}, age ${m.age}` : `${m.living} — the line rests`;
     row.innerHTML=`<div class="body" tabindex="0" role="button" aria-label="Load House ${m.surname}"><div class="nm">House ${m.surname}</div>

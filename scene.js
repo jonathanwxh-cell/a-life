@@ -230,6 +230,7 @@
       if(sw!==lastStage){
         if(lastStage!==null){
           st.textContent=sw; st.classList.add('show'); setTimeout(()=>st.classList.remove('show'),3500);
+          const a11y=document.getElementById('stageA11y'); if(a11y) a11y.textContent='A new season of life: '+sw+'.';  // reliable SR announce, independent of the animated title
           if(stArt && STAGE_ART[sw]){ stArt.style.backgroundImage="url('assets/"+STAGE_ART[sw]+".webp')"; stArt.classList.add('show'); setTimeout(()=>stArt.classList.remove('show'),5000); }
         }
         lastStage=sw;
