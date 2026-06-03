@@ -1,0 +1,38 @@
+{
+  "profile": "critic_journalist",
+  "score": 8.5,
+  "strengths": [
+    "The prose voice is genuinely literary and consistent — the logLine one-liners ('Kept a conviction private and safe, was never tested on it, and wondered sometimes if that was the same as never having held it.') earn their keep every time; the game reads like a quiet short-story anthology.",
+    "The competing-goods grammar lands. x_honest_or_kind, x_loyalty_truth, and x_dream_or_duty all present two coherent virtues in genuine tension, and cb_the_cost closes the loop in old age with specificity ('the kindness she told in place of the truth') — this is the game's moral core and it works.",
+    "Callback depth is real and earned. cb_books_late, cb_outcast_return, cb_lookaway, cb_corner, cb_principle — these re-anchor your choices across decades in a way that makes a life feel like a narrative with an author rather than a slot machine. The 'Look away a second time, and knew, now, exactly what it cost' line in the transcripts is the clearest proof that the design intent is being realized.",
+    "r_hard_name now fires in practice. Yara Holloway at 37 ('Let the family's hard name do the work, closed the thing cold, and it stayed closed') confirms the ruthless-house path is a lived experience, not dead content. The heirloom 'a name that opens doors by being feared' appears across multiple dynasties, which means the darker reputation track has real downstream weight.",
+    "Motto distribution across the five sampled dynasties is meaningfully varied: scholarly, artistic (twice), industrious, generous — no single motto dominates, and 'pious' and 'ruthless' have distinct paths to crystallization. The reduced scholarly/industrious bumps are holding.",
+    "The dynasty layer has genuine mechanical teeth. The seat system, the repute fade-and-renew loop, the bequest as a cross-generation lever, and the secret inheritance all produce distinct dynasties rather than cosmetically varied ones. House Vane's multi-generational affair secret shaping two descendants (r_old_shame triggering, cb_inherited_secret) is the standout example.",
+    "Epitaph variation is thoughtful and the anti-repetition logic (blocked/recent cluster tracking) prevents a line from reading three 'kind' epitaphs in a row — important for a game where you watch many deaths.",
+    "The prose accommodates multiple tones of a 'good' or 'bad' choice without editorializing. 'Said no to the title, and yes to the evenings' and 'Worked for the family until the family barely saw her' are morally equivalent in a certain light — the game doesn't indicate which is right."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add one or two cards that only fire for a house with a 'ruthless' or 'tainted' motto — not just the r_hard_name gating on the heirloom, but a card where the darker name actively costs the family something (a door that closes, a marriage refused, a child who rejects the reputation). Currently the ruthless path is a use-it lever but lacks a moment where being feared has a downside that the player must reckon with.",
+      "why": "The moral texture of the game is 'competing goods'; the hard-name path currently has competing goods on one side (use it / refuse it) but no card where the cost of the reputation's accumulation returns to the player across a generation. Adding this would complete the loop the way cb_lookaway completes the 'looked away' path.",
+      "impact": "med"
+    },
+    {
+      "what": "The 'artistic' motto appears twice in five dynasties because a_make_thing and the associated art-memory bump are relatively easy to trigger. Consider adding a cooldown or raising the repute threshold slightly for 'artistic' relative to 'pious' or 'reckless', so all eight motto paths have genuinely similar natural frequencies.",
+      "why": "A critic's eye notices when one flavour clusters. 'We leave something beautiful behind' twice in five dynasties is not damning, but it hints the artistic path is slightly over-weighted versus the pious and reckless ones.",
+      "impact": "low"
+    },
+    {
+      "what": "Add one elder card that can only fire if the player has both a high-heart stat AND a history of dishonest choices (cut_a_corner + kind_to_outcast together) — a 'warm person who cut corners' moment that names the contradiction without resolving it.",
+      "why": "The game's best moments are about holding two true things simultaneously. The current card set handles sequential competing-goods well but doesn't often generate a card that names a character-level contradiction the player has themselves constructed across a life. This would reward players who did not play a consistent moral archetype.",
+      "impact": "med"
+    },
+    {
+      "what": "The 'a short life is framed as complete, not cut off' logic in showEulogy is correct design philosophy — but Cyrus Achterberg dying at 17 with only one event card feels thin in the transcript, even if it reads as tragic. Consider ensuring any life shorter than 30 years draws at least two moment cards before the first death-roll threshold, so a short-life playthrough has some texture rather than a single choice and an epitaph.",
+      "why": "A critic will notice that brief lives are essentially non-experiences for the player, which undercuts the 'even a short life is complete' framing. More events before the first credible death threshold gives the eulogy something to echo.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life is the rare browser game that could sit comfortably in a literary games roundup alongside Bury Me, My Love or 80 Days — its competing-goods moral grammar, earned callbacks, and dynasty-layer depth cohere into something genuinely recommendable, and the round-6 fixes demonstrably closed the gaps that were holding it back."
+}

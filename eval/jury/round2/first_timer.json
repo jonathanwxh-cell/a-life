@@ -1,0 +1,41 @@
+{
+  "profile": "first_timer",
+  "score": 7.5,
+  "strengths": [
+    "The title screen lands cleanly: the tagline ('One person, born into the world. Then the next. Then the next.') and the key explainer ('a choice between two paths, and it cannot be undone') tell a newcomer exactly what they are walking into without over-explaining. No tutorial paralysis.",
+    "The first moment arrives quickly and is immediately legible: a sick child in a large bed, two plain choices, a hint text that whispers 'a bond is set' or 'a habit is set'. A first-timer can make a meaningful choice within seconds of the game starting, with no prior knowledge needed.",
+    "The pulse-dot on 'the years are passing' is a genuinely good liveness signal. It answers the exact question a new player asks — 'is this thing running, or have I broken it?' — without any text explaining itself. The breathing age numeral doubles down on this.",
+    "The ~13s onboarding hint ('The years move on their own — pause any time with the ▮▮ below. Now and then, a moment will ask something of you.') lingers long enough to actually be read. The brighter .entry.hint styling makes it legible against the ambient log lines. This is the right call.",
+    "The heir transition is now genuinely clear: 'You are no longer X. You are Y, their daughter — born into the world they left behind.' A first-timer playing their first succession will not be confused about whether they are still playing. That sentence is doing real work.",
+    "The writing quality in the event cards is high enough that a newcomer is rewarded just for reading. 'Fell in love — the kind that quietly rearranges the furniture of a life.' lands on first contact without needing genre familiarity.",
+    "The 'how things stand' button gives a newcomer a way to orient themselves mid-life without breaking the flow — it pauses gracefully and reads back the current situation in plain prose."
+  ],
+  "blockers": [
+    "The gap between the title screen and the first card is not obviously alive. The game starts, 'Was born.' appears in the log, the age counter begins advancing — but nothing asks for input for potentially several real-world minutes. A first-timer who doesn't read the hint text (or misses it in the 1.6s delay before it appears) will sit watching a number climb and not know if they missed the interaction, if the game is loading, or if there is something to press. The pulsing dot helps, but there is no reinforcing element in the main stage area during the quiet years to communicate 'waiting for a moment to arrive' vs. 'you have already lost'.",
+    "The 'Begin a new line' button on the title screen gives no preview of dynasty/generational play. The second paragraph ('Each life hands the next its name, its means, its reputation — and its secrets. Over the generations, a house takes shape.') is there, but it sits below a visual rule and in smaller dim text that a newcomer's eye skips toward the button. The dynasty hook — the actual reason to keep playing beyond one life — is buried, not sold. A first-timer playing one life and dying may not realize they are supposed to continue.",
+    "The Chronicle and Constellation are extremely easy to miss on mobile. The top-right links ('✦ the constellation' / 'the chronicle ↗') are small, dim, uppercase, and visually compete with the name/meta text. The second onboarding hint pointing to the constellation fires only after the first choice — which is correct — but 'tap ✦ the constellation (top)' relies on the player finding a control that blends into the header. A first-timer who does not find the Chronicle before their character dies will receive the eulogy with no context for the accumulated log, which blunts the emotional payoff significantly."
+  ],
+  "improvements": [
+    {
+      "what": "Add a single ambient line in the main stage (the .passing area or a card-like insert) during the first 8–10 years of a brand new life that communicates 'a moment is coming' — something like 'The early years settle. Something will ask something of you.' Dismiss it automatically when the first card draws.",
+      "why": "Closes the liveness gap for first-timers who miss the hint or arrive after it fades. The pulse-dot communicates running, but not 'waiting for something' — that distinction matters for players unfamiliar with async idle loops.",
+      "impact": "high"
+    },
+    {
+      "what": "On the title screen, move the dynasty-sell line above the rule and give it full ink opacity — not dim — or add one concrete example: 'A family name rises across generations. A house takes shape.' Make it visually co-equal with the opening tagline, not a footnote.",
+      "why": "The biggest motivation to keep playing past the first death is the generational loop, but it is currently the least visible thing on the title screen. A newcomer who plays one life and gets a eulogy with no dynasty frame will not know the game has only just begun.",
+      "impact": "high"
+    },
+    {
+      "what": "On the eulogy / death screen, add a single line of house context if one has started forming: 'House [name] continues. You have [N] years of this line behind you.' Even on the first death with no heir, state 'No heir — the line ends here. Begin anew to build another.' This removes the ambiguity about what pressing the button does.",
+      "why": "First-timers do not know whether dying means game-over or continuation. The heir screen now explains the identity shift clearly, but only if an heir exists. With no heir the player sees the eulogy and a button that says 'Begin a new line' — which could mean restart-everything or start-over. The distinction is not obvious.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the contrast / size of the top-right chronicle links slightly, or add a small persistent icon in the footer (alongside pause and music) so the Chronicle is discoverable without relying on the onboarding hint alone.",
+      "why": "The constellation and chronicle are the game's memory — they are where the dynasty becomes emotionally real. If a first-timer never finds them before their character dies, the death screen reads as a flat ending rather than a chapter in a larger story.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life earns its atmosphere and its writing, and the recent onboarding fixes (the explicit identity-shift text, the liveness pulse, the lingering hint) move it meaningfully closer to accessible — but a first-timer who doesn't read carefully will still spend the first life not quite sure whether something is supposed to happen yet, and may not realize the dynasty is the actual game until after they have already quit."
+}

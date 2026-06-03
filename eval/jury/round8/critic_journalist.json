@@ -1,0 +1,41 @@
+{
+  "profile": "critic_journalist",
+  "score": 8.5,
+  "strengths": [
+    "The writing is the game's real achievement: the prose at choice-text level is consistently above average, and the best lines — 'Fell in love, and was aware, with a cold clarity, of everything it now made possible to lose' / 'Carried one secret all the way to the end' — have genuine literary weight rather than the generic flavour most narrative sims settle for.",
+    "The callback architecture gives the game a structural argument most of its genre peers never bother making: that the choices that define you arrive twice — once when you make them and once, years later, when they make you answer for them. The transcripts confirm this fires reliably and with precision (cb_lookaway landing 46 years after the original choice; cb_corner offering a real second test of character).",
+    "The dynasty layer has real mechanical teeth that connect to the prose. Heirlooms, the inherited secret, the bequest card, and the seat/reputation system create a genuine medium-term project across generations — and crucially the game makes the costs legible in prose ('The family climbed in the world this generation') rather than in numbers, preserving the literary register throughout.",
+    "Moral texture is genuine, not decorative. The competing-goods suite (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, cb_the_cost) refuses clean answers and the game is honest about that: 'held a true thing back to spare someone pain, and was never afterward quite sure she had been right' is exactly the right note. No option is flatly punished or rewarded. The affair card's framing varies by stat profile rather than rotating randomly — that is unusually careful character-aware writing.",
+    "Variety breadth across five dynastic transcripts is strong: no two houses read the same, mottos diverge, seat trajectories differ, and the competing-goods callbacks land in different generations on different characters. The system has real combinatorial texture and does not collapse to one dominant path.",
+    "Comparator positioning is correct and earned. Against Reigns it is deeper and less reductive; against Cultist Simulator it is more immediately legible; against BitLife it is vastly more literary and morally serious; against 80 Days it has a different axis (time vs. generational arc) and holds its own on prose density. The closest peer is actually Sunless Sea's text-layer — and on the pure sentence level it sometimes matches it."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add one or two cards that explicitly fail — where both choices produce a net negative outcome and the log is allowed to record something genuinely bleak without a redemptive close",
+      "why": "Almost every card in the set has at least one 'good' option and one 'bad but recoverable' option. The competing-goods suite is the closest exception but still tends toward 'unsettled, not destroyed.' A card where both roads genuinely cost — illness spreading, a secret that destroys either way, a debt that cannot be repaid — would deepen the sense that the game is about life rather than about optimising a life. The transcripts show no such moment exists yet.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the constellation's road-not-taken layer more explicitly at the eulogy screen — one sentence naming the single biggest unchosen path, not just the epitaph",
+      "why": "The 'decisions' array stores every alternative already; displaying one counterfactual at death ('She could have stood up for the unfair thing at 24') would make the Chronicle feel genuinely retrospective rather than purely archival, and give casual players who skip the constellation view a taste of what they chose against",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce one card per dynasty that directly asks the player what kind of house they are trying to build — a meta-layer choice that does not affect any single stat but writes into the dynasty's 'intent' and appears as context on the heir screen",
+      "why": "Some players will never discover the reputation/motto system through organic play and may experience the dynasty layer as opaque. A single explicit 'what does your family stand for' card (not replacing a_make_name but complementing it) would lower the discovery floor without reducing the reward for those who find it organically",
+      "impact": "med"
+    },
+    {
+      "what": "Tune the c_book / stray heirloom inheritance so that inheriting the 'book too hard for a child's hands' does not virtually guarantee the c_book card fires early in the heir's life — the inherited-memory guard is correct but the inherited prompt still feeds the draw pool with the exact same card repeatedly across dynasties",
+      "why": "Across three of the five transcripts the book card fires before age 12 in every generation that inherited the heirloom. The c_book line 'Read a book he couldn't yet understand, and loved it anyway' is lovely the first time and mechanical by the fourth. A 40% weight reduction on c_book when child_books.inherited is true, or routing the inherited heirloom to a different card that acknowledges the family history, would break the repetition",
+      "impact": "med"
+    },
+    {
+      "what": "Add one explicit 'dark house' path: a card tree available only to a tainted or ruthless house at seat 4+ that has a genuinely tragic endpoint — e.g. a life that ends having destroyed the family standing through its own choices, with an epitaph cluster that names the fall rather than euphemising it",
+      "why": "The current seat-fall mechanic (facedReckoning='fell', spirit/means collapse) works mechanically but the prose for a fallen house is not distinguished enough from a modest house that simply never climbed. A villain's arc that actually looks different in the chronicle — and is named as such by the epitaph system — would make the ruthless/tainted reputation path worth playing intentionally rather than just interesting to observe",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life has genuine literary and structural ambitions and, unusually, the execution earns them: the prose is among the best in its genre, the callback architecture gives choices real long-form consequence, and the dynasty layer has enough mechanical depth to sustain multi-hour investment — making it, with minor roughness at the edges, a game I would recommend without caveats to anyone who reads fiction and has thirty minutes to lose a life."
+}

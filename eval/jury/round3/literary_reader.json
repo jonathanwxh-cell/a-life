@@ -1,0 +1,47 @@
+{
+  "profile": "literary_reader",
+  "score": 7.5,
+  "strengths": [
+    "The sentence-level prose is genuinely good — compressed without feeling sparse. 'Married Elias after both had long stopped expecting it, and meant it the more for that' does real emotional work in a clause.",
+    "The marriage logline variants are the single strongest achievement in round 3. The six standard lines and three late-marriage lines are all distinct in register, none repeats the same gesture. 'Nobody made a speech; the years that followed were the speech' is the best line in the whole game.",
+    "The absence-framing for y_love1 ('the person whose absence, lately, has become the loudest thing in any room'; 'the quiet has a shape') correctly shifts from appearance-based infatuation to presence-as-need — a more literary register of desire.",
+    "The competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) succeed precisely because neither choice is labeled virtue or vice. 'Was never afterward quite sure she had been right' after sparing a loved one from truth is the kind of unresolved moral texture literary fiction earns.",
+    "The observe() pools have real depth now. Six variants each for vitality-low, vitality-very-low, and spirit-high — and the lines within each pool are tonally differentiated, not synonymous. 'The body has become a small daily negotiation' and 'The body has stopped being something he has, and become something he tends' work differently from each other.",
+    "The callback architecture is the game's most literary feature: choices made at 8 arrive again at 40, and the prose in the callback ('Made up, to a stranger, for a child he had ignored 32 years before') explicitly names the gap. This is how good fiction handles moral time.",
+    "Epitaphs avoid convergence across the dynasties in the transcripts — five different houses produce meaningfully different final lines — and the blocked-cluster logic is doing real work."
+  ],
+  "blockers": [
+    "The affair card is the most tonally inconsistent moment in the game. Three rotating texts — two cold-observation lines ('A door opens that X did not knock on'; 'It would be so easy, and so quiet') sandwiching a warmer-voice line ('Someone looks at X the way Y stopped looking some years ago') — are rotated by generation index, not by any characterological logic. The 'colder register' the brief promises exists in one of three variants but is equally as likely to produce the warmer, more novelistic framing. The resulting randomness undercuts what should be the most deliberately controlled moment in the adult arc.",
+    "The refusal lines for y_love1 ('Let someone slip away by saying nothing. Wondered, later, often.'; 'Said nothing, let the moment pass, and watched it become one of the things they simply hadn't done'; 'Kept their own counsel, let someone go, and felt the shape of that silence for years') are three variants of the same idea — silence, regret, shape-of-absence — without distinction in tone or specificity. They do not expand the emotional range so much as orbit the same planet. A reader notices the repetition before the third dynasty is complete.",
+    "The child-birth loglines in engine.js ('The world rearranged itself around a small weight'; 'Was sure of nothing, that first night, except that it had happened'; 'Some door he hadn't known was shut came quietly open') use the same register — quiet astonishment, oblique dislocation — for every variant. By the fourth or fifth child born across dynasties these read as interchangeable. The 'red and furious and entirely unimpressed by any of it' line is deliberately used once, which is correct, but the base pool needs similar tonal differentiation.",
+    "The single motto that appears across all five dynasties in the transcripts is 'We take in what the world turns out.' — Dynasty 1, 3, 4, and 5 (Dynasty 2 has no motto; Dynasty 5 gets 'We leave something beautiful behind'). This is a mechanics/weighting problem but it lands as a prose problem: the dynasty layer promises distinct family voices and the motto is the sharpest expression of that, but four of five houses share the same words. A literary reader notices the convergence and it flattens the cross-generational texture."
+  ],
+  "improvements": [
+    {
+      "what": "Give the affair card's three text variants three actually-different registers — one cold/clinical (current 'A door opens'), one self-deceiving/warm (current 'Someone looks at X the way Y stopped looking'), one darkly ironic/self-aware (current 'It would be so easy'). Then rotate by something characterological (spirit level, or heart vs. means dominant) rather than gen index, so the card's framing matches who this person is.",
+      "why": "The affair is the highest-stakes moment in the adult arc and the one readers will remember. Tonal randomness here registers as authorial carelessness rather than variety.",
+      "impact": "high"
+    },
+    {
+      "what": "Differentiate the y_love1 refusal pool: keep one regret line, make one actively defensive ('Saw the wanting coming and chose, deliberately, to be somewhere else — which was not quite the same as not wanting'), and make one bleakly matter-of-fact ('Said nothing. The person left. The moment closed over it like water.'). The current three variants share a single emotional posture.",
+      "why": "Refusal of love is as rich a literary subject as love itself. Three near-synonyms waste the slot.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 tonal outliers to the engine.js child-birth pool: one exhausted-but-present ('Had a child, [name]. Was asleep on their feet and has never been so awake.'), one matter-of-fact that earns its own weight ('Had a child, [name], and did not know, until that night, what they had been waiting for.'). The current pool is all quiet-dislocation in the same key.",
+      "why": "Players see child-birth multiple times per dynasty. Tonal variety is the difference between poetry and filler.",
+      "impact": "med"
+    },
+    {
+      "what": "Adjust the reputation/motto weighting so that 'kind' — which feeds from both lived('kept_stray'), legacy==='kind', m.let_in, s.heart>82, AND kind_to_outcast — is less dominant relative to 'scholarly', 'artistic', 'reckless'. The 'kind' pool is the widest and the most choices funnel into it; the motto convergence in the transcripts is a symptom of this, not only of the inherited-heirloom guard.",
+      "why": "Four of five dynasties reading the same motto is a prose-level problem regardless of its mechanical cause — it collapses the feeling that these are distinct families with distinct inheritances.",
+      "impact": "high"
+    },
+    {
+      "what": "The choice-hint text (the small h: field visible to players) is often empty or generic ('', 'the heart opens', 'the body runs'). These are the one place voice can be maintained inside the UI without adding words. A literary choice would be to write all non-empty hints in the same compressed style as the main prose — not summary ('the body runs') but image ('the body, earning its years').",
+      "why": "Currently the hints read as designer notes appended to literary text. Consistency of voice at every level is what separates a literary artifact from a well-written game.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The prose is frequently excellent and occasionally has the genuine compression of good short fiction, but the marriage arc's new lines are doing more work than everything else combined, and the affair card's tonal randomness, the love-refusal pool's synonymy, and the persistent motto convergence are real holds keeping this short of the level where a reader forgets they're inside a system."
+}

@@ -1,0 +1,47 @@
+{
+  "profile": "accessibility_advocate",
+  "score": 7.8,
+  "strengths": [
+    "All four round-3 blockers resolved: aria-pressed correctly absent from the 3-state #flow control (label carries state); .reflect button text passes AA at 6.39:1 with --ink-dim; opening childhood stage announced via #stageA11y outside the transition guard; constellation tab now announces total choice count on switchTab.",
+    "Centralised MutationObserver focus-trap covers all six veils (vTitle, vLoad, vDeath, vHeir, vChron, vStock) with a nested stack, Escape dismissal for non-narrative gates, and return-focus to the trigger on close.",
+    "Scene region (aria-live=assertive, aria-atomic=true) makes each moment's prose fire at the top of the reading order; requestAnimationFrame then moves focus to the first choice button so keyboard users land on an actionable control immediately.",
+    "sr-only emotion prefixes (Joyful / A loss / An echo) inside every rendered log entry give colour-blind and screen-reader users a semantic tier that is independent of the amber/rose/sage palette.",
+    "Role=list/listitem on both the lineage panel and the slot list; roving-tabindex ARIA tablist with Home/End/ArrowLeft/ArrowRight on the Chronicle tabs; constellation pane keyboard traversal with per-decision announcements via #starA11y.",
+    "Reduced-motion handled at two layers: @media (prefers-reduced-motion: reduce) kills all CSS animations globally (animation-duration:0.001ms !important covers flowpulse, ageBreath, chosenPulse, beckon) and the two canvas loops read matchMedia at startup and freeze their clocks.",
+    "44px touch targets on all footer controls, slot delete confirm, eulogy action links; inline two-step delete replaces confirm() with a keyboard-accessible, focus-retaining pattern.",
+    "Skip link properly hidden off-screen until focus, then slides into view with a clear amber background; focus-visible amber rings on every interactive element."
+  ],
+  "blockers": [
+    ".reflect button border (1px solid rgba(236,225,207,0.16)) has a blended contrast of 1.48:1 against the #16110d background — below WCAG 1.4.11's 3:1 non-text contrast threshold. The button boundary is not perceivable for low-vision users at normal operating contrast. Fix: raise alpha to ~0.45 or use a solid --ink-faint border.",
+    ".reflect text at the dimmed state (opacity:0.55 applied when a veil is open or game is paused) falls to approximately 2.77:1, below AA's 4.5:1 for 12.5px text. The button remains visible on-screen during paused play and users may attempt to use it. Fix: clip the minimum blended opacity to a floor that keeps the text above 4.5:1 (~0.65 minimum).",
+    "Eulogy dialog (vDeath) focus lands on the first focusable element (#dChron, 'read this life, button') but the epitaph text (#dEul), the person's name (#dName), lifespan (#dSpan), and survivors (#dSurv) are static DOM nodes with no aria-live and no aria-describedby wiring. A screen-reader user hears 'dialog, An ending' and then immediately a button label — never the actual epitaph prose, which is the emotional payload of the entire game loop. Same pattern in vHeir: heir name and inheritance text are not announced before focus lands on 'Live this life'."
+  ],
+  "improvements": [
+    {
+      "what": "Raise .reflect border alpha from 0.16 to at least 0.42 (e.g. rgba(236,225,207,0.42)) and add a comment noting the 3:1 non-text contrast requirement. This is a single CSS value change.",
+      "why": "Fixes the WCAG 1.4.11 failure for the only in-play navigational affordance that lacks a purely text-based indicator. Low-vision users using 200% magnification or adjusted contrast may not detect the current border.",
+      "impact": "high"
+    },
+    {
+      "what": "In the .reflect dimmed rule (line: '.veil.show ~ #app .reflect, body.paused .reflect{opacity:.55;}'), raise the floor to 0.65 OR instead of opacity on the element, apply color: var(--ink-faint) (4.68:1 at full opacity) rather than dimming the whole element. This avoids the compounded-opacity contrast problem entirely.",
+      "why": "At 55% opacity, 12.5px text drops below 3:1, let alone 4.5:1. Users who are paused and want to check 'how things stand' will be reading a text element below the contrast threshold.",
+      "impact": "high"
+    },
+    {
+      "what": "In showEulogy() (dynasty.js), after populating #dName/#dEul/#dSurv, write the same content as a single string into a visually-hidden aria-live='polite' region (reuse or extend #stageA11y, or add a dedicated #eulogyA11y div). Pattern: 'dA11y.textContent = p.name + \". \" + p.deathAge + \" years. \" + epitaphText + \". \" + survivorText'. Do the same in the successor screen (showHeir or equivalent) for heirName + heirTag + heirInherit.",
+      "why": "The eulogy is the emotional climax of every life. A screen-reader user currently hears only 'dialog, An ending / read this life, button' and must manually navigate through the dialog's reading order to reach the prose — defeating the literary intent of the design. Two lines of JS fully resolve this.",
+      "impact": "high"
+    },
+    {
+      "what": "In the constellation star legend, raise the .dot.alt background from rgba(160,170,210,0.5) to ~rgba(160,170,210,0.85) against the starCanvas dark background (#0a0812 approx). Current computed contrast is 2.89:1; the fix brings it to ~4.5:1 and also improves the perceptual distinctness of the 'road not taken' indicator.",
+      "why": "WCAG 1.4.11 requires 3:1 for non-text UI components and graphical objects that convey meaning. The alt dot is the only visual indicator distinguishing chosen from unchosen paths in the legend.",
+      "impact": "med"
+    },
+    {
+      "what": "Add aria-describedby='dEul' to the vDeath dialog element, pointing to the epitaph paragraph. This wires the epitaph as the accessible description of the dialog so screen readers that announce dialog descriptions (NVDA browse mode, VoiceOver) will read it immediately after the dialog label.",
+      "why": "A lighter-weight fix than a full aria-live announcement; complements fix R4 and handles screen readers that already read aria-describedby on dialog open without requiring JS changes.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuinely earned its accessibility infrastructure — skip link, assertive scene region, emotion semantics, reduced-motion support, and constellation keyboard traversal are all correct and considered — but three concrete failures remain below the 8 threshold: the reflect button's border and dimmed-state contrast both fail WCAG, and the eulogy dialog's emotional prose is structurally inaudible to screen readers, which is a meaningful gap in the game's most important narrative moment."
+}

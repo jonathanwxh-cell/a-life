@@ -1,0 +1,48 @@
+{
+  "profile": "literary_reader",
+  "score": 7.8,
+  "strengths": [
+    "The observe() pools in engine.js are the game's best sustained prose — six calibrated lines per condition, genuinely differentiated, and the age-gating (vit_tire >40, vit_neg >55) means they land with biographical weight. 'You have grown courteous with your own body, the way one is with the powerful' is a standout sentence.",
+    "The y_love1 refusal pool is now three distinct positions: regret, deliberate-avoidance ('not quite the same as not wanting' is the best line), and bleak matter-of-fact. These read as three genuinely different people making three genuinely different choices.",
+    "The affair card's register is now character-derived: clinical for low-spirit (the rationalizer), warm/self-deceiving for heart-dominant (the romantic), cold/self-aware for the default. This matters because the framing is what the player reads, and it now feels like the character seeing themselves rather than a random voice.",
+    "The haveChild pool is now tonally heterogeneous: 'Was asleep on their feet for a month, and had never once been so awake' lands differently from 'Some door they hadn't known was shut came quietly open.' The 'red and furious' line with its once-per-dynasty guard is smart — it reads as a real discovery rather than a stock phrase.",
+    "The competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) hold up as prose — both choices feel like genuine virtues in tension, and the closure card cb_the_cost delivers on the promise: 'the one with a cost they has never quite finished paying' is exactly the right frame for an elder reckoning.",
+    "The callback system creates genuine narrative continuity. The cb_lookaway chain (childhood avoidance → midlife stranger → Lucan perpetuating the Vasquez pattern) is moving in the transcripts in a way static narrative rarely achieves.",
+    "Epitaph deduplication (blocked() + pr() variant rotation) works: no dynasty reads three of the same note in succession across the five transcript dynasties.",
+    "Motto variety is confirmed: 'We burn bright, and we burn' (Vasquez, reckless) vs 'By our own hands' (Marchetti, industrious) are genuinely distinct dynasty characters."
+  ],
+  "blockers": [
+    "The y_love1 acceptance pool (three lines for 'Meet them halfway') is still single-register: 'Started without quite deciding to,' 'Fell in love — the kind that quietly rearranges the furniture,' and 'Fell in love, and was surprised, as everyone is, that it was them this time' are all gentle-surprise variants of the same emotional note. The refusal pool now has positions; the acceptance pool needs them too — this is the most-fired card in the game.",
+    "The c_sick nurture outcome is a single string that fires verbatim across all five dynasties: 'Was nursed through a fever; remembered a cool hand for life.' It appears recognizably in Rafael Fenn, Iris Mercer, Yara Mercer, Lucan Vasquez, Tariq Marchetti, Vera Achterberg. A card with this firing rate needs a pool of at least three.",
+    "Several high-frequency adult outcome lines are single strings: 'Found love later than expected, and was almost embarrassed by the size of it' appears three times in the transcripts (Rafael Fenn, Greta Vasquez, Lazlo Mercer). The card text (a_meet_late) correctly rotates its framing, but the outcome line is fixed — so the player who takes this choice twice feels the repetition.",
+    "The motto system and the epitaph cluster are slightly decoupled for 'kind': a house can accumulate kind-cluster epitaphs across generations without ever triggering the 'kind' motto, because the motto requires lived('kept_stray') or legacy==='kind', while the epitaph fires on heart>82 or the 'kind' memory separately. The Mercer house reads as definitively kind in its epitaphs but never crystalized 'We take in what the world turns out.' A player who nurtures a kind dynasty can feel cheated."
+  ],
+  "improvements": [
+    {
+      "what": "Add two more y_love1 acceptance outcome lines with distinct positions — e.g., one that reads as a person who is frightened by the wanting ('Fell in love, and was aware, with a cold precision, of everything it now made possible to lose'), one as someone matter-of-fact ('Started spending time with someone, and the time organized itself, without a great deal of drama, into a life').",
+      "why": "The acceptance is the most common path through the most-fired youth card. Single emotional register on a high-frequency card is the fastest way to make the game feel thin.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 3-variant pool to the c_sick nurture outcome. Current: 'Was nursed through a fever; remembered a cool hand for life.' Alternatives: 'Learned, lying in a large bed, that to be cared for is its own kind of gift.' / 'The fever passed. What stayed was the shape of a hand on a forehead, kept for decades.'",
+      "why": "This line fires in nearly every dynasty and is the first 'observation' prose a player reads. Its verbatim repetition is the single most noticeable repetition in the transcripts.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 variant outcome strings to a_meet_late (the late-love card). The framing already rotates; the resolution 'Found love later than expected, and was almost embarrassed by the size of it' needs companions.",
+      "why": "Late love is the dominant path in adult play; the fixed outcome string becomes a known phrase across a dynasty.",
+      "impact": "med"
+    },
+    {
+      "what": "Broaden the 'kind' motto trigger: also set it when the epitaph cluster has been 'kind' for two consecutive generations (recentC.filter(c==='kind').length>=2 already exists as a block — invert it as a trigger). Or add heart>78 as a direct bump(kind, 0.8) in updateHouse(), so a sustained heart-high dynasty reaches the motto without requiring a specific stray moment.",
+      "why": "The Mercer house is the most emotionally coherent dynasty in the transcripts and never crystalized its motto. Mottos should track the dynasty's actual felt character, not only its specific choice-path.",
+      "impact": "med"
+    },
+    {
+      "what": "The 'Close the door' affair choice still uses rotN(p.gen,3) for its outcome lines — generation-indexed rather than character-indexed. Route these by the same stat logic as the card framing (spirit/heart split).",
+      "why": "The fix to the card's register is real, but the aftermath text still rotates by generation. A complete fix would make both the framing and the outcome character-consistent.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 4 fixes are real and meaningful — the affair framing, the love-refusal positions, and the birth-pool range all land — but a handful of high-frequency single-string outcomes (c_sick, a_meet_late acceptance) and the kind-motto decoupling are still legible gaps between a game with literary ambition and one that earns the adjective."
+}

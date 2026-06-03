@@ -1,0 +1,39 @@
+{
+  "profile": "literary_reader",
+  "score": 8.2,
+  "strengths": [
+    "The y_love1 pool (seven variants) achieves genuine distinctiveness — 'Someone has gone quiet for three days, and {n} is unsettled to find that the quiet has a shape' is a sentence you'd mark in a novel; all seven variants reach for different emotional registers rather than synonyms of the same feeling.",
+    "The a_affair card's character-driven variant selection (cold/self-aware vs heart-led vs clinical) is the game's most sophisticated craft — it reads who the person actually is rather than rolling randomly, and it works as written.",
+    "The competing-goods trio (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) plus cb_the_cost echo sustain the game's best register: 'Mostly believed it' in the elder callback is exactly the right level of irresolution — names the tension rather than resolving it.",
+    "The r_name_cost card is a genuine new strength: 'a young one in the house who has started to flinch at what they stand to inherit' is the game's most concrete image of inherited consequence, and it gives ruthlessness real downstream weight.",
+    "The observe() body-decay pools have real depth and internal consistency — the body-as-correspondent metaphor ('ledger,' 'bills,' 'quiet counsel') runs across six variants without feeling repetitious because each is formally distinct.",
+    "The motto-milestone line ('The family's character has settled, at last, into words') fires at a natural dramatic beat with the right unhurried register; 'settled, at last, into words' earns its formality.",
+    "The a_child 'No' fix is a genuine prose upgrade: 'Chose a life without children, with clear eyes' is spare and dignified; 'the family, as it already was, was enough' has the finality of a settled question rather than a refusal.",
+    "The c_sick expansion with 'the shape of a hand on a forehead, kept for decades' is the kind of image the game's best writing reaches for — it names a sensory memory that actually lasts.",
+    "Epitaph variety holds up across fifteen lives in the transcripts; the blocking logic works and produces genuinely distinct eulogies across dynasties."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Deepen the a_meet_late pool from three variants to at least five, with more specificity — 'across an ordinary Tuesday' is the best of the three because it names the moment; the other two are structurally similar ('the stories say,' 'the better part of a life'). Need variants that name a different kind of late-arrival: across a grief, across a return, across a change of circumstances.",
+      "why": "The late-love path is narratively important (it's the adult alternative to the foreclosed youth romance) but its setup prose is noticeably thinner than y_love1's seven variants. A player who reaches a_meet_late multiple times across a dynasty will feel the repetition.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the motto a moment of reaction, not just declaration — when the motto first crystallizes, surface it as a beat the current life actually responds to (even a one-line observe-style entry: 'There are now words for who the family is, and {they} is not sure how they feel about that' or its warmer inverse). The current implementation declares it but doesn't let it land.",
+      "why": "The motto is the dynasty's most significant symbolic milestone, but it fires at death as a log line rather than as something the living person can react to. It's earned by the system but not experienced by the player.",
+      "impact": "med"
+    },
+    {
+      "what": "The spirit_lo observe() pool ('A greyness has moved quietly into {their} rooms,' 'Something has gone flat in the colour of the days') reads slightly more generic than the body-decay pools. Replace the two weakest entries with something more particular — not environmental metaphors, but the way a low-spirit person actually behaves or notices differently.",
+      "why": "The body observations use the metaphor of the body-as-correspondent (ledger, bills, quiet counsel) and are consistent and strong. The spirit_lo pool falls back on light/colour clichés. Small gap, but visible when reading transcripts in sequence.",
+      "impact": "low"
+    },
+    {
+      "what": "The epitaph dedup logic checks only the last two ancestors, which allows a repeated phrase to appear within a single dynasty if two non-adjacent lives share a cluster. Add a dynasty-level set (or check the last three) to prevent the same epitaph phrase appearing more than once in a given house's run.",
+      "why": "Dynasty 3 (House Reyes) has 'Left his knowing in other heads, where it kept on being used' for both Aldous (gen 2) and Lucan (gen 5). The phrase is good; the repeat is noticeable within a single dynasty's chronicle.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The writing holds up as prose you'd read through: the best lines (the quiet that has a shape, the shape of a hand on a forehead, the young one who flinches at what they stand to inherit) are genuinely literary, the improvements to c_sick and a_child are real upgrades, and the game sustains its contemplative register across fifteen lives without collapsing into formula."
+}

@@ -1,0 +1,43 @@
+{
+  "profile": "accessibility_advocate",
+  "score": 8.3,
+  "strengths": [
+    "Modal focus management is complete and correct: a MutationObserver stack traps focus inside the topmost veil, restores it on close, and handles nested veils (e.g. chronicle over eulogy). All six dialog veils are covered.",
+    "aria-describedby on both the eulogy dialog (dName dSpan dEul dSurv) and the heir dialog (heirName heirTag heirInherit) so screen readers announce the full narrative content, not just the dialog label.",
+    "The #scene region is aria-live='assertive' aria-atomic='true', so the moment's prose is announced immediately to screen readers when a card appears — the single most important live-region call in the game.",
+    "The #flow pace control deliberately omits aria-pressed (it is a 3-state control, not a binary toggle) and carries the full state in the aria-label text, which is updated on every state change: 'the years are passing — tap to race ahead', 'the years are racing by — tap to return to the usual pace', 'time held still — tap to let the years resume'.",
+    "sr-only emotion prefixes (Joy, A loss, An echo) are injected via srTag() into both the ephemeral in-play log entries and the full memoir in the Chronicle, so colour is never the only differentiator.",
+    "WCAG AA contrast is met across the board: ink-dim (#a99c87) on the dark background (#16110d) is 6.36:1, well above 4.5:1; amber is 8.09:1; full ink is 13.14:1. The reflect button text (ink-dim) clears AA.",
+    "prefers-reduced-motion is honoured at two levels: CSS kills all transitions/animations via a blanket !important rule, and both scene.js and constellation.js read the media query at startup to freeze their animation clocks (dt=0 or throttled to 250ms).",
+    "The constellation keyboard interface is thorough: the tabpanel owns arrow-key traversal (Left/Right/Up/Down/Home/End), each chosen star is announced with age, choice text, alternative, and position ('Decision N of M') via a live region, and the canvas itself is aria-hidden.",
+    "The skip link is present, visible on focus, and targets #app correctly. It uses a smooth CSS transition rather than JavaScript.",
+    "The ARIA tablist pattern in the Chronicle is correctly implemented: roving tabindex, aria-selected, aria-controls, aria-labelledby, keyboard navigation with ArrowLeft/ArrowRight/Home/End, and focus moves with switchTab().",
+    "Touch targets meet 44px: footer buttons (.pp), delete confirm buttons (.delYes/.delNo), chronicle entry points (.chron/.chron2 with padding: 11px giving min-height 44px), eulogy secondary links (#dChron/#dBackup), and the inline delete button.",
+    "The stageA11y polite live region fires on every life-stage transition ('A new season of life: youth.') independently of the visual title animation — so screen readers get the announcement even when the CSS animation is suppressed.",
+    "The inline two-step delete confirm replaces native confirm() — focus lands on the 'delete' button, Escape disarms it, and both confirm/cancel have descriptive aria-labels ('Confirm: delete House X forever', 'Cancel: keep House X')."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Replace <br>-separated heir text in heirTag and heirInherit with <p> or <li> elements so screen readers announce meaningful sentence breaks rather than running the paragraphs together.",
+      "why": "Both showHeir() builds these fields with innerHTML=lines.join('<br>'), and dynasty.js also uses innerHTML=t.join('<br>') for heirTag. NVDA/JAWS treat <br> as whitespace, not a pause — the three distinct pieces of identity information (role change, family reputation, traits) merge into one unbroken utterance.",
+      "impact": "low"
+    },
+    {
+      "what": "Add role='list' and role='listitem' to the .marks stat panel in the Chronicle (the four mark <div class='mark'> tiles), mirroring what is already done for #lineage and #slotList.",
+      "why": "The four mark tiles (generations, lives lived, longest life, peak standing) are rendered as unlabelled divs with no list semantics — a screen reader traversing the panel gets four orphaned text nodes with no structural relationship. The fix is one setAttribute call on the .marks wrapper.",
+      "impact": "low"
+    },
+    {
+      "what": "Add Escape-key dismissal to the eulogy (vDeath) and heir (vHeir) dialogs by adding them to the ESC_CLOSE map in the focus management IIFE.",
+      "why": "The current ESC_CLOSE map covers vChron, vLoad, and vStock, but leaves vDeath and vHeir without keyboard dismissal. These are narrative gates (player must make a choice), so Escape should not skip the succession — but it could safely do nothing (preventDefault) or focus the primary action button, so the trap does not feel broken to screen reader users pressing Escape expecting a response.",
+      "impact": "low"
+    },
+    {
+      "what": "Give the #log element role='log' (or remove role='button' and make the click handler a sibling control) to resolve the role tension.",
+      "why": "#log simultaneously holds role='button' (so it is keyboard-activatable to open the Chronicle) and aria-live='polite' (so it announces incoming log lines). ARIA prohibits live regions on interactive roles — some browser/AT pairs will suppress the live announcements once the button role is applied. The cleanest fix is a transparent sibling <button> overlaid on the log that handles the click/keydown, leaving the log div as a pure live region.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The accessibility implementation is genuinely thorough — correct focus trapping, assertive scene announcements, reduced-motion respected at two layers, full keyboard constellation traversal, AA contrast throughout, emotion prefixes for colour-blind users, and 44px touch targets everywhere — with only four minor residual gaps (log role tension, <br>-joined heir paragraphs, marks panel list semantics, and no Escape on the narrative gates), none of which block actual use."
+}

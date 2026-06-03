@@ -1,0 +1,50 @@
+{
+  "profile": "roguelike_replayer",
+  "score": 6.5,
+  "strengths": [
+    "Motto variety is genuinely fixed: all 5 sampled dynasties land different mottos (burn bright / beautiful / do not ask twice / by our own hands / take in what the world turns out), driven by distinct play patterns. The inherited-heirloom guard in updateHouse() is the right fix and it works.",
+    "The `a_make_name` card is a real build-identity lever — choosing 'learned / hard to cross / open-handed' directly steers reputation and future gated content. This is the closest the game has to a conscious archetype pick.",
+    "Callback cards (cb_outcast_return, cb_books_late, cb_study_pays, cb_lookaway, etc.) create genuine build-identity payoff: a choice at age 7 echoes at age 28, which is exactly the 'one-more-run to try the other branch' pull.",
+    "The `e_bequest` card is a meaningful cross-generation lever with 4 distinct outcomes (mind / means / heart / free traits). Players who understand it have a real planning horizon.",
+    "Seat-gated cards (s_great_burden, s_patronage, s_inheritance_dispute, s_from_nothing) gate unique content behind dynasty progress — reaching a grand estate genuinely changes which moments you meet.",
+    "Repute-gated cards (r_scholar_door, r_family_shadow) mean the house's accumulated reputation shapes individual lives, creating visible build coherence across generations.",
+    "Trait-gated cards (t_bookish, t_guarded, t_restless) reward inherited traits with unique moments — a 'guarded' heir meets the wall-question card no other character sees.",
+    "The dynasty-end tally line on the eulogy ('House X ends here — N generations, N lives, risen to [seat], known as [rep]') is the exact run-summary a roguelike player wants to see.",
+    "Card pool is wide enough (80+ cards across stages) that individual lives read distinctly; the transcript confirms no two lives share the same event sequence."
+  ],
+  "blockers": [
+    "No persistent run-to-run meta-progression or unlockable content: a player who completes 10 dynasties sees the same card pool as on run 1. There is no 'new card/scenario/house trait unlocked' reward, which is the core engine of 'one more run' in rogue-likes. The system accumulates within a dynasty beautifully but resets completely between dynasties.",
+    "The card-draw is invisible to the player — there is no sense of 'building toward' a specific payoff or 'setting up a combo.' The design is contemplative-witness, not build-planner. A roguelike replayer wants to see the consequence space of their choices ahead (even loosely), not discover it only in callbacks. Without any visible build-feedback loop the 'one more run to try the scholar archetype' motivation exists only for readers of the source code.",
+    "Run variance is primarily in prose, not in structural outcomes: seats 0-7 and 9 mottos exist, but most runs land at the same 3-4 seats (grand estate, fine townhouse, comfortable household). The seat ceiling for ordinary play is seat 5-6; seat 7 ('a house written into the histories') requires repute >= 7.5 AND peakMeans >= 92 AND seat >= 6 AND a 25% RNG gate — in practice functionally unreachable in a standard run. This means the 'pinnacle' of the progression system is invisible.",
+    "No run-end summary screen for when a dynasty continues — the eulogy shows the tally only when the line goes extinct. A player mid-dynasty who wants to know 'what am I building toward?' has no dashboard; the constellation is beautiful but opaque as a strategy tool.",
+    "The `a_make_name` reputation-steering card fires once but its downstream effect (which repute-gated cards appear) is invisible without knowing the reputation threshold mechanics. Players who don't read the code can't plan around it — a key roguelike design requirement is that the build system be learnable through play."
+  ],
+  "improvements": [
+    {
+      "what": "Add a lightweight inter-dynasty unlock layer: completing a dynasty with motto X unlocks 1-2 new cards tagged to that motto that appear in future runs of any house. E.g., completing a 'scholarly' dynasty unlocks a late-game card about the family library that only appears when a scholarly house exists.",
+      "why": "Creates the meta-progression engine that drives 'one more run' — players will deliberately try to earn each motto's unlock. Currently there is zero carryover between dynasties.",
+      "impact": "high"
+    },
+    {
+      "what": "Show the house's current top reputation word and its strength (e.g., 'Your house is known as learned — building toward a scholarly motto') in the eulogy/succession screen so players can plan the next life consciously.",
+      "why": "The build-identity system exists but is invisible mid-run. Making reputation visible turns the current witness experience into a legible build game for players who want to steer.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the seat-7 gate from repute >= 7.5 + peakMeans >= 92 + 25% RNG to repute >= 5.5 + peakMeans >= 86 + 40% RNG (or remove the RNG gate entirely). Seat 7 should be rare but achievable in a focused run.",
+      "why": "As specced, the pinnacle is effectively a lottery prize, not a reward for skilled dynasty management. Roguelike players need the ceiling to feel reachable through intentional play.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a living 'house ledger' panel (toggle in the constellation view or eulogy) showing: current seat, top-3 reputation tags with their accumulated weight, active heirlooms, and the motto (or 'reputation not yet crystallized'). One paragraph, not a stat dump.",
+      "why": "The roguelike build-planner needs a read-back of state to make informed choices. The constellation is beautiful but reads as memoir, not as strategy tool.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 more callback cards for the 'hard to cross' / ruthless and 'reckless' memory paths, which currently have thin downstream payoff compared to 'scholarly' (which has r_scholar_door, cb_books_late, cb_study_pays, cb_trade_regret — four callbacks). A ruthless reputation should feel meaningfully different to play through, not just produce a different motto string.",
+      "why": "Build diversity requires that different archetypes produce different *play* across lives, not just a different motto at the end. Currently scholarly/teacher is the richest branch.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The motto-convergence blocker from round 1 is genuinely fixed — five distinct dynasties, five distinct mottos, driven by actual play differences — but for a roguelike replayer the 'one more run' engine is still missing its core piece: zero inter-dynasty progression, an invisible reputation/build system, and a pinnacle seat requirement so tight it functions as a lottery rather than a skill target."
+}

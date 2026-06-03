@@ -1,0 +1,41 @@
+{
+  "profile": "critic_journalist",
+  "score": 8.1,
+  "strengths": [
+    "The prose voice is consistently excellent — every card reads like a sentence that earned its place. 'Took the easy, dishonest gain, and kept the small private knowledge of it' is the kind of line that makes you wince because you know the feeling. The writing is the game, and the writing holds.",
+    "a_public_fall fires with real weight in the Vasquez dynasty (Greta at 31): 'Stood in the wreck of a public failure and did not look away — and people remembered that longer than the failure.' This is the most dramatically resonant single moment across all five dynasties — it changes how you read the next 55 years of that life. Exactly what the adult band needed.",
+    "The reputation rebalance works structurally. Two distinct mottos fire across the five dynasties ('We burn bright, and we burn' for reckless Vasquez; 'By our own hands' for industrious Marchetti), and neither is 'kind'. The kind bucket now requires specific acts rather than ambient warmth, which is the right fix.",
+    "The callback architecture is the strongest design pillar. cb_lookaway (Lucan Vasquez at 48 — 'Looked away a second time, and knew, now, exactly what it cost'), cb_corner threading across multiple Marchetti lives, cb_principle returning the youth stand at midlife — these make lives feel like unified stories rather than collections of moments.",
+    "The hardname heirloom ('a name that opens doors by being feared') propagating through Mercer, Vasquez, and Marchetti dynasties gives the chronicle a quiet menace. Seeing it listed in the heir header before you've earned it raises the question of what kind of person you'll be about it.",
+    "The a_conviction card has genuine moral texture: 'Kept a conviction private and safe, was never tested on it, and wondered sometimes if that was the same as never having held it.' Both options are defensible and both have a cost. This is the game's best binary."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Gate a_conviction more tightly or lower its weight from 2. It appears in 5 of 15 lives — more than a_public_fall (1) and a_friend_need (0 combined) — and is becoming the new a_work workhorse in the conviction/public-role cluster. Consider adding a distinct cond so it doesn't fire in every other life.",
+      "why": "When a card is too common, its moral weight deflates. The conviction card's best line ('wondered sometimes if that was the same as never having held it') needs rarity to land.",
+      "impact": "med"
+    },
+    {
+      "what": "The shadow-path content (r_hard_name, r_old_shame) never fires in practice. In all five dynasties where 'a name that opens doors by being feared' appears as an heirloom, reputeTop(S.house) is never 'ruthless' — the house accrues the heirloom via cut_a_corner/chose_self_over_house without accumulating enough ruthless reputation tally to dominate. Consider: (a) lower the ruthless threshold in reputeTop from requiring v>=2 to v>=1.2 for this gate, or (b) add a secondary cond that also triggers on holding the 'hardname' heirloom itself.",
+      "why": "The shadow content is the most interesting new writing in round 4 — 'The family's hard name goes into the room ahead of you' is a genuinely different register — but it is unreachable in the actual play experience as structured.",
+      "impact": "high"
+    },
+    {
+      "what": "cb_the_cost's feeding pipeline is silently broken for the sample transcripts. The three trigger memories (chose_self, chose_others, chose_loyalty) require x_dream_or_duty and x_loyalty_truth to fire first, but neither appears in any of the 15 lives. x_dream_or_duty requires an existing child or spouse at age 30-52 — which should be common — but the card's w:2 puts it in competition with higher-weight cards. Raise x_dream_or_duty's weight to 3 and verify cb_the_cost can reach elder lives.",
+      "why": "The cb_the_cost reckoning ('near the end, one old decision keeps returning') is the most ambitious new card — an elder moment that names the specific competing-good you chose decades earlier. It cannot do its work if the pipeline never delivers it.",
+      "impact": "high"
+    },
+    {
+      "what": "a_friend_need fires zero times across 15 lives despite being the one genuinely friction-forward friendship card. The condition (friend with bond>40) is reachable, but the cooldown of 16 years combined with the friend-bond gate and w:2 means it rarely competes. Consider dropping the cooldown to 10 or raising weight to 3.",
+      "why": "Friendship currently has almost no mid-life texture — you make the friend in childhood, possibly get betrayed or watch them die, and that's it. a_friend_need is designed to fill that gap but isn't pulling its weight.",
+      "impact": "med"
+    },
+    {
+      "what": "The epitaph cluster still skews toward warmth/kindness in outcome even when the reputation fix is working. 5 of 15 lives end with a kind/warmth epitaph variant despite the motto rebalance. Consider adding 1-2 epitaph clusters for the 'conviction' and 'public role' paths — lives that died having stood for something — so a Yara or a Tamsin reads differently at the end.",
+      "why": "When the last thing you read about a life is 'Remembered, above all, as kind' regardless of whether that life spent 40 years as a public agitator, the moral world feels flattened at exactly the moment it should be sharpest.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has crossed the bar — the adult band is genuinely broader, the reputation rebalance delivers variety in mottos and house character, and the new shadow content is the most interesting writing in the game; the critical remaining work is making that shadow content actually reachable, and ensuring cb_the_cost's ambitious elder reckoning has a functioning pipeline to fire through."
+}

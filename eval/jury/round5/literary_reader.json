@@ -1,0 +1,45 @@
+{
+  "profile": "literary_reader",
+  "score": 8.1,
+  "strengths": [
+    "The y_love1 acceptance pool now has genuine tonal range: the frightened line ('aware, with a cold clarity, of everything it now made possible to lose') and the matter-of-fact line ('the time arranged itself, without much drama, into a life') feel like two different people falling in love, not just synonym-swapping. Both hold up as prose.",
+    "The c_sick nurture pool is now three meaningfully different observations ('a cool hand for life', 'to be cared for is its own kind of gift', 'the shape of a hand on a forehead, kept for decades') — each a different angle on the same small event. The third variant is the best writing in the pool: it defers the arrival of meaning until 'kept for decades', which is how memory actually works.",
+    "The a_meet_late pool ('across an ordinary Tuesday', 'across the better part of a life') hits the intended register — late love arriving without ceremony. The three variants are genuinely different framings rather than the same sentence shuffled.",
+    "The affair card's character-driven register selection (cold/self-aware when spirit is low, warm/self-deceiving when heart-led, clinical otherwise) is the best implementation of a non-random choice in the whole codebase. In the transcript, Lazlo — a spirit-led character at 16, falling 'with a cold clarity' — gets the appropriate variant. The mechanism does what it promises.",
+    "The observe() pools are deep and specific enough that across fifteen transcribed lives they almost never repeat verbatim within a single dynasty. 'The stairs have started to ask a question of her' is stronger than 'the body is getting older'; 'money has stopped being a worry and become a kind of weather' earns its abstraction.",
+    "The competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, x_honest_or_kind) genuinely have no clean answer, and the logLines for both choices in each pair make the moral weight legible without editorializing. 'Was never afterward quite sure she had been right' is an honest observation, not a penalty.",
+    "The cb_the_cost elder callback is structurally satisfying: it reads back the specific earlier choice in the character's own terms, which makes the echo feel earned rather than mechanical.",
+    "The motto system and the house-character function produce readable in-voice dynasty summaries without exposing numbers. 'What the mind holds cannot be taken' appearing at generation 3 and persisting through generation 5 of House Voss gives a genuine sense of lineage.",
+    "Epitaph de-duplication (blocked() and pr() machinery) works across the five transcripts: no two consecutive ancestors share an epitaph theme, and the mid-tier 'ordinary life' fallback only fires when it should.",
+    "The callback cards (cb_books_late, cb_outcast_return, cb_lookaway, cb_unspoken) that reach across decades feel like earned callbacks, not mechanical triggers. The Lena Voss sequence — looked away at 9, looked away again at 47, knowing now exactly what it costs — is the game's best prose arc."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Expand the c_sick 'brave alone' logLine into a small pool (2–3 variants). Currently it remains a single verbatim string: 'Learned early to be ill quietly.' It fires in 7 of 15 transcribed lives and is the most repeated line in the whole run.",
+      "why": "The nurture branch was fixed but the refusal branch was not. Across a long dynasty a player sees 'Learned early to be ill quietly' every other generation. It weakens the fix already done.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the a_child logLine for 'No. This life, as it is.' a pool of 2–3 variants. The current single line ('Chose a life without children, with clear eyes.' / 'Chose not to have another…') is fine, but it fires on nearly every dynasty that declines a second or third child and reads flat by the third time.",
+      "why": "The YES branch has a well-varied pool (8 base lines + a late-birth pool + the 'red and furious' special). The NO branch gets one line per parity. A player who repeatedly declines children should feel a different texture each time.",
+      "impact": "med"
+    },
+    {
+      "what": "The e_window grandchild card fires in 10 of 15 lives and resolves to 'Improved her own childhood a little, for a child who'd never know.' in 9 of those (the tell-the-better-story branch). The tell-the-true-story branch has only one logLine too. Both branches would benefit from a 2-variant pool.",
+      "why": "It is the single most repeated resolved line across the five dynasties. A card that touches so many lives needs more surface area.",
+      "impact": "med"
+    },
+    {
+      "what": "The a_marry late-marriage pool (p.age > 48 branch) currently has 3 lines; the standard branch has 6. In the transcripts, late marriage is extremely common — roughly half of all marriages — because characters so often acquire love through a_meet_late. The late pool should be expanded to 5 or 6 lines to match usage.",
+      "why": "The most-fired variant, 'Married X with most of a life already behind them, and counted it the best thing in any of it,' appears in 6 of the 15 lives. It is a good line but it has become the default sound of marriage in this game.",
+      "impact": "med"
+    },
+    {
+      "what": "Add one or two child-stage cards that are observational rather than binary-choice — pure texture, no choice at all, a single logLine fired by a stat or age threshold. The child stage currently only shows cards when a moment triggers, leaving long gaps of silence in early life.",
+      "why": "The game's ambient prose (observe()) is the strongest writing, but it is almost entirely stat-driven and fires in adulthood and later. A child who passes through age 3–12 without triggering c_book, c_sick, c_friend, c_steal, c_animal, c_sibling, c_talent, c_move, or c_grandparent gets no texture at all. A no-choice observational moment ('The years of learning one's own face' or similar) would fill that gap.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The round-5 fixes land: y_love1 now has two genuinely different emotional registers, c_sick's nurture branch has real variant depth, a_meet_late reads as three distinct late-love encounters rather than one reshuffled — and the prose throughout is specific enough to hold up as writing you'd read through rather than skim past, which puts this firmly above the 8 bar."
+}

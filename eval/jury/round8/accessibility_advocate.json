@@ -1,0 +1,44 @@
+{
+  "profile": "accessibility_advocate",
+  "score": 8.3,
+  "strengths": [
+    "aria-describedby on both eulogy (vDeath) and heir (vHeir) dialogs correctly references multiple content IDs, giving screen readers a full picture of the transition before they reach the action button",
+    "The 3-state pace control (#flow) deliberately omits aria-pressed and encodes full state in a dynamic aria-label ('the years are passing — tap to race ahead', 'the years are racing by — tap to return to the usual pace', 'time held still — tap to let the years resume'), which is correct design for a non-binary toggle",
+    ".reflect button uses ink-dim (#a99c87) on the dark background (#16110d) with a visible 1px border — computed contrast ~7:1, clearing AA at 13.5px; focus-visible ring is amber",
+    "srTag() injects sr-only prefixes ('Joyful: ', 'A loss: ', 'An echo: ') into both the ephemeral log and the full chronicle memoir, so colour-coded emotion is named for screen reader and colour-blind users",
+    "Lineage list and slot list both receive role='list'/role='listitem' programmatically in openChronicle() and openLoadMenu()",
+    "Skip link is present at the very top of body, uses position:absolute / top:-48px offscreen pattern, surfaces on focus",
+    "Reduced-motion is handled at three independent layers: CSS @media kills all transitions/animations; scene.js sets dt=0 and falls back to 250ms setTimeout loop; constellation.js freezes the twinkle clock; ui.js skips the opacity fade on beingLine()",
+    "#scene is aria-live='assertive' so moment prose interrupts any current AT speech — appropriate for a user-action-gated narrative card",
+    "Stage transition announcements go to stageA11y (polite) so they don't interrupt the assertive scene; the announcement fires on every stage including the opening childhood",
+    "Constellation keyboard traversal: arrow keys on the tabpanel navigate chosenStars chronologically; each decision is announced to #starA11y with age, text, road-not-taken, and ordinal count",
+    "Full MutationObserver focus trap across all 6 veils with a stack for nesting, focus return on close, and Escape handling for dismissable dialogs",
+    "Focus on card presentation goes to first choice button (not the card wrapper), so keyboard/AT users land directly on an actionable control; the assertive live region announces the moment prose simultaneously",
+    "Inline two-step delete confirm replaces native confirm() dialog, keeping focus inside the list and giving screen readers 'Confirm: delete House X forever' / 'Cancel: keep House X' labels",
+    "All meaningful ink-faint text has been lifted to ink-dim across temporal labels, flow readout, slot delete, and star legend hint, bringing them to ~5.5:1 on the dark background"
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add a <label> element associated to #codeBox via for/id, or use aria-labelledby pointing to the .backupTitle div",
+      "why": "The textarea currently relies on placeholder text alone, which WCAG 1.3.1 explicitly flags as insufficient — placeholder disappears on input and is never an accessible name substitute. A screen reader user tabbing to the textarea hears no label.",
+      "impact": "med"
+    },
+    {
+      "what": "Add aria-live='polite' aria-atomic='true' to #inspectOut, and perhaps role='status' to match the semantic intent",
+      "why": "When the player taps 'Inspect storage', results are injected into #inspectOut with no live region. A screen reader user gets no notification that content appeared; they must manually navigate back to read it.",
+      "impact": "low"
+    },
+    {
+      "what": "Set focus to #stockBody (add tabindex='-1') or the dialog heading when vStock opens rather than the 'Return to the years' button",
+      "why": "Currently the MutationObserver focusIn() jumps straight to the first focusable element (the dismiss button), so a keyboard user hears 'Return to the years button' before any of the readout content. Setting focus to the heading or region lets them read the dynasty status naturally before the dismiss action.",
+      "impact": "low"
+    },
+    {
+      "what": "Lift .hr-mottos from ink-faint (#8a7d6e) at opacity:0.85 to ink-dim (#a99c87) or full opacity",
+      "why": "The effective rendered colour of the past-houses mottos on the title screen sits at roughly 4.8:1 — technically AA for 12px italic, but on the edge; any display gamma variation or CSS compositing effect could push it below. The title screen is the first thing a new player sees.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A genuinely inclusive implementation that covers every material accessibility requirement for its gameplay loop — focus management, live regions, reduced-motion, keyboard traversal, colour-independent semantics — with three small but unaddressed gaps (no label on the backup textarea, no live region on the storage inspector, and focus landing on the dismiss button instead of the content in the readout panel) that are real WCAG 1.3.1/4.1.3 issues without being blockers to actual play."
+}

@@ -1,0 +1,47 @@
+{
+  "profile": "roguelike_replayer",
+  "score": 5.5,
+  "strengths": [
+    "The softened love/marry/child forcing (drawCard in engine.js) genuinely works: lives diverge in when and whether romantic milestones land — Calla Vane marries at 56, Elias at 54, others in their 20s, producing meaningfully different adult arcs.",
+    "Callback cards are the strongest replayability hook: cb_outcast_return, cb_books_late, cb_strayed, cb_lookaway, and cb_inherited_secret create payoff moments that only unlock if you chose correctly 20-40 years earlier — this is the game's best 'build identity' mechanism.",
+    "The bequest system (e_bequest) is a genuine cross-generation lever: bequeathing 'mind' vs. 'means' vs. 'heart' vs. 'free' visibly shapes the heir's opening conditions and changes which early cards are eligible, so one generation's death is another's character-creation.",
+    "Seat- and reputation-gated cards (s_great_burden, s_from_nothing, r_scholar_door, r_family_shadow, x_reckoning) add content the player can only see by steering the dynasty — a landed house meets cards a struggling one never will.",
+    "Individual life texture is genuinely varied: a reckless-then-confined Ambrose Vasquez reads nothing like a quietly faithful Anders Vasquez, even within the same dynasty; the prose rotations (rotI variants on key cards) prevent exact repetition.",
+    "Early-mortality risk (deathRoll + peril flag) means some runs end short, changing which content fires and forcing a different starting situation on the heir — Dynasty 3 Halloran dying at 44 is a real departure from the five-generation norm."
+  ],
+  "blockers": [
+    "All three completed 5-generation dynasties in the transcripts end with the identical motto 'We take in what the world turns out.' — the kind/generous/warm reputation tags are dramatically over-weighted in updateHouse(), so every long dynasty converges on the same house identity regardless of how differently lives were played (a pious Vasquez line and a hard-dealing line both resolve to 'kind'). This kills the fantasy of building a distinct dynasty archetype.",
+    "The card pool is too shallow to sustain multi-dynasty replayability without visible repetition. The c_talent / c_animal / c_book trinity appears in nearly every childhood; e_grandchild fires in 7+ lives across 5 dynasties; m_health fires in almost every midlife. A player doing a second full 5-generation run will see all the same beats.",
+    "No run-start differentiation: every new dynasty begins from identical conditions (seat 1, blank reputation, no heirlooms, no traits beyond random roll). There are no 'choose your starting house' or 'cursed lineage' or 'fallen noble' options, so dynasty 1 and dynasty 4 open identically — the roguelike pull of 'try a different start' does not exist.",
+    "The reputation-to-motto mapping has only 8 tags and heavily penalizes niche paths: 'reckless' and 'artistic' and 'pious' can bump into reputation but the motto system requires reputeTop() >= 2.0 to trigger and fade() slowly erases non-leading tags — in practice only 'kind', 'scholarly', and 'industrious' persist long enough to crystallize a motto, meaning 5 of 8 possible identities are effectively unreachable over a full dynasty.",
+    "Callbacks are the best replayability mechanic but only 2 of them (cb_books_late, cb_outcast_return) reliably fire across dynasties — the others (cb_strayed, cb_lookaway, cb_unspoken, cb_inherited_secret) require specific negative choices that players often avoid, leaving the reach-back arcs unresolved in most playthroughs."
+  ],
+  "improvements": [
+    {
+      "what": "Rebalance updateHouse() reputation bumps so reckless/artistic/pious accumulate at parity with kind/scholarly, and increase the fade() resistance of specialty tags so a dynasty that consistently makes bold/creative/devout choices actually crystallizes a distinct motto.",
+      "why": "Fixes the single biggest replayability failure: every long dynasty reading as the same house. A 'We burn bright' or 'In time, all is weighed' motto from a second playthrough is the strongest possible signal that dynasty 2 is genuinely different from dynasty 1.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 dynasty archetypes players can optionally start from when beginning a new line — e.g. 'fallen house' (seat 3, tainted reputation, secret already set), 'trade family' (seat 1, industrious bump, means-leaning traits), 'wanderers' (no seat, restless trait mandated, no heirlooms ever). These gate content differently from turn 1.",
+      "why": "Creates the roguelike pull of 'try a different start.' Right now there is no reason dynasty 2 opens differently than dynasty 1; adding starting conditions gives the player a character-creation beat and a different early card mix.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 8-10 new adult/midlife cards specifically for niche reputation states (a 'reckless' house should see a card about the family's wild reputation preceding the heir into a room; an 'artistic' house should have an inheritance-of-craft moment distinct from e_craft; a 'pious' house should have a reckoning-of-faith moment).",
+      "why": "Expands the gated content pool so steering toward a specialty reputation actually unlocks meaningfully different gameplay, not just a different motto string. Right now r_scholar_door is the only repute-gated card that delivers narrative payoff.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'dynasty-end score' or summary that highlights what was unique about this run — which cards only this dynasty saw, what reputation they built, the seat arc, any callbacks that fired. Display this before 'Begin a new line' so the player internalizes what they steered toward.",
+      "why": "Makes the run feel complete and distinct before it ends, which is the primary 'one more run' trigger in roguelikes — knowing exactly what you achieved and what you didn't try.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce a second callback tier: 'dynasty callbacks' that fire in a grandchild's life based on what the founding generation chose, not just the direct parent. For example, if the founder kept the stray AND the child kept it, a generation-3 heir meets a card about a family legend of the animal that was always kept.",
+      "why": "Right now callbacks span a single generation (parent choice -> child payoff). Cross-generational callbacks would make the 3rd or 4th life feel causally connected to the 1st, giving the player a reason to replay from the founding choice.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine generational texture and smart callback mechanics, but its reputation system funnels every long dynasty to the same motto and its card pool is too small to sustain a second full run without visible repetition — the 'one more dynasty' pull simply isn't there yet."
+}

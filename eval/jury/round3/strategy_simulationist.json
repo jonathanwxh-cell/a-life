@@ -1,0 +1,44 @@
+{
+  "profile": "strategy_simulationist",
+  "score": 7.0,
+  "strengths": [
+    "houseCharacter() now gives a graduated, number-free prose reading of reputation state ('A name for being X is only just beginning to gather' / 'The family is becoming known as X' / 'known, by now, as X — settled enough it has become the house's character') — a systems player can finally read where they are on the reputation track and how far from motto crystallization",
+    "houseCharacter() appears in two places that matter: the 'how things stand' panel (openStock) AND the heir screen — so reputation is visible both mid-life and at the generation transition, which is where a dynasty-manager needs it",
+    "The 'how things stand' panel's directional hint now names the two growth vectors (end-far-richer-than-begun, OR sustained-name) and surfaces the m_invest_name lever when the conditions are live (age 40-64, means>40) — this is the missing signal that was the core of blocker #2",
+    "m_invest_name gate widened to means>40 (from presumably higher) and weight raised to 3, with a cool of 14 years — it now fires in the transcripts (Cyrus Holloway, age 43, used it successfully); the log line correctly distinguishes rose vs. held ('watched the name climb a rung' vs. 'held the name where it stood')",
+    "The reputation path is now genuinely player-targetable: a_make_name fires once in adult stage with a direct 3-way fork, and each fork writes a specific memory tag that feeds into updateHouse()'s bump() weights — so choosing 'Be known as learned' at 31 (Annika Lindholm) actually shifts the house toward scholarly",
+    "The bequest system is a real cross-generation planning lever: four distinct options (mind/means/heart/free) with visibly differentiated starting conditions for the heir, shown plainly on the heir screen — this works",
+    "The reckoning (x_reckoning) is genuine risk pressure: it fires at seat>=3 on a long cooldown, forces a cash/spirit trade, and the 'fell' outcome costs the house a seat — making seat maintenance a real concern, not just passive accumulation",
+    "Seat-7 now has a clearly stated gate (seat-6, repute>=6 on dominant tag, peakMeans>=88, ~35% chance) with per-generation lapse back to seat-6 — the pinnacle is both visible and earned"
+  ],
+  "blockers": [
+    "The directional hint in openStock surfaces m_invest_name only with a vague 'There may be a way, now, to spend the means in hand deliberately on the family's standing' — it names no action, no cost, no probability. A CK player reading this doesn't know whether to look for an event, a button, or a menu. The hint should name the mechanism ('Watch for the patronage decision') or at minimum confirm it is a card that will come.",
+    "The reputation feedback loop still has a material gap: the reputation-to-seat promotion in updateHouse() (repTop>=2.0, seat<5, 60% chance) is opaque. The 'how things stand' panel shows current reputation character but gives no indication that reputation itself can move the seat — only money is mentioned in the directional hint. A strategist building a scholarly or kind dynasty to climb without wealth has no signal that this path exists.",
+    "The seat-decay mechanic (slow decline when peak-endMeans>=40 and endMeans<35) is invisible to the player. There is no hint in the readout that a life living off old wealth without sustaining it risks a seat loss. A Dwarf Fortress player would expect this as a readable threat — right now a dynasty can quietly slide and the player won't understand why until after the fact.",
+    "Seat-7 requires repute[top]>=6 on a single tag, but the 'how things stand' readout only gives qualitative tier language ('becoming known as / known, by now, as') with no indication of multi-generational depth needed. A player who reaches seat-6 with a motto has no way to gauge whether their repute score is at 2.1 or 5.9 — the prose is the same once the motto appears. The gap between 'motto crystallized' (repute>=2) and 'seat-7 eligible' (repute>=6) is four generations of re-earning with no visible progress indicator.",
+    "No feedback on a failed m_invest_name ('held the name where it stood') explains WHY it failed or what would improve the odds. The 62% success rate is silent; a systems player expects to understand variance sources (was it just RNG, or does higher means shift the odds?)."
+  ],
+  "improvements": [
+    {
+      "what": "In the openStock directional hint, explicitly name both seat-climbing paths: 'The house rises on a life that ends far richer than it began, OR on a strong single reputation held across many lives. Watch for a decision about spending on the family's standing — it arrives in midlife when the means are above a certain threshold.'",
+      "why": "Closes the gap between m_invest_name being discoverable and the reputation path being completely invisible as a seat-driver — both vectors should be named so a player can plan which to pursue",
+      "impact": "high"
+    },
+    {
+      "what": "When reputation has crystallized a motto (repute[top]>=2), add a second sentence to houseCharacter() that signals multi-generational depth still matters: e.g. 'A house that holds this name across many lives may one day be written into the histories.' This doesn't give numbers but signals that the motto is a beginning, not a peak.",
+      "why": "Closes the seat-7 opacity gap — a player building a storied dynasty currently has no signal that keeping the reputation alive across 4+ generations after motto crystallization unlocks the next tier",
+      "impact": "high"
+    },
+    {
+      "what": "Add a one-line 'the house lives off old wealth — a lean year could cost it' warning to the openStock hint when peak-endMeans gap >= 30 and endMeans < 40, so the slow-decay risk is visible mid-life.",
+      "why": "Slow seat-decay is a real mechanic but currently invisible; without feedback a player can't distinguish deliberate decline from passive drift, which breaks the cause-effect loop a systems player needs",
+      "impact": "med"
+    },
+    {
+      "what": "When m_invest_name fires and the result is 'held' (38% of the time), append a hint to the log line: 'The timing may yet not have been right — or the odds simply fell against it.' This signals RNG variance is normal, not a permanent lock.",
+      "why": "Removes the ambiguity of a failed investment — currently indistinguishable from a misconfigured condition; a strategy player needs to know a retry is valid",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 3 fixes both stated blockers — houseCharacter() is now readable and informative, and m_invest_name actually fires and logs truthfully — but the strategy layer still has three visibility gaps (reputation as a seat-climbing path is unnamed, seat-7 depth after motto is opaque, slow-decay risk is invisible) that prevent a systems player from forming a complete mental model and planning against it; a 7 rather than an 8."
+}

@@ -1,0 +1,33 @@
+{
+  "profile": "cozy_fan",
+  "score": 8.6,
+  "strengths": [
+    "The ambient whisper system (child/elder/any pools, ephemeral log, fade-in/fade-out) is exactly right — it fills silence with texture, never with noise. 'A year goes by that no one will remember, and it is a good one.' is the kind of line a cozy game earns once and most never does.",
+    "The sky-as-life-arc is one of the most quietly beautiful design decisions I've seen: born at dawn, midlife gold afternoon, elder dusk, death at night — the whole lifespan as a single day. It runs without explanation and lands immediately.",
+    "The competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are genuinely calm to face. There is no wrong answer, no punishment — just the ache of two real things that won't both fit. That is cozy design in the deepest sense: the conflict is interior, not hostile.",
+    "The slow seat-decay is implemented with exactly the right touch — falls require genuine end-of-life hardship or a deliberate choice to protect oneself over the house; a coasting life doesn't hemorrhage. The system has teeth without anxiety.",
+    "The title now leads with the dynasty hook ('Each life hands the next its name, its means, its reputation — and its secrets. Over the generations, a house takes shape.') placed prominently before the mechanics. This is the first thing a new player reads that makes them want to stay.",
+    "The 'houses you have raised' collection on the title screen is a perfect meta-progression gesture — a cabinet of completed houses, their peak standing and crystallised mottos, visible before you even press Begin. It reframes every dynasty that ends as an achievement, not a loss.",
+    "The writing consistency across 15 full lives in the transcripts is remarkably even — the prose voice doesn't slip, choices feel appropriately weighted, and callback cards (cb_lookaway, cb_unspoken, cb_strayed) reward attention without demanding it.",
+    "Music at 0.42 max volume, opt-in only, four contextual pieces: this is the music philosophy of a cozy game done correctly. It sits under the reading; nothing shouts."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add 2–3 more ambient whisper lines tuned to the midlife and adulthood stages, not just child/elder/any",
+      "why": "The middle decades — adulthood and midlife — are where most of a life is lived in play. The 'any' pool covers them adequately but the stage-specific warmth of the child and elder pools ('A long afternoon goes by with nothing in it but light'; 'The days are wide and slow and mostly kind now') is missing for the longest stretch of the game. A midlife line like 'The ordinary week turns out to be where a life actually lives' would deepen the atmosphere considerably.",
+      "impact": "med"
+    },
+    {
+      "what": "On the title screen, show the current active dynasty's standing and motto (not just concluded houses) as a single line beneath the 'Continue House X' button",
+      "why": "Returning players see 'Continue House Thorne' but get no atmospheric reminder of where the house stands. A line like 'a comfortable household · hard-working · four generations' would make re-entry feel warm rather than neutral, and is consistent with the game's prose-not-numbers philosophy.",
+      "impact": "low"
+    },
+    {
+      "what": "Expand the competing-goods section with 1–2 more cards, particularly for the early-adult window (26–35) which currently runs lighter on these reflective moments",
+      "why": "x_honest_or_kind and x_loyalty_truth are the most distinctive things this game does — neither has a wrong answer, both leave you genuinely unsure. The cool:22 on the first one means long plays can go decades without seeing one. A second quiet-goods card for young adulthood (e.g., the competing claims of ambition and contentment, or staying vs. uprooting a settled life) would make that stretch feel as rich as the rest.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is, in round 3, a genuinely excellent cozy game: the atmosphere is consistent, the silence is properly inhabited, the competing-goods cards are the most interesting design in the genre I've encountered, and the dynasty hooks are now properly surfaced — I would absolutely return to it to unwind."
+}

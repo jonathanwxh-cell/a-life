@@ -1,0 +1,46 @@
+{
+  "profile": "critic_journalist",
+  "score": 7.5,
+  "strengths": [
+    "The writing has a consistent, earned voice — terse, elegiac, never purple. Lines like 'Left home for the city, carrying one bag and a life not yet started' or 'The marriage broke on what they did' carry genuine literary weight, and the constraint of prose-only output forces the prose to actually work.",
+    "The callback card system is the game's best idea and it delivers: seeing 'a kindness done at 7 came back, decades later, as a door held open' across a 30-year gap is the closest thing to genuine novelistic structure in the genre — it beats Cultist Simulator's lore cards for emotional legibility while keeping the same sense of hidden causation.",
+    "The epitaph generator is quietly brilliant. Blocking repeated clusters across three ancestors so a chronicle never reads the same note twice, then falling through to 'an ordinary life, which is to say, a whole world' — that last line alone earns its keep. It handles procedural text with the discipline of a writer rather than an engineer.",
+    "Form serves theme with unusual fidelity. The 2-second year tick, the ephemeral log that fades between moments, the sky that arcs from dawn to dark over one lifetime — these are not cosmetic. They make time feel like the subject rather than the container. This is where the game earns its literary claim.",
+    "The dynasty layer gives genuine longitudinal stakes without a leaderboard. Watching 'a book too hard for a child's hands' pass through four generations as a named heirloom while the motto 'What the mind holds cannot be taken' crystallises — that produces exactly the slow accumulation that Reigns gestures at but can't sustain across sessions.",
+    "The constellation is the right UI idea: a star-map of decisions, chosen versus unchosen, draggable and zoomable. It externalises the 'road not taken' structurally rather than leaving it to memory, and it looks beautiful in the screenshot."
+  ],
+  "blockers": [
+    "Card repetition is the single biggest threat to the literary identity. In five dynasties across fifteen lives, the transcripts show the same card text landing three or four times per dynasty: 'The question of a child arrives, the way it does — half decision, half tide,' 'The end of the month keeps arriving before the money does,' the work-promotion card cycling through its three variants in quick succession within a single life. For a game that bills itself as a reading experience and invokes Sunless Sea as a comparator, repetition is not a minor flaw — it breaks the suspension. Sunless Sea's quality bar is one unique, vivid text per node; A Life is still below it.",
+    "The choice architecture is almost entirely binary and value-neutral, which hollows the literary claim. The game presents itself as a contemplative meditation on a life, but most choices reduce to a hedonic trade: heart vs. means, spirit vs. vitality, presence vs. provision. There is no card that is genuinely morally uncomfortable, no choice where both options feel like a real cost to something the player has built a relationship with. Cultist Simulator and Sunless Sea both know that the best text-driven choice is one where you already understand what you will lose. A Life hasn't crossed that threshold.",
+    "The observation lines ('Something in them has refused, all these years, to grow heavy' / 'Whatever the years took, they did not take the lightness in them') are too frequent and cycle through too few variants. In transcripts, a single character can receive two of the three spirit-high variants within the same playthrough, and across generations the same line can appear five or six times total. These lines are meant to feel like a narrator's private notation about a specific person; when they repeat they feel like copy.",
+    "There is almost no systemic surprise that originates from *player* choices compounding over *multiple lives* in unexpected ways. The heirlooms are lovely, the secret mechanic is good, but the actual play experience is a series of 50/50 binary decisions with clean stat outcomes — the dynasty emerges from averaging rather than from emergent collisions. Games like Universal Paperclips and BitLife earn their replayability by producing situations the player could not have predicted from the inputs; A Life does not yet do this at the generational level."
+  ],
+  "improvements": [
+    {
+      "what": "Extend the card pool by at least 40% before any other change — specifically in the adult and midlife stages, which are both underserved and where the repetition is worst. The child stage already has good variety; the 30-to-60 range in the transcripts shows the same 8-10 cards cycling every generation.",
+      "why": "Repetition is the primary threat to the literary identity. A player who encounters 'the question of a child' four times in a session stops reading it; at that point the game has lost its only differentiator from a stat-management UI.",
+      "impact": "high"
+    },
+    {
+      "what": "Add at least 3-4 cards where the *correct* choice is genuinely ambiguous and where one option causes a loss that is already emotionally loaded (e.g., a card that only fires if you have a high-bond child, where the choice involves sacrificing that bond for something the *child* needs rather than something the character needs). The current moral universe is too comfortable.",
+      "why": "The game's stated ambition is contemplative and literary. Literary fiction earns its weight by putting something genuinely at stake. Right now the hardest choice in the game is 'affair: walk through it' — which pays a spirit penalty and a 50% chance of losing the spouse. That is a stat consequence, not a moral one.",
+      "impact": "high"
+    },
+    {
+      "what": "Cut or consolidate the spirit-high observation variants to one line per playthrough per archetype, and enforce a minimum generational gap (at minimum 2 generations) before the same observation text can fire again.",
+      "why": "The observer-narrator voice is the game's most distinctive stylistic choice. Repetition of that voice's specific phrases is more damaging than repetition of choice-card text, because the observer is supposed to be seeing *this* person specifically.",
+      "impact": "high"
+    },
+    {
+      "what": "Add one cross-generational emergent mechanic where the player can see a consequence they caused 2+ generations ago surface in an unexpected form — something beyond the named heirlooms (which are predictable). A reputation-tainted house that produces a specific card only available to descendants of a disgraced ancestor, for instance.",
+      "why": "The dynasty engine has the infrastructure for this (repute tags, secrets, seat levels) but doesn't use it to generate genuinely surprising situations. A single well-designed emergent chain would elevate the generational layer from decorative to structural.",
+      "impact": "med"
+    },
+    {
+      "what": "On the constellation UI, add a way to filter or highlight the callback cards specifically — the moments where an earlier choice returned. These are the game's strongest design achievement and they are invisible in the star-map without tapping each node.",
+      "why": "Making the callback chain visible would let players understand and appreciate the game's best mechanic, and would give the constellation a curatorial purpose beyond being a map.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has a genuine literary identity — clean prose, a clever callback system, and a form that makes time feel like the subject — but it is not yet the reading experience it aspires to be, because card repetition breaks the spell and the choice architecture never asks anything genuinely hard of the player."
+}

@@ -1,0 +1,41 @@
+{
+  "profile": "roguelike_replayer",
+  "score": 7.8,
+  "strengths": [
+    "Reputation rebalance demonstrably works: across all 5 sampled dynasties no single tag dominates. Mercer crystallizes no motto (kind never hit threshold); Vasquez earns 'reckless' ('We burn bright, and we burn.'); Marchetti earns 'industrious' ('By our own hands.'). The lived() guard that blocks inherited heirlooms from silently re-scoring kind is precisely the right fix and it held in every observed dynasty.",
+    "The ruthless heirloom 'a name that opens doors by being feared' now shows up visibly in heir screens for House Mercer (gen 3 onward), House Vasquez (gen 4), House Marchetti (gen 4-5) — a ruthless archetype now leaves tangible proof across dynasties that is read back at the start of every heir.",
+    "r_hard_name and r_old_shame are wired to reputeTop checks in updateHouse — the code is correct and will trigger for any dynasty that earns 'ruthless' or 'tainted'. cb_corner, cb_reckless, cb_the_cost are present and gated on the right memories.",
+    "houseCharacter() now surfaces a readable progress signal at every heir screen — including the hint 'Held this strong across more lives, and raised high enough, such a name can be written into the histories' when seat>=4 and repute>=2, which is a clear goal-post for the run-building mindset.",
+    "The meta-progression 'houses you have raised' collection (recordHouseLegacy, renderHousesRaised) is real and shows house count, peak seat name, and all mottos earned — exactly the inter-run trophy board a roguelike player wants to accumulate.",
+    "The seat-7 gate has been adjusted: repute>=4.5 (code reads 'repute[repTop]>=4.5') and peakMeans>=88 with a 35% chance. The comment explicitly says 'reachable through a focused run, still re-earned each generation', which is the right design philosophy for a run-based player.",
+    "Callback card depth for the harder paths is now real: cb_corner, cb_reckless, cb_the_cost, plus r_hard_name, r_old_shame, r_family_shadow give distinctly different mid-arcs to ruthless/tainted lines vs clean ones."
+  ],
+  "blockers": [
+    "Seat-7 pinnacle still extremely hard to verify as actually reachable in a 5-6 generation run. The condition requires seat>=6 AND repute>=4.5 AND peakMeans>=88 AND 35% random. In the transcripts, the best dynasty (House Marchetti, 5 gens) ends at 'an old and famous house' (seat 6). Getting repute to 4.5 for any single tag requires consistently scoring the same archetype with ~1.2 bump per life across 4+ generations without the 0.12/gen fade wiping it — plausible on a focused run but untested in transcript evidence. The 35% gate means even a perfectly built run has a 65% chance of failing the pinnacle on any given generation. This still feels closer to 'win-and-maybe-eventually' than 'focused 5-6 gen run goal'.",
+    "Ruthless and tainted mid-arc content (r_hard_name, r_old_shame) is present in code but never fires in any of the 5 sampled dynasties. Mercer has the hardname heirloom in gen 3-5 but the r_hard_name card requires reputeTop==='ruthless' — Mercer never earns that top tag (Joaquin cut corners but other paths diluted it). The content exists but the triggering path is narrow enough that a player may run 3-4 full dynasties without ever seeing it. The archetype needs either a lower trigger bar or a second entry point.",
+    "No 'run meta' communication at dynasty end. When the line goes extinct you see a one-liner ('House X ends here — N gens, M lives, risen to Y, known as Z') but there's no screen that shows 'this run: here's what you built, here's what you never unlocked, here's what the next run could chase.' For a roguelike-minded player the end-of-run debrief is load-bearing for the 'one more run' pull."
+  ],
+  "improvements": [
+    {
+      "what": "Add a dynasty-end debrief screen (or expand the eulogy of the last life) that lists: highest seat reached, motto earned (or 'no motto crystallized'), heirlooms left in the world, any unlocked archetype content that fired (e.g. 'The hard name opened doors') and 1-2 things the run did NOT reach (e.g. 'The family never built a scholarly name' or 'The pinnacle was in sight but not reached'). Frame it as a chronicle summary, not a stats dump.",
+      "why": "The 'one more run' pull in roguelikes is driven by knowing exactly what you failed to do and feeling it was close. Right now the line extinction message is too terse to create that itch.",
+      "impact": "high"
+    },
+    {
+      "what": "Lower the seat-7 gate slightly: remove the peakMeans>=88 hard requirement or lower it to >=80, keeping the repute>=4.5 and the 35% random. Alternatively, make the 35% become 55% if repute>=6 (hyper-focused line), so a player who genuinely commits to one archetype for 6+ gens gets a realistic shot.",
+      "why": "peakMeans>=88 is a stat the player has very limited direct control over — it's mostly the wealth path. Requiring simultaneously: seat 6, repute 4.5, peakMeans 88, AND 35% chance collapses the reachable-in-focused-run promise. The repute bar alone is sufficient skill gate.",
+      "impact": "high"
+    },
+    {
+      "what": "Give r_hard_name a secondary trigger: fire if either reputeTop==='ruthless' OR (heirlooms includes 'hardname' AND means>60). This catches the Mercer case where a ruthless act left an heirloom but the overall house never tipped to 'ruthless' as its top tag.",
+      "why": "The ruthless heirloom is explicitly shown to heirs across 3 generations in the transcripts but never produces the distinctive mid-arc card because the house tag never aligns. The heirloom is a tangible promise the game makes and then doesn't keep.",
+      "impact": "med"
+    },
+    {
+      "what": "Add one more 'tainted' card in the youth/early-adult band (age 18-30): a moment where the family secret becomes visible to the heir for the first time — not just a log line but a choice about whether to dig into it or bury it deeper. Currently the tainted path has r_old_shame (which fires when something is blocked by the shame) and r_family_shadow (carry it or refuse it) but no card that makes the player feel the weight of discovery.",
+      "why": "The tainted archetype's emotional hook is the inherited secret, but it only surfaces as inherited_secret in mem and a log line. A discovery card would make the archetype feel authored rather than procedural.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Round 4 delivered real fixes — motto diversity is genuine, the ruthless heirloom creates visible inter-generational proof, and houseCharacter now works as a build-readback — but the pinnacle gate is still effectively out of reach in a 5-6 generation run, the ruthless mid-arc content never fires in practice (heirloom present, trigger tag absent), and the end-of-dynasty debrief is too thin to close the 'one more run' loop."
+}

@@ -1,0 +1,38 @@
+{
+  "profile": "roguelike_replayer",
+  "score": 8.3,
+  "strengths": [
+    "The bequest lever (e_bequest: mind/means/heart/free) is a genuine strategic choice across the generation boundary — each option demonstrably changes the heir's starting stats and framing, which is exactly the 'how do I set up the next run differently' pull that drives roguelike replayability",
+    "The r_hard_name → r_name_cost thread is a real two-beat ruthless arc with downstream cost: you use the feared name as a weapon in adult years (means +14), then in midlife a child starts flinching at what they stand to inherit — this is consequence that outlasts the life that made it and rewards players who notice and try to break the cycle",
+    "The 'houses you have raised' meta-collection (up to 24 dynasties in localStorage, displaying motto earned and peak seat) gives meaningful cross-run accumulation — a player can see they have never gotten the scholarly motto and set out to earn it deliberately",
+    "Seat-7 ('a house written into the histories') is genuinely rare: it requires seat-6, a cumulative repPeak ≥ 3.5, and a life that peaked at means ≥ 76, with only a 45% roll even then — and it lapses back to seat-6 every generation, so it must be re-earned, not just reached and held",
+    "The houseCharacter readout now gives a full four-tier trajectory across the seat-5-to-6 climb ('barely begun to settle' through 'deep enough now for the histories'), making the pinnacle legible rather than opaque across long plays",
+    "Callback cards (cb_lookaway, cb_principle, cb_outcast_return, cb_strayed, cb_corner) create genuine remembered-consequences replayability — choices made at age 8 surface again at 52 with a different resolution available, making a second run feel like a chance to answer differently",
+    "Motto diversity is real in play: the transcripts show 'We burn bright, and we burn.' (reckless) and 'What the mind holds cannot be taken.' (scholarly) on different dynasties — and the eight distinct mottos mapped to eight distinct reputation paths means a focused run produces a meaningfully different house character",
+    "The invest lever (m_invest_name) and reputation-steering card (a_make_name) give a player who wants to actively play the dynasty — not just witness it — real levers to pull, with visible seat movement logged in the life that caused it"
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "At run end (the 'The line ends. Begin anew.' screen), add a brief dynasty autopsy: highest seat reached, motto earned or nearest reputation, how close repPeak got to the seat-7 threshold (e.g. 'reputation peaked at 2.8 of 3.5 needed for the histories'), and which bequest type was used most or least",
+      "why": "Roguelike replayability depends on knowing what to do differently. The current end screen names the final standing but gives no goal-setting information for the next run — a player who never reached seat-7 doesn't know whether they were one focused generation away or five",
+      "impact": "high"
+    },
+    {
+      "what": "In the m_invest_name card hint text, surface the odds explicitly: currently 'spend yourself to lift the house' tells the player it costs but not that it succeeds 62% of the time — something like 'more often than not, it lifts' would let a player make an informed bet across the generation arc",
+      "why": "The brief notes honest odds were added; they are in code comments but not in the player-facing hint. A roguelike player plans around probabilities; hiding them forces guesswork on a key dynasty lever",
+      "impact": "med"
+    },
+    {
+      "what": "Add one or two adult/midlife cards for runs that avoid both the ruthless and scholarly reputation paths — the variety expansions help, but a 'neutral' run that doesn't invest in the name, doesn't have a hardname heirloom, and isn't scholarly-tracked can cycle through the same 6-8 mid-life moments across three generations",
+      "why": "The roguelike replayer's main frustration is feeling like they are replaying the same session; the seat-gated and repute-gated content is good but only fires on certain build paths — the broad middle needs more surface area",
+      "impact": "med"
+    },
+    {
+      "what": "Consider a brief 'house trait' summary on the heir screen that names the specific reputation tier and what the next generation needs to sustain or shift it (e.g. 'the scholarly name is close to settling — one or two more lives of the same, or it drifts') — the houseCharacter text does this but it is a single paragraph that competes with bequest text and seat description",
+      "why": "This is the dynasty-steering information most valuable to a replayer planning across generations; surfacing it more prominently at the moment of succession (when the player is thinking ahead) rather than only in the houseCharacter block would sharpen the strategic loop",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A genuine 'one more run' pull — the bequest lever, the ruthless two-beat thread, the legible seat-7 pinnacle, and the cross-run house collection give a replayability-minded player real reasons to go again with intent, though the run-end screen leaves too much goal-setting information on the floor."
+}

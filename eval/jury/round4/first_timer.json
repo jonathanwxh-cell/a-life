@@ -1,0 +1,32 @@
+{
+  "profile": "first_timer",
+  "score": 8.0,
+  "strengths": [
+    "The dynasty-hook lead paragraph ('Each life hands the next its name, its means, its reputation — and its secrets. Over the generations, a house takes shape.') is now a fully-bright line (color:var(--ink), opacity:.96, font-size:14px) placed above the rule in the title sheet — the first substantive prose a newcomer reads after the tagline. The round-3 blocker about this being unreliably visible was based on a stale screenshot; the actual code confirms it is present, prominent, and in the natural reading flow.",
+    "The heir identity line ('You are no longer X. You are Y, their son/daughter — born into the world they left behind.') is the first sentence in the .tag of the heir screen, styled at 15px italic. A first-timer is told clearly that they have become someone new, before anything else on the screen.",
+    "Ambient whispers now fill the quiet years: after 4 years with no card, a 14% per-year chance triggers lines like 'The ordinary week turns out to be where a life is actually lived.' or 'Rain comes, and stays a while, and goes.' — stage-appropriate, ephemeral, and styled distinctly dim/italic so they read as texture rather than events. The waiting gap that confused first-timers in round 2 now has a quiet, continuous presence.",
+    "The chronicle link (.chron2) is now font-size:12px, color:var(--ink-dim), opacity:1.0, with a subtle bottom border — a readable, discoverable element. The constellation link above it is amber at 13.5px with its own underline, drawing the eye first; after the first decision, a beckon animation on the constellation link and a persistent hint ('Every choice is being written into your chronicle — tap the constellation (top) to see the whole line.') closes the discoverability gap.",
+    "The liveness pulse-dot on the flow text (a breathing animation that pauses when time is held) is a clean, unobtrusive signal that the game is active — a first-timer who sees the dot pulse knows something is happening and is not staring at a broken page.",
+    "The intro hint ('The years move on their own — pause any time with the ▮▮ below. Now and then, a moment will ask something of you.') fires at 1.6s, lingers 13s, and is styled .entry.hint at full ink colour — more readable than ordinary log lines.",
+    "The transcript writing is genuinely moving for a newcomer: 'Had a child, Iris, and felt the lateness itself as a kind of luck.' and 'Left his knowing in other heads, where it kept on being used.' land with quiet weight. A first-timer who experiences one full life will feel it."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Give the heirInherit paragraph slightly more visual weight — bump its font-size from 14.5px to 15px and use color:var(--ink) at 0.88 opacity rather than the full var(--ink-dim). It currently reads as the quietest text on the heir screen, and the inheritance specifics (what was handed down, what the family now holds) are the most dynasty-meaningful prose at that moment.",
+      "why": "A first-timer who reads the identity line and hits 'Live this life' quickly may not register the inheritance paragraph. Lifting it slightly makes the chain of continuity feel heavier and more intentional without overcrowding the screen.",
+      "impact": "low"
+    },
+    {
+      "what": "After a first-timer's third ambient whisper during a single quiet stretch (roughly 20+ years with no card), fire a one-time hint gated by a separate localStorage key: 'Long stretches between moments are normal — the years are still passing.' This is distinct from the intro hint and addresses the edge case of someone returning after a pause.",
+      "why": "The ambient whispers address the quiet years during active play, but a player who steps away and returns after a long gap has no signal that they haven't missed anything. One additional gentle hint closes this case without cluttering the first-timer experience.",
+      "impact": "low"
+    },
+    {
+      "what": "On the title screen, consider making the housesRaised mottos slightly more legible on first play for a returning player — the .hr-mottos at var(--ink-faint)/opacity:.85 is dim for a small, italic font. Raising to var(--ink-dim) at full opacity would match the .tag readability without losing the quiet register.",
+      "why": "This is a meta-progression hook for returning players; if it reads clearly, a player who has lost one dynasty will feel the pull of the accumulated history and be more likely to start a new line.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The round-3 blockers are genuinely resolved: the dynasty hook is prominent on the title, the heir identity is explicit, the waiting gap has ambient whispers, and the chronicle link is now readable — a first-timer landing on this game will understand what it is, feel the permanence of choices, and know when someone new has taken their place; I would recommend it without caveats to anyone patient enough for a quiet, literary experience."
+}

@@ -1,0 +1,47 @@
+{
+  "profile": "qa_skeptic",
+  "score": 7.0,
+  "strengths": [
+    "No hard soft-locks found: the card draw system guarantees love/marriage/child windows are never permanently foreclosed — the priority rules in drawCard() (opensLove, a_marry, a_child forcing on window close) are correctly implemented and confirmed working across 15 transcript lives.",
+    "deathRoll() is mathematically sound — three layered age bands, vitality scaling, frail trait modifier, and the vit<=2 hard-kill fallback all compose correctly; early mortality rate appears calibrated near the intended 8–12% (no statistical run, but no lives ended before the first card in any transcript).",
+    "Save/load is robust: multi-slot with index, legacy migration, export/import base64 round-trip, and the dead-person path (loadSlot → showEulogy) are all handled; loadSlot() re-hydrates every missing field gracefully.",
+    "Callback card arcs work correctly in practice: cb_books_late, cb_outcast_return, cb_study_pays, cb_left_home, cb_strayed all fired appropriately in transcripts and the echo text correctly distinguished inherited vs. self-experienced memories.",
+    "No unresolved {token} literals appear in player-visible prose: fmt() is applied to all card text (strings and functions) and all log lines; the {n}/{they}/{them}/{their} replacement is complete.",
+    "The epitaph deduplication system (pr() + blocked() + recentC) prevents exact repeats across consecutive generations, confirmed across 15 lives with no duplicate epitaph strings.",
+    "updateHouse() inheritance math handles the seat floor, peak-means vs. end-means distinction, and the seat-7 re-earn requirement without going negative; Math.max(0, inheritMeans) prevents negative starting means."
+  ],
+  "blockers": [
+    "Logically impossible survivors: when succeed() seeds the heir, it creates a SYNTHETIC parent relation using dead.given (the just-played ancestor's name) via addRel(lineKind, dead.given, ..., ri(24,38)). This phantom relation ages independently and can outlive the real ancestor by decades. In Dynasty 2 transcript, Greta (4th of line) had Joaquin at age 45 and died at 74 — yet the transcript shows at Joaquin's age 67: 'Greta, Joaquin's mother, is old now, and frightened in the small hours' and the eulogy reads 'survived by: Greta (mother)' at Joaquin's death at 68, implying Greta lived to 113. Any attentive reader of the Chronicle will notice this contradiction between lineage records and survivor lists.",
+    "Prose bug in a_old_friend 'Give it' branch: the do() sets f.lentBefore=true BEFORE the logLine reads it. On the first lending, the log prints 'Helped an old friend again, knowing how it might go.' The word 'again' is wrong on the first encounter. The fix is trivial (capture lentBefore before setting it), but the error is directly visible to players who choose the generous path.",
+    "cb_books_late 'Pass it to a young one' choice uses the phrase 'the book that shaped {them}' for characters who inherited the book as an heirloom (child_books.inherited=true) and never read it themselves. The 'Read it again' branch correctly uses the inherited-variant text; the 'Pass it' branch does not distinguish. Not a crash, but a narrative contradiction whenever an inherited-book heir chooses to pass it on.",
+    "The 'survived by' list in showEulogy() filters r.alive && r.kind!=='ex' but does not filter out phantom parent relations whose names duplicate played ancestors. When an heir outlives the synthetic parent bearing their predecessor's name, the eulogy can list a character as a survivor who — per the Chronicle's own records — died generations or decades earlier. This undermines the Chronicle's credibility as a coherent record."
+  ],
+  "improvements": [
+    {
+      "what": "In succeed(), tag the synthetic lineage-parent relation with a flag (e.g. r.lineageEcho=true) and exclude it from the 'survived by' list in showEulogy (filter r.lineageEcho out). Optionally also suppress it from m_parent_age if the relation's simulated birth-year would make it impossible for the ancestor to still be alive.",
+      "why": "Eliminates the logically impossible survivor listing that breaks Chronicle credibility. The echo parent can still exist for narrative warmth (heirlooms, motto, aging-parent card) but shouldn't appear as a literal survivor in the eulogy.",
+      "impact": "high"
+    },
+    {
+      "what": "In a_old_friend 'Give it' do(): capture lentBefore BEFORE setting it: const wasLentBefore = f && f.lentBefore; then set f.lentBefore=true, then use wasLentBefore in the logLine.",
+      "why": "Fixes the 'again' appearing on the very first lending, which is the most common path for a generous player.",
+      "impact": "med"
+    },
+    {
+      "what": "In cb_books_late 'Pass it to a young one' do(): check recall('child_books').inherited and use separate echo text — e.g. 'Gave the book the family has always kept to [child], saying nothing of what it meant.' — for the inherited case.",
+      "why": "Maintains narrative consistency: an inherited book that was never read shouldn't be described as having 'shaped' the character who passes it on.",
+      "impact": "low"
+    },
+    {
+      "what": "Add a guard in the btn.textContent / onclick pair in showEulogy: sort kids before reading kids[0] so the button label always names the same child that will be succeeded into. Currently btn.textContent uses kids[0] (unsorted) but btn.onclick sorts before picking.",
+      "why": "If a younger child has a higher array index than an older sibling (possible if children are added out of order by any future card), the button could name the wrong heir. The sort on line 193 is correct but the label on 192 doesn't use it.",
+      "impact": "low"
+    },
+    {
+      "what": "Consider adding a minimum viable age-plausibility check before the m_parent_age card fires for the lineage-echo parent: if (pa.lineageEcho && childRel.age > (dead.deathAge - birthAgeOfChild + pa.ageAtDeath)) skip the card.",
+      "why": "Even if the survivor-listing is fixed, a phantom parent triggering the 'old and frightened' card decades past when the actual ancestor died breaks immersion for players who read the Chronicle.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is mechanically disciplined and almost entirely bug-free at the engine level, but a design trade-off in succession — reusing the played ancestor's name for the heir's synthetic parent relation — creates real logical contradictions visible in the Chronicle and eulogy, and a single line-order bug causes 'again' to appear on a first-time act of generosity; both are fixable and keep this just below an 8."
+}

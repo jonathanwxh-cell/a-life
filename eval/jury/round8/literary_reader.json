@@ -1,0 +1,41 @@
+{
+  "profile": "literary_reader",
+  "score": 8.2,
+  "strengths": [
+    "The logLine prose sustains a consistent, hard-won register — aphoristic but never decorative, always earned by context. 'Fell in love, and was aware, with a cold clarity, of everything it now made possible to lose' is a sentence a novelist would keep.",
+    "The y_love1 pool (7 variants) and a_meet_late pool (3 variants) are genuinely differentiated — each approaches the same beat from a different emotional angle (observational, ache-of-absence, late-romance embarrassment) rather than restating it. The rotI rotation means a dynasty reader rarely hears the same framing twice.",
+    "Callback architecture works as literary craft: the looked-away child at 10 becoming a stranger sleeping rough at 52, the book too hard for child's hands returning at 48, the unspoken love surfacing in a newspaper column in old age — these are the structural moves of a short story, not a game. They land.",
+    "The competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, cb_the_cost) are the writing's best achievement. Both choices are articulated as genuine virtues. The aftermath prose ('and was never afterward quite sure she had been right') refuses to settle the moral. cb_the_cost names the specific old decision by memory key — 'the dream she set down for the people who needed her' — rather than generic retroaction. This is real.",
+    "The observe() pool is substantial enough that a 70-year life rarely repeats ambient texture. 'The decades have arranged themselves around him and somehow never sat down' and 'Thinking has become his favourite weather' read as distinct character registers, not just synonyms for 'he was cheerful'.",
+    "The c_sick pool (3 variants across a once:true card) shows care: 'the shape of a hand on a forehead, kept for decades' is a specific, physical image. Not all the pools reach that standard, but the formative ones do.",
+    "The epitaph system is both procedurally sound and literarily adequate. The cluster-blocking logic means a chronicle does not read three 'kindness' epitaphs in a row. The fallback to 'an ordinary life, which is to say, a whole world' is the right line — it earns its weight instead of apologising.",
+    "The dynasty prose layer — motto crystallisation, bequest statement, house-character readout — is written in the same voice as the life log. 'The family's character has settled, at last, into words' in the transcript feels continuous with what preceded it, not a UI intrusion.",
+    "The affair card (a_affair) selects its framing by stat rather than random rotation — clinical when spirit is low, self-deceiving when heart-led. That is a craft decision. The logLine options ('a secret is a stone you carry, not one you set down') sustain the register.",
+    "The r_name_cost card — a ruthless house finally costs someone something that cannot be bought back, a young one flinching at the inheritance — is a genuine dramatic complication. It does what a competing-goods card should: make the ruthless path feel real and consequential, not merely punitive.",
+    "Across the five dynasties in the transcript, the voice holds. Iris Renner at 54 ('Made up, to a stranger, for a child she had ignored 46 years before') and Anouk Reyes at 72 ('Decided, at the last, that the dream she set down for the people who needed her had been right — and mostly believed it') both carry the same earned, unsentimentalised weight. Consistent register across 1000 lines of generated prose is genuinely difficult."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Expand the a_marry logLine pool for late marriages (age > 48) beyond 3 variants",
+      "why": "Late marriages are common in dynasties where love arrives via a_meet_late or m_old_flame, but the pool is only 3 lines — noticeably thin if a player has two or three late-marrying ancestors in sequence. The early-marriage pool has 6 lines by comparison.",
+      "impact": "low"
+    },
+    {
+      "what": "Give the a_child card a logLine on the 'yes' branch — currently it calls haveChild() and sets stats but produces no prose of its own beyond what the child log later generates",
+      "why": "The decision to have a child is one of the most significant a life makes, but it produces no first-person sentence in the life log at the moment of choice. Compare to a_marry, which always produces a marriage line. The transcripts show this gap: 'Had a child, Tomas, at an age she had stopped expecting it — and was the more undone' actually comes from the auto-generated child-log, not a deliberate logLine. Writing the moment directly would be more controlled and distinct.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a second pool to the r_scholar_door card's 'walk through it' logLine — currently a single fixed line",
+      "why": "Reputation-gated cards like r_scholar_door are rare and meaningful; their prose should match. A single fixed logLine ('Took up the family's learning, and carried it a little further down the years') risks repetition if the family stays scholarly across several generations and the card fires multiple times via the cool window.",
+      "impact": "low"
+    },
+    {
+      "what": "The observe() heart_lo pool ('has walled off the soft rooms, and rarely goes in') is the weakest of the five pools — three of the five lines use the same door/wall/close metaphor cluster",
+      "why": "Minor tonal monotony when a character has sustained low heart across a long life. Replacing one or two with a different register (relational rather than architectural) would broaden it.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The writing holds up as prose worth reading: the register is consistent, the callback architecture functions as genuine literary structure, and the best lines — the affair's cold self-awareness, the competing-goods aftermath, the book too hard for a child's hands — are simply good sentences."
+}

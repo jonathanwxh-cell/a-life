@@ -1,0 +1,47 @@
+{
+  "profile": "critic_journalist",
+  "score": 8.3,
+  "strengths": [
+    "cb_the_cost now reliably fires: six confirmed instances across five dynasties, creating genuine late-life moral reckoning. The 'Let it stay unsettled / Decide it was right' binary is the game's best writing — it doesn't resolve, it accepts irresolution as an answer, which is rare and true.",
+    "The motto system is functional and legible: two distinct mottos across five dynasties, crystallizing naturally from repeated-life behavior rather than a fixed algorithm. 'By our own hands' vs 'What the mind holds cannot be taken' give dynasties genuinely different textures on the heir screen.",
+    "The competing-goods grammar (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) is the philosophical backbone the game needed. These cards ask questions with no clean answer and resist the 'be good, gain spirit' pattern most of the rest of the game runs on.",
+    "Callback depth is now real: cb_books_late closing on the childhood book at age 59-61 (Tamsin, Esme, Mira) lands as genuine long-arc payoff — the game remembers what matters and surfaces it at the right moment.",
+    "Epitaph rotation is working. Across 15+ lives the 'kind' cluster doesn't dominate — 'teacher,' 'stray,' 'lived half in the world,' 'left no monument' all appear. The anti-repetition logic in epitaphFor() is earning its complexity.",
+    "The prose tone holds. 'The marriage broke on what he did. Carys left, and was right to.' is exactly the understated moral judgment the game's voice should be doing more of.",
+    "Short-life eulogies ('Left before the story had found its middle') are handled with grace — Bram Thorne at 16 is not a bug report, it's a genuine beat."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "r_hard_name never fires in any of five dynasties despite the hardname heirloom appearing in Dynasty 1 (Esme Voss, gen 5). The cond requires means>45 AND the heirloom — verify Esme's means at age 26-58 or widen the age window and drop the means floor to 30. Also add the card to elder stage or extend age to 65, since the 'ruthless' repute path is nearly unreachable in a single run.",
+      "why": "The shadow/competing-goods fix claimed r_hard_name now fires, but the transcripts show zero fires across 15 lives including the one life with the hardname heirloom. Dark paths that never fire are not lived darkness, they're decoration.",
+      "impact": "high"
+    },
+    {
+      "what": "r_old_shame similarly never fires — no dynasty survives long enough in a 'tainted' state to meet the card. Consider adding a path to 'tainted' repute that doesn't require a secret (e.g., a public failure deliberately buried three consecutive times), or lower the repute threshold for tainted from >=2 to >=1.5.",
+      "why": "Two of the four shadow-archetype cards are structurally dormant. A 'darker paths are now a lived experience' claim requires these to actually appear in play.",
+      "impact": "high"
+    },
+    {
+      "what": "cb_the_cost fires almost exclusively on a_kind_silence (x_honest_or_kind → 'Spare them'), making the 'one old decision keeps returning' phrasing feel heavier than the trigger warrants. The card's tone — 'a cost she has never quite finished paying' — implies a graver sacrifice than withholding a painful truth. Either soften the cb_the_cost prose for a_kind_silence fires specifically, or require at least one of the more consequential memories (chose_self, chose_others) in the cond.",
+      "why": "Tone mismatch erodes trust in the game's moral seriousness — players sense when the gravity of language outstrips the gravity of what they actually did.",
+      "impact": "med"
+    },
+    {
+      "what": "Motto diversity in practice is lower than claimed: five dynasties yield only 'scholarly' and 'industrious.' The 'reckless,' 'artistic,' 'pious,' 'generous,' 'kind,' and 'tainted' motto paths all require specific sequences of choices that rarely chain in random play. Consider bumping artistic, pious, and generous repute bumps by +0.2 each, or add a second repute-bump path to each (e.g., e_journey → pious bump, a_make_thing → artistic bump elevated from +1.2 to +1.5).",
+      "why": "Advertised diversity is only achieved if the repute pathways are roughly equally reachable. Currently scholarly/industrious dominates because their input cards are the most common.",
+      "impact": "med"
+    },
+    {
+      "what": "The a_conviction card (spirit>55 or prior stand) appears in nearly every full-length life, even though it's once:true. Its condition is wide enough that it fires as reliably as a guaranteed card. The line 'Took a private conviction public, with their own name on it, and lived with the weather it brought' has become a near-universal adult milestone. Raise the spirit threshold to 65, or remove the OR and require held('took_a_stand') only.",
+      "why": "Ubiquity drains meaning. If every person of moderate spirit publicly declares a conviction, the conviction is no longer a character-defining move.",
+      "impact": "low"
+    },
+    {
+      "what": "The 'Tell the better story' grandchild moment (e_window) appears in 8 of the 15 lives sampled — almost every elder with a grandchild chooses the mythologized version. The prose 'Improved her own childhood a little, for a child who'd never know' is lovely but has become background. Add a memory-specific 'Tell the true story' outcome that references what the true story actually was (stray, book, a theft, a cowardice) rather than a generic line — make telling the truth feel like a real gift.",
+      "why": "The card's two paths currently produce prose of similar weight. A true-story outcome that names the actual memory would make the binary meaningful rather than decorative.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life at round 5 is a genuinely recommendable literary game — the competing-goods grammar and callback depth finally create the moral texture the design has been reaching for, but the darker paths (r_hard_name, r_old_shame) remain structurally unlit in real play, which is the one thing keeping it from being confidently described as a game where ruthlessness and shame have consequences rather than just definitions."
+}

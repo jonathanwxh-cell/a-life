@@ -1,0 +1,45 @@
+{
+  "profile": "systems_designer",
+  "score": 7.8,
+  "strengths": [
+    "Reputation rebalance is mechanically sound and verifiably working: 'kind' now requires only two genuine acts (kept_stray, legacy=kind), warmth routes to 'generous', and the five dynasties in the transcripts show distinct mottos — none, 'We burn bright and we burn' (reckless), 'By our own hands' (industrious), with scholarly/generous/kind all appearing in the epitaph distribution. The inherited-memory guard (lived=k=>m[k]&&!m[k].inherited) cleanly prevents heirloom bleed-through, which was the root of the monoculture.",
+    "Seat change narration is correctly wired: seatBefore is captured before any mutation, and the joy/loss logLine fires only when seat differs and gen>=2. Every transcript confirms this lands at the correct age (the log shows 'The family climbed...' as a timed in-life event, not a death-screen postscript). Dynasty 4's five-generation climb from nothing to an old and famous house is readable generation-by-generation through these mid-life moments.",
+    "houseCharacter() now serves as a legible, number-free state readout at both the heir screen and the 'how things stand' reflect button — players can see not just the seat name but what reputation is forming, how close a motto is, and the aspirational prompt toward seat-7 ('Held this strong across more lives, and raised high enough...'). This is the clearest fix: state that was invisible before is now narrated in-voice.",
+    "The competing-goods callback (cb_the_cost) is a genuine system payoff — it keys off four distinct memory flags (chose_self, chose_others, chose_loyalty, a_kind_silence) and delivers a personalised elder reckoning. The transcript shows this firing correctly in Dynasty 4.",
+    "Seat-7 gate is now mechanically reachable at repute>=4.5 (down from an unreachable threshold), and the houseCharacter aspiration line nudges players toward it without revealing the number. The pinnacle-then-lapse mechanic (seat===7 resets to 6 each generation, must be re-earned) is the right design choice — it keeps the very top precarious rather than won-and-done.",
+    "The ruthless heirloom ('a name that opens doors by being feared') and the r_hard_name card create a genuinely distinct shadow-archetype path — a ruthless house meets different content than a scholarly or generous one. Dynasty 3 and 4 both accumulate the hardname heirloom through cut_a_corner choices, and it shows up correctly on heir screens."
+  ],
+  "blockers": [
+    "Motto distribution across the five sampled dynasties: only 2 of 5 dynasties produce a motto at all (Dynasty 3: reckless; Dynasty 4: industrious). Dynasties 1, 2, and 5 end without one — Dynasty 2 runs 5 generations to 'an old and famous house' with no motto crystallized. The rebalance fixed the monoculture but the motto threshold (reputeTop must hit >=2, which requires multiple reinforcing lives) is still high enough that a majority of real runs end without any motto. From a plannable-dynasty lens this is a gap: if the player can't reliably produce a motto in a focused 3-4 generation run, the motto system reads as decoration rather than a planned outcome.",
+    "Seat-7 remains unreachable in practice across all five transcripts — the best run (Mercer, 5 generations) peaks at 'an old and famous house' (seat 6) without achieving seat-7. The condition requires seat>=6 AND repute[top]>=4.5 AND peakMeans>=88, all simultaneously. Across 15 lives in the transcripts, peakMeans rarely exceeds 80; the repute threshold of 4.5 requires roughly 4-5 reinforcing lives in the same tag (with 0.12 fade per generation). Even with the aspiration hint now present, the barrier is so tall that the pinnacle functions as theoretical rather than genuinely plannable. An 11% frequency across a sim of thousands is not player-plannable; a player running a focused 6-generation scholarly line should be able to see it on a good run.",
+    "The elder competing-goods callback (cb_the_cost) only fires if a player chose specific 'no-clean-answer' cards. In the five dynasties, it appears once. The three competing-goods cards themselves (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) have cool:22/once:true respectively — they are not reliably in every life. A system payoff that echoes an earlier choice lands beautifully when it fires, but the reach-back is too dependent on the player having hit the exact triggering cards in an earlier stage. The callback is present but its expected firing rate per run is low."
+  ],
+  "improvements": [
+    {
+      "what": "Lower the motto crystallization threshold from repute>=2 to repute>=1.5, and let a motto form on gen>=2 (current) but re-confirm on gen>=3 if the tag stays above 1.2 (so a motto can solidify earlier in a focused run, and persist unless the reputation actually fades below threshold).",
+      "why": "A player who deliberately steers three generations toward 'scholarly' or 'generous' choices should see the motto crystallize by generation 3-4. Right now the fade rate (0.12 per generation) and the threshold mean a focused run can fail to reach motto in 5 generations. The motto is the clearest signal of plannable identity — if it rarely appears, the dynasty layer lacks its most legible payoff.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the seat-7 gate to: seat>=6 AND repute[top]>=3.5 AND peakMeans>=82 AND Math.random()<0.45 (instead of 4.5/88/0.35). Keep the re-earn mechanic unchanged.",
+      "why": "A peakMeans>=88 condition is rare because the means stat naturally drains in elder years (spending, bequests, loss cards), so peakMeans reflects a midlife high that only exceptionally wealth-building lives clear. Combined with repute>=4.5 requiring ~5 compounding generations, seat-7 is effectively unreachable in any run a player can plan for. The aspiration hint in houseCharacter creates desire without a realistic path; lowering the bar to something achievable on a good 6-generation focused run makes it plannable.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a second competing-goods elder callback that reads from different memory flags — specifically 'strayed/confessed', 'chose_self_over_house/facedReckoning', and 'looked_away' — so the reach-back system triggers more reliably in the elder stage regardless of which specific adult cards a life encountered.",
+      "why": "cb_the_cost currently requires one of four specific memories; many lives (especially those that took the harder 'ruthless' or 'tainted' routes) have none of those flags. A parallel elder callback for the shadow-path memories would ensure that nearly every elder life has at least one genuine reach-back moment, making the 'your choices have weight across time' feel consistent rather than occasional.",
+      "impact": "med"
+    },
+    {
+      "what": "In the heir screen and stockBtn readout, add a generation-count hint toward motto formation — e.g. if repute[top]>=1.0 but no motto yet, append: 'One or two more lives like this, and the name could settle into a motto.'",
+      "why": "Players currently can't tell whether they're close to motto crystallization or two generations away. The repute values are hidden; houseCharacter gives a qualitative reading but no sense of proximity. A light directional signal ('close', 'forming', 'settled') would make motto-planning legible without exposing numbers.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce a deliberate 'reputation investment' choice in the a_make_name card or a companion card for the 'generous' and 'pious' reputations — currently 'Be known as learned' and 'Be known as hard to cross' have their own repute-gated callbacks (r_scholar_door, r_hard_name) but 'generous' and 'pious' do not have equivalent reach-back moments that reward a player who has been steering toward them.",
+      "why": "A player building a 'generous' house has fewer system hooks than one building 'scholarly' or 'ruthless'. s_patronage fires at seat>=5 (too late) and bumps generous, but there is no mid-tier generous-specific callback that delivers the 'your reputation is doing work' feeling. Pious has almost no gated content at all.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 4 closes the most critical structural gaps — motto monoculture, invisible seat changes, seat-7 complete inaccessibility, and opaque reputation state — but the system still falls short of fully plannable dynasties because the motto threshold is practically high enough that most runs end without one, and seat-7 remains a theoretical ceiling rather than a genuine player goal."
+}

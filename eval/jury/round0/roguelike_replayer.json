@@ -1,0 +1,46 @@
+{
+  "profile": "roguelike_replayer",
+  "score": 5.5,
+  "strengths": [
+    "Callback cards (cb_*: 9 total) are a genuine run-differentiator — cb_books_late, cb_outcast_return, cb_strayed, cb_inherited_secret etc. fire only when a prior choice left its mark, creating satisfying long-arc closure that varies meaningfully between lives where those seeds were planted vs. not.",
+    "The dynasty layer adds a light but real meta-arc: seat, repute, heirlooms, motto, and the family secret accumulate across lives and alter heir starting conditions and which cards are seeded as latent memories, so a 5th-generation heir in a scholarly house genuinely starts differently from a founder.",
+    "Content pool is wider than it first appears: 58 cards, heavily cond-gated (40/58 behind conditions), with 10 traits crossing 5 hidden stats producing genuinely different character pressures — a frail bookish heir and a restless shrewd heir draw from noticeably different eligible pools.",
+    "Peril flag and early-mortality system mean some lives end at 25 (Calla) rather than 80, producing a run of wildly different lengths — this creates a roguelike-style 'bad run / lucky run' tension that makes each life feel like its own roll.",
+    "Prose variant rotation (rotI/rotN with per-house offset) prevents the same phrasing even when the same structural beat fires, which reduces the feeling of reading a form letter on repeat plays."
+  ],
+  "blockers": [
+    "The structural pipeline is too rigid and too visible: fall in love (y_love1 or a_meet_late), get married (a_marry), have a child (a_child) fires in every single long life across all five dynasties in the transcripts — this three-beat mandatory sequence is mechanically enforced in drawCard() with explicit priority overrides that guarantee these cards are offered. A roguelike player will see the skeleton after two runs and feel they are filling in a template, not living a distinct life.",
+    "Only ~10 cards are seen per life out of 58, but the majority of the unique content lives in once-gated cards behind narrow stat-or-memory conditions — on a given run many of these never become eligible, and the player cannot know which door they missed or steer toward opening them. There is no build identity or 'class' to develop that makes a run feel deliberately different from the last one.",
+    "Zero meta-progression or cross-dynasty unlocks beyond the dynasty state itself. Once a dynasty ends (or is abandoned), the next dynasty begins fresh — no new cards are revealed, no permanent changes to the content pool, no escalating variety. A session of 3 dynasties and 12 lives sees essentially the same 58-card pool as a session of 1 dynasty, with no reason to believe run 10 will show something run 1 could not.",
+    "The dynasty high-water marks (longest life, peak means, peak seat, souls count) are tracked but have no gameplay consequence — they are not shown in any way that creates a 'beat my record' loop or a reason to start the next line with a specific goal.",
+    "No choice the player makes meaningfully closes off a different branch of the content tree or opens a stable of new cards. Divergent paths (trade vs. study, stray vs. turn away, leave home vs. stay) each unlock at most one callback card — the rest of the content is still accessible in later lives regardless. There is no 'I've never seen the ruthless branch' or 'I want to try a spirit-first run' framing because the game offers no such frame."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 mutually exclusive 'life archetype' cards in youth that permanently lock some branches and unlock others — e.g., a wanderer path that enables a set of adult cards unavailable to the settled path, and vice versa. These would be visible as named routes, not just outcome divergence.",
+      "why": "Gives the roguelike player a build identity to commit to and a reason to say 'this run I want the wanderer arc' — the single biggest missing ingredient for 'one more run' pull.",
+      "impact": "high"
+    },
+    {
+      "what": "Relax the love/marry/child priority override in drawCard() — instead of forcing these cards before their window closes, let them compete naturally with other content (perhaps with a gentle weight boost). The line-foreclosure concern can be addressed by simply extending the age windows rather than hardcoding draw priority.",
+      "why": "The mandatory pipeline is the most conspicuous repetition between runs. Removing it (or softening it to probabilistic) is the fastest way to make life 2 feel structurally different from life 1.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the dynasty high-water marks as a visible 'dynasty ledger' on the constellation screen with named milestones (first time seat 5 is reached, first confession, first scholar motto) that act as soft unlock signals for flavour variants or new card content.",
+      "why": "Turns the existing tracking data into a reason to keep playing across dynasties — gives the player a collection goal and a sense that long sessions reveal something new.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 4-6 cards that only become eligible after a dynasty has accumulated a specific repute tag at level 3+ (e.g., a 'ruthless house' card that confronts the heir with the family's hard-dealing reputation, or a 'scholarly house' card that opens an academic opportunity unavailable to other lines). These should be dynasty-length-gated so they reward long runs.",
+      "why": "Makes dynasty repute feel like actual unlocked content rather than prose flavour — creates a tangible 'new run, maybe I can reach scholarly repute 3 and see the scholar card' goal.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'chronicle completeness' counter visible to the player — e.g., a small marker in the constellation that shows X/58 moments encountered across all dynasties in this session. Optionally, mark which major branches (stray/no-stray, trade/study, left home/stayed) have been explored.",
+      "why": "Gives the collection-minded replayer a tangible map of what they have and have not seen, which is a proven driver of session length in roguelikes with large content pools.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life has the bones of a replayable generational sim — good callback card design, real dynasty accumulation, and a decently wide content pool — but the mandatory love-marry-child pipeline and total absence of meta-progression or build identity mean a roguelike player will feel the template after two runs and have no 'one more dynasty' hook to pull them back."
+}

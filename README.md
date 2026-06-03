@@ -78,6 +78,7 @@ Hosted on **Vercel** — every push to `main` auto-deploys. It's also a plain st
 | `vercel.json` | Vercel cache headers, so updates show on a normal refresh. |
 | `gallery.html` | Dev-only preview of the image set; not part of the game. |
 | **`AGENTS.md`** | **Guide for contributors & AI agents** — architecture, conventions, deployment, gotchas. Start here to work on the code. |
+| `eval/` | Headless verification harness (`sim-harness.cjs`, `transcript-gen.cjs` — run the real engine with no browser) and the jury audit trail (`jury/` — 90 receipts). See [`eval/README.md`](./eval/README.md). |
 | `docs/cloud-saves.md` | Design spec for the cloud-save feature. |
 | `docs/images.md` | How the backdrop images are generated, optimized, and wired in. |
 | `docs/five-critics-goal-journey.md` | How the game was hardened across 15 critic-driven rounds — to unanimous sign-off from five independent reviewers (UX, writing, design, visual, accessibility). The methodology, the round-by-round findings, and the fixes. |

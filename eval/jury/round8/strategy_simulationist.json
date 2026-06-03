@@ -1,0 +1,32 @@
+{
+  "profile": "strategy_simulationist",
+  "score": 8.0,
+  "strengths": [
+    "The four-tier reputation trajectory at seats 5-6 is now gapless: any leading reputation — even a thin one — gets a legible reading ('has barely begun to settle... it would take several more lives of the same'), and the high-water-mark (repPeak) correctly drives it so a once-strong name still reads strong after generational fade. A focused run now has a continuous planning signal all the way to the pinnacle.",
+    "The seat-5 → seat-6 path in openStock is now explicitly named — both the fortune lever ('an heir whose fortune reaches a real height') and the reputation lever ('a name settled deep into the family's character over several lives') — ending the void that made seat-5 feel like a planning dead-end.",
+    "The m_invest_name hint is now honest ('it does not always hold, but it tilts the odds'), which matches the real 62% fire rate in the card. A strategist can now reason about expected value across multiple invest-name attempts instead of treating it as a guaranteed lift.",
+    "The seat-7 gate is fully legible: openStock at seat 6 explicitly checks whether this life's peakMeans cleared 76 ('This life's fortune has not yet reached that height' / 'has reached that height') and the reputation trajectory tells the player whether repPeak >= 3.5 is met ('deep enough now for the histories'). The two required conditions are independently readable.",
+    "Seat changes are narrated at the moment of death — 'The family climbed in the world this generation — the house now keeps X' — so falls and rises land emotionally in context rather than being inferred from the heir screen. The reckoning card, peril, and the slow-decline condition all have teeth and are named when they fire.",
+    "The bequest is surfaced explicitly at the heir screen with a plain prose line ('From [ancestor], deliberately: every coin they could spare — a softer place to begin'), making the cross-generation lever legible to a player who wants to plan the succession.",
+    "loadSlot now backfills peakMeans and repPeak on old saves, so the pinnacle gates don't silently break on continued dynasties."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "In openStock at seat 5, the prose says the house can climb 'on a name settled deep into the family's character over several lives' — but the code (dynasty.js line 161) caps the reputation-driven seat climb at seat 5 (condition: h.seat<5). Reputation alone cannot push seat 5 → 6; only a high-peak-means life or the m_invest_name card can. Correct the prose to: 'From here it climbs on an heir whose fortune reaches a real height, or on the m_invest_name lever when the name is established — reputation alone lifts the house only to this point' (or similar language that doesn't promise what the code won't deliver).",
+      "why": "A strategist who reads 'name settled deep' as a viable seat-5→6 path will waste 3 generations grinding rep and never climb. This is the one remaining planning trap in the dynasty readout.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a peakMeans indicator to the openStock 'means' row or as a separate hint line during a life, e.g. 'The means have, at their height this life, been [ample / comfortable / thin]' — distinguishing current means from the life's high-water mark so a player knows whether the seat-lift threshold has already fired.",
+      "why": "A player who had a big windfall at 40 and then spent down has no way to know whether peakMeans already crossed 80 (seat lift guaranteed) or only crossed 58 (50/50). The planning uncertainty here is invisible and mildly punishing.",
+      "impact": "low"
+    },
+    {
+      "what": "The houseCharacter() sentence at the thin-rep tier reads slightly awkwardly when appended to the main character sentence: 'A name for being learned is only just beginning to gather. As a name, it has barely begun to settle...' The word 'name' repeats. Rephrase the trajectory suffix at the thin tier to something like 'That reputation, though, has barely begun to settle — it would take several more lives of the same before the histories took any notice' to read cleanly as a continuation rather than a new sentence.",
+      "why": "Pure prose quality — a systems player doing careful planning rereads houseCharacter often and the doubled phrasing is mildly distracting.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 8 fixes are real and cross the threshold: a systems-strategist can now read state and trajectory across the full climb — four-tiered reputation signal at seats 5-6, explicit seat-5 path, honest investment odds, legible pinnacle gates — with one minor planning trap remaining (reputation oversold as a seat-5→6 lever when the code caps it at 5)."
+}

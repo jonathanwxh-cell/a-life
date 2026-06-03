@@ -1,0 +1,52 @@
+{
+  "profile": "critic_journalist",
+  "score": 7.5,
+  "strengths": [
+    "The prose line quality is genuinely high and consistent across the whole card set — phrases like 'the arithmetic of her own remaining years rearranges itself, quietly' and 'bought a place of their own, and slept differently in it' are the kind of writing that earns a game literary credibility rather than merely trading on the aesthetic.",
+    "The callback system is the game's best mechanic and its most original idea. The moment where you sit beside a lonely child at age 6 and the same person, grown, holds a door open twenty years later is quietly affecting — it treats moral choices as having a real half-life, and the transcript shows it working across multiple dynasties without repetition.",
+    "Motto differentiation is now genuinely distinct across dynasties: 'We burn bright, and we burn' (reckless Okonkwo), 'We do not ask twice' (hard-dealing Salvedi), 'We take in what the world turns out' (generous Calloway), 'By our own hands' (industrious Vasquez). The variety holds up across all five sampled dynasties and the choices that produce them are legible in the transcripts.",
+    "The epitaph engine's anti-repetition logic (blocked-cluster + recent-phrase tracking) works well in practice — across fifteen lives the eulogies do not read the same, and a few ('Never could pass a hurt creature without stopping for it'; 'Gave away everything they knew, and so kept it') achieve real resonance.",
+    "The affair card's colder register is noticeably distinct from the warmer adultery framing — 'It would be so easy, and so quiet, and no one would ever have to know. Which is precisely what makes it dangerous' treats the moment as a moral problem, not a romance. The strayed-and-unconfessed secret threading into later life (the elder confession card, the secret passed to descendants) is one of the game's genuinely ambitious structural ideas.",
+    "The dynasty layer — seats, reputation drift, heirlooms passing with their backstory — gives the generational arc weight that most life-sim games gesturally invoke but do not actually implement. The bequest card (what do you leave: knowledge, money, warmth, freedom?) is an elegant mechanic because it reads as a moral question and is also a real lever.",
+    "Early death is now handled well at the writing level — 'A short life — and, taken on its own terms, a whole one' reframes it without cheapening the loss. Mateo Ashby dying at 23 in the transcripts lands as intended."
+  ],
+  "blockers": [
+    "The card pool, read across fifteen full lives, reveals a structural sameness in the binary choice architecture: almost every card presents one 'open' option (kindness, generosity, courage) and one 'closed' option (self-protection, caution, withdrawal). This produces dynasties that feel like variations on a theme rather than genuinely different lives — the moral texture is wider than it first appears, but the grammar of each choice is almost always the same. A player who reads critically across multiple generations will notice that the game mostly offers two versions of 'more open' versus 'more closed.' The great literary life-sims (Fallen London, Disco Elysium, even Seedship) destabilize the reader's sense of which option is 'right'; this one rarely does.",
+    "The observation lines (engine.js/observe()) — the passive prose beats that arrive when stats cross thresholds — repeat noticeably within a dynasty. 'The stairs have started to ask a question of them' / 'The body has begun keeping its own quiet counsel' / 'Their legs know something the rest of them is not yet ready to hear' are six variants for the same low-vitality observation, but two or three will fire in a single life across the elder band, and they're close enough in register that reading them in sequence feels redundant. The card-writing has improved its rotation, but the observe() pool still reads thin under sustained play.",
+    "The game has no mechanism for genuine moral ambiguity — choices with clearly bad outcomes for the character but defensible reasons (not 'bad' as in 'closes off' but 'bad' as in produces loss with real texture). The 'Tell it. Take the gain' option on the small-dishonesty card produces a memory of 'cut_a_corner' and stat penalties, but the writing is flat ('Took the easy, dishonest gain, and kept the small private knowledge of it') compared to the work the game puts into its noble choices. The dark paths are mechanically present but aesthetically underserved.",
+    "Across five dynasties the mid-adult band (ages 30-50) shows the heaviest card reuse. The windfall card, the work-promotion card, the aging-parent card, the health-warning card — these appear in nearly every adult life in roughly the same order, which makes the middle years feel like a checklist rather than a life. A critic session where a player runs three generations back-to-back will notice this before the elder cards arrive."
+  ],
+  "improvements": [
+    {
+      "what": "Add 6-8 genuinely ambiguous cards where the 'worse' choice has defensible, even admirable reasons — not just more soul-closing outcomes but real competing goods. E.g.: a choice between loyalty to family and a stranger's urgent need, where either option is legible and neither is simply cowardly.",
+      "why": "The current binary grammar (open/closed) is the game's main creative ceiling. One card where a player cannot confidently name the 'right' answer would shift the register from meditative to genuinely literary.",
+      "impact": "high"
+    },
+    {
+      "what": "Deepen the writing on the 'shadow' paths. The affair-walked, the lie-told, the corner-cut paths need prose as specific as the noble paths get. 'Strayed, and learned that a secret is a stone you carry, not one you set down' is better than most but still generic; the noble path lines have concrete images and the dark paths mostly have abstractions.",
+      "why": "Moral texture requires that both roads feel lived-in. The asymmetry signals — inadvertently — that the game has a preferred reading.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the mid-adult observation pool (observe() in engine.js) with 3-4 additional clusters, and set a per-life hard cap so that no single observation cluster (vit_tire, vit_neg, spirit_hi) can fire more than twice. The variants within each cluster are close enough in register that two firings in one life feel like a reprint.",
+      "why": "This is the most technically simple fix with immediate impact on extended-session feel — it is where the writing's improvement is most eroded by the density of a single life.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce one or two 'crossroads' cards in the adult band — longer-form moments with three or four genuine options, one of which is a real surprise (unexpected generosity, an act of pure stubbornness, something eccentric) — to break up the binary rhythm.",
+      "why": "After five or six binary choices in sequence the cognitive rhythm becomes predictable and the player starts to feel they are answering a questionnaire rather than living a life.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the mid-adult band two new cards unique to it that do not appear elsewhere in the arc — events with no equivalent in childhood or elderhood, specific to the particular weight of the 30-50 decade (a chance betrayal of one's own younger principles, an encounter with someone who chose the other road at the fork you took at 20).",
+      "why": "The mid-adult repetition is the transcript's most visible structural weakness in sustained play; new content here would reduce the checklist feel directly.",
+      "impact": "med"
+    },
+    {
+      "what": "For the early-death case (under 45), write 2-3 life-specific short-life eulogies that reference what the life actually did, rather than the generic 'A short life — and, taken on its own terms, a whole one.' The frame is right but the line is the same for a child who died at 23 after a handful of choices and a parent who died at 40 after building a family.",
+      "why": "Mateo Ashby's death at 23 is the transcript's most affecting moment and it deserves more than a generic buffer line — the potential for something genuinely haunting is there.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life is a smart, well-written game with a genuinely original structural idea (the callback system), prose that earns its literary pretensions, and a dynasty layer that actually works — but its binary-choice grammar is more uniform than the writing quality deserves, and a critic playing three generations back-to-back will see the architecture underneath the felt."
+}

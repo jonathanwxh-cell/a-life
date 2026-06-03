@@ -1,0 +1,33 @@
+{
+  "profile": "mobile_casual",
+  "score": 8.3,
+  "strengths": [
+    "Reflect button border is now clearly visible (rgba(236,225,207,0.45), 13.5px font) — it reads as a real button over any sky, not a ghost",
+    "Log-tap hint now fires after the 2nd decision instead of the 3rd — catches the player while they still have short-term memory of the choice, much better timing",
+    "Cold-start 'Continuing House X' confirmation fires cleanly on re-entry, grounding the returning one-handed player immediately in their dynasty and generation",
+    "Pace pulse-dot is a smart liveness signal — the breathing amber dot tells a returning player 'years are moving' without words, and speeds to 1s on fast-forward",
+    "Fast-forward no longer resets on pause: pp.onclick does not touch fastFwd at all; pause and resume preserves the racing-years state exactly as expected",
+    "44px touch targets are consistently applied across footer buttons, slot delete, chronicle tabs, eulogy links, delete-confirm yes/no — nothing egregiously undertapped remains",
+    "Save code box is 13px DM Mono with user-select:all — one tap selects the full code on mobile, which is the critical friction-free moment for cross-device hand-off",
+    "The 'houses raised' section on the title screen gives a returning casual player an immediate emotional reward before they even start — mottos from past dynasties feel like trophies"
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add min-height:44px to .reflect button",
+      "why": "Current padding (5px 13px) produces a ~27-30px tap target — the only remaining under-44px interactive element I can find. A one-handed thumb can easily miss it, especially sitting between the being line and the card area",
+      "impact": "med"
+    },
+    {
+      "what": "Show a one-word pace label beside the flow text on mobile (e.g., a tiny 'fast' badge or arrow-double-right glyph when fastFwd is active)",
+      "why": "The flow text changes from 'the years are passing' to 'the years are racing by' to signal the state, but on a quick glance the prose difference is subtle. A visual glyph (like '>>' or the amber color alone) would let a casual player confirm fast-forward is on without reading",
+      "impact": "low"
+    },
+    {
+      "what": "Brief one-time tooltip or micro-hint that tapping the flow text controls pace (e.g., 'Tap the pace text to race ahead' as a hintOnce after the first time the player waits through 5 quiet years)",
+      "why": "The pace control is genuinely undiscoverable on mobile — the aria-label is right but invisible; casual players who don't read code comments will never find the 3x speed-up without stumbling on it. The hint system already exists, this is just one more hintOnce call",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The round-4 fixes land cleanly — every specific complaint from last round is genuinely resolved in the code, and this is now a polished one-handed mobile experience with only one lingering small tap-target gap on the reflect button."
+}

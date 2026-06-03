@@ -1,0 +1,35 @@
+{
+  "profile": "mobile_casual",
+  "score": 8.4,
+  "strengths": [
+    "44px touch targets confirmed on every interactive control: footer buttons, chronicle/constellation links, tab strip, delete confirm, eulogy tap zones — one-handed use is viable throughout",
+    "Pace pulse-dot is a genuinely elegant liveness cue: the breathing dot in the footer tells you time is moving without any text; amber + 1s cycle in fast-forward mode reads instantly as 'racing'",
+    "Fast-forward (tap the flow text) cycles cleanly between three states — paused / normal / fast — with the amber colour change as the only feedback needed; no menu required",
+    "Cold-start confirmation hint ('Continuing House X — Nth of the line, age N.') lingers 9 seconds so a returning player immediately knows where they are without opening the chronicle",
+    "The new first-gen dynasty hint ('Everything this life gathers — its name, its means, its standing — will pass to the one who comes after') fires at exactly the right moment (after 2nd decision, gen 1) and resolves the biggest cold-start confusion for casual players: why the choices feel permanent",
+    "Sticky dismiss buttons (#loadBack, #chronClose) with a fade gradient ensure 'Back'/'Return' is always reachable on a short phone screen — no scrolling required",
+    "Choice hints auto-revealed on touch devices (@media hover:none) so one-handed tapping reveals the hint text that desktop users only see on hover — no feature loss on mobile",
+    "The 'how things stand' readout is number-free prose with revised tier text that reads as natural sentences; a casual player gets useful feedback without feeling like they opened a stat screen",
+    "Safe-area-inset padding in the footer protects the controls from notch/home-bar overlap on modern phones",
+    "The code backup textarea uses user-select:all at 13px — one tap selects the whole code on mobile, which matters for a player who actually wants to preserve their dynasty"
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add min-height:44px to the .reflect button rule (currently only has padding:5px 13px with no explicit min-height)",
+      "why": "The reflect button is the one new-cycle control that still misses the 44px touch target standard; it is small enough that one-handed tapping at the top of the stage area is occasionally imprecise",
+      "impact": "low"
+    },
+    {
+      "what": "On the eulogy screen, show the dynasty's current seat/standing as one short line before the heir button — e.g. 'The house now holds a comfortable household.'",
+      "why": "Casual players in burst sessions may miss the Chronicle entirely; a single inherited-standing line at the transition moment rewards the dynasty investment without requiring them to open a panel",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the fast-forward control with a one-time hint after the first long quiet stretch (e.g. sinceCard >= 5 and no card drawn), similar to how seenChron is hinted",
+      "why": "The flow text doubles as a pace control but a casual first-session player may never discover it; they may just watch years tick and wonder if the game is broken",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The mobile foundation holds firmly — 44px targets, pulse liveness, fast-forward, cold-start and dynasty hints all verified intact — and the new gen-1 dynasty hint meaningfully closes the biggest casual comprehension gap; score unchanged at 8.4."
+}

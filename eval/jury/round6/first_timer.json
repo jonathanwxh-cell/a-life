@@ -1,0 +1,34 @@
+{
+  "profile": "first_timer",
+  "round": 6,
+  "score": 8.0,
+  "strengths": [
+    "The title screen does the full onboarding job in three short blocks: (1) 'A Life' + the tagline ('One person, born into the world. Then the next. Then the next. A line drawn across time.') establishes genre; (2) the .lead paragraph ('Each life hands the next its name, its means, its reputation — and its secrets. Over the generations, a house takes shape.') — styled at color:var(--ink) / opacity:.96, above the rule, font-size:14px — makes the dynasty loop explicit before a player touches anything; (3) the .dim mechanics line ('a choice between two paths, and it cannot be undone') tells a non-gamer exactly how to play. No tutorial needed.",
+    "The permanence signal is unambiguous. 'It cannot be undone' is a short, plain English sentence — no genre jargon, no metaphor. A first-timer who has never played a life-sim reads it and knows what they are committing to. In play, the chosen button gets an amber pulse before disappearing, which makes the finality physical rather than just stated.",
+    "The heir screen identity-switch sentence ('You are no longer X. You are Y, their son/daughter — born into the world they left behind.') is the first sentence in the heir .tag. A newcomer is told directly that they have become someone new before they read anything else on the screen. This is where dynasty permanence becomes personal — not abstract.",
+    "The dynasty hook is present and explicit, not implied. '.lead' names name, means, reputation, and secrets — four concrete things that carry forward — in one sentence. The heir screen then shows them: seat insight, house character, heirlooms, secret, bequest. The loop is closed at the right moment.",
+    "Ambient whispers (child/adult/elder/any pools, fired during quiet years) fill the waiting gap with prose that matches the life stage. They are styled .entry.whisper — dim and italic, clearly not events — so a newcomer reads them as atmosphere and not as missed actions. The gap between moments no longer reads as a broken or stalled game.",
+    "The liveness pulse-dot (.flow::before with flowpulse animation, stilling when paused, speeding to amber on fast-forward) is an intuitive 'the game is alive' signal that needs no explanation. A first-timer who sees it pulse knows something is happening. When it stops during pause, the still dot is its own clear state change.",
+    "The chronicle links in the header — amber '✦ the constellation' at 13.5px with bottom border, dim 'the chronicle ↗' below it — are visible throughout play, tappable at >=44px minimum height, and fire a beckon animation (gated by localStorage: 'seenChron') on first encounter to draw the eye. A newcomer can read their life in progress at any point.",
+    "The intro hint ('The years move on their own — pause any time with the ▮▮ below. Now and then, a moment will ask something of you.') fires at 1.6s, lingers 13s (double the 6.5s of normal log entries), and is styled .entry.hint at full ink colour. It answers the first-timer's most likely question — 'do I need to do something?' — before they can ask it."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "On the heir screen, the heirInherit block stacks seat insight + house character + heirlooms + secret + bequest as a single <br>-joined paragraph. For a first-timer whose dynasty is only one life old, this can be three to five items — readable. For a player on generation 4–5 with multiple heirlooms and a buried secret, it can run to seven or eight items immediately after the identity-switch sentence. Consider a visual separator (a thin rule or a half-beat of margin) between the identity .tag and the heirInherit block, so the two registers (who you are now vs. what you carry) stay distinct when the inherit list grows.",
+      "why": "The identity sentence is the most important moment on that screen. If the inherit list immediately presses against it, a newcomer's eye may jump past the line that was supposed to land. Separation preserves the sentence's weight.",
+      "impact": "low"
+    },
+    {
+      "what": "During a first life, the dynasty system is entirely invisible. The player has no way to know the house is being built until death. A single, one-time log line — gated by localStorage like the other hints — at roughly age 20–25 of the first life ('The family is still only a name, and nothing more yet.') would let the hook land earlier without giving anything away about what is to come.",
+      "why": "A first-timer who dies before reaching age 40 may close the game without ever seeing the heir screen or the house payoff. One early breadcrumb makes the dynasty promise feel active rather than deferred.",
+      "impact": "med"
+    },
+    {
+      "what": "The 'how things stand' button (the .reflect element) uses the aria-label 'how things stand — a quiet reckoning of where this life sits right now'. The label is poetic and not immediately legible as 'press this to see your stats'. The visible button text ('how things stand') is better than the aria-label for this. For a sighted non-gamer hovering or pressing it the first time, a small tooltip or one-line hint in the .being area after first open ('your life, in prose — no numbers') might help discoverability.",
+      "why": "The reflect button is genuinely useful for a first-timer who wants grounding, but its purpose is not obvious until pressed. Post-open friction is low; pre-open friction is just the label.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The dynasty-system changes this round do not touch the onboarding layer, and the onboarding layer still does its job cleanly: a first-timer can understand what the game is, feel the permanence of choices, and grasp the dynasty hook from the title screen alone — the heir screen then makes it personal; the score holds at 8.0, with the same ceiling as last round: the heir-screen information density under a multi-generation run and the dynasty being invisible during a first life."
+}

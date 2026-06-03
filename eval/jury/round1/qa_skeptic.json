@@ -1,0 +1,51 @@
+{
+  "profile": "qa_skeptic",
+  "score": 6.5,
+  "strengths": [
+    "The lineage-echo parent fix is solid: echoParent.lineageEcho=true and diesAtAge=dead.deathAge means the bloodline parent dies in the heir's log at exactly the correct historical age — ageRelations() handles this with a hard continue, so the echo never enters the random elder-death path. In 15 transcripted lives I found zero cases of a dead ancestor appearing alive after their recorded death.",
+    "The bequest flow (e_bequest -> succeed()) is mechanically clean: all four bequest types (mind/means/heart/free) apply correctly to the heir's seedStats, traits, and display text. The BEQ_LINE strings in showHeir() match the four branches exactly and fire only when child._bequest is set.",
+    "The x_reckoning card correctly gates on seat>=3 and once-per-life (P.flags.facedReckoning), and updateHouse() reads it cleanly. The two outcome branches (held/fell) each adjust h.seat through Math.max(0, ...) so no underflow is possible.",
+    "No unresolved {token} placeholders were found anywhere in the prose. The fmt() and reTok() substitution coverage is complete for all tokens used across content.js, dynasty.js, and engine.js.",
+    "The openStock/lifeReadout 'how things stand' panel gives accurate, number-free prose descriptions and correctly pauses the tick while open, restoring running state on close.",
+    "Fast-forward pace control (fastFwd toggled by clicking the flow text) uses RATE*0.34 and resumes correctly after card presentation; the busy flag prevents double-fire.",
+    "The inheritMeans computation is guarded: Math.max(0, inheritMeans+meansBeq) in succeed() prevents negative wealth from propagating to the heir's seedStats."
+  ],
+  "blockers": [
+    "MOTTO CONVERGENCE — a structural bug: when the 'stray' heirloom is acquired (kept_stray), it is propagated into every subsequent heir's mem object as mem.kept_stray={age:0,inherited:true} (dynasty.js:249). updateHouse() then bumps 'kind' reputation for any life where m.kept_stray is truthy (line 109), regardless of whether that heir did anything kind in their actual life. Because 'stray' is the most commonly appearing first-heirloom (c_animal fires in child stage with w:2), nearly every multi-generation dynasty ends up with a dominant 'kind' reputation and gets the motto 'We take in what the world turns out.' This is confirmed by the transcripts: all three dynasties that ran 5 generations share the identical motto. The other six mottos are functionally unreachable through heirloom propagation — they require specific repute without the stray shortcut.",
+    "REPEATED 's_from_nothing' CONTRADICTION — the card lacks `once:true`, so it fires multiple times for the same person if the house stays at seat<=1. In Dynasty 4 (transcripts line 411-425), Ambrose at age 29 'began from nothing, and laid the first course of something, alone' — then the identical log entry reappears at age 52 when the same card fires again. The second instance is logically nonsensical for a 52-year-old who already built something. This is the most visible prose-continuity failure in the transcripts.",
+    "ANCESTOR NAME REUSE IN LOVE RELATIONSHIPS — love/marriage partners are named via pick() with no guard against the historical lineage name pool. In Dynasty 1, Tomas Vane (4th of line) married 'Adaline', which is also the name of the dynasty founder (Adaline Vane, 1st of line). The succeed() function correctly excludes ancestor names for the echo-parent and the generated other-parent, but love-card addRel() calls use freshName() which only avoids current living rels, not historical ancestors. A player reading the chronicle sees two unrelated 'Adalines' in their lineage, which erodes narrative coherence."
+  ],
+  "improvements": [
+    {
+      "what": "In updateHouse(), change the 'kind' repute bump to exclude inherited mem.kept_stray: replace `if(s.heart>74||m.kept_stray||p.flags.legacy==='kind')` with `if(s.heart>74||(m.kept_stray&&!m.kept_stray.inherited)||p.flags.legacy==='kind')`. Optionally also check `m.turned_stray` is absent. The heirloom stray already produces a narrative benefit; it should not also force-rack the 'kind' repute counter.",
+      "why": "Eliminates motto convergence — dynasties with stray heirlooms won't automatically land on 'kind' repute and 'We take in what the world turns out.' Other mottos become reachable in long plays.",
+      "impact": "high"
+    },
+    {
+      "what": "Add `once:true` to the 's_from_nothing' card (content.js line 421). This is a foundational-identity moment, not a recurring economic situation. Alternatively, add a cond that blocks it if held('self_made') to prevent the repeat only when the player already chose that path.",
+      "why": "Eliminates the prose paradox of 'began from nothing' being logged twice for the same person decades apart, which is the most jarring continuity failure visible in the transcripts.",
+      "impact": "high"
+    },
+    {
+      "what": "In addRel() when called from love/marriage card `do` functions, pass the lineage ancestor name set as a filter. Simplest fix: in the love card do() handlers, replace `pick(pool)` with a call through `freshName()` after temporarily adding all S.lineage ancestor given-names to P.rels' used set. Or expose a `freshNameExcluding(sex, extra)` helper that accepts an additional exclusion set.",
+      "why": "Prevents love partners from sharing given names with dead ancestors, keeping the chronicle readable across multi-generation dynasties.",
+      "impact": "med"
+    },
+    {
+      "what": "The x_reckoning 'Meet it head-on' choice resolves as held vs. fell based on a hidden stat check (means>45 || spirit>62) that the player cannot see or plan around. The card text and choice hint give no signal about what the threshold is. Add a subtle contextual cue: if the house-standing panel (openStock) is already accessible, its 'how things stand' prose for means/spirit gives the player enough to reason about readiness. Consider surfacing a one-line contextual hint in the choice itself, e.g. 'What the family has put by, and the strength behind the name, is what decides it.' already exists in the card text — make the hint ('h' field) more specific: 'succeeds if means or spirit are strong; fails otherwise.'",
+      "why": "Reduces the frustration of a player who deliberately chooses 'meet it head-on' but gets the failure log anyway, which reads as a system contradiction — the player chose action but the engine chose failure.",
+      "impact": "med"
+    },
+    {
+      "what": "Add more MOTTOS entries and bias the repute bump weights so that heirlooms like 'book' (academic) push 'scholarly' more aggressively, competing with 'kind'. Currently the book heirloom propagates `child_books` which affects only the cb_books_late callback card, not the updateHouse() repute bump. Add a line to updateHouse: `if(m.child_books && !m.child_books.inherited) bump('scholarly', 0.8)` to give the book heirloom a matching reputation effect.",
+      "why": "Broadens which dynasty characters emerge — a book-keeping line can become 'learned' rather than defaulting to 'kind'.",
+      "impact": "med"
+    },
+    {
+      "what": "The 'survived by' list in showEulogy() includes ALL living rels regardless of whether the player has any context for them. In Dynasty 4's Tomas Vane, Aldous appears as '(father)' — but Aldous is a non-bloodline generated parent the player never interacted with. Consider filtering 'survived by' to only rels with bond > 40 or rels the player explicitly interacted with (e.g., have a log entry) to avoid listing strangers as survivors.",
+      "why": "Prevents the eulogy's survivor list from including atmospheric filler that muddies which relationships mattered.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The engine is mechanically sound and the prose writing is genuinely strong, but three verifiable bugs — motto convergence via heirloom repute stacking, the s_from_nothing card firing twice for the same character, and love-interest names recycling from dead ancestors — create real continuity breaks that a careful player will notice and that undermine the literary ambitions the game otherwise earns."
+}

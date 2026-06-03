@@ -1,0 +1,61 @@
+{
+  "profile": "accessibility_advocate",
+  "score": 7.5,
+  "strengths": [
+    "assertive live region on #scene means card prose is announced immediately when a moment appears — the fundamental reading loop works for screen-reader users",
+    "first choice receives programmatic focus on card presentation, so keyboard users land on an actionable control without hunting",
+    "srTag() injects sr-only emotion prefixes ('Joyful:', 'A loss:', 'An echo:') before log entries, giving non-visual users the same emotional register that colour carries for sighted players",
+    "dedicated #stageA11y polite live region announces stage transitions independently of the opacity-animated #stageTitle — a screen reader is not dependent on the visual fade",
+    "aria-describedby correctly wires choice hints (the .h span) into the accessibility tree even while visually collapsed, so VoiceOver/NVDA announces the hint alongside the choice label",
+    "robust modal focus management: MutationObserver traps focus inside open veils, Escape closes dismissable dialogs (Chronicle, Load, Stock), focus returns to the trigger on close, nested veil stack is handled",
+    "roving tabindex on the Chronicle tablist with arrow-key navigation matches the ARIA tabs pattern correctly",
+    "prefers-reduced-motion is honoured at three layers: CSS kills all animation/transition durations, scene.js freezes the animation clock entirely (no continuous RAF), constellation.js freezes the twinkle clock, and ui.js suppresses the being-line fade",
+    "role=list / role=listitem applied to both the save-slot list (#slotList) and the lineage list (#lineage), with readable button labels on each row",
+    "skip link present and functional (#app target), using the standard sr-only-until-focused pattern with correct CSS",
+    "inline two-step delete confirm replaces native confirm() — keyboard focus goes to 'delete' button on open, Escape disarms, focus returns to the ✕ button on cancel — accessible and focused throughout",
+    "constellation tab panel is keyboard navigable: arrow keys traverse chosen decisions, Home/End jump to endpoints, each decision announces to a polite live region with age, choice, and alt",
+    "44px minimum touch targets on all footer controls, slot delete, chronicle/constellation links, and eulogy action spans",
+    "contrast of meaning-carrying elements has been progressively lifted from ink-faint (~3.8:1) to ink-dim (~5.6:1) through six review passes, covering chronicle ages, log ages, ancestor ordinals and spans, flow text, slot delete, and star tip alt text",
+    "aria-pressed on #flow set to 'true' when fast-forward is active, 'false' otherwise — state change is programmatically exposed in setPP()",
+    "setPP() updates both #pp aria-label (pause/play) and #flow aria-label with a full description of current state and next action, covering all three states"
+  ],
+  "blockers": [
+    "aria-pressed on #flow is semantically incorrect: the element is role='button' and aria-pressed converts it to a toggle button (2-state: on/off). But the control has three states — paused, normal, fast — so aria-pressed='false' during normal play is actively misleading (screen readers announce 'not pressed' while the game is actively running). aria-label already describes state and action perfectly; aria-pressed should be removed from #flow, or the element should become a proper <button> with an explicit state label",
+    "The .reflect button (#stockBtn) uses color:var(--ink-faint) at opacity:.82 — effectively ~3.1:1 contrast ratio on the dark background, below the WCAG AA 4.5:1 requirement for interactive text. This is a visible, interactive, labelled button and fails minimum contrast",
+    "First stage (childhood at life start) is never announced by #stageA11y: scene.js only fires the announcement when lastStage !== null (line 232), but lastStage initialises to null and is set to 'childhood' on the first frame without announcing. Only transitions from childhood onward are announced — a screen reader user begins each new life in silence about what stage they are in",
+    "No initial orientation text in the Stars tabpanel before keyboard navigation begins — the canvas is aria-hidden, the legend reads 'drag or arrow keys to roam' but never says how many decisions are traversable. A user with no vision cannot know there are any stars to navigate until they discover that arrow keys do something"
+  ],
+  "improvements": [
+    {
+      "what": "Remove aria-pressed from #flow in setPP(); rely on the aria-label alone to communicate state",
+      "why": "aria-pressed on a role='button' creates a false toggle-button semantic. The aria-label ('the years are racing by — tap to return to the usual pace') already communicates state and action unambiguously across all three states. Removing aria-pressed eliminates the spurious 'not pressed' announcement during normal play",
+      "impact": "high"
+    },
+    {
+      "what": "Lift .reflect / #stockBtn text color from ink-faint (opacity:.82) to ink-dim or ink, and add a visible focus-visible ring that is already used on .btn — currently only .reflect:focus-visible is styled",
+      "why": "A labelled interactive button failing AA contrast is a hard accessibility failure. ink-dim (#a99c87) on the dark background clears 5.6:1. The opacity cascade makes ink-faint worse than its raw value",
+      "impact": "high"
+    },
+    {
+      "what": "In scene.js, initialise lastStage to a sentinel value (e.g. '') rather than null, and remove the null-guard so the first stage (childhood) is announced to #stageA11y on the very first frame",
+      "why": "Screen reader users get no stage context at the start of each life — the first announcement is 'A new season of life: youth' when the character hits 13, with no prior indication they were in 'childhood'. The fix is one-line: set lastStage='' instead of null and drop the !== null condition",
+      "impact": "med"
+    },
+    {
+      "what": "When the Stars tab is activated (switchTab('stars')), write an initial count message to #starA11y: 'Constellation: N decisions. Use arrow keys to navigate.'",
+      "why": "Without it, a non-visual user has no idea whether there is anything to navigate or how many decisions exist. The count is available as chosenStars.length immediately after build()",
+      "impact": "med"
+    },
+    {
+      "what": "Convert the #flow div (role='button', tabindex='0') to a native <button> element",
+      "why": "Native <button> gets keyboard activation, correct ARIA role, and disabled-state support for free. Custom role='button' divs require explicit keydown handlers (present but fragile). The flow control is central to the game loop — it deserves a native element",
+      "impact": "low"
+    },
+    {
+      "what": "Audit and suppress .entry.whisper from the #log aria-live='polite' region, or accept that it fires and ensure the whisper text is meaningful enough to not annoy screen-reader users who hear every ephemeral line",
+      "why": "Ambient whispers ('A long afternoon goes by with nothing in it but light') are added to the polite live region and will be announced. They are intentionally non-informational. Many AT users turn off noisy live regions; if whispers are too frequent, players may disable it and miss actual game events",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A thoughtful, multi-pass accessibility implementation that nails the hard parts — the reading loop, focus management, reduced-motion, and emotion semantics — but is held below 8 by a semantically incorrect aria-pressed that makes the pace control actively misleading to screen readers, a contrast failure on the 'how things stand' button, and a blind spot where the first life stage is never announced."
+}

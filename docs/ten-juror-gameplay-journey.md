@@ -18,9 +18,9 @@ literary-fiction reader pull in nearly opposite directions, and the game has to 
 
 - **Ten blind, independent jurors**, each a distinct profile, each a fresh subagent that never sees
   the others. They read the *actual* source, *real* engine-generated playthrough transcripts, and the
-  live UI screenshots, then score 0–10 against a shared honest rubric ([the brief](../../a-life-eval/jury/BRIEF.md)).
+  live UI screenshots, then score 0–10 against a shared honest rubric ([the brief](../eval/jury/BRIEF.md)).
 - **Every verdict is a receipt.** Each juror writes its raw JSON (score, blockers, improvements) to
-  `a-life-eval/jury/round<N>/<profile>.json`. Nothing is hand-waved; the scores below are transcribed
+  `eval/jury/round<N>/<profile>.json` (committed in this repo). Nothing is hand-waved; the scores below are transcribed
   from those files. Fresh jurors each round, so no score is "remembered" or coached.
 - **The bar:** all ten ≥ 8.0. A session Stop-hook held the loop open until that was genuinely true.
 - **No cheating** means: real jurors, real receipts, real fixes between rounds — the game actually
@@ -83,7 +83,8 @@ below.
 ## The convergence — every round's scores
 
 Nine jury rounds (Round 0 = baseline, Rounds 1–8 = after each build pass). Every cell is transcribed
-from a real receipt in [`a-life-eval/jury/round<N>/`](../../a-life-eval/jury). **90 verdicts in all.**
+from a real receipt in [`eval/jury/round<N>/`](../eval/jury) (committed in this repo; the harness that
+generated the transcripts the jurors read is in [`eval/`](../eval) too). **90 verdicts in all.**
 
 | Lens \ Round | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | **8** |
 |---|--:|--:|--:|--:|--:|--:|--:|--:|--:|

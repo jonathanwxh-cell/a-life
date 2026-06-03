@@ -1,0 +1,37 @@
+{
+  "profile": "roguelike_replayer",
+  "score": 8.1,
+  "strengths": [
+    "Seat-7 gate at peakMeans>=76 (down from 82) meaningfully increases pinnacle reachability — a focused 4-5 gen run now has a credible shot, as the Reyes dynasty in the transcripts demonstrates (5 gens, seat-7 achieved).",
+    "The houseCharacter() trajectory readout now gives a clear in-prose description of how far the leading reputation has come toward the histories, with four tier levels (still gathering / has real weight / has lasted / deep enough). This is exactly the kind of legible goal-state that drives 'one more run' thinking — the player knows what the house is building toward without ever seeing a raw number.",
+    "The ruthless archetype now has a genuine two-beat thread: r_hard_name (using the feared name to close a deal) fires in adulthood, then r_name_cost (the name has finally cost something — a flinching heir, a closed door) fires in midlife and forces a real fork between softening and holding teeth. The midlife card's text is strong: 'a young one in the house who has started to flinch' makes the cost visceral, not abstract.",
+    "Motto crystallization announced in-life ('The family's character has settled, at last, into words') is confirmed firing across multiple dynasties in the transcripts (Aldous Reyes at 65, Emory Reyes at 64, Cyrus Castellane at 85). The mid-game announcement is a genuine 'the plan is working' moment — the roguelike's clearest success-signal.",
+    "The first-life dynasty breadcrumb ('Was born into a rented room, and a family that already had a story') gives the new heir an immediate sense of where they stand without a raw number — early scent confirmed.",
+    "Meta-progression 'houses you have raised' collection is fully wired: recordHouseLegacy() stores surname/motto/seat/gens/souls to localStorage when a line ends, renderHousesRaised() surfaces it on the title screen. Mottos earned are deduped and shown — every distinct motto is a visible trophy.",
+    "Archetype differentiation is now real across runs: the transcripts show scholarly, reckless, ruthless, and artistic paths producing meaningfully different event sequences, different callback firings, and different epitaphs. A ruthless run (cut_a_corner -> cb_corner -> r_hard_name -> r_name_cost) reads nothing like a scholarly one (chose_study -> cb_study_pays -> r_scholar_door)."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Give the ruthless archetype a third downstream beat: a late-game elder card that fires only if the player chose 'Let them fear it' on r_name_cost — e.g. a grandchild who never visits, or a eulogy that admits the house was respected and unloved.",
+      "why": "r_name_cost currently ends the ruthless thread at midlife. A dedicated elder echo would close the arc for players who doubled down, making a truly ruthless run feel like it had a complete three-act shape rather than petering out into generic elder content.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'broke_with_house' callback for the scholarly archetype — a card that fires when the heir of a scholarly house explicitly chose not to study, acknowledging the break and letting the player lean into or resist the family's character.",
+      "why": "The scholarly and generous archetypes currently only reward continuation; the ruthless archetype is the only one where defying the house's reputation is an active thematic choice. Giving scholarly the same fork would make archetype choice feel like a tension rather than a train track.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the house motto on the in-play 'how things stand' reflect panel (not just at birth and at motto-crystallization), so a player mid-run can see it without restarting or dying.",
+      "why": "The motto is the most personally legible distillation of the dynasty's character, but a player who earns it at gen 2 and is now playing gen 4 may have forgotten it. Mid-game visibility reinforces identity and the 'I am building something' feeling that drives replayability.",
+      "impact": "low"
+    },
+    {
+      "what": "Add one seat-7 exclusive event card — something that only a 'house written into the histories' will ever see — to give the pinnacle a unique payoff beyond the title.",
+      "why": "Reaching seat-7 is currently reward-by-description (the seat name changes, the heir screen says it). A single card exclusive to that seat — e.g. a summons from someone in power, an archivist arriving to record the family's history — would make the pinnacle feel like a distinct gameplay state the player earned rather than just a display update.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "Round 7 crossed the 8-bar: the ruthless archetype now has a real two-beat arc, the motto crystallization announces itself in the life that earns it, the seat-7 gate is reachable through focused play, and the houseCharacter readout gives the dynasty-builder a legible climb — together these changes produce the 'I know what I'm building toward' pull that was missing."
+}

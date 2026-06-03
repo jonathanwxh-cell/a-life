@@ -1,0 +1,42 @@
+{
+  "profile": "mobile_casual",
+  "score": 7.5,
+  "strengths": [
+    "The layout on mobile is genuinely clean — one card fills the middle of the screen, two tap targets stacked vertically, plenty of breathing room between them. The screenshot shows the choices are big enough to hit one-handed without squinting.",
+    "The breathing pulse-dot on the flow text is a small but effective liveness cue. I can put the phone down for 30 seconds, glance at it, and immediately see if time is still moving — no anxiety about whether the game froze or drained the battery doing nothing.",
+    "Tapping the flow text to toggle fast-forward is discoverable and feels right for mobile. The text changes to 'the years are racing by' and the dot pulses faster (1s instead of 2.6s) and turns amber — you get tactile feedback in the label, the colour, and the rhythm all at once.",
+    "The sticky 'Back'/'Return' buttons at the bottom of scrollable panels mean a new player with three saves on a short phone screen is never stranded scrolling to find the dismiss button. That is a solved problem that most phone games still get wrong.",
+    "44px touch targets are everywhere that matters: the pause button, the music toggle, the menu button, the chronicle/constellation links, the delete controls on save slots. The spec was followed, not aspirationally gestured at.",
+    "The save code textarea has 'user-select:all' at 13px — one tap selects the whole thing for copy. Cross-device handoff is achievable without frustration on a phone keyboard.",
+    "The game's own pacing matches mobile sessions naturally: a moment arrives roughly every 5-12 years of sim time, you make one binary tap, and the game drifts on. You can drop in for 90 seconds and have done something meaningful."
+  ],
+  "blockers": [
+    "The hint text on choice buttons only reveals on hover — the CSS fix for touch devices ('(hover:none)') makes the hint always visible on a phone at 0.82 opacity, which is the right call, but at 13px italic in var(--ink-faint) (lifted to ink-dim in the review pass), the sub-labels are still quite small and easy to ignore on a bright outdoor screen. They are not a blocker on their own, but they show that mobile readability got addressed at the CSS level without being validated against an actual small screen in sunlight.",
+    "There is no session-resume indicator. If I close the browser tab and come back, the game auto-reloads my save silently — but I have no immediate confirmation that I am where I left off. The 'cloudStatus' toast fires during sync, but on a cold open from the home screen it is gone before I can read it. A casual phone player opening the game 18 hours later has a moment of 'is this the right save?' with no answer until they check the header name and generation number, which takes a beat to parse.",
+    "The log at the bottom is 92px tall and shows one ephemeral line at a time — on a phone the log feels like a status bar, not a feed. The only way to see what happened earlier is to tap the log, which opens the full chronicle. That flow is not surfaced: a new player may not know the log is tappable, and the aria-label ('open the full record') is invisible. There is a one-time hint system but it covers the constellation, not the log-tap gesture. Casual players who do not discover this will feel like the game erases context.",
+    "The 'how things stand' button sits between the 'being' line and the stage area as a small 11.5px Fraunces label with a dot prefix. On mobile it reads as decoration, not affordance. The label is correct ('how things stand') but the visual weight is too shy — it looks like a watermark. A first-time player playing for 5 minutes with one hand on the bus is unlikely to tap it, and will therefore have no model of what their choices are doing. The no-numbers philosophy is admirable but the prose readout only helps players who find the button."
+  ],
+  "improvements": [
+    {
+      "what": "Add a one-time log-tap hint at first launch, parallel to the constellation beckon — e.g. a 'hint' class log entry that says 'tap here to read the full record' and lingers for 18 seconds, with a brief amber pulse on the #log element itself",
+      "why": "The log's tappability is invisible. Casual players lose the thread of what is happening and do not know they can recover it. This is exactly what hintOnce() + the beckon animation already do for the constellation — apply the same pattern to the log",
+      "impact": "high"
+    },
+    {
+      "what": "On cold start (page load that restores a save), briefly show the save name + generation in the cloudStatus element for ~3s before fading — e.g. 'continuing · House Ashby · 3rd of the line'",
+      "why": "Eliminates the 'am I in the right save' moment. Takes three lines of JS in the persistence restore path, and re-uses the already-styled cloudStatus toast that exists exactly for this purpose",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the 'how things stand' button to at least 14px and add a visible border or underline so it reads as a tappable control rather than italic prose — currently at 11.5px/ink-faint it disappears into the ambient text",
+      "why": "The prose readout is the only window into the hidden stats for players who want orientation. If they do not notice the button exists, it delivers no value. The touch target is fine (padding gives it height) but the visual affordance is missing",
+      "impact": "med"
+    },
+    {
+      "what": "When fast-forward is active and a moment card appears, add a brief visual jolt — e.g. a 100ms amber flash on the card container — to signal that time has paused for a decision, since the dot pulse stops and the text changes but the transition can feel abrupt on a small screen while scrolling",
+      "why": "Casual players using fast-forward may miss the moment card appearing if they glanced away; the existing 0.55s card fade-in is gentle but not attention-grabbing enough when the rhythm suddenly shifts from 'racing' to 'stopped'",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life handles mobile with genuine care — the touch targets, the pulse-dot liveness cue, the pace toggle, and the sticky dismiss buttons are all done right — but two invisible affordances (the tappable log and the 'how things stand' button) mean a casual player playing in short bursts will feel the game is quieter and more opaque than it needs to be, keeping it just short of a clean 8."
+}

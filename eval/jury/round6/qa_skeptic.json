@@ -1,0 +1,42 @@
+{
+  "profile": "qa_skeptic",
+  "score": 8.1,
+  "strengths": [
+    "The `h.repPeak` high-water mark correctly uses `Math.max(h.repPeak||0, ...)` so it never goes stale, never double-counts, and the `||0` guard prevents crashes on saves that predate the field — functional for all forward use.",
+    "The seat-7 gate (repPeak>=3.5, seat>=6, peakMeans>=82, 45% chance) is genuinely hard to reach and re-earned each generation: the fall-back `else if(h.seat===7) h.seat=6` is clean and prevents the pinnacle from being a permanent won-and-done status.",
+    "The scholarly and industrious bumps at 1.0 are consistent with the motto threshold (1.5): two dedicated lives clear the bar even after fade(), and the fallback stat-based paths (0.5) provide a reasonable secondary ramp — no tag is unreachable.",
+    "The `r_hard_name` card weight and age change (w:4, age:[26,60]) is internally consistent: the heirloom path (`hardname` + means>45) and the reputeTop='ruthless' path both make narrative sense, and the 'Use the name' branch correctly accumulates 'cut_a_corner' memory and ruthless rep rather than orphaning them.",
+    "No unresolved `{token}` placeholders found in content.js, dynasty.js, or ui.js across all examined card texts and log lines.",
+    "The `houseCharacter` signal in the heir screen and in openStock are complementary rather than contradictory — openStock correctly names all three requirements for seat-7 (seat, reputation, means), while houseCharacter provides directional narrative encouragement.",
+    "Save/load for existing data is safe from crashes: all new field reads use the `||0` or `||null` guards and the only new field on S.house (`repPeak`) degrades gracefully rather than throwing."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add `repPeak` backfill in `loadSlot()`: after `if(!S.house) S.house=initHouse();`, add `if(S.house && typeof S.house.repPeak==='undefined') S.house.repPeak=0;`. Alternatively, compute it from the existing lineage on first load by scanning S.lineage for the historical max.",
+      "why": "Pre-round-6 saves with a seat-6 house cannot reach seat-7 for one full generation because repPeak starts at 0 and must be rebuilt from scratch. The guard works but silently disadvantages veteran saves versus new ones. A player with five scholarly generations who saved yesterday now needs to re-earn the threshold from 0.",
+      "impact": "med"
+    },
+    {
+      "what": "Add `repPeak: 0` to `initHouse()` so the field is declared at creation rather than being implicitly undefined until first `updateHouse()` call.",
+      "why": "The current `||0` guard works but the field is structurally absent from the canonical house shape. This creates a latent maintenance risk: any future code that checks `'repPeak' in h` would give a wrong answer, and the omission is invisible in saved JSON inspection.",
+      "impact": "low"
+    },
+    {
+      "what": "In `houseCharacter()`, tighten the seat-7 aspirational sentence (line 97) to fire only at `h.seat>=6` rather than `h.seat>=5`. Currently a seat-5 house sees 'such a name could one day be written into the histories' — but the actual gate requires seat>=6 first, so the player needs two climbs, not one. Seat-5 should say something like 'a name this strong could raise the house to the very top of the old families.'",
+      "why": "Mild mislead: a seat-5 player optimising for the history entry is one seat further away than the signal implies. Low impact but the sort of thing a careful player notices and is annoyed by.",
+      "impact": "low"
+    },
+    {
+      "what": "The seat-7 hint in openStock (line 276) says 'raise an heir to the very height of their means' but the actual gate is `p.peakMeans>=82`, not `p.stats.means` at death. Clarify to 'an heir who reached the very height of their means at their peak, not necessarily at the end' or add '(means at their height, not their end)' — the distinction matters for understanding that a wealthy life that declines in old age still qualifies.",
+      "why": "A player who reads the openStock hint literally might worry about maintaining means until death, when actually only peakMeans matters. Not a bug, but a precision gap in the player-facing hint.",
+      "impact": "low"
+    },
+    {
+      "what": "In `updateHouse()`, the `repPeak` line (162) tracks only `repTop` — the currently-leading tag at death-time. If a house built scholarly to 4.0, then drifted toward industrious so that industrious became repTop, the historically-earned scholarly peak of 4.0 is already captured in repPeak. But if after several more lives the industrious line pushes repPeak higher, while scholarly has faded below reputeTop threshold, repPeak may reflect an orphaned past peak that no longer reflects the current house character — and the seat-7 check fires on that orphaned number. Consider adding a comment noting this is intentional (rewarding focused runs) or cap repPeak to the current leading tag if the policy is that the peak must be of the same tag the house currently holds.",
+      "why": "Design ambiguity that could cause a house to reach seat-7 on the strength of a reputation it no longer holds. Whether that's a feature or a bug depends on intent — but it's undocumented and surprising.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The round-6 changes are mechanically sound with one concrete save-fragility (repPeak not backfilled on old saves means veteran players lose historical rep momentum for one generation), and a minor signal inconsistency where a seat-5 house is told it could reach the histories when it actually needs two climbs — everything else is well-guarded, internally consistent, and free of the soft-locks, orphaned tokens, or impossible ages the brief flagged as risks."
+}

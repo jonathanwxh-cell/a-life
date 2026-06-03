@@ -1,0 +1,49 @@
+{
+  "profile": "mobile_casual",
+  "score": 6.5,
+  "strengths": [
+    "Choice buttons are generously padded and well-spaced — tapping the right option on a thumb is reliable, no mis-fire risk.",
+    "All three footer controls (pause, music, menu) hit the 44px touch-target minimum; pause is amber-tinted so it reads as the primary action at a glance.",
+    "viewport-fit=cover plus env(safe-area-inset-bottom) on the footer means the controls clear notches and home bars correctly on iPhone.",
+    "The @media(hover:none) rule always surfaces choice hint text on touch devices — you don't need to hover to know what a choice means, which removes a real mobile friction point.",
+    "Scene text is 23px Fraunces serif — highly legible on a phone without zooming.",
+    "The title screen has a 'Continue House X' primary CTA — returning to a saved game is literally one tap, which is the right call for casual sessions.",
+    "The 2.1s/year pace combined with event spacing (floor of 2 quiet years, then a probabilistic ramp) means that within a 2-3 minute burst you will almost always face at least one meaningful choice, and the log fills with passive observations that keep the screen feeling alive between choices.",
+    "Card appears with a smooth translateY + fade transition that feels polished and native-app-quality on mobile.",
+    "-webkit-tap-highlight-color:transparent eliminates the ugly blue flash on tap."
+  ],
+  "blockers": [
+    "Interaction density is too low for short-burst mobile play: with ~2.1s/year and moments spaced at minimum 2 years apart (often 5–12), a 2-3 minute session regularly yields only 1–2 choice moments. The rest is watching the age counter increment. There is no speed-up control — pause exists but not fast-forward. A casual player in a queue wants to feel agency, not wait.",
+    "The backup/portability textarea (#codeBox) is rendered at 10px DM Mono — unreadable on any phone without pinch-zooming in. This is the only cross-device save mechanism for casual players, and it fails the basic readability test on the very screen type most likely to need it.",
+    "The constellation (star map) is flagged as a key feature but requires two-handed pinch-to-zoom. One-handed mobile use makes this view largely non-interactive beyond the initial static view. The hint even explicitly says 'pinch / scroll to zoom' — acknowledging it assumes two hands.",
+    "The live log area is capped at 92px height with no user-scrollable access. Passive narrative lines (loss, joy, observations) scroll in and vanish. On a short burst session these are the texture between choices, but a player who just unlocked an emotional beat (e.g. 'Lost his mother') cannot scroll back to re-read it — it fades and disappears."
+  ],
+  "improvements": [
+    {
+      "what": "Add a 'years are passing — tap to hurry' gesture or a long-press/double-tap on the pause button to toggle a 4x speed mode (e.g. RATE drops to 500ms while held)",
+      "why": "Lets a casual player burn through quiet years to reach the next choice moment. Preserves the meditative pace as the default while giving mobile users an escape valve.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase #codeBox font-size from 10px to at least 13px and set user-select:all so one tap selects the whole code string for copy on mobile",
+      "why": "10px monospace is unreadable on a phone. The backup code is the only cross-device save path — if it can't be read or easily selected, casual players lose their save when they switch phones.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the .log area tappable to open a scrollable 'recent memory' overlay showing the last ~20 log entries",
+      "why": "Casual players check their phone mid-session and lose context. The current 92px window discards narrative lines permanently once they scroll off. A quick tap-to-expand log is a standard mobile pattern and resolves the 'what just happened' problem.",
+      "impact": "med"
+    },
+    {
+      "what": "Replace pinch-zoom on the constellation canvas with double-tap-to-zoom-in / double-tap-to-zoom-out steps (e.g. 3 zoom levels), keeping drag pan one-handed",
+      "why": "Pinch requires two hands — one-handed mobile use is the stated context. Step zoom makes the star map actually usable on a phone without a second hand.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a brief animated pulse or text prompt ('a moment is coming') roughly 1 year before a card draws, so a player mid-glance knows to pay attention",
+      "why": "On a phone propped up or glanced at, missing the card animation means missing a choice window and making an accidental non-choice. A 1-year forewarning — even just the ambient light brightening slightly — reduces missed moments.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A genuinely polished touch experience let down by one structural mismatch: the ~2-minute interval between meaningful player choices is meditative on a desktop but feels inert in a 3-minute pocket session, and there is no speed control to compensate."
+}

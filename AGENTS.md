@@ -115,9 +115,12 @@ Supporting files:
   ```
   Agents acting for the maintainer should match this identity. (This email deploys
   cleanly on Vercel — see Gotchas.) Never run `git config --global`.
-- **Verify before claiming done.** Actually run it. For browser-observable changes,
-  load the page and check via DOM / `getComputedStyle` — headless screenshots time
-  out on the always-animating canvas, so don't rely on them.
+- **Verify before claiming done.** Actually run it. For engine/content/dynasty changes,
+  run the headless harness in [`eval/`](./eval): `node eval/sim-harness.cjs 8000` must report
+  **0 violations** (and healthy distributions), and `node eval/transcript-gen.cjs` lets you read
+  resolved playthroughs. For browser-observable changes, load the page and check via DOM /
+  `getComputedStyle` — headless screenshots time out on the always-animating canvas, so don't rely
+  on them. See [`eval/README.md`](./eval/README.md) for the full workflow and the jury audit trail.
 
 ## Deployment
 

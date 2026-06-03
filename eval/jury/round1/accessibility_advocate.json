@@ -1,0 +1,55 @@
+{
+  "profile": "accessibility_advocate",
+  "score": 6.5,
+  "strengths": [
+    "All essential gameplay information (age, name, scene prose, choices, log entries) is conveyed through DOM text — the living canvas (sky, tree, birds, particles) is aria-hidden throughout, so nothing essential is canvas-only.",
+    "Decision moment fully wired for assistive tech: #scene is aria-live=assertive so the moment's prose is announced immediately when the card appears, and engine.js focuses the first choice button (not the card wrapper) so a keyboard or screen-reader user lands on an actionable control without an extra Tab.",
+    "Log entries carry sr-only emotion prefixes via srTag() — joy, loss, echo are named for color-blind and screen-reader users so emotional register is not conveyed by color alone.",
+    "Comprehensive modal focus-trap system: a centralised MutationObserver watches all 6 veils, stacks nested dialogs, returns focus to the trigger on close, and handles Escape for the three dismissable modals (Chronicle, Load, How-things-stand). The three narrative gates (title, eulogy, heir) correctly block escape — the player must acknowledge them.",
+    "Chronicle tablist follows the ARIA tabs pattern correctly: roving tabindex, aria-selected, aria-controls/tabpanel associations, and arrow-key (Left/Right/Home/End) roving built into the keydown handler.",
+    "Constellation canvas is aria-hidden; keyboard traversal lives on the focusable paneStars tabpanel; chosen decisions are announced via a .sr-only aria-live=polite region (#starA11y) with age, chose text, alternative, and ordinal position — a screen-reader user can traverse the entire bloodline decision-by-decision.",
+    "Lineage list in the Chronicle uses role=list / role=listitem applied dynamically, so AT can enumerate ancestors. Each readable ancestor gets role=button and a named aria-label (Read the life of [name]).",
+    "Skip link present, visually hidden until focused, correct target (#app).",
+    "prefers-reduced-motion respected in three layers: CSS kills all animation/transition durations globally (!important), scene.js freezes the animation clock (dt=0), constellation.js also freezes its time delta. The #being line has an explicit JS guard (_reduceMotion) that skips the opacity-0 flash and sets text directly.",
+    "Focus-visible rings are consistent: an amber 2px outline on every interactive control including the custom role=button elements, the choice hints are also revealed on focus-visible for keyboard users who have no hover.",
+    "Contrast is broadly AA: primary ink (~13:1), amber on dark (~7:1), ink-dim (~5.6:1) used for log ages, lineage ordinals, stat labels after several review passes moved them off ink-faint (~3.8:1).",
+    "Touch targets for all footer controls, chronicle tabs, slot delete button, eulogy links, and chronicle entry points meet the 44px minimum.",
+    "Music button aria-label updates correctly on toggle (audio.js line 95 calls setAttribute). The diagonal CSS slash communicates muted state visually without relying on color alone.",
+    "The inline two-step delete confirm in save slots avoids native confirm() (which breaks focus and is blocked in sandboxed contexts): focus moves to the confirm button, Escape disarms it, and the delete/keep buttons have explicit aria-labels."
+  ],
+  "blockers": [
+    "#slotList container never receives role=list — persistence.js renders save slots as div.slot children of a plain div, so screen readers cannot announce item count or enumerate them as a list. The lineage in the Chronicle correctly sets role=list dynamically, but the load menu does not get the same treatment.",
+    "The #flow pace control has a static aria-label ('the years are passing — tap to change the pace') that is never updated by setPP(). In fast-forward mode the visible text changes to 'the years are racing by' but the aria-label is stale. A screen-reader user relying on the label (which overrides textContent for named elements) never learns that fast-forward is active. There is also no programmatic state indicator (aria-pressed, aria-checked, or a state token in the label) for whether the pace is normal vs accelerated.",
+    "The vStock 'how things stand' panel has no focus-trap initialisation at the moment it opens via openStock() — it is included in the MutationObserver array in ui.js so the trap does engage, but only after the class change fires the observer. In practice the timing works because classList.add triggers the observer synchronously, but there is a narrow race: openStock() immediately adds 'show' and the observer relies on a 40ms setTimeout in focusIn(). During those 40ms a fast Tab press escapes into the game underneath. This is a close call but still a gap in the spec.",
+    "The #stageTitle element (the life-stage transition flourish — 'childhood', 'youth', etc.) is a polite live region but sits at z-index:5 with pointer-events:none. The text update happens inside the canvas frame loop (scene.js), which sets textContent and toggles the 'show' class, but screen readers may not reliably pick up this update because the element is positioned fixed with opacity:0 when inactive — some AT skip live regions whose opacity is 0 or whose layout box is collapsed. The stage transition is atmospheric and not strictly essential, but it names the life stage the player just entered and it would be useful to screen-reader users.",
+    "The choice hint text (.choice .h) is exposed on focus-visible, which is correct, but the hint is a child element inside the <button>. Because it is initially height:0 / opacity:0 and only expands on focus/hover, some screen readers may read the concatenated button text without the hint (the accessible name is computed before CSS layout). Hints like 'this will be hard to undo' carry genuine decision weight and may be silently dropped by SR in some configurations."
+  ],
+  "improvements": [
+    {
+      "what": "In openLoadMenu() (persistence.js), set list.setAttribute('role','list') immediately after list.innerHTML='' and before any slots are appended. Each slot row already contains role=button children; add role=listitem to the outer div.slot element so the list/listitem relationship is complete.",
+      "why": "Fixes the save-slot list semantics gap. Screen readers can then announce '5 items' and users can navigate the list with AT shortcuts rather than Tab-walking through a flat sequence of buttons.",
+      "impact": "high"
+    },
+    {
+      "what": "In setPP() (ui.js), also update document.getElementById('flow').setAttribute('aria-label', running ? (fastFwd ? 'the years are racing by — tap to slow down' : 'the years are passing — tap to change the pace') : 'time held still — tap to resume'). This keeps the announced label in sync with the three states.",
+      "why": "Fixes the stale aria-label on the pace control so a screen-reader user hears the correct state and knows what a tap will do. The current gap means a blind user can never confirm fast-forward is engaged.",
+      "impact": "high"
+    },
+    {
+      "what": "In scene.js, when a stage transition fires (stageWord changes), also set document.getElementById('stageTitle').setAttribute('role','status') and ensure the element is not opacity:0 when its textContent is set — or better, use a separate sr-only live region (like #starA11y) to announce the stage change rather than relying on the animated element to be picked up.",
+      "why": "Ensures stage transitions (childhood → youth → adulthood → midlife → old age) are reliably announced to screen-reader users even in AT that skips opacity-zero live regions. The life stage name contextualises what decisions the player will face next.",
+      "impact": "med"
+    },
+    {
+      "what": "For the choice hint (.choice .h), give each hint a stable id and add aria-describedby on the <button> pointing to that id. Keep the hint visually hidden until focus/hover but keep it in the accessibility tree (remove height:0 / clip from the AT representation, e.g. using sr-only on the element always, and only add the visual reveal on focus/hover for sighted users).",
+      "why": "Guarantees that hint text — which carries meaningful decision weight ('this is permanent', 'this will cost you') — is always available to screen-reader users regardless of whether their AT reads dynamically expanding children inside a button.",
+      "impact": "med"
+    },
+    {
+      "what": "After openStock() adds 'show' to vStock, call the modal-focus logic synchronously (or with a shorter delay) rather than relying solely on the MutationObserver's 40ms setTimeout, to close the Tab-escape window during vStock opening.",
+      "why": "Eliminates the narrow timing race where a keyboard user can Tab into the live game while the 'how things stand' overlay is visually shown. This makes the focus trap spec-compliant rather than relying on the observer timing coinciding with user input speed.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life has clearly been through a serious accessibility review — the canvas/text separation, assertive live regions, focus management stack, constellation keyboard traversal, and reduced-motion layers are all implemented thoughtfully — but two concrete holes (save-slot list missing role=list, and a stale aria-label on the pace control that hides the fast-forward state from screen readers) prevent it from being genuinely inclusive without caveats."
+}

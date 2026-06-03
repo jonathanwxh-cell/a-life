@@ -1,0 +1,48 @@
+{
+  "profile": "mobile_casual",
+  "score": 6.5,
+  "strengths": [
+    "The card layout on mobile is genuinely phone-native: two stacked full-width choice buttons with 14px+ padding, rounded corners, and a tactile scale-down on :active. One-handed tapping works naturally.",
+    "Pick-up-and-play pacing is real. A moment (card) arrives roughly every 3-10 years of game-time, and at 2 seconds per year the default pace delivers a choice in under a minute of real time. You can get something meaningful in 2 minutes.",
+    "The fastFwd toggle (tap 'the years are passing') is a genuine quality-of-life win for mobile bursts: tap once, years race, a card stops it. You don't have to interact with a slider or menu.",
+    "The log area is also a tap target that opens the full Chronicle, which is smart repurposing of dead screen space — the bottom strip you'd idly look at while time passes is now a shortcut.",
+    "The 'how things stand' opt-in readout gives curious players prose-based feedback without cluttering the default screen with numbers. It's one tap from the main view.",
+    "The save code box being 13px monospace with user-select:all means one tap selects the entire code for copy — this is exactly right for mobile cross-device handoff.",
+    "The dark atmospheric palette with high-contrast amber choices doesn't fight legibility on dim phone screens.",
+    "The hint text on choice buttons is always visible on touch devices (the @media hover:none rule reveals .h permanently), so mobile players don't miss the hint that desktop hover-users see."
+  ],
+  "blockers": [
+    "There is no persistent 'what do I do now?' orientation. After your first card resolves, the screen returns to a large age numeral and the fading log. There is no label, no tooltip, no in-context nudge telling a new player that the game is running and they should just wait. The 'the years are passing' text is the only cue, and it is 12px dim text in the footer. A casual player who picked this up cold — or returned after a week away — would not confidently know the game is doing anything. The beckon animation on 'the constellation' fires once but does nothing to orient the player to the running state.",
+    "Discovery of the three hidden tap targets (the flow text for fastFwd, the log area for the chronicle, the 'how things stand' button) requires either reading a tutorial or random exploration. None of them look like controls. The flow text has no visual affordance (no underline, no icon, nothing amber) until you are in hurry mode. A mobile casual player who misses fastFwd is stuck at 1x pace and may feel the game is simply slow.",
+    "The Chronicle/constellation links in the header ('+ THE CONSTELLATION' and 'THE CHRONICLE') are rendered in 12-13px all-caps with very low contrast (--ink-dim or --amber at 0.9 opacity over a painterly sky). On a phone in daylight or with a dim screen, these are genuinely hard to read and not immediately identifiable as tap targets — even though the CSS now gives them 44px touch targets via padding. The visual presentation does not signal 'this is interactive'.",
+    "Session re-entry after closing the app is confusing. When you return, you see the title screen (with 'Continue House X' if a save exists). Tapping it drops you into the running state with no contextual recap: no short 'you were 34, here is the last thing that happened' beat. You have to actively tap the chronicle link to recall where you were. For a 2-minute phone session, the re-entry friction is real."
+  ],
+  "improvements": [
+    {
+      "what": "Add a subtle animated indicator (a slow-pulse dot or the age numeral's existing breath animation made more visible) plus a one-line footer label like 'age 34 · years passing' that makes the running state unmistakable to a returning player",
+      "why": "Eliminates the single biggest drop-off point: a player who doesn't know the game is running and closes it thinking nothing is happening",
+      "impact": "high"
+    },
+    {
+      "what": "Give the 'the years are passing' flow text a visual affordance — a faint underline or a small right-pointing chevron icon — so it reads as a tappable control before the player discovers it by accident",
+      "why": "fastFwd is the most mobile-relevant feature (short-session pacing) but it is invisible as a control; its discoverability is effectively zero for a first-time player",
+      "impact": "high"
+    },
+    {
+      "what": "On the session-resume screen (after tapping 'Continue House X'), show a one-sentence context beat before starting the tick: the character's name, current age, and the last log entry rendered as a brief card, dismissed by a single tap",
+      "why": "Casual players return to games in fragments; dropping them cold into a running simulation with no recap wastes the first 30 seconds of a 2-minute session on orientation",
+      "impact": "high"
+    },
+    {
+      "what": "Make the header chronicle links visually distinct as controls — amber color with a small icon (e.g., a star glyph before 'THE CONSTELLATION') or a faint underline, rather than plain small-caps text that blends into the atmospheric header",
+      "why": "The links are the only way to access the richer game layers (dynasty, bloodline history); if they are not discovered, the game feels shallower than it is",
+      "impact": "med"
+    },
+    {
+      "what": "Add a brief first-play onboarding beat after 'Begin a new line' is tapped — a single screen (not a tutorial) that says 'time passes on its own. When a moment arrives, it will ask something of you.' with a 'Begin' button, replacing the cold drop into the ticker",
+      "why": "The title screen copy explains the concept but it is read before investment; a one-beat orientation after the player commits would land better and cut early drop-off",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely phone-shaped passive experience let down by invisible controls and a disorienting running state that a casual player picking it up cold — or returning after days away — will not read confidently enough to stay."
+}

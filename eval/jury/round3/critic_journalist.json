@@ -1,0 +1,41 @@
+{
+  "profile": "critic_journalist",
+  "score": 7.8,
+  "strengths": [
+    "The three competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the game's best writing: both options carry real moral weight, the hint text names the genuine virtue on each side without editorialising, and the resolution lines honour the ambiguity rather than resolving it ('called it, mostly, no regret'; 'was never afterward quite sure she had been right'). This is the grammar the game needed.",
+    "cb_corner is precise and chilling. The dishonest life faces a larger temptation downstream, the consequence of feeling 'almost nothing, which was its own kind of answer' earns its darkness, and the redemption path ('surprised how much lighter it left them') is equally honest. This is how a shadow callback should work.",
+    "The affair card's three text variants are now genuinely colder: the third ('It would be so easy, and so quiet, and no one would ever have to know. Which is precisely what makes it dangerous') puts the moral weight entirely on the character's own nature rather than on circumstance — a real improvement in register.",
+    "The epitaph engine is quietly excellent. The cluster-blocking logic (no theme appears twice running), the 'ordinary life, which is to say, a whole world' fallback, and the memory-priority ordering (stray > teacher > secret > legacy > stats) produce eulogies that feel earned rather than computed. Across 15 lives, no two are indistinguishable.",
+    "The reputation-to-motto pipeline now produces differentiated dynasties: House Voss (Dynasty 5) crystallised 'We leave something beautiful behind' (artistic) on the basis of actual play choices, distinct from the kind houses. The reputation fading mechanic and the guard against inherited heirlooms silently forcing character are systemically sound.",
+    "The dynasty layer gates real content: seat-gated cards (s_great_burden, s_patronage, s_inheritance_dispute), repute-gated moments (r_scholar_door, r_family_shadow), and the bequest lever giving the player a genuine cross-generational choice. The Constellation visual confirms the bloodline reading is beautiful and functional.",
+    "cb_reckless resolves with genuine ambiguity: both 'tell them to slow down' (speaking caution you never managed yourself) and 'tell them it was worth it' (honest endorsement of a reckless life) are defensible, and neither is free of irony. The Cyrus Holloway life demonstrates it firing naturally at 66."
+  ],
+  "blockers": [
+    "The adult band still leans too hard on a small set of workhorse cards. Across 15 lives in the transcripts, a_work ('promotion / refuse it') and a_marry appear in nearly every adult life, while the newer and sharper cards (x_dream_or_duty, x_loyalty_truth, a_small_lie, cb_corner) fire only in a subset of lives. The repetition is noticeable to any player who runs more than two dynasties — the adult years feel less authored than they should.",
+    "Three of five dynasties landed on the same motto ('We take in what the world turns out' — the kind house). The reputation system still skews toward 'kind' as the default accumulation, because the memory paths that score it (kind_to_outcast, legacy='kind', let_in, looked_up) are more numerous and more commonly triggered than those scoring artistic, reckless, scholarly, or pious. The result is that most houses feel like variations on the same moral character rather than genuinely distinct dynasties.",
+    "The ruthless/tainted/reckless shadow paths remain underwritten compared to the noble ones. cb_corner fires once per life if the player cut a corner AND never stayed straight — a plausible but narrow gate. There is no 'deeply ruthless dynasty' content path, no moment that only a tainted house meets beyond r_family_shadow (which is also available to a merely secretive house), and no multi-life arc for a line that chooses hard-dealing across generations the way scholarly or kind lines can compound. The shadow paths produce different stats but not a different narrative experience."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 additional adult cards with distinct subject matter to reduce a_work and a_marry dominance in the adult band. Candidates: a friendship that demands more than the player wants to give (not just the old-friend-money ask); a moment of public failure; a choice about whether to let a private conviction become a public one.",
+      "why": "The adult years are the longest part of every life and the most repeated band across dynasties. Adding volume here reduces the sense that every life visits the same four events.",
+      "impact": "high"
+    },
+    {
+      "what": "Rebalance the reputation scoring so that artistic, reckless, pious, and industrious accumulate at the same rate as kind when their paths are actively chosen. Specifically: made_art, lived_reckless, and found_faith should each score their reputation at 1.2 (currently matching) but the NUMBER of distinct cards that score 'kind' (a_neighbour, c_friend, e_window stray path, legacy='kind', cb_lookaway second chance, s_patronage, a_make_name open-handed) is 2-3x higher than for any other reputation. Either add more cards for the other reputation paths or reduce the scoring multiplier for kind in the updateHouse function.",
+      "why": "Dynasty distinctiveness is one of the game's core promises. If most lines converge on the same motto, the generational layer loses its payoff.",
+      "impact": "high"
+    },
+    {
+      "what": "Add one tainted-specific gate card (beyond r_family_shadow) that fires only for houses where 'tainted' is the top reputation. Something like: a marriage opportunity that collapses when the family's history surfaces, or a public role that requires the character to decide whether to acknowledge or deny the family's shadow. Give the ruthless path its own downstream card that only a family with 'ruthless' in its top two reputations will meet.",
+      "why": "Currently the shadow paths produce different stats but not a different narrative experience. A player who builds a ruthless line should encounter a world that pushes back on that in kind — the way a scholarly line gets r_scholar_door. Without this, choosing the harder, darker path feels underpaid.",
+      "impact": "med"
+    },
+    {
+      "what": "In cb_corner, lower the gate slightly: require held('cut_a_corner') but allow it to fire even if stayed_straight was also set, instead of blocking entirely on !held('stayed_straight'). Currently a player who cut a corner once and then went straight never sees the callback; a player who cut corners consistently does. The morally interesting case — the reformed corner-cutter facing the temptation again — is precisely the one the current gate excludes.",
+      "why": "The most resonant version of the callback is the one where the past and the reformed self are in the same room. The current gate fires only for the unrepentant, which is compelling but narrower than it should be.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Round 3 broke the most important thing that was broken — the binary virtue grammar — and the competing-goods cards are the game's best writing yet; but the adult band's repetition and the reputation system's quiet drift toward the same dynasty character keep it just below the threshold of a game I'd recommend without caveat."
+}

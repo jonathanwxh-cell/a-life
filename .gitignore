@@ -16,3 +16,7 @@ tmp/
 scratch/
 *.local
 .vercel
+
+# eval/ runtime artifact (regenerate with `node eval/transcript-gen.cjs`; the committed
+# reference is eval/sample-transcripts.txt)
+eval/transcripts.txt

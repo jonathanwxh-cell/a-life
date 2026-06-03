@@ -1,0 +1,33 @@
+{
+  "profile": "mobile_casual",
+  "score": 8.0,
+  "strengths": [
+    "Core loop is ideal for one-handed short bursts: years pass on their own, a moment appears, you tap one of two choices, done — zero cognitive overhead between sessions",
+    "Cold-start confirmation ('Continuing House X — Nth of the line, age N') lands exactly right: one glance reorients you without any menu-diving",
+    "seenLog hint fires after your third decision with a beckon animation on the log zone — the amber glow pulse finally makes the tappable area findable on a dark screen",
+    "The 'how things stand' button now has a visible border, ink-dim colour, and the ⊙ prefix; it reads as a pressable control, not decorative text",
+    "Pace pulse-dot (breathing ::before on the flow text) gives a persistent liveness cue — you know the years are moving at a glance without reading anything",
+    "Fast-forward (tap flow text) runs at 34% of normal tick rate — makes the quiet years feel controlled rather than interminable during a 5-minute mobile session",
+    "44px touch targets on every key control — pause, chronicle links, tab row, delete confirm — nothing requires precision tapping one-handed",
+    "13px monospace save code with user-select:all means one tap selects the whole code for cross-device handoff — solves the most annoying mobile friction point"
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Raise the .reflect border opacity from 0.16 to ~0.28 and font-size from 12.5px to 13.5px",
+      "why": "At rgba(236,225,207,0.16) the border is barely visible over the dark sky background on a phone screen in daylight; a new player glancing quickly still reads it as a label, not a button. A slightly higher opacity and larger text close that last gap without breaking the quiet aesthetic.",
+      "impact": "low"
+    },
+    {
+      "what": "Trigger the seenLog hint after the first decision, not the third",
+      "why": "Three decisions = roughly 10-15 minutes of play on the default tick rate. A mobile casual player who opens the app, gets one moment, makes one choice, and closes — which is a very common session shape — never sees the hint in that session. One decision is enough to know the log exists.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the fast-forward state a persistent text label change in the footer ('the years are racing by' already exists) and keep it across pause-resume",
+      "why": "Right now tapping play/pause clears the hurry state — a player who pauses mid-burst to reply to a text and resumes loses the fast-forward setting without realising it. Persisting fastFwd across a single session prevents the mild friction of re-tapping.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "All three round-2 blockers are genuinely fixed — the log is now hinted and beckoned, the cold-start confirmation grounds you in one line, and 'how things stand' finally reads as a pressable control — and the game is now as good as its genre gets for one-handed mobile play."
+}

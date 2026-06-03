@@ -1,0 +1,43 @@
+{
+  "profile": "qa_skeptic",
+  "score": 8.3,
+  "strengths": [
+    "Round-7 fix (1) confirmed: persistence.js:52 correctly backfills P.peakMeans from P.stats.means on old saves, guarded by `==null` rather than falsy (which would erroneously overwrite a genuine 0 on a destitute life — correct guard). The S.marks.peakMeans init on the same loadSlot path (line 43) also guards with `!S.marks`, not a weaker check. No double-init risk: newPerson() sets peakMeans:st.means and startFreshGame() initialises marks:{peakMeans:0}, so the backfill at loadSlot is the only path that can write the field after the fact.",
+    "Round-7 fix (2) confirmed: houseCharacter() rp>=3.5 tier now reads 'it wants the house raised to its summit seat and an heir whose fortune reaches its full height' — the word 'only' is gone, and both remaining gates (seat AND fortune) are explicitly named. The old single-gate mis-statement is gone.",
+    "houseCharacter trajectory block guard (seat>=5 && seat<7) is tight: it fires at seats 5 and 6 only, correctly skipping seat 7 (where the histories text in openStock takes over) and seats 0-4 (where no trajectory reading is warranted). The block will never fire with no leading reputation because the function already returned early at line 89 if `e.length === 0`.",
+    "houseCharacter with thin reputation (v0 just above 0.5) at seat 5-6: rp = Math.max(v0, h.repPeak||0). If both are thin, the block resolves to the lowest tier ('has barely begun to settle'). That is honest and useful feedback, not a contradiction.",
+    "openStock seat-5 branch (line 278) and houseCharacter (line 101-104) are semantically consistent at seat 5: openStock says 'fortune or name settled deep'; houseCharacter's trajectory tiers grade reputation depth. No contradiction — they describe the same gates from different angles.",
+    "At seat 6, openStock pushes houseCharacter(h) (line 273) AND the seat-6 dir hint (line 276-277). These stack in the extra[] array and both appear in the panel. The houseCharacter trajectory message conveys reputation depth; the dir hint conveys all three gates. They reinforce rather than contradict each other.",
+    "repPeak backfill on loadSlot (persistence.js:53) uses `h.repPeak==null` which correctly catches both `null` (initHouse has no repPeak field — undefined coerces to null in ==null via abstract equality) and `undefined`. initHouse() deliberately omits the field; `undefined==null` is true in JS, so old saves without repPeak get initialised to 0. No false-negative on a genuine 0 value for a house that never built reputation.",
+    "Save/load fragility scan: adoptIntoSlot() calls loadSlot() which runs all the backfill guards, so imported saves get the same treatment as locally-loaded ones. migrateLegacy() does not call loadSlot() — it writes to storage and expects the next openLoadMenu→loadSlot() call to run the backfills. That flow is correct: migrateLegacy() exits and the user clicks a slot, triggering loadSlot() with all guards.",
+    "No unresolved {token} literals found in content.js: all tokens are the standard set ({n}, {they}, {them}, {their}, {They}, {Their}) resolved by fmt() and reTok(). The a_affair card constructs its variant string via plain JS string ops using p.given and s.given, so no token leaks.",
+    "Soft-lock scan: the line-foreclosure guards in drawCard() (love-opening certainty in last 3 years; marriage and first-child pressure in last 5-6 years) are intact. The heir button in showEulogy() always has either a 'Become X' path or a 'Begin anew' path. No code path leaves the game paused with no way forward.",
+    "Transcript evidence: 15 lives across 5 dynasties show no repeating-epitaph runs, no ancestral-ghost appearing after their recorded death, no frozen UI, and no log line with raw token strings. The seat-7 life was not achieved in transcripts (House Halloran peaked at seat 6) which is expected given the stringent repPeak>=3.5 AND peakMeans>=76 AND seat>=6 AND 45% chance gate.",
+    "Age plausibility: the transcripts show no impossible ages. The youngest death is Cyrus Brandt at 9 (within possible range given EARLY_MORTALITY baseline). The lineage-echo parent diesAtAge mechanic in ageRelations() prevents ancestors appearing alive after their recorded death.",
+    "The `repPeak` high-water mark is written in updateHouse() AFTER fade() runs (line 171 comes after line 134). This is correct — repPeak captures the value before the current-generation fade, meaning the peak is a true lifetime high rather than a post-fade value. No ordering bug."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "In openStock(), at seat 6 the player sees houseCharacter()'s trajectory sentence AND the seat-6 dir hint in sequence. The trajectory sentence at rp>=3.5 says 'summit seat and heir fortune'; the dir hint says 'keep this seat, reputation strong, heir fortune'. Consider suppressing the houseCharacter trajectory append (or shortening it to a single clause) when openStock is the rendering context at seat>=6, to avoid the redundancy without losing the prose in the heir screen (showHeir still calls houseCharacter independently).",
+      "why": "At seat 6 the readout currently has two overlapping goal-statements. A player who is already tracking reputation depth gets less signal per word than they could.",
+      "impact": "low"
+    },
+    {
+      "what": "initHouse() does not initialise repPeak (it is undefined after a fresh start or beginNewLine()). updateHouse() guards with `h.repPeak||0` when reading and uses Math.max to write, so undefined is handled correctly. But houseCharacter() also does `h.repPeak||0` which is fine. The only fragility is that if a future caller accesses h.repPeak directly (e.g. a new analytics feature) it will get undefined. Consider adding `repPeak:0` to initHouse() for defensive completeness.",
+      "why": "Reduces a latent footgun when the codebase grows; costs nothing.",
+      "impact": "low"
+    },
+    {
+      "what": "The seat-5 branch in openStock (line 278) says 'climbs on an heir whose fortune reaches a real height, OR on a name settled deep into the family's character.' The OR is accurate mechanically (either peakMeans or repPeak can lift the house from 5 to 6 via different code paths) but 'a real height' for peakMeans is undefined to the player. Seat-6 gets explicit feedback ('This life's fortune has reached that height' / 'has not yet reached that height'). Seat-5 deserves the same: append a clause about whether this life's fortune is tracking toward 'a real height' (e.g. peakMeans>=58 threshold used in updateHouse).",
+      "why": "Players at seat 5 have no way to know whether their current life's fortune is on track to lift the house without this feedback. The seat-6 screen already sets the precedent.",
+      "impact": "med"
+    },
+    {
+      "what": "The 'spend deliberately' hint appended to dir (line 280) fires for seats 2-5 when means>40, age 40-64. At seat 5 this tip and the seat-5 dir text are both already in the panel, but the combined sentence is long. Consider splitting the invest-hint into its own line in extra[] rather than appending it to dir, so it reads as a separate action rather than a run-on clarification.",
+      "why": "Minor readability improvement; the current version is dense at seat 5 where three sentences chain together.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 8 lands in genuinely robust territory: the two flagged items from round 7 are correctly addressed (peakMeans backfill with the right null guard, wording names both remaining gates without 'only'), the new houseCharacter trajectory block is properly bounded and cannot fire with no leading reputation or at seat 7, the openStock seat-5 branch is consistent with the engine's actual seat-lift logic, and five full dynasties in the transcripts show no soft-locks, ghost ancestors, raw tokens, or broken succession — the only actionable findings are a mild prose redundancy at seat 6 and a missing fortune-progress signal at seat 5."
+}

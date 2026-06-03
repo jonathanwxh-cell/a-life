@@ -1,0 +1,53 @@
+{
+  "profile": "accessibility_advocate",
+  "score": 8.3,
+  "strengths": [
+    "aria-describedby on both narrative gates (vDeath: dName+dSpan+dEul+dSurv; vHeir: heirName+heirTag+heirInherit) — screen readers get a rich, coherent description when these modals open, not just a label.",
+    "aria-pressed intentionally absent from #flow: the three-state pace control (paused / normal / hurried) correctly carries its state through a dynamic aria-label rather than a binary aria-pressed, which would be semantically wrong.",
+    ".reflect (how things stand) now has a visible border (1px solid rgba(236,225,207,0.45)), focus-visible amber ring, and color:var(--ink-dim) — contrast is ~5.6:1 on the dark background, clearing AA at 13.5px.",
+    "sr-only emotion prefixes (Joyful / A loss / An echo) on log entries and memoir rows so colour-blind and screen-reader users get the register without relying on green/rose/italic alone.",
+    "lineage list and slot list correctly use role='list' + role='listitem' on dynamically-built elements (L.setAttribute('role','list') and li.setAttribute('role','listitem') in openChronicle; same in openLoadMenu).",
+    "Skip link (#app) is implemented correctly: visually hidden until focused, then slides into view with an amber background and white outline — first tabbable element in the DOM.",
+    "prefers-reduced-motion: CSS kills all transitions/animations in one block; scene.js freezes the animation clock (REDUCE flag, dt=0, 250ms rAF throttle); constellation.js also checks RM and stops t from advancing.",
+    "assertive live region (#scene) announces each moment's prose to AT as soon as a card appears, without waiting for focus to move.",
+    "First choice receives programmatic focus (cw.firstElementChild.focus()) on card presentation — keyboard/AT users land on an actionable control immediately.",
+    "Stage transitions announce to #stageA11y (polite live region) for every stage including the opening childhood — independent of the animated visual title.",
+    "Constellation keyboard traversal: paneStars handles ArrowRight/Left/Up/Down/Home/End to walk chosenStars array; each step announces full context ('Age N: [choice]. Instead of [alt]. Decision X of Y.') to #starA11y.",
+    "Modal focus trap with stack-based nesting support (chronicle over eulogy), MutationObserver-driven so all show/hide paths are covered without per-call-site instrumentation. Focus restores to trigger on close.",
+    "Escape closes the three dismissable modals (vChron, vLoad, vStock) via ESC_CLOSE map.",
+    "Inline two-step delete confirm (no native confirm()) keeps focus in the list, provides unique aria-labels, and Escape disarms it — no mood-rupture and no silent suppression in sandboxed contexts.",
+    "roving tabindex on Chronicle tablist (tab: tabIndex 0/-1 toggling, arrow-key navigation with Home/End, aria-selected toggling) follows the ARIA tabs pattern correctly.",
+    "44px minimum touch targets across footer buttons, slot delete, dChron/dBackup links, and Chronicle tabs.",
+    "choice hint text (visually collapsed, hover-revealed) remains in the AT tree via aria-describedby on the choice button — a keyboard user still gets the hint text.",
+    "Flow pulse-dot is pure CSS ::before pseudo-element — decorative, not a content node; no AT impact."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add role='list' to the #marks container and role='listitem' to each .mark element in the openChronicle marks block (ui.js line 175). Currently four plain divs with no list semantics — AT users hear four isolated numbers with labels but no structural grouping.",
+      "why": "The stats panel (generations / lives lived / longest life / peak standing) is a genuine list of dynasty metrics. Without list semantics, a screen reader user on VoiceOver or NVDA navigating the Chronicle pane has no structural signal that these four items belong together. Low friction to fix — add L.setAttribute / li.setAttribute in the same style as the lineage block already does.",
+      "impact": "med"
+    },
+    {
+      "what": "Convert <br>-joined lines in heirTag and heirInherit (dynasty.js showHeir, lines 347 and 372) from innerHTML with '<br>' concatenation to a proper <p> or <ul> structure, or at minimum wrap each segment in a <span> with display:block.",
+      "why": "<br> as a list separator is the one residual semantic shortcut in the heir dialog. AT reads these lines as a single continuous run of text with brief pauses, losing the distinct-point structure (identity sentence / family reputation / traits / inheritance). The eulogy uses plain textContent correctly; the heir dialog should match. The fix is small: join with '</p><p>' and wrap in a container, or use a <ul> + <li> for the inheritance items.",
+      "impact": "med"
+    },
+    {
+      "what": "Add Escape handling for vDeath and vHeir to ESC_CLOSE in ui.js, or add a comment explaining why these are intentionally excluded.",
+      "why": "The three 'dismissable' modals (Chronicle, Load, Stock) correctly close on Escape. The two narrative gates (eulogy, heir) do not — pressing Escape has no effect. This is defensible as intentional (the player must commit to the next generation or start anew), but it reads as an omission without an explicit comment. At minimum, the modal-focus-manager comment should document the distinction so future maintainers don't patch it accidentally. If Escape is genuinely excluded by design, a keydown handler that calls e.preventDefault() on Escape while vDeath/vHeir are open would prevent AT from unexpectedly closing system dialogs.",
+      "impact": "low"
+    },
+    {
+      "what": "Lift .hr-mottos from color:var(--ink-faint) opacity:.85 to color:var(--ink-dim) on the title screen's 'houses raised' motto list.",
+      "why": "ink-faint (#8a7d6e) at .85 opacity on the dark (#16110d) background computes to roughly 3.0:1 — below WCAG AA (4.5:1) at 12px italic. The motto text is meaningful meta-progression content (the player earned these). ink-dim (#a99c87) at full opacity gives ~5.6:1 and the visual effect stays quiet. Every other AA pass in the codebase already applied this exact fix to comparable faint text.",
+      "impact": "low"
+    },
+    {
+      "what": "Give #log a role that better matches its behaviour. It is aria-live='polite' AND role='button', which is semantically contradictory — a live region should be a landmark or a generic container, not a button. Consider role='log' (purpose-built for scrolling live transcript content) with a separate visually-hidden 'Open chronicle' button overlaid, or keep role='button' and remove aria-live (the chronicle link is the action, not a live region).",
+      "why": "The dual role='button' + aria-live='polite' means AT may announce the region's content changes AND treat it as a focusable button. In practice most AT ignores live updates on role='button', so the polite announcements silently fail. Separating the two concerns is correct. This is the same tension flagged last round.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The implementation holds and is genuinely inclusive — the round-6 dynasty/content changes introduced no new accessibility regressions, and all the structural pieces from prior rounds (aria-describedby on both narrative gates, focus trap, Escape handling, sr-only emotion tags, reduced-motion in CSS and JS, assertive scene announce, constellation keyboard traversal, skip link, list semantics on lineage and slots, roving tabindex on tabs) remain intact and correct; the three residual gaps (marks panel missing list semantics, heir dialog br-concatenated text, hr-mottos contrast) are actionable fixes but none rises to blocker level for a screen-reader or keyboard-only user."
+}

@@ -1,0 +1,33 @@
+{
+  "profile": "qa_skeptic",
+  "score": 8.1,
+  "strengths": [
+    "repPeak ||0 guard is present at every call site (dynasty.js:100 and :172), so old saves without repPeak never NaN-compare their way into an unearned seat-7",
+    "motto logLine is correctly inside the !h.motto block (dynasty.js:195-203): fires exactly once per house, never at gen 1 (p.gen>=2 guard), prose is token-clean with no {they}/{their}/{them} placeholders",
+    "seenDynasty hint (engine.js:246) is gated to P.gen===1 and hintOnce() uses localStorage for a true once-ever guarantee — will not re-fire on a second dynasty or on reload",
+    "openStock seat-6 readout (ui.js:275-277) is correctly nested: h.seat>=7 branch takes priority, so the 'reach the histories' direction never shows for a seat-7 house; peakMeans>=76 threshold matches the actual updateHouse gate exactly",
+    "r_name_cost card (content.js:635): once:true, age-band overrides stage check per documented grammar, cond reads from S.house (correct global), prose has no unresolved {tokens} — the standalone 'they' in 'what they stand to inherit' is plain English referring to 'a young one', not a template token",
+    "houseCharacter trajectory tiers (dynasty.js:99-105) use rp=Math.max(v0, h.repPeak||0) correctly — the high-water mark beats the current (post-fade) value, so a dynasty that built a strong name doesn't lose its tier readout after normal reputation decay",
+    "recordAncestor stores log entries with reTok already applied (dynasty.js:232), so showAncestorLife can render e.text directly without a double-resolve bug",
+    "loadSlot backfills all runtime fields a new life would have (px, aura, flags, log, childrenIds), and drewAt defaults gracefully in presentCard"
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "In houseCharacter(), gate the rp>=3.5 tier message on h.seat>=6 as well (or reword to 'once the house holds its summit seat, this reputation is deep enough to be written into the histories')",
+      "why": "A seat-5 house with a very strong old repPeak reads 'deep enough now to be written into the histories — it wants only a house held at the summit.' The word 'only' implies a single remaining gate; in reality two gates remain (seat must reach 6, then repPeak+peakMeans must clear again on the next life). A careful player opening How Things Stand at seat-5 may misread their position.",
+      "impact": "low"
+    },
+    {
+      "what": "In loadSlot, backfill P.peakMeans = P.stats.means if P.peakMeans is undefined",
+      "why": "Old saves without peakMeans load safely (the ||0 guards prevent crashes), but a life loaded from such a save can never push the house to seat-7 even with means>=76, because p.peakMeans evaluates undefined < 76. The fix is one line in loadSlot after the existing backfills.",
+      "impact": "low"
+    },
+    {
+      "what": "Consider adding a brief comment in openStock explaining why the h.seat>=2 && h.seat<6 invest-hint is guarded behind both a means floor (>40) and an age window (40-64)",
+      "why": "The condition is non-obvious and a future maintainer adding a new seat branch might clip the hint range incorrectly; a one-line comment would prevent drift.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round-7 changes are clean: the repPeak guard, motto milestone, seenDynasty gate, r_name_cost card, and openStock seat-6 readout all behave exactly as specified with no new crashes, token leaks, or contradictions — the only lingering issue is a pre-existing wording ambiguity in the houseCharacter seat-5 tier that mildly overstates how close the player is to the histories."
+}

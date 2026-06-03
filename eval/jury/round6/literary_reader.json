@@ -1,0 +1,43 @@
+{
+  "profile": "literary_reader",
+  "score": 8.2,
+  "strengths": [
+    "The callback arcs are the work's highest achievement: the three-generation book thread (c_book → cb_books_late → e_window 'true story') creates exactly the sensation of a life with accumulated weight. Reading Saoirse read 'at last with ease, the book the family has always kept' after Yara gave it to her is the kind of payoff literary fiction earns over hundreds of pages — this does it in a playthrough.",
+    "The affair card's character-routing (stat-gated variant selection) is genuinely sharp prose craft: three framings — cold/self-aware for low-spirit, warm/self-deceiving for heart-led, clinical otherwise — and the right one lands in context. Not a random roll; an actual characterisation.",
+    "cb_the_cost reads the specific earlier decision back with real precision ('the life they took for themselves' / 'the dream they set down for the people who needed them' / 'the kindness they told in place of the truth'). In the Saoirse transcript this hit hard.",
+    "Epitaph variety is working: 19 lives across the transcripts, zero exact-line repeats, and 'Took one door, unopened, all the way into the ground' for the straying Calla Vane is the best single line in the game.",
+    "Competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are philosophically honest — neither choice morally clean, both framed as forms of love. Rare in any medium.",
+    "y_love1 pool of 7 variants is strong throughout, especially 'Someone has gone quiet for three days, and [n] is unsettled to find that the quiet has a shape.' The refused-love pool now includes the cold, self-aware option ('Saw the wanting coming and chose, deliberately, to be elsewhere — which was not quite the same as not wanting.').",
+    "Dynasty mottos read as distinct family voices across five dynasties: four different mottos, each earning its character through the accumulated play. 'We do not ask twice.' and 'We burn bright, and we burn.' are the best of them.",
+    "The observe() pools are deep enough that ambient prose never feels like a loop. 'Time has not yet managed to talk him out of being glad' lands differently at 31 vs 88."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Give c_sick 'Insist on being brave alone.' a pool of 3 logLine variants instead of the single string 'Learned early to be ill quietly.'",
+      "why": "This is the highest-frequency confirmed single-string outcome in the run — fires in Niall, Yara, Carys, Emory across just two dynasties. The brief flagged it last round; it was not addressed. Two alternatives: 'Was ill alone and told no one, and learned to call that independence.' / 'Decided young that suffering quietly was a kind of dignity, and kept deciding it.'",
+      "impact": "high"
+    },
+    {
+      "what": "Give e_window 'Tell the better story.' a pool of 3 logLine variants instead of the single string 'Improved her/his own childhood a little, for a child who'd never know.'",
+      "why": "Fires in three lives in the transcripts (Niall, Saoirse, Vera) with identical prose. Easy fix: 'Gave the child a better past than the one she had lived, because the child deserved a better past.' / 'Made himself a little braver in the telling, because why not.'",
+      "impact": "high"
+    },
+    {
+      "what": "Give the a_child 'No. This life, as it is.' branch (k===0, deliberately childless) 2-3 logLine variants",
+      "why": "A player who repeatedly refuses children will see 'Chose a life without children, with clear eyes.' every time. It's a significant character choice that deserves to register differently across a dynasty-long commitment to it — there's emotional weight in the third refusal that the first one doesn't carry.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2 more lines to the 'ordinary' epitaph fallback cluster (currently 3)",
+      "why": "The ordinary cluster is the most-triggered fallback for lives that don't peak any stat or leave a defining mark. Three variants shows strain across a 10+ life dynasty. 'Lived with good sense, which is its own kind of courage.' / 'Did not leave a monument, and would have felt embarrassed by one.'",
+      "impact": "med"
+    },
+    {
+      "what": "Consider giving a_meet_late 'It's too late for that.' a 2-line pool (currently one: 'Decided the time for that had passed, and built a life around the decision.')",
+      "why": "The refused late-love path is philosophically interesting — a life deliberately foreclosed — and the single line doesn't quite honour the weight of that choice the second or third time a dynasty produces a solitary elder.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The writing holds up as prose worth reading through: the callback arcs achieve something genuinely rare, the competing-goods cards are philosophically honest, and the epitaph system never repeats itself across a dynasty — three specific high-frequency single-string outcomes (c_sick brave-alone, e_window better-story, a_child No) remain unaddressed from last round and are the only thing keeping this below 8.5."
+}

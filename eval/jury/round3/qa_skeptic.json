@@ -1,0 +1,41 @@
+{
+  "profile": "qa_skeptic",
+  "score": 7.8,
+  "strengths": [
+    "All four round-2 bugs confirmed fixed: (1) m_invest_name log is now branched on Math.random()<0.62 (content.js:503-504 — 'watched the name climb a rung' vs 'held the name where it stood'); (2) a_make_name scholarly path now calls remember('set_scholar_rep') not remember('chose_study'), so cb_study_pays can no longer be triggered by a midlife reputation choice (content.js:511); (3) cb_outcast_return now branches its text on whether rel('friend') exists, using neutral framing when no yard friend is present (content.js:171); (4) e_window guards both stray and book branches on !ls.inherited / !lb.inherited, so an heir who only carries the heirloom never tells a false story (content.js:251).",
+    "houseCharacter() is syntactically valid: line 93 uses a Unicode right-single-quote (U+2019, E2 80 99) in 'house’s character', not an ASCII apostrophe — confirmed by hex dump. No JS syntax error.",
+    "The seat-decay else-if chain in updateHouse (lines 116-119) is logically correct: only one demotion path fires per death, preventing double-demotions from facedReckoning + spirit/means overlap.",
+    "recordHouseLegacy / pastHouses / renderHousesRaised are wired and clean: the cold-start 'Continue' toast (persistence.js:395) reads P.gen and P.age after offlineCatchUp completes, so it always reflects the player's actual current position, not a stale pre-catchup value.",
+    "The seat-7 gate is intentionally precarious by design: line 159 drops any seat-7 house that fails the re-elevation check back to 6 — including the 65% random-fail path — which is documented intent and works as stated.",
+    "Competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are well-formed and gate correctly (cool:22, once:true, relationship guards). No crash paths or token errors.",
+    "The meta-progression is safe against the edge case of no past houses: renderHousesRaised early-returns if pastHouses() is empty (persistence.js:371).",
+    "The r_family_shadow card's confess path (cb_strayed -> confessed -> updateHouse line 175) correctly nulls h.secret, so the confession arc truly closes the secret."
+  ],
+  "blockers": [
+    "r_scholar_door (content.js:436) calls remember('chose_study'), which triggers cb_study_pays (content.js:188-193). The callback text reads 'The long bet on {n}’s own mind, made hungry and young, is finally being called in' and its echo says 'The hungry years of study, begun at [age], at last came good.' This is factually false when chose_study was set via r_scholar_door (ages 24-55, through a comfortable family reputational door, not a hungry youthful wager). The a_make_name fix in round 2 correctly used set_scholar_rep instead of chose_study to avoid this; r_scholar_door reintroduces the exact same class of error. A scholarly house heir who walks through the family's learned door in their 40s will be told they 'bet hungry and young' — a fabricated memory.",
+    "r_family_shadow (content.js:439) cond checks S.house.secret as truthy, but h.secret is only nulled by the confession path (dynasty.js:175). The exposure path — cb_inherited_secret 'Speak it. End the silence.' — sets h.secret.known=true without nulling the object (content.js:216). Result: after an heir publicly exposes the family secret, subsequent heirs still draw r_family_shadow with 'a thing the house simply does not discuss' — a direct contradiction of the player's own action. The cond should read S.house.secret&&!S.house.secret.known instead of S.house.secret."
+  ],
+  "improvements": [
+    {
+      "what": "In r_scholar_door's 'Walk through it' do(), replace remember('chose_study') with remember('scholarly_door') (or any key other than 'chose_study'). Then add a second callback cb_scholar_door_pays that mirrors cb_study_pays but uses 'scholarly_door' and different echo text — e.g. 'The family name opened a door at [age]; what was walked through it has now come due.'",
+      "why": "Prevents the 'hungry and young' echo from firing after a comfortable adult reputation-door choice. This is the same fix applied to a_make_name in round 2 — needs to be applied consistently to every new card that activates scholarly study outside the youth window.",
+      "impact": "high"
+    },
+    {
+      "what": "Change r_family_shadow's cond from S.house&&(S.house.secret||reputeTop(S.house)==='tainted') to S.house&&((S.house.secret&&!S.house.secret.known)||reputeTop(S.house)==='tainted').",
+      "why": "Prevents the 'does not discuss' framing from appearing after a player has explicitly dragged the secret into daylight via cb_inherited_secret. As currently written, an heir who heroically exposed the secret still faces cards about a hidden family shame — directly contradicting their own chronicle.",
+      "impact": "med"
+    },
+    {
+      "what": "Add at least one callback that reads chose_loyalty, chose_self, chose_others, or a_kind_silence — even a brief elder whisper. Currently the competing-goods cards set memories that nothing ever reads.",
+      "why": "The competing-goods cards are the most morally interesting choices in the round-3 content. Giving them downstream resonance (an elder moment that references the loyalty kept, or the dream set aside) would fulfill their design intent and make them feel like genuine chronicle moments rather than isolated choices.",
+      "impact": "med"
+    },
+    {
+      "what": "In x_dream_or_duty, either add a cond that requires an earlier memory suggesting an unfulfilled dream (e.g. held('made_art')||held('early_talent')||held('took_a_stand')), or soften the text from 'The thing {n} has always meant to do' to 'A thing {n} had not known was possible arrives within reach now.'",
+      "why": "Without an anchoring prior memory, 'the thing {n} has always meant to do' asserts a lifelong dream with no textual basis, weakening the card's emotional weight for players who haven't established that thread.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 3 fixes all four stated bugs cleanly and adds genuinely good content (competing-goods cards are well-written, seat-7 gate is sound, cold-start toast is correct), but the r_scholar_door card reintroduces the exact same chose_study fabricated-memory error that was fixed in round 2 for a_make_name, and the r_family_shadow cond fails to exclude already-exposed secrets — two concrete narrative contradictions in the new repute-gated content."
+}

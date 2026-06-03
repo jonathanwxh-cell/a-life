@@ -1,0 +1,43 @@
+{
+  "profile": "accessibility_advocate",
+  "score": 8.3,
+  "strengths": [
+    "aria-describedby on both eulogy (#vDeath: dName dSpan dEul dSurv) and heir (#vHeir: heirName heirTag heirInherit) dialogs — full narrative context is in the accessibility tree before the CTA button",
+    "aria-pressed deliberately absent from #flow: the code comment explains the design (3-state control, label carries state) and the aria-label updates correctly across all three states (passing / racing / held still)",
+    ".reflect button has a visible 1px border (rgba(236,225,207,0.45)) plus amber :focus-visible ring — contrast is borderline but the border ensures a sighted user can distinguish the control, and the full aria-label survives AT",
+    "sr-only emotion prefixes (srTag: Joyful / A loss / An echo) applied to both the ephemeral log and the Chronicle memoir — colour-blind users get the same emotional signal as sighted users",
+    "Lineage and slot lists use role=list / role=listitem set programmatically, so the semantic correction survives innerHTML rewrites",
+    "Skip link present and correctly implemented (position: absolute; top: -48px; transition to top: 8px on :focus)",
+    "prefers-reduced-motion: CSS kills all transitions/animations; scene.js reads the media query and sets dt=0 to freeze the canvas clock; constellation.js does the same with RM flag — motion is suppressed at both the DOM and canvas layers",
+    "assertive live region on #scene announces moment prose immediately; #stageA11y fires on every stage transition including the first (childhood), independent of the visual title animation which is gated to transitions only",
+    "First-choice focus on card presentation: requestAnimationFrame focuses cw.firstElementChild, so keyboard and screen-reader users land on an actionable button with the moment text already announced via the assertive region",
+    "Stage transitions announced via #stageA11y ('A new season of life: youth.') — fires every stage including the opening one",
+    "Constellation keyboard traversal: arrow keys walk chosenStars in chronological order; #starA11y announces 'Age N: [choice]. Instead of [alt]. Decision K of N.' — count and alts both spoken",
+    "Full modal focus trap implemented via MutationObserver watching all six veils; nested veil stack supported; Escape closes dismissable modals; focus returns to trigger on close",
+    "Content changes in dynasty.js / content.js and wording changes in openStock (ui.js) do not touch any ARIA wiring — all previously confirmed implementation still holds"
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add role='list' to the #marks panel (the four stat tiles in the Chronicle 'The Line' tab) and role='listitem' to each .mark div",
+      "why": "The marks panel is rendered as bare divs without list semantics; a screen-reader user hears four isolated items with no structural grouping. The lineage list directly below it correctly uses role=list/listitem — the marks panel is the one remaining data group that doesn't. Fixable in the innerHTML template in ui.js openChronicle.",
+      "impact": "low"
+    },
+    {
+      "what": "Replace <br>-separated mottos in .hr-mottos with a proper list (ul/li or role=list items)",
+      "why": "The houses-raised mottos on the title screen are joined with <br> tags inside a div. Screen readers announce these as a continuous run of text with no item boundaries ('\"endure\" \"bend but hold\" \"what we keep\"'). A role=list structure would give each motto its own listitem boundary, matching the chronicle lineage pattern already used elsewhere.",
+      "impact": "low"
+    },
+    {
+      "what": "Lift .hr-mottos text color from var(--ink-faint) (#8a7d6e on #16110d, ~3.8:1) to var(--ink-dim) (#a99c87 on #16110d, ~5.6:1)",
+      "why": "The motto text on the title screen sits at ink-faint, which clears AA for large/bold text only (18px bold or 14px bold), not for 12px italic. The round-6 AA pass lifted several other ink-faint occurrences already; the hr-mottos line was missed. One line change in styles.css.",
+      "impact": "low"
+    },
+    {
+      "what": "Resolve the dual-role tension on #log (aria-live='polite' + role='button' on the same element)",
+      "why": "role='button' suppresses live-region semantics in some AT implementations — an element that is simultaneously a button and a live region creates conflicting semantics. The practical impact is low because the log's content is already duplicated in the Chronicle, but splitting it into a wrapping live region div (no role) containing a visually-invisible button overlay would be the clean fix.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The accessibility implementation is genuinely thorough and consistent — focus management, motion suppression, live regions, keyboard traversal, and contrast are all correctly built and survive the round-7 content-only changes intact, with only four low-severity structural refinements remaining."
+}

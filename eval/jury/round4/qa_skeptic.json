@@ -1,0 +1,50 @@
+{
+  "profile": "qa_skeptic",
+  "score": 7.9,
+  "strengths": [
+    "Both round-3 bugs are confirmed fixed: r_scholar_door now calls remember('set_scholar_rep') (content.js line 440) and r_family_shadow cond is now ((S.house.secret&&!S.house.secret.known)||reputeTop(S.house)==='tainted') (content.js line 443).",
+    "The reputation rebalance in updateHouse is logically sound: let_in and looked_up correctly map to 'generous' and 'pious' respectively, with no double-counting at death (bump() is called once per death regardless of how many times the memory was set during life).",
+    "The fall/rise narration (seatBefore compare + logLine) is correctly guarded by p.gen>=2, so the founder never gets a spurious 'family climbed' log entry. The seat-7 auto-lapse is intentional and correctly narrated.",
+    "New cards (a_public_fall, a_friend_need, a_conviction, r_hard_name, r_old_shame, cb_the_cost) are all structurally clean: proper cond gates, no unresolved {tokens} in text or do() strings, no impossible age ranges.",
+    "The affair card's character-based selector (spirit<45 -> clinical, heart>=mind -> warm/self-deceiving, else -> neutral) is coherent and never crashes — the spouse name is safely guarded (s ? s.given : fallback).",
+    "The ruthless heirloom (hardname) is added to h.heirlooms correctly and displays on the heir screen. The r_hard_name card gates on house reputation (not memory), so the heirloom is functionally correct even without a memory injection.",
+    "Transcripts confirm the engine is stable across 15 lives, 5 dynasties: no crashes, no visible token leaks ({n}, {they} etc.), no soft-locks observed. The fall/rise narration fires exactly when expected (e.g. Iris Fenn gen-2 at age 6, Joaquin Mercer gen-3 at age 74).",
+    "cb_the_cost correctly chains back to x_dream_or_duty, x_loyalty_truth, and x_honest_or_kind via their memory keys, and the 'which' priority chain correctly resolves in prose at render time via reTok()."
+  ],
+  "blockers": [
+    "CONFIRMED BUG (content.js line 81): a_child 'No' choice logLine says 'Chose a life without children, with clear eyes.' regardless of current child count. If the player already has 1-2 children and declines a second or third, this line is factually wrong. Transcripts confirm the card fires with k=1 and k=2 children (Joaquin Mercer age 27, Calla Mercer age 48 both show 'No. This life, as it is.' passed over, but the bug would fire on selection). The text should be conditional on k===0."
+  ],
+  "improvements": [
+    {
+      "what": "Fix a_child 'No' logLine to be child-count-aware: k===0 ? 'Chose a life without children, with clear eyes.' : 'Chose not to have another — the family, as it is, was enough.'",
+      "why": "Current text is factually wrong for players who already have 1-2 children and decline further. Content.js line 81, trivial one-line fix.",
+      "impact": "med"
+    },
+    {
+      "what": "Add memory injection for the hardname heirloom in succeed() (dynasty.js line 298): if(hl.tag==='hardname') child.mem.cut_a_corner={age:0,inherited:true}; — or a dedicated 'inherited_hardname' key that gates a new trait-aware card.",
+      "why": "The book/stray/teaching heirlooms all inject memories that can trigger downstream cards. The hardname heirloom is purely cosmetic — it displays on the heir screen but injects nothing. This breaks the pattern and wastes the heirloom's narrative potential.",
+      "impact": "low"
+    },
+    {
+      "what": "Differentiate r_family_shadow and r_old_shame conditions so they don't share the exact same gate. For example, r_old_shame could additionally require P.stats.means>30 (a tangible loss is at stake) while r_family_shadow remains the ambient/psychological version.",
+      "why": "Both cards fire on identical conditions (tainted OR secret not known) with cooldowns of 18/20 years. A player in a tainted house may see both within the same life, with both narrating 'the family's old shame'. Splitting the gate reduces thematic repetition.",
+      "impact": "low"
+    },
+    {
+      "what": "Convert at least the most meaningful orphaned memory keys into active cond/epitaph inputs. Priority: 'broke_with_house' (set in 3 places: r_scholar_door refuse, r_family_shadow refuse, r_hard_name refuse) could seed a callback card for an heir who breaks the pattern twice; 'owned_a_failure' could feed an epitaph variant; 'public_role' could gate a seat-3+ inheritance-dispute variant.",
+      "why": "14 memory keys are currently set but never read (child_outdoors, stayed_home, closed_to_love, refused_the_name, broke_with_house, memento_mori, reinvented, exposed_secret, owned_a_failure, doted_sibling, uprooted, first_loss, first_wage, public_role). These represent permanent per-life state with zero downstream effect — the callbacks that justify them don't exist yet.",
+      "impact": "med"
+    },
+    {
+      "what": "Tighten e_window cond to also require P.age>=70, or explicitly note in text that 'a grandchild' is an abstraction. Currently the card can fire at 60 with children who are only 10 years old — too young to plausibly have children of their own.",
+      "why": "Minor but detectable prose inconsistency: the cond checks for the player having children, not grandchildren. A 61-year-old with a 10-year-old child receiving a grandchild card breaks the fiction.",
+      "impact": "low"
+    },
+    {
+      "what": "Fix cb_strayed text (content.js line 211): 'No one else remembers. {They} does.' — add a branch for when rel('spouse') is alive (spouse stayed after the affair). E.g. '{They} and [spouse] have never spoken of it. {They} does not know if [spouse] has forgotten or simply chosen not to.'",
+      "why": "The affair card gives a 50% chance the spouse stays. When they stay, the text 'No one else remembers' is false — the spouse was there. Small but breaks immersion for players who experienced the specific 50% outcome where the marriage survived.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 4 is a genuine improvement: both prior bugs are fixed, the reputation rebalance is correctly implemented, and the new cards are structurally sound — the score stays just under 8 solely because the a_child 'No' logLine is factually wrong for players who already have children, which is a recurring player-facing text error on one of the highest-weight cards in the game."
+}

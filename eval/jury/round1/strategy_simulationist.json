@@ -1,0 +1,48 @@
+{
+  "profile": "strategy_simulationist",
+  "score": 4.5,
+  "strengths": [
+    "The bequest mechanic (e_bequest) is a genuine cross-generational lever with real, differentiated tradeoffs — mind vs. means vs. heart vs. free each produce measurably different starting conditions for the heir as confirmed by the succeed() code and visible in transcript outcomes.",
+    "The 'how things stand' prose readout (lifeReadout/openStock) gives five-band descriptions of all five stats plus house seat and closest relationship — enough to plan against, even without numbers.",
+    "The reckoning (x_reckoning) is real failure pressure: a seat-3+ house faces a crisis where means>45 or spirit>62 determines survival, and facedReckoning='fell' actually costs a seat — the dynasty can visibly regress.",
+    "Seat mechanics are asymmetric in an interesting way: peakMeans (the high-water mark) lifts the house even if you spend down later, so a 'build then live' strategy genuinely outperforms pure accumulation — a plannable insight.",
+    "Callback cards create a lightweight optimization problem: choices at age 7-12 open or foreclose content at 25-50, giving early life a sense of downstream consequence that rewards awareness of the system.",
+    "Inherited heirlooms and the family secret gate real content across generations (cb_inherited_secret, r_family_shadow), so a dynasty with a buried secret plays differently from a clean one."
+  ],
+  "blockers": [
+    "Only ONE deliberate dynasty-steering choice per life (the bequest), and it fires only in the elder stage. There is no mid-life equivalent — no moment where you deliberately invest in the house's reputation path, choose a strategic direction for the next generation, or trade personal welfare for dynastic gain beyond the single bequest card.",
+    "The reckoning cannot be prepared for: the pass condition (means>45 OR spirit>62) is not communicated to the player, there is no 'shore up the house before the crisis' mechanic, and the card fires on a cool:26 timer once — so after you survive it once, the only remaining failure pressure is statistical death. A strategist wants a recurring, escalating pressure system, not a single gate.",
+    "Seat and repute-gated content is paper-thin: only two seat-gated cards (s_great_burden and s_from_nothing) and two repute-gated cards (r_scholar_door and r_family_shadow) exist across the entire card pool. A 'grand estate' house and a 'storied' house play nearly identically — the same ~60 cards with one or two additions. There is no content that only a scholarly dynasty, or only a ruthless dynasty, can unlock at scale.",
+    "Reputation (house repute tags) is built entirely automatically by updateHouse() at death — the player has no in-life choices that directly target a reputation tag. You cannot consciously pursue 'make this a scholarly house' mid-life; you can only choose study/trade and hope the tag accumulates. The system is read-only from the player's perspective during play.",
+    "The five dynasty transcripts all funnel to 'old and famous house' by generation 5 via completely different life choices, revealing a narrow outcome variance. The dynasties feel different narratively but end up at the same mechanical destination, suggesting the optimization space is either solved trivially or doesn't exist — a strategist will sense the ceiling quickly.",
+    "The 'how things stand' panel is hidden behind an opt-in button (stockBtn) and pauses time to read — it is not glanceable during play. A player who wants to plan their bequest or assess reckoning readiness must stop and navigate to it. There is also no display of how far the current stat bands are from the next threshold, so 'the means are ample' is unactionable for optimization."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 dynasty-investment cards in the adult/midlife stage that let the player consciously sacrifice personal stats to directly bump a specific house repute tag (e.g. 'Endow the family name in a public way — it costs means but the house will be known as generous for a generation').",
+      "why": "Gives the strategist a deliberate reputation-steering lever rather than a passive accumulation system. Makes dynasty identity a player-driven project, not an emergent accident.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the reckoning recur (remove the facedReckoning flag so it can fire again after the cool:26 window, as intended for houses that remain at seat>=3), and add a preparatory card that warns of approaching instability 10-15 years before — something like 'The house's debts have been accumulating. There is still time to address them quietly.' with a means-spending choice that improves survival odds.",
+      "why": "Transforms the reckoning from a single gate into ongoing failure pressure a strategist can monitor and manage. Right now it fires once and disappears; a strategist needs recurring crisis with preparation counterplay.",
+      "impact": "high"
+    },
+    {
+      "what": "Display the current seat number (1-7) and a prose hint about what the next seat requires alongside the house panel in openChronicle — e.g. 'One more life of strong fortune could lift the family to a fine townhouse.' This requires exposing no raw numbers, just a directional signal.",
+      "why": "Gives the strategist a concrete mid-term goal to plan around. Right now the seat system is opaque — you don't know if you're one life away from climbing or three.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-5 more seat-gated cards at seats 4-6 that create meaningfully different problems for a wealthy established house: inheritance disputes among multiple heirs, reputation attacks from rivals, requests for patronage that cost means but build a specific repute tag. Make the 'old and famous house' feel structurally different to inhabit.",
+      "why": "Currently arriving at a grand estate or storied house produces no new gameplay — just the same card pool with one extra card. Seat should unlock distinct decision types, not just a descriptive label.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the 'how things stand' panel accessible as a persistent sidebar or a glanceable overlay that doesn't pause the game, and annotate each stat band with a brief note on what it gates (e.g. 'At this level, a windfall may lift the house' or 'Below this, the reckoning cannot be held').",
+      "why": "Plannable play requires plannable information. The current system has enough state to optimize against, but hides it behind a pause-menu, breaking the strategic loop.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A quietly beautiful literary toy with a single real dynastic lever (the bequest) and one meaningful crisis (the reckoning), but a strategist will hit the optimization ceiling within two or three dynasties — the reputation and seat systems are passive read-outs rather than targets you can pursue, and the card pool barely differentiates between a humble house and a storied one."
+}

@@ -1,0 +1,44 @@
+{
+  "profile": "systems_designer",
+  "score": 8.5,
+  "strengths": [
+    "Reputation as a genuinely choice-driven emergent signal: updateHouse() correctly gates bumps on lived acts (the `lived()` guard stopping inherited heirlooms from silently forcing a tag) rather than raw stats, so distinct play produces distinct houses and mottos rather than every line drifting to the same tag. This is hard to get right and it is right.",
+    "The seat-5-to-6-to-7 climb now has a fully legible four-tier trajectory in houseCharacter(): 'barely begun to settle' fills the previously silent lower band, the high-water mark (repPeak) rather than the post-fade current value drives the tier, and the tier sentence correctly names what the pinnacle still asks for. The player is no longer left in the dark during the long mid-climb.",
+    "The bequest lever is exactly the right design: a late-life, four-way, irreversible decision that reaches across the generation boundary and is explained plainly on the heir screen. It gives dynasty play a concrete closing act and a reason to think across lives rather than only within them.",
+    "The reckoning (x_reckoning) is the correct adversarial pressure point for a growing house: it only fires at seat>=3, it names the consequence in the very life that caused it (seatBefore/after diff), and it distinguishes a prepared house from an empty-handed one. Paired with the seat-fall narration in updateHouse(), this makes loss feel caused and named rather than arbitrary.",
+    "The two-beat ruthless thread (r_hard_name followed by r_name_cost) is a properly designed delayed consequence: the family's fear-based reputation opens a door in adulthood, then the midlife card names the specific cost — 'a young one who has started to flinch at what they stand to inherit' — before asking whether to reverse course. cb_the_cost in old age then closes the loop with a personalised moral reckoning. This is three-act structure inside a single reputation path.",
+    "Seat-gated and repute-gated cards (s_great_burden, s_patronage, r_scholar_door, r_family_shadow, r_hard_name, r_old_shame) make dynasty state gate content rather than just gate flavour. The transcripts confirm this working: House Halloran at seat 5-6 encounters s_patronage; a scholarly house sees r_scholar_door.",
+    "The epitaph anti-repetition system (pr() with last-two look-back, blocked() for cluster repetition, out() tagging) is solid engineering that keeps the chronicle from reading as the same note over and over. Across 15 lives in the transcripts, no two adjacent epitaphs share an identical line.",
+    "loadSlot correctly backfills both peakMeans and repPeak to zero on old saves, so the pinnacle gate stays reachable rather than silently broken for returning players.",
+    "The 'reflect on how things stand' panel (openStock) surfaces the seat-5 readout ('From here it climbs on an heir whose fortune reaches a real height, or on a name settled deep...') and the seat-investment hint only when conditions are actually met (seat 2-5, means>40, age 40-64), avoiding false prompts."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "The seat-investment hint in openStock (line 280) fires when means>40 and age 40-64 but does NOT check whether x_reckoning has already fired this life — so a player who just 'fell' on the reckoning and dropped a seat can still see 'spend deliberately to push the standing up.' Filter the hint with !P.flags.facedReckoning or add a note that the reckoning must be settled first.",
+      "why": "Avoids giving tactically misleading advice in the exact moment a life has just compromised the house's footing.",
+      "impact": "low"
+    },
+    {
+      "what": "houseCharacter() appends the trajectory sentence ('As a name, it...') whenever seat>=5 AND seat<7, even if no leading reputation exists at all (v0 could be 0.5, the minimum threshold). At v0<1.0, telling a player 'it has barely begun to settle' is accurate, but pairing it with the trajectory goal ('the histories would ask for a good deal more') creates a faint promise the house has not actually started building. Consider raising the trajectory clause guard to v0>=1.0 so it only appears once the reputation is at least nascent rather than a trace.",
+      "why": "Keeps the trajectory readout meaningful rather than aspirational noise on a house that has barely a whisper of any reputation.",
+      "impact": "low"
+    },
+    {
+      "what": "The motto crystallizes at repute>=1.5 (a lower bar than the seat-5+ trajectory clause), and the transcript confirms it can arrive before a reputation is well-established enough to feel earned. Consider raising the motto gate to repute>=2.0 (matching the 'settled into the house's character' prose tier in houseCharacter) so the motto and the character prose fire at the same threshold rather than the motto arriving first while the character line still says 'becoming known.'",
+      "why": "Prevents the mild tonal mismatch where the family earns its words before the prose says the character has settled — the motto implies finality, the prose still implies process.",
+      "impact": "med"
+    },
+    {
+      "what": "The seat-7 re-earn logic (else if h.seat===7, h.seat=6) fires unconditionally every generation regardless of whether that generation met the bar, which means a seat-7 house drops back to 6 even in a generation where repPeak>=3.5, peakMeans>=76, and the random check would have passed — it simply gets overwritten. The condition is checked first, but both the if and the else-if can only run once per updateHouse call, so this is correctly structured; verify the order: if(h.seat>=6 && repPeak>=3.5 && peakMeans>=76 && Math.random()<0.45) h.seat=7; else if(h.seat===7) h.seat=6. The else-if only fires if the seat-7 gate FAILED, which is correct. This item is a non-issue — no change needed. Flagging it as a false alarm after close reading.",
+      "why": "Verified correct — no change needed.",
+      "impact": "low"
+    },
+    {
+      "what": "The transcript reveals 'We burn bright, and we burn' as a motto appearing in both Dynasty 1 (House Renner) and Dynasty 2 (House Halloran) — the motto pool is small enough that two simultaneous play-sessions or a reset will commonly produce the same words. Adding 2-3 more per reputation tag (especially reckless, which drives 'burn') would widen the space and make a player's motto feel less generic.",
+      "why": "A motto that several houses have felt is less meaningful as a dynasty identity marker.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life's generational systems are genuinely well-designed: the choice-driven reputation, the legible pinnacle trajectory, the bequest lever, the named reckoning, and the ruthless two-beat thread all cohere as intended, and the round-8 refinements to houseCharacter() close the most significant legibility gap without over-explaining — this is a complete, coherent system that earns its score."
+}

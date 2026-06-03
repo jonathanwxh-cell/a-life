@@ -1,0 +1,40 @@
+{
+  "profile": "strategy_simulationist",
+  "score": 7.5,
+  "strengths": [
+    "The reputation decay softening (0.12->0.09) is a genuine fix: a focused line no longer quietly hemorrhages progress between lives. Combined with the raised seat from sustained reputation (repute>=2.0, 60% chance up to seat 5), there is now a viable non-wealth path to standing that a strategist can deliberately build.",
+    "houseCharacter() now gives an explicit proximity signal at repute>=1.2: 'one or two more lives of the same, and it could settle into the family's words.' This lets a strategist read trajectory rather than just current state — the critical missing piece from round 4.",
+    "Motto threshold at repute>=1.5 means a focused 2-3 generation run reliably earns its words. Transcripts confirm: House Voss earns 'What the mind holds cannot be taken' by generation 3, House Fenn2 by generation 3, House Voss2 'By our own hands' by generation 2. The mechanic now works at the pace of play.",
+    "The seat-change log line — 'The family climbed in the world this generation' / 'slipped this generation' — fires at death and appears in the Chronicle. A strategist can now see which life caused a rise or fall rather than discovering it passively on the heir screen.",
+    "m_invest_name fires correctly: seat 2-5 gated, means>40 required, 62% chance of actual seat rise, explicit log line on both outcomes. The bequest (e_bequest) surfaces clearly on the heir screen with exactly what the choice conveyed. The reckoning (x_reckoning) names the cost of failing it (seat-1 via facedReckoning='fell') in the choice hint.",
+    "Seat-7 aspiration surfaces in houseCharacter() when repute>=2 and seat is 4-6: 'Held this strong across more lives, and raised high enough, such a name can be written into the histories.' This is now visible in the 'how things stand' readout."
+  ],
+  "blockers": [
+    "The 'how things stand' readout (openStock, ui.js line 274) tells a seat-6 house 'The house stands as high as a house can; only a hard fall can move it now.' — which is factually wrong. Seat-7 ('a house written into the histories') is reachable from seat-6. A strategist checking state mid-life at seat 6 is told the ceiling is the floor, destroying the most important long-arc goal signal. The seat-7 aspiration from houseCharacter() only fires if repute is already >=2 (not just approaching), so a player building toward seat-7 from seat-6 with repute at 1.5-1.9 gets zero forward signal anywhere in the live readout.",
+    "The three conditions for seat-7 (seat>=6, repute>=4.5, peakMeans>=82, 45% chance) are never named together in one place the player can read while alive. houseCharacter() names the aspiration but not the full tri-condition requirement. The 'how things stand' screen tells seat-6 players it's already over. A strategist cannot form a coherent plan for the pinnacle — they cannot tell which of the three levers they're short on, or that all three matter at once.",
+    "m_invest_name's seat cap is 6 (Math.min(6, seat+1)), so it cannot push a seat-6 house to seat-7 even though seat-7 requires peakMeans>=82 not means expenditure. A player who reads the invest-in-name card as the path to the top will invest correctly for seats 2-6 and then discover the seat-7 mechanic is entirely different (reputation-dominated, not means-dominated). This is an invisible fork that isn't signposted."
+  ],
+  "improvements": [
+    {
+      "what": "Fix the seat-6 direction text in openStock (ui.js line 274): replace 'The house stands as high as a house can' with prose that names the final tier and its requirements — e.g. 'The house stands at the summit of ordinary ambition. To be written into the histories, it must hold this seat, sustain a reputation held strong across many lives, and produce an heir who reaches the height of their means.'",
+      "why": "Currently tells players the game is over when it isn't. The seat-7 aspiration from houseCharacter() only appears when repute is already >=2; players building toward that threshold from seat-6 get no forward signal in the live readout. This is the single highest-priority gap for a strategist.",
+      "impact": "high"
+    },
+    {
+      "what": "In houseCharacter(), extend the seat-7 forward signal to fire when seat>=5 (not only seat>=4) AND when repute is >=1.2 (not only >=2) with different urgency text — e.g. at v0>=1.2: 'A name held to this strength, and a house raised to the summit, can one day be written into the histories.' This gives the signal during the climb, not only at the destination.",
+      "why": "Currently the 'written into the histories' signal only fires after repute is already settled (>=2). The proximity signal for the motto fires at 1.2; the seat-7 aspiration should fire at the same early threshold so a player building reputation at seat 5-6 knows they're on the right track.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a one-line coda to m_invest_name's 'Invest in the name' choice hint (the italic hint text under the button) when the house is already at seat 5-6, signalling that the seat-7 path runs through reputation, not spending — e.g. 'At this height, the name is made by what the family is known for, not only what it spends.'",
+      "why": "Prevents the strategist from over-investing in means expenditure when the seat-7 gate is actually reputation-dominated. The current card silently stops at seat-6 with no explanation of why the mechanic changes at the top.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the reckoning outcome in the Chronicle log for the life that triggered it (not only in the log that fades during play). Currently facedReckoning='fell' causes a seat-1 penalty at death, but the connection between 'shielded myself at 37' and 'house slipped at 84' is only recoverable by memory, not by reading the recorded chronicle.",
+      "why": "A strategist reviewing past lives to understand why a dynasty lost ground needs to find 'reckoning failed' in the ancestor's log, not piece it together from a choice made 47 in-game years before death. The seat-slip log already says the house slipped; it should reference the cause.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Round 5 meaningfully closes the worst gaps — the fade is gentler, the proximity signal is real, the motto crystallizes reliably — but the seat-7 endgame remains opaque: the 'how things stand' screen actively lies to a seat-6 house by calling it the ceiling, and the tri-condition requirement for the pinnacle is never legible in a single place the player can consult while alive."
+}

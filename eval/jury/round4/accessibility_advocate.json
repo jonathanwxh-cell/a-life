@@ -1,0 +1,46 @@
+{
+  "profile": "accessibility_advocate",
+  "score": 8.3,
+  "strengths": [
+    "vDeath aria-describedby='dName dSpan dEul dSurv' confirmed: epitaph and survivors are announced as the dialog description on open — the eulogy is now structurally audible to screen readers without extra navigation",
+    "vHeir aria-describedby='heirName heirTag heirInherit' confirmed: the inheritance prose is the dialog description, so the identity hand-off ('You are no longer X, you are Y') is the first thing a screen reader announces",
+    ".reflect border at rgba(236,225,207,0.45) computes to ~3.81:1 contrast against the #16110d background — clears the WCAG 3:1 non-text threshold; opacity:1 confirmed on the element itself",
+    "Paused/veil dimming rule for .reflect is fully removed from styles.css — no body.paused .reflect or veil-open dimming rule exists; the dimmed-state contrast failure is gone",
+    "aria-pressed absent from #flow is intentional and correct — it is a 3-state control (paused / normal / hurry) and the aria-label carries the full state description",
+    "srTag() emotion prefixes (Joyful, A loss, An echo) present in both the live ephemeral log and the Chronicle memoir view including showAncestorLife — colour coding is never the only channel",
+    "Skip link <a href='#app' class='skip'> with CSS focus reveal (top:-48px to top:8px) confirmed; amber background with dark text for clear visibility",
+    "prefers-reduced-motion: CSS kills all transitions/animations; scene.js and constellation.js freeze their animation clocks and throttle to 250ms setTimeout — motion fully suspended, not just slowed",
+    "aria-live='assertive' on #scene means card prose is announced immediately without waiting for a polite queue — critical for a game where the moment text is the primary affordance",
+    "First choice focused via cw.firstElementChild.focus() after card show — keyboard and screen reader users land on an actionable control, not the card wrapper",
+    "Stage transitions announced via sr-only #stageA11y polite live region every time the life-stage changes, including at birth (childhood) — independent of the animated visual title",
+    "Constellation keyboard traversal confirmed: arrow keys on #paneStars, Home/End, announce() via #starA11y polite live region with decision count ('Decision N of M') and road-not-taken",
+    "Roving tabindex on Chronicle tabs (ARIA tabs pattern) with arrow-key navigation and ArrowLeft/Right/Home/End confirmed",
+    "Focus trap in all six dialogs via MutationObserver watching .show class; Escape closes dismissable modals (vChron, vLoad, vStock); focus returned to trigger on close",
+    "Inline two-step delete confirm replaces native confirm() — focus moves to 'delete' button, Escape disarms, aria-label names the house on each button — no focus rupture",
+    "choice .h hint text kept in a11y tree via aria-describedby even while visually collapsed (max-height:0) — keyboard users get the hint without hover"
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Give the Chronicle marks panel (.mark divs: generations, lives lived, longest life, peak standing) a role='list' wrapper with role='listitem' on each mark, and a visually-hidden label like 'Dynasty statistics'",
+      "why": "Currently announced as ungrouped text runs; a list role lets screen reader users navigate and count the items, and clarifies these are parallel summary statistics rather than prose",
+      "impact": "low"
+    },
+    {
+      "what": "Replace the <br>-separated sentences in heirTag (dynasty identity line) with a <ul> or multiple <p> elements",
+      "why": "<br> line-breaks inside a div are not pause points in all AT — some readers run the sentences together; semantic paragraph or list structure gives reliable pauses between 'You are no longer X', 'Of a family known as Y', 'Said already to be Z'",
+      "impact": "low"
+    },
+    {
+      "what": "Change role='button' on #log to role='log' (or role='region' aria-label='recent events') and expose the chronicle-open affordance via a separate visible button or the existing aria-label",
+      "why": "A role='button' containing dynamically-added child div.entry elements creates a browse-mode mismatch — screen readers in virtual cursor mode may read the entry content as button text rather than as log lines; role='log' is the correct landmark for a running transcript",
+      "impact": "low"
+    },
+    {
+      "what": "Add a brief aria-description or instructions-id to vDeath and vHeir explaining these dialogs are narrative gates ('press the button below to continue') — they intentionally cannot be Escape-dismissed",
+      "why": "Screen reader users accustomed to Escape closing dialogs may attempt it and receive no feedback; a short instruction clarifies the gate is deliberate without breaking the literary mood",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 4 closes the two structural blockers cleanly — the eulogy and heir dialogs now announce their prose as ARIA descriptions on open, and the reflect button's border and opacity are fixed — leaving a screen reader path that is solid end-to-end, with only polish-level semantic gaps remaining."
+}

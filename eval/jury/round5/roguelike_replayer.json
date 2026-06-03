@@ -1,0 +1,43 @@
+{
+  "profile": "roguelike_replayer",
+  "score": 7.6,
+  "strengths": [
+    "r_hard_name dual-trigger is correctly wired in code: the heirloom condition (S.house.heirlooms.some(h=>h.tag==='hardname') && P.stats.means>45) is live and distinct from the ruthless-top-tag path, so the fix exists where it matters",
+    "cb_the_cost fires reliably now: Pavel (chose_loyalty path), Lena and Tamsin (a_kind_silence path), Caleb (chose_self via affair), Mateo all hit the elder reckoning — the competing-goods cards do close the loop for players who invest in those mid-arc choices",
+    "Motto diversity is genuinely improved: Dynasty 1 crystallizes 'scholarly' ('What the mind holds cannot be taken.') by gen 2; Dynasty 5 crystallizes 'industrious' ('By our own hands.') by gen 3; 7 distinct mottos exist, threshold 1.5 is low enough that a focused 3-gen run reliably earns words",
+    "Houses-you-have-raised collection is implemented end-to-end: recordHouseLegacy() fires at beginNewLine(), renders surname + highest seat + last 5 mottos on the title — a genuine across-run reward that accumulates",
+    "houseCharacter() is surfaced at two points the player actually sees: heir screen at succession AND the reflect panel (ui.js:273), giving real-time dynasty-identity feedback mid-run",
+    "Seat-7 easing (peakMeans 88→82, chance 0.45) is verified in code; seat-6 is achieved in Dynasty 1 by gen 4 (Tamsin), which means a determined line can now genuinely threaten the pinnacle within one committed playthrough",
+    "Transcript variety is real: Dynasty 3 (Thorne, 2 generations, heir dies at 16) and Dynasty 4 (Lindholm, 2 generations, founder dies at 66 + heir at 23) provide genuine mortality variance and the short dynasties read as complete rather than punishing",
+    "Heirloom accumulation plays distinctly: Esme Voss in gen 5 inherits 4 heirlooms simultaneously, and each one has a card echo (the book heirloom triggers its own late-life re-read moment for Tamsin and Esme)"
+  ],
+  "blockers": [
+    "r_hard_name still does not fire in practice across the 15 lives sampled: Esme Voss (Dynasty 1 gen 5) holds the 'hardname' heirloom, meets means>45 for her entire adult band (26–58), yet the card never draws — the heirloom path is wired but the card is crowded out by the adult pool; with ~8-9 decision draws in that window and w:3 competing against a_marry(w:5), a_child(w:5), a_work(w:3), a_friend_need(w:3) and several other w:3 cards, the single ruthless-archetype card is drawing roughly a 3-in-40 chance per eligible tick — statistically plausible it misses a run, but this means dedicated ruthless play still may not see its signature moment",
+    "No seat-7 achieved across 5 dynasties (15 lives): Dynasty 1 reaches seat 6 in gen 4, but gen 5 (Esme, peakMeans presumably high from grand estate) does not push to 7 — the combined bar of seat>=6 AND repute>=4.5 AND peakMeans>=82 AND random<0.45 is still steep enough that a player optimizing for the pinnacle may finish a 5-gen run without touching it even once",
+    "cb_the_cost weight is still w:2 in the actual code (line 635), not w:3 as the brief claims was raised; x_honest_or_kind (which seeds a_kind_silence) is also w:2, so the chain from competing-goods choice to elder reckoning still relies on a double w:2 draw — the card does fire in practice (it appeared in Pavel, Lena, Caleb, Mateo) but primarily because x_dream_or_duty and x_loyalty_truth are w:3 and fire more reliably; a player whose only competing-goods path is the x_honest_or_kind route may still miss cb_the_cost",
+    "The scholarly motto dominates: two of three completed multi-gen dynasties earn 'What the mind holds cannot be taken.' — the chose_study / child_books / became_teacher inputs to 'scholarly' are simply encountered more often than the inputs for ruthless/reckless/kind, making the title screen collection feel repetitive after a few runs"
+  ],
+  "improvements": [
+    {
+      "what": "Raise r_hard_name weight to 5 when the hardname heirloom is the trigger (not just ruthless-top): add a separate cond path or double the weight when heirloom is the qualifying condition rather than reputation",
+      "why": "At w:3 in a crowded adult pool, a single qualifying character (Esme) across a 32-year window never drew it — the heirloom path needs to feel guaranteed, not lucky, because earning the heirloom over 4 generations is itself an investment the player should see paid off",
+      "impact": "high"
+    },
+    {
+      "what": "Raise cb_the_cost to w:3 (as stated in the brief but not reflected in code line 635); also raise x_honest_or_kind from w:2 to w:3 so the a_kind_silence seed fires more reliably in lives without a friend or sibling",
+      "why": "The elder reckoning is the game's most thematically resonant card — the competing-goods arc only lands if the echo reliably closes; currently two w:2 draws are required for the a_kind_silence chain to complete, which is a 1-in-~225 per-tick chance each year",
+      "impact": "med"
+    },
+    {
+      "what": "Add one more scholarly reputation input to a non-scholarly path, or reduce the scholarly bump from 1.2 to 0.9, so that a mixed line doesn't accidentally crystallize 'scholarly' from a single chose_study in generation 2 alone",
+      "why": "Title screen diversity for returning players is the core meta-progression pitch; if every focused playthrough defaults to 'scholarly' unless actively suppressed, the houses-raised collection loses its promise of distinct earned words",
+      "impact": "med"
+    },
+    {
+      "what": "For seat-7 attainment: make the repute>=4.5 requirement track cumulative peak (like peakMeans already does) rather than the current, fade-softened end-of-run value, so that a dynasty which was consistently ruthless or scholarly for 6 generations but had one diluted heir isn't disqualified by reputation drift",
+      "why": "The seat-7 constraint is triply gated (seat, repute, peakMeans, random) — any focused run that earns seat 6 has probably earned the pinnacle in spirit; the current fade means reputation built over generations decays at the final moment, making the top feel capricious rather than earned",
+      "impact": "high"
+    }
+  ],
+  "verdict": "Round 5 fixes the code correctly but the ruthless archetype still doesn't fire its signature card in real play, seat-7 is never reached across 5 dynasties, and the scholarly motto dominates the title-screen collection — the 'one more run' pull is genuinely present for a patient literary player but the replay-differentiating content that a roguelike player chases (archetype-distinctive moments, the pinnacle seat, motto variety) still lands inconsistently enough to keep this just below a clean 8."
+}

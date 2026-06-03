@@ -1,0 +1,43 @@
+{
+  "profile": "strategy_simulationist",
+  "score": 7.5,
+  "strengths": [
+    "Standing-change narration is now in-the-moment: the 'The family climbed/slipped this generation' log line fires at death via the seatBefore compare in updateHouse(), so a fall is felt while still playing that generation, not discovered on the heir screen.",
+    "houseCharacter() appends a seat-7 aspiration string ('Held this strong across more lives, and raised high enough, such a name can be written into the histories.') when repute is strong (v0>=2) and seat is 4-6, giving a concrete progress signal toward the pinnacle.",
+    "The seat-7 gate was lowered to repute>=4.5 (down from what was effectively unreachable), making the pinnacle a genuine 5-to-7-generation target rather than a theoretical horizon.",
+    "m_invest_name fires with accurate, conditional log feedback: it tells you whether the seat rose ('watched the name climb a rung') or not ('held the name where it stood'), so the player learns the 62% base rate from play rather than being misled.",
+    "The 'how things stand' readout (openStock) names both the wealth path and the reputation path in prose, surfaces m_invest_name contextually (seat 2-5, means>40, age 40-64), and reminds you the bequest window is open — three strategically distinct levers, all legible at a glance.",
+    "The bequest system is mechanically clean: four choices with distinct heir-stat effects, stated plainly on the heir screen with attribution ('From X, deliberately: ...'). A strategist can plan the wealth-vs-mind-vs-heart tradeoff generations ahead.",
+    "The reckoning (x_reckoning) is genuinely punishing: 'fell' costs a seat step via updateHouse(), creating real downward pressure that a strategist must plan around.",
+    "Callback chains (cb_principle, cb_small_lie, cb_books_late) let play history gate later content, giving a systems mind something to track across a single life arc."
+  ],
+  "blockers": [
+    "The seat-7 gate still requires peakMeans>=88 AND repute[top]>=4.5 AND seat>=6 AND 35% random chance. The repute threshold of 4.5 is not communicated to the player anywhere — houseCharacter() says 'Held this strong across more lives' but gives no signal of how many more or how close the repute score is. A strategist cannot tell whether they are one generation away or five from meeting the hidden threshold.",
+    "The slow-decay mechanic (repute fades 0.12 per generation via fade()) is completely invisible. A player building a scholarly or generous reputation line has no idea a generation of off-theme play quietly erased 12% of their standing. This is the exact 'slow-decay risk invisible' blocker from round 3 — still unresolved. The houseCharacter signal only shows current state, not trajectory or velocity.",
+    "The m_invest_name card fires as a midlife event (42-64) but has no indicator in the readout of whether it already fired this life (cooldown 14 years, once-per-life flags not set). A player who misses it at 44 doesn't know it might recur at 58. The readout hint ('There may be a way, now, to spend the means in hand deliberately on the family's standing') correctly fires but disappears when age drifts out of the 40-64 window — no signal that the window is closing.",
+    "The reputation path to seat 5 (reputeTop score >= 2.0, 60% chance per generation) has no naming in the readout. The directional hint in openStock mentions 'a name made strong for one thing' but never connects this to the actual houseCharacter signal or to the motto crystallization milestone. A strategist can't confirm they're executing the reputation strategy vs. the wealth strategy vs. a combined one."
+  ],
+  "improvements": [
+    {
+      "what": "Add a repute trajectory indicator to houseCharacter(): e.g. append the delta between this generation's repute score and the motto threshold (v0>=2), and the seat-7 threshold (v0>=4.5), as a plain prose fragment like 'The reputation is building — it has hold enough to set a motto, but needs three or four more lives of the same to be written into the histories.' Gate behind v0>=1.5 so it only appears when relevant.",
+      "why": "Closes the single largest gap: the hidden repute gate for seat 7. A strategist can't plan toward a threshold they can't observe. This does not expose a raw number — it uses prose bands consistent with the game's design.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the fade() mechanic implicitly in houseCharacter(): when the current top repute score dropped since last generation (compare against a stored S.house.prevRepute snapshot), add a clause like 'Though the line has not renewed it lately — the reputation has softened some.' Store prevRepute at the start of updateHouse so the compare is possible.",
+      "why": "The slow-decay risk is the one system a strategist most needs to see and it is completely silent. This makes the decay felt without exposing numbers.",
+      "impact": "high"
+    },
+    {
+      "what": "In the m_invest_name choice header text, add a hint clause when means are high and the player's age is 58+: e.g. 'The window for this is narrowing.' Alternatively, add a note to the openStock directional hint when the seat-2-6/means>40/age>55 condition is met: 'This window does not stay open long.'",
+      "why": "Without this, a player who saves money for a late-game seat push has no warning the m_invest_name event window closes at 64. The missed window is invisible.",
+      "impact": "med"
+    },
+    {
+      "what": "In openStock, after the houseCharacter() output, name which path the current house is on: if repute top >= 1.2, add 'The name path: the family is becoming known as [X] — this is how it rises without wealth.' If means are on track (peakMeans trending high), add the complementary note. This makes the two paths distinct and legible as strategic alternatives.",
+      "why": "Currently the readout names both paths in the same sentence without distinguishing which is active for this house. A strategist wants to read current position on each axis separately.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Round 4 fixes the three stated blockers partially but not fully: decline is now narrated in the moment (solid), the seat-7 aspiration string exists but points at a hidden repute threshold the player still cannot measure, and the slow-decay risk that collapses a reputation line across an off-theme generation remains completely invisible — a dynasty strategist can be eroding their core asset and have no signal of it until the motto fails to crystallize."
+}

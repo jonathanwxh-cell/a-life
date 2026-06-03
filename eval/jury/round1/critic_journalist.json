@@ -1,0 +1,45 @@
+{
+  "profile": "critic_journalist",
+  "score": 7.0,
+  "strengths": [
+    "The prose is the best argument for the game's existence — line after line earns its place. 'A kindness done at 6 came back, decades later, as a door held open' is literary craft, not filler, and the callback card system that makes it possible is the game's most original mechanical idea.",
+    "The no-numbers commitment is genuine and coherent. Hidden stats drive outcomes without leaking into the UI; the player feels consequences through prose rather than reading them off a bar. Few games sustain this conceit without cheating.",
+    "The generational architecture is well-resolved: the bequest mechanic gives a real lever at the generation boundary, the house reputation system accumulates plausibly, and the constellation star-map is a beautiful way to make a dynasty legible across time.",
+    "Visual and audio aesthetic are in register with the writing — the dark-warm palette, the growing tree as a life-clock, the quiet ambient music. The presentation says 'this is about mortality and continuity' before a word is read.",
+    "The 'readout' prose — observational lines like 'money has stopped being a worry and become a kind of weather' — achieves the intended literary effect of a life observed from outside and inside at once."
+  ],
+  "blockers": [
+    "The motto crystallization collapses in practice: all three five-generation dynasties in the provided transcripts arrive at the same motto ('We take in what the world turns out' — the 'kind' path). The reputation drift during normal play heavily weights 'kind,' turning what should be the dynasty's crowning synthesis into a repeated phrase. A mechanic that is supposed to distinguish each house instead makes them identical at their most memorable moment.",
+    "Observational readout lines repeat across lives within and across dynasties with audible frequency — 'money has stopped being a worry and become a kind of weather,' 'his legs know something the rest of him is not yet ready to hear' appear in three to four lives in these transcripts. For a game where prose is the primary sensory channel, recurrence of identical lines in a single session is felt immediately and undermines the sense that each life is individually authored.",
+    "The game lives in one emotional register — elegiac, restrained, warm even in its darker moments. The callback for an unconfessed affair carries the same measured tone as the grandparent grief card. Compared to Sunless Sea or Cultist Simulator, which achieve genuine dread or strangeness within their aesthetic constraints, A Life's difficult paths feel underweight — they record a moral fact without making the player feel it differently than the positive paths.",
+    "There is no vertical accumulation — no question the game is asking across generations, no escalation, no reveal. The dynasty deepens horizontally (more history, more constellation, more heirlooms) but never pulls forward with the sense that something is building to something. A player seven lives in has a richer record but not a more urgent situation."
+  ],
+  "improvements": [
+    {
+      "what": "Diversify the reputation weight distribution so 'kind' does not dominate by default. Add a stronger bump from 'lived_reckless,' 'public_role,' 'broke_with_house' to 'reckless' and 'industrious,' and make the motto only lock once any two distinct reputations are both above threshold, so dynasties crystallize different mottos in practice rather than in theory.",
+      "why": "The motto is the dynasty layer's payoff. If it always resolves to the same line, the whole system feels decorative rather than generative.",
+      "impact": "high"
+    },
+    {
+      "what": "Double or rotate the pool of observational readout lines (the non-choice prose injected at certain ages/stats). Each cluster — wealth, body, spirit — should have 8–10 variants rather than 2–3, and implement a per-dynasty blacklist so a line that appeared in a prior generation of the same house cannot fire again for at least two lives.",
+      "why": "Prose repetition within a single session is the most immediately damaging friction for a game whose entire case rests on its writing. Fixing this costs only authorial effort and a small array check.",
+      "impact": "high"
+    },
+    {
+      "what": "Add two or three 'dark register' card variants for the affair, the failed reckoning, and the estranged child — prose that is quieter and colder rather than just more restrained. The current affair-carried-to-the-grave epitaph ('Took one door, unopened, all the way into the ground') is good; the in-life card prose for those same paths is not as different in tone from the positive paths as it should be.",
+      "why": "Without a distinct emotional register for failure and moral damage, the game's choices feel less consequential than they should. The player needs to feel the difference, not just read a different outcome.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce one slow-burn dynasty mystery — an heirloom whose origin is ambiguous, or a seat-7 house threshold that, once reached, reveals a single additional piece of family history the player did not know was accumulating. It need not be dramatic; it just needs to give the player something to lean toward across generations.",
+      "why": "Without any vertical pull, extended play becomes accumulation for its own sake. A single 'answer' the game has been quietly building toward would transform the constellation from a beautiful record into a destination.",
+      "impact": "med"
+    },
+    {
+      "what": "On the eulogy and heir screens, surface one concrete callback — name an actual past decision that shaped this person's character — rather than generic trait statements. For example: 'A mind sharpened by a parent who taught' is good but 'A mind sharpened by a parent who taught — the same gamble Anders made hungry at 20, paid back now' would close the loop the writing keeps opening.",
+      "why": "The game's thesis is that choices echo. The transition screens are the moment to prove it explicitly, and currently that moment lands softer than the in-game callback cards do.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has the writing and the architecture for a genuine recommendation, but the motto system collapses into sameness in practice, prose readout lines repeat too visibly within a session, and the single emotional register — beautiful as it is — never earns the difference between its darker paths and its warmer ones."
+}

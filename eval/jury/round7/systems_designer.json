@@ -1,0 +1,38 @@
+{
+  "profile": "systems_designer",
+  "score": 8.5,
+  "strengths": [
+    "houseCharacter() trajectory tiers are genuinely elegant: the four-tier prose arc ('still only beginning to hold' → 'real weight behind it' → 'has lasted' → 'deep enough to be written into the histories') makes the seat-7 climb legible without exposing numbers, and it fires at exactly the right moment — inside the how-things-stand panel where a planning player looks.",
+    "repPeak high-water mark is correctly computed: fade() runs, then bumps, then repPeak = max(current, post-bump) on line 171, then the seat-7 gate reads it on line 172 — all in one updateHouse() call. The prior one-seat-lateness bug is cleanly fixed.",
+    "The motto milestone announcement ('The family's character has settled, at last, into words') fires in the life that earns it, confirmed across both Dynasty 3 (Aldous Reyes, gen 2) and Dynasty 4 (Cyrus Castellane, gen 2) in the transcripts. The timing is satisfying and diegetically correct.",
+    "r_name_cost is a well-designed second ruthless card: the feared name has now cost something real (a door, a match, a young heir flinching), and the two choices (soften vs. let it keep its teeth) produce genuinely different downstream reputation paths. The condition correctly catches both ruthless repute and the hardname heirloom.",
+    "The seat-investment lever (m_invest_name) is now surfaced directly in the how-things-stand readout (ui.js line 279), so a player at seat 2-5 with sufficient means knows the lever exists before they age out of the window.",
+    "Generational coherence holds across all five dynasties in the transcripts: distinct arcs, distinct reputations, the reckoning system working (Otto Reyes meets it head-on; cb_corner fires correctly for the same life), callback chains resolving across generations (cb_lookaway fires for both Otto Calloway gen 2 and Theda Castellane gen 4 reading back to their respective childhood cowardice). No two dynasties feel mechanically identical.",
+    "peakMeans gate eased to 76 makes the pinnacle reachable through a focused wealth-and-reputation run without requiring an outlier life — Dynasty 3 proves this works: Lucan Reyes (gen 5) achieves it via consistent means investment rather than a single heroic peak.",
+    "The bequest lever is now named plainly on the heir screen and hinted in the how-things-stand panel, so a player who wants to plan across generations has a visible, legible instrument."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add a direct steering card for the industrious path, parallel to a_make_name's three-option structure. One option in a_make_name (or a separate card with a similar 'reputation setting' frame) should let a player explicitly choose 'be known as hard-working' — triggering remember('self_made') or remember('built_the_name') and bumping industrious in the same way the scholarly/generous options bump their respective tags.",
+      "why": "Industrious is the only major reputation with no direct steering card. Every other reputable identity (scholarly, ruthless, generous) has at least one explicit opt-in moment where the player can say 'this is what I want the family to be known for.' Industrious accrues only through legacy='built', self_made, built_the_name, or driven — all of which are either stat-fallback or incidental side-effects of other choices. A focused player trying to build an industrious house has no equivalent moment of deliberate intent, which makes that dynasty arc feel passive rather than chosen.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a callback (cb_hardname_heir or similar) for the r_name_cost outcome where a young heir has been shown flinching at the family's reputation. If the player chose 'soften,' a later card (youth/adult band) lets that heir meet the world with a name that is feared but no longer hard — acknowledging the generational cost was absorbed. If the player chose 'let it keep its teeth,' a later card shows the heir using the name coldly, completing the ruthless arc.",
+      "why": "r_name_cost establishes a consequential story beat (the young one flinches) but the engine currently has no callback that resolves it. The setup creates an expectation — what happened to that heir? — that goes unanswered, which undercuts the card's drama. A callback would close the loop and make the ruthless/redemption fork feel like a real generational choice rather than a one-time toll.",
+      "impact": "med"
+    },
+    {
+      "what": "Add an elder-band equivalent of m_invest_name (age 66-80, means > 35, seat 2-5) — something like spending reputation rather than wealth: a life that publicly endorses a successor, makes a gift to the community with the name attached, or formally hands a title forward. Mechanically identical result (seat bump at ~50% odds), but diegetically appropriate for an elder who can no longer work for the climb.",
+      "why": "m_invest_name is age 42-64 with a 14-year cooldown, meaning a player who doesn't encounter it in midlife has no equivalent lever in the elder band. An elder whose means are comfortable but who missed the midlife window — or who rebuilt from loss — has no way to make a deliberate, costly investment in the family's standing before dying. This leaves the elder years feeling passive relative to the midlife band for players who want to steer the house.",
+      "impact": "med"
+    },
+    {
+      "what": "In the how-things-stand readout, when repTop exists and houseCharacter() returns the 'beginning to hold' tier, add a one-line hint about which cards / choices feed that specific reputation tag. For example: for 'scholarly beginning to hold,' note that study, teaching, and the scholar door card all deepen it. For 'industrious,' note what actions qualify once that direct card exists.",
+      "why": "The trajectory tiers are legible but they don't tell the player how to advance them. A player at 'beginning to hold' knows where they are but not what moves the needle. A single sentence per tier (not per repute tag — just the current top tag) would close the loop between 'I can see where I am' and 'I know what to do next,' without exposing raw numbers.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The generational systems are genuinely coherent and the round-7 additions — trajectory tiers in houseCharacter(), in-life motto announcement, r_name_cost, repPeak fix, eased peakMeans gate — all land cleanly; the one substantive gap that remains is the missing direct steering card for the industrious path, which leaves that dynasty arc passive where every comparable reputation has an explicit opt-in moment."
+}

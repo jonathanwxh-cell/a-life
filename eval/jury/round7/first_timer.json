@@ -1,0 +1,110 @@
+{
+  "profile": "first_timer",
+  "round": 7,
+  "score": 8.5,
+  "prior_score": 8.0,
+  "delta": "+0.5",
+
+  "verdict_summary": "The round-7 dynasty breadcrumb lands exactly as designed and closes the main ceiling note from round 6. The game now hooks a first-timer on dynasty before the first death, not only at it. Everything else I flagged last round has held or improved. I would keep playing and recommend this to someone who reads.",
+
+  "items": [
+    {
+      "id": "dynasty_breadcrumb",
+      "label": "First-life dynasty breadcrumb (the round-7 change)",
+      "status": "verified_pass",
+      "detail": "engine.js line 246 fires hintOnce('seenDynasty', 'Everything this life gathers — its name, its means, its standing — will pass to the one who comes after.') on exactly the right trigger: gen===1 AND decisions.length>=2, meaning it shows after the player has made two choices in their very first life. The localStorage gate ('alife:seenDynasty') means it shows once ever and never again. The text is the exact sentence specified in the brief. It renders via addEphemeralEntry with cls='hint', which styles it as --ink (the brighter onboarding colour) and lingers 13 seconds — long enough to read. This closes the main ceiling note from round 6: the dynasty hook now lands during the first life, not only at the first death."
+    },
+    {
+      "id": "title_dynasty_lead",
+      "label": "Dynasty hook lead line on title screen",
+      "status": "pass",
+      "detail": "The .lead paragraph reads: 'Each life hands the next its name, its means, its reputation — and its secrets. Over the generations, a house takes shape.' It is styled with color: var(--ink) at opacity .96 — noticeably brighter than the .dim mechanics line below it, which is ink-dim. A non-gamer reading the title screen gets the dynasty premise before pressing anything."
+    },
+    {
+      "id": "undone_verb",
+      "label": "'a choice between two paths, and it cannot be undone'",
+      "status": "pass",
+      "detail": "Present in the .dim paragraph on the title sheet, verbatim. The stakes of a choice are declared before the player starts."
+    },
+    {
+      "id": "heir_identity",
+      "label": "Explicit heir identity line on heir screen",
+      "status": "pass",
+      "detail": "dynasty.js showHeir() pushes this as the first item in t[]: 'You are no longer [dead.given]. You are [child.given], [their] [son/daughter] — born into the world [they] left behind.' A first-timer who might be confused about what 'Become [name]' means gets an unambiguous handoff statement before continuing."
+    },
+    {
+      "id": "seenIntro_hint",
+      "label": "First-play orientation hint (seenIntro)",
+      "status": "pass",
+      "detail": "dynasty.js / startLife() fires hintOnce('seenIntro', 'The years move on their own — pause any time with the ▮▮ below. Now and then, a moment will ask something of you.') after 1600ms, gated to first-ever play. Explains the passive year-flow and the card mechanic without a tutorial wall."
+    },
+    {
+      "id": "seenChron_hint",
+      "label": "Chronicle hint + beckon animation (seenChron)",
+      "status": "pass",
+      "detail": "After the first decision, hintOnce('seenChron') fires and the '✦ the constellation' link in the header gets the .beckon class, which plays a 1.4s amber glow animation 3 times (CSS @keyframes beckon). This draws the eye to the chronicle entry point without any instruction text."
+    },
+    {
+      "id": "seenLog_hint",
+      "label": "Log / chronicle tap hint (seenLog)",
+      "status": "pass",
+      "detail": "After the second decision, hintOnce('seenLog') fires with 'Tap the fading log below any time to read this life's full record.' and the log element gets a .beckon animation. Both seenChron and seenDynasty now trigger at decisions.length >= 2, so all three fire close together after two choices — which is a reasonable density for onboarding (not simultaneous, since they fire in sequence as presentCard checks them in order)."
+    },
+    {
+      "id": "chronicle_link",
+      "label": "Chronicle link readability and discoverability",
+      "status": "pass",
+      "detail": "styles.css: .gen .chron has font-size 13.5px, letter-spacing 1px, border-bottom amber underline, min-height 44px (touch target). .gen .chron2 (the chronicle ↗ link) is 12px, ink-dim, also 44px touch target. Both are keyboard-focusable with amber ring on focus-visible. Comfortable to tap on mobile."
+    },
+    {
+      "id": "liveness_pulse_dot",
+      "label": "Liveness pulse dot on the flow text",
+      "status": "pass",
+      "detail": "styles.css: .flow::before is a 6px dot, position:absolute, animated by @keyframes flowpulse (opacity .22 → .85 over 2.6s). Paused = animation:none, opacity:.2. Fast-forward = duration 1s, amber colour. A non-gamer gets a continuous passive signal that the game is running without needing to understand the 'the years are passing' text."
+    },
+    {
+      "id": "ambient_whispers",
+      "label": "Ambient whispers during quiet years",
+      "status": "pass",
+      "detail": "engine.js tick(): when sinceCard>=4 and chance(0.14) and no card draws, window.AL_ambient() fires an ephemeral .whisper line (ink-faint, italic, opacity .72). Pools exist for child/adult/elder and a shared 'any' pool. These never write to the chronicle. A first-timer during a long card gap sees atmospheric prose and knows the game hasn't frozen — without being interrupted by an event."
+    },
+    {
+      "id": "age_breath_animation",
+      "label": "Age numeral breath animation as liveness signal",
+      "status": "pass",
+      "detail": "body:not(.paused) .passing .age has animation:ageBreath (opacity 1 → 0.8 → 1 over 4.5s). Combined with the pulse dot, a first-timer has two subtle signals that time is passing. Stops cleanly when paused."
+    },
+    {
+      "id": "information_density",
+      "label": "Header / information density (prior ceiling note)",
+      "status": "improved",
+      "detail": "The header shows name, meta (stage + kin), and generation ordinal with two chrome-less chronicle links. The 'being' line (italic, ink-dim) adds a mood readout. The 'how things stand' button is now present (styles.css .reflect: a small pill button below the being line). A first-timer who wants to know what their stats mean can tap it for a prose tier readout without numbers. This directly addresses the information-density ceiling note — the game remains number-free by default but the player has an opt-in readout available from the first moment."
+    }
+  ],
+
+  "remaining_ceiling_notes": [
+    {
+      "id": "triple_hint_timing",
+      "label": "Three hints fire close together at decision 2",
+      "severity": "minor",
+      "detail": "seenChron fires at decisions.length >= 1 (presentCard checks it first), seenLog and seenDynasty both fire at decisions.length >= 2. On second choice: seenLog and seenDynasty queue in the same presentCard call. They render as separate log entries but back-to-back — the dynasty line may crowd out the log hint or vice versa depending on the 3-entry cap in addEphemeralEntry. For a first-timer, two orientation lines appearing at once can feel cluttered. The dynasty breadcrumb is the priority; the seenLog hint is lower stakes (the log tap is also taught by the seenChron beckon animation). Consider staggering seenLog to decisions.length >= 3 so each hint has a moment to breathe."
+    },
+    {
+      "id": "first_death_dynasty_echo",
+      "label": "Dynasty hook echoed at first death",
+      "severity": "minor",
+      "detail": "The in-life breadcrumb is now solid. But a first-timer may still be surprised at death when they hit the heir screen, because the title's dynasty premise is not restated anywhere between the breadcrumb (which fades) and the death modal. The heir screen's identity line ('You are no longer...') does this job well. No change strictly needed, but if a future pass adds a single line to the eulogy modal that primes 'what passes now', the transition would be even smoother for players who missed or forgot the breadcrumb."
+    }
+  ],
+
+  "what_works_for_a_non_gamer": [
+    "The title screen needs no gaming vocabulary — 'a line drawn across time' and 'a house takes shape' are immediately legible as a premise.",
+    "The seenIntro hint explains the passive-time mechanic in plain English within the first two seconds of play.",
+    "The dynasty breadcrumb fires before a first-timer has had any reason to think about what comes after death, making the concept land as a pleasant surprise rather than a post-mortem explanation.",
+    "The 'how things stand' readout means a curious player can ask 'how am I doing?' at any time without needing a stats screen.",
+    "The age pulse and the flow dot together mean the game never looks frozen to someone who doesn't know a card is coming.",
+    "The heir identity line at succession is the clearest possible statement of what just happened — it treats the player as someone who might genuinely not know."
+  ],
+
+  "score_rationale": "8.5 — the dynasty breadcrumb change is exactly right and closes the main ceiling note. The heir screen identity line is excellent. The triple-hint timing at decision 2 is a minor roughness but not disorienting. No first-timer confusion points remain that would prevent a recommendation."
+}

@@ -1,0 +1,39 @@
+{
+  "profile": "roguelike_replayer",
+  "score": 7.5,
+  "strengths": [
+    "Meta-progression is now genuinely real: recordHouseLegacy/pastHouses/renderHousesRaised stores every finished house in localStorage and shows a running collection of surnames, peak standing, and distinct mottos on the title screen — a roguelike player now has a visible chronicle of all runs, not just the current one.",
+    "Build visibility is solved at the heir screen: houseCharacter() delivers graduated prose (reputation 'just beginning to gather' → 'becoming known as' → 'settled … house's character') plus motto, so the next-life strategy is readable before committing.",
+    "Seat-7 is now mathematically reachable through focused multi-run play: repute>=6 + seat>=6 + peakMeans>=88 is a real long-game target, and the 5-generation transcript (House Lindholm) reaches seat 6, confirming the ladder works.",
+    "cb_corner and cb_reckless give the harder archetypes an actual downstream echo — the ruthless life sees its corner come back larger in midlife; the reckless life faces its own reflection in a young family member in old age.",
+    "a_make_thing adds a reliable artistic path, and Dynasty 5 (House Voss) confirms it crystallizes the 'We leave something beautiful behind.' motto — motto diversity is measurably improved from round 2."
+  ],
+  "blockers": [
+    "Motto variety is still tilted: 3 of 5 sampled dynasties earn 'We take in what the world turns out.' (kind reputation). The card set's density of heart-boosting events (stray, fever, friend, neighbour, look-away callback) and the stray heirloom's structural presence in nearly every heir still funnel dynasties toward warmth even with the inherited-guard fix.",
+    "Seat-7 requires repute[top]>=6, which in practice needs 7-9 generations of unflinching single-archetype play — the transcript shows a veteran 5-generation house topping out at seat 6. For a roguelike player whose 'one more run' instinct fires on achievable-within-3-5-runs goals, the pinnacle remains more horizon than target.",
+    "Ruthless and reckless archetypes each get exactly one callback card — there is no mid-arc content chain (no heirloom, no repute-gated card, no multi-card branch) that makes playing toward those mottos feel like a distinct style the way scholarly or kind does, limiting their replay-pull to a single beat of recognition."
+  ],
+  "improvements": [
+    {
+      "what": "Add 1-2 adult-stage cards that are exclusive to a ruthless or reckless reputation (cond: reputeTop===ruthless / reckless), giving those archetypes mid-life gated content the way r_scholar_door does for scholarly.",
+      "why": "Right now cb_corner and cb_reckless are elder/midlife one-shots; a player optimizing for those mottos has no mid-arc feedback loop that a scholarly/kind player gets from heirlooms + the scholar door + teaching chains.",
+      "impact": "high"
+    },
+    {
+      "what": "Lower the repute gate for seat-7 from >=6 to >=4.5, keeping the peakMeans>=88 requirement and the 35% roll.",
+      "why": "repute>=6 is a 7-9 generation commitment; at >=4.5 a focused 5-6 generation run can credibly compete, making the pinnacle a within-session horizon rather than a multi-session abstraction.",
+      "impact": "high"
+    },
+    {
+      "what": "Add an heirloom that only the ruthless or reckless path can generate (e.g. 'a reputation for getting what you want' from a strayed+cut_corner life), so those archetypes build a tangible inheritance artifact the way kind builds the stray soft-spot.",
+      "why": "Heirlooms are the clearest dynasty-layer affordance a roguelike player can track; ruthless/reckless currently generate none, so there is no visual proof of the archetype in the heir screen.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 1-2 more card paths that reliably bump artistic or pious (not just made_art/found_faith) — e.g. a youth card for musical training or a midlife patronage that sets early_talent — so those mottos compete with kind on frequency.",
+      "why": "Dynasty 5's artistic motto required Sabine to both hit a_make_thing AND have found_faith ancestry; with one fewer aligned choice the motto would have collapsed to kind again. More paths to those reputations reduce the gravitational pull of warmth.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Round 3 clears the structural holes — meta-progression is real, builds are visible, seat-7 exists, and the harder archetypes get a downstream beat — but the kind/warm reputation still dominates sampled dynasties and the pinnacle is too many runs away to drive the 'just one more' loop for most players."
+}

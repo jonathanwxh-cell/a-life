@@ -1,0 +1,36 @@
+{
+  "profile": "first_timer",
+  "round": 8,
+  "score": 8.5,
+  "prior_score": 8.5,
+  "delta": "0",
+
+  "strengths": [
+    "The title screen states the dynasty premise in plain language before you press anything: 'Each life hands the next its name, its means, its reputation — and its secrets. Over the generations, a house takes shape.' No gaming vocabulary required.",
+    "The seenIntro hint fires within two seconds of your first life beginning and explains the passive time mechanic in one sentence: 'The years move on their own — pause any time with the ▮▮ below. Now and then, a moment will ask something of you.' A non-gamer doesn't need to figure this out.",
+    "The 'cannot be undone' framing on the title screen sets stakes before the first choice. You know it matters before it matters.",
+    "The dynasty breadcrumb — 'Everything this life gathers — its name, its means, its standing — will pass to the one who comes after.' — fires after two decisions in the first life. By the time you face your third choice you already know this life is building toward something.",
+    "The heir identity line ('You are no longer [name]. You are [name], their son/daughter — born into the world they left behind.') is the clearest possible handoff. There is no confusion about what has happened.",
+    "The pulse dot on the flow text and the age numeral breath animation together mean the screen never looks frozen to someone who doesn't know what a card is or when the next one comes.",
+    "The 'how things stand' button is visible with a border, opt-in, and gives a number-free prose readout. A curious newcomer can ask 'how am I doing?' without needing a stats screen.",
+    "Ambient whispers during quiet years fill the silence so a first-timer doesn't think the game has broken while waiting for the next event.",
+    "The transcripts confirm the writing is consistently strong across many lives — choices feel consequential and the prose around ordinary events ('Want has become a quiet, constant houseguest.') is atmospheric without being opaque."
+  ],
+
+  "blockers": [],
+
+  "improvements": [
+    {
+      "what": "Add a single sentence to the death modal priming 'what passes now' before 'Become [name]'",
+      "why": "A first-timer who missed the seenDynasty breadcrumb (it fades after 13 seconds) may still be surprised at death — the title's dynasty premise is not restated between the breadcrumb and the heir screen. The heir identity line does good work, but a brief line on the death modal itself ('The life ends. What it gathered passes on.') would smooth the transition for the inattentive.",
+      "impact": "low"
+    },
+    {
+      "what": "Stagger seenLog to decisions.length >= 3 instead of >= 2",
+      "why": "seenLog and seenDynasty both fire at decisions.length >= 2, so the second choice can produce two orientation lines back-to-back. The dynasty breadcrumb is the priority; the log tap hint is lower stakes and having it appear one beat later would let the dynasty line breathe.",
+      "impact": "low"
+    }
+  ],
+
+  "verdict": "The round-8 changes don't touch the onboarding layer a first-timer sees, and that layer remains solid — dynasty hook on the title, 'cannot be undone' framing, the seenIntro hint, the first-life dynasty breadcrumb, and the heir identity line together give a non-gamer everything they need to understand what the game is and why it matters; I would recommend this to someone who reads."
+}

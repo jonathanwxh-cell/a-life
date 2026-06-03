@@ -1,0 +1,54 @@
+{
+  "profile": "literary_reader",
+  "score": 7.5,
+  "strengths": [
+    "Sentence-level craft is genuinely above average: compressed, concrete, un-showy. Lines like 'Chose the table, the window, the ordinary hour' and 'Folded the doctor's letter away, and kept the life he had built' earn their feeling through specificity of gesture rather than naming emotion directly.",
+    "The callback architecture is the game's literary crown jewel. When Emory's act of childhood kindness returns 'decades later, as a door held open,' or when the old book resurfaces at 52 and Ingrid passes it silently to Calla, the game produces genuine emotional resonance — the way a long novel closes its motifs. Nothing in the genre does this as elegantly.",
+    "Restraint in the card prompts: 'Someone keeps finding reasons to be where {n} is. The reasons are getting thinner' is far better than saying 'someone is falling in love with you.' The best card prose trusts the reader to complete the feeling.",
+    "The epitaph system is thoughtful and avoids mechanical repetition through the cluster-blocking logic. 'Gave away everything he knew, and so kept it' and 'Wanted no marker but the fact of having been here' are quiet and true. 'An ordinary life, which is to say, a whole world' is an excellent fallback — it would be the weakest line if it appeared too often, but as a genuine last resort it earns it.",
+    "The observation lines (generated passively as stats shift) include several that genuinely land: 'Reading has stopped being something he does, and has become somewhere he goes' and 'Money has stopped being a worry and become a kind of weather' are small originals. They avoid cliche by picking the right vehicle.",
+    "The dynasty's inherited prose — birth into 'a rented room, already partly spent,' being 'raised on the family words,' the heirlooms carried forward — creates a literary texture of continuity that feels earned rather than cosmetic.",
+    "The death log lines are varied enough that consecutive generations rarely repeat verbatim, and the cluster-avoidance code actually works in practice across the transcripts I read."
+  ],
+  "blockers": [
+    "The spirit-high observation line set is the game's most repeated prose, and it shows badly across the transcripts. 'Something in him has refused, all these years, to grow heavy,' 'Whatever the years took, they did not take the lightness in him,' and 'There is a lightness in him the decades never managed to press flat' all say exactly the same thing with only cosmetic rewording. A literary reader encounters all three across a single dynasty — Gideon (31), Felix (31), Henrik (34), Greta (62), Idris (31), Hale (31) — and the rotation across generations fails because the metaphor (refusing to grow heavy / lightness / press flat) is identical in all three variants. This is not variation; it is the same sentence wearing different shoes.",
+    "Several of the logLine results after choices are too on-the-nose or read as tidy moral summaries rather than prose. 'Worked for the family until the family barely saw her' is accurate but inert. 'Let a sibling become someone she used to know' is a phrase that explains its own image. The better lines ('Stood up young against something unfair, and wore the cost of it'; 'Took a wild chance and learned what losing feels like') are slightly stronger but still often describe rather than render.",
+    "The love-fall log variants collapse on inspection. 'Fell in love, clumsily and completely,' 'Fell in love — the kind that quietly rearranges the furniture of a life,' and 'Fell in love, and was surprised, as everyone is, that it was him this time' are three different sentences but one emotional gesture, and the middle one ('furniture of a life') is the only genuinely original image. The others are filler-quality. In the transcripts, two of these land within the same dynasty (Emory at 21 and Hale at 25 both get a variant), and they do not feel different enough.",
+    "The choice of having multiple card prompts share the same sentence structure across different cards creates a numbing effect over dynasties. The body-as-correspondent metaphor ('The body sends its first real letter'; 'The body has begun sending letters Gideon would rather not open') reappears in two distinct cards (m_health and e_body), and the word 'letter' does real damage in both — it is a worn figure that the game deploys twice, once as the central image of the m_health prompt and again in the e_body observation-trigger. Over a dynasty this reads as the writer running out of vehicles.",
+    "The a_marry card's three rotating prompts are the weakest in the whole file: 'a quiet certainty for years now,' 'no good reason left to keep waiting,' 'the question has been in the room for years.' All three say the same thing (they're stalling on commitment) through different formulations of delay. There is no genuine variation in register, implication, or tonal coloring between them. Contrast this with the late-love card (a_meet_late), which has noticeably better variants across its three options.",
+    "The 'Had a child' log lines are the game's most mechanical moment. 'The world rearranged itself around a small weight,' 'nothing afterward was ever quite the same size,' 'A new centre the whole house quietly turned toward' — three lines, one event, and all three describe the same cognitive/emotional fact (the child becomes the center of gravity) in the same way. Having a child is the event with the most varied emotional reality in a human life, and the game flatlines it into a single emotional key (wonder/displacement) with zero tonal range between the variants."
+  ],
+  "improvements": [
+    {
+      "what": "Rewrite at least two of the three spirit-high observation variants (spirit_hi in engine.js) to use a completely different vehicle from 'lightness.' Possible alternatives: something about a specific posture or laugh or the way time sits on the person — anything that doesn't rely on the weight/light binary. The current three variants are one image, not three.",
+      "why": "This is the single most-repeated prose cluster in actual play. Across a four-generation dynasty a player sees all three, recognizes they are the same thought, and the illusion of a living chronicle breaks.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a third and fourth 'Had a child' logLine variant in engine.js that occupies a different emotional register — one could be muted/ambivalent ('A child arrived, and with it a life that would eventually stop being solely {their} own'), one could be specifically physical ('Held a child for the first time, and could not account for the weight of it'), rather than only wonder-as-gravity.",
+      "why": "Having children is the life event with the richest literary potential and the game's narrowest tonal range. Adding register-variation would let different lives feel genuinely different at this hinge.",
+      "impact": "high"
+    },
+    {
+      "what": "In the a_marry card, replace at least one of the three rotating prompts with a version that enters from a different angle: not 'the question is waiting' but perhaps the specific ordinary moment that precedes it — 'Over dinner on a Tuesday, nothing special, Gideon understands that this is the person. The words haven't been said yet. They're about to be.' This shifts from narrative summary to scene.",
+      "why": "The current three variants are the same observation at three levels of abstraction. A scene-level entry would add genuine tonal variety and give the player a different quality of moment.",
+      "impact": "med"
+    },
+    {
+      "what": "In the love-fall logLine variants, cut 'Fell in love, clumsily and completely' (generic) and replace with something that earns the surprise differently — perhaps a behavioral detail: 'Started making plans that assumed another person in them, and noticed only later what that meant.'",
+      "why": "The 'clumsily and completely' variant is the weakest of the three and actively lowers the quality of the set it belongs to. The other two are better and can carry the rotation.",
+      "impact": "med"
+    },
+    {
+      "what": "Audit and differentiate the two body-as-letter metaphors: m_health ('the body sends its first real letter') and e_body ('sending letters Gideon would rather not open'). The second is a direct callback to the first — if intentional, lean into it and name it as such; if not intentional, change the e_body image entirely. As it stands it reads as inadvertent repetition rather than structural echo.",
+      "why": "Literary economy requires that repeated images be doing work. A reader who notices this twice in a dynasty wonders if the writing is thin rather than deliberate.",
+      "impact": "med"
+    },
+    {
+      "what": "In the choice-result logLines for the a_work card, give the 'take the job' results more specific variation in consequence rather than only tonal variation. Currently the variants on repeated takes ('Climbed again, and the family learned, again, to fit around the work') acknowledge repetition but don't capture what the second or third sacrifice of family time actually feels like — the growing distance from a child's face, not an abstract family-as-organism. One variant could be keyed specifically to whether children exist vs. just a spouse.",
+      "why": "The callback-card system already does this well (it checks memory before choosing its line). The work card's repeating variants could borrow the same pattern to feel alive on second draw.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A genuinely literary ambition realized in flashes — the callback architecture and the best of the epitaphs are things a careful novelist would not be embarrassed by — but held below its own standard by a core set of observation-line clusters that repeat a single image in three syntactic costumes and, across a dynasty, expose the thinness of the variant pool."
+}

@@ -1,0 +1,51 @@
+{
+  "profile": "strategy_simulationist",
+  "score": 3.5,
+  "strengths": [
+    "Callback cards (cb_study_pays, cb_outcast_return, cb_books_late, etc.) create genuine 2-step plant-and-harvest loops that reward attentive play — the closest thing to a real strategic arc in the game.",
+    "The dynastic accumulation system (seat, repute, heirlooms, secret, motto) has the skeleton of an interesting long-game: wealth begets floor for the heir, reputation can substitute for money, secrets cascade across generations.",
+    "Trait and stat inheritance (seedChildStats with parental blending + regression, inheritTraits with mutation) is mechanically coherent — a child is genuinely a product of both parents, which is the right foundation for dynasty play.",
+    "The 'peril' flag (earned risk that raises mortality for N years) is a well-designed consequence mechanic — reckless choices have actual weight, not just mood-log entries."
+  ],
+  "blockers": [
+    "The player has zero information about the five stats driving everything. Without seeing even rough ranges or trends, there is nothing to optimize, no build to plan, and no feedback loop — choices are made by feel, not by strategy. A systems-strategist needs some signal to work with, even if imprecise or prose-encoded.",
+    "Across a full life the player makes roughly 8–15 binary choices. There are no allocations, no sequencing decisions, no resource management. The decision space is too narrow to support the kind of planning and multi-move thinking a strategy player comes for.",
+    "Dynastic progression has a structural soft ceiling and a missing collapse mechanism. The seat accumulation code (peakMeans >= 58 gives 60% bump chance, reputation independently pushes to seat 5, and falls require endMeans < 14) means houses drift upward by default. All five transcribed dynasties end at seat 2 or above; the worst case (House Reyes, two generations) ends where it started but never falls below it. There is no dynastic failure mode to counterplan against, so the long-game has no real tension.",
+    "The player has no levers over the heir. Trait inheritance is ~45% random carry-through plus a 55%-chance new mutation; stats regress 35% to mean plus ±9 noise. The heir screen presents the child fully formed. Without the ability to deliberately shape a successor's starting conditions through in-life decisions, dynasty management is watching, not playing.",
+    "The callback system — the game's only multi-step strategic arc — has only ~8 callbacks total and all fire at most once per life. By generation 3–4, a player who has seen them all has exhausted the game's depth. No new structure emerges at higher generational depth.",
+    "No competition, no external pressure, no rival houses, no crises that can genuinely topple a functioning dynasty. The absence of antagonistic forces means there is nothing to outmaneuver — mastery has no adversary to be tested against."
+  ],
+  "improvements": [
+    {
+      "what": "Add a lightweight stat dashboard — not numbers, but prose-encoded tiers the player can read (e.g., 'your body is wearing', 'your coffers are comfortable', 'your mind is sharp'). Update it each year in the passing log.",
+      "why": "Without any signal about where stats sit, the player cannot make informed decisions or build a strategy. Even rough qualitative feedback unlocks planning. This is the single highest-leverage change for the strategy lens.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'parenting investment' card or mechanic (age 5–15 of the heir's childhood, framed as the dying/retired parent's final years) that lets the player allocate 2–3 scarce resources (time, money, knowledge) toward shaping the heir's starting stats or traits.",
+      "why": "Gives dynasty planning a concrete, cross-generational lever. Deciding whether to invest the estate's wealth in boosting the heir's mind vs. means vs. vitality is exactly the kind of asymmetric tradeoff a strategy player wants to optimize across generations.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce a house-level antagonist pressure: a periodic 'challenge' event (debt crisis, scandal, rival claim, famine year) that can demote the seat by 1–2 levels unless the current life's stats or flags meet a threshold. Gate it to every 2–3 generations.",
+      "why": "Without downward pressure, the dynasty only drifts upward and the game has no tension. A crisis the player must have planned for (high means, strong repute, an heir ready) creates exactly the kind of medium-term threat that strategy players build around.",
+      "impact": "high"
+    },
+    {
+      "what": "Double the callback card count and make some callbacks cross-generational: if the grandparent made choice X, the grandchild gets a card that references it and requires a different response to close the arc.",
+      "why": "The current callback system is the game's strongest strategic hook but it is exhausted too quickly. Cross-generational callbacks would make the dynasty feel like a continuous strategic entity rather than a series of parallel single-life vignettes.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2–3 exclusive dynastic 'paths' that require committing multiple consecutive lives (e.g., a scholarly house that needs mind > 65 in three successive heirs to unlock a unique seat tier; a merchant line that needs peakMeans > 75 twice to unlock a 'fortune' house bonus). Surface the path's current progress on the heir screen.",
+      "why": "Gives multi-generation intentionality a concrete target. The player can now try to run a specific dynasty strategy and measure progress against it, rather than watching the house accumulate abstractly.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the 'roads not taken' from prior generations on the heir screen, not just in the constellation. Show which callback arcs are still open or now closed.",
+      "why": "A strategy player needs to know what they are managing. Showing which seeds were planted and which are still harvestable across generations turns the constellation from a pretty chronicle into an actionable strategic map.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A quiet, beautifully written vignette machine that asks you to witness a life, not steer one — the decision space (8–15 binary choices, no stat visibility, no heir-shaping, no downward pressure) is too thin and too passive to satisfy a player who came to build something deliberate across generations."
+}

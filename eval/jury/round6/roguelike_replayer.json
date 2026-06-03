@@ -1,0 +1,40 @@
+{
+  "profile": "roguelike_replayer",
+  "score": 7.9,
+  "strengths": [
+    "r_hard_name fix is real: weight 4 and window 26-60 confirmed in code, card fired in Yara Holloway's transcript at age 37 — the ruthless/heirloom path now has a signature moment that reliably appears",
+    "Seat-7 path is now mechanically sound: repPeak high-water mark correctly rewards a line that built a strong name even after reputation softens; the hint text at seat-6 ('keep this seat, hold one reputation strong, raise an heir to the very height of their means') makes the goal legible for the first time",
+    "Motto diversity genuinely improved: five dynasties show four distinct mottos — scholarly, artistic (x2), industrious, generous — versus the previous scholarly-dominant collapse; the bump flattening to 1.0 on scholarly/industrious is doing real work",
+    "Houses-raised meta-progression is fully wired and renders on title screen; seeing accumulated mottos ('An open door, an open hand', 'By our own hands') creates genuine cross-run pull toward untried archetypes",
+    "Eulogies remain the game's strongest hook — each is earned and distinct ('Took one door, unopened, all the way into the ground' vs. 'Was elsewhere as often as here') and reading the next heir's birth immediately after creates the generational handoff feeling that drives one-more-run",
+    "houseCharacter() readback in the stock panel explicitly tells the player what reputation the house is building and how close it is to crystallizing — the archetype feedback loop exists, it's just gated behind the reflect button"
+  ],
+  "blockers": [
+    "Seat-7 still did not appear in any of the five sampled dynasties, including two that reached seat-6; the gate (seat-6 AND repPeak>=3.5 AND peakMeans>=82 AND 45% roll) stacks enough conditions that it reads as a ~3% dynasty event rather than a focused player's realistic target — the path is now legible but still feels like a lottery rather than a thing a deliberate run can reach",
+    "Ruthless archetype is content-thin relative to scholarly/generous: scholarly house gets r_scholar_door, a_make_name (learned option), and the child_books heirloom chain across generations; ruthless gets r_hard_name plus r_old_shame (which fires for tainted too); a focused ruthless run lacks the chain of escalating signature moments that makes an archetype feel like a distinct playthrough rather than a stat-label",
+    "Archetype feedback is mid-game invisible: the house-character read is only surfaced when the player actively opens the reflect panel; there is no ambient signal mid-life that says 'your family is becoming known as hard-dealing — here is what that opens' until the card already fires; a roguelike player building a specific house needs more scent earlier"
+  ],
+  "improvements": [
+    {
+      "what": "Lower the seat-7 peakMeans threshold from 82 to 76, or raise the roll probability from 0.45 to 0.6 for dynasties with repPeak >= 4.5",
+      "why": "A focused 5-generation run that deliberately invests in wealth AND reputation should have a meaningful shot (~15-20%) at the pinnacle per qualifying generation; current stacking makes it feel probabilistically out of reach even when playing optimally",
+      "impact": "high"
+    },
+    {
+      "what": "Add one more ruthless-gated card in the midlife band (46-64) — a 'reckoning' moment where the hard-dealing reputation must be answered: a former partner, a deal gone wrong, or a community that finally pushes back",
+      "why": "Ruthless runs currently feel identical to other runs from age 45 onward; a second signature card in midlife would make the archetype feel like a distinct narrative thread rather than a reputation tag that only mattered in the adult band",
+      "impact": "high"
+    },
+    {
+      "what": "Add a low-weight ambient log line (no choice, just prose) when the house's leading reputation crosses 1.0 — something like 'The family is beginning to be known for something' in the voice of the game — so the player gets scent without a number",
+      "why": "Archetype feedback is currently invisible until the reflect panel or a gated card fires; a single literary whisper at the reputation milestone would close the feedback loop without breaking the game's prose-only aesthetic",
+      "impact": "med"
+    },
+    {
+      "what": "Ensure 'pious' and 'reckless' mottos have at least one repute-gated card each (analogous to r_scholar_door for scholarly) so that chasing those archetypes presents a distinct moment in play",
+      "why": "A player who earns 'We burn bright, and we burn' as a motto should have encountered at least one card that was uniquely available to a reckless house; without it the motto label is earned but the run did not feel mechanically distinct",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Round-6 fixes all landed and are confirmed in code and transcripts — r_hard_name fires, seat-7 is legible, mottos are more varied — but the pinnacle still evades sampled play and a ruthless run remains content-thin enough that the 'one more run for a different archetype' pull is stronger in theory than in the moment-to-moment experience."
+}

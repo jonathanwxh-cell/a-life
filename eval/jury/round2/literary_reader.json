@@ -1,0 +1,39 @@
+{
+  "profile": "literary_reader",
+  "score": 7.5,
+  "strengths": [
+    "The observe() pools are now genuinely deep across all five clusters — 5-6 distinct variants each, with real tonal variety within pools rather than mere paraphrase. 'Thinking has become her favourite weather' and 'Want has become a quiet, constant houseguest' are lines worth keeping.",
+    "The late-birth child pool (3 lines) and the dynasty-flag guard on 'red and furious' (S._usedFurious, confirmed used only once across 15 lives in transcripts) is exactly the right surgical fix — the line lands with appropriate weight at Bram Vasquez and never recurs.",
+    "Motto variety across five dynasties is genuine and distinct: no convergence at all in this sample. The fix separating lived-experience reputation scoring from inherited-heirloom carry-over has worked structurally.",
+    "The callback system is the literary centrepiece and it earns its billing. The 49-year arc of Adaline Vasquez looking away at age 9 and making amends at 58 is moving on the page. The book-heirloom chain through the Salvedi line is sound literary architecture — decisions made in one life create legible texture in subsequent ones.",
+    "The affair card now has three rotated variants with genuinely different registers ('A door opens that she did not knock on' / 'Someone looks at her the way the spouse stopped looking' / 'It would be so easy, and so quiet'), and the close-the-door branch has three cold-register variants. Competent.",
+    "Epitaph anti-repetition logic (cluster tracking, recent-two blocking, per-generation rotation) visibly works across the transcripts — fifteen lives, fifteen distinct epitaphs, no cluster appears more than twice in any dynasty."
+  ],
+  "blockers": [
+    "The marriage logline pool has only 3 variants ('Nobody made a speech; the years that followed were the speech.' / 'They made it formal on an ordinary day, and meant every word of it.' / 'The day was small and the meaning was not.') and marriage is near-universal across long sessions. In Dynasty 5 alone, three different marriages resolve to these same three lines across four generations. This is the single most-repeated prose in any extended play and it is the game's most emotionally loaded beat — the thinness here undermines what the surrounding prose earns.",
+    "The love-opening card (y_love1) has 5 variants but they are structurally identical in angle: someone keeps appearing, the character has noticed, the noticing runs both ways. The rotation changes the surface prose without changing the register or the shape of how love begins. A player who plays three dynasties experiences all five within a few lives. A variant that begins from the character's side (noticing an absence, or love recognised in retrospect) would give the pool genuine variety, not just paraphrase."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 marriage logline variants to the a_marry card's do() block, using rotI or rotN. Include at least one late-marriage line (since late-love cards are common) and one that acknowledges the weight of time rather than the smallness of ceremony.",
+      "why": "Marriage is the most universally triggered moment in long sessions, and three variants repeat visibly within a single 5-generation dynasty. This is the lowest-hanging prose fix with the highest experiential return.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2 love-opening variants to y_love1 that approach from a different angle — e.g., one where the character notices love through its absence ('Someone has gone quiet for three days, and the quiet has a shape') or one where the recognition is internal and unnamed before it is social.",
+      "why": "The current 5 variants all describe love from the outside (someone keeps appearing). Varying the angle gives the pool genuine depth rather than surface rotation.",
+      "impact": "med"
+    },
+    {
+      "what": "The affair card text uses gen rotation (rotN(p.gen,3)) which means the same player sees the same variant each dynasty. Switch to a player-responsive condition — e.g., vary by whether the spouse's bond is below a threshold, or whether the player has already had a child — so the text reads as causally connected to this life's specific situation.",
+      "why": "The affair is the game's highest-stakes prose moment. Mechanical rotation by generation misses the opportunity for the text to feel discovered rather than served.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the y_love1 'pretend not to notice' refusal logline beyond the single current line ('Let someone slip away by saying nothing. Wondered, later, often.') to 2-3 variants. The refusal path is chosen in roughly half of sessions and currently always reads identically.",
+      "why": "The roads-not-taken appear in the transcript alongside every choice. A single refusal line is visible in five transcripts within the same file.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The prose foundation is genuinely literary — patient, precise, with a callback architecture that gives a dynasty the shape of a real story — but the marriage beat, which every long session triggers multiple times, is served by only three variants and the repetition undercuts what the surrounding writing earns."
+}

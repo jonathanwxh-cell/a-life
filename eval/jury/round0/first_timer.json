@@ -1,0 +1,46 @@
+{
+  "profile": "first_timer",
+  "score": 6.5,
+  "strengths": [
+    "The title screen nails the first impression: a lone tree at dusk, a simple tagline ('Years pass on their own. Now and then a moment asks something of you. Nothing can be undone.') tells a first-timer exactly what they are in for without overwhelming them.",
+    "The very first moment a choice appears — a fever, a child small in a large bed, two clear human options — lands emotionally before the player has any idea how the game works. The writing carries the onboarding.",
+    "The footer text 'the years are passing' + the ticking age number reassures that waiting is correct behavior, reducing the 'is it broken?' panic during long silent stretches.",
+    "The one-time orientation hint ('The years move on their own — pause any time with the pause button below') fires at the right moment and uses plain language.",
+    "The eulogy and heir screens are clearly labeled ('an ending,' 'the line continues,' 'Live this life') — a newcomer understands succession without a tutorial.",
+    "No visible numbers means no stat-anxiety. A non-gamer is never confronted with a spreadsheet."
+  ],
+  "blockers": [
+    "The gap between moments (often 8–20 real seconds of silence) is not explained at first launch. The hint fires once and fades in 6.5 seconds. If a first-timer is glancing at the screen during those seconds, they miss it entirely and are left watching a number tick upward with no cue that this is normal and intentional — the 'is it frozen?' anxiety is real.",
+    "The dynasty/house concept (the core long-term hook) is invisible in the first life and barely surfaced in the UI. A first-timer finishes their first life with no understanding of why they just became their heir, what accumulates across generations, or what they are building toward. The emotional pitch — 'you are creating a bloodline that rises or falls' — never lands in the first session.",
+    "The constellation link ('✦ the constellation') in the header is visually subtle and the label is poetic, not descriptive. A first-timer who hasn't read the README does not know what a 'constellation' means here, and the follow-up hint ('every choice is being written into your chronicle — tap the constellation to see the whole line') arrives only after the first choice, in fading text they may miss. The Chronicle's three-tab structure (This Life / The Line / Constellation) is never introduced — many first-timers will never open it.",
+    "The title screen shows 'Continue House Thorne' as the primary button when a save exists, which is correct for returning players but not relevant here; for a true first visit, 'Begin a new line' is buried as the second option in my observation of the screenshots — a small but real friction point for someone who clicks the first prominent button by habit."
+  ],
+  "improvements": [
+    {
+      "what": "Add a persistent (not fading) ambient label during the silent-years state — e.g., a soft line beneath the age counter reading 'waiting for the next moment…' or '~X years until the next chapter' — that disappears when a card appears.",
+      "why": "Directly kills the 'is it broken?' confusion without breaking the contemplative mood. The hint text already exists; it just needs to not vanish before the player absorbs it.",
+      "impact": "high"
+    },
+    {
+      "what": "On the title screen (or immediately after 'Begin a new line'), add one sentence about what accumulates across lives — e.g., 'Each life leaves something behind: wealth, reputation, heirlooms, a name. Over generations, a dynasty takes shape.' The existing title text only describes the first life.",
+      "why": "The generational hook is the game's most distinctive idea and its best sales pitch to any audience. A first-timer currently has no reason to push through a second life because they don't know a dynasty is being built.",
+      "impact": "high"
+    },
+    {
+      "what": "On the eulogy/death screen, before the heir button, briefly surface what is being inherited: e.g., '(heir name) inherits the family name, a modest standing, and a book too hard for a child's hands.' This information exists in the heir screen's 'heirInherit' field but is easy to miss.",
+      "why": "This is the moment the player most needs to feel continuity. Making the inheritance legible at the moment of succession transforms the succession from 'a restart' into 'a handoff,' which is the game's core emotional beat.",
+      "impact": "high"
+    },
+    {
+      "what": "Rename or re-label '✦ the constellation' in the header to something more self-explanatory for a first-timer, e.g., '✦ your bloodline' or '✦ chronicle' — or add a tooltip/label that appears on the first hover/focus: 'See every choice you've ever made.'",
+      "why": "The constellation is the most impressive feature for showcasing that choices persist, but first-timers never find it because the label is opaque. Discoverability is the bottleneck, not the feature itself.",
+      "impact": "med"
+    },
+    {
+      "what": "When a new line is begun (not resumed), give 'Begin a new line' primary visual prominence on the title screen — make it the top/largest button — and demote 'Continue House X' to secondary styling. Currently when a save exists, 'Continue' is the highlighted primary button and 'Begin a new line' is secondary, which is correct for returning players but the screenshots suggest this ordering may confuse a true first-timer who lands on the page with a prior browser session.",
+      "why": "Removes the small but real friction of 'which button do I actually press?' for someone who has never played.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A genuinely moving, accessible first experience let down by the fact that the game's most compelling pitch — that choices echo across generations and build a dynasty — is entirely invisible during the first life, leaving a non-gamer with a beautiful vignette but no reason to come back for the second."
+}

@@ -1,0 +1,43 @@
+{
+  "profile": "cozy_fan",
+  "score": 7.5,
+  "strengths": [
+    "The sky-arc (dawn at birth, night at death) is one of the most poetic ambient frames in the genre — the palette transitions from early-morning blue through gold afternoon to dusk purples feel genuinely moving, not decorative.",
+    "The growing tree and sapling-children beside it deliver constant quiet atmosphere without ever becoming a gamey progress bar; it is ambient meaning, not a mechanic.",
+    "No visible numbers, anywhere, ever. The prose IS the HUD. This fully delivers the meditative promise — you read a life, you don't manage one.",
+    "Music implementation is exemplary for a restful game: opt-in, capped at 0.42 volume, scene-aware track switching with graceful 750ms fades, lazy-loaded, never autoplay. It sits under the reading rather than competing with it.",
+    "The writing quality in event cards is consistently literary and economical. Lines like 'Bought a place of her own, and slept differently in it' or 'Money has stopped being a worry and become a kind of weather' land with the unhurried warmth that cozy fans come for.",
+    "Callback cards — a childhood kindness returning as a door held open two decades later — provide the gentle, non-mechanical resonance that is the emotional core of the cozy genre. These are the moments you remember.",
+    "The 'how things stand' prose readout is a smart opt-in: number-free, diegetic, and behind a quiet button so it never breaks the reverie unless you ask.",
+    "Default pace of 2.1s/year is genuinely unhurried. The fast-forward tap is opt-in and doesn't change the game's feel unless you choose it, preserving the meditative default.",
+    "The quiet observation lines that fire passively ('The stairs have started to ask a question of her'; 'Reading has stopped being something he does, and has become somewhere he goes') maintain ambient prose texture between choices without demanding anything of the player."
+  ],
+  "blockers": [
+    "The reckoning event introduces genuine pass/fail pressure against hidden stats: a dynasty that fails it 'gave ground it had spent generations gaining.' For someone playing this as a calm wind-down session, having a multi-session dynasty suddenly demotion-threatened by a stat check is stress, not contemplation. The framing is tense ('a debt called in, a name questioned') and the hidden-means gate means the outcome is partly outside the player's knowledge — exactly the kind of uncertainty that works against the cozy contract.",
+    "Early death (~8-12% of lives ending before 55, per the engine) can deliver a genuine gut-punch that breaks rather than deepens the contemplative mode. In the transcripts, Mira Halloran dies at 44 with a love she never married and a dynasty that simply ends. This is moving in a literary sense but jarring in a restorative-play sense — the feeling is loss and interrupted narrative, not gentle melancholy. A cozy fan needs to feel safe enough to invest.",
+    "Between events in childhood and early youth, the quiet can stretch 5-7 years with only the sky and tree changing. The intention is right (unhurried pacing) but in practice there is not enough ambient prose texture to sustain genuine meditative attention during these stretches — it tips from peaceful waiting into passive waiting."
+  ],
+  "improvements": [
+    {
+      "what": "Soften the reckoning's pass/fail edge: instead of a hidden means-gate that silently determines whether the house holds or falls, let the reckoning always result in cost and consequence (means drop, a hard season described in prose) but never in an invisible stat-check failure. The player chose 'meet it head-on' — that choice should be honoured regardless of hidden means level, with different prose outcomes rather than a binary hold/fall.",
+      "why": "Removes the single most stress-producing hidden mechanic from a game that otherwise earns its calm by keeping stats invisible. Right now there is a gotcha: you can choose the 'right' option and still lose house standing because of stats you cannot see. That undermines trust in the cozy space.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 short ambient log lines per life-stage that fire on a timer during long quiet stretches — not choices, just observations: the season, a small detail of domestic life, a sensory note. Model them on the existing 'obs' lines but fire them unprompted in years where no card draws.",
+      "why": "Fills the 5-7 year silences in childhood/youth with the prose texture the game promises. Right now the game asks you to watch a tree grow and a sky shift — both beautiful, but text-first players feel the absence of language during the quiet years.",
+      "impact": "high"
+    },
+    {
+      "what": "Frame early death in prose that closes rather than interrupts. When a life ends before 55, give the eulogy screen an additional paragraph that gently acknowledges the shortness — something that makes brevity feel like completion rather than truncation. The existing epitaphs for early death ('Gone too soon, with so much unspent') are correct in tone; extend this into the eulogy body itself.",
+      "why": "Cozy players invest emotionally. An abrupt short life currently reads as system-imposed loss. A softer framing — 'a short life, and a whole one' — would let the player metabolize it restoratively rather than feeling punished.",
+      "impact": "med"
+    },
+    {
+      "what": "On the fast-forward mode ('the years are racing by'), add a visual warmth shift — perhaps a slightly warmer or more amber tint on the sky scene, or a subtle pulse on the flow text — so the player always knows at a glance whether they are in contemplative mode or quick-scan mode.",
+      "why": "Right now the text change is subtle, especially on mobile. A player might drift into fast-forward without noticing, which works against the intentional pacing the game is built on.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life delivers on its meditative promise in almost every layer — the sky-arc, the tree, the opt-in music, the number-free prose — but the reckoning's hidden-stat pass/fail and occasional early-death gut-punches introduce a low-grade anxiety that a cozy fan will feel and remember, holding a genuinely beautiful game just short of the safe, restorative space it is so nearly achieving."
+}

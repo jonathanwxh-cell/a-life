@@ -1,0 +1,77 @@
+{
+  "profile": "accessibility_advocate",
+  "score": 5.5,
+  "strengths": [
+    "All five veils (title, load, death, heir, chronicle) carry role='dialog' aria-modal='true' and descriptive aria-label attributes — the modal semantics are correct.",
+    "Focus management is genuinely good: a MutationObserver-driven stack traps Tab inside the topmost veil, restores focus to the trigger on close, supports nested veils (chronicle over eulogy), and seeds the already-open title veil on first load.",
+    "Escape dismisses the chronicle and load veils via a centralized keydown handler — no bespoke per-dialog wiring needed.",
+    "Arrow-key roving tabindex on the Chronicle tablist follows the ARIA tabs pattern exactly (ArrowLeft/Right/Home/End, aria-selected, tabIndex=-1 on inactive tabs).",
+    "The constellation canvas is aria-hidden='true'; the surrounding tabpanel is focusable and owns a sr-only aria-live='polite' region (#starA11y) that announces each decision as the user navigates with arrow keys — a genuine text alternative for a purely visual canvas feature.",
+    "prefers-reduced-motion is honoured in both CSS (animation/transition durations collapsed to 0.001ms) and JS: scene.js reads the media query and freezes the animation clock (dt=0) so the tree/sky/motes/birds hold still; constellation.js similarly freezes its twinkle clock. The loops still run at 250ms throttle in scene.js so stage transitions still work.",
+    "The sky canvas carries aria-hidden='true' — purely decorative, correctly hidden.",
+    "The pause/play button has a dynamic aria-label ('pause'/'play') that updates with state, and the flow text ('the years are passing' / 'time held still') provides a redundant text cue.",
+    "Footer buttons (pause, music, menu) meet the 44px touch-target minimum via explicit CSS (.pp { width:44px; height:44px }).",
+    "Choice hint text (.h) is revealed on :focus-visible in addition to :hover, so keyboard users see the hint — and on (hover:none) devices it is always visible.",
+    "Inline two-step delete confirm in the load menu avoids native confirm() (which can be blocked in sandboxed iframes and is not well-announced), uses real buttons with aria-labels, and moves focus to the confirm button.",
+    "Save-slot body and ancestor lineage rows are keyboard-operable (tabindex=0, role='button', Enter/Space handlers, amber focus ring).",
+    "A .sr-only class is defined with the correct clip-rect / overflow:hidden / margin:-1px pattern.",
+    "The chronicle code textarea gets a focus style (outline: 2px solid amber) on :focus.",
+    "Key AA contrast fixes were applied across multiple review passes: .entry .a, .mline .ma, .anc .o/.sp lifted from --ink-faint (~3.8:1) to --ink-dim (~5.6:1); .passing .yr and .flow lifted similarly; .starLegend .starHint opacity raised to 0.85."
+  ],
+  "blockers": [
+    "The main game loop — the only mechanism that advances time and triggers choices — has no keyboard-operable equivalent for the age counter / passing display. The pause button is keyboard-reachable, but there is no way for a keyboard-only user to know when a card is about to arrive or to interact with the breathing age numeral. This is a UX gap, not a blocker, but it merges into the next real blocker.",
+    "Choice buttons inside the card receive no programmatic focus when a card appears. engine.js calls card.focus() (the wrapping group div, tabindex=-1), not the first choice button. A screen-reader user receives no announcement that a moment has arrived requiring a decision — the card has role='group' and aria-label='a moment' but no aria-live or role='alertdialog', so the reader is silently sitting somewhere on the page while the game waits for input. The live region on #being (aria-live='polite') and #scene (aria-live='polite') would eventually announce the scene text, but only once the user happens to navigate there; there is no proactive interrupt.",
+    "The ephemeral log (#log, aria-live='polite' aria-atomic='false') announces individual log entries as they appear, but entries fade out and are removed from the DOM after 6.5s. Screen-reader users who are focused elsewhere (e.g., reading a card) may miss log entries entirely since the announcement happens and the node is then deleted before the reader can repeat it. The Chronicle preserves the full history, but discovering that requires knowing to open it.",
+    "Color is the sole differentiator for log entry types in the ephemeral log and in the memoir: joy entries are --sage (green), loss entries are --rose (pink), echo entries carry a left border. There is no text prefix, icon, or ARIA role to distinguish them for users who cannot perceive color. The cls value ('joy', 'loss', 'echo', 'obs') is present in the DOM class but never surfaced as readable text.",
+    "The constellation canvas tooltip (#starTip) is positioned with absolute CSS and set via tip.style.opacity. It is not a live region and has no aria-live attribute — a screen-reader user who triggers the keyboard traversal will hear the #starA11y announcement, but the visible tooltip itself is inaccessible. Mouse users who hover over stars also get no accessible read-out beyond visual.",
+    "The 'being' line (#being) transitions via opacity 0 -> 0.9 with a 250ms JS delay even under prefers-reduced-motion — because the opacity fade is done via element.style in renderBeing(), not a CSS transition, so the CSS @media rule does not suppress it. Small but inconsistent.",
+    "Stage-transition title (#stageTitle) uses a CSS opacity transition (1.4s) combined with aria-live='polite'. Under prefers-reduced-motion the CSS duration is collapsed to 0.001ms so the visual flash is instant — good — but the aria-live announcement still fires, which is actually correct behavior. However, for a low-vision user who needs reduced motion but still reads text, the stage title text appears and immediately disappears (effectively invisible), because the JS class removal setTimeout of 3500ms still fires but the visual is instant. Low-vision users who rely on the text rendering of the stage title get no dwell time.",
+    "The house panel, marks, and lineage in the Chronicle pane are built entirely via innerHTML with no ARIA landmark or heading hierarchy inside the pane. The lineage list (.lineage) is a sequence of divs, not a <ul>/<ol> — screen-reader users cannot use list navigation to jump between ancestors.",
+    "The slot list in the load menu (#slotList) is also built from div.slot elements, not a list element. No ARIA listbox or list semantics.",
+    "The 'Trouble finding a saved line?' storage inspector is inside a <details>/<summary> — good progressive disclosure — but the <summary> text is purely diagnostic copy; a screen-reader user navigating the load dialog encounters it as just another focusable item with no indication that it expands a technical diagnostic tool.",
+    "No skip-to-main-content link exists. On first load the title veil traps focus correctly, but once gameplay begins, a keyboard user must Tab through the header (name, meta, generation, two chronicle links) and the age counter before reaching the pause button and footer controls on every pass — there is no landmark shortcut."
+  ],
+  "improvements": [
+    {
+      "what": "Add role='alertdialog' (or aria-live='assertive' on the card's scene region) when a card is presented, and move focus to the first .choice button rather than the card wrapper div.",
+      "why": "Screen-reader users currently receive no proactive notification that a decision moment has arrived. Moving focus to the first choice button makes the card immediately navigable and the scene text is read as part of the button's context.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a visually-hidden text prefix to each log entry and memoir line that encodes the entry type: prepend an sr-only span with text 'joyful moment:', 'loss:', 'echo from the past:', or omit for neutral observations.",
+      "why": "Joy/loss/echo are conveyed purely via color (#sage, #rose, amber border). Screen-reader users and users with color-blindness cannot distinguish these emotional registers.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the #starTip element aria-live='polite' so that the tooltip content is announced when it updates, in addition to the existing #starA11y announcement.",
+      "why": "The keyboard-traversal live region in #starA11y is the right approach, but mouse users hovering over stars get a tooltip that is not accessible. Adding aria-live to the tip element costs nothing and makes the tooltip usable for both interaction modes.",
+      "impact": "med"
+    },
+    {
+      "what": "Convert .lineage and #slotList from div-soup to <ol> / <li> elements, or add role='list' + role='listitem' to the existing divs.",
+      "why": "Screen-reader users can use list navigation shortcuts (e.g., VoiceOver 'L' key) to jump between ancestors and saved slots. As divs, these are plain flow content with no navigational affordance.",
+      "impact": "med"
+    },
+    {
+      "what": "Fix the renderBeing() opacity fade under prefers-reduced-motion: guard the JS opacity transition with a matchMedia check, or skip the fade entirely and set textContent + opacity=0.9 synchronously when motion is reduced.",
+      "why": "The CSS @media rule collapses CSS transitions but this fade runs through element.style directly, bypassing the media query. A user who expects no motion gets a 250ms invisible-text period.",
+      "impact": "low"
+    },
+    {
+      "what": "Add a <nav> or role='navigation' landmark with a visually-hidden 'Skip to game' anchor at the very top of #app so keyboard users can bypass the header on each page load / new life.",
+      "why": "Without a skip link, keyboard users Tab through name + meta + generation + two chronicle links before reaching any interactive game control, on every new life.",
+      "impact": "med"
+    },
+    {
+      "what": "Add an aria-label or visually-hidden heading to the .memoir and .lineage regions inside the Chronicle pane so screen-reader users know what section they are in when they arrive via Tab.",
+      "why": "The pane is labelled by its tab button (aria-labelledby='tabLife'), which helps, but the sub-sections (memoir vs. house panel vs. lineage) have no headings or landmarks, forcing a linear read of the whole pane.",
+      "impact": "low"
+    },
+    {
+      "what": "For stage-transition title text (#stageTitle): under prefers-reduced-motion, skip the class-toggle animation and instead render the text persistently for the 3500ms dwell period (e.g., set opacity directly to 0.92 for the dwell, then remove it), rather than relying on a CSS transition that the media query collapses instantly.",
+      "why": "Low-vision users who need reduced motion but rely on reading text currently see the stage label appear and vanish in ~0ms, making it effectively invisible.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life shows genuine, iterative accessibility care — correct modal semantics, real focus management, a text alternative for the constellation canvas, and reduced-motion support in both CSS and JS — but it falls well short of an inclusive experience for screen-reader users because the core gameplay loop (the card/decision moment) never announces itself proactively, and emotional register (joy vs. loss) is encoded only in color, leaving blind and color-blind users with a structurally impoverished read of the story."
+}

@@ -1,0 +1,50 @@
+{
+  "profile": "systems_designer",
+  "score": 7.0,
+  "strengths": [
+    "Choice-weighted reputation is genuinely clever: `fade()` at every death means a reputation must be re-earned across generations, and the inherited-heirloom guard prevents a single early heirloom from silently locking every dynasty into the same motto. The mechanism is exactly right.",
+    "The `m_invest_name` card is a real cross-generational lever — a midlife means-sink with a 62% chance of a seat lift that fires in the transcripts (Cyrus Holloway, gen 4, uses it to lift to a grand estate). Weight 3, gated at seat 2–5, cooldown 14: the gate is wide enough to surface it in normal play.",
+    "Seat decline has three distinct pressure channels that stack correctly: `facedReckoning='fell'` (choice-driven, deterministic), the low-spirit/low-means roll (structural failure), and the new slow-decay path (peak minus end >= 40 and end < 35). A house living beyond its means now has a genuine path down.",
+    "The `a_make_thing` card with `remember('made_art')` creates a reliable artistic reputation path. Dynasty 5 (House Voss) earns the motto 'We leave something beautiful behind' — the only non-'kind' motto in the sample — confirming the artistic track actually crystallises.",
+    "Seat-7 entry conditions are coherent design: seat >= 6, single reputation >= 6, peakMeans >= 88, 35% chance, and it lapses back to 6 every generation that doesn't re-qualify. It is genuinely precarious rather than won-and-done.",
+    "Trait-gated cards (`t_bookish`, `t_guarded`, `t_restless`) and seat-gated cards (`s_great_burden`, `s_from_nothing`, `s_inheritance_dispute`, `s_patronage`) make the dynasty layer gate real content — being born into an established house or a broken one now surfaces qualitatively different moments.",
+    "The bequest mechanic (`e_bequest`) is the sharpest plannable agency the game has: the four options (mind/means/heart/free) each meaningfully shape the heir's starting state in `succeed()`, and the heir screen surfaces it plainly so a player can see what was passed down.",
+    "The `houseCharacter()` function exposes reputation state in legible prose at three thresholds (just gathering / becoming / settled) — a player can read where the family is heading without seeing a number.",
+    "The competing-goods cards (`x_honest_or_kind`, `x_loyalty_truth`, `x_dream_or_duty`) are the best writing in the system: both choices are virtuous, both log something honest about the cost, neither is cleanly right. These produce the most interesting transcript moments."
+  ],
+  "blockers": [
+    "Motto monoculture in practice: across 5 dynasties and 19 lives, three of four dynasties that reach a motto land on 'We take in what the world turns out.' (the 'kind' motto). The one exception is Dynasty 5's 'We leave something beautiful behind.' The reputational fade mechanism is correct in theory but the card set still produces disproportionately many 'kind' signals — `lived('kept_stray')`, `p.flags.legacy==='kind'`, `m.let_in`, `m.looked_up`, `m.kind_to_outcast`, `m.kind_to_outcast` from `a_neighbour`, `s_patronage`, and `s_from_nothing` all bump 'kind'. There are roughly 8 paths to 'kind', 3 to 'scholarly', 2 to 'artistic', 1 to 'pious', 1 to 'generous', 1 to 'reckless'. The design says 'distinct dynasties crystallise distinct mottos' but the actual distribution collapses toward one.",
+    "Seat-7 is theoretically available but functionally unreachable in normal play: it requires repute >= 6 on a single tag (meaning that tag must accumulate ~6 points across generations after fading), peakMeans >= 88, AND a 35% chance. The repute requirement alone demands ~8 generations of consistent reinforcement without drift. None of the 5 sample dynasties approaches it. The design comment says 'seat-7 made attainable through focused play' but the bar as coded is not attainably high — it is aspirationally high, which is different.",
+    "The `m_invest_name` lever fires only once in 19 lives (Cyrus Holloway). Weight 3 is reasonable but the gate (seat 2–5, means > 40, cooldown 14) can be outcompeted by other adult/midlife cards. More critically: the card does NOT update the readout or tell the player anything happened beyond a log line — `remember('built_the_name')` is logged but `houseCharacter()` is only shown at the heir screen, so a player choosing to invest has no in-moment feedback about whether the seat actually rose. The 38% failure case ('held the name where it stood') is also silent about the cause.",
+    "Plannable agency is shallow for mid-game play: the player can choose the bequest (once, at death), choose `m_invest_name` (if it surfaces), and choose `a_make_name` (once, adult). But within a life, there is no persistent strategic choice visible — you cannot 'plan to build reputation for scholarly this generation' because there is no interface to the reputation state except the heir screen after death. The game rewards reactive choices beautifully but proactive planning across a generation requires mental state-tracking with no in-game aid.",
+    "Fall-and-rise arc is present in the engine but not clearly readable in the transcripts. Dynasty 3 (Lindholm) falls from 'rented room' (gen 1) to 'nothing but a name' (gen 2), then slowly climbs to 'an old and famous house' by gen 5 — that IS a rise arc. But the fall is never dramatised; no transcript moment frames 'the house just fell a seat' as a narrative event. The reputation readout (`houseCharacter`) appears only at the heir screen. A dynasty in genuine decline has no in-moment signal of what is happening to it."
+  ],
+  "improvements": [
+    {
+      "what": "Rebalance reputation bump weights: cap 'kind' paths at 3–4 distinct sources (currently 8+), add 2–3 more 'scholarly', 'artistic', and 'reckless' sources at mid-career stages. The `a_make_name` card already steers directly — add a parallel `m_make_name` for midlife players who missed or refused the adult version.",
+      "why": "Breaks the de facto motto monoculture. With 8 kind-bump paths and ~3 for everything else, the fade mechanism is overwhelmed regardless of tuning. Reducing kind sources or adding competing paths is the only fix.",
+      "impact": "high"
+    },
+    {
+      "what": "Lower the seat-7 repute threshold from 6 to 3.5–4, or replace the hard repute >= 6 gate with 'repute >= 3 AND has held top repute for >= 3 consecutive generations' (trackable as a new `S.house.repStreaks` counter). Keep the 35% chance and peakMeans >= 88 gate.",
+      "why": "Seat-7 as described ('attainable through focused play') should be reachable in an 8–10 generation dynasty of consistent focused play. At repute >= 6 post-fade, it is effectively impossible in normal sessions. The consecutive-streak variant rewards consistency over grind.",
+      "impact": "high"
+    },
+    {
+      "what": "Show `houseCharacter()` in-play, not only at the heir screen. A natural place: append a one-line reputation gloss to the 'being' line or to the Chronicle's 'The Line' pane after any reputation-bumping choice fires. Even a single sentence ('The family is becoming known as open-handed.') after a key choice closes the feedback loop.",
+      "why": "Plannable agency requires visible state. Currently a player investing in the name via `m_invest_name` has no way to know whether it succeeded or what the house now reads as until the next heir screen. The feedback gap is the main reason 'dynasty stewardship' feels more like hoping than planning.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a narrative beat when the house falls a seat: when `updateHouse` produces a seat decrement, queue a log line on the next card draw (or as an ambient whisper) that names what happened — 'The family's standing has quietly slipped' or something equally understated. This uses the existing `logLine`/`ambientWhisper` infrastructure.",
+      "why": "Fall-and-rise is the most emotionally resonant dynasty arc, but it is currently invisible in the moment it happens. A family in decline is learning about it retroactively at the heir screen. A single quiet line mid-life would make the failure pressure legible and the eventual recovery meaningful.",
+      "impact": "med"
+    },
+    {
+      "what": "Add one 'artistic' reputation source in the youth or early-adult stage (before `a_make_thing` at 26–58) — for example, the `c_talent` card's 'Lean into it. Practise.' branch should call `remember('early_talent')` AND bump 'artistic' directly in `updateHouse` via `m.early_talent`. Currently `early_talent` is checked in `updateHouse` but the bump to 'artistic' requires both `m.early_talent` AND `m.made_art`. A single early choice should be enough to seed the track.",
+      "why": "The artistic path requires two independent cards to both fire and both be chosen in the 'art' direction — `c_talent` plus one of (`a_make_thing`, `e_garden`). That's a ~25% chance per life of both surfacing and being chosen. The scholarly path just needs `chose_study` OR `became_teacher` OR `set_scholar_rep` OR `child_books`. Equal probability requires equal path count.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A generationally coherent sim that now has the right structural bones — declining houses, legible succession, reputation that fades and must be re-earned — but falls short of 'distinct, plannable dynasties' because one reputation tag dominates the output, the feedback loop from choices to house state is invisible during play, and the pinnacle condition (seat-7) is aspirational rather than attainable."
+}

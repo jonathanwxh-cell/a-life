@@ -1,0 +1,35 @@
+{
+  "profile": "mobile_casual",
+  "score": 8.4,
+  "strengths": [
+    "All interactive controls meet the 44px touch target minimum — pause/play, music, menu, chronicle links, delete confirm, chronicle tabs all verified in CSS.",
+    "The pace pulse-dot (`.flow::before` breathing animation, faster amber in hurry, still when paused) gives a clear at-a-glance liveness signal without cluttering the screen.",
+    "Fast-forward by tapping the flow text is exactly the right gesture for a casual player who wants to race through a quiet stretch — discoverable because the text is a button.",
+    "Cold-start confirmation toast ('Continuing House X — 2nd of the line, age 34') means a player picking up mid-session always knows where they are within seconds.",
+    "Choice hints auto-reveal on touch devices (`@media (hover:none)`) so the secondary context appears without needing hover — the mobile player gets the full card.",
+    "The `viewport-fit=cover` + `safe-area-inset-bottom` footer padding handles notched phones cleanly.",
+    "The reflect button ('how things stand') has a visible border now, making it discoverable as a tappable affordance rather than bare text.",
+    "The save code textarea is 13px with `user-select:all` — one-tap copy works on mobile without fiddly drag-selection.",
+    "Ephemeral log entries with auto-fade keep the screen uncluttered between moments — important for one-handed reading.",
+    "The dynasty content tuning (epitaph anti-repetition, reputation rebalancing, motto crystallization) means a multi-generation run stays fresh, rewarding the player who comes back across short sessions."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add a subtle scroll-shadow or chevron at the bottom of the stage area when a 3-choice card overflows the viewport height.",
+      "why": "`.stage{overflow-y:auto}` handles it mechanically but gives no visual cue that content is cut off below the fold. A casual player on a short phone may not know to scroll and will miss a choice.",
+      "impact": "med"
+    },
+    {
+      "what": "Show the log-tap hint slightly earlier — after the very first choice rather than the second — and make it slightly brighter (class `hint` rather than `whisper`) so it competes with the ambient prose.",
+      "why": "The chronicle is one of the game's best features, but the log-tap onboarding hint arrives after 2 decisions, by which point a casual short-burst player may have already put the phone down.",
+      "impact": "low"
+    },
+    {
+      "what": "In the load menu, move the 'Sync & copy code' button above the slot list (or add a quick-copy icon to each slot row), so the backup flow is reachable without scrolling past all saved slots.",
+      "why": "On a short phone with 3+ saves, the backup textarea is below the fold even with the sticky dismiss. A casual player who wants to move to a new device may not find it in a quick session.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The mobile experience is genuinely solid — every touch target, liveness cue, and one-handed convenience feature from the last round is confirmed intact, and the dynasty content improvements make returning across short sessions more rewarding; no regressions, score holds at 8.4."
+}

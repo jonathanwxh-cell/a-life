@@ -1,0 +1,37 @@
+{
+  "profile": "critic_journalist",
+  "score": 8.5,
+  "strengths": [
+    "r_name_cost delivers exactly what was asked: the feared name costs something unrecoverable (door, match, a flinching young heir), the choice is binary-but-weighted, and both paths have meaningful stat signatures with no clean winner. The prose ('a young one in the house who has started to flinch at what they stand to inherit') makes the inheritance embodied and specific rather than abstract.",
+    "cb_the_cost is genuinely good callback writing. The which-string is persona-aware — it names the exact prior decision ('the life they took for themselves,' 'the dream they set down for the people who needed them') rather than gesturing vaguely. Two resolutions that don't moralize: 'mostly believed it' and 'made a kind of peace with that' are both honest about the limits of late reckoning.",
+    "The competing-goods grammar holds across the full deck. x_honest_or_kind, x_loyalty_truth, x_dream_or_duty all have hint text that declines to declare a winner, which is the only correct design choice. The three-layer callback chain (early choice → mid echo via cb_corner / cb_lookaway / cb_principle → elder reckoning via cb_the_cost) is structurally sound and confirmed working in the transcripts.",
+    "Prose voice is exceptionally consistent. The characteristic moves — em-dash pause, short declarative close, 'and' as weight-bearer not mere connector, compression of emotional shift into one clause — hold from c_book to e_last_walk without visible seams. 'the seconds of it lasted years,' 'was aware, with a cold clarity, of everything it now made possible to lose,' 'let it stay exactly as unsettled as it had always been' are the kind of lines that justify the literary ambition.",
+    "Motto diversity is real. Eight mottos, each with a distinct register: 'We do not ask twice' (menacing brevity), 'We burn bright, and we burn' (self-aware recklessness), 'What the mind holds cannot be taken' (quiet scholarly pride). None is generic. Dynasty 3 / Reyes confirms the full five-generation earned arc displays correctly.",
+    "Epitaph system's anti-repetition logic (blocked(), pr() rotation, cluster tracking) prevents the chronicle from flattening. Dynasty 5 shows four different epitaph clusters across five lives despite significant thematic overlap in the play. This is a real design achievement for a game played across many generations.",
+    "Callback depth in the transcripts is verified at three levels within a single life (Otto Calloway: c_friend → cb_lookaway → cb_principle, all coherent). The system is not just scaffolding — it's alive in actual play."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Extend r_name_cost's echo across the succession line. When the heir is born into a house with the hardname heirloom and the parent's generation left 'cut_a_corner' from r_name_cost, add a birth-context line naming this specifically — something like 'The name that opens doors by being feared is yours now, though the last generation paid the first price for keeping it.' Currently the heirloom reactivates r_hard_name and r_name_cost as fresh situations rather than as inherited consequences.",
+      "why": "The ruthless moral loop closes within one life but not across the succession boundary. A player who chose 'Let them fear it. It works.' at 55 hands the heir a heirloom with no narrative memory of the cost that was weighed. The loop you built deserves to be visible at generation-start, not just at midlife.",
+      "impact": "med"
+    },
+    {
+      "what": "Add r_name_cost's memory flags to cb_the_cost's condition. Currently cb_the_cost fires only on chose_self / chose_others / chose_loyalty / a_kind_silence. A player who spent their life on the ruthless path and chose 'Let them fear it. It works.' at r_name_cost never gets cb_the_cost at elder — the elder reckoning skips the defining choice of that life. Add held('cut_a_corner') from r_name_cost, or add a separate memory flag like 'kept_the_name' to the 'Let them fear it' branch and gate cb_the_cost on it.",
+      "why": "The whole point of cb_the_cost is that it reads back the one choice with a cost never quite finished paying. The ruthless path is arguably the card where that cost is richest — the elder who chose fear over warmth and watched the young one flinch should be exactly who faces this reckoning. As written, they escape it entirely.",
+      "impact": "high"
+    },
+    {
+      "what": "Reconsider r_old_shame's second choice stat signature. 'Let it cost you. Walk away' gives spirit:-5, means:+2 with a loss-tone logLine. The spirit penalty reads as pure defeat rather than complicated dignity — a player absorbing shame rather than fighting it is making a different kind of moral choice that shouldn't register as strictly worse than refusing to flinch.",
+      "why": "The card sits in the shadow-archetype section where both paths should carry weight. The current asymmetry (face it: spirit:+6, means:-4, heart:-2 vs. walk away: spirit:-5, means:+2) makes 'walk away' feel like failure rather than a different form of integrity. A rebalance to something like spirit:-2, heart:+3 with an obs-tone logLine would keep the cost while giving the path its own dignity.",
+      "impact": "low"
+    },
+    {
+      "what": "Add one age-observation line in the midlife/elder band that's specific to a ruthless or hard-dealing house — the equivalent of 'Books have become a country he can live in' but for someone whose family name has weight and fear behind it. The floating observation lines are mostly warm or melancholy; a hard-dealing elder deserves a different tenor of self-reflection.",
+      "why": "The ambient observation lines (the ones that appear without choices) don't vary by reputation or house character. A player who built a feared name experiences the same aging cadences as someone who gave everything away. One or two character-specific observations would make the ruthless path feel inhabited rather than merely mechanically different.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The round-7 fix lands correctly — r_name_cost closes the ruthless moral loop with specificity and weight, the competing-goods grammar is now the strongest structural feature in the deck, and the prose voice remains the most consistently excellent thing in the game; the one real gap is that cb_the_cost still can't reach the player who chose 'Let them fear it,' leaving the elder reckoning blind to the life that most needs it."
+}

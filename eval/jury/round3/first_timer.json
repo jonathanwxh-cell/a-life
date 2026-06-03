@@ -1,0 +1,42 @@
+{
+  "profile": "first_timer",
+  "score": 7.5,
+  "strengths": [
+    "The writing is consistently excellent — every moment in the transcripts lands with quiet weight, and the binary choices feel real rather than gamey ('Tell the truth. They deserve it.' vs 'Spare them.'). A newcomer feels the stakes immediately.",
+    "The heir identity line ('You are no longer Ottilie. You are Junia, her daughter — born into the world she left behind.') is now explicit and clear; succession is no longer a confusing hard cut.",
+    "The mechanic text on the title now says 'a choice between two paths, and it cannot be undone' — the permanence is front-and-centre, which correctly frames the emotional register before play starts.",
+    "The pulse dot on the pace text ('the years are passing') is a genuinely good liveness signal — it shows a first-timer that something is actively happening, not that the game is broken.",
+    "Hint duration at 13s is long enough to actually read; the seenChron hint triggering a beckon animation on the constellation link is a smart way to direct the eye without interrupting play.",
+    "The log tappability hint fires correctly and the beckon glow on the log is a useful affordance cue.",
+    "The constellation and chronicle are genuinely rewarding once found — star strands, chosen vs road-not-taken distinction, ancestor bios. For a curious newcomer who discovers them these are high-value.",
+    "Heirlooms, epitaphs, and the motto system give the dynasty tangible shape — by gen 3 in the Lindqvist transcript, the inherited 'soft spot for strays' already feels like family character."
+  ],
+  "blockers": [
+    "The dynasty hook ('.lead' paragraph) is not reliably visible in the title screen layout. The screenshot confirms: the art overlay occupies the top portion, the tagline sits below it, and then 'Years pass on their own... Nothing can be undone.' appears — but the lead paragraph ('Each life hands the next its name...') is not visible above the rule. Whether due to art height, sheet compression, or a viewport edge case, a first-timer on a real device may never read the one sentence that explains why dynasty matters. The fix is in the HTML but does not reliably surface.",
+    "The long idle gap between moments remains unexplained to a newcomer who has already dismissed the intro hint. The hint fires once at 1.6s after starting, then fades after 13s. If a player pauses and returns 10 minutes later, or if they hit a quiet stretch from age 30 to 55 with no moments, there is no repeated signal that waiting is the game. The first-timer blockers from round 2 on the 'ambiguous waiting gap' are partially addressed but not closed.",
+    "The Chronicle and Constellation in-game links are still low-discoverability for a newcomer who ignores the hint. 'the chronicle ↗' is rendered at 9.5px in var(--ink-faint) at opacity 0.8 — that is genuinely difficult to read, and it sits in the top-right corner where a first-timer's eye is not naturally drawn. A player who dismisses or misses the seenChron hint has no second chance to discover the Chronicle until they already know to look."
+  ],
+  "improvements": [
+    {
+      "what": "Move the dynasty lead text above the art area, or ensure it is visible by making the art panel shorter (e.g. cap veil-art height at 35vh) on the title screen so the lead paragraph is always in the visible sheet area without scrolling.",
+      "why": "The dynasty hook is the entire emotional reason to keep playing past one life. If it is not seen on the title, a first-timer has no frame for why the heir matters — which is the exact blocker from round 2.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a second ambient hint after ~10 minutes of play (or after age 40 passes with no decision), gated by a separate localStorage key, reminding the player that quiet years are normal: 'Long stretches with no moment to face are part of the life. The years are still passing.'",
+      "why": "The single intro hint fades in 13s and is not repeated. A confused player who returns after a pause has no signal that the wait is intentional. This closes the 'ambiguous waiting gap' blocker without cluttering the first-timer experience.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the chronicle link font-size to at least 11px and opacity to 1.0 (or near it), or give it a subtle amber underline on first play so it reads as a link rather than a label.",
+      "why": "'the chronicle ↗' at 9.5px and 80% opacity is nearly invisible at arm's length on mobile. It is one of the three elements the first-timer profile found hardest to discover last round. The constellation link at 0.9 opacity is readable; the chronicle link should match it.",
+      "impact": "med"
+    },
+    {
+      "what": "On the heir screen, after the identity line, add one sentence summarising what was inherited in plain terms before the player hits 'Live this life' — e.g., 'Junia inherits the family's modest means, a warm name in the neighbourhood, and a soft spot for animals.' Currently this exists as the dim heirInherit paragraph but the inheritance framing is dense. A first-timer needs one punchy line that says 'this matters, and it came from you.'",
+      "why": "The continuity between lives is the game's core mechanic and emotional hook. A first-timer who breezes through the heir screen without reading the inheritance paragraph misses the chain.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine literary quality and the round-3 fixes show real care — the heir identity line and the liveness dot are solid improvements — but the dynasty hook remains unreliably visible on the title screen, the waiting gap is only partially addressed, and the Chronicle link is still too dim to discover without a hint, which means a first-timer can still leave before understanding what kind of game they are playing."
+}

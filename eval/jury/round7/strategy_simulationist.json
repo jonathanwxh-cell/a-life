@@ -1,0 +1,42 @@
+{
+  "profile": "strategy_simulationist",
+  "score": 7.8,
+  "strengths": [
+    "Reputation trajectory now has four legible tiers ('is still only beginning to hold' / 'has real weight behind it now' / 'has lasted' / 'is deep enough now to be written into the histories'), firing for seats 5-6 where the final push happens — a genuine planning signal, not just a goal statement.",
+    "Seat-6 now tells you explicitly whether THIS life's fortune clears the peakMeans bar ('This life's fortune has reached that height' vs. 'has not yet reached that height'), turning the opaque pinnacle gate into a readable check-box.",
+    "The seat-investment lever (m_invest_name) is named in the 'how things stand' readout with its mechanics described ('a patronage, a marriage well made, a public work with the name on it — to lift the standing directly'), so the player can plan around it.",
+    "Rise/fall narration fires in the life that caused the change, not just at the heir screen — the dynasty moves in real time rather than as a post-mortem discovery.",
+    "Motto milestone announced with logLine in the life that earns it — a satisfying crystallization moment, not a silent background event.",
+    "Seat-7 threshold eased (peakMeans 82→76) alongside the repPeak high-water mechanic, which preserves reputation progress across fade — trajectory is rewarded even if a generation builds then declines.",
+    "Bequest system is clearly stated at the heir screen with named mechanic lines — the generational lever is explicit.",
+    "Reckoning outcomes feed directly into seat movement (facedReckoning='fell' costs a seat) and are narrated — earned failure has weight."
+  ],
+  "blockers": [
+    "The reputation trajectory block in houseCharacter only fires when the leading reputation is v0 >= 1.2, so a player at seat 5 or 6 who is early in building a reputation (v0 = 0.5-1.1) gets no trajectory signal at all — exactly the state where a strategist most needs to know 'is this line worth pursuing?' There is a hard silence where there should be a low-tier indicator ('the name has barely begun to settle').",
+    "No specific seat-5 → seat-6 requirement is spelled out in the 'how things stand' panel. At seat 5 the player sees a generic description ('The house rises on a life that ends far richer than it began, or on a name made strong for one thing'). The actual mechanics (peakMeans>=80 for a reliable climb, or repTop>=2.0 + seat<5 for reputation-driven lift) are invisible. A strategist planning a 3-generation push cannot calibrate the difficulty of the seat-5 → seat-6 step the way they can for seat-6 → seat-7.",
+    "The openStock hint says 'to lift the standing directly' for m_invest_name but the card has a 38% chance of no lift. 'Directly' implies certainty — the readout should say something like 'to push the standing' or note the odds, so the player doesn't rely on it as a guaranteed lever when planning a multi-life arc."
+  ],
+  "improvements": [
+    {
+      "what": "Extend the houseCharacter trajectory block to fire even when v0 < 1.2, with a zeroth tier: 'has barely begun to settle — it needs several more lives of the same before the histories would notice it'.",
+      "why": "A player at seat 5 or 6 with a fresh reputation gets total silence where they most need a planning signal. This tier makes the pre-1.2 zone legible without adding numbers.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a seat-5 specific requirement sentence to openStock's dir variable: something like 'From here, the house rises on an heir whose fortune reaches a high peak — or on a reputation that has settled into the family's character over several lives.'",
+      "why": "Right now seat-5 → seat-6 is the only step with no stated requirements. Seat 6 → seat-7 is fully specified. Seat 0-4 have a generic description. Seat 5 is a void.",
+      "impact": "high"
+    },
+    {
+      "what": "Change 'to lift the standing directly' in the m_invest_name openStock hint to 'to push the standing up — it doesn't always hold, but it tilts the odds'. Alternatively, change the card itself to guarantee a lift and reduce the magnitude, so the stated certainty is real.",
+      "why": "Strategy players plan around stated mechanics. 'Directly' implies guaranteed effect; 38% failure undermines a carefully laid plan and feels like false information from the readout, not a meaningful gamble.",
+      "impact": "med"
+    },
+    {
+      "what": "Fix the stale comment in dynasty.js lines 163-168 to reflect the actual seat-7 gate values: repPeak >= 3.5 (not repute >= 5) and peakMeans >= 76 (not >= 86). Minor developer hygiene but confusing if the code is read.",
+      "why": "The comment says the wrong numbers. A player or contributor reading the source to understand the system will plan against a harder gate than exists.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 7 substantially closes the seat-7 blindness: trajectory is now readable, the peakMeans gate is explicit, the invest lever is named, and the pinnacle requirement is stated — but a thin-reputation player at seats 5-6 still hits a dead zone of silence, and the seat-5 → seat-6 step has no stated requirements, leaving one full rung of the climb without a planning scaffold."
+}

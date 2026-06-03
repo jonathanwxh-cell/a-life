@@ -1,0 +1,36 @@
+{
+  "profile": "strategy_simulationist",
+  "score": 7.5,
+  "strengths": [
+    "The seat-6 readout in openStock now names all three requirements for seat-7 explicitly ('keep this seat, hold one reputation strong across many lives, and raise an heir to the very height of their means') — the false ceiling is gone and the gate is legible.",
+    "houseCharacter correctly fires a forward signal at seat 5-6 with repute>=1.2: 'Held this strong across more lives, and the house raised higher still, such a name could one day be written into the histories.' This appears on the heir screen and in the readout — the player sees it during the climb, not only at the top.",
+    "The repPeak high-water mark correctly rewards a line that built strong reputation even if it has since softened — a player who runs a focused scholarly or kind house across four generations now accumulates the credit their play deserves, not just the post-fade residue.",
+    "The m_invest_name card (spend means to lift seat directly) exists and is gated to the right window (seat 2-5, midlife, means>40); the readout hints at it ('there may be a way, now, to spend the means in hand deliberately on the family's standing') when conditions align.",
+    "The bequest mechanic (mind/means/heart/free) is fully wired and named in the heir screen — the one inter-generational lever the player controls is visible and its effects stated plainly.",
+    "The reckoning card and the fall/rise narration ('the family climbed / slipped this generation') fire in the moment at death, not only on the heir screen — a systems player can read cause-and-effect in real time.",
+    "The constellation and chronicle give a full decision audit trail: every choice, every road not taken, every epitaph. Replaying a dynasty is genuinely legible."
+  ],
+  "blockers": [
+    "The repPeak trajectory is invisible. The readout names 'hold one reputation strong across many lives' but never tells you where you stand on the way to 3.5 — a player who is at 2.1 and thinks they are close is flying blind. Even a prose tier ('barely begun' / 'building' / 'nearly there') would let a strategist plan across generations rather than guess.",
+    "The peakMeans threshold for seat-7 (82 in the code) does not map to any readable tier in lifeReadout — 'the means are ample' and 'deep and closely watched' bracket the 86/92 thresholds used for seat rises, so the player cannot tell whether this life will clear the 82 bar. The readout says 'raise an heir to the very height of their means' but 'the very height' is undefined in felt terms.",
+    "m_invest_name is not named in the readout, only hinted. The hint ('there may be a way, now, to spend the means deliberately on the family's standing') tells the player something is possible but not what to look for. A strategy player will spend multiple lives not knowing this card exists by name."
+  ],
+  "improvements": [
+    {
+      "what": "Add a prose-tier repPeak signal to houseCharacter or the openStock readout — e.g., 'The name is beginning to hold' (repPeak < 1.5), 'The name has weight behind it' (1.5-2.5), 'The name has lasted' (2.5-3.5), 'The name is deep enough to write into the histories' (>=3.5). No numbers needed — just enough to plan.",
+      "why": "Without this, a player chasing seat-7 cannot assess whether they are one generation away or five. The fix to repPeak made it reachable; this fix makes it plannable.",
+      "impact": "high"
+    },
+    {
+      "what": "Name m_invest_name in the seat-2-to-5 hint in openStock — e.g., 'A life that spends deliberately on patronage, a marriage well made, or a public work can lift the seat directly.' This is the card text; mirroring it in the readout closes the loop.",
+      "why": "The card is the primary active lever for raising the seat through choice rather than waiting for wealth events. A strategy player who doesn't know to look for it cannot plan around it.",
+      "impact": "med"
+    },
+    {
+      "what": "Add one prose sentence to the seat-6 direction in openStock that conveys whether the current life's means are 'at the very height' — e.g., 'This life's fortune has reached the height needed' or 'The means are not yet at the height the historians require.' The means tier is already computed; it just needs to be cross-referenced to the seat-7 bar.",
+      "why": "The requirement 'raise an heir to the very height of their means' is named but not checkable during play. A player cannot know mid-life whether they should double down on means or pivot to reputation.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Round 6 fixed the three concrete blockers it targeted — the false ceiling is gone, the forward signal fires during the climb, and repPeak makes the pinnacle genuinely reachable — but the trajectory toward seat-7 remains opaque enough that a systems strategist still cannot plan the final push, only aim at it and hope."
+}

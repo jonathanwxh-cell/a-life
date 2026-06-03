@@ -1,0 +1,48 @@
+{
+  "profile": "systems_designer",
+  "score": 7.5,
+  "strengths": [
+    "The feedback loop between choices and dynasty identity is genuinely tight: `remember()` keys set in one life gate `cb_*` cards in the next, `updateHouse()` reads those keys to drift `repute{}`, and `repute{}` gates both a crystallized motto and seat-gated/repute-gated content. The chain is coherent end-to-end — a life of unconfessed affairs writes `tainted`, which later unlocks `r_family_shadow`, which makes the next generation live inside the shadow of what a prior ancestor did. That is real systemic consequence.",
+    "The `e_bequest` card is the best player lever in the game: four meaningfully different inheritances (mind/means/heart/free) that land in the heir as distinct starting conditions with prose that names the donor. It is one decision that actually teaches you how inheritance works before you make it — and the transcripts show players using it deliberately (Lena gives means, Junia gives mind, Tomas gives heart in Gen 5 Salvedi). The cross-generational agency it creates is the clearest design win.",
+    "The `x_reckoning` card is well-designed: it only fires at seat≥3, cannot repeat within 26 years, and its outcome writes `facedReckoning` which `updateHouse` reads to drop a seat on failure. A house can visibly fall from a choice, not just from bad luck — that is earned downward pressure, not noise.",
+    "Seat-gated content (`s_inheritance_dispute` at seat≥4, `s_patronage` at seat≥5, `s_great_burden` at seat≥5, `s_from_nothing` at seat≤1) means the game you play is genuinely different depending on where the dynasty sits. Dynasties 4 (Calloway) shows `s_inheritance_dispute` firing at seat 4 — this is the system working.",
+    "The inherited-heirloom guard in `updateHouse` — `const lived = k => m[k] && !m[k].inherited` — is an elegant fix to a real collapse: without it every house converges on 'kind' because the stray heirloom is injected into every heir. With it, reputation must be re-earned, not merely carried. The transcripts confirm this works: Salvedi becomes 'ruthless' (motto: 'We do not ask twice') across 5 generations through deliberate `cut_a_corner`/`chose_self_over_house` choices, while Calloway becomes 'kind' through repeated `kept_stray` and kindness choices.",
+    "Trait-gated cards (`t_bookish`, `t_guarded`, `t_restless`) give inherited nature a gameplay expression beyond passive stat drift. `t_guarded` in particular creates a moment that only a guarded person faces — the one question their walls are built against. Caleb Calloway (guarded, bright) getting `t_guarded` at 33 and keeping the wall is a small but real identity beat.",
+    "The `a_make_name` card is an honest reputation-steering lever: three paths that directly write `chose_study`/`cut_a_corner`/`kind_to_outcast` into memory, which `updateHouse` uses. Roman Salvedi and Theda Salvedi both pick 'hard to cross' two generations apart — the motto 'We do not ask twice' is legibly theirs, earned through choices.",
+    "Death feedback is honest: `deathRoll` includes a vitality-modulated baseline so the 'frail' trait is a real mortality risk, and `p.flags.peril` (set by reckless choices) multiplies death odds for N years. The engine is transparent enough that a player who understands the hidden model can plan around it."
+  ],
+  "blockers": [
+    "The seat economy is too easy to hold and too hard to fall from. In practice the transcripts show 5 of 5 dynasties at 'comfortable household' or above by generation 3, with the primary floor being the seatFloor in `succeed()` — a seat-3 house gives 26 as an inherit floor, which virtually guarantees the heir never falls below comfortable. The `x_reckoning` downward pressure (`facedReckoning='fell'` drops one seat) cannot recur in the same life, and the only other meaningful fall requires `endMeans < 14` — extremely rare given compound inheritance. The result: rising is more likely than falling, and once a dynasty reaches seat 4–5 it stays there unless a player actively ignores wealth. This undermines the 'precarious dynasty' tension the design aspires to.",
+    "The reputation system lacks enough distinct input channels to produce legible, non-obvious mottos. Of the 9 reputation tags, 4 have reliable natural inputs: `scholarly` (chose_study), `kind` (kind_to_outcast/kept_stray/legacy='kind'), `ruthless` (cut_a_corner/chose_self), `generous` (kind_to_outcast). The remaining 5 — `tainted`, `artistic`, `pious`, `industrious`, `reckless` — depend on memories that are much rarer or easy to miss across a generation. In the transcripts, `tainted` and `artistic` never emerge. `reckless` only appears if a life chooses peril-setting cards. A player who wants to steer toward 'artistic' or 'pious' has almost no reliable path. The system is narrower than it looks.",
+    "Callback cards (`cb_*`) currently rely on the same `remember()` keys that dynasty reputation does — so the `chose_study` path that unlocks `cb_study_pays` also bumps `scholarly`. There is no tension between a choice that's good for THIS life versus good for the house. A player who wants to steer the dynasty toward scholarly reputation just... also gets a midlife windfall via `cb_study_pays`. The systems are too aligned; they should occasionally conflict.",
+    "The `m_invest_name` card (the direct seat-lift lever) has only a 60% chance of actually lifting the seat and costs -18 means and -3 spirit and -2 vit — a very high personal cost for a non-guaranteed outcome. Because most dynasties reach high seats through compound wealth anyway, this card is rarely the decisive move, which weakens the fantasy of a life deliberately sacrificing itself to lift the name. In the 5 transcripts it doesn't appear once, suggesting the cond (seat 2–5, means > 48) either didn't coincide or the card was crowded out."
+  ],
+  "improvements": [
+    {
+      "what": "Add a 'slow decay' to the seatFloor in succeed(): if the house is declining (endMeans < peakMeans by a large margin, or if the reckoning was failed), apply a 10–20% reduction to the seatFloor passed to the heir.",
+      "why": "Currently the seat floor guarantees a stabilizing inheritance even for dynasties in freefall. Tying the floor to how well the prior life actually maintained wealth makes decline feel earned rather than mechanically blocked.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2–3 cards that write `early_talent`/`made_art` reliably (e.g. an adult card gated on `early_talent` that explicitly branches toward artistic output), so `artistic` reputation can be intentionally cultivated across generations.",
+      "why": "Currently `artistic` and `pious` are effectively dead reputation tags in practice because the memory inputs are sparse. A player who wants a creative dynasty should have a coherent path, the same way 'scholarly' has study→books→cb_study_pays as a legible arc.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce at least one card where the choice that advances dynasty reputation conflicts with a personal stat gain — e.g. the `s_patronage` card currently gives +heart +spirit, but lifting the scholarly or kind reputation should occasionally cost means or vit so there is genuine sacrifice in building the family name.",
+      "why": "When systems align perfectly (reputation-building is also personally beneficial), dynasty planning collapses into 'just play well'. Introducing at least one tension point makes the question 'do I spend this life for the house?' meaningful.",
+      "impact": "med"
+    },
+    {
+      "what": "Make `m_invest_name` fire more reliably by splitting its condition into two cards: one cheaper version (means > 35) that has a 50% seat-lift chance, and the current expensive version (means > 55) that has an 80% chance. This gives players at different wealth levels a real seat-investment decision.",
+      "why": "As designed, the card never appears in any of the 5 transcripts. Its window is too narrow — a player at seat 2–5 with means > 48 in midlife usually has other pressing cards competing. Making it accessible earlier gives the 'sacrifice yourself for the name' fantasy a real gameplay slot.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a `x_reckoning` variant that can fire on seat ≥ 2 (not just ≥ 3) with lower stakes — a smaller test that doesn't cost a seat but costs spirit/means — so early-dynasty players experience the pressure of being tested before they have deep reserves.",
+      "why": "Currently a dynasty doesn't face real reckoning pressure until it has already climbed to 'comfortable household', which is usually safe enough to weather it. Earlier, smaller reckonings would make the climb itself feel contested.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The generational systems are architecturally sound and produce genuinely distinct dynasties in the transcripts — Salvedi's 'hard-dealing' trajectory is legible and earned, Calloway's slow rise to 'kind' reads like a coherent family character — but the seat economy is too cushioned against decline and the reputation palette has too many dead tags to reach the level of 'plannable dynasty' the design is capable of."
+}

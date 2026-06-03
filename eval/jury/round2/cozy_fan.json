@@ -1,0 +1,37 @@
+{
+  "profile": "cozy_fan",
+  "score": 8.3,
+  "strengths": [
+    "The ambient whisper lines ('A year goes by that no one will remember, and it is a good one.', 'The season turns over, quietly, and turns again.') fill exactly the long silences that a cozy game needs — they are weather, not pressure, and they reset the mood between moments perfectly.",
+    "No stress loop and no punishment framing: the reckoning card ALWAYS keeps the house standing if you choose to face it head-on (only preparedness changes the cost), and an early death is rendered as 'a short life — and, taken on its own terms, a whole one.' These two fixes together mean a cozy player never feels ambushed or penalised.",
+    "The sky arc (dawn to night across one lifespan) and procedural tree give an almost wordless atmosphere layer that never demands attention but rewards it — the gold-afternoon palette at midlife and the dusk-to-dark at elder are genuinely beautiful.",
+    "The writing quality is consistently high and varied. Reading back across three dynasties of transcripts, the log lines have real texture: 'Never quite poor, never quite free.' / 'The years that followed were the speech.' The prose never oversells or moralises.",
+    "The bequest system is one of the game's best cozy hooks: choosing what to leave ('The stories, and the warmth' vs. 'Every coin I can spare') is a low-stakes, meaningful gesture that makes each succession feel like closing a chapter rather than ending a run.",
+    "Opt-in music at subdued volume (MAX_VOL 0.42), off by default, with four context-aware pieces, is exactly the right stance — it never colonises the mood.",
+    "Callback cards (the outcast child returning grown, the book on the high shelf, the unspoken love resurfacing) make the cozy loop feel accumulative rather than episodic — there is genuine payoff to early choices, which is exactly what the genre promises."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add 4–6 purely observational 'elder-to-child warmth' ambient whispers for the late-life stage — something like 'The grandchildren are loud in the next room, and the sound is entirely fine.' or 'A window is open somewhere in the house.' The current elder-ambient pool has only 3 lines vs. 6 in 'any', so it cycles noticeably on long elder stages.",
+      "why": "The late game is where a cozy player most wants to settle in; the thin pool slightly underserves that peak moment.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the fast-forward tap (fastFwd mode) a gentle on-screen cue — even just a brief '>>' fade — so new players discover it exists without stumbling on it accidentally and wondering why the years suddenly blurred.",
+      "why": "The quiet years are pleasant, but very patient players who want to sink into the atmosphere at full ~2s/year sometimes never find the accelerator; the mode is invisible until discovered by accident.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface one sentence of the dynasty's running motto in the main play view (not only in the Chronicle) once it crystallises — perhaps in the header or below the 'being' line, faded, small. Something like 'House Ashby · \"We leave something beautiful behind.\"'",
+      "why": "The motto is the game's most satisfying narrative payoff for long play, but it currently hides behind a tap — a cozy player who hasn't yet explored the Chronicle tab may never notice it exists.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2–3 choice-free 'joy' log lines for the birth stage (age 0–4) when traits are strong — e.g. a 'warm' child who just inherited should get a brief ambient note before the first card rather than silence. Currently there is a 4–6 year gap at the very start of each heir's life with only the 'came into the world' birth line.",
+      "why": "The succession moment is emotionally charged; a brief warm observation right after arriving into the new life would round out the cozy handoff feeling.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life earns a genuine return visit: the writing is careful, the silences are earned rather than empty, and the recent fixes (reckoning always holds the house, early death framed as complete, ambient whispers in the quiet years) solve the two things that most threatened the cozy promise — this is the rare browser game I would actually leave open on a slow afternoon."
+}

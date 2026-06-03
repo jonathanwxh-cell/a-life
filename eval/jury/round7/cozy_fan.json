@@ -1,0 +1,32 @@
+{
+  "profile": "cozy_fan",
+  "score": 9.2,
+  "strengths": [
+    "The motto crystallization is now exactly the quiet ceremony I wanted: a 'joy'-tagged log line — 'The family's character has settled, at last, into words: \"...\"' — appears in the life that earned it, visible before the eulogy, so the milestone lands in the moment rather than being discovered retroactively on the heir screen.",
+    "The writing throughout the log and cards is consistently literary without being pretentious: 'Learned early that love is divided, and counted his share.' / 'Kept the town perfect and unvisited.' — the prose holds its weight across 80+ years of a life.",
+    "The sky arc (dawn-to-night across a full lifespan) and the procedural growing tree are among the most genuinely meditative UI decisions I've seen in this genre — atmosphere that earns its place without demanding attention.",
+    "The callback card system (the book from childhood surfacing at midlife, the outcast child returning grown) creates genuine emotional resonance without any visible mechanics — the player just feels their past.",
+    "The opt-in music design (off by default, 0.42 volume cap, four contextually-switching pieces) respects the reading game's nature perfectly — it never competes with the text.",
+    "The seat-7 easing (peakMeans >= 76 down from a harder threshold, repPeak tracked as high-water mark) makes the pinnacle feel reachable-but-rare over a focused run rather than impractical, which improves the dynasty arc's pacing.",
+    "The 'houseCharacter' prose trajectory for reputation now gives a readable sense of how far a name has come, with distinct tiers ('only just beginning to gather' / 'lasted — a little more of the same' / 'deep enough now to be written into the histories') — lets the player feel momentum without numbers."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add 2-3 gentle 'slow moment' cards for the long adult stretch (ages 30-44) that have no stakes — no stat effect, no choice consequence — just a small observed thing: a morning light through a window, a conversation overheard. Single-choice 'Notice it.' cards that only log a quiet line.",
+      "why": "The adult stage is the longest and densest with consequential choices (work, marriage, child, affair). For cozy players, a few breath-moments of pure observation would deepen the meditative quality and reduce the sense that every card is a dilemma.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the motto one beat earlier if possible — as the PENULTIMATE log line of a life rather than the very last (currently it fires in updateHouse just before the seat-change note, so it sometimes reads below a seat-change on the same tick). Give the motto its own line without a seat-change competing immediately after.",
+      "why": "In Dynasty 4 (Cyrus, age 85), the motto line is immediately followed by 'The family climbed in the world this generation...' on the same tick. The ceremony is real but slightly crowded. The motto deserves one beat of silence.",
+      "impact": "low"
+    },
+    {
+      "what": "Consider a 'linger' option at the eulogy — a small button or secondary text panel showing just the log of the life that just ended, scrollable, before pressing 'Become [heir]'. Currently the eulogy shows epitaph + survivors but not the full life log.",
+      "why": "Cozy players want to sit with a completed life. The transcript shows beautiful log lines but they scroll past during play. A moment of 'read the whole life' before succession would feel ceremonial and honor the meditative intent.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "The motto crystallization — that quiet named ceremony in the log — was the one thing missing; it's here now and it's right, and the rest of the dynasty tuning (readable pinnacle trajectory, eased seat-7) serves the genre without adding friction."
+}

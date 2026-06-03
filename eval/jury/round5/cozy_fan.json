@@ -1,0 +1,33 @@
+{
+  "profile": "cozy_fan",
+  "score": 9.0,
+  "strengths": [
+    "The writing is the game — and it holds up across 15 lives and 5 dynasties without feeling thin. Prose like 'The end of the month keeps arriving before the money does' and 'Books have become a country she can live in' land as quiet observations, never as game-text filler.",
+    "Motto diversity is genuinely earned now: transcripts show 'What the mind holds cannot be taken.' (scholarly) and 'By our own hands.' (industrious) emerging from different actual play patterns; the reputation system — especially the guard that stops inherited memories from silently reinforcing kind — means the house's character is the player's own, not the engine's default.",
+    "The callback system is the soul of the cozy loop. Tamsin at 31 getting a hand up because she sat beside a lonely child at 7, or Esme at 59 finally reading the family's too-hard book, gives the steady accumulation of small choices the kind of payoff a cozy game lives or dies on. These fire reliably and feel like reunions.",
+    "The sky-as-lifespan is a perfect cozy metaphor: dawn at birth, dusk in elderhood, night at death. The tree growing from sapling to canopy to bare is gentle and readable without ever demanding attention. Atmosphere serves, never competes.",
+    "Opt-in music with four distinct cues (theme/living/ending/heir) handled with proper fade and pause-on-hide is exactly the right cozy approach — never intrusive, remembered across sessions, layered as an optional extra rather than baked expectation.",
+    "Observation lines between choices ('She has kept, against most of the evidence, a stubborn appetite for the days'; 'The stairs have started to ask a question of her') give each life a texture of quiet noticing that is the meditative promise of the design fulfilled.",
+    "The competing-goods cards (honest-or-kind, loyalty-or-truth, dream-or-duty) and their elder echo (cb_the_cost) are genuinely good. Neither option reads as wrong, both choices feel like real lives, and the loop-back at the end — 'let it stay unsettled' vs. 'decide it was right' — is the most emotionally honest thing in the game.",
+    "Dynasty 3/Bram dying at 16 'before the story had found its middle' shows the system has real stakes: lines can end, heirs can die young, the calm can be punctured by genuine loss without the game feeling cruel."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add 1-2 more passive observation lines per life-stage that fire during quiet stretches — no choice, just a one-line note in the log that ages with the character",
+      "why": "The existing ones ('There is a whole life he keeps behind the eyes, and visits often'; 'Getting up has become the first real work of every day') are the most purely meditative moments in the game. There are about 8 of them total and they feel sparse in a 70-year life. A few more — tied loosely to stats or season — would deepen the sense that time is actually passing between choices.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the 'no heir' ending path a short grace note in the log — a line acknowledging the line's end — before the 'begin anew' prompt",
+      "why": "Dynasty 3 (Bram dying at 16, line ends) goes straight to the successor prompt. For a cozy player who has tended a line, the extinction event deserves a beat of quiet. One line like 'The name had run its course. Somewhere, another life was beginning.' would close the loop elegantly.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the constellation link slightly more visibly during play, not just at the eulogy — perhaps a soft pulse on the star icon after each choice",
+      "why": "The Constellation is the single most cozy-adjacent feature (a star-map of a whole bloodline is exactly what this audience loves), but players who don't know to look for it after a few choices may not discover it until they've already played several lives. A subtle affordance mid-life rather than only at death would let it function as the cozy 'collection screen' it architecturally is.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life delivers on its meditative promise: the writing is careful, the dynasty accumulation is meaningful without numbers, the callbacks reward patience, and the round-5 changes — softer reputation fade, lower motto threshold, diversified mottos, deeper prose pools — push an already strong game closer to the kind of quiet, re-playable thing a cozy fan returns to across a whole evening."
+}

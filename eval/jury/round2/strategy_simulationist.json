@@ -1,0 +1,47 @@
+{
+  "profile": "strategy_simulationist",
+  "score": 6.5,
+  "strengths": [
+    "Bequest system is a genuine cross-generation lever: four distinct options (mind, means, heart, free traits) with distinct mechanical effects on the heir's starting conditions, always surfaced at end-of-life and telegraphed in the openStock readout.",
+    "a_make_name fires once per adult life and directly steers reputation via a clean 3-way choice (scholarly/ruthless/generous), each mapping to a different dynasty motto. Confirmed working in transcripts: Roman Salvedi's 'Be known as hard to cross' at age 33 drove the Salvedi motto 'We do not ask twice' across 5 generations.",
+    "Reckoning preparedness payoff is real: an underprepared house pays -22 means/-9 spirit vs -15/-2 for a prepared one, and facedReckoning='fell' docks a seat in updateHouse. This creates plannable incentive to build reserves.",
+    "Seat-gated content (s_inheritance_dispute at seat>=4, s_patronage at seat>=5) confirmed working in Calloway dynasty — Caleb faced the inheritance dispute at a fine townhouse. The game reads meaningfully differently at different standings.",
+    "Reputation can also lift seat independently of wealth (repute>=2.0 at seat<5 gives 60% seat climb chance), creating two distinct paths to elevation — accumulate money, or consistently signal a character.",
+    "openStock opt-in readout gives prose-level visibility on all 5 stats and current house position, and warns when a reckoning is live or a bequest remains unmade."
+  ],
+  "blockers": [
+    "Reputation state is invisible mid-dynasty: the player has no way to see current repute tallies (e.g. 'scholarly: 1.8, generous: 0.9'), so they cannot know whether a_make_name will close a motto this generation or whether years of prior choices are about to crystallize. The chronicle shows what you did, not where the house's reputation score currently sits.",
+    "m_invest_name — the explicit seat-lifting spend — did not fire in any of the 15 transcript lives despite being the only direct seat-control tool. Weight 2 in a field of 50+ cards, narrow gate (age 44-64, means>48, seat 2-5), no in-game hint that it exists. A strategy player who doesn't read the source cannot discover or plan around it.",
+    "openStock's directional hint mentions only wealth as the seat driver; it does not mention reputation-driven seat climbs or m_invest_name. The strategic map the player can read is incomplete.",
+    "The reckoning fires stochastically (random within age 30-80, cool:26) rather than being something a player can anticipate or time. Preparation pays off in cost reduction, but you cannot schedule it around a strong or weak resource state.",
+    "Seat 7 (the historic pinnacle) requires repute>=7.5, peakMeans>=92, seat>=6, AND a 25% roll — an effective probability so low that none of the 15 lives reached it. There is no tractable route a player can optimize toward; it reads as an easter egg, not a strategic target."
+  ],
+  "improvements": [
+    {
+      "what": "Add a one-line repute summary to the openStock readout — e.g. 'The family's name carries something of the scholar (growing) and a little of the generous.' No raw numbers; the same prose-tier system lifeReadout uses.",
+      "why": "Without any window into current repute state, the player cannot make a_make_name or lifestyle choices in service of a deliberate dynasty character. This is the single biggest gap between 'I can influence the house' and 'I can steer it.'",
+      "impact": "high"
+    },
+    {
+      "what": "Surface m_invest_name as a possibility in openStock when conditions are near-met (seat 2-4, means 40+), with a hint like 'With the means the house now holds, there may be a way to spend deliberately toward the name.'",
+      "why": "The lever only works if the player knows it exists. At weight 2 among 50+ cards it is practically invisible. A hint in openStock — the one state-readout tool the player controls — would let an optimizer plan for it.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the reckoning a short 'warning year' — one tick before it presents, a log line like 'The house's debts are drawing to a head; what has been set aside is about to matter' — so a player who is watching has one beat to register their current state before the card lands.",
+      "why": "Meaningful preparedness choices require knowing a reckoning is coming. Right now the card fires silently out of randomness; a strategist can only play general risk-buffering, not targeted preparation.",
+      "impact": "med"
+    },
+    {
+      "what": "Raise m_invest_name's weight to 3-4 (from 2) or add a second version for midlife (age 35-50 window) to ensure it actually appears in a normal dynasty.",
+      "why": "A lever that never fires in 15 played lives is not a lever. The seat-investment mechanic is the game's most explicit strategy tool; players need to encounter it.",
+      "impact": "med"
+    },
+    {
+      "what": "For the seat-7 pinnacle, add one more tractable path: a multi-generation 'storied' reputation track visible in the lineage panel (e.g. 'The house has held its character for N generations'), so a patient optimizer can see they are building toward something.",
+      "why": "The current seat-7 condition requires repute>=7.5 which takes ~6 generations of consistent bumps. Players deserve a progress signal, not just a black box that occasionally resolves.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The dynasty layer now has genuine levers — bequest, reputation targeting, reckoning pressure, seat-gated content all work and the transcripts confirm them — but two of the three pillars a strategy player needs are present only in the code, not in the player's readable state: reputation progress is invisible mid-dynasty, and the key seat-investment card (m_invest_name) never appeared in 15 lives, making the gap between 'systems exist' and 'player can deliberately exploit them' wide enough to hold this below a 7."
+}

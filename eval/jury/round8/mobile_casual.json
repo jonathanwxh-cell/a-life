@@ -1,0 +1,34 @@
+{
+  "profile": "mobile_casual",
+  "score": 8.4,
+  "strengths": [
+    "All 44px touch targets hold: footer buttons (pause/music/menu), chronicle/constellation links, eulogy tap zones, delete confirm buttons — confirmed in CSS, no regression.",
+    "Fast-forward (tap the flowing-years text) at ~0.34x speed is a genuine gift for short bursts — a 5-min session now yields visibly more life even in the quiet years.",
+    "The pulse-dot on the flow text is a clear, low-cost liveness cue: mobile players know time is moving without reading anything.",
+    "Cold-start hint ('Continuing House X — Nth of the line, age Y') orients a returning player immediately, before any tick fires.",
+    "Choice hints show at 0.82 opacity unconditionally on touch devices (hover:none media query) — no hover needed, no information hidden from mobile.",
+    "The 'how things stand' reflect button now has a visible border (1px solid rgba(236,225,207,0.45)) — discoverable without hovering.",
+    "Dynasty readout wording improvement: houseCharacter() now gives directional trajectory prose ('a little more of the same, and it could be written into the histories') rather than just a snapshot — a casual player can now act on what they read in the panel, not just observe it.",
+    "The gen-1 dynasty hint after the 2nd decision ('Everything this life gathers will pass to the one who comes after') lands at exactly the right moment to explain the meta-loop without front-loading it.",
+    "Persistence robustness fixes (missing field seeding, ghost-resurrection prevention on delete) remove a class of hard-to-diagnose mobile bugs where a session could silently break across app suspends."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add a subtle life-arc progress indicator — e.g. a thin amber line or a faint stage label ('youth · adulthood · midlife') near the age numeral, showing where in the 0–85 arc the current life sits.",
+      "why": "Mobile casual players picking up mid-session have no feel for 'how much life is left' beyond the raw age number. A glanceable arc cue would make the approaching-death beat land harder and encourage deliberate pacing of choices.",
+      "impact": "med"
+    },
+    {
+      "what": "Extend the fast-forward mode to auto-pause the moment a card appears, then resume fast-forward after the player dismisses the choice — currently the player must tap the flow text again after every decision.",
+      "why": "A one-handed casual player wants to set 'race mode' and glance back when something happens; having to re-enable it each time after a choice breaks the low-effort rhythm.",
+      "impact": "med"
+    },
+    {
+      "what": "Slightly widen the ambient whisper and observation pools, or introduce 1-2 dynasty-specific observations that reference the house's accumulated seat/motto — so repeat short sessions feel less like seeing the same sky twice.",
+      "why": "In a 5-minute burst across multiple return visits the same observation lines ('The stairs have started to ask a question') can repeat within a single life; a casual player notices this faster than a long-session player would.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "The mobile layer is genuinely solid — touch targets, fast-forward, pulse cue, cold-start hint, and the now-discoverable reflect button all hold up — and the dynasty readout wording improvement makes the 'how things stand' panel actionable rather than merely descriptive, which is a real upgrade for a player making decisions in short bursts; no regressions found, score confirmed at 8.4."
+}

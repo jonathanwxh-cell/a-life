@@ -1,0 +1,48 @@
+{
+  "profile": "qa_skeptic",
+  "score": 7.5,
+  "strengths": [
+    "All three round-1 bugs confirmed fixed: lived() guard at dynasty.js:112 correctly blocks inherited kept_stray from re-scoring 'kind'; s_from_nothing carries once:true (content.js:421); _takenNames() at core.js:90-92 now scans S.lineage so love/friend names no longer collide with ancestors, and the echo-parent override at dynasty.js:285 deliberately restores the ancestor name as documented.",
+    "Reckoning redesign is clean and intentional: 'Meet it head-on' always sets facedReckoning='held' and never triggers the seat-demotion path in updateHouse(); only the 'fell' path demotes. The variable cost (ready vs. not-ready means check) adds meaningful risk-calibration without a soft-lock.",
+    "ambientWhisper implementation is sound: the {they} token in the elder pool ('The hours have loosened, and {they} lets them.') is resolved correctly because addEphemeralEntry calls reTok() on every ephemeral entry including whispers.",
+    "Ancestor log pronoun resolution is correct: recordAncestor() maps stored logs through reTok() at death-time while P is still the dying ancestor, so showAncestorLife() can render pre-resolved text without a second reTok pass.",
+    "Dynasty-end tally is coherent: S.marks.gens and souls are incremented inside recordAncestor() before showEulogy() reads them, so the closing 'House X ends here' line always reflects the correct generation and soul count.",
+    "Reputation rebalance achieves its design goal: five of the fifteen transcribed dynasties produced mottos other than 'kind' (ruthless x2, industrious, artistic-adjacent), confirming the inherited-heirloom guard unblocked the variety the dev intended.",
+    "New trait-gated cards (t_bookish, t_guarded, t_restless) are correctly scoped and have no cross-life state contamination.",
+    "New seat/repute-gated cards (s_inheritance_dispute, s_patronage, m_invest_name, a_make_name) all have coherent conditions and do not crash when their stat/relation preconditions are met."
+  ],
+  "blockers": [
+    "m_invest_name log line is factually false 40% of the time (content.js:499): the do() logs 'watched the name climb a rung' unconditionally, but seat only increments when Math.random()<0.6. When the 40% path fires, the player is told they rose when they did not. This is a direct prose/reality contradiction in the one card designed to be the player's clearest dynasty lever.",
+    "a_make_name 'Be known as learned' misuses chose_study (content.js:507): it calls remember('chose_study'), which unlocks cb_study_pays. That callback's echo says 'The long bet on {n}'s own mind, made hungry and young, is finally being called in' with recall('chose_study').age returning a value in the 30-52 range. A character who chose scholarly reputation in midlife has no 'hungry young years of study' — the callback text is a false memory. The fix is either to use a different memory key in a_make_name or gate cb_study_pays to only fire when chose_study was set before age 26.",
+    "cb_outcast_return fires 'child from the yard' framing when triggered by non-yard memories (content.js:166-167): a_neighbour, a_make_name ('open-handed'), and s_patronage all set kind_to_outcast without creating a yard friend. When the callback fires after one of these, rel('friend') is null and the card text reads 'The child from the yard, grown, is somebody now, and has not forgotten that {P.given} sat beside them' — fabricating a yard encounter that never happened. Verified in Dynasty 5 transcript (Greta Calloway, age 39: 'A kindness done at 34 came back' after a_neighbour trigger at 34). Low crash risk, high narrative credibility risk.",
+    "e_window grandchild 'true story' branch fires for inherited-only kept_stray (content.js:247): held('kept_stray') returns true even when the memory is {inherited:true}. An heir who never actually kept a stray (only inherited the heirloom) will tell a grandchild 'the one about the secret stray' — a story that has no corresponding log entry in their chronicle. The fix is to check !recall('kept_stray').inherited alongside held('kept_stray')."
+  ],
+  "improvements": [
+    {
+      "what": "Make m_invest_name's log line conditional on whether the seat actually moved: 'if(Math.random()<0.6)' branch says 'watched the name climb a rung', else says 'poured everything in, and held the name where it stood'.",
+      "why": "Eliminates the prose/reality contradiction that lets the player believe they rose when they didn't. The distinction also adds mechanical feedback to a key dynasty lever.",
+      "impact": "high"
+    },
+    {
+      "what": "Separate a_make_name's scholarly path from cb_study_pays by using a distinct memory key (e.g. remember('set_scholar_rep') instead of remember('chose_study')), or add a P.age<26 guard to cb_study_pays's cond.",
+      "why": "Prevents the 'hungry young years' echo from firing after a midlife reputation-choice, which reads as a fabricated memory to anyone paying attention to the timeline.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate cb_outcast_return's 'child from the yard' text on whether a living friend exists: if rel('friend') is null, use a neutral framing like 'Someone {P.given} helped once, long ago, is somebody now — and has not forgotten it.'",
+      "why": "Fixes the chronological fabrication (yard encounter that never happened) without removing the callback.",
+      "impact": "med"
+    },
+    {
+      "what": "In e_window's 'Tell the true story' do(), guard the kept_stray branch against inherited-only memories: held('kept_stray') && !recall('kept_stray').inherited.",
+      "why": "An heir who only carries the heirloom, not the actual memory, would otherwise tell a false story to a grandchild — breaking the chronicle's promise of recording only what actually happened.",
+      "impact": "med"
+    },
+    {
+      "what": "Consider a once:true on x_reckoning (or a dynasty-level flag rather than per-life) to prevent the same seat-3+ house from facing a reckoning every single generation.",
+      "why": "Currently a long-running seat-3+ dynasty will reliably draw the reckoning once per life (cool:26 is short enough for a 70-year lifespan). The framing 'hard season' reads freshest when rare. Low urgency given the cool:26 already spaces it.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 2 fixes the three stated regressions cleanly, and the new reputation and trait cards work, but two of the four new cards (m_invest_name and a_make_name) introduce prose/logic bugs that will surface in normal play: one tells you the house rose when it didn't, the other fabricates 'hungry young years' from a midlife reputation choice."
+}

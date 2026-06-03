@@ -1,0 +1,48 @@
+{
+  "profile": "systems_designer",
+  "score": 6.5,
+  "strengths": [
+    "Callback architecture is the game's crown jewel: memory flags planted by one choice (`child_books`, `kind_to_outcast`, `strayed`, `chose_study`, `unspoken_love`) create priority-pulled callbacks up to 50 years later, and the transcripts confirm these arcs close reliably — the book tracing through 5 Delacroix generations is a genuinely emergent dynasty story.",
+    "The 3-generation causal chain around infidelity is complete and tight: `a_affair` (strayed) → house secret created → heir inherits `inherited_secret` memory → `cb_inherited_secret` fires → player choice to expose or keep it → secret cleared or tainted reputation grows. This is what the whole system should do.",
+    "`seedChildStats` with 35% regression to the mean prevents runaway dynasties while still letting character accumulate across generations — correct design under the hood.",
+    "`driftYear()` connecting average bond strength across living relationships to spirit drift means neglecting relationships has an ongoing mechanical cost, not just a narrative one.",
+    "The `epitaphFor()` anti-repeat logic (`pr()` + cluster `blocked()`) actively varies the chronicle so consecutive ancestors don't read identically — a real craft detail that extends the legibility of the lineage view.",
+    "Peril flag (`P.flags.peril = P.age + N`) from reckless choices creates earned mortality risk that briefly elevates death probability — elegant invisible consequence for bold choices.",
+    "The `nurture` stat bonus (parent mind × 0.18 + bond × 0.10) makes intellectually engaged parents measurably transmit an edge to heirs without being visible as a number — on-brand and meaningful."
+  ],
+  "blockers": [
+    "The generational layer is architecturally present but mechanically thin: roughly 70% of cards (a_work, y_risk, y_dare, y_leave, y_drink, m_reinvent, m_money, e_garden, e_peace, c_steal, c_sick, c_talent, y_principle, y_job, a_home, a_role, a_fork_career, and more) set no `remember()` flag, produce no dynasty-layer effect, and leave no trace in future generations. Choices evaporate between lives rather than accumulating into a house with a distinct character.",
+    "The reputation system is underdifferentiated in practice: the `scholarly` tag dominates because bookish traits auto-bump `mind` via `driftYear()` and many study/teaching paths bump `scholarly`, while most other tags (ruthless, artistic, pious, reckless) have no bumping path at all in the card set. Three of five transcript dynasties share the identical motto. The system has 8 motto slots but only 2 are reachable with the current card-to-reputation wiring.",
+    "House seat has no mechanical feedback into the card pool: no event card uses `S.house.seat` in its `cond` predicate. A seat-6 'grand estate' dynasty and a seat-1 'rented room' dynasty face identical choices — the rising status changes the heir birth text and `inheritMeans` floor but creates zero new narrative pressure or opportunities. The player cannot feel what they are building toward.",
+    "Heirlooms activate inherited memory flags for heirs but those flags only enable within-life callbacks — they don't diversify the card pool or create dynasty-specific moments. The `teaching` heirloom grants `had_mentor` memory but there is no callback that fires specifically because the heir *inherited* this versus earned it themselves, so the distinction is invisible.",
+    "Secrets have negligible mechanical weight: the only consequence of carrying a family secret is `cb_inherited_secret` (spirit:-3/mind:3 or spirit:9/heart:4) and a `tainted` reputation bump of 1. Given that `tainted` fades at 0.12/generation and is never renewed, a secret that passes through 3 generations has almost no dynasty-level impact. The secret is presented as a defining family burden but mechanically it's barely heavier than a windfall."
+  ],
+  "improvements": [
+    {
+      "what": "Add `remember()` calls to 8–10 currently-memoryless cards and wire at least one new callback per major life domain: public life (took_a_stand → cb_legacy_contested in midlife), independence (self_made → cb_self_reliance in elder), home (own_home → cb_home_lost or cb_home_kept), and civic engagement (public_role → cb_asked_again in midlife). Each callback should also set a dynasty-visible tag or heirloom.",
+      "why": "The generational layer can only be as rich as the number of choices that actually persist across the generation boundary. Right now only ~6 choices carry memory flags. Doubling or tripling this immediately expands the space of cross-generational stories without requiring any architectural change.",
+      "impact": "high"
+    },
+    {
+      "what": "Add seat-gated `cond` predicates to at least 4–6 existing cards — e.g., `m_money` could show a different variant when `S.house.seat >= 5` ('the estate has grown beyond what any one life needs'), `a_role` could be unreachable at seat 0 ('no one listens to a nobody'), and `e_legacy` could have a fourth option only available at seat 6+ ('Leave it to the house'). One or two cards should require seat ≥ 4 to appear at all.",
+      "why": "Without seat-gated content, house standing is abstract bookkeeping. Tying even a few cards to seat creates narrative proof that the dynasty layer has mechanical consequence — the player feels they have unlocked something or been excluded from it.",
+      "impact": "high"
+    },
+    {
+      "what": "Add bumping paths for at least 3 currently unreachable reputation tags. 'Reckless' should bump from y_dare or y_drink (reckless choice) + y_risk. 'Artistic' should bump from c_talent (practise) or e_garden (tend it). 'Pious/devout' could bump from any contemplative/spiritual elder card. Also increase `scholarly` bump weight slightly for high-mind lives that never explicitly chose study, to prevent the current bias from all bookish traits funneling into it.",
+      "why": "The motto system has 8 slots but only 2 are practically reachable, making the dynasty's 'character' feel random rather than chosen. More differentiated reputation paths let players make generational bets ('I am building a reckless house') that have visible payoff.",
+      "impact": "med"
+    },
+    {
+      "what": "Give secrets a second mechanical beat beyond `cb_inherited_secret`: when a secret has been carried for 3+ generations (trackable via `h.secret.gen` vs current gen), add a `cond`-gated card that surfaces it as external pressure — a distant relative who remembers, a letter found in the estate, a journalist who heard rumors. Player can pay a means cost to suppress it or let it break. This should also bump `tainted` by 2–3 (enough to matter at the house level).",
+      "why": "A secret that passes silently through 3 generations and costs almost nothing undermines the thematic weight the game places on it. Escalating mechanical cost makes keeping vs. exposing a genuine dynastic tradeoff rather than a flavor choice.",
+      "impact": "med"
+    },
+    {
+      "what": "Wire 2–3 more choices to `P.flags.peril` and make the observation system surface the current peril state in at least one prose line when peril is active and the person is near the window end. Currently peril is invisible to the player except through early death outcomes; a single log line ('Something in the way he is living suggests the body is not the only thing at risk') would make the system legible.",
+      "why": "Earned mortality risk is a strong design move but an invisible one — players can't recognize the consequence-space and so can't make informed tradeoffs. Surfacing it once makes the system teach itself without exposing the number.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A genuinely clever within-life callback engine — the multi-decade arcs that close across a single life are the game's best moment — wrapped in a generational dynasty shell that is architecturally sound but mechanically hollow: most choices leave no cross-generational mark, house seat creates no new narrative pressure, and the reputation system is so skewed that three of five real playthroughs produce the identical family motto."
+}

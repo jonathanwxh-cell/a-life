@@ -1,0 +1,47 @@
+{
+  "profile": "first_timer",
+  "score": 6.5,
+  "strengths": [
+    "The title screen's second paragraph ('Years pass on their own. Now and then a moment asks something of you. Nothing can be undone.') is the clearest possible statement of the core loop for a newcomer — it arrives before the buttons.",
+    "The recent third paragraph ('Each life hands the next its name, its means, its reputation — and its secrets. Over the generations, a house takes shape.') plants the generational payoff early and gives a reason to keep going.",
+    "The heir screen now states inheritance plainly in prose: house standing, heirlooms by name, the bequest, and the secret. A newcomer reading it understands what carried over without needing to infer anything.",
+    "The first post-heir birth line in the log immediately contextualises the new character ('Was born into a small house in town, and a family that already had a story') — the identity shift lands in the writing, not in UI copy.",
+    "The 'how things stand' button gives newcomers a safe way to check in without breaking the mood, and it pauses time while they read.",
+    "The pace control ('the years are passing') is tappable and labelled — a newcomer who thinks the game is running too slowly has an obvious affordance.",
+    "The visual presentation (sky arc, growing tree, card on dark ground) communicates tone instantly. Even someone who has never played a life-sim understands 'something is alive and passing.'"
+  ],
+  "blockers": [
+    "The silence before the first card is the single biggest friction point for a non-gamer. For the first 3–10 in-game years nothing asks anything of the player. The lone orientating hint ('The years move on their own — pause any time with the pause button. Now and then, a moment will ask something of you.') fires 1.6 seconds after the life starts, fades out like any log line, and is easy to miss. A player who blinks or scrolls away will have seen nothing, stares at an age counter ticking upward, and assumes the game is broken or they missed a button.",
+    "The title screen does not name the player's verb. 'A Life' with its tagline establishes tone but does not say 'you will make choices that are permanent.' The instruction paragraph does say 'a moment asks something of you' but 'asks something' is abstract. A non-gamer needs one concrete example — 'a question will appear, you pick one answer, and it stays' — within sight of the Begin button.",
+    "The succession identity shift is implicit. The death screen shows a eulogy and then a button labelled 'Become [child's name].' There is no line explaining that the player is now a different person who inherited from the previous one. A first-timer who does not read the heir screen closely may think they are reviving the same character, or be confused why the stats and name changed.",
+    "The 'the years are passing' pace label doubles as a speed toggle, but this is not discoverable. A newcomer who wants the years to go faster has no indication that tapping the text changes anything. The footer has four controls (pause, flow-text, music, menu) with inconsistent affordances — two are icon buttons, one is a plain sentence, one is a hamburger. The plain sentence is the least obvious interactive element."
+  ],
+  "improvements": [
+    {
+      "what": "Add one sentence to the title screen sheet between the existing paragraphs, e.g. 'A choice will come. Pick one. It cannot be undone.' — or show a tiny static mock of a card with two buttons, greyed out, to set the expectation before Begin is tapped.",
+      "why": "A first-timer needs to know the core mechanic (binary choice, permanent) before they start, not after the first 10 years of silence.",
+      "impact": "high"
+    },
+    {
+      "what": "Keep the 'seenIntro' hint visible for longer (at least 12 seconds) or use a slightly higher-contrast styling than the ordinary obs log line, so it does not fade before the player processes it.",
+      "why": "It is the only orientating instruction for a new player; if it fades and the player is not looking at the screen, they receive zero onboarding.",
+      "impact": "high"
+    },
+    {
+      "what": "On the heir screen (vHeir), add one sentence above the inherit text that makes the identity shift explicit: e.g. 'You are no longer [dead parent's name]. You are [new child's name], born into the world they left behind.'",
+      "why": "A first-timer pressing 'Live this life' after a death does not automatically understand they have become a different person. The prose birth line in the log fixes this eventually, but the heir screen is the moment of maximum confusion and the clearest place to resolve it.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the pace/flow text a visual affordance — a small chevron, an underline on hover, or a label '(tap to change pace)' — so it reads as a button rather than prose.",
+      "why": "Non-gamers do not tap plain text; the toggle goes undiscovered and players either endure slow years or give up waiting.",
+      "impact": "med"
+    },
+    {
+      "what": "For the very first life only, surface the first card slightly sooner (e.g. at age 3 rather than waiting for the natural draw window), so a new player sees the mechanic in action within their first 15 real-time seconds.",
+      "why": "Reducing the initial silence removes the 'is this broken?' moment for the least patient newcomers without affecting any returning player (the hint gate already ensures it fires only once).",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely beautiful thing to discover, but a newcomer with no gaming context will spend their first 30 seconds staring at a ticking age counter wondering if they missed a button — and the game does just enough to explain itself to survive that gap, but not comfortably enough to earn a recommendation without caveats."
+}

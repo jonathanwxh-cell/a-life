@@ -1,0 +1,33 @@
+{
+  "profile": "systems_designer",
+  "score": 8.5,
+  "strengths": [
+    "Seat-7 is genuinely fixed: the repPeak high-water mark (h.repPeak>=3.5) correctly rewards a line that built a strong reputation even if it has softened since, and the forward signal in houseCharacter() and the readout panel explicitly names what is needed — no longer a dead branch.",
+    "Motto diversity is real across sampled play: 5 dynasties produced 4 distinct mottos (scholarly, artistic x2, industrious, generous) with no majority, confirming the 1.0 bump equalization worked.",
+    "The bequest lever is the single cleanest cross-generation agency point in the genre: one late-life choice (mind / means / heart / freedom) tangibly shifts the heir's starting conditions in documented, diegetically honest ways, and the heir screen names it explicitly.",
+    "The reckoning (x_reckoning) is well-designed competing-goods pressure: seat-3+ gate, once-per-life, and the 'fell' branch directly costs a seat — narrated in the moment via logLine so the player feels the dynasty fall rather than inferring it later.",
+    "Seat movement is narrated in the moment (the logLine at death that says 'The family climbed / slipped this generation') rather than left for the heir screen, which closes the feedback loop elegantly.",
+    "The cb_the_cost callback is the strongest systems-design choice in the whole card set: it reads back which competing-goods memory is active and individualises the elder reckoning, making past choices feel genuinely consequential decades later.",
+    "Trait-gated cards (bookish, guarded, restless) and seat-gated cards (s_great_burden, s_from_nothing, s_patronage) create meaningfully different play-contexts for different dynasties — the content layer gates real opportunities, not flavour.",
+    "Heirloom propagation is mechanically sound: the inherited:{true} guard prevents stale heirlooms from silently re-scoring reputation every generation, which was the original collapse vector."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Add 'industrious' as a direct option in a_make_name alongside learned/hard-to-cross/open-handed, with a do() that sets p.flags.legacy='built' or remember('self_made'). Currently industrious is only reachable indirectly via scattered self_made/built_the_name/driven memories, making it the least steerable of the nine reputation tags despite being bump-equalized.",
+      "why": "A player who wants to build an industrious house has no reliable intentional lever — they depend on incidentally picking fork-career, m_invest_name, or m_rival choices. Scholarly, generous, and ruthless all have direct steering paths; industrious does not.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the repPeak mechanic one seat earlier: when seat>=5 (not only seat>=6), the houseCharacter() readout or the 'how things stand' direction hint should mention that the reputation high-water mark — not only the current value — is what the histories gate on. Something like 'even a reputation that has softened counts toward it, if it was once strong enough.'",
+      "why": "The seat-7 gate requires repPeak>=3.5, which players cannot observe directly. A seat-5 family with strong historic reputation has already built the credential but gets no signal that it is accumulating credit toward the pinnacle. The forward signal only appears at seat-6, one step too late for meaningful planning.",
+      "impact": "low"
+    },
+    {
+      "what": "Add a second reckoning variant — or lower the cool from 26 to ~18 — so a long-lived dynasty (6+ generations, 400+ years of game-time) faces at least two reckonings. Currently a 7-generation house can statistically go the entire run with a single reckoning, reducing the fall-pressure that makes seat-holding feel earned.",
+      "why": "The reckoning is the primary downward-pressure mechanic. A cool of 26 years per life means a 90-year life only risks one instance; at 26-year cooldown across multiple lives, a strong house can simply age past the threat. Two reckonings would make the 'held' branch feel more like a repeated test of dynastic character.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A genuinely excellent generational system: the seat-7 fix is real and correctly gated, motto diversity is verified across sampled play, the bequest-reckoning-callback triad gives players meaningful levers across the generation boundary, and the narrative feedback is timed to the causal moment — the only remaining gap is that industrious is the one reputation without a direct steering card, which is a smaller omission than any of the previous rounds' blockers."
+}

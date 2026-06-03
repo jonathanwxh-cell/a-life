@@ -1,0 +1,57 @@
+{
+  "profile": "literary_reader",
+  "score": 7.0,
+  "strengths": [
+    "The best individual lines are genuinely good: 'the taste was guilt as much as fruit,' 'the silence on the subject has its own shape now,' 'the town is small and she can feel its edges,' 'someone the years have not yet learned how to reach' — these earn their feeling rather than announcing it.",
+    "The callback system is the design's strongest literary idea: a kindness at age 6 returns as a door held open at 28, the book too hard for a child comes back to be read with ease decades later. This is structurally elegant and produces the best emotional moments in the transcripts.",
+    "Epitaphs show genuine restraint. 'Took one door, unopened, all the way into the ground' and 'An ordinary life, which is to say, a whole world' are the kind of lines that justify the whole project. The anti-repetition logic (blocked/pr) is thoughtful and mostly works.",
+    "The observe() lines have a quietly effective register — 'a greyness has moved quietly into their rooms,' 'the body has begun keeping its own quiet counsel' — unpretentious, a little clinical, which suits the surveillance-of-a-life tone.",
+    "The love card variants ('the same face keeps appearing at the edges of her days, and the days have begun to arrange themselves around it') maintain consistent voice and avoid cheap sentiment. The late-love card ('across an ordinary Tuesday — someone') is the best single card.",
+    "The dynasty layer produces real literary texture in transcripts: inherited secrets, heirlooms with named provenance, the motto arriving mid-sequence. Reading a full 5-generation dynasty feels genuinely different from reading a single life."
+  ],
+  "blockers": [
+    "Repetition is the primary literary failure, and it is structural. Across fifteen lives in the transcripts, certain log lines appear verbatim in nearly every life: 'Money has stopped being a worry and become a kind of weather' (appears 9+ times), 'The stairs have started to ask a question of her/him' (7+ times), 'Whatever the years took, they did not take the lightness in him' (5 times), 'The body keeps its own ledger now, and the sums are getting harder' (5 times), 'Loved small helpless things her whole life long' as an epitaph (4 times across 5 dynasties — Tobias Mercer, Adaline Mercer, Anders Vasquez, Mira Halloran, Tomas Vane all get a variant of this). A line that appears once in a life reads as character; appearing across a dozen lives it collapses into furniture.",
+    "The 'spirit_hi' observe pool has only 4 variants rotated by rotI — across long dynasties all 4 exhaust and repeat within a single reading session. The 4 'had a child' first-birth variants also exhaust quickly: 'red and furious and entirely unimpressed by any of it' appears verbatim for Caleb Vane, Ambrose Vasquez, Hale Vasquez, Adaline Mercer, Sabine Mercer (5 of 15 lives). This is the observe() and logLine() pools being too small for the volume of output they are asked to carry.",
+    "The 'had a child' log line is not a choice line — it fires automatically in haveChild() with only 3 variants, one of which ('red and furious and entirely unimpressed by any of it') becomes a running joke by the third time. A moment this weighty needs more range, not a rotation.",
+    "The motto system produces the same motto ('We take in what the world turns out.') for THREE of the five dynasties in the transcripts (Vane, Vasquez, Mercer), because 'kind' is the dominant repute track in the default play pattern. This should be literarily distinctive per house; instead it reads as a shared motto across all successful dynasties, which undercuts the idea of distinct family characters.",
+    "Several card texts are competent-but-generic where they need to be specific. 'A question she had long set aside — about what, if anything, holds the whole thing up' is deliberately vague but consequently hollow; the faith card has no texture at all. 'A dare, a height, a fast machine' does better with its concrete nouns but the logLine ('the seconds of it lasted years') is a familiar formulation. Cards with 2 variants (c_sick, a_affair, most elder cards) don't have enough variance to survive repeated encounters across dynasties."
+  ],
+  "improvements": [
+    {
+      "what": "Expand the observe() pools for spirit_hi, vit_tire, vit_neg, and heart_lo from 3-4 variants to 8-10. These fire constantly and the current pools exhaust within two or three lives.",
+      "why": "These lines appear more than any other prose in a long playthrough. They are the ambient texture of the game. Right now they become wallpaper by generation 3. Doubling the pool size costs a few hours of writing but removes the most damaging source of repetition.",
+      "impact": "high"
+    },
+    {
+      "what": "Rewrite the haveChild() log line pool from 3 variants to at least 8, with some that are more particular: reference the time of year, a detail of the household, what the parent was doing when it happened. Remove 'red and furious and entirely unimpressed by any of it' as a permanent variant — make it conditional (e.g., only fires once per dynasty).",
+      "why": "This is the most repeated exact phrase across all five transcripts and it lands on one of the heaviest life events. The repetition is jarring and deflates the moment.",
+      "impact": "high"
+    },
+    {
+      "what": "Add at least 3 more motto options to the MOTTOS map (reckless, warm, pious, artistic at minimum) and tune reputeTop() weighting so 'kind' does not dominate so heavily. Consider letting a house develop a SECONDARY motto when two reputations are close — the conflict between them is more interesting than a single winner.",
+      "why": "Three of five dynasties sharing 'We take in what the world turns out.' collapses the dynasty differentiation that is the game's central literary promise. Each house should feel like its own voice.",
+      "impact": "high"
+    },
+    {
+      "what": "The epitaph 'Loved small helpless things her whole life long' (and its cluster 'stray') fires as the dominant epitaph across multiple dynasties whenever kept_stray is in the memory. Add a generation-guard: once this epitaph has been used in the current dynasty, the cluster should be blocked and the epitaphFor() logic should fall through to the next applicable theme.",
+      "why": "Four lives sharing essentially the same epitaph within a single reading session (the transcripts) drains what is the game's most prominent literary statement of each life of its power. Each epitaph should feel like the final word on a singular person.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a second log line variant to a_child (the first birth card) that fires when the character is over 40 — something that acknowledges the lateness, the weight of having arrived at parenthood at a particular moment. The current 3-variant pool is age-agnostic.",
+      "why": "The game goes to some care to make the e_last_walk and m_health cards register the character's age as meaningful; the birth log should do the same. A child born to a 48-year-old is a different moment than one born at 26.",
+      "impact": "med"
+    },
+    {
+      "what": "The a_affair card has only one text and two choices, and the logLine for the 'close the door' path ('Felt the pull, and chose the marriage anyway') is generic. This is one of the morally heaviest cards. Give it 3 text variants and at least 3 logLine variants — some that name what was at stake, not just what was decided.",
+      "why": "The affair card fires in a significant fraction of lives and it is currently the flattest card for a moment this charged. It reads like a placeholder.",
+      "impact": "med"
+    },
+    {
+      "what": "The 'means_hi' observe line ('Money has stopped being a worry and become a kind of weather') is a fine single line but fires as the only variant. Give it 4-5 alternatives at different wealth levels or life stages.",
+      "why": "It appears in 9 of 15 transcribed lives and is visually identical every time. Even one alternative would halve the repetition.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has a genuine literary sensibility and its best moments — the callbacks, the epitaphs at their sharpest, the late-love card — are genuinely moving, but the prose is undermined by structural repetition: too-small variant pools, a dominant epitaph that lands on a third of the lineage, and a motto system that converges on one phrase across unrelated dynasties, so what promises to be a chronicle of distinct lives becomes, by generation four, a procession of echoes."
+}

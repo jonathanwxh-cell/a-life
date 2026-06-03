@@ -1,0 +1,48 @@
+{
+  "profile": "cozy_fan",
+  "score": 7.5,
+  "strengths": [
+    "The sky-arc concept — one life is one day, dawn to night — is genuinely beautiful and gives every session a built-in rhythm that feels meditative without being forced.",
+    "The writing is the game, and the writing is good: terse, precise, emotionally honest. Lines like 'felt the sense of it like a bruise' or 'the end of the month keeps arriving before the money does' land with real weight.",
+    "The living scene (procedural tree, sun arc, motes, birds, falling leaves in old age) is a quiet triumph — it reads the life without announcing itself, which is exactly the right register for this genre.",
+    "Absolutely zero punishment or stress mechanics. No fail state, no score, no leaderboard. Deaths are peaceful passages, not losses. This is rare and exactly right.",
+    "Callback cards — when a childhood choice echoes back in midlife — are the highlight of the whole design. The book-too-hard-for-a-child's-hands threading through three generations in the transcripts is as cozy as a game can get.",
+    "The Constellation screen (star-map of the bloodline) is a genuinely original reflective artifact — browsing it after several lives feels like a journal you didn't know you were keeping.",
+    "Music is opt-in, off by default, and transitions gently between four pieces keyed to life-stage. The volume cap at 0.42 ensuring it 'sits under the reading' is a small but correct decision.",
+    "Pacing (~2s/year) gives enough quiet between moments to actually read and breathe. The pause button respects the player's time without breaking immersion."
+  ],
+  "blockers": [
+    "Card repetition is the main cozy-breaker. Reading the transcripts across five dynasties and fifteen lives, several cards recur almost verbatim within the same dynasty (the windfall envelope, the doctor's letter, the yard-outcast). A cozy player who plays long enough stops feeling like they are inhabiting a unique life and starts pattern-matching the deck — which destroys the very spell the game is trying to cast.",
+    "The between-moment silence is currently just text ticking ('the years are passing') over the static canvas. There is no ambient texture — no soft sound layer, no canvas micro-events — during the long stretches between choices. For a cozy player who wants to simply be in the world, the quiet stretches feel slightly empty rather than restful.",
+    "The music is entirely optional and off by default with no in-game nudge toward it. A player who never notices the ♪ button gets a materially thinner atmospheric experience. The four tracks (theme, living, ending, heir) exist and appear to be good production decisions based on the audio.js code, but they are largely invisible to casual players.",
+    "Eulogy text is fixed prose per life, not procedurally assembled from actual choices made. After reading several eulogies in the transcripts they feel somewhat interchangeable ('Carried a warmth into every room', 'Carried a lightness the years never managed to take'). A cozy player investing in a dynasty wants the closing reflection to feel personally earned."
+  ],
+  "improvements": [
+    {
+      "what": "Add a soft ambient sound layer that plays continuously during the living-years phase — not music, but textural: wind, distant birds, rain by season, hearth-crackle in elder years. Keyed loosely to sky-arc progress and aura warmth.",
+      "why": "The visual canvas is already doing this ambient work for the eyes; the ears get nothing between cards. A sound layer would fill the quiet stretches and turn 'waiting' into 'dwelling', which is the core cozy experience.",
+      "impact": "high"
+    },
+    {
+      "what": "Weight rare/callback cards more heavily in the draw and add 3-5 more life-stage-specific observation lines per stage to reduce perceived repetition. Specifically: add ~8 new adult/midlife situational observation lines that fire once per life based on accumulated memory flags, so longer-play dynasties read more distinctly.",
+      "why": "Repetition of the windfall card, the doctor's letter, and the yard-outcast across multiple lives in the same dynasty is the biggest single break in immersion for a player settling in for a long session.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the music toggle more prominently on first play — either a one-time tooltip pointing at ♪ after the first card resolves, or a gentle first-session prompt ('There is optional music — would you like it on?'). Persist the choice silently after that.",
+      "why": "The four-track score is a real atmospheric asset that most players are not discovering. The cozy experience is materially better with it on.",
+      "impact": "med"
+    },
+    {
+      "what": "Make eulogies reference 2-3 specific choices from the life: pull the strongest-bond relationship's name, the legacy flag (kind/built/here), and one notable memory key, and weave them into the closing line. Even one procedural sentence would make eulogies feel like they belong to this particular life.",
+      "why": "The eulogy is the emotional payoff of a life. Right now it reads like a fortune cookie. Grounding it in what actually happened would make death feel meaningful rather than routine, which is central to what a cozy-meditative player is here for.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 purely contemplative cards with no stat impact — moments where a choice is presented and both options resolve to a single log line, no numeric outcome. E.g. 'It is a Tuesday. The light is coming through the window at an angle. Nothing is required of you today.' The 'options' are merely two shades of the same quiet.",
+      "why": "Every card in the current deck moves a stat. A few zero-stakes reflective pauses would embody the meditative promise more directly and give the player permission to simply be, which is the soul of the cozy genre.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life earns its meditative premise through genuinely beautiful writing, a living scene that reads your choices in its sky, and callback mechanics that make a dynasty feel like a real accumulating story — but card repetition across a long session and the near-silence between moments keep it just short of the game you'd return to nightly to unwind."
+}

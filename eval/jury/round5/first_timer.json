@@ -1,0 +1,45 @@
+{
+  "profile": "first_timer",
+  "round": 5,
+  "score": 8.0,
+  "verdict": "Would keep playing and recommend",
+  "rubric": {
+    "understands_what_game_is": {
+      "score": 9,
+      "notes": "The title screen does the work immediately and clearly. 'A Life' as the h1, then the tag — 'One person, born into the world. Then the next. Then the next. A line drawn across time.' — is about as clear a genre statement as you can write in three lines. A newcomer understands this is a generational simulation before reading anything else. The .lead line ('Each life hands the next its name, its means, its reputation — and its secrets. Over the generations, a house takes shape.') reinforces the dynasty loop explicitly. The mechanics line — 'Years pass on their own. Now and then a moment asks something of you — a choice between two paths, and it cannot be undone.' — tells the player exactly how to play. No tutorial needed."
+    },
+    "feels_permanence_of_choices": {
+      "score": 8,
+      "notes": "The phrase 'it cannot be undone' does real work — direct, honest, unambiguous. In play, once a choice is made the chosen button gets the amber pulse animation and is gone. The log fade reinforces that moments pass. The bigger permanence signal is the dynasty: your choices compound into the house seat, repute, heirlooms, and secrets — all visible in the Chronicle. The 'how things stand' reflect button gives a prose readout of where the life sits, so the weight of choices feels legible without numbers. One small friction: a first-timer won't know their choices feed the dynasty until their first death. The heir screen and its explicit identity hand-off ('You are no longer X. You are Y, their son/daughter — born into the world they left behind.') makes that permanence land hard at the right moment."
+    },
+    "grasps_dynasty_hook": {
+      "score": 8,
+      "notes": "The .lead paragraph on the title screen is the key hook and it is doing its job. 'Each life hands the next its name, its means, its reputation — and its secrets' is evocative and concrete. The heir screen (vHeir) makes the hand-off explicit with the identity line, the house character paragraph, inherited heirlooms list, and the bequest line. The dynasty feedback loop — seat rising or falling, repute drifting, motto crystallising, secrets buried and exhumed — is rich. One gap: during a first life none of this is visible in play; the player runs on faith that it matters. The first death is where it pays off. The heirInherit prose on the heir screen is long (seat insight + house character + heirlooms + secret + bequest stacked) and could overwhelm a newcomer at exactly the moment it needs to land cleanly. But the identity-switch sentence leads, so the core is protected."
+    },
+    "ambient_and_onboarding_hints": {
+      "score": 8,
+      "notes": "The hintOnce system fires once-per-key (seenChron, seenLog), lingers 13s (vs 6.5s for normal log entries), and triggers a beckon animation on the chronicle star to draw the eye. The ambient whispers (child/adult/elder/any pools) fill quiet years with life-texture without adding chronicle noise — a genuine atmospheric win. The 'being' line (italic, faint, top of stage) shifts with age/relationships. The pulse-dot on the flow text is a low-key liveness signal that reads as 'something is happening' to a newcomer without explanation needed. The reflect button ('how things stand') is discoverable by curious players who want grounding."
+    },
+    "readable_chronicle_link": {
+      "score": 9,
+      "notes": "The header's .gen element shows 'Nth of the line', then two amber/ink-dim links: '✦ the constellation' (amber, underlined, large tap target >=44px) and 'the chronicle ↗' (dim, underlined, same tap target). Both are visible during play and fire openChronicle(). The eulogy screen has '✦ read this life & the line ↗' in amber. Past ancestors in The Line tab show '— read ↗' in amber when they have a log. The memoir scrolls with masked fade edges. Chronicle navigation is complete: tablist (This Life / The Line / Constellation) with roving tabindex, arrow-key nav, proper ARIA. A newcomer can tap 'the chronicle ↗' at any point mid-game and read their life so far. The sticky Back/Return button means they never get stuck."
+    }
+  },
+  "what_landed": [
+    "Title screen copy is tight and complete — genre, hook, and mechanic in three short blocks",
+    "The 'it cannot be undone' line is the strongest single phrase in the onboarding",
+    "Heir screen identity-switch sentence ('You are no longer X') is a defining moment — permanence becomes personal",
+    "Dynasty hook in .lead is explicit and evocative ('name, its means, its reputation — and its secrets')",
+    "Ambient whispers give quiet years texture without cluttering the chronicle",
+    "Pulse-dot liveness signal is intuitive and needs no explanation",
+    "Chronicle links are amber, underlined, large tap targets — discoverable without a hint",
+    "Readable ancestor logs with '— read ↗' make the dynasty feel like actual history"
+  ],
+  "what_could_improve": [
+    "The heirInherit block on the heir screen stacks 5 prose items (seat insight + house character + heirlooms + secret + bequest) — a first-timer's eyes may glaze at the moment the dynasty payoff needs to hit hardest; leading with the identity line saves it but the rest could be paced better",
+    "During a first life, the dynasty system is entirely invisible; the player runs on trust. A tiny breadcrumb mid-game (a log line naming the house for the first time, say) could let the hook land earlier than death",
+    "The 'how things stand' button label is evocative but not immediately legible to a non-gamer — 'a quiet reckoning' in the aria-label is poetic, not instructive; the ⊙ prefix helps but this is a minor friction point"
+  ],
+  "would_recommend": true,
+  "summary": "A first-timer can understand what the game is (generational life sim, choices that cannot be undone, a house that accrues), feel the permanence of choices (verbally at title, physically at heir screen), and grasp the dynasty hook (explicit in .lead, paid off at death). The onboarding is complete without being heavy. The score holds at 8.0 — the ceiling is kept by the heir-screen information density and the dynasty being invisible during a first life. Nothing is broken; this is a polished, atmospherically coherent product a non-gamer would happily continue and share."
+}

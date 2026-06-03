@@ -1,0 +1,38 @@
+{
+  "profile": "systems_designer",
+  "score": 8.0,
+  "strengths": [
+    "Motto crystallization is now reliable: 3 of 3 full five-generation dynasties earned a motto; the threshold at repute>=1.5 with 0.09 fade correctly rewards a focused three-to-four generation line without requiring a marathon run.",
+    "Motto diversity is genuinely improved: 'industrious' and 'scholarly' both appear in the five-dynasty sample, and the code hard-limits 'kind' to genuine lived acts (kept_stray or legacy==='kind'), successfully inverting its old dominance.",
+    "cb_the_cost fires reliably across the transcripts — roughly five to six triggerings in thirteen observed lives, up from near-zero — giving elder generations a plannable moral echo that lands with weight.",
+    "The bequest system is a real cross-generation lever: every five-generation dynasty uses it, and the choice (mind vs. means vs. heart vs. free) visibly shapes the heir's starting conditions, which is the clearest form of player agency across the generation boundary.",
+    "Repute-gated cards (r_scholar_door, r_hard_name) fire inside dynasties with the relevant character — three consecutive Voss generations walk through the scholar door — creating a dynasty that plays differently from a generalist line.",
+    "The heirloom-triggered r_hard_name condition (tag==='hardname' + means>45) correctly extends the ruthless content path beyond a raw repute check, so a single hard ancestor can open that gated content for descendants.",
+    "a_make_name gives the player a deliberate steering moment in every adult life, and its three-way choice cleanly maps to three distinct dynasty trajectories — the most explicit planning tool in the system.",
+    "Seat progression is gradual but legible: both five-generation scholarly dynasties end at 'a grand estate' (seat 5), which reads as earned rather than given, and the dynasty-climb log line fires at the correct generation rather than being discovered retroactively."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Slightly rebalance a_make_name incentives: 'be known as learned' gives mind+9 spirit+2 with no penalty; 'hard to cross' gives means+9 heart-3; 'open-handed' gives heart+7 means-5 spirit+3. The learned path is strictly better in most runs. Add a small spirit cost to scholarly (e.g. mind+9, spirit-2, means+3) and remove the means penalty from open-handed (heart+8, spirit+4) to make all three choices feel like genuine tradeoffs rather than a stat-optimisation pick.",
+      "why": "In all three motto-bearing dynasties in the transcript sample, 'scholarly' appears twice and 'industrious' once — suggesting the scholarly path is both easiest to trigger and most incentivised. Rebalancing broadens observed motto diversity without removing the scholarly option.",
+      "impact": "med"
+    },
+    {
+      "what": "Lower the seat-7 repute threshold from 4.5 to 3.5, or extend the seat-6 repute-climb assist (currently capped at seat<5) up to seat 6 so a focused six-generation line can plausibly accumulate enough. Alternatively, add a one-time 'house written into histories' flourish card at seat>=6 + repute>=3.0 that grants +1.0 repute as a reward for reaching the threshold — making the pinnacle feel like an earned unlock rather than a dice roll.",
+      "why": "Zero of fifteen observed lives reach seat 7. The requirement chain (seat>=6 AND repute>=4.5 AND peakMeans>=82 AND 45% chance) is effectively unreachable in a typical five-generation run because 0.09 fade per generation means repute at 4.5 would require eight or more highly focused ancestors. A pinnacle that no player has ever seen is not a design goal, it is a dead branch.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'tainted' or 'reckless' starter event that can appear in the founder's early adult stage — something like a desperate act or a public disgrace — so a player who wants to build a hard-dealing or reckless dynasty has a reliable opening move without depending on the low-probability affair card (cond: spouse exists + no prior strayed + affairResolved clear). Currently the darker motto paths require specific relationship states that may not obtain for several generations.",
+      "why": "In five dynasties, no tainted, reckless, or ruthless motto emerged. The cards exist (a_affair, y_drink, a_small_lie) but are each gated by conditions that can all miss in a given life. A founder-stage entry point (e.g. a 'desperate year' card with no relationship prerequisite) would make those trajectories plannable from generation one.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the current repute values (without numbers) more visibly during play, not only on the heir screen. houseCharacter() already produces the right prose — consider logging it as a brief 'obs' line in the life log when a reputation crosses the 1.2 threshold for the first time (e.g. 'The family is beginning to be known as hard-working'), so a player can feel the dynasty building mid-life rather than only at succession.",
+      "why": "Currently a player who wants to steer toward a specific motto has no mid-life feedback that their choices are accumulating. The heir-screen summary is excellent but arrives after the life is over. An in-life signal would make the generational strategy feel plannable rather than retrospective.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The round-5 fixes land: mottos crystallise reliably, cb_the_cost echoes meaningfully, and the repute-gated cards produce dynasties that play noticeably differently from each other — the system now earns an 8, with the seat-7 pinnacle remaining a dead branch in practice and the incentive landscape still nudging most focused players toward scholarly."
+}

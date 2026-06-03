@@ -1,0 +1,43 @@
+{
+  "profile": "qa_skeptic",
+  "score": 8.1,
+  "strengths": [
+    "Round-4 bug is confirmed fixed: content.js line 81 now reads k===0 ? 'Chose a life without children, with clear eyes.' : 'Chose not to have another — the family, as it already was, was enough.' — exactly the fix proposed. Child-count-awareness is correct and the text is well-calibrated for each case.",
+    "Motto threshold lowered to 1.5 (dynasty.js line 184) does NOT create a runaway-tag risk. The fade() at line 125 subtracts 0.09 per generation — a tag that is never renewed falls from 1.5 to below 0.4 (the deletion threshold) in ~12 generations, so no tag permanently owns the motto slot. The 0.09 fade is net-negative for tags that aren't actively reinforced.",
+    "No repute inconsistency between motto (>=1.5) and reputeTop (>=2) causes a visible bug. The functions serve distinct purposes: motto is a one-time crystallization (once set, never changes), while reputeTop drives the heir screen, epitaph summary, and reputation-gated cards. A house can have a motto but reputeTop returning null — this is the correct design: the motto is a legacy inscription, not a live reputation descriptor.",
+    "Seat-7 gate remains correctly demanding: h.seat>=6 AND repute>=4.5 AND peakMeans>=82 AND random<0.45 (dynasty.js line 160). The 'eased' aspect from the brief refers to the lapse path (h.seat===7 -> h.seat=6, line 161), which is present and correct — a seat-7 house lapses without being re-earned. This was already in the prior round; transcripts show no seat-7 reached across 5 dynasties, confirming the bar is appropriately high.",
+    "r_hard_name's heirloom-based trigger (line 621) has a sound narrative basis: the hardname heirloom is only created when cut_a_corner or chose_self_over_house AND means>68 (dynasty.js line 172). These are always triggered by explicit player choices (a_small_lie 'Tell it', a_make_name 'hard to cross', x_reckoning 'Protect your own', cb_corner 'Cut it again', r_hard_name itself 'Use the name'). The card cannot fire without a genuine prior ruthless act establishing the heirloom.",
+    "The expanded pools (y_love1 now 7 variants, c_sick 3 variants, a_meet_late 3 variants) are all clean: array lengths match rotI(p, N) calls exactly. No off-by-one. No unresolved {tokens} in any new variant text. The 'No' branch of y_love1 has 3 variants with rotI(p,3) — also clean.",
+    "Competing-goods weights: transcripts confirm x_honest_or_kind (w:2, cool:22), x_loyalty_truth (w:3, once:true), x_dream_or_duty (w:3, once:true) all fire appropriately across the 15 lives reviewed. cb_the_cost fires correctly for lives with chose_self/chose_others/chose_loyalty/a_kind_silence — confirmed in Pavel Fenn gen 3 (chose_loyalty at 52, cb_the_cost at 67) and Lena Voss gen 3 (a_kind_silence at 74, cb_the_cost at 79). The 'which' priority chain correctly resolves: chose_self > chose_others > chose_loyalty > a_kind_silence.",
+    "Transcripts remain clean across all 5 dynasties (15 lives): no soft-locks, no unresolved {tokens}, no crashes, no impossible ages. The heirloom list in dynasty 5 gen 5 (Esme Voss: book+fortune+teaching+hardname) is correctly rendered and all four heirlooms appear in succession with correct ancestors attributed."
+  ],
+  "blockers": [],
+  "improvements": [
+    {
+      "what": "Fix the r_hard_name semantic gap: the card fires on the hardname heirloom even when the house's current reputeTop is NOT 'ruthless' — so a gen-4 heir in a scholarly house that once had a ruthless founder still gets 'The family's hard name goes into the room ahead of {n}'. Add a soft reputation check: cond:()=>S.house&&(reputeTop(S.house)==='ruthless'||((S.house.heirlooms||[]).some(h=>h.tag==='hardname')&&P.stats.means>45&&(S.house.repute&&(S.house.repute.ruthless||0)>=0.5))). This keeps the heirloom path alive for partially-renewing lines while blocking the card from firing on a fully-pivoted family.",
+      "why": "Current code lets a gen-5 heir of a 'scholarly' house receive a card premised on the family being feared, which breaks immersion when the player has explicitly steered the dynasty away from ruthlessness across several generations.",
+      "impact": "low"
+    },
+    {
+      "what": "Fix the e_window grandchild age inconsistency: the card fires at age 60 with children who are only 10-15. The cond checks rels('child').length>0 but not child ages. Add a secondary check: P.age>=68 OR (rels('child').length>0 && rels('child').some(c=>c.age>=18)). A 61-year-old parent of a 12-year-old getting a sticky grandchild in their lap is implausible.",
+      "why": "Transcripts show the card fires at ages 63, 71, 82, 85 in these playthroughs — the minimum (63 with a 15-year-old child) is borderline. In edge cases with early first children (c_child at age 26, child now 15 at age 41) and long lives, this could fire at 60 with a child who is 5-10, which is a visible prose contradiction.",
+      "impact": "low"
+    },
+    {
+      "what": "Resolve the 14 orphaned memory keys: break_with_house (set in 3 cards), owned_a_failure, public_role, and closed_to_love are the highest priority. At minimum, add closed_to_love as a cond gate for a_meet_late's 'It is too late for that' variant — so a player who already chose closed_to_love in one life sees a different framing if the card fires again. These keys represent durable per-life state with no downstream consequence.",
+      "why": "The memory system's design contract is that choices leave durable marks the future can find. Fourteen keys that are set but never read undermine this contract and represent future callback opportunities that are being missed.",
+      "impact": "med"
+    },
+    {
+      "what": "Differentiate r_family_shadow and r_old_shame conditions. Both currently fire on the same gate (tainted OR secret not known) with similar cooldowns (18/20). Add means>35 to r_old_shame (a tangible prize the shame costs you) and optionally require spirit<60 for r_family_shadow (the psychological weight variant).",
+      "why": "A player with a tainted house can receive both cards in the same long life, both narrating 'the family's old shame' with no differentiation except the choice text. The split is thematic — one is internal (shadow), one is external (door blocked) — but the overlapping cond makes it easy for both to fire in mid-to-late adult.",
+      "impact": "low"
+    },
+    {
+      "what": "Inject a narrative memory for the hardname heirloom in succeed() (dynasty.js, near line 297): after the book/stray/teaching injections, add: if(hl.tag==='hardname') child.mem.cut_a_corner={age:0,inherited:true}; This enables cb_corner to fire for the heir as 'the corner that was cut before you were born', and it mirrors how book/stray/teaching create downstream card eligibility.",
+      "why": "Without the injection, the hardname heirloom is cosmetic: it displays on the heir screen and enables r_hard_name, but no callback card can fire for the heir on the basis of inherited ruthlessness. The other three heirlooms all inject memories enabling downstream effects; hardname is the odd one out.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "Round 5 clears the single blocker from round 4: the a_child 'No' logLine is correctly child-count-aware, the fade softening and motto threshold lowering are coherent and introduce no runaway-tag or reputeTop inconsistency, and the expanded pools are structurally clean — the score crosses 8 for the first time, held just above rather than well above by a soft r_hard_name semantic gap (heirloom fires even on a pivoted-away house) and the still-unresolved orphaned-memory debt."
+}
