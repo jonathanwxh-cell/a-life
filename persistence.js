@@ -49,6 +49,8 @@ async function loadSlot(slot){
       if(!P.flags) P.flags={};
       if(!Array.isArray(P.log)) P.log=[];
       if(!Array.isArray(P.childrenIds)) P.childrenIds=[];
+      if(P.peakMeans==null) P.peakMeans=(P.stats&&P.stats.means)||0;   // old saves: seed the high-water mark so the pinnacle stays reachable
+      if(S.house && S.house.repPeak==null) S.house.repPeak=0;          // and the reputation high-water mark
     }
     firedObs={};
     return !!P;

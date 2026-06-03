@@ -96,12 +96,12 @@ function houseCharacter(h){
   if(e[1] && e[1][1]>=1) s+=' There is something of the '+w(e[1][0])+' in it too.';
   // a prose reading of how far the leading reputation has come toward the histories (the seat-7 gate
   // is the cumulative high-water mark h.repPeak >= 3.5) — so the climb has a legible trajectory, not just a goal
-  if((h.seat||0)>=5 && (h.seat||0)<7 && v0>=1.2){
+  if((h.seat||0)>=5 && (h.seat||0)<7){   // any leading reputation gets a trajectory reading — no silent gap when it's thin
     const rp=Math.max(v0, h.repPeak||0);
-    const tier = rp>=3.5 ? 'is deep enough now to be written into the histories — it wants only a house held at the summit and an heir whose fortune reaches its full height'
+    const tier = rp>=3.5 ? 'is deep enough now for the histories — it wants the house raised to its summit seat and an heir whose fortune reaches its full height'
                : rp>=2.5 ? 'has lasted — a little more of the same, and the house raised to the summit, and it could be written into the histories'
-               : rp>=1.7 ? 'has real weight behind it now, though the histories ask for more of it yet'
-               : 'is still only beginning to hold';
+               : rp>=1.7 ? 'has real weight behind it now, though the histories would ask for a good deal more of it yet'
+               : 'has barely begun to settle — it would take several more lives of the same before the histories took any notice';
     s+=' As a name, it '+tier+'.';
   }
   return s;
@@ -162,8 +162,8 @@ function updateHouse(p){
 
   // the very top — "a house written into the histories" — is not a status you reach
   // and keep; it must be RE-EARNED every generation. It needs a seat-6 house, a single
-  // reputation held strong across many lives (repute >= 5), and a life that itself peaked
-  // remarkably (peakMeans >= 86) — and even then only sometimes. If a later generation
+  // reputation built strong across many lives (high-water mark repPeak >= 3.5), and a life
+  // that itself peaked well (peakMeans >= 76) — and even then only sometimes. If a later generation
   // fails to clear that bar, the house lapses back to "old and famous." This keeps the
   // pinnacle genuinely rare and makes the very top precarious rather than won-and-done.
   // track the high-water mark of the leading reputation, so the pinnacle rewards a line that BUILT
