@@ -94,6 +94,7 @@ function houseCharacter(h){
   else if(v0>=1.2) s='The family is becoming known as '+w(k0)+'.';
   else s='A name for being '+w(k0)+' is only just beginning to gather.';
   if(e[1] && e[1][1]>=1) s+=' There is something of the '+w(e[1][0])+' in it too.';
+  if(v0>=2 && (h.seat||0)>=4 && (h.seat||0)<7) s+=' Held this strong across more lives, and raised high enough, such a name can be written into the histories.';
   return s;
 }
 
@@ -101,6 +102,7 @@ function houseCharacter(h){
 function updateHouse(p){
   const h=S.house;
   const s=p.stats, m=p.mem||{};
+  const seatBefore=h.seat;   // so a rise or a fall can be NAMED in the life that caused it (not just discovered later)
   // --- seat moves with how much fortune the life ended holding, relative to its peak ---
   // the house rises on what a life ACHIEVED at its height (peakMeans), not only what
   // it ended holding — so building wealth and then living on it still lifts the family.
@@ -130,18 +132,18 @@ function updateHouse(p){
   // Reputation is driven FIRST by what a life DID (choices/memories), and only lightly by a raw stat
   // as a fallback — so distinct play yields distinct houses, instead of every line drifting toward
   // whichever stat happened to run high (which collapsed all mottos to one).
-  if(m.chose_study||m.became_teacher||m.set_scholar_rep||lived('child_books')) bump('scholarly',1.2); else if(s.mind>80) bump('scholarly',0.6);
-  if(lived('kept_stray')||p.flags.legacy==='kind'||m.let_in||m.looked_up) bump('kind',1.2); else if(s.heart>82) bump('kind',0.6);
+  // Balanced so no single tag has many more inputs than the others — otherwise every house drifts to
+  // whichever reputation has the most paths (it was 'kind'). 'kind' now means only the genuinely
+  // kind-DEFINING acts; broad warmth-to-others reads as 'generous' (its own motto).
+  if(m.chose_study||m.became_teacher||m.set_scholar_rep||lived('child_books')) bump('scholarly',1.2); else if(s.mind>82) bump('scholarly',0.5);
+  if(lived('kept_stray')||p.flags.legacy==='kind') bump('kind',1.2);
   if(m.strayed&&!m.confessed) bump('tainted',1.3);
   if(m.cut_a_corner||m.chose_self_over_house||(s.means>82&&s.heart<40)) bump('ruthless',1.2);
-  if(p.flags.legacy==='built'||m.self_made||m.built_the_name||m.driven) bump('industrious',1.1); else if(s.means>84) bump('industrious',0.6);
-  if(m.kind_to_outcast) bump('generous',1.0);
-  // the character paths the card set now writes — so a house can read as wild, creative, devout,
-  // or hard-driving, not only learned or kind (this is what lets distinct dynasties crystallize
-  // distinct mottos; with the inherited-heirloom guard above, these now actually win sometimes).
+  if(p.flags.legacy==='built'||m.self_made||m.built_the_name||m.driven) bump('industrious',1.2); else if(s.means>86) bump('industrious',0.5);
+  if(m.kind_to_outcast||m.chose_others||m.let_in) bump('generous',1.1);
   if(m.lived_reckless||p.flags.peril) bump('reckless',1.2);
   if(m.early_talent||m.made_art) bump('artistic',1.2);
-  if(m.found_faith||m.made_peace) bump('pious',1.2);
+  if(m.found_faith||m.made_peace||m.looked_up) bump('pious',1.1);
 
   // a family can also climb on a strong, sustained reputation — not only on wealth.
   // A scholarly or kind or hard-working line earns standing the modest can reach
@@ -155,7 +157,7 @@ function updateHouse(p){
   // remarkably (peakMeans >= 86) — and even then only sometimes. If a later generation
   // fails to clear that bar, the house lapses back to "old and famous." This keeps the
   // pinnacle genuinely rare and makes the very top precarious rather than won-and-done.
-  if(h.seat>=6 && repTop && h.repute[repTop]>=6 && p.peakMeans>=88 && Math.random()<0.35) h.seat=7;
+  if(h.seat>=6 && repTop && h.repute[repTop]>=4.5 && p.peakMeans>=88 && Math.random()<0.35) h.seat=7;   // reachable through a focused run, still re-earned each generation
   else if(h.seat===7) h.seat=6;
 
   // --- heirlooms: certain lives leave an object behind ---
@@ -167,6 +169,8 @@ function updateHouse(p){
     h.heirlooms.push({tag:'fortune',name:"a fortune, and the fear of losing it",from:p.given,gen:p.gen});
   if(m.had_mentor && !h.heirlooms.some(x=>x.tag==='teaching'))
     h.heirlooms.push({tag:'teaching',name:"the habit of teaching the young",from:p.given,gen:p.gen});
+  if((m.cut_a_corner||m.chose_self_over_house) && s.means>68 && !h.heirlooms.some(x=>x.tag==='hardname'))
+    h.heirlooms.push({tag:'hardname',name:"a name that opens doors by being feared",from:p.given,gen:p.gen});
 
   // --- secret: a strayed-and-unconfessed life buries one for descendants to inherit ---
   if(m.strayed && !m.confessed && !h.secret)
@@ -182,6 +186,15 @@ function updateHouse(p){
       tainted:"We do not speak of everything.",pious:"In time, all is weighed.",artistic:"We leave something beautiful behind.",
       reckless:"We burn bright, and we burn."};
     if(top&&MOTTOS[top]&&p.gen>=2) h.motto=MOTTOS[top];
+  }
+
+  // name the change in standing within the very life that caused it, so the player feels the
+  // dynasty rise and fall in the moment rather than only inferring it later from the heir screen.
+  if(p.gen>=2 && h.seat!==seatBefore){
+    logLine(h.seat>seatBefore
+      ? "The family climbed in the world this generation — the house now keeps "+seatOf(h.seat).name+"."
+      : "The family's standing slipped this generation — the house holds "+seatOf(h.seat).name+" now.",
+      h.seat>seatBefore?"joy":"loss");
   }
 }
 

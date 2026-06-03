@@ -77,13 +77,14 @@ function hintOnce(key, text){
 // without writing anything to the chronicle (these are weather, not events worth recording).
 const AMBIENT={
   child:["A long afternoon goes by with nothing in it but light.","Somewhere a window stays open, and the whole day comes in.","A whole season passes in the slow way only childhood seasons do."],
+  adult:["The ordinary week turns out to be where a life is actually lived.","A stretch of work and evenings goes by, and is mostly good.","The middle of a life is wide and quiet and full of nothing in particular.","The days run together for a while, the way the good ones tend to."],
   elder:["The days are wide and slow and mostly kind now.","Morning, the long noon, the longer evening; morning again.","The hours have loosened, and {they} lets them."],
   any:["The season turns over, quietly, and turns again.","An ordinary week passes, and is not kept.","Rain comes, and stays a while, and goes.","The light lengthens, and shortens, and lengthens again.","A year goes by that no one will remember, and it is a good one.","The house settles around its own small sounds."]
 };
 let _ambN=0;
 function ambientWhisper(){
   if(!P||!P.alive) return;
-  const stage = P.age<13?'child':(P.age>=66?'elder':null);
+  const stage = P.age<13?'child':(P.age>=66?'elder':(P.age>=26?'adult':null));
   const pool = (stage?AMBIENT[stage]:[]).concat(AMBIENT.any);
   const line = pool[(_ambN++ + (typeof houseOff==='function'?houseOff():0))%pool.length];
   const log=document.getElementById('log'); if(log) addEphemeralEntry(log, {age:P.age, text:line, cls:'whisper'});

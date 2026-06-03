@@ -38,7 +38,7 @@
   .gen{font-size:10.5px;color:var(--ink-dim);letter-spacing:2px;text-transform:uppercase;text-align:right;line-height:1.7;}
   .gen .chron{cursor:pointer;color:var(--amber);opacity:0.9;}
   .gen .chron:hover{opacity:1;}
-  .gen .chron2{cursor:pointer;color:var(--ink-faint);opacity:0.8;font-size:9.5px;}
+  .gen .chron2{cursor:pointer;color:var(--ink-dim);opacity:0.92;font-size:11px;}
   .gen .chron2:hover{opacity:1;color:var(--ink-dim);}
   .being{padding:2px 22px 0;color:var(--ink-dim);font-size:13.5px;font-style:italic;min-height:20px;
     opacity:0.9;transition:opacity .6s;}
@@ -324,11 +324,11 @@
   .skip:focus{top:8px;outline:2px solid #fff;outline-offset:1px;}
 
   /* "how things stand" — a quiet, discoverable reflect button under the being line */
-  .reflect{display:block;margin:2px auto 0;background:none;border:1px solid rgba(236,225,207,0.16);cursor:pointer;
-    font-family:'Fraunces',serif;font-size:12.5px;letter-spacing:.8px;
-    color:var(--ink-dim);opacity:.95;padding:4px 12px;border-radius:11px;transition:color .2s,opacity .2s,border-color .2s;}
-  .reflect::before{content:'⊙ ';opacity:.8;}
-  .reflect:hover{color:var(--amber);opacity:1;border-color:rgba(224,169,75,0.42);}
+  .reflect{display:block;margin:2px auto 0;background:none;border:1px solid rgba(236,225,207,0.45);cursor:pointer;
+    font-family:'Fraunces',serif;font-size:13.5px;letter-spacing:.8px;
+    color:var(--ink-dim);opacity:1;padding:5px 13px;border-radius:11px;transition:color .2s,border-color .2s;}
+  .reflect::before{content:'⊙ ';opacity:.85;}
+  .reflect:hover{color:var(--amber);border-color:rgba(224,169,75,0.55);}
 
   /* the dynasty hook on the title — brighter than the mechanics line, so a newcomer reads it */
   .lead{color:var(--ink);font-size:14px;line-height:1.55;margin:8px auto 2px;max-width:32ch;opacity:.96;}
@@ -339,7 +339,6 @@
   .hr-title{font-family:'Fraunces',serif;letter-spacing:.5px;color:var(--ink-dim);opacity:.9;}
   .hr-mottos{margin-top:6px;font-style:italic;color:var(--ink-faint);opacity:.85;line-height:1.7;}
   .reflect:focus-visible{outline:2px solid var(--amber);outline-offset:2px;color:var(--amber);}
-  .veil.show ~ #app .reflect, body.paused .reflect{opacity:.55;}
 
   /* the flow text is now a control: tap it to change the pace of the years */
   .flow{cursor:pointer;border-radius:8px;transition:color .2s;}

@@ -25,7 +25,9 @@ function haveChild(){
     "Had a child, "+cn+", and the whole shape of the days changed to make room.",
     "Had a child, "+cn+" — and discovered a fear {they} had not known {they} owned.",
     "Had a child, "+cn+". Some door {they} hadn't known was shut came quietly open.",
-    "Had a child, "+cn+", and began, that night, keeping a different kind of time."];
+    "Had a child, "+cn+", and began, that night, keeping a different kind of time.",
+    "Had a child, "+cn+". Was asleep on {their} feet for a month, and had never once been so awake.",
+    "Had a child, "+cn+", and did not know, until that night, quite what {they} had been waiting for."];
   const latePool=[
     "Had a child late, "+cn+", and felt the lateness itself as a kind of luck.",
     "Had a child, "+cn+", at an age {they} had stopped expecting it — and was the more undone.",
@@ -240,7 +242,7 @@ function presentCard(c){
   if(c.once) P.flags['card_'+c.id]=1;
   // once the player has made a choice, point them to where it's all recorded
   if(window.hintOnce && P.decisions && P.decisions.length>=1) hintOnce('seenChron',"Every choice is being written into your chronicle — tap “✦ the constellation” (top) to see the whole line.");
-  if(window.hintOnce && P.decisions && P.decisions.length>=3) hintOnce('seenLog',"Tap the fading log below any time to read this life's full record.");
+  if(window.hintOnce && P.decisions && P.decisions.length>=2) hintOnce('seenLog',"Tap the fading log below any time to read this life's full record.");
   const card=document.getElementById('card'), pass=document.getElementById('passing');
   pass.classList.remove('show');
   document.getElementById('scene').innerHTML=fmt(c.text);
