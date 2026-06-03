@@ -43,10 +43,10 @@ const CARDS=[
   {t:"Take the trade. Eat today.",h:"steady means, narrow door",do:p=>{fx(p,{means:14,mind:-2,vit:2});p.flags.trade=1;remember('chose_trade');logLine("Chose the wage over the wager. Was never quite poor, never quite free.");}},
   {t:"Study. Gamble on the mind.",h:"hungry now, wider door",do:p=>{fx(p,{mind:16,means:-8,spirit:2});p.flags.scholar=1;remember('chose_study');logLine("Chose study, and hunger, and the long bet on {their} own head.");}},
  ]},
-{id:'y_love1',stage:'youth',w:4,age:[16,25],opensLove:true,cond:()=>!rel('love'),text:p=>["Someone keeps finding reasons to be where {n} is. The reasons are getting thinner.","There is someone who keeps turning up where {n} is. {They} has noticed. And the noticing, by now, runs both ways.","Someone has started to matter — turning up, lingering, the way only a few people ever do.","The same face keeps appearing at the edges of {n}'s days, and the days have begun to arrange themselves around it.","There is a particular person now — nothing announced, nothing decided, just a quiet fact getting truer."][rotI(p,5)],
+{id:'y_love1',stage:'youth',w:4,age:[16,25],opensLove:true,cond:()=>!rel('love'),text:p=>["Someone keeps finding reasons to be where {n} is. The reasons are getting thinner.","There is someone who keeps turning up where {n} is. {They} has noticed. And the noticing, by now, runs both ways.","Someone has started to matter — turning up, lingering, the way only a few people ever do.","The same face keeps appearing at the edges of {n}'s days, and the days have begun to arrange themselves around it.","There is a particular person now — nothing announced, nothing decided, just a quiet fact getting truer.","Someone has gone quiet for three days, and {n} is unsettled to find that the quiet has a shape.","It takes {n} a while to name it: the person whose absence, lately, has become the loudest thing in any room."][rotI(p,7)],
  choices:[
   {t:"Meet them halfway.",h:"the heart opens",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,62,p.age+ri(-2,2));fx(p,{spirit:9,heart:6});logLine(["Started, without quite deciding to, building the days around another person.","Fell in love — the kind that quietly rearranges the furniture of a life.","Fell in love, and was surprised, as everyone is, that it was {them} this time."][rotI(p,3)],"joy");}},
-  {t:"Pretend not to notice.",h:"",do:p=>{remember('unspoken_love');fx(p,{spirit:-4,mind:2});logLine("Let someone slip away by saying nothing. Wondered, later, often.","obs");}},
+  {t:"Pretend not to notice.",h:"",do:p=>{remember('unspoken_love');fx(p,{spirit:-4,mind:2});logLine(["Let someone slip away by saying nothing. Wondered, later, often.","Said nothing, let the moment pass, and watched it become one of the things {they} simply hadn't done.","Kept {their} own counsel, let someone go, and felt the shape of that silence for years."][rotI(p,3)],"obs");}},
  ]},
 {id:'y_risk',stage:'youth',w:2,age:[18,28],cond:()=>P.stats.means>20,text:"A friend has a scheme. It could double everything {n} has saved. It could take it.",
  choices:[
@@ -67,7 +67,11 @@ const CARDS=[
 /* ---- ADULT ---- */
 {id:'a_marry',stage:'adult',w:5,age:[24,58],cond:()=>rel('love')&&!P.flags.married,text:()=>{const l=rel('love');return [`${P.given} and ${l.given} have been a quiet certainty for years now. ${l.given} is waiting for a question.`,`${l.given} fell asleep first again, mid-sentence; ${P.given} lay awake deciding to ask in the morning — and then, by morning, did not.`,`The question has been in the room for years — between ${P.given} and ${l.given}, just words now, standing between here and the answer.`][rotI(P,3)];},
  choices:[
-  {t:"Ask. Build a life.",h:"two become a household",do:p=>{const l=rel('love');l.kind='spouse';p.flags.married=1;fx(p,{spirit:11,heart:6});logLine("Married "+l.given+". "+["The day was small and the meaning was not.","Nobody made a speech; the years that followed were the speech.","They made it formal on an ordinary day, and meant every word of it."][rotI(p,3)],"joy");}},
+  {t:"Ask. Build a life.",h:"two become a household",do:p=>{const l=rel('love');l.kind='spouse';p.flags.married=1;fx(p,{spirit:11,heart:6});
+    const lines = p.age>48
+      ? ["Married "+l.given+" late, and found the lateness made the vow weigh more, not less.","Married "+l.given+" after both had long stopped expecting it, and meant it the more for that.","Married "+l.given+" with most of a life already behind them, and counted it the best thing in any of it."]
+      : ["Married "+l.given+". The day was small and the meaning was not.","Married "+l.given+". Nobody made a speech; the years that followed were the speech.","Married "+l.given+" on an ordinary day, and meant every word of it.","Married "+l.given+" in front of the few who mattered, and let the world find out after.","Married "+l.given+" without ceremony and without a single doubt.","Married "+l.given+", and the plain room felt larger for the promise made in it."];
+    logLine(lines[rotI(p,lines.length)],"joy");}},
   {t:"Not yet. Maybe never.",h:"",do:p=>{const l=rel('love');l.bond=clamp(l.bond-14);fx(p,{spirit:-6});logLine("Could not say yes, and watched a good thing strain.","loss");}},
  ]},
 {id:'a_child',stage:'adult',w:5,age:[26,50],cool:5,cond:()=>(rel('spouse')||rel('love'))&&rels('child').length<3,
@@ -164,7 +168,7 @@ const CARDS=[
   {t:"Pass it to a young one.",h:"",do:p=>{const c=rels('child')[0];const bk=recall('child_books')||{};echo((bk.inherited?"Gave the book the family has always kept to ":"Gave the book that shaped {them} to ")+(c?c.given:'a child')+", saying nothing of why.");if(c)c.bond=clamp(c.bond+8);fx(p,{spirit:6,heart:4});}},
  ]},
 {id:'cb_outcast_return',stage:'adult',w:4,cond:()=>held('kind_to_outcast'),once:true,
- text:()=>{const f=rel('friend');return `The child from the yard${f?' — '+f.given+', grown —':', grown,'} is somebody now, and has not forgotten that ${P.given} sat beside them when no one else would.`;},
+ text:()=>{const f=rel('friend');return f?`The child from the yard — ${f.given}, grown — is somebody now, and has not forgotten that ${P.given} sat beside them when no one else would.`:`Someone ${P.given} helped once, years ago and asking nothing in return, is somebody now — and has not forgotten who stood with them.`;},
  choices:[
   {t:"Accept the hand up.",h:"kindness, returned with interest",do:p=>{const f=rel('friend');echo("A kindness done at "+recall('kind_to_outcast').age+" came back, decades later, as a door held open.","joy");fx(p,{means:14,spirit:8});if(f)f.bond=clamp(f.bond+10);}},
   {t:"Decline. You didn't do it for this.",h:"",do:p=>{echo("Refused to be repaid for a kindness {they} barely remembered giving.","obs");fx(p,{spirit:6,heart:5});}},
@@ -244,7 +248,7 @@ const CARDS=[
  ]},
 {id:'e_window',stage:'elder',w:3,age:[60,95],once:true,cond:()=>rels('child').length>0||P.childrenIds.length>0,text:"A grandchild — small, sticky, fearless — climbs into {n}'s lap and asks what {they} was like when {they} was little.",
  choices:[
-  {t:"Tell the true story.",h:"",do:p=>{fx(p,{spirit:9,heart:7});const line= held('kept_stray')?"told the one about the secret stray":held('child_books')?"told the one about the book too hard to read":"told the truest one {they} had";logLine("Held a grandchild and "+line+".","joy");}},
+  {t:"Tell the true story.",h:"",do:p=>{fx(p,{spirit:9,heart:7});const ls=recall('kept_stray'),lb=recall('child_books');const line=(ls&&!ls.inherited)?"told the one about the secret stray":(lb&&!lb.inherited)?"told the one about the book too hard to read":"told the truest one {they} had";logLine("Held a grandchild and "+line+".","joy");}},
   {t:"Tell the better story.",h:"",do:p=>{fx(p,{spirit:5,heart:4});logLine("Improved {their} own childhood a little, for a child who'd never know.","obs");}},
  ]},
 {id:'e_last_walk',stage:'elder',w:2,age:[66,95],cond:()=>P.stats.vit<40,once:true,
@@ -493,18 +497,18 @@ const CARDS=[
    ============================================================ */
 
 /* ---- invest in the name: a means-sink that deliberately lifts the seat (plan reckonings around it) ---- */
-{id:'m_invest_name',stage:'midlife',w:2,age:[44,64],cond:()=>S.house&&S.house.seat>=2&&S.house.seat<6&&P.stats.means>48,
+{id:'m_invest_name',stage:'midlife',w:3,age:[42,64],cool:14,cond:()=>S.house&&S.house.seat>=2&&S.house.seat<6&&P.stats.means>40,
  text:"There is a way to spend — money, and years — on the family's standing itself: a patronage, a marriage well made, a public work with the name carved into it. It would cost {n} personally; the house would carry it forward long after.",
  choices:[
-  {t:"Invest in the name.",h:"the house rises; you pay for it",do:p=>{fx(p,{means:-18,spirit:-3,vit:-2});p.flags.lastWork=p.age;remember('built_the_name');if(S.house)S.house.seat=Math.min(6,S.house.seat+(Math.random()<0.6?1:0));logLine("Spent {them}self down to lift the family's standing, and watched the name climb a rung.","obs");}},
-  {t:"Keep what's yours.",h:"",do:p=>{fx(p,{means:8,spirit:2});logLine("Kept {their} money and {their} years for {them}self, and let the name be what it was.");}},
+  {t:"Invest in the name.",h:"spend yourself to lift the house",do:p=>{fx(p,{means:-17,spirit:-3,vit:-2});p.flags.lastWork=p.age;remember('built_the_name');const rose=Math.random()<0.62;if(S.house&&rose)S.house.seat=Math.min(6,S.house.seat+1);logLine(rose?"Spent {them}self down to lift the family's standing, and watched the name climb a rung.":"Spent {them}self down on the family's standing, and held the name where it stood — no higher, but no lower for the trying.","obs");}},
+  {t:"Keep what's yours.",h:"",do:p=>{fx(p,{means:8,spirit:2});logLine("Kept {their} money and {their} years for {them}self, and let the name be only what it was.");}},
  ]},
 
 /* ---- choose the family's character: a direct, 3-way reputation-steering decision ---- */
 {id:'a_make_name',stage:'adult',w:2,age:[30,52],once:true,cond:()=>S.house,
  text:"{n} is at the age where a reputation sets, the way a face does. There is still a little say in which one — in what the family comes to be known for, through {them}.",
  choices:[
-  {t:"Be known as learned.",h:"toward a scholarly house",do:p=>{fx(p,{mind:9,spirit:2});remember('chose_study');logLine("Set out, deliberately, to be the one the family came to for answers.","obs");}},
+  {t:"Be known as learned.",h:"toward a scholarly house",do:p=>{fx(p,{mind:9,spirit:2});remember('set_scholar_rep');logLine("Set out, deliberately, to be the one the family came to for answers.","obs");}},
   {t:"Be known as hard to cross.",h:"toward a hard-dealing house",do:p=>{fx(p,{means:9,heart:-3});remember('cut_a_corner');logLine("Set out, deliberately, to be the one no one tried twice.","obs");}},
   {t:"Be known as open-handed.",h:"toward a generous house",do:p=>{fx(p,{heart:7,means:-5,spirit:3});remember('kind_to_outcast');logLine("Set out, deliberately, to be the one the door was always open at.","joy");}},
  ]},
@@ -541,5 +545,51 @@ const CARDS=[
  choices:[
   {t:"Chase it. Go.",h:"",do:p=>{fx(p,{spirit:6,mind:4,means:-4,heart:-2});p.flags.peril=p.age+3;remember('left_home');logLine("Followed the restlessness clean over the horizon, and let it cost what it cost.","obs");}},
   {t:"Sit with it. Let it pass.",h:"",do:p=>{fx(p,{spirit:-2,mind:5,heart:3});logLine("Learned, young, to sit still inside the wanting, and let the worst of it pass through.","obs");}},
+ ]},
+
+/* ---- a reliable creative path (so an 'artistic' house is reachable, not an accident) ---- */
+{id:'a_make_thing',stage:'adult',w:2,age:[26,58],once:true,
+ text:"There is a thing {n} could make — write it, build it, paint it, play it — that no one is asking for, that will pay nothing, and that will exist because {they} made it, or not at all.",
+ choices:[
+  {t:"Make it. Whether or not it matters.",h:"",do:p=>{fx(p,{spirit:7,means:-3,mind:3});remember('made_art');logLine("Made a thing the world had not asked for, and was the more {them}self for the making.","joy");}},
+  {t:"Spend the hours on something useful.",h:"",do:p=>{fx(p,{means:5,spirit:-2});logLine("Set the unasked-for thing aside, and did the useful work instead.");}},
+ ]},
+
+/* ---- callbacks for the harder paths, so ruthless / reckless lives play differently downstream ---- */
+{id:'cb_corner',stage:'midlife',w:3,once:true,cond:()=>held('cut_a_corner')&&!held('stayed_straight'),
+ text:"The corner {n} cut once, years ago, comes back wearing a larger face — the same quiet dishonesty, more at stake, and the same certainty that no one need ever know.",
+ choices:[
+  {t:"Cut it again. You know how.",h:"",do:p=>{echo("Did, a second time and for far more, the quiet dishonest thing — and felt almost nothing, which was its own kind of answer.","loss");fx(p,{means:14,heart:-4,spirit:-3});remember('cut_a_corner');}},
+  {t:"Not this time.",h:"",do:p=>{echo("Stood, this once, on the side of the thing {they} had cut past before — and was surprised how much lighter it left {them}.","joy");fx(p,{spirit:7,heart:4});remember('stayed_straight');}},
+ ]},
+{id:'cb_reckless',stage:'elder',w:2,once:true,cond:()=>held('lived_reckless'),
+ text:"A young one in the family lives the way {n} once did — fast, and breakable, and sure of {their} own luck. {n}, of all people, knows exactly where that road runs.",
+ choices:[
+  {t:"Tell them to slow down.",h:"",do:p=>{echo("Counselled the caution {they} had never once managed {them}self — and meant every word of it.","obs");fx(p,{mind:3,heart:3});}},
+  {t:"Tell them it was worth it.",h:"",do:p=>{echo("Told a reckless young one the truth: that {they} would not, on balance, give back a single one of those breakable years.","joy");fx(p,{spirit:6,heart:2});}},
+ ]},
+
+/* ============================================================
+   COMPETING GOODS — moments with no clean answer, where both roads are
+   a kind of virtue and the player cannot be sure which was right. (The
+   binary 'open vs. closed' grammar, broken on purpose.)
+   ============================================================ */
+{id:'x_honest_or_kind',stage:'*',w:2,age:[26,74],cool:22,cond:()=>P.rels.some(r=>r.alive&&r.bond>45&&r.kind!=='ex'),
+ text:"Someone {n} loves asks a direct question, and the true answer would wound them for no good {n} can see. A kindness and an honesty — and they will not both fit in the room.",
+ choices:[
+  {t:"Tell the truth. They deserve it.",h:"honesty over comfort",do:p=>{const r=P.rels.filter(x=>x.alive&&x.bond>45)[0];if(r)r.bond=clamp(r.bond-6);fx(p,{spirit:2,mind:2});logLine("Told someone {they} loved a true thing that hurt, because the truth seemed to {them} the larger love.","obs");}},
+  {t:"Spare them. Some truths cost more than they're worth.",h:"mercy over candour",do:p=>{fx(p,{heart:4,spirit:-1});remember('a_kind_silence');logLine("Held a true thing back to spare someone pain, and was never afterward quite sure {they} had been right.","obs");}},
+ ]},
+{id:'x_loyalty_truth',stage:'adult',w:2,age:[28,60],once:true,cond:()=>rel('friend')||rel('sibling'),
+ text:"{n} knows a thing about someone {they} loves — a thing that others are genuinely owed. Loyalty pulls one way and honesty the other, and both have always been {n}'s virtues.",
+ choices:[
+  {t:"Keep faith with your own.",h:"loyalty",do:p=>{const r=rel('friend')||rel('sibling');if(r)r.bond=clamp(r.bond+8);fx(p,{heart:3,spirit:-2});remember('chose_loyalty');logLine("Kept faith with {their} own, and carried what that cost others quietly, alone.","obs");}},
+  {t:"Tell the truth that's owed.",h:"honesty",do:p=>{const r=rel('friend')||rel('sibling');if(r)r.bond=clamp(r.bond-14);fx(p,{spirit:3,mind:2});logLine("Told a truth that was owed, and lost some of someone {they} loved in the telling of it.","loss");}},
+ ]},
+{id:'x_dream_or_duty',stage:'adult',w:2,age:[30,52],once:true,cond:()=>rels('child').length||rel('spouse'),
+ text:"The thing {n} has always meant to do with {their} one life has finally come within reach — and taking it would ask real sacrifice of the people who depend on {them}. Both, {they} knows, are forms of love.",
+ choices:[
+  {t:"Take the chance. A life is your own.",h:"the self",do:p=>{fx(p,{spirit:10,means:-8});const f=rels('child')[0]||rel('spouse');if(f)f.bond=clamp(f.bond-8);remember('chose_self');logLine("Reached, at last, for the thing {they} had always wanted — and asked the people {they} loved to carry the cost of it.","obs");}},
+  {t:"Set it down. They need you whole.",h:"the others",do:p=>{fx(p,{heart:6,spirit:-4});const f=rels('child')[0]||rel('spouse');if(f)f.bond=clamp(f.bond+8);remember('chose_others');logLine("Set down the thing {they} had always wanted, for the people who needed {them} more — and called it, mostly, no regret.","obs");}},
  ]},
 ];

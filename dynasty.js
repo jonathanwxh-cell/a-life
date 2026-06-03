@@ -81,6 +81,21 @@ function reputeTop(h){
 const REPUTE_WORD={scholarly:"learned",kind:"kind-hearted",ruthless:"hard-dealing",
   artistic:"creative",pious:"devout",tainted:"quietly disgraced",generous:"open-handed",
   industrious:"hard-working",reckless:"wild"};
+// A number-free, in-voice reading of where the house's REPUTATION currently sits — so a player
+// can see what character the family is building toward (and how close a motto is) without raw tallies.
+function houseCharacter(h){
+  if(!h||!h.repute) return 'The family has not yet become known for any one thing.';
+  const e=Object.entries(h.repute).filter(([k,v])=>v>=0.5).sort((a,b)=>b[1]-a[1]);
+  if(!e.length) return 'The family has not yet become known for any one thing.';
+  const w=k=>REPUTE_WORD[k]||k;
+  const [k0,v0]=e[0];
+  let s;
+  if(v0>=2) s='The family is known, by now, as '+w(k0)+' — settled enough that it has become the house’s character'+(h.motto?' (“'+h.motto+'”)':'')+'.';
+  else if(v0>=1.2) s='The family is becoming known as '+w(k0)+'.';
+  else s='A name for being '+w(k0)+' is only just beginning to gather.';
+  if(e[1] && e[1][1]>=1) s+=' There is something of the '+w(e[1][0])+' in it too.';
+  return s;
+}
 
 // called at death: fold this life's character into the house
 function updateHouse(p){
@@ -100,6 +115,8 @@ function updateHouse(p){
   // a genuinely broken life (ending both poor and in shadow) can pull a house down a step too.
   if(p.flags.facedReckoning==='fell') h.seat=Math.max(0,h.seat-1);
   else if(s.spirit<24 && endMeans<32 && h.seat>1 && Math.random()<0.5) h.seat=Math.max(1,h.seat-1);
+  // slow decline: a life that ends far poorer than it once stood — the house living beyond its means
+  else if(peak-endMeans>=40 && endMeans<35 && h.seat>1 && Math.random()<0.4) h.seat=Math.max(1,h.seat-1);
 
   // --- reputation drifts with the defining qualities of the life ---
   const bump=(tag,n=1)=>{h.repute[tag]=(h.repute[tag]||0)+n;};
@@ -113,7 +130,7 @@ function updateHouse(p){
   // Reputation is driven FIRST by what a life DID (choices/memories), and only lightly by a raw stat
   // as a fallback — so distinct play yields distinct houses, instead of every line drifting toward
   // whichever stat happened to run high (which collapsed all mottos to one).
-  if(m.chose_study||m.became_teacher||lived('child_books')) bump('scholarly',1.2); else if(s.mind>80) bump('scholarly',0.6);
+  if(m.chose_study||m.became_teacher||m.set_scholar_rep||lived('child_books')) bump('scholarly',1.2); else if(s.mind>80) bump('scholarly',0.6);
   if(lived('kept_stray')||p.flags.legacy==='kind'||m.let_in||m.looked_up) bump('kind',1.2); else if(s.heart>82) bump('kind',0.6);
   if(m.strayed&&!m.confessed) bump('tainted',1.3);
   if(m.cut_a_corner||m.chose_self_over_house||(s.means>82&&s.heart<40)) bump('ruthless',1.2);
@@ -138,7 +155,7 @@ function updateHouse(p){
   // remarkably (peakMeans >= 86) — and even then only sometimes. If a later generation
   // fails to clear that bar, the house lapses back to "old and famous." This keeps the
   // pinnacle genuinely rare and makes the very top precarious rather than won-and-done.
-  if(h.seat>=6 && repTop && h.repute[repTop]>=7.5 && p.peakMeans>=92 && Math.random()<0.25) h.seat=7;
+  if(h.seat>=6 && repTop && h.repute[repTop]>=6 && p.peakMeans>=88 && Math.random()<0.35) h.seat=7;
   else if(h.seat===7) h.seat=6;
 
   // --- heirlooms: certain lives leave an object behind ---
@@ -322,6 +339,7 @@ function showHeir(child, dead, inh, nur, h){
   // inherited heirlooms / secret, surfaced at birth
   const lines=[insight];
   if(h){
+    lines.push(houseCharacter(h));   // the family's character so far — what the next life inherits and can build on
     for(const hl of (h.heirlooms||[])) lines.push('Inherits '+hl.name+' (from '+hl.from+').');
     if(h.secret && !h.secret.known) lines.push('And inherits a silence: '+h.secret.text+'.');
   }
@@ -364,6 +382,8 @@ function startLife(p){
 }
 
 function beginNewLine(){
+  // the line that just ended joins the quiet collection of houses you've raised (title screen)
+  if(typeof recordHouseLegacy==='function' && typeof S!=='undefined' && S && S.lineage && S.lineage.length) recordHouseLegacy(S);
   document.getElementById('vDeath').classList.remove('show');
   document.getElementById('vHeir').classList.remove('show');
   S.surname=pick(SURNAMES);

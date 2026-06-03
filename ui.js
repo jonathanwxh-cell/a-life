@@ -71,6 +71,7 @@ function hintOnce(key, text){
   const log=document.getElementById('log'); if(log) addEphemeralEntry(log, {age:'', text, cls:'hint'}, 13000);  // onboarding lines linger
   // briefly draw the eye to the actual chronicle control the hint refers to
   if(key==='seenChron'){ const s=document.getElementById('openStars'); if(s){ s.classList.add('beckon'); setTimeout(()=>s.classList.remove('beckon'),5400); } }
+  if(key==='seenLog'){ const l=document.getElementById('log'); if(l){ l.classList.add('beckon'); setTimeout(()=>l.classList.remove('beckon'),5400); } }
 }
 // a rare, ephemeral ambient line during the quiet years — fills the silence between moments
 // without writing anything to the chronicle (these are weather, not events worth recording).
@@ -131,6 +132,9 @@ function switchTab(which){
   document.getElementById('paneLine').style.display=which==='line'?'':'none';
   document.getElementById('paneStars').style.display=which==='stars'?'':'none';
   if(which==='stars' && window.AL_buildStars) requestAnimationFrame(()=>window.AL_buildStars());
+  if(which==='stars'){ const a=document.getElementById('starA11y');
+    if(a){ const n=((typeof S!=='undefined'&&S&&S.lineage)?S.lineage.reduce((x,an)=>x+((an.decisions&&an.decisions.length)||0),0):0)+((P&&P.decisions)?P.decisions.length:0);
+      a.textContent='The constellation: '+n+' choices across the bloodline, drawn as a star-map. Use the arrow keys to move between them.'; } }
 }
 document.getElementById('tabLife').onclick=()=>switchTab('life');
 document.getElementById('tabLine').onclick=()=>switchTab('line');
@@ -226,7 +230,7 @@ function setPP(){pp.innerHTML=running?'<svg viewBox="0 0 24 24" fill="currentCol
   const flowEl=document.getElementById('flow');
   flowEl.textContent=running?(fastFwd?'the years are racing by':'the years are passing'):'time held still';
   flowEl.setAttribute('aria-label', running?(fastFwd?'the years are racing by — tap to return to the usual pace':'the years are passing — tap to race ahead'):'time held still — tap to let the years resume');
-  flowEl.setAttribute('aria-pressed', (running&&fastFwd)?'true':'false');   // so a screen-reader user can tell fast-forward is engaged
+  // (no aria-pressed: this is a 3-state control, not a 2-state toggle — the label carries the state)
   document.body.classList.toggle('paused',!running);
   document.body.classList.toggle('hurry',running&&fastFwd);}
 pp.onclick=()=>{ if(busy)return; running=!running; setPP(); if(running)scheduleTick(); else clearTimeout(timer); };
@@ -263,9 +267,13 @@ function openStock(){
   document.getElementById('stockWho').textContent = P.name+' · '+(P.age<13?'a child':stageOf(P.age))+', age '+P.age;
   const rows=lifeReadout().map(([k,val])=>`<div class="srow"><span class="sk">${k}</span> <span class="sv">${val}.</span></div>`);
   const extra=[];
-  const h=S.house; if(h){ const seat=seatOf(h.seat); const rep=reputeTop(h);
-    extra.push(`The house holds <b>${seat.name}</b>${rep&&REPUTE_WORD[rep]?', and is known as '+REPUTE_WORD[rep]:''}.`);
-    extra.push(`<span class="shint">${h.seat>=6?'The house stands as high as a house can; only a hard fall can move it now.':'The house rises on a life that ends far richer than it began — and can slip a step in a hard year met empty-handed.'}</span>`); }
+  const h=S.house; if(h){ const seat=seatOf(h.seat);
+    extra.push(`The house holds <b>${seat.name}</b>.`);
+    extra.push(houseCharacter(h));
+    let dir = h.seat>=6 ? 'The house stands as high as a house can; only a hard fall can move it now.'
+            : 'The house rises on a life that ends far richer than it began, or on a name made strong for one thing — and can slip a step in a hard year met empty-handed.';
+    if(h.seat>=2 && h.seat<6 && P.stats.means>40 && P.age>=40 && P.age<=64) dir += ' There may be a way, now, to spend the means in hand deliberately on the family’s standing.';
+    extra.push(`<span class="shint">${dir}</span>`); }
   const tie=P.rels.filter(r=>r.alive&&r.kind!=='ex').sort((a,b)=>b.bond-a.bond)[0];
   if(tie) extra.push(`Closest, just now, to ${tie.given}.`);
   if(P.flags.peril && P.age<P.flags.peril) extra.push(`And something in how ${P.px.they} has been living has put the body, for a while, at risk.`);

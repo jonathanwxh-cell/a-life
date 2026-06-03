@@ -240,6 +240,7 @@ function presentCard(c){
   if(c.once) P.flags['card_'+c.id]=1;
   // once the player has made a choice, point them to where it's all recorded
   if(window.hintOnce && P.decisions && P.decisions.length>=1) hintOnce('seenChron',"Every choice is being written into your chronicle — tap “✦ the constellation” (top) to see the whole line.");
+  if(window.hintOnce && P.decisions && P.decisions.length>=3) hintOnce('seenLog',"Tap the fading log below any time to read this life's full record.");
   const card=document.getElementById('card'), pass=document.getElementById('passing');
   pass.classList.remove('show');
   document.getElementById('scene').innerHTML=fmt(c.text);

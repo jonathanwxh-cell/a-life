@@ -350,8 +350,35 @@ async function migrateLegacy(){
   }catch(e){ return await readIndex(); }
 }
 
-// on first load: recover any legacy save, then offer Continue for the most recent chronicle
+// ---- META-PROGRESSION: a quiet collection of the houses you've raised, across runs ----
+// When a dynasty ends (or you begin another over it), its summary is kept in localStorage and
+// shown on the title screen — so a long-player accrues a visible "chronicle of houses," and each
+// distinct motto earned reads as something achieved rather than lost.
+function recordHouseLegacy(s){
+  try{
+    if(typeof localStorage==='undefined' || !s || !s.surname) return;
+    let arr=[]; try{ arr=JSON.parse(localStorage.getItem('alife:houses')||'[]'); }catch(_){ arr=[]; }
+    const h=s.house||{};
+    arr.push({surname:s.surname, motto:h.motto||null, seat:(h.seat!=null?h.seat:1),
+      gens:(s.marks&&s.marks.gens)||1, souls:(s.marks&&s.marks.souls)||0});
+    if(arr.length>24) arr=arr.slice(-24);
+    localStorage.setItem('alife:houses', JSON.stringify(arr));
+  }catch(_){}
+}
+function pastHouses(){ try{ return JSON.parse(localStorage.getItem('alife:houses')||'[]'); }catch(_){ return []; } }
+function renderHousesRaised(){
+  const el=document.getElementById('housesRaised'); if(!el) return;
+  const hs=pastHouses(); if(!hs.length){ el.innerHTML=''; return; }
+  const peak=seatOf(Math.max(0,...hs.map(h=>h.seat||0)));
+  const mottos=[...new Set(hs.filter(h=>h.motto).map(h=>h.motto))].slice(-5);
+  let html='<div class="hr-title">'+hs.length+(hs.length===1?' house':' houses')+' raised — highest, '+peak.name+'</div>';
+  if(mottos.length) html+='<div class="hr-mottos">'+mottos.map(m=>'“'+m+'”').join('<br>')+'</div>';
+  el.innerHTML=html;
+}
+
+// on first load: recover any legacy save, show the houses you've raised, then offer Continue
 (async()=>{
+  renderHousesRaised();
   const idx=await migrateLegacy();
   if(idx.length){
     const most=idx.slice().sort((a,b)=>b.updated-a.updated)[0];
@@ -362,7 +389,11 @@ async function migrateLegacy(){
       const ok=await loadSlot(most.slot);
       if(ok){ if(window.AL_cloud) await window.AL_cloud.reconcile();
         document.getElementById('vTitle').classList.remove('show'); offlineCatchUp(); setPP();
-        if(P.alive){renderAll();scheduleTick();} else {renderAll();showEulogy(P);} }
+        if(P.alive){ renderAll(); scheduleTick();
+          // a brief cold-start confirmation so a returning player knows exactly where they are
+          const log=document.getElementById('log');
+          if(log && typeof addEphemeralEntry==='function') addEphemeralEntry(log,{age:'',text:'Continuing House '+S.surname+' — '+ordinal(P.gen)+' of the line, age '+P.age+'.',cls:'hint'},9000);
+        } else { renderAll(); showEulogy(P); } }
     };
     t.insertBefore(cont, t.firstChild);
   }
