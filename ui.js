@@ -273,9 +273,10 @@ function openStock(){
     extra.push(houseCharacter(h));
     let dir;
     if(h.seat>=7) dir='The house is written into the histories — as high as a name can be raised.';
-    else if(h.seat>=6) dir='The house holds an old and famous name. To be written into the histories, it must keep this seat, hold one reputation strong across many lives, and raise an heir to the very height of their means.';
+    else if(h.seat>=6){ dir='The house holds an old and famous name. To be written into the histories, it must keep this seat, hold one reputation strong across many lives, and raise an heir whose fortune reaches its full height.';
+      dir += ' '+((P.peakMeans||0)>=76 ? 'This life’s fortune has reached that height.' : 'This life’s fortune has not yet reached that height.'); }
     else dir='The house rises on a life that ends far richer than it began, or on a name made strong for one thing — and can slip a step in a hard year met empty-handed.';
-    if(h.seat>=2 && h.seat<6 && P.stats.means>40 && P.age>=40 && P.age<=64) dir += ' There may be a way, now, to spend the means in hand deliberately on the family’s standing.';
+    if(h.seat>=2 && h.seat<6 && P.stats.means>40 && P.age>=40 && P.age<=64) dir += ' A life can spend deliberately now — on a patronage, a marriage well made, a public work with the name on it — to lift the standing directly.';
     extra.push(`<span class="shint">${dir}</span>`); }
   const tie=P.rels.filter(r=>r.alive&&r.kind!=='ex').sort((a,b)=>b.bond-a.bond)[0];
   if(tie) extra.push(`Closest, just now, to ${tie.given}.`);

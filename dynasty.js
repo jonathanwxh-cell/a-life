@@ -94,7 +94,16 @@ function houseCharacter(h){
   else if(v0>=1.2) s='The family is becoming known as '+w(k0)+' — one or two more lives of the same, and it could settle into the family’s words.';
   else s='A name for being '+w(k0)+' is only just beginning to gather.';
   if(e[1] && e[1][1]>=1) s+=' There is something of the '+w(e[1][0])+' in it too.';
-  if((h.seat||0)>=5 && (h.seat||0)<7 && v0>=1.2) s+=' Held this strong across more lives, and the house raised higher still, such a name could one day be written into the histories.';
+  // a prose reading of how far the leading reputation has come toward the histories (the seat-7 gate
+  // is the cumulative high-water mark h.repPeak >= 3.5) — so the climb has a legible trajectory, not just a goal
+  if((h.seat||0)>=5 && (h.seat||0)<7 && v0>=1.2){
+    const rp=Math.max(v0, h.repPeak||0);
+    const tier = rp>=3.5 ? 'is deep enough now to be written into the histories — it wants only a house held at the summit and an heir whose fortune reaches its full height'
+               : rp>=2.5 ? 'has lasted — a little more of the same, and the house raised to the summit, and it could be written into the histories'
+               : rp>=1.7 ? 'has real weight behind it now, though the histories ask for more of it yet'
+               : 'is still only beginning to hold';
+    s+=' As a name, it '+tier+'.';
+  }
   return s;
 }
 
@@ -160,7 +169,7 @@ function updateHouse(p){
   // track the high-water mark of the leading reputation, so the pinnacle rewards a line that BUILT
   // a strong name even if it has softened a little since — not only the current (post-fade) value
   if(repTop) h.repPeak=Math.max(h.repPeak||0, h.repute[repTop]);
-  if(h.seat>=6 && (h.repPeak||0)>=3.5 && p.peakMeans>=82 && Math.random()<0.45) h.seat=7;   // reachable through a focused run, still re-earned each generation
+  if(h.seat>=6 && (h.repPeak||0)>=3.5 && p.peakMeans>=76 && Math.random()<0.45) h.seat=7;   // reachable through a focused run, still re-earned each generation
   else if(h.seat===7) h.seat=6;
 
   // --- heirlooms: certain lives leave an object behind ---
@@ -190,7 +199,8 @@ function updateHouse(p){
       ruthless:"We do not ask twice.",industrious:"By our own hands.",generous:"An open door, an open hand.",
       tainted:"We do not speak of everything.",pious:"In time, all is weighed.",artistic:"We leave something beautiful behind.",
       reckless:"We burn bright, and we burn."};
-    if(top&&MOTTOS[top]&&p.gen>=2) h.motto=MOTTOS[top];
+    if(top&&MOTTOS[top]&&p.gen>=2){ h.motto=MOTTOS[top];
+      logLine("The family's character has settled, at last, into words: “"+h.motto+"”","joy"); }   // name the milestone in the life that earned it
   }
 
   // name the change in standing within the very life that caused it, so the player feels the

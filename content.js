@@ -632,6 +632,12 @@ const CARDS=[
  ]},
 
 /* ---- the competing-goods choices finally echo: an elder reckoning that reads them back ---- */
+{id:'r_name_cost',stage:'midlife',w:3,age:[46,66],once:true,cond:()=>S.house&&(reputeTop(S.house)==='ruthless'||(S.house.heirlooms||[]).some(h=>h.tag==='hardname')),
+ text:"The family's hard name has finally cost {n} something that cannot be bought back: a door closed, a match refused, a young one in the house who has started to flinch at what they stand to inherit.",
+ choices:[
+  {t:"Soften. It's gone far enough.",h:"",do:p=>{fx(p,{heart:6,means:-6,spirit:3});remember('broke_with_house');logLine("Began, late, to spend the family's hard name back down — quietly, and at real cost to the purse.","obs");}},
+  {t:"Let them fear it. It works.",h:"",do:p=>{fx(p,{means:8,heart:-4,spirit:-2});remember('cut_a_corner');logLine("Decided the fear was worth more than the warmth, and let the name keep its teeth.","obs");}},
+ ]},
 {id:'cb_the_cost',stage:'elder',w:2,once:true,cond:()=>held('chose_self')||held('chose_others')||held('chose_loyalty')||held('a_kind_silence'),
  text:"Near the end, one old decision keeps returning to {n} — not a wrong one, exactly, but the one with a cost {they} has never quite finished paying.",
  choices:[

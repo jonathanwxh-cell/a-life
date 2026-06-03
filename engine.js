@@ -243,6 +243,7 @@ function presentCard(c){
   // once the player has made a choice, point them to where it's all recorded
   if(window.hintOnce && P.decisions && P.decisions.length>=1) hintOnce('seenChron',"Every choice is being written into your chronicle — tap “✦ the constellation” (top) to see the whole line.");
   if(window.hintOnce && P.decisions && P.decisions.length>=2) hintOnce('seenLog',"Tap the fading log below any time to read this life's full record.");
+  if(window.hintOnce && P.gen===1 && P.decisions && P.decisions.length>=2) hintOnce('seenDynasty',"Everything this life gathers — its name, its means, its standing — will pass to the one who comes after.");
   const card=document.getElementById('card'), pass=document.getElementById('passing');
   pass.classList.remove('show');
   document.getElementById('scene').innerHTML=fmt(c.text);
