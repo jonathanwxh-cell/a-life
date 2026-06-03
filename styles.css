@@ -305,3 +305,13 @@
   .troubleshoot summary:hover{color:var(--ink);}
   .troubleshoot summary:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
   .troubleshoot[open] summary{color:var(--ink);margin-bottom:4px;}
+
+  /* ---- review pass 7: optional, opt-in music ---- */
+  #musicBtn{position:relative;color:var(--ink-dim);}                               /* off: a quiet, dim note */
+  #musicBtn.on{border-color:rgba(224,169,75,0.42);background:rgba(224,169,75,0.07);color:var(--amber);}  /* on: amber, like the pause control */
+  #musicBtn.on:hover{background:rgba(224,169,75,0.16);}
+  /* a diagonal slash reads as "muted" while music is off */
+  #musicBtn:not(.on)::after{content:'';position:absolute;left:10px;right:10px;top:50%;height:1.6px;
+    background:currentColor;border-radius:2px;transform:rotate(-45deg);opacity:.85;pointer-events:none;}
+  /* with three footer controls now, the flow text stays on one line (clips rather than wraps on tiny screens) */
+  .flow{white-space:nowrap;overflow:hidden;}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Life — music auditions</title>
+<style>
+  :root{ --bg:#16110d; --ink:#ece1cf; --ink-dim:#a99c87; --amber:#e0a94b; --line:rgba(236,225,207,0.12); }
+  *{box-sizing:border-box;}
+  body{margin:0;background:radial-gradient(120% 90% at 50% 0%, #211913 0%, var(--bg) 60%);
+    color:var(--ink);font-family:'Newsreader',Georgia,serif;line-height:1.5;
+    min-height:100vh;padding:48px 22px 80px;}
+  .wrap{max-width:620px;margin:0 auto;}
+  h1{font-family:'Fraunces','Times New Roman',serif;font-weight:500;font-size:34px;letter-spacing:.5px;margin:0 0 4px;}
+  .sub{color:var(--ink-dim);font-style:italic;font-size:15px;margin:0 0 34px;}
+  .track{border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-bottom:18px;
+    background:rgba(236,225,207,0.03);}
+  .track h2{font-family:'Fraunces',serif;font-weight:500;font-size:19px;margin:0 0 2px;color:var(--amber);}
+  .when{color:var(--ink-dim);font-size:13px;letter-spacing:.3px;margin:0 0 10px;}
+  .desc{color:var(--ink-dim);font-size:14px;margin:0 0 13px;}
+  audio{width:100%;height:38px;filter:sepia(0.25) saturate(1.1) hue-rotate(-8deg);}
+  .note{color:var(--ink-dim);font-size:13px;font-style:italic;margin-top:30px;border-top:1px solid var(--line);padding-top:18px;}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>A Life — music</h1>
+    <p class="sub">Four instrumental pieces, generated to fit the game's moments. Listen and keep what lands.</p>
+
+    <div class="track">
+      <h2>theme</h2>
+      <div class="when">title screen · "a line drawn across time"</div>
+      <p class="desc">Contemplative neoclassical piano with warm strings and a soft pad — intimate, dusk-lit, melancholic but hopeful. (~7.5 min)</p>
+      <audio controls preload="none" src="theme.mp3"></audio>
+    </div>
+
+    <div class="track">
+      <h2>living</h2>
+      <div class="when">gameplay · the years passing</div>
+      <p class="desc">Near-still ambient for reading and reflection — a soft sustained pad with sparse piano, unobtrusive and timeless. (~7.5 min)</p>
+      <audio controls preload="none" src="living.mp3"></audio>
+    </div>
+
+    <div class="track">
+      <h2>ending</h2>
+      <div class="when">the eulogy · an ending</div>
+      <p class="desc">Tender elegiac piano and warm low strings — grief and gratitude together, a life completing at dusk. (~2.7 min)</p>
+      <audio controls preload="none" src="ending.mp3"></audio>
+    </div>
+
+    <div class="track">
+      <h2>heir</h2>
+      <div class="when">the line continues</div>
+      <p class="desc">Quiet renewal — soft piano with a faint rising warmth, hopeful but restrained, like first dawn light. (~2.7 min)</p>
+      <audio controls preload="none" src="heir.mp3"></audio>
+    </div>
+
+    <p class="note">Generated with MiniMax music-2.6 (instrumental). Nothing is wired into the game yet — tell me which to keep, and whether to add them as optional ambient (with a mute toggle) inside A Life.</p>
+  </div>
+</body>
+</html>

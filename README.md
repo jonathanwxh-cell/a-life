@@ -28,6 +28,8 @@ There are no visible numbers. The game is reading and pacing, not stats. What yo
 4. When you die, read the eulogy and **become your heir** to continue the line — or, if there's no heir, begin anew.
 5. Tap **✦ the constellation** (top-right) to see your whole bloodline; the **Chronicle** holds *This Life*, *The Line* (the house and its ancestors), and the *Constellation*.
 
+Optional: tap **♪** in the footer to turn on quiet background music — it's off by default and remembers your choice.
+
 ## Saving &amp; backups — please read
 
 Progress autosaves to the browser's local storage, with up to six save slots. When the game is served from the web (not opened as a bare file), it also syncs each line to the **cloud** under a private **chronicle code**, so a dynasty can follow you across devices and survive a cleared browser.
@@ -67,8 +69,10 @@ Hosted on **Vercel** — every push to `main` auto-deploys. It's also a plain st
 | `cloud.js` | Optional cross-device sync — shadows the active save to the cloud under a chronicle code; no-ops offline. |
 | `scene.js` | The living scene — sky, sun and moon, the growing tree, and particles, on the background canvas. |
 | `constellation.js` | The bloodline star-map. |
+| `audio.js` | Optional, opt-in ambient music — loops the piece that fits the moment (title, the living years, the eulogy, the heir), off by default. |
 | `api/chronicle.js` | Serverless route (Vercel) that reads/writes a save to Supabase with the service-role key — the only thing that touches the database. |
 | `assets/*.webp` | The painterly backdrop images (title, eulogy, heir, and the five life stages). |
+| `assets/music/*.mp3` | Four instrumental pieces for the game's moments (with a `preview.html` to audition them). |
 | `index.html` | A small entry page that opens `a-life.html` (so GitHub Pages / Vercel serves the game at the root). |
 | `vercel.json` | Vercel cache headers, so updates show on a normal refresh. |
 | `gallery.html` | Dev-only preview of the image set; not part of the game. |
