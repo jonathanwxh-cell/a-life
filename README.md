@@ -20,6 +20,8 @@ There are no visible numbers. The game is reading and pacing, not stats. What yo
 - **Read it in prose, not numbers.** Tap **⊙ how things stand** for an opt-in, number-free reckoning of where the life sits — body, mind, heart, means, spirit — plus the house's standing and how close its name is to being written into the histories. Hidden by default, so the quiet stays quiet.
 - **The Constellation.** Your whole bloodline rendered as a star-map: each life a strand of decision-stars, the choices you made glowing, the roads not taken faded beside them, generations linked down lineage threads. Drag to roam, pinch or scroll to zoom, tap a star to read the moment.
 - **A living scene.** A procedural tree grows from sapling to canopy to bare with age; birds, motes, and the colour of the sky quietly read the warmth and light of the life you're living. Painterly backdrops mark the turning points — each life-stage, an ending, an heir.
+- **Every house you finish is kept.** When a line ends, the house joins a quiet collection on the title screen — its name, its peak standing, the mottos it earned — so a long player accrues a chronicle of dynasties across runs.
+- **Built to be inclusive, and to play in your pocket.** Full keyboard play and real screen-reader support (the moment announces itself; joy and loss are *named*, not colour-only), `prefers-reduced-motion` honoured at every layer, AA contrast, a constellation you can walk with the arrow keys — and one-handed, touch-first ergonomics with a tap-to-fast-forward through the quiet years. Hardened across many independent review passes (see the journeys below).
 
 ## How to play
 
