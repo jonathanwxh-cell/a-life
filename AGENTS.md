@@ -71,6 +71,22 @@ Supporting files:
   mortality from age 6–54 (rare early death; infancy protected), and a reckless
   choice can set `P.flags.peril` to raise the odds briefly. Design + verified
   results: [docs/story-overhaul.md](./docs/story-overhaul.md).
+- **The dynasty layer & diegetic agency (`dynasty.js`).** The house (`S.house`)
+  accrues across lives: a `seat` 0–7 (`SEATS`), a choice-driven `repute{}` (folded
+  in by `updateHouse`, **only from lived acts** — the `lived()` guard stops an
+  *inherited* heirloom-memory from silently re-scoring a tag, which once collapsed
+  every dynasty to "kind"), heirlooms, an inheritable `secret`, a `motto` that
+  crystallizes once a reputation passes ~1.5, and `repPeak` (the reputation
+  high-water mark that gates seat-7). Player levers, all **prose, never numbers**:
+  the **bequest** (`e_bequest` → read in `succeed()` as the heir's starting
+  conditions), the **reckoning** (`x_reckoning` → a failed/declined one drops a
+  seat), seat-/repute-/trait-gated cards, and **competing-goods** cards (no clean
+  answer). Seat changes are narrated in the life that caused them. `houseCharacter(h)`
+  returns the number-free reputation reading + pinnacle trajectory used by the
+  **"how things stand" readout** (`openStock`/`lifeReadout` in `ui.js`, opt-in) and
+  the heir screen. A cross-run **"houses you have raised"** collection persists in
+  `localStorage` (`recordHouseLegacy`/`renderHousesRaised` in `persistence.js`).
+  Full design + jury journey: [docs/ten-juror-gameplay-journey.md](./docs/ten-juror-gameplay-journey.md).
 - **Persistence (`core.js` + `persistence.js`).** All reads/writes go through an
   async `window.storage` (`get/set/delete/list`). A sandbox host may supply one;
   otherwise `core.js` shims it with `localStorage`. Keys: `alife:index` (slot

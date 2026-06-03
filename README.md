@@ -16,7 +16,8 @@ There are no visible numbers. The game is reading and pacing, not stats. What yo
 - **One life is one day.** Each person is born at dawn and is gone by night; the sky arcs from sunrise through noon, dusk, and dark across their lifespan.
 - **Choices echo across decades.** A book kept in childhood can resurface at midlife. A kindness to an outcast can return, grown up, as a door held open. These *callback cards* only appear if an earlier choice left its mark.
 - **A real generational engine.** Every heir is *born into the world* and lives a full life from childhood — inheriting blended traits (with regression to the mean, so no runaway dynasties), a share of the estate, and the family's standing, all as the conditions of a new childhood rather than a head start. Moments fit your age and circumstances, and lives can end early or simply run out — so a line can also, quietly, end.
-- **The house.** Across lives the family rises or falls through seven seats — from *nothing but a name* to *an old and famous house* — accrues a drifting reputation, passes down heirlooms, and can bury an inheritable **secret** that descendants may keep or expose. A **motto** crystallizes once the family has a character.
+- **The house, and steering it.** Across lives the family rises or falls through eight seats — from *nothing but a name* to *a house written into the histories* — and the climb is something you can actually *steer*, never with a stat bar. A late-life **bequest** lets you set aside one thing for your heir (their mind, a softer footing, the stories, or their own freedom) that becomes the next life's real starting conditions. A house with something to lose can face a **reckoning** and lose a seat. Reputation is driven by what a life actually *does*, so distinct dynasties crystallize distinct **mottos** ("We do not ask twice"; "We leave something beautiful behind"). Heirlooms and an inheritable **secret** pass down; the pinnacle is rare and must be re-earned.
+- **Read it in prose, not numbers.** Tap **⊙ how things stand** for an opt-in, number-free reckoning of where the life sits — body, mind, heart, means, spirit — plus the house's standing and how close its name is to being written into the histories. Hidden by default, so the quiet stays quiet.
 - **The Constellation.** Your whole bloodline rendered as a star-map: each life a strand of decision-stars, the choices you made glowing, the roads not taken faded beside them, generations linked down lineage threads. Drag to roam, pinch or scroll to zoom, tap a star to read the moment.
 - **A living scene.** A procedural tree grows from sapling to canopy to bare with age; birds, motes, and the colour of the sky quietly read the warmth and light of the life you're living. Painterly backdrops mark the turning points — each life-stage, an ending, an heir.
 
@@ -28,7 +29,7 @@ There are no visible numbers. The game is reading and pacing, not stats. What yo
 4. When you die, read the eulogy and **become your heir** to continue the line — or, if there's no heir, begin anew.
 5. Tap **✦ the constellation** (top-right) to see your whole bloodline; the **Chronicle** holds *This Life*, *The Line* (the house and its ancestors), and the *Constellation*.
 
-Optional: tap **♪** in the footer to turn on quiet background music — it's off by default and remembers your choice.
+Optional, any time: tap **⊙ how things stand** (under the "being" line) for a prose reading of where this life and house sit; tap the **"the years are passing"** text to race past the quiet years; tap **♪** in the footer for quiet, opt-in background music (off by default, remembers your choice).
 
 ## Saving &amp; backups — please read
 
@@ -80,6 +81,7 @@ Hosted on **Vercel** — every push to `main` auto-deploys. It's also a plain st
 | `docs/cloud-saves.md` | Design spec for the cloud-save feature. |
 | `docs/images.md` | How the backdrop images are generated, optimized, and wired in. |
 | `docs/five-critics-goal-journey.md` | How the game was hardened across 15 critic-driven rounds — to unanimous sign-off from five independent reviewers (UX, writing, design, visual, accessibility). The methodology, the round-by-round findings, and the fixes. |
+| `docs/ten-juror-gameplay-journey.md` | The **gameplay** overhaul: eight build passes driven by ten blind, distinct-profile jurors (systems, literary, cozy, strategy, mobile, a11y, roguelike, first-timer, critic, QA), until all ten independently rated it ≥ 8/10 (from a 6.05 average, toughest lens 3.5). The diegetic agency layer, the round-by-round scores, the 90 verdict receipts. |
 
 ## Tech
 
