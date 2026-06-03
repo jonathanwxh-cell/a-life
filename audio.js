@@ -61,16 +61,24 @@
   function play(name){
     if (!enabled || !TRACKS[name]) return;
     ensureEl();
-    if (cur === name && !el.paused){ if (el.volume < MAX_VOL - 0.01) fadeTo(MAX_VOL); return; }
-    const swap = ()=>{
+    if (cur === name && el.src){                          // the right track is already loaded
+      if (el.paused){ const p = el.play(); if (p && p.catch) p.catch(()=>{}); }   // resume from where it was (e.g. after the tab was hidden)
+      if (el.volume < MAX_VOL - 0.01) fadeTo(MAX_VOL);
+      return;
+    }
+    const swap = ()=>{                                    // a different track — cross over to it
       cur = name;
       el.src = TRACKS[name];
       const p = el.play();
       if (p && p.catch) p.catch(()=>{});   // autoplay can be blocked until a gesture — retried on the next scene change/gesture
       fadeTo(MAX_VOL);
     };
-    if (cur && el && !el.paused) fadeTo(0, swap); else swap();
+    if (cur && el.src && !el.paused) fadeTo(0, swap); else swap();
   }
+
+  // Never play to an empty room: pause while the tab is hidden or unloading
+  // (backgrounded or about to close), and resume from the same spot on return.
+  function suspend(){ clearInterval(fadeTimer); fadeTimer = null; if (el){ el.volume = 0; try { el.pause(); } catch(_){} } }
 
   function stop(){
     if (!el) return;
@@ -105,6 +113,10 @@
       if (v) mo.observe(v, { attributes:true, attributeFilter:['class'] });
     });
 
+    // pause when the tab is hidden/backgrounded or unloading; resume when it returns
+    document.addEventListener('visibilitychange', ()=>{ if (document.hidden) suspend(); else if (enabled) sync(); });
+    window.addEventListener('pagehide', suspend);
+
     // restore the preference. If it was on, reflect that visually but only
     // start audio after the first user gesture (Begin/Continue), since a
     // fresh page load has no gesture yet and browsers would block autoplay.
@@ -123,7 +135,7 @@
       reflect(false);
     }
 
-    window.AL_music = { sync, toggle: ()=> setEnabled(!enabled), get on(){ return enabled; }, get track(){ return cur; } };
+    window.AL_music = { sync, toggle: ()=> setEnabled(!enabled), get on(){ return enabled; }, get track(){ return cur; }, get playing(){ return !!(el && el.src && !el.paused); } };
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
