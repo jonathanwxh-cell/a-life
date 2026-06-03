@@ -271,8 +271,10 @@ function openStock(){
   const h=S.house; if(h){ const seat=seatOf(h.seat);
     extra.push(`The house holds <b>${seat.name}</b>.`);
     extra.push(houseCharacter(h));
-    let dir = h.seat>=6 ? 'The house stands as high as a house can; only a hard fall can move it now.'
-            : 'The house rises on a life that ends far richer than it began, or on a name made strong for one thing — and can slip a step in a hard year met empty-handed.';
+    let dir;
+    if(h.seat>=7) dir='The house is written into the histories — as high as a name can be raised.';
+    else if(h.seat>=6) dir='The house holds an old and famous name. To be written into the histories, it must keep this seat, hold one reputation strong across many lives, and raise an heir to the very height of their means.';
+    else dir='The house rises on a life that ends far richer than it began, or on a name made strong for one thing — and can slip a step in a hard year met empty-handed.';
     if(h.seat>=2 && h.seat<6 && P.stats.means>40 && P.age>=40 && P.age<=64) dir += ' There may be a way, now, to spend the means in hand deliberately on the family’s standing.';
     extra.push(`<span class="shint">${dir}</span>`); }
   const tie=P.rels.filter(r=>r.alive&&r.kind!=='ex').sort((a,b)=>b.bond-a.bond)[0];

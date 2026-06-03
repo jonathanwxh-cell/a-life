@@ -94,7 +94,7 @@ function houseCharacter(h){
   else if(v0>=1.2) s='The family is becoming known as '+w(k0)+' — one or two more lives of the same, and it could settle into the family’s words.';
   else s='A name for being '+w(k0)+' is only just beginning to gather.';
   if(e[1] && e[1][1]>=1) s+=' There is something of the '+w(e[1][0])+' in it too.';
-  if(v0>=2 && (h.seat||0)>=4 && (h.seat||0)<7) s+=' Held this strong across more lives, and raised high enough, such a name can be written into the histories.';
+  if((h.seat||0)>=5 && (h.seat||0)<7 && v0>=1.2) s+=' Held this strong across more lives, and the house raised higher still, such a name could one day be written into the histories.';
   return s;
 }
 
@@ -135,11 +135,11 @@ function updateHouse(p){
   // Balanced so no single tag has many more inputs than the others — otherwise every house drifts to
   // whichever reputation has the most paths (it was 'kind'). 'kind' now means only the genuinely
   // kind-DEFINING acts; broad warmth-to-others reads as 'generous' (its own motto).
-  if(m.chose_study||m.became_teacher||m.set_scholar_rep||lived('child_books')) bump('scholarly',1.2); else if(s.mind>82) bump('scholarly',0.5);
+  if(m.chose_study||m.became_teacher||m.set_scholar_rep||lived('child_books')) bump('scholarly',1.0); else if(s.mind>82) bump('scholarly',0.5);
   if(lived('kept_stray')||p.flags.legacy==='kind') bump('kind',1.2);
   if(m.strayed&&!m.confessed) bump('tainted',1.3);
   if(m.cut_a_corner||m.chose_self_over_house||(s.means>82&&s.heart<40)) bump('ruthless',1.2);
-  if(p.flags.legacy==='built'||m.self_made||m.built_the_name||m.driven) bump('industrious',1.2); else if(s.means>86) bump('industrious',0.5);
+  if(p.flags.legacy==='built'||m.self_made||m.built_the_name||m.driven) bump('industrious',1.0); else if(s.means>88) bump('industrious',0.5);
   if(m.kind_to_outcast||m.chose_others||m.let_in) bump('generous',1.1);
   if(m.lived_reckless||p.flags.peril) bump('reckless',1.2);
   if(m.early_talent||m.made_art) bump('artistic',1.2);
@@ -157,7 +157,10 @@ function updateHouse(p){
   // remarkably (peakMeans >= 86) — and even then only sometimes. If a later generation
   // fails to clear that bar, the house lapses back to "old and famous." This keeps the
   // pinnacle genuinely rare and makes the very top precarious rather than won-and-done.
-  if(h.seat>=6 && repTop && h.repute[repTop]>=4.5 && p.peakMeans>=82 && Math.random()<0.45) h.seat=7;   // reachable through a focused run, still re-earned each generation
+  // track the high-water mark of the leading reputation, so the pinnacle rewards a line that BUILT
+  // a strong name even if it has softened a little since — not only the current (post-fade) value
+  if(repTop) h.repPeak=Math.max(h.repPeak||0, h.repute[repTop]);
+  if(h.seat>=6 && (h.repPeak||0)>=3.5 && p.peakMeans>=82 && Math.random()<0.45) h.seat=7;   // reachable through a focused run, still re-earned each generation
   else if(h.seat===7) h.seat=6;
 
   // --- heirlooms: certain lives leave an object behind ---

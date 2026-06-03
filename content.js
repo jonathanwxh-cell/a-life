@@ -618,7 +618,7 @@ const CARDS=[
  ]},
 
 /* ---- shadow-archetype gated content, so a ruthless / tainted house meets a different world ---- */
-{id:'r_hard_name',stage:'adult',w:3,age:[26,58],cond:()=>S.house&&(reputeTop(S.house)==='ruthless'||((S.house.heirlooms||[]).some(h=>h.tag==='hardname')&&P.stats.means>45)),
+{id:'r_hard_name',stage:'adult',w:4,age:[26,60],cond:()=>S.house&&(reputeTop(S.house)==='ruthless'||((S.house.heirlooms||[]).some(h=>h.tag==='hardname')&&P.stats.means>45)),
  text:"The family's hard name goes into the room ahead of {n} — and a deal is on the table that the name itself could close, by being exactly as feared as the stories say.",
  choices:[
   {t:"Use the name. Close it hard.",h:"",do:p=>{fx(p,{means:14,heart:-4,spirit:-2});remember('cut_a_corner');logLine("Let the family's hard name do the work, closed the thing cold, and it stayed closed.","obs");}},
