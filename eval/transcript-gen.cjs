@@ -20,12 +20,25 @@ const body=`
   // resolve tokens at log time so transcripts read exactly as the player sees them
   logLine=function(text,cls){ P.log.push({age:P.age,text:fmt(text),cls:cls||''}); };
   echo=function(text,cls){ logLine(text,cls||'echo'); };
-  var INTENT={y_love1:1,a_meet_late:1,a_marry:1,a_child:1,m_old_flame:1};
+  // A REPRESENTATIVE player, not a continuation-maximizer: a real player declines love sometimes (and lives
+  // a solitary life with its own content), stays childless sometimes, and — across many founders — takes all
+  // four callings, not one. The old INTENT forced accept on love/marry/child, which made the EVIDENCE PACKET
+  // look like a domestic monoculture even though the engine produces ~a quarter solitary lives. This shows
+  // the variety the game actually has. (rotateVoc spreads y_calling evenly so no one vocation dominates the packet.)
+  var vrot=0;
+  function pickChoice(c){
+    if(c.id==='y_calling') return c.choices[(vrot++)%c.choices.length];               // rotate soldier/scholar/maker/wanderer evenly
+    if(c.id==='y_love1'||c.id==='a_meet_late') return Math.random()<0.9 ? c.choices[0] : c.choices[1]; // mostly accept; the engine's un-offered lives supply the solitary minority
+    if(c.id==='a_marry') return Math.random()<0.9 ? c.choices[0] : c.choices[1];
+    if(c.id==='a_child') return Math.random()<0.85 ? c.choices[0] : c.choices[1];        // ~15% of couples stay childless
+    if(c.id==='m_old_flame') return c.choices[0];
+    return c.choices[Math.floor(Math.random()*c.choices.length)];
+  }
   // headless presentCard: capture the resolved prompt + choice, then apply it. The real
   // tick()/drawCard() still run, so the love-nudge and cb_* preference shape the draws.
   presentCard=function(c){
     var q=fmt(typeof c.text==='function'?c.text(P):c.text).replace(/<[^>]+>/g,'');
-    var ch=INTENT[c.id]?c.choices[0]:c.choices[Math.floor(Math.random()*c.choices.length)];
+    var ch=pickChoice(c);
     var chose=fmt(ch.t).replace(/<[^>]+>/g,'');
     var alts=c.choices.filter(function(o){return o!==ch;}).map(function(o){return fmt(o.t).replace(/<[^>]+>/g,'');});
     P.sinceCard=0; P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age; if(c.once) P.flags['card_'+c.id]=1;

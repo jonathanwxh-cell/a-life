@@ -19,12 +19,12 @@ const CARDS=[
 {id:'c_book',stage:'child',w:3,age:[7,12],text:"A teacher leaves a book on {n}'s desk by mistake. It is far too difficult. {They} could return it, or keep it and try.",
  choices:[
   {t:"Keep it. Climb the hard pages.",h:"the mind reaches",do:p=>{fx(p,{mind:8,spirit:3});remember('child_books');logLine("Read a book {they} couldn't yet understand, and loved it anyway.");}},
-  {t:"Give it back. Go out and play.",h:"the body runs",do:p=>{fx(p,{vit:6,heart:4});remember('child_outdoors');logLine("Spent the afternoon outside until the light went.");}},
+  {t:"Give it back. Go out and play.",h:"the body runs",do:p=>{fx(p,{vit:6,heart:4});remember('child_outdoors');logLine(freshPick(["Spent the afternoon outside until the light went.","Gave the book back and ran, and learned the body's case for being a body.","Chose the yard over the page, that day, and most days after."],p));}},
  ]},
 {id:'c_sick',stage:'child',w:1,once:true,onceDyn:true,age:[3,10],text:"A fever takes the house for a week. {n} is small in a large bed.",
  choices:[
   {t:"Let mother sit through the nights.",h:"a bond is set",do:p=>{const m=rel('mother');if(m)m.bond=clamp(m.bond+12);fx(p,{vit:-4,heart:5});logLine(["Was nursed through a fever, and remembered a cool hand for life.","Learned, lying small in a large bed, that to be cared for is its own kind of gift.","The fever passed; what stayed was the shape of a hand on a forehead, kept for decades."][rotI(p,3)],"obs");}},
-  {t:"Insist on being brave alone.",h:"a habit is set",do:p=>{fx(p,{vit:-2,spirit:-3,mind:2});logLine("Learned early to be ill quietly.","obs");}},
+  {t:"Insist on being brave alone.",h:"a habit is set",do:p=>{fx(p,{vit:-2,spirit:-3,mind:2});logLine(freshPick(["Learned early to be ill quietly.","Learned, small and feverish, to need no one — a lesson that took, and cost.","Got through the fever alone on purpose, and kept the habit of it for life."],p),"obs");}},
  ]},
 {id:'c_friend',stage:'child',w:2,onceDyn:true,age:[6,12],cond:()=>!rel('friend'),text:"There is a child at the edge of the yard who never gets picked for anything.",
  choices:[
@@ -55,15 +55,15 @@ const CARDS=[
 /* ---- YOUTH ---- */
 {id:'y_calling',stage:'youth',w:4,once:true,age:[14,22],text:p=>["The years ahead want a shape. {n} stands where the roads fork, and the choosing, for once, is really {their}s.","Everyone is suddenly asking {n} the same question — what {they} will be — and it has stopped being easy to wave off.","There comes a morning when the wide-open future narrows, kindly, to a few real roads, and {n} has to pick one to walk."][rotI(p,3)],
  choices:[
-  {t:"The blade — a soldier's life.",h:"pay, and odds",do:p=>{fx(p,{vit:8,means:6,heart:-3,spirit:2});p.flags.vocation='soldier';remember('chose_soldier');logLine("Took up the soldier's life — the pay, the odds, the particular company of other people's danger.");}},
-  {t:"The book — the scholar's road.",h:"hungry now, wider door",do:p=>{fx(p,{mind:16,means:-8,spirit:2});p.flags.vocation='scholar';p.flags.scholar=1;remember('chose_study');logLine("Chose study, and hunger, and the long bet on {their} own head.");}},
-  {t:"The hands — a maker's trade.",h:"steady means, narrow door",do:p=>{fx(p,{means:14,mind:-1,vit:2});p.flags.vocation='maker';p.flags.trade=1;remember('chose_trade');logLine("Took up a trade and a set of tools, and chose the wage over the wager — never quite poor, never quite free.");}},
-  {t:"The road — go where the work is.",h:"free, and unrooted",do:p=>{fx(p,{mind:6,spirit:6,heart:-3,means:-3});p.flags.vocation='wanderer';remember('chose_road');remember('left_home');logLine("Chose no fixed thing at all — only the road, the work that turns up on it, and the freedom that costs.");}},
+  {t:"The blade — a soldier's life.",h:"pay, and odds",do:p=>{fx(p,{vit:8,means:6,heart:-3,spirit:2});p.flags.vocation='soldier';remember('chose_soldier');logLine(freshPick(["Took up the soldier's life — the pay, the odds, the particular company of other people's danger.","Went for a soldier, and learned the trade of standing where other people would not.","Chose the blade, and the hard simple wage of being willing to be where it was worst.","Put on the coat and took the oath, and joined the old profession of organised danger.","Became a soldier — for the pay at first, and then for the strange belonging of it."],p));}},
+  {t:"The book — the scholar's road.",h:"hungry now, wider door",do:p=>{fx(p,{mind:16,means:-8,spirit:2});p.flags.vocation='scholar';p.flags.scholar=1;remember('chose_study');logLine(freshPick(["Chose study, and hunger, and the long bet on {their} own head.","Took the scholar's road — the lean years, the late candles, the wager that a mind could be a living.","Chose the book over the bread, betting the hungry years would, eventually, be worth it."],p));}},
+  {t:"The hands — a maker's trade.",h:"steady means, narrow door",do:p=>{fx(p,{means:14,mind:-1,vit:2});p.flags.vocation='maker';p.flags.trade=1;remember('chose_trade');logLine(freshPick(["Took up a trade and a set of tools, and chose the wage over the wager — never quite poor, never quite free.","Chose the maker's trade — a craft, a bench, a steady narrow door into a sufficient life.","Learned a trade and took up the tools of it, and traded the wide gamble for the sure small thing."],p));}},
+  {t:"The road — go where the work is.",h:"free, and unrooted",do:p=>{fx(p,{mind:6,spirit:6,heart:-3,means:-3});p.flags.vocation='wanderer';remember('chose_road');remember('left_home');logLine(freshPick(["Chose no fixed thing at all — only the road, the work that turns up on it, and the freedom that costs.","Took the road for a trade — no master, no roof for long, only the next town and the next.","Chose the unrooted life, and the particular wealth and poverty of belonging nowhere in particular."],p));}},
  ]},
 {id:'y_love1',stage:'youth',w:4,age:[16,25],opensLove:true,cond:()=>!rel('love'),text:p=>["Someone keeps finding reasons to be where {n} is. The reasons are getting thinner.","There is someone who keeps turning up where {n} is. {They} has noticed. And the noticing, by now, runs both ways.","Someone has started to matter — turning up, lingering, the way only a few people ever do.","The same face keeps appearing at the edges of {n}'s days, and the days have begun to arrange themselves around it.","There is a particular person now — nothing announced, nothing decided, just a quiet fact getting truer.","Someone has gone quiet for three days, and {n} is unsettled to find that the quiet has a shape.","It takes {n} a while to name it: the person whose absence, lately, has become the loudest thing in any room."][rotI(p,7)],
  choices:[
-  {t:"Meet them halfway.",h:"the heart opens",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,62,p.age+ri(-2,2));fx(p,{spirit:9,heart:6});logLine(["Started, without quite deciding to, building the days around another person.","Fell in love — the kind that quietly rearranges the furniture of a life.","Fell in love, and was surprised, as everyone is, that it was {them} this time.","Fell in love, and was aware, with a cold clarity, of everything it now made possible to lose.","Started spending time with someone, and the time arranged itself, without much drama, into a life."][rotI(p,5)],"joy");}},
-  {t:"Pretend not to notice.",h:"",do:p=>{remember('unspoken_love');fx(p,{spirit:-4,mind:2});logLine(["Let someone slip away by saying nothing, and wondered, later, often.","Saw the wanting coming and chose, deliberately, to be elsewhere — which was not quite the same as not wanting.","Said nothing. The person left. The moment closed over it like water."][rotI(p,3)],"obs");}},
+  {t:"Meet them halfway.",h:"the heart opens",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,62,p.age+ri(-2,2));fx(p,{spirit:9,heart:6});logLine(freshPick(["Started, without quite deciding to, building the days around another person.","Fell in love — the kind that quietly rearranges the furniture of a life.","Fell in love, and was surprised, as everyone is, that it was {them} this time.","Fell in love, and was aware, with a cold clarity, of everything it now made possible to lose.","Started spending time with someone, and the time arranged itself, without much drama, into a life.","Fell, with no particular grace and no real choice in it, for somebody.","Let someone in, the whole way, for the first time — and felt the terror and the relief of it together.","Found, without looking, the person the rest of the life would arrange itself around."],p),"joy");}},
+  {t:"Pretend not to notice.",h:"",do:p=>{remember('unspoken_love');fx(p,{spirit:-4,mind:2});logLine(freshPick(["Let someone slip away by saying nothing, and wondered, later, often.","Saw the wanting coming and chose, deliberately, to be elsewhere — which was not quite the same as not wanting.","Said nothing. The person left. The moment closed over it like water.","Let the chance go by unanswered, and told {them}self, for years, that it had not been one."],p),"obs");}},
  ]},
 {id:'y_risk',stage:'youth',w:2,age:[18,28],cond:()=>P.stats.means>20,text:"A friend has a scheme. It could double everything {n} has saved. It could take it.",
  choices:[
@@ -97,11 +97,11 @@ const CARDS=[
   {t:"Yes. Make room in the world.",h:"the line may continue",do:p=>{haveChild();fx(p,{spirit:8,means:-6,vit:-3});}},
   {t:"No. This life, as it is.",h:"",do:p=>{const k=rels('child').length;fx(p,{spirit:2,means:4});logLine(k===0?"Chose a life without children, with clear eyes.":"Chose not to have another — the family, as it already was, was enough.","obs");}},
  ]},
-{id:'a_work',stage:'adult',w:3,age:[28,60],cond:()=>(P.age-(P.flags.lastWork||-12))>=10,
+{id:'a_work',stage:'adult',w:2,age:[28,60],cond:()=>(P.age-(P.flags.lastWork||-12))>=12&&(rel('spouse')||rel('love')||rels('child').length),
  text:p=>["There is a promotion, but it eats the evenings. The home gets the leftovers of {n}.","The work wants more — a better title, longer hours. The family would get whatever was left.","An offer comes: more money for more of {n}'s time. There is only ever so much of it."][rotN((p.flags.n_work_take||0)+(p.flags.n_work_refuse||0),3)],
  choices:[
-  {t:"Take it. Provide.",h:"means up, hours gone",do:p=>{p.flags.lastWork=p.age;fx(p,{means:16,spirit:-3});const f=rels('child')[0]||rel('spouse');if(f)f.bond=clamp(f.bond-7);logLine(nth(p,'work_take')>1?"Climbed again, and the family learned, again, to fit around the work.":["Worked for the family until the family barely saw {them}.","Gave the work its due, and the family what was left of {them}.","Took the better title, and paid for it in evenings."][rotI(p,3)],"obs");}},
-  {t:"Refuse it. Be present.",h:"less money, more evenings",do:p=>{p.flags.lastWork=p.age;fx(p,{means:-2,spirit:6});const f=rels('child')[0]||rel('spouse');if(f)f.bond=clamp(f.bond+8);logLine(nth(p,'work_refuse')>1?"Chose the table over the ladder once more, with less doubt this time.":["Turned down more money to be home for dinner.","Said no to the title, and yes to the evenings.","Chose the table, the window, the ordinary hour."][rotI(p,3)],"joy");}},
+  {t:"Take it. Provide.",h:"means up, hours gone",do:p=>{p.flags.lastWork=p.age;fx(p,{means:16,spirit:-3});const f=rels('child')[0]||rel('spouse');if(f)f.bond=clamp(f.bond-7);logLine(nth(p,'work_take')>1?freshPick(["Climbed again, and the family learned, again, to fit around the work.","Took the next rung too, and the house arranged itself, again, around {their} absence."],p):freshPick(["Worked for the family until the family barely saw {them}.","Gave the work its due, and the family what was left of {them}.","Took the better title, and paid for it in evenings.","Chose the ladder over the table, and told {them}self it was for them."],p),"obs");}},
+  {t:"Refuse it. Be present.",h:"less money, more evenings",do:p=>{p.flags.lastWork=p.age;fx(p,{means:-2,spirit:6});const f=rels('child')[0]||rel('spouse');if(f)f.bond=clamp(f.bond+8);logLine(nth(p,'work_refuse')>1?freshPick(["Chose the table over the ladder once more, with less doubt this time.","Turned the next one down too, and was, by now, entirely at peace with the smaller name."],p):freshPick(["Turned down more money to be home for dinner.","Said no to the title, and yes to the evenings.","Chose the table, the window, the ordinary hour.","Let a smaller career buy a larger presence, and never regretted the trade."],p),"joy");}},
  ]},
 {id:'a_old_friend',stage:'adult',w:2,age:[28,60],
  cond:()=>{const f=rel('friend');return f&&!f.refused&&f.bond>30&&(P.age-(f.lastAsked||-10))>=8;},
@@ -216,14 +216,14 @@ const CARDS=[
 {id:'cb_study_pays',stage:'adult',w:4,cond:()=>held('chose_study')&&P.stats.mind>62,once:true,
  text:"The long bet on {n}'s own mind, made hungry and young, is finally being called in. Someone wants to pay for what {they} knows.",
  choices:[
-  {t:"Name your worth.",h:"the gamble matures",do:p=>{echo("The hungry years of study, begun at "+recall('chose_study').age+", at last came good.","joy");fx(p,{means:20,spirit:7});}},
-  {t:"Teach it cheap. Spread it wide.",h:"",do:p=>{echo("Chose to give knowledge away rather than sell it dear.","joy");fx(p,{means:3,heart:8,spirit:6});remember('became_teacher');}},
+  {t:"Name your worth.",h:"the gamble matures",do:p=>{const a=(recall('chose_study')||{age:p.age}).age;echo(freshPick(["The hungry years of study, begun at "+a+", at last came good.","The long bet {they} placed on {their} own head at "+a+" finally, improbably, paid.","What {they} starved for at "+a+" — the learning, the long shot — turned at last into a living.","The wager of those lean studying years, laid down at "+a+", came in at last, and handsomely."],p),"joy");fx(p,{means:20,spirit:7});}},
+  {t:"Teach it cheap. Spread it wide.",h:"",do:p=>{echo(freshPick(["Chose to give knowledge away rather than sell it dear.","Set the price low on purpose, so the knowing would reach further than the money ever could.","Gave the learning away at cost, and counted the reach of it the better profit."],p),"joy");fx(p,{means:3,heart:8,spirit:6});remember('became_teacher');}},
  ]},
 {id:'cb_left_home',stage:'midlife',w:3,cond:()=>held('left_home'),once:true,
  text:"Word comes from the town {n} left long ago. It is smaller than {they} remembered, and mostly gone. {They} could go back, once.",
  choices:[
-  {t:"Go back. Stand where you started.",h:"",do:p=>{echo("Returned to the town {they} fled at "+recall('left_home').age+", and found it both smaller and larger than memory.","obs");fx(p,{spirit:7,heart:5});}},
-  {t:"Let it stay a memory.",h:"",do:p=>{echo("Chose not to return, and kept the town perfect and unvisited.","obs");fx(p,{spirit:-2,mind:3});}},
+  {t:"Go back. Stand where you started.",h:"",do:p=>{const a=(recall('left_home')||{age:p.age}).age;echo(freshPick(["Returned to the town {they} fled at "+a+", and found it both smaller and larger than memory.","Went back to the place {they} left at "+a+", stood in it, and felt the strange double size of an old home.","Came back to where {they} began, abandoned at "+a+", and found it had shrunk to fit a smaller life than {they} now lived."],p),"obs");fx(p,{spirit:7,heart:5});}},
+  {t:"Let it stay a memory.",h:"",do:p=>{echo(freshPick(["Chose not to return, and kept the town perfect and unvisited.","Left the old place unvisited on purpose, so memory could keep it the way it never quite was.","Decided some places are better kept than seen, and never went back."],p),"obs");fx(p,{spirit:-2,mind:3});}},
  ]},
 {id:'cb_unspoken',stage:'elder',w:3,cond:()=>held('unspoken_love'),once:true,
  text:"In the slow evenings, {n} thinks again of the one {they} never answered, all those years ago. {They} finds that name in a newspaper column — still living, a town away.",
@@ -249,7 +249,7 @@ const CARDS=[
    ============================================================ */
 {id:'c_animal',stage:'child',w:2,once:true,age:[6,11],text:"A stray follows {n} home. It is thin and trusting and not, by any measure, theirs to keep.",
  choices:[
-  {t:"Hide it. Feed it anyway.",h:"",do:p=>{remember('kept_stray');fx(p,{heart:8,spirit:4});logLine("Kept a secret animal alive on stolen scraps, and loved it fiercely.","joy");}},
+  {t:"Hide it. Feed it anyway.",h:"",do:p=>{remember('kept_stray');fx(p,{heart:8,spirit:4});logLine(freshPick(["Kept a secret animal alive on stolen scraps, and loved it fiercely.","Hid a stray and fed it in secret, and learned young the weight of a thing that depends on you.","Smuggled scraps to a hidden animal, and loved it with the whole undivided heart only children manage."],p),"joy");}},
   {t:"Do the sensible thing.",h:"",do:p=>{remember('turned_stray');fx(p,{heart:-3,mind:3});logLine("Turned the stray away, because it was sensible, and felt the sense of it like a bruise.");}},
  ]},
 {id:'y_mentor',stage:'youth',w:3,once:true,onceDyn:true,age:[14,22],text:"An older stranger sees something in {n} and offers to teach {them} — for nothing, just because someone once did it for them.",
@@ -298,7 +298,7 @@ const CARDS=[
  text:"A new baby arrives in the house — small, loud, and suddenly the centre of everything. {n} is not, anymore.",
  choices:[
   {t:"Adore the little intruder.",h:"a bond for life",do:p=>{const s=chance(0.5)?'m':'f';addRel('sibling',pick(s==='m'?GIVEN_M:GIVEN_F),s,64,0);remember('doted_sibling');fx(p,{heart:6,spirit:3});logLine("Took to a new sibling like it was {their} own to raise.","joy");}},
-  {t:"Resent the lost attention.",h:"",do:p=>{const s=chance(0.5)?'m':'f';addRel('sibling',pick(s==='m'?GIVEN_M:GIVEN_F),s,42,0);fx(p,{heart:-3,spirit:-2,mind:2});logLine("Learned early that love is divided, and counted {their} share.");}},
+  {t:"Resent the lost attention.",h:"",do:p=>{const s=chance(0.5)?'m':'f';addRel('sibling',pick(s==='m'?GIVEN_M:GIVEN_F),s,42,0);fx(p,{heart:-3,spirit:-2,mind:2});logLine(freshPick(["Learned early that love is divided, and counted {their} share.","Learned, at the new baby's arrival, the first hard lesson in sharing what {they} had thought was all {their} own.","Met the sibling and the arithmetic of divided love in the same week, and resented both a while."],p));}},
  ]},
 {id:'c_talent',stage:'child',w:2,age:[7,12],once:true,
  text:"Something comes easily to {n} that does not come easily to others — a quickness with numbers, or a voice, or a way of running that turns heads.",
@@ -309,14 +309,14 @@ const CARDS=[
 {id:'c_move',stage:'child',w:2,age:[5,11],once:true,
  text:"The family packs everything it owns into crates. There is a new town coming, and the old one — the only one {n} knows — is being left behind.",
  choices:[
-  {t:"Make the new place yours.",h:"",do:p=>{fx(p,{spirit:5,heart:-2,mind:3});remember('uprooted');logLine("Was uprooted young, and learned how to begin again among strangers.");}},
-  {t:"Grieve the one you lost.",h:"",do:p=>{const f=rel('friend');if(f)f.bond=clamp(f.bond-10);fx(p,{spirit:-5,heart:4});logLine("Left a whole small world behind, and felt every mile of it.","loss");}},
+  {t:"Make the new place yours.",h:"",do:p=>{fx(p,{spirit:5,heart:-2,mind:3});remember('uprooted');logLine(freshPick(["Was uprooted young, and learned how to begin again among strangers.","Moved as a child, and learned the useful, lonely art of walking into a room where no one knew {them}.","Was transplanted young, and took root again quickly, the way only children can."],p));}},
+  {t:"Grieve the one you lost.",h:"",do:p=>{const f=rel('friend');if(f)f.bond=clamp(f.bond-10);fx(p,{spirit:-5,heart:4});logLine(freshPick(["Left a whole small world behind, and felt every mile of it.","Was moved away from the only place {they} knew, and grieved it like a person.","Lost the whole map of a childhood to a move, and never quite stopped missing the old streets."],p),"loss");}},
  ]},
 {id:'c_grandparent',stage:'child',w:2,age:[6,12],once:true,
  text:"An old one in the family — a grandmother, a great-uncle — is suddenly, simply, gone. It is the first time {n} meets the fact of it.",
  choices:[
-  {t:"Keep something of theirs.",h:"",do:p=>{remember('first_loss');fx(p,{heart:5,spirit:-2,mind:2});logLine("Kept a dead grandparent's small thing, and carried the first grief carefully.","loss");}},
-  {t:"Don't really understand yet.",h:"",do:p=>{fx(p,{spirit:2});logLine("Was too young to hold it, and let the loss pass through like weather.","obs");}},
+  {t:"Keep something of theirs.",h:"",do:p=>{remember('first_loss');fx(p,{heart:5,spirit:-2,mind:2});logLine(freshPick(["Kept a dead grandparent's small thing, and carried the first grief carefully.","Took one small object off the dead, and learned that this is how the gone stay.","Held onto a token of the first death, and felt, young, the long arithmetic of loss begin."],p),"loss");}},
+  {t:"Don't really understand yet.",h:"",do:p=>{fx(p,{spirit:2});logLine(freshPick(["Was too young to hold it, and let the loss pass through like weather.","Met the first death without quite understanding it, and went back to playing.","Was spared, by being small, the full weight of it — and let the grief pass over like a cloud."],p),"obs");}},
  ]},
 
 /* ---- YOUTH ---- */
@@ -507,8 +507,8 @@ const CARDS=[
 {id:'cb_principle',stage:'midlife',w:3,cond:()=>held('took_a_stand'),once:true,
  text:"The thing {n} stood up for once, young and at a cost, comes round again — older now, more tangled, asking the same question with higher stakes.",
  choices:[
-  {t:"Stand again. You know the price.",h:"",do:p=>{echo("Paid, a second time and more dearly, for a principle {they} would not set down.","joy");fx(p,{spirit:7,means:-6,heart:3});}},
-  {t:"You've paid enough.",h:"",do:p=>{echo("Let the old fight pass to someone younger, and tried not to call it surrender.","obs");fx(p,{spirit:-3,mind:2});}},
+  {t:"Stand again. You know the price.",h:"",do:p=>{echo(freshPick(["Paid, a second time and more dearly, for a principle {they} would not set down.","Took the old stand again, older and clearer-eyed, and paid the higher price without flinching.","Fought the same fight twice in one life, and was, the second time, entirely sure."],p),"joy");fx(p,{spirit:7,means:-6,heart:3});}},
+  {t:"You've paid enough.",h:"",do:p=>{echo(freshPick(["Let the old fight pass to someone younger, and tried not to call it surrender.","Set down a fight {they} had carried for decades, and called it, with some effort, wisdom.","Handed the old cause to the next ones and stepped back, and mostly made peace with stepping back."],p),"obs");fx(p,{spirit:-3,mind:2});}},
  ]},
 {id:'cb_home_keep',stage:'elder',w:2,cond:()=>held('own_home'),once:true,
  text:"The place {n} bought all those years ago is old now too. It could pass to someone, or be quietly let go.",
@@ -565,8 +565,8 @@ const CARDS=[
 {id:'t_guarded',stage:'adult',w:2,age:[28,54],once:true,cond:()=>P.traits.includes('guarded'),
  text:"Someone has gotten close enough to ask {n} the question the walls are up against: what is it {they} is so carefully never saying?",
  choices:[
-  {t:"Let them in. Just this once.",h:"",do:p=>{fx(p,{heart:8,spirit:5});remember('let_in');logLine("Opened a door {they} usually kept locked, and was not, in the end, sorry for it.","joy");}},
-  {t:"Keep the wall.",h:"",do:p=>{fx(p,{spirit:-3,mind:2});logLine("Kept the wall exactly where it had always stood, and watched someone give up trying.","obs");}},
+  {t:"Let them in. Just this once.",h:"",do:p=>{fx(p,{heart:8,spirit:5});remember('let_in');logLine(freshPick(["Opened a door {they} usually kept locked, and was not, in the end, sorry for it.","Let one person all the way in, against long habit, and found the room behind the wall still worked.","Said the unsaid thing to one person, once, and survived the saying of it better than {they}'d feared."],p),"joy");}},
+  {t:"Keep the wall.",h:"",do:p=>{fx(p,{spirit:-3,mind:2});logLine(freshPick(["Kept the wall exactly where it had always stood, and watched someone give up trying.","Held the question off one more time, and felt the particular cost of being well-defended.","Kept the door shut, as ever, and told {them}self the solitude was a preference."],p),"obs");}},
  ]},
 {id:'t_restless',stage:'youth',w:2,age:[17,28],once:true,cond:()=>P.traits.includes('restless'),
  text:"The old restlessness is loud in {n} this year — the certainty that the real life is happening somewhere {they} is not.",
@@ -662,7 +662,7 @@ const CARDS=[
   {t:"Soften. It's gone far enough.",h:"",do:p=>{fx(p,{heart:6,means:-6,spirit:3});remember('broke_with_house');logLine("Began, late, to spend the family's hard name back down — quietly, and at real cost to the purse.","obs");}},
   {t:"Let them fear it. It works.",h:"",do:p=>{fx(p,{means:8,heart:-4,spirit:-2});remember('cut_a_corner');logLine("Decided the fear was worth more than the warmth, and let the name keep its teeth.","obs");}},
  ]},
-{id:'cb_the_cost',stage:'elder',w:2,once:true,onceDyn:true,cond:()=>held('chose_self')||held('chose_others')||held('chose_loyalty')||held('a_kind_silence'),
+{id:'cb_the_cost',stage:'elder',w:2,once:true,onceDyn:true,cond:()=>held('chose_self')||held('strayed')||held('cut_a_corner')||held('chose_loyalty'),
  text:"Near the end, one old decision keeps returning to {n} — not a wrong one, exactly, but the one with a cost {they} has never quite finished paying.",
  choices:[
   {t:"Decide it was right.",h:"",do:p=>{const which=held('chose_self')?"the life {they} took for {them}self":held('chose_others')?"the dream {they} set down for the people who needed {them}":held('chose_loyalty')?"the truth {they} kept for the sake of {their} own":"the kindness {they} told in place of the truth";echo("Decided, at the last, that "+which+" had been right — and mostly believed it.","obs");fx(p,{spirit:6,heart:3});}},

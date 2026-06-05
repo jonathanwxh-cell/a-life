@@ -136,7 +136,7 @@ function freshPick(pool, who){
   const use=fresh.length?fresh:pool;
   // rotI keeps it decorrelated per-house/generation; the filter keeps it un-repeated per-session
   const choice=use[rotI(who,use.length)%use.length];
-  RECENT_LINES.push(choice); if(RECENT_LINES.length>30) RECENT_LINES.shift();
+  RECENT_LINES.push(choice); if(RECENT_LINES.length>70) RECENT_LINES.shift();
   return choice;
 }
 const rel=kind=>P.rels.find(r=>r.kind===kind&&r.alive);

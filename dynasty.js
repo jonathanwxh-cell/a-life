@@ -31,7 +31,7 @@ function epitaphFor(p){
     if(!pool.length) pool=opts.filter(o=>!recent.includes(o));
     if(!pool.length) pool=opts;
     const choice=pool[((p.gen-1+(typeof houseOff==='function'?houseOff():0))%pool.length+pool.length)%pool.length];
-    if(typeof RECENT_LINES!=='undefined'){ RECENT_LINES.push(choice); if(RECENT_LINES.length>30) RECENT_LINES.shift(); }
+    if(typeof RECENT_LINES!=='undefined'){ RECENT_LINES.push(choice); if(RECENT_LINES.length>70) RECENT_LINES.shift(); }
     return choice; };
   const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains.","Put something into the world that stayed there after {them}."];
   const kind=["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones.","Left people gentler than {they} found them.","Carried a warmth into every room, and left it there."];
@@ -81,21 +81,22 @@ function seatOf(lvl){ let s=SEATS[0]; for(const x of SEATS) if(lvl>=x.min) s=x; 
    life is the same human business; the era only tilts which rare moments can happen and
    how the world feels. The era drifts at each succession, so a house lives through history. */
 const ERAS={
-  settled:{line:"These are settled years — the country quiet, the roads safe, the seasons turning as they should."},
-  war:    {line:"There is a war on in these years. Far off, at first."},
-  plague: {line:"A sickness is moving through the country — slow, and close, and without much mercy."},
-  plenty: {line:"These are fat years — trade good, the granaries full, money loose and everywhere."},
-  hard:   {line:"These are lean years — thin harvests, long winters, every coin counted twice."},
-  turning:{line:"The age itself is turning — new ideas, new machines, new gods, and the old certainties coming loose."},
+  settled:{lines:["These are settled years — the country quiet, the roads safe, the seasons turning as they should.","These are quiet years, as years go — no war worth the name, no plague at the door, the world minding itself.","The times are ordinary, which is to say kind: the harvests come, the roads hold, nothing large is on fire."]},
+  war:    {lines:["There is a war on in these years. Far off, at first.","The country is at war in these years — distant, and then, the way it always comes, not distant at all.","These are war years. The drums are someone else's problem, until quite suddenly they are not."]},
+  plague: {lines:["A sickness is moving through the country — slow, and close, and without much mercy.","There is a fever in the land these years — patient, and thorough, and no respecter of doors.","A plague walks the country in these years, taking its tithe house by house, in no particular hurry."]},
+  plenty: {lines:["These are fat years — trade good, the granaries full, money loose and everywhere.","These are years of plenty — the markets fat, the purses loose, optimism cheap and on every corner.","The country is flush in these years — easy money, easy credit, everyone suddenly an expert on the good times."]},
+  hard:   {lines:["These are lean years — thin harvests, long winters, every coin counted twice.","These are hard years — the harvests short, the winters cruel, every household doing sums it would rather not.","The country is pinched in these years — work scarce, bread dear, and a general tightening of belts and faces."]},
+  turning:{lines:["The age itself is turning — new ideas, new machines, new gods, and the old certainties coming loose.","Something is shifting in the age — new machines, new notions, the old ways of doing things suddenly in question.","The world is changing under everyone's feet these years — new tools, new faiths, the ground of the ordinary moving."]},
 };
 const ERA_KEYS=Object.keys(ERAS);
 // the next era: usually drifts back toward ordinary (most years are quiet), sometimes lurches into history.
 function rollEra(prev){ if(chance(0.4)) return 'settled'; const o=ERA_KEYS.filter(k=>k!=='settled'&&k!==prev); return o[ri(0,o.length-1)]; }
 function eraTone(k){ return (k==='war'||k==='plague'||k==='hard')?'loss':(k==='plenty'?'joy':'obs'); }
+function eraPick(k){ const e=ERAS[k]; if(!e) return null; return (typeof freshPick==='function')?freshPick(e.lines,P):e.lines[0]; }
 function setEra(key,announce){ if(typeof S==='undefined'||!S) return false; const changed=S.era!==key; S.era=key;
-  if(announce && changed && ERAS[key] && typeof logLine==='function') logLine(ERAS[key].line, eraTone(key));
+  if(announce && changed && ERAS[key] && typeof logLine==='function') logLine(eraPick(key), eraTone(key));
   return changed; }
-function eraLine(){ return (typeof S!=='undefined'&&S&&S.era&&ERAS[S.era])?ERAS[S.era].line:null; }
+function eraLine(){ return (typeof S!=='undefined'&&S&&S.era&&ERAS[S.era])?eraPick(S.era):null; }
 
 function initHouse(){
   return {
@@ -268,9 +269,10 @@ function updateHouse(p){
   // name the change in standing within the very life that caused it, so the player feels the
   // dynasty rise and fall in the moment rather than only inferring it later from the heir screen.
   if(p.gen>=2 && h.seat!==seatBefore){
+    const sn=seatOf(h.seat).name;
     logLine(h.seat>seatBefore
-      ? "The family climbed in the world this generation — the house now keeps "+seatOf(h.seat).name+"."
-      : "The family's standing slipped this generation — the house holds "+seatOf(h.seat).name+" now.",
+      ? freshPick(["The family climbed in the world this generation — the house now keeps "+sn+".","The house rose a step this life — it holds "+sn+" now, and the name with it.","This generation lifted the family — "+sn+", where before there was less.","The standing went up this generation; the house keeps "+sn+" now."],p)
+      : freshPick(["The family's standing slipped this generation — the house holds "+sn+" now.","The house lost ground this life — down to "+sn+", and the name a little lighter for it.","This generation cost the family a step — "+sn+" now, where there had been more.","The standing fell this generation; the house holds only "+sn+" now."],p),
       h.seat>seatBefore?"joy":"loss");
   }
 }
@@ -398,15 +400,21 @@ function succeed(childRel){
   let oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F), g=0;
   while(taken.has(oNm) && g++<20) oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F);
   addRel(otherKind, oNm, otherSex, 68, ri(22,34));
-  // the world turns between generations — the heir may be born into a changed age
-  if(chance(0.45)) setEra(rollEra(S.era), false);
+  // the world turns between generations — the heir may be born into a changed age. The era line is
+  // announced ONLY when it changes (not re-stated at every birth, which made "there is a war" recur every
+  // generation) — so a shift in the times reads as news, and a steady era stays quietly in the background.
+  const eraChanged = chance(0.45) ? setEra(rollEra(S.era), false) : false;
   // opening lines reflect being born a child of the house it has become
   const seat=seatOf(h.seat);
-  const births=["Was born into "+seat.name+", and a family that already had a story.",
-    "Was born where the last life ended — into "+seat.name+", and even that already partly spent.",
-    "Came into the world already inside a story someone else had begun, with "+seat.name+" for an inheritance."];
-  logLine(births[rotI(child, births.length)],"obs");
-  if(S.era && S.era!=='settled' && eraLine()) logLine(eraLine(), eraTone(S.era));   // the times this generation is born into
+  const sn=seat.name;
+  const births=["Was born into "+sn+", and a family that already had a story.",
+    "Was born where the last life ended — into "+sn+", and even that already partly spent.",
+    "Came into the world already inside a story someone else had begun, with "+sn+" for an inheritance.",
+    "Was born to "+sn+" and a surname with some weight already on it.",
+    "Arrived into "+sn+", and a house that had been keeping its accounts long before {them}.",
+    "Was born partway through the family's story — into "+sn+", and whatever the last life had left of it."];
+  logLine(freshPick(births,child),"obs");
+  if(eraChanged && eraLine()) logLine(eraLine(), eraTone(S.era));   // only when the age itself has turned
   if(h.motto) logLine("Raised on the family words: “"+h.motto+"”","obs");
   showHeir(child, dead, inheritMeans, nurture+nurtureBeq, h);
 }

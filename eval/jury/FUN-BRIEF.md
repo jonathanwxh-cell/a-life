@@ -45,10 +45,10 @@ All paths absolute on this machine.
    `content.js` (THE moments — how many, how gated, how varied), `engine.js` (how cards are drawn/paced),
    `dynasty.js` (the house/reputation/seat systems), `core.js`. Count the cards; see how much is
    once-per-life vs. repeatable; see what creates variety vs. sameness.
-2. **A 12-dynasty / 38-life playthrough packet** —
-   `C:\Users\Greyf\Desktop\Claude Code\a-life-eval\... ` → use the in-repo copy:
+2. **A multi-dynasty / multi-life playthrough packet** —
    `C:\Users\Greyf\Desktop\Claude Code\a-life\eval\fun-transcripts.txt`. This is **real engine output**:
-   twelve dynasties played end to end. **READ A LOT OF IT** — this is the single best evidence of whether
+   fifteen dynasties played end to end by a representative player (who declines as well as accepts, and takes
+   all four callings across the run). **READ A LOT OF IT** — this is the single best evidence of whether
    the game stays fresh or repeats. Look for repeated beats, repeated lines, repeated life-shapes.
 3. **Live site** (if your tools reach it): https://a-life-chi.vercel.app
 
