@@ -369,13 +369,26 @@ function recordHouseLegacy(s){
   }catch(_){}
 }
 function pastHouses(){ try{ return JSON.parse(localStorage.getItem('alife:houses')||'[]'); }catch(_){ return []; } }
+// DISCOVERY: a quiet count of the distinct moments a player has witnessed across all runs — so the large,
+// rare-gated content pool (vocations, eras, callbacks, fate, intersections) becomes something to chase, and
+// each new dynasty that turns up a never-seen moment reads as a small discovery. Never spoils what's unseen.
+function markMomentSeen(id){ try{ if(typeof localStorage==='undefined'||!id) return;
+  let s={}; try{ s=JSON.parse(localStorage.getItem('alife:seen')||'{}'); }catch(_){ s={}; }
+  if(!s[id]){ s[id]=1; localStorage.setItem('alife:seen', JSON.stringify(s)); } }catch(_){} }
+function seenCount(){ try{ return Object.keys(JSON.parse(localStorage.getItem('alife:seen')||'{}')).length; }catch(_){ return 0; } }
 function renderHousesRaised(){
   const el=document.getElementById('housesRaised'); if(!el) return;
-  const hs=pastHouses(); if(!hs.length){ el.innerHTML=''; return; }
-  const peak=seatOf(Math.max(0,...hs.map(h=>h.seat||0)));
-  const mottos=[...new Set(hs.filter(h=>h.motto).map(h=>h.motto))].slice(-5);
-  let html='<div class="hr-title">'+hs.length+(hs.length===1?' house':' houses')+' raised — highest, '+peak.name+'</div>';
-  if(mottos.length) html+='<div class="hr-mottos">'+mottos.map(m=>'“'+m+'”').join('<br>')+'</div>';
+  const hs=pastHouses();
+  const seen=seenCount(), total=(typeof CARDS!=='undefined'?CARDS.length:0);
+  let html='';
+  if(hs.length){
+    const peak=seatOf(Math.max(0,...hs.map(h=>h.seat||0)));
+    const mottos=[...new Set(hs.filter(h=>h.motto).map(h=>h.motto))].slice(-5);
+    html+='<div class="hr-title">'+hs.length+(hs.length===1?' house':' houses')+' raised — highest, '+peak.name+'</div>';
+    if(mottos.length) html+='<div class="hr-mottos">'+mottos.map(m=>'“'+m+'”').join('<br>')+'</div>';
+  }
+  // the discovery line — a gentle "there is more to find," shown once a few moments are in
+  if(seen>=4 && total) html+='<div class="hr-seen">'+seen+' of the '+total+' moments a life can hold, witnessed so far.</div>';
   el.innerHTML=html;
 }
 

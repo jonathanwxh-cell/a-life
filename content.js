@@ -21,7 +21,7 @@ const CARDS=[
   {t:"Keep it. Climb the hard pages.",h:"the mind reaches",do:p=>{fx(p,{mind:8,spirit:3});remember('child_books');logLine("Read a book {they} couldn't yet understand, and loved it anyway.");}},
   {t:"Give it back. Go out and play.",h:"the body runs",do:p=>{fx(p,{vit:6,heart:4});remember('child_outdoors');logLine("Spent the afternoon outside until the light went.");}},
  ]},
-{id:'c_sick',stage:'child',w:2,once:true,onceDyn:true,age:[3,10],text:"A fever takes the house for a week. {n} is small in a large bed.",
+{id:'c_sick',stage:'child',w:1,once:true,onceDyn:true,age:[3,10],text:"A fever takes the house for a week. {n} is small in a large bed.",
  choices:[
   {t:"Let mother sit through the nights.",h:"a bond is set",do:p=>{const m=rel('mother');if(m)m.bond=clamp(m.bond+12);fx(p,{vit:-4,heart:5});logLine(["Was nursed through a fever, and remembered a cool hand for life.","Learned, lying small in a large bed, that to be cared for is its own kind of gift.","The fever passed; what stayed was the shape of a hand on a forehead, kept for decades."][rotI(p,3)],"obs");}},
   {t:"Insist on being brave alone.",h:"a habit is set",do:p=>{fx(p,{vit:-2,spirit:-3,mind:2});logLine("Learned early to be ill quietly.","obs");}},
@@ -35,6 +35,21 @@ const CARDS=[
  choices:[
   {t:"Take it.",h:"",do:p=>{fx(p,{means:2,spirit:-2,heart:-2});logLine("Stole, once, and the taste was guilt as much as fruit.");}},
   {t:"Walk on, hungry.",h:"",do:p=>{fx(p,{spirit:3,vit:-2});logLine("Went hungry rather than take what wasn't given.","obs");}},
+ ]},
+{id:'c_wonder',stage:'child',w:2,once:true,age:[5,11],text:"Something stops {n} cold in the ordinary day — the inside of a flower, the wheel of stars, the way light falls through dust. The world cracks open a little.",
+ choices:[
+  {t:"Chase the wonder. Ask why.",h:"a mind that won't settle",do:p=>{fx(p,{mind:7,spirit:5});remember('early_wonder');logLine(freshPick(["Found, young, the particular drug of wanting to know, and never quite got free of it.","Stopped cold before an ordinary marvel, and started, that day, the long habit of asking why.","Looked too hard at one small thing and fell, permanently, into a curiosity the years never cured."],p),"joy");}},
+  {t:"Let it pass. Go back to playing.",h:"",do:p=>{fx(p,{vit:4,heart:3,spirit:2});logLine("Felt the world crack open for a moment, shrugged, and went back to the game — which is also a way of being wise.","obs");}},
+ ]},
+{id:'c_unfair',stage:'child',w:2,once:true,age:[6,12],text:"{n} meets it for the first time, the way every child eventually does: a punishment that wasn't earned, a thing taken that was {their}s. The unfairness of it is enormous.",
+ choices:[
+  {t:"Burn, and remember.",h:"a sense of justice, forged hard",do:p=>{fx(p,{spirit:3,mind:4,heart:-2});remember('took_a_stand');logLine(freshPick(["Met the world's first unfairness and did not, would not, ever quite accept it.","Learned young that the world is not fair, and decided, privately and for life, to mind.","Took the first injustice personally, and kept taking them personally, all the way up."],p),"obs");}},
+  {t:"Shrug. The world is like that.",h:"an early, useful calm",do:p=>{fx(p,{spirit:4,mind:2,heart:2});logLine("Met the world's unfairness early and made an odd, durable peace with it, the way some children do.","obs");}},
+ ]},
+{id:'c_dark',stage:'child',w:1,once:true,age:[5,10],text:"There is a season of it, the way there is for some children: the dark behind the door, the thing under the floor, the long bad hour before sleep. {n} is small, and the night is large.",
+ choices:[
+  {t:"Face the dark down alone.",h:"a hard early courage",do:p=>{fx(p,{spirit:4,vit:2,heart:-2});remember('guarded_self');logLine(freshPick(["Learned, small and alone in the dark, to be {their} own comfort — a skill {they} would lean on for life.","Stared the childhood dark down without help, and kept the slightly armoured heart it gave {them}.","Faced the night alone because there seemed no other option, and grew a quiet, early hardness."],p),"obs");}},
+  {t:"Call out. Be gathered up.",h:"a bond, made in the dark",do:p=>{const m=rel('mother')||rel('father');if(m)m.bond=clamp(m.bond+10);fx(p,{heart:6,spirit:3});logLine("Called out into the childhood dark and was gathered up, and learned the deep thing: that calling out can work.","joy");}},
  ]},
 
 /* ---- YOUTH ---- */
@@ -139,11 +154,18 @@ const CARDS=[
   {t:"Call. Say the hard thing.",h:"",do:p=>{const r=p.rels.filter(r=>r.alive&&r.bond<35)[0];if(r){r.bond=clamp(r.bond+25);logLine("Reached across years of silence to "+r.given+".","joy");}fx(p,{spirit:10});}},
   {t:"Let it lie. Too late now.",h:"",do:p=>{fx(p,{spirit:-6});logLine("Decided it was too late to mend it. It was not, but {they} would never know.","loss");}},
  ]},
-{id:'e_legacy',stage:'elder',w:3,once:true,age:[66,95],text:"{n} is asked what {they} wants remembered. The question lands harder than expected.",
+{id:'e_legacy',stage:'elder',w:3,once:true,age:[66,95],
+ text:p=>{const v=p.flags.vocation;
+   const q = v==='soldier' ? "A young one asks {n} — who carried a blade, and the weight of it — what {they} wants remembered. The question lands harder than expected."
+     : v==='scholar' ? "{n}, who spent a life in thought, is asked what {they} wants remembered. The question is harder than any {they} studied."
+     : v==='maker' ? "{n}, whose hands made things that outlasted the making, is asked what {they} wants remembered. It lands harder than expected."
+     : (v==='wanderer'||v==='settled') ? "{n}, who went so far and came so late to stillness, is asked what {they} wants remembered. The question lands harder than expected."
+     : "{n} is asked what {they} wants remembered. The question lands harder than expected.";
+   return q;},
  choices:[
-  {t:"\"That I was kind.\"",h:"",do:p=>{fx(p,{heart:6,spirit:6});p.flags.legacy='kind';logLine("Said {they} hoped to be remembered as kind.","obs");}},
-  {t:"\"That I built something.\"",h:"",do:p=>{fx(p,{spirit:4});p.flags.legacy='built';logLine("Said {they} hoped to be remembered for what {they} made.","obs");}},
-  {t:"\"That I was here at all.\"",h:"",do:p=>{fx(p,{spirit:2});p.flags.legacy='here';logLine("Said {they} only hoped to be remembered.","obs");}},
+  {t:"\"That I was kind.\"",h:"",do:p=>{fx(p,{heart:5,spirit:4});p.flags.legacy='kind';logLine(freshPick(["Said {they} hoped to be remembered as kind.","Asked only to be remembered as someone who had been gentle with people.","Said the thing {they} most wanted left behind was a kind of warmth, and nothing grander."],p),"obs");}},
+  {t:"\"That I built something.\"",h:"",do:p=>{fx(p,{spirit:5,means:2});p.flags.legacy='built';logLine(freshPick(["Said {they} hoped to be remembered for what {they} made.","Wanted, in the end, to be remembered by the thing {they} left standing.","Asked to be measured by the work — the made thing, the built thing, the thing that stayed."],p),"obs");}},
+  {t:"\"That I was here at all.\"",h:"",do:p=>{fx(p,{spirit:4,mind:2});p.flags.legacy='here';logLine(freshPick(["Said {they} only hoped to be remembered.","Asked for no monument but the plain fact of having been alive, and meant it.","Wanted only that someone, someday, would know {they} had been here, and had tried."],p),"obs");}},
  ]},
 {id:'e_garden',stage:'elder',w:2,age:[68,95],once:true,text:"The days are slow and wide. {n} takes up something small — a garden, a craft, a quiet ritual.",
  choices:[
@@ -568,11 +590,11 @@ const CARDS=[
   {t:"Cut it again. You know how.",h:"",do:p=>{echo("Did, a second time and for far more, the quiet dishonest thing — and felt almost nothing, which was its own kind of answer.","loss");fx(p,{means:14,heart:-4,spirit:-3});remember('cut_a_corner');}},
   {t:"Not this time.",h:"",do:p=>{echo("Stood, this once, on the side of the thing {they} had cut past before — and was surprised how much lighter it left {them}.","joy");fx(p,{spirit:7,heart:4});remember('stayed_straight');}},
  ]},
-{id:'cb_reckless',stage:'elder',w:2,once:true,cond:()=>held('lived_reckless'),
+{id:'cb_reckless',stage:'elder',w:2,once:true,onceDyn:true,cond:()=>held('lived_reckless'),
  text:"A young one in the family lives the way {n} once did — fast, and breakable, and sure of {their} own luck. {n}, of all people, knows exactly where that road runs.",
  choices:[
-  {t:"Tell them to slow down.",h:"",do:p=>{echo("Counselled the caution {they} had never once managed {them}self — and meant every word of it.","obs");fx(p,{mind:3,heart:3});}},
-  {t:"Tell them it was worth it.",h:"",do:p=>{echo("Told a reckless young one the truth: that {they} would not, on balance, give back a single one of those breakable years.","joy");fx(p,{spirit:6,heart:2});}},
+  {t:"Tell them to slow down.",h:"",do:p=>{echo(freshPick(["Counselled the caution {they} had never once managed {them}self — and meant every word of it.","Told a young one to be careful in a voice {they} had spent a whole life ignoring, and hoped it carried better than it had.","Handed on the warning {they} had been given and waved away at that age, knowing it would likely be waved away again."],p),"obs");fx(p,{mind:3,heart:3});}},
+  {t:"Tell them it was worth it.",h:"",do:p=>{echo(freshPick(["Told a reckless young one the truth: that {they} would not, on balance, give back a single one of those breakable years.","Said the unwise thing, and the true one — that the wild years had been worth their cost, and then some.","Refused to lie to the young about the fire {they}'d played with, and admitted, plainly, that {they}'d do it again."],p),"joy");fx(p,{spirit:6,heart:2});}},
  ]},
 
 /* ============================================================
@@ -708,17 +730,17 @@ const CARDS=[
   {t:"Let it die with you.",h:"some things end",do:p=>{fx(p,{spirit:-2,mind:2});logLine("Kept the trade's last secrets to {them}self, and let a way of making things end, quietly, where {they} ended.","obs");}},
  ]},
 
-{id:'a_wanderer_settle',w:4,age:[26,52],cool:14,cond:()=>P.flags.vocation==='wanderer',
+{id:'a_wanderer_settle',w:4,once:true,age:[26,52],cond:()=>P.flags.vocation==='wanderer',
  text:p=>["A place has tried to hold {n} again — work, a face, a reason. The road is also right there, as it always is.","{n} has been still long enough to feel the old itch. There is a horizon, and {they} knows exactly how it would feel to walk at it.","Someone has asked {n} to stay. It is a fair offer. It is also a door closing, and {they} can hear it."][rotI(p,3)],
  choices:[
-  {t:"Move on. The horizon calls.",h:"free, and unheld",do:p=>{fx(p,{mind:6,spirit:5,heart:-4,means:-3});remember('left_home');remember('lived_reckless');logLine(["Moved on again, before the place could close around {them}, and felt the old clean relief of an open road.","Chose the horizon over the held hand, as {they} had before, as {they} probably always would.","Walked when {they} could have stayed, and added another town to the long list {they} had loved and left."][rotI(p,3)],"obs");}},
+  {t:"Move on. The horizon calls.",h:"free, and unheld",do:p=>{fx(p,{mind:6,spirit:5,heart:-4,means:-3});remember('left_home');remember('lived_reckless');logLine(freshPick(["Moved on again, before the place could close around {them}, and felt the old clean relief of an open road.","Chose the horizon over the held hand, as {they} had before, as {they} probably always would.","Walked when {they} could have stayed, and added another town to the long list {they} had loved and left."],p),"obs");}},
   {t:"Stay. Let the road end here.",h:"roots, at last",do:p=>{fx(p,{heart:8,spirit:4,means:4});p.flags.vocation='settled';remember('stayed_home');logLine("Let the road end, finally, in one place with one set of faces — and was surprised how much like relief it felt.","joy");}},
  ]},
-{id:'m_wanderer_return',w:3,once:true,age:[46,68],cond:()=>P.flags.vocation==='wanderer'||held('left_home'),
+{id:'m_wanderer_return',w:3,once:true,age:[46,68],cond:()=>P.flags.vocation==='wanderer',
  text:"After all the years and all the roads, {n} comes back to the place {they} started — smaller now, or {they} are larger, the arithmetic never quite works.",
  choices:[
-  {t:"Stay a while. Make peace.",h:"",do:p=>{fx(p,{heart:6,spirit:5,mind:3});remember('made_peace');logLine("Went home at last, and found it had gone on without {them}, and made a quiet peace with both facts.","obs");}},
-  {t:"See it, and go. Home is the road now.",h:"",do:p=>{fx(p,{spirit:3,heart:-2,mind:4});logLine("Looked at the old place once, the way you look at an old photograph, and went back to the only home {they} had left — the going itself.","obs");}},
+  {t:"Stay a while. Make peace.",h:"",do:p=>{fx(p,{heart:6,spirit:5,mind:3});remember('made_peace');logLine(freshPick(["Went home at last, and found it had gone on without {them}, and made a quiet peace with both facts.","Came back to the first place at last, sat in what was left of it, and let the long going settle into something like peace.","Returned, finally, and found home had become a smaller and more forgivable thing than the one {they}'d fled."],p),"obs");}},
+  {t:"See it, and go. Home is the road now.",h:"",do:p=>{fx(p,{spirit:3,heart:-2,mind:4});logLine(freshPick(["Looked at the old place once, the way you look at an old photograph, and went back to the only home {they} had left — the going itself.","Saw the first place again, felt nothing {they} could use, and turned back to the road that had become the only home that fit.","Stood in the doorway of the beginning, found it didn't hold {them} any more than it had, and left it for good."],p),"obs");}},
  ]},
 
 /* ---- ERA: the world a generation lives through (gated on S.era) ---- */
@@ -898,11 +920,11 @@ const CARDS=[
   {t:"Hand the question on, unanswered.",h:"the work outlives the worker",do:p=>{fx(p,{spirit:6,heart:4});remember('became_teacher');logLine("Handed {their} great unanswered question to someone younger, the way a runner hands on a flame, and was content to have carried it as far as {they} did.","joy");}},
   {t:"Make peace with not knowing.",h:"",do:p=>{fx(p,{spirit:5,mind:4});remember('made_peace');logLine("Made, at the last, a scholar's peace with the size of what {they} would never know — which was most of it, and always had been.","obs");}},
  ]},
-{id:'e_wanderer_old',stage:'elder',w:3,age:[66,92],once:true,cond:()=>P.flags.vocation==='wanderer'||P.flags.vocation==='settled'||held('left_home'),
+{id:'e_wanderer_old',stage:'elder',w:3,age:[66,92],once:true,cond:()=>P.flags.vocation==='wanderer'||P.flags.vocation==='settled',
  text:"The road is mostly behind {n} now; the body has called {them} in for good. All those places, all that going — it asks to be added up.",
  choices:[
-  {t:"Regret nothing. The going was the life.",h:"",do:p=>{fx(p,{spirit:6,heart:3});logLine(["Added up all the roads and all the leaving and regretted not one mile of it, even the cold ones.","Decided a life spent going had been a life, fully — that the horizon had been worth every door {they} closed to chase it."][rotI(p,2)],"joy");}},
-  {t:"Count the doors you closed to keep moving.",h:"",do:p=>{fx(p,{spirit:-2,heart:4,mind:3});remember('knew_loss');logLine("Counted, at the end of the road, the doors {they} had closed in order to keep walking — and felt each one, plainly, for the first time.","obs");}},
+  {t:"Regret nothing. The going was the life.",h:"",do:p=>{fx(p,{spirit:6,heart:3});logLine(freshPick(["Added up all the roads and all the leaving and regretted not one mile of it, even the cold ones.","Decided a life spent going had been a life, fully — that the horizon had been worth every door {they} closed to chase it.","Looked back down the whole long road and found {they} would walk every mile of it again, the hard ones included."],p),"joy");}},
+  {t:"Count the doors you closed to keep moving.",h:"",do:p=>{fx(p,{spirit:-2,heart:4,mind:3});remember('knew_loss');logLine(freshPick(["Counted, at the end of the road, the doors {they} had closed in order to keep walking — and felt each one, plainly, for the first time.","Tallied, late, the people and the places {they} had left to keep moving, and let the bill of it come due all at once.","Reckoned up what the going had cost — every held hand let go of — and carried the sum quietly to the end."],p),"obs");}},
  ]},
 
 /* ---- FATE: things that simply happen — no choosing your way out ---- */

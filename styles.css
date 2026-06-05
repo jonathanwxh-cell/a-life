@@ -347,6 +347,7 @@
   .housesRaised:empty{display:none;}
   .hr-title{font-family:'Fraunces',serif;letter-spacing:.5px;color:var(--ink-dim);opacity:.9;}
   .hr-mottos{margin-top:6px;font-style:italic;color:var(--ink-faint);opacity:.85;line-height:1.7;}
+  .hr-seen{margin-top:8px;font-size:12.5px;letter-spacing:.3px;color:var(--ink-faint);opacity:.7;}
   .reflect:focus-visible{outline:2px solid var(--amber);outline-offset:2px;color:var(--amber);}
 
   /* the flow text is now a control: tap it to change the pace of the years */

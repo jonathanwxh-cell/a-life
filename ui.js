@@ -282,7 +282,9 @@ function openStock(){
     else if(h.seat>=5) dir='The house holds a grand estate. From here it climbs on an heir whose fortune reaches a real height, or on a name settled deep into the family’s character over several lives — and can still slip in a hard year met empty-handed.';
     else dir='The house rises on a life that ends far richer than it began, or on a name made strong for one thing — and can slip a step in a hard year met empty-handed.';
     if(h.seat>=2 && h.seat<6 && P.stats.means>40 && P.age>=40 && P.age<=64) dir += ' A life can spend deliberately now — on a patronage, a marriage well made, a public work with the name on it — to push the standing up; it does not always hold, but it tilts the odds.';
-    extra.push(`<span class="shint">${dir}</span>`); }
+    extra.push(`<span class="shint">${dir}</span>`);
+    // what the house has yet to reach — something concrete to steer the next lives toward
+    if(typeof houseAspirations==='function'){ const asp=houseAspirations(h, S.marks); if(asp.length) extra.push(`<span class="shint">Still ahead for the house: ${asp.slice(0,3).join('; ')}.</span>`); } }
   const tie=P.rels.filter(r=>r.alive&&r.kind!=='ex').sort((a,b)=>b.bond-a.bond)[0];
   if(tie) extra.push(`Closest, just now, to ${tie.given}.`);
   if(P.flags.peril && P.age<P.flags.peril) extra.push(`And something in how ${P.px.they} has been living has put the body, for a while, at risk.`);

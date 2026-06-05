@@ -244,7 +244,10 @@ function drawCard(){
   }
   if(rel('love') && !P.flags.married){
     const mc=pool.find(c=>c.id==='a_marry');
-    if(mc && mc.age && P.age>=mc.age[1]-4 && chance(0.6)){ presentCard(mc); return; }
+    // marriage follows love by a few years at a VARIED age (a moderate per-draw nudge once in love),
+    // strengthening into a late safety-net — so couples who met young also marry young, instead of every
+    // marriage clustering at the window's end and reading "married late" no matter when they fell in love.
+    if(mc){ const late = mc.age && P.age>=mc.age[1]-4; if((late && chance(0.62)) || chance(0.3)){ presentCard(mc); return; } }
   }
   // callbacks are rare, memory-gated payoffs (cb_*) — the reach-back that gives a life its
   // particular shape. When one is finally eligible, strongly prefer it so the long arc
@@ -258,10 +261,14 @@ function drawCard(){
   const SIG=/^(a_soldier|m_soldier|e_soldier|a_scholar|m_scholar|e_scholar|a_maker|m_maker|e_maker|a_wanderer|m_wanderer|e_wanderer|vx_|t_|w_)/;
   const sig=pool.find(c=>SIG.test(c.id));
   if(sig && chance(0.48)){ presentCard(sig); return; }
-  // weighted pick
-  let tot=0; for(const c of pool) tot+=c.w;
+  // weighted pick — with a TRAIT AFFINITY so a child's marked nature actually shapes which childhood it
+  // has: a bookish child leans to the book, a warm one to the friend, a restless one to leaving/taking.
+  // This makes the early years (the jury's "identical checklist") diverge by who the child already is.
+  const TRAIT_AFFINITY={c_book:'bookish',c_friend:'warm',c_animal:'tender',c_talent:'bright',c_grandparent:'tender',c_steal:'restless',c_move:'restless',c_sibling:'warm',c_wonder:'dreaming',c_unfair:'stubborn',c_dark:'guarded'};
+  const ew=c=>{ const tr=TRAIT_AFFINITY[c.id]; return (tr && P.traits && P.traits.indexOf(tr)>=0) ? c.w*2.6 : c.w; };
+  let tot=0; for(const c of pool) tot+=ew(c);
   let r=Math.random()*tot, chosen=pool[0];
-  for(const c of pool){ r-=c.w; if(r<=0){chosen=c;break;} }
+  for(const c of pool){ r-=ew(c); if(r<=0){chosen=c;break;} }
   presentCard(chosen);
 }
 function presentCard(c){
@@ -270,6 +277,7 @@ function presentCard(c){
   P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age;   // for the no-repeat cooldown
   if(c.once) P.flags['card_'+c.id]=1;
   if(c.onceDyn && typeof S!=='undefined' && S){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=1; }   // burn it for the whole house
+  if(typeof markMomentSeen==='function') markMomentSeen(c.id);   // cross-run discovery: count the distinct moments witnessed
   // once the player has made a choice, point them to where it's all recorded
   if(window.hintOnce && P.decisions && P.decisions.length>=1) hintOnce('seenChron',"Every choice is being written into your chronicle — tap “✦ the constellation” (top) to see the whole line.");
   if(window.hintOnce && P.decisions && P.decisions.length>=2) hintOnce('seenLog',"Tap the fading log below any time to read this life's full record.");
