@@ -16,12 +16,32 @@
 
 const CARDS=[
 /* ---- CHILD ---- */
+// The OPENER: a born-circumstance card that fires very early and reads differently for every life — by the
+// era it's born into, the standing of its house, or its own nature — so childhood no longer universally opens
+// on the fever. High weight + the earliest window so it reliably lands first; its text is the variety.
+{id:'c_origin',stage:'child',w:8,once:true,age:[3,5],
+ text:p=>{const e=(typeof S!=='undefined'&&S&&S.era)?S.era:'settled';const seat=(typeof S!=='undefined'&&S&&S.house)?(S.house.seat||0):1;
+   if(e==='hard') return "{n} is small in a lean time — a house counting every coin, a table that never quite fills. The shape of want is among the first things {they} learns.";
+   if(e==='plague') return "{n}'s earliest years pass under a quiet dread — a sickness in the land, doors kept shut, the grown-ups speaking low. {They} learns caution before {they} learns much else.";
+   if(e==='war') return "{n} comes up in a loud time — a war somewhere past the edge of everything, the grown-ups tense with news that is never quite good. {They} learns early that the world is not safe.";
+   if(e==='plenty') return "{n}'s first years fall in a fat time — money easy, the table full, the grown-ups generous and a little distracted. {They} learns the world as a place of plenty, for better and worse.";
+   if(e==='turning') return "{n} is born into a time that will not hold still — the old ways and the new ones arguing in every room, the grown-ups unsure which to teach. {They} learns early that nothing is settled.";
+   if(seat>=5) return "{n} is born into a house with a name — rooms that echo, a standing to be worthy of, expectations that arrive before {they} can walk. {They} learns early that {they} is meant to be someone in particular.";
+   if(seat<=0) return "{n} is born with little more than the name, and not much of that — a bare room, a hard start, a world already indifferent. {They} learns early to expect little, and to reach anyway.";
+   if(p.traits.indexOf('frail')>=0) return "{n} comes into the world small and unfinished, a worry from the first — the kind of child the grown-ups watch too closely. The body is a fact {they} learns before any other.";
+   if(p.traits.indexOf('bright')>=0) return "{n} is quick from the very start — too quick, the grown-ups say, half proud and half uneasy. Being ahead of the room is among the first things {they} learns.";
+   if(p.traits.indexOf('warm')>=0||p.traits.indexOf('tender')>=0) return "{n} is, from the first, an easy and open child — the kind that hugs strangers and weeps at small cruelties. A wide heart is the earliest thing anyone notices.";
+   return "{n}'s earliest years pass the way most do — ordinary, half-remembered, a few bright fragments in a long warm blur. The world is, at first, simply everything there is.";},
+ choices:[
+  {t:"Take the world as it comes.",h:"",do:p=>{fx(p,{spirit:3,heart:2});logLine(freshPick(["Met the first years as they came, and took the shape of them without knowing it.","Soaked up the early world whole, the way children do, before {they} could weigh any of it.","Was, in those first years, simply and entirely a child of wherever {they} happened to land."],p),"obs");}},
+  {t:"Feel, even small, it could be otherwise.",h:"",do:p=>{fx(p,{mind:4,spirit:1});remember('early_restless');logLine(freshPick(["Felt, even very small, the first flicker of a sense that things might be arranged some other way.","Carried, from the start, a small private conviction that the given world was not the only possible one.","Looked at the world {they} was handed, even as a child, as if it were a first draft."],p),"obs");}},
+ ]},
 {id:'c_book',stage:'child',w:3,age:[7,12],text:"A teacher leaves a book on {n}'s desk by mistake. It is far too difficult. {They} could return it, or keep it and try.",
  choices:[
   {t:"Keep it. Climb the hard pages.",h:"the mind reaches",do:p=>{fx(p,{mind:8,spirit:3});remember('child_books');logLine("Read a book {they} couldn't yet understand, and loved it anyway.");}},
   {t:"Give it back. Go out and play.",h:"the body runs",do:p=>{fx(p,{vit:6,heart:4});remember('child_outdoors');logLine(freshPick(["Spent the afternoon outside until the light went.","Gave the book back and ran, and learned the body's case for being a body.","Chose the yard over the page, that day, and most days after."],p));}},
  ]},
-{id:'c_sick',stage:'child',w:1,once:true,onceDyn:true,age:[3,10],text:"A fever takes the house for a week. {n} is small in a large bed.",
+{id:'c_sick',stage:'child',w:1,once:true,onceDyn:true,age:[6,11],text:"A fever takes the house for a week. {n} is small in a large bed.",
  choices:[
   {t:"Let mother sit through the nights.",h:"a bond is set",do:p=>{const m=rel('mother');if(m)m.bond=clamp(m.bond+12);fx(p,{vit:-4,heart:5});logLine(["Was nursed through a fever, and remembered a cool hand for life.","Learned, lying small in a large bed, that to be cared for is its own kind of gift.","The fever passed; what stayed was the shape of a hand on a forehead, kept for decades."][rotI(p,3)],"obs");}},
   {t:"Insist on being brave alone.",h:"a habit is set",do:p=>{fx(p,{vit:-2,spirit:-3,mind:2});logLine(freshPick(["Learned early to be ill quietly.","Learned, small and feverish, to need no one — a lesson that took, and cost.","Got through the fever alone on purpose, and kept the habit of it for life."],p),"obs");}},
@@ -44,7 +64,7 @@ const CARDS=[
 {id:'c_unfair',stage:'child',w:2,once:true,age:[6,12],text:"{n} meets it for the first time, the way every child eventually does: a punishment that wasn't earned, a thing taken that was {their}s. The unfairness of it is enormous.",
  choices:[
   {t:"Burn, and remember.",h:"a sense of justice, forged hard",do:p=>{fx(p,{spirit:3,mind:4,heart:-2});remember('took_a_stand');logLine(freshPick(["Met the world's first unfairness and did not, would not, ever quite accept it.","Learned young that the world is not fair, and decided, privately and for life, to mind.","Took the first injustice personally, and kept taking them personally, all the way up."],p),"obs");}},
-  {t:"Shrug. The world is like that.",h:"an early, useful calm",do:p=>{fx(p,{spirit:4,mind:2,heart:2});logLine("Met the world's unfairness early and made an odd, durable peace with it, the way some children do.","obs");}},
+  {t:"Shrug. The world is like that.",h:"an early, useful calm",do:p=>{fx(p,{spirit:4,mind:2,heart:2});logLine(freshPick(["Met the world's unfairness early and made an odd, durable peace with it, the way some children do.","Learned young that fair was not how the world worked, and let go of expecting it — a calm that lasted.","Took the first injustice with an unsettling child's shrug, and carried that even temper a long way."],p),"obs");}},
  ]},
 {id:'c_dark',stage:'child',w:1,once:true,age:[5,10],text:"There is a season of it, the way there is for some children: the dark behind the door, the thing under the floor, the long bad hour before sleep. {n} is small, and the night is large.",
  choices:[
@@ -219,7 +239,7 @@ const CARDS=[
   {t:"Name your worth.",h:"the gamble matures",do:p=>{const a=(recall('chose_study')||{age:p.age}).age;echo(freshPick(["The hungry years of study, begun at "+a+", at last came good.","The long bet {they} placed on {their} own head at "+a+" finally, improbably, paid.","What {they} starved for at "+a+" — the learning, the long shot — turned at last into a living.","The wager of those lean studying years, laid down at "+a+", came in at last, and handsomely."],p),"joy");fx(p,{means:20,spirit:7});}},
   {t:"Teach it cheap. Spread it wide.",h:"",do:p=>{echo(freshPick(["Chose to give knowledge away rather than sell it dear.","Set the price low on purpose, so the knowing would reach further than the money ever could.","Gave the learning away at cost, and counted the reach of it the better profit."],p),"joy");fx(p,{means:3,heart:8,spirit:6});remember('became_teacher');}},
  ]},
-{id:'cb_left_home',stage:'midlife',w:3,cond:()=>held('left_home'),once:true,
+{id:'cb_left_home',stage:'midlife',w:3,cond:()=>held('left_home'),once:true,onceDyn:true,
  text:"Word comes from the town {n} left long ago. It is smaller than {they} remembered, and mostly gone. {They} could go back, once.",
  choices:[
   {t:"Go back. Stand where you started.",h:"",do:p=>{const a=(recall('left_home')||{age:p.age}).age;echo(freshPick(["Returned to the town {they} fled at "+a+", and found it both smaller and larger than memory.","Went back to the place {they} left at "+a+", stood in it, and felt the strange double size of an old home.","Came back to where {they} began, abandoned at "+a+", and found it had shrunk to fit a smaller life than {they} now lived."],p),"obs");fx(p,{spirit:7,heart:5});}},
@@ -560,7 +580,7 @@ const CARDS=[
  text:"For all the reading, there is a thing the books never taught {n} — and life has just set it on the table, plainly, where no page can be turned to avoid it.",
  choices:[
   {t:"Close the book. Be in the room.",h:"",do:p=>{fx(p,{heart:7,spirit:4,mind:-1});remember('looked_up');logLine("Set down what {they} knew to attend to what {they} didn't, and was the larger for it.","joy");}},
-  {t:"Retreat to what you know.",h:"",do:p=>{fx(p,{mind:5,heart:-3,spirit:-2});logLine("Met the one unteachable thing by reaching, again, for a book.");}},
+  {t:"Retreat to what you know.",h:"",do:p=>{fx(p,{mind:5,heart:-3,spirit:-2});logLine(freshPick(["Met the one unteachable thing by reaching, again, for a book.","Answered the unanswerable the only way {they} knew — by reading more about it, and feeling no better.","Retreated from the thing no book could fix into the books anyway, because it was where {they} lived."],p));}},
  ]},
 {id:'t_guarded',stage:'adult',w:2,age:[28,54],once:true,cond:()=>P.traits.includes('guarded'),
  text:"Someone has gotten close enough to ask {n} the question the walls are up against: what is it {they} is so carefully never saying?",
@@ -715,7 +735,7 @@ const CARDS=[
  text:"{n} could go out on {their} own — {their} name over a door, {their} hours {their} own, every risk {their} own too. Or stay another's hands, safe and waged.",
  choices:[
   {t:"Open your own door.",h:"your name, your neck",do:p=>{if(chance(0.6)){fx(p,{means:14,spirit:8,vit:-2});remember('self_made');remember('built_the_name');logLine("Hung {their} own name over {their} own door, and made the gamble pay — slowly, and with both hands.","joy");}else{fx(p,{means:-10,spirit:-3,mind:4});remember('self_made');logLine("Hung {their} own name over a door, and learned the hard arithmetic of working for {them}self.","loss");}}},
-  {t:"Stay waged. Sleep at night.",h:"",do:p=>{fx(p,{means:6,vit:3,spirit:-2});remember('chose_trade');logLine("Stayed another's good hands, took the steady wage, and slept the sleep of the un-indebted.","obs");}},
+  {t:"Stay waged. Sleep at night.",h:"",do:p=>{fx(p,{means:6,vit:3,spirit:-2});remember('chose_trade');logLine(freshPick(["Stayed another's good hands, took the steady wage, and slept the sleep of the un-indebted.","Kept working for someone else's name, and bought, with the lost ambition, a great deal of peace.","Chose the wage and the quiet over the risk and the glory, and rarely lay awake regretting it."],p),"obs");}},
  ]},
 {id:'m_maker_masterwork',w:3,once:true,age:[44,66],cond:()=>P.flags.vocation==='maker',
  text:"There is one piece {n} has always meant to make — the real one, the one that would say everything {they} know how to do. It would cost time {they} can't quite spare.",
@@ -843,8 +863,8 @@ const CARDS=[
 {id:'t_warm',w:2,once:true,age:[24,62],cond:()=>P.traits.includes('warm')||P.traits.includes('tender'),
  text:"People keep ending up at {n}'s table — the lost, the lonely, the merely hungry. {They} has never been able to work out how to say no, or to want to.",
  choices:[
-  {t:"Keep the door open.",h:"a warmth that costs",do:p=>{fx(p,{heart:8,spirit:4,means:-4});remember('let_in');remember('kind_to_outcast');logLine("Kept the door and the table open to whoever turned up, fed more people than {they} could afford to, and was the richer in every way but the one.","joy");}},
-  {t:"Learn, finally, to say no.",h:"a harder, kept self",do:p=>{fx(p,{means:4,spirit:2,heart:-3});remember('stayed_straight');logLine("Learned, late and against {their} nature, to close the door sometimes, and kept a little more of {them}self for the keeping.","obs");}},
+  {t:"Keep the door open.",h:"a warmth that costs",do:p=>{fx(p,{heart:8,spirit:4,means:-4});remember('let_in');remember('kind_to_outcast');logLine(freshPick(["Kept the door and the table open to whoever turned up, fed more people than {they} could afford to, and was the richer in every way but the one.","Let the lost and the hungry keep finding {their} table, and never learned, or wanted, to turn them away.","Ran an open house {they} couldn't quite afford, and counted the warmth of it worth every coin it cost."],p),"joy");}},
+  {t:"Learn, finally, to say no.",h:"a harder, kept self",do:p=>{fx(p,{means:4,spirit:2,heart:-3});remember('stayed_straight');logLine(freshPick(["Learned, late and against {their} nature, to close the door sometimes, and kept a little more of {them}self for the keeping.","Taught {them}self, with effort, to say the no {their} nature resisted, and was a little less spent for it.","Drew, finally, a line around {their} own generosity, and felt the loss and the relief of it together."],p),"obs");}},
  ]},
 {id:'t_shrewd',w:2,once:true,age:[26,58],cond:()=>P.traits.includes('shrewd'),
  text:"{n} sees the angle nobody else in the room has noticed — the soft place, the lever, the thing that could be turned to {their} advantage. It would be so easy.",
@@ -928,23 +948,23 @@ const CARDS=[
  ]},
 
 /* ---- FATE: things that simply happen — no choosing your way out ---- */
-{id:'f_fire',stage:'*',w:1,age:[18,88],cool:30,cond:()=>P.stats.means>24,
+{id:'f_fire',stage:'*',w:1,once:true,age:[18,88],cool:30,cond:()=>P.stats.means>24,
  text:"There is no warning, the way there never is. A fire — a lamp, a dry season, a neighbour's carelessness — and by morning a great deal of what {n} had is ash and stink.",
  choices:[
-  {t:"Begin again from the ash.",h:"there is no other option",do:p=>{fx(p,{means:-18,spirit:-4,vit:-2});remember('knew_loss');logLine("Lost much of what {they} had to a fire {they} could not have prevented, stood in the wet ash a while, and began again.","loss");}},
+  {t:"Begin again from the ash.",h:"there is no other option",do:p=>{fx(p,{means:-18,spirit:-4,vit:-2});remember('knew_loss');logLine(freshPick(["Lost much of what {they} had to a fire {they} could not have prevented, stood in the wet ash a while, and began again.","Watched a fire take, in one night, what it had taken years to gather — and started over, because there was nothing else to do.","Lost the house and most of what was in it to a fire, and learned the cold lesson of how fast a life's accumulation burns."],p),"loss");}},
  ]},
-{id:'f_sudden_loss',stage:'*',w:1,age:[20,88],cool:28,cond:()=>P.rels.some(r=>r.alive&&r.bond>52&&r.kind!=='ex'),
+{id:'f_sudden_loss',stage:'*',w:1,once:true,age:[20,88],cool:28,cond:()=>P.rels.some(r=>r.alive&&r.bond>52&&r.kind!=='ex'),
  text:p=>{const r=P.rels.filter(x=>x.alive&&x.bond>52&&x.kind!=='ex')[0];return (r?r.given:"Someone")+" is simply gone one morning — no illness anyone marked, no warning anyone caught. The world does this sometimes, without asking.";},
  choices:[
   {t:"Let it break you, and mend slow.",h:"",do:p=>{const r=P.rels.filter(x=>x.alive&&x.bond>52&&x.kind!=='ex')[0];if(r)r.alive=false;fx(p,{spirit:-7,heart:5});remember('knew_loss');logLine("Lost someone with no warning at all, let the grief have its full brutal say, and was a long time mending.","loss");}},
-  {t:"Go numb, and keep moving.",h:"",do:p=>{const r=P.rels.filter(x=>x.alive&&x.bond>52&&x.kind!=='ex')[0];if(r)r.alive=false;fx(p,{spirit:-4,heart:-3,means:4});remember('driven');logLine("Lost someone without warning, went somewhere cold and useful inside, and did not come fully back for years.","loss");}},
+  {t:"Go numb, and keep moving.",h:"",do:p=>{const r=P.rels.filter(x=>x.alive&&x.bond>52&&x.kind!=='ex')[0];if(r)r.alive=false;fx(p,{spirit:-4,heart:-3,means:4});remember('driven');logLine(freshPick(["Lost someone without warning, went somewhere cold and useful inside, and did not come fully back for years.","Met the sudden death by going numb and busy, and postponed the grief so long it never quite arrived properly.","Took the blow standing, buried it in work, and carried the undealt-with weight of it for the rest of {their} life."],p),"loss");}},
  ]},
-{id:'f_grace',stage:'*',w:1,age:[14,90],cool:30,
+{id:'f_grace',stage:'*',w:1,once:true,age:[14,90],cool:30,
  text:"It comes unasked and undeserved, the way grace does: a stranger's plain kindness, a turn of pure luck, a door held open by no one {n} will ever be able to thank.",
  choices:[
-  {t:"Take it, and pass it on someday.",h:"",do:p=>{fx(p,{spirit:6,heart:6,means:3});remember('let_in');logLine(["Was handed an undeserved kindness by a stranger, took it, and spent years quietly trying to be worthy of the luck.","Met plain grace from someone who wanted nothing back, and carried the small debt of it gladly for life."][rotI(p,2)],"joy");}},
+  {t:"Take it, and pass it on someday.",h:"",do:p=>{fx(p,{spirit:6,heart:6,means:3});remember('let_in');logLine(freshPick(["Was handed an undeserved kindness by a stranger, took it, and spent years quietly trying to be worthy of the luck.","Met plain grace from someone who wanted nothing back, and carried the small debt of it gladly for life.","Got, once, a piece of pure undeserved luck from a stranger, and never quite stopped meaning to deserve it."],p),"joy");}},
  ]},
-{id:'f_reversal',stage:'*',w:1,age:[26,80],cool:30,cond:()=>P.stats.means>48,
+{id:'f_reversal',stage:'*',w:1,once:true,age:[26,80],cool:30,cond:()=>P.stats.means>48,
  text:"It is nobody's fault {n} can name — a bank, a market, a far-off decision by people {they} will never meet — but the comfortable ground gives way underfoot all the same.",
  choices:[
   {t:"Take the fall. Rebuild from lower.",h:"",do:p=>{fx(p,{means:-20,spirit:-3,mind:3});remember('knew_loss');logLine("Watched a comfortable footing collapse through no fault of {their} own, took the fall without flinching much, and started the long climb back from lower down.","loss");}},

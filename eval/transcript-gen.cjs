@@ -28,9 +28,9 @@ const body=`
   var vrot=0;
   function pickChoice(c){
     if(c.id==='y_calling') return c.choices[(vrot++)%c.choices.length];               // rotate soldier/scholar/maker/wanderer evenly
-    if(c.id==='y_love1'||c.id==='a_meet_late') return Math.random()<0.9 ? c.choices[0] : c.choices[1]; // mostly accept; the engine's un-offered lives supply the solitary minority
-    if(c.id==='a_marry') return Math.random()<0.9 ? c.choices[0] : c.choices[1];
-    if(c.id==='a_child') return Math.random()<0.85 ? c.choices[0] : c.choices[1];        // ~15% of couples stay childless
+    if(c.id==='y_love1'||c.id==='a_meet_late') return Math.random()<0.94 ? c.choices[0] : c.choices[1]; // mostly accept; the engine's ~quarter un-offered lives supply the solitary minority
+    if(c.id==='a_marry') return Math.random()<0.92 ? c.choices[0] : c.choices[1];
+    if(c.id==='a_child') return Math.random()<0.9 ? c.choices[0] : c.choices[1];          // coupled lives mostly reproduce -> the packet shows multi-gen dynasties (depth), not only founders
     if(c.id==='m_old_flame') return c.choices[0];
     return c.choices[Math.floor(Math.random()*c.choices.length)];
   }

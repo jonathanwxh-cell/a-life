@@ -90,7 +90,7 @@ const ERAS={
 };
 const ERA_KEYS=Object.keys(ERAS);
 // the next era: usually drifts back toward ordinary (most years are quiet), sometimes lurches into history.
-function rollEra(prev){ if(chance(0.4)) return 'settled'; const o=ERA_KEYS.filter(k=>k!=='settled'&&k!==prev); return o[ri(0,o.length-1)]; }
+function rollEra(prev){ if(chance(0.3)) return 'settled'; const o=ERA_KEYS.filter(k=>k!=='settled'&&k!==prev); return o[ri(0,o.length-1)]; }
 function eraTone(k){ return (k==='war'||k==='plague'||k==='hard')?'loss':(k==='plenty'?'joy':'obs'); }
 function eraPick(k){ const e=ERAS[k]; if(!e) return null; return (typeof freshPick==='function')?freshPick(e.lines,P):e.lines[0]; }
 function setEra(key,announce){ if(typeof S==='undefined'||!S) return false; const changed=S.era!==key; S.era=key;

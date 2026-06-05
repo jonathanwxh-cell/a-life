@@ -247,7 +247,7 @@ function drawCard(){
     // marriage follows love by a few years at a VARIED age (a moderate per-draw nudge once in love),
     // strengthening into a late safety-net — so couples who met young also marry young, instead of every
     // marriage clustering at the window's end and reading "married late" no matter when they fell in love.
-    if(mc){ const late = mc.age && P.age>=mc.age[1]-4; if((late && chance(0.62)) || chance(0.3)){ presentCard(mc); return; } }
+    if(mc){ const late = mc.age && P.age>=mc.age[1]-4; if((late && chance(0.62)) || chance(0.42)){ presentCard(mc); return; } }
   }
   // callbacks are rare, memory-gated payoffs (cb_*) — the reach-back that gives a life its
   // particular shape. When one is finally eligible, strongly prefer it so the long arc
