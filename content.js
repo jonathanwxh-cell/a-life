@@ -73,7 +73,13 @@ const CARDS=[
  ]},
 
 /* ---- YOUTH ---- */
-{id:'y_calling',stage:'youth',w:4,once:true,age:[14,22],text:p=>["The years ahead want a shape. {n} stands where the roads fork, and the choosing, for once, is really {their}s.","Everyone is suddenly asking {n} the same question — what {they} will be — and it has stopped being easy to wave off.","There comes a morning when the wide-open future narrows, kindly, to a few real roads, and {n} has to pick one to walk."][rotI(p,3)],
+{id:'y_calling',stage:'youth',w:4,once:true,age:[14,22],text:p=>{const e=(typeof S!=='undefined'&&S&&S.era)?S.era:'settled';const seat=(typeof S!=='undefined'&&S&&S.house)?(S.house.seat||0):1;
+   if(e==='war') return "There is a war on, and it is hungry for the young. {n} can choose a road now — or wait, and have one chosen.";
+   if(e==='hard') return "In a lean time, the choice of what to be is also the choice of how to eat. {n} stands at the fork with an empty stomach, which concentrates the mind.";
+   if(e==='turning') return "The age is changing so fast that half the old roads lead nowhere now. {n} has to choose a life in a world that won't hold still long enough to promise anything.";
+   if(seat>=5) return "A house with a name expects its young to take up something worthy of it. {n} feels the weight of that, and the narrower fork it makes of the open road.";
+   if(seat<=0) return "With nothing behind {them} and no name to trade on, {n} chooses a road the hard way — on its own merits, and {their} own nerve.";
+   return freshPick(["The years ahead want a shape. {n} stands where the roads fork, and the choosing, for once, is really {their}s.","Everyone is suddenly asking {n} the same question — what {they} will be — and it has stopped being easy to wave off.","There comes a morning when the wide-open future narrows, kindly, to a few real roads, and {n} has to pick one to walk.","{n} is old enough now to be asked the question that shapes the rest: not who {they} is, but what {they} will make of the having-been-born."],p);},
  choices:[
   {t:"The blade — a soldier's life.",h:"pay, and odds",do:p=>{fx(p,{vit:8,means:6,heart:-3,spirit:2});p.flags.vocation='soldier';remember('chose_soldier');logLine(freshPick(["Took up the soldier's life — the pay, the odds, the particular company of other people's danger.","Went for a soldier, and learned the trade of standing where other people would not.","Chose the blade, and the hard simple wage of being willing to be where it was worst.","Put on the coat and took the oath, and joined the old profession of organised danger.","Became a soldier — for the pay at first, and then for the strange belonging of it."],p));}},
   {t:"The book — the scholar's road.",h:"hungry now, wider door",do:p=>{fx(p,{mind:16,means:-8,spirit:2});p.flags.vocation='scholar';p.flags.scholar=1;remember('chose_study');logLine(freshPick(["Chose study, and hunger, and the long bet on {their} own head.","Took the scholar's road — the lean years, the late candles, the wager that a mind could be a living.","Chose the book over the bread, betting the hungry years would, eventually, be worth it."],p));}},
@@ -209,7 +215,7 @@ const CARDS=[
    CALLBACK CARDS — these reach back to who you were.
    They only appear if an earlier choice left its mark.
    ============================================================ */
-{id:'cb_books_late',stage:'midlife',w:4,cond:()=>held('child_books')&&P.stats.mind>52,once:true,
+{id:'cb_books_late',stage:'midlife',w:4,cond:()=>held('child_books')&&P.stats.mind>52,once:true,onceDyn:true,
  text:"{n} finds the old book on a high shelf — the one too hard for a child's hands, kept all these years.",
  choices:[
   {t:"Read it again, slowly.",h:"a circle closes",do:p=>{const bk=recall('child_books')||{};echo(bk.inherited?"Read, at last with ease, the book the family has always kept.":"Read, at last with ease, the book that began everything at age "+bk.age+".");fx(p,{spirit:9,mind:4});}},
@@ -366,7 +372,7 @@ const CARDS=[
  ]},
 
 /* ---- ADULT — the late road to love, and a settling life ---- */
-{id:'a_meet_late',stage:'adult',w:3,age:[30,54],opensLove:true,cond:()=>!rel('love')&&!rel('spouse'),
+{id:'a_meet_late',stage:'adult',w:2,age:[32,54],opensLove:true,cond:()=>!rel('love')&&!rel('spouse'),
  text:p=>["It is later than the stories say it should be. And still — across a room, across a counter, across an ordinary Tuesday — someone.","The time for this was supposed to have passed. And yet — a face, a second glance, an afternoon that refuses to end — someone.","Later than anyone plans for, it arrives anyway: across a table, across a season, across the better part of a life — someone."][rotI(p,3)],
  choices:[
   {t:"Let it begin.",h:"the heart, still open",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,60,p.age+ri(-4,4));fx(p,{spirit:8,heart:6});logLine(freshPick(["Found love later than expected, and was almost embarrassed by the size of it.","Let love in late, and was astonished how little the lateness seemed to matter to it.","Came to love past the age {they} thought it was meant for, and found it meant exactly the same.","Found, well into the second half, the thing {they} had quietly filed under never.","Met someone late, and discovered the heart had been keeping a room aired the whole time.","Fell in love at an unlikely age, and stopped, gratefully, being the exception {they}'d assumed {they} was."],p),"joy");}},
@@ -504,7 +510,7 @@ const CARDS=[
   {t:"Tell it. Take the gain.",h:"",do:p=>{fx(p,{means:10,spirit:-5,heart:-3});remember('cut_a_corner');logLine("Took the easy, dishonest gain, and kept the small private knowledge of it.");}},
   {t:"Keep your hands clean.",h:"",do:p=>{fx(p,{means:-3,spirit:5});remember('stayed_straight');logLine("Turned down a clean-looking dishonest gain, and slept the better for it.","obs");}},
  ]},
-{id:'m_peer_dies',stage:'midlife',w:2,age:[46,64],once:true,
+{id:'m_peer_dies',stage:'midlife',w:2,age:[46,64],once:true,onceDyn:true,
  text:"Someone {n}'s own age — not close, but a fixed point all the same — is suddenly gone. The arithmetic of {their} own remaining years rearranges itself, quietly.",
  choices:[
   {t:"Let it change how you live.",h:"",do:p=>{fx(p,{spirit:4,vit:3,means:-2});remember('memento_mori');logLine("Took a peer's early death as a letter addressed, also, to {them}self — and answered it.","obs");}},
@@ -524,7 +530,7 @@ const CARDS=[
  ]},
 
 /* ---- NEW CALLBACKS — the reach-back, extended to more of the life ---- */
-{id:'cb_principle',stage:'midlife',w:3,cond:()=>held('took_a_stand'),once:true,
+{id:'cb_principle',stage:'midlife',w:3,cond:()=>held('took_a_stand'),once:true,onceDyn:true,
  text:"The thing {n} stood up for once, young and at a cost, comes round again — older now, more tangled, asking the same question with higher stakes.",
  choices:[
   {t:"Stand again. You know the price.",h:"",do:p=>{echo(freshPick(["Paid, a second time and more dearly, for a principle {they} would not set down.","Took the old stand again, older and clearer-eyed, and paid the higher price without flinching.","Fought the same fight twice in one life, and was, the second time, entirely sure."],p),"joy");fx(p,{spirit:7,means:-6,heart:3});}},
@@ -886,7 +892,7 @@ const CARDS=[
  ]},
 
 /* ---- DYNASTY-MEMORY: the family, played back at the living ---- */
-{id:'d_ancestor',w:3,age:[20,70],cool:22,cond:()=>typeof S!=='undefined'&&S&&S.lineage&&S.lineage.length>=1,
+{id:'d_ancestor',w:3,once:true,onceDyn:true,age:[20,70],cond:()=>typeof S!=='undefined'&&S&&S.lineage&&S.lineage.length>=1,
  text:p=>{const a=S.lineage[rotI(p,S.lineage.length)];const nm=a?a.given:"someone before";return "There is a story in the family about "+nm+", who came before {n} — a thing they did, and what it cost. {n} has heard it so often it has the worn shape of a lesson, though no two tellers agree on the moral.";},
  choices:[
   {t:"Live up to the name.",h:"the line, continued",do:p=>{fx(p,{spirit:5,mind:3,heart:2});remember('honored_line');remember('took_a_stand');logLine("Took the old family story as a thing to live up to, and bent {their} own life, a little, toward its shape.","obs");}},
@@ -988,5 +994,41 @@ const CARDS=[
  choices:[
   {t:"Grow it. Ride the good years.",h:"a bigger name, fewer hands",do:p=>{if(chance(0.6)){fx(p,{means:18,spirit:4,heart:-2});remember('built_the_name');remember('driven');logLine("Grew the workshop into a real concern while the good years lasted, and stopped, somewhere in it, being the one who actually made the things.","obs");}else{fx(p,{means:-8,spirit:-3});remember('self_made');logLine("Reached to grow the workshop in the fat years and overreached, and learned the hard edge of easy money.","loss");}}},
   {t:"Keep it small. Keep your hands in it.",h:"the maker, still making",do:p=>{fx(p,{spirit:7,heart:4,means:5});remember('made_art');logLine("Let the fat years make other men big, and stayed small on purpose — still, at the end of every day, the one whose hands had made the thing.","joy");}},
+ ]},
+
+/* ============================================================
+   ANTI-STALENESS PASS 7 — thicken the thin adult/midlife years
+   (repeatable, so they keep the 28-64 band alive in later
+   generations after the once-per-dynasty milestones have rotated out)
+   ============================================================ */
+{id:'a_smallchoice',stage:'adult',w:3,once:true,age:[27,58],
+ text:p=>freshPick(["A small fork in an ordinary week: the easy thing or the right thing, and no one watching to know which {n} picks.","One of those minor crossroads the years are mostly made of — nothing dramatic, just a quiet chance to be a little better or a little worse.","A low-stakes choice arrives, the kind that leaves no mark on the day and somehow all the marks on the life."],p),
+ choices:[
+  {t:"The right thing. Quietly.",h:"character, in private",do:p=>{fx(p,{spirit:4,heart:3,means:-1});remember('stayed_straight');logLine(freshPick(["Did the harder right thing when no one was watching, which is the only place it ever really counts.","Chose well in a moment too small to be noticed, and was, by a hair, a better person for it.","Took the quiet honest option nobody would have known {they} skipped, and knew."],p),"obs");}},
+  {t:"The easy thing. Just this once.",h:"a small slack, taken",do:p=>{fx(p,{means:2,spirit:-1});logLine(freshPick(["Took the easy way in a small thing, told {them}self it didn't matter, and was mostly right.","Cut the small corner, the way everyone does, and felt the almost-nothing of it.","Let {them}self off the hook on a little thing, and the little thing stayed little."],p),"obs");}},
+ ]},
+{id:'a_friend_drift',stage:'adult',w:2,once:true,age:[30,62],cond:()=>rel('friend'),
+ text:p=>{const f=rel('friend');return (f?f.given:"An old friend")+" and {n} have drifted, the way people do — not a falling-out, just two lives that stopped overlapping. A word now would close the gap, or confirm it.";},
+ choices:[
+  {t:"Reach out. Mend it.",h:"",do:p=>{const f=rel('friend');if(f)f.bond=clamp(f.bond+10);fx(p,{heart:5,spirit:3});logLine(freshPick(["Picked up a drifted friendship before it could finish drifting, and was glad to find it still fit.","Reached across the gap of years to an old friend, and found the bridge held.","Made the small effort that keeps a friendship from quietly becoming a memory."],p),"joy");}},
+  {t:"Let it fade. People do.",h:"",do:p=>{fx(p,{spirit:-2,mind:2});logLine(freshPick(["Let an old friendship finish its quiet fade, and told {them}self it was just how the years went.","Watched a friendship thin to nothing without doing the one small thing that would have saved it.","Let the gap with an old friend become permanent, by the simple method of doing nothing."],p),"obs");}},
+ ]},
+{id:'m_smaller_body',stage:'midlife',w:3,once:true,age:[48,66],cond:()=>P.stats.vit<58,
+ text:p=>freshPick(["Not a scare, exactly — just the body making one more small, non-negotiable adjustment to what it will and won't do now.","The body files another minor amendment: a thing that used to be free now costs a little, and will keep costing.","One more of the body's quiet retirements — some small ability handed in, without ceremony, for good."],p),
+ choices:[
+  {t:"Adjust. Carry on.",h:"",do:p=>{fx(p,{mind:2,spirit:1});logLine(freshPick(["Made the small adjustment the body asked for, without much fuss, and carried on.","Took the body's latest small retirement in stride, and found a workaround, as one does.","Quietly rearranged the day around one more thing the body would no longer do."],p),"obs");}},
+  {t:"Rage, a little, first.",h:"",do:p=>{fx(p,{spirit:-2,vit:1,heart:1});logLine(freshPick(["Was briefly, uselessly furious at the body for its latest small betrayal, then adjusted anyway.","Resented the body's newest limit for an afternoon, which changed nothing and helped a little.","Grieved one more small lost ability properly before getting on with the workaround."],p),"obs");}},
+ ]},
+{id:'a_recognition',stage:'adult',w:2,once:true,age:[32,60],cond:()=>P.stats.means>34||P.stats.mind>60,
+ text:p=>freshPick(["A small recognition arrives — not fame, just being, for once, plainly seen and valued for the work {n} actually does.","Someone, with no reason to flatter, tells {n} that the work is good, and means it. It lands harder than expected.","A modest honour, a word of real praise, a thing {n} can point to — the quiet validation of a life's ordinary effort."],p),
+ choices:[
+  {t:"Let it land. Enjoy it.",h:"",do:p=>{fx(p,{spirit:6,heart:2});logLine(freshPick(["Let a small, genuine recognition land fully, instead of deflecting it, for once.","Took the rare plain praise without arguing with it, and was warmer for days.","Believed, for a whole afternoon, that the work had been worth doing — because someone said so, and meant it."],p),"joy");}},
+  {t:"Deflect. Back to work.",h:"",do:p=>{fx(p,{mind:3,means:2,spirit:-1});remember('driven');logLine(freshPick(["Deflected the praise, as ever, and was back at the work before it could properly warm {them}.","Brushed off a real recognition with a joke, and privately wondered why {they} always did that.","Took the compliment sideways and got back to it, which is its own small sad efficiency."],p),"obs");}},
+ ]},
+{id:'m_late_skill',stage:'midlife',w:2,age:[46,64],once:true,
+ text:"Past the age when people are supposed to start things, {n} finds {them}self wanting to learn one — an instrument, a language, a craft — from the clumsy beginning.",
+ choices:[
+  {t:"Begin badly, anyway.",h:"a beginner, late",do:p=>{fx(p,{mind:6,spirit:5,heart:2});remember('reinvented');logLine(freshPick(["Took up a new thing too late to ever be good at it, and loved being bad at something again.","Became, in midlife, a clumsy beginner at one chosen thing, and found the beginning was the best part.","Started something new past the proper age for starting, purely for the pleasure of being a novice once more."],p),"joy");}},
+  {t:"Decide it's too late.",h:"",do:p=>{fx(p,{spirit:-2,mind:2});logLine(freshPick(["Decided it was too late to begin, which was both true and the wrong lesson.","Let the wish to learn a new thing pass, filed under someday, which is to say never.","Talked {them}self out of beginning, with reasons that were sensible and a little sad."],p),"obs");}},
  ]},
 ];

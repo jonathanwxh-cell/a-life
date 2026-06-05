@@ -220,9 +220,9 @@ function drawCard(){
     // teen/twenties ages); late love gets only a faint chance (so it stays the rarer path, not the default);
     // and the rest of lives stay solitary — a real, content-bearing shape, not the same domestic arc.
     const yc=pool.find(c=>c.id==='y_love1');
-    if(yc && chance(0.34)){ presentCard(yc); return; }
+    if(yc && chance(0.46)){ presentCard(yc); return; }   // youth love is the clear default — most lives that couple, couple young
     const lc=pool.find(c=>c.id==='a_meet_late');
-    if(lc && chance(0.10)){ presentCard(lc); return; }
+    if(lc && chance(0.05)){ presentCard(lc); return; }   // late love is the genuine exception, not the fallback
   }
   // a youth should almost always be offered a CALLING — the fork that gives a life its shape and gates a
   // distinct adult arc (soldier / scholar / maker / wanderer). This is the engine of structural variety,
