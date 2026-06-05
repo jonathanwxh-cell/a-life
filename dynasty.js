@@ -31,7 +31,7 @@ function epitaphFor(p){
     if(!pool.length) pool=opts.filter(o=>!recent.includes(o));
     if(!pool.length) pool=opts;
     const choice=pool[((p.gen-1+(typeof houseOff==='function'?houseOff():0))%pool.length+pool.length)%pool.length];
-    if(typeof RECENT_LINES!=='undefined'){ RECENT_LINES.push(choice); if(RECENT_LINES.length>70) RECENT_LINES.shift(); }
+    if(typeof RECENT_LINES!=='undefined'){ RECENT_LINES.push(choice); if(RECENT_LINES.length>110) RECENT_LINES.shift(); }
     return choice; };
   const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains.","Put something into the world that stayed there after {them}."];
   const kind=["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones.","Left people gentler than {they} found them.","Carried a warmth into every room, and left it there."];

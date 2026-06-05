@@ -36,10 +36,10 @@ function haveChild(){
     "Had a child, "+cn+", when {they} had made a quiet peace with not — and unmade it gladly, overnight.",
     "Had a child, "+cn+", late enough that {they} had stopped counting on it, and counted it twice the gift.",
     "Had a child, "+cn+", in the back half of a life, and found the lateness changed nothing the child asked of {them}."];
-  let firstLine;
-  // 'red and furious' is a good line, but once a dynasty is plenty — otherwise it becomes a joke
-  if(!S._usedFurious && !lateBirth && chance(0.4)){ S._usedFurious=true; firstLine="Had a child, "+cn+" — red and furious and entirely unimpressed by any of it."; }
-  else firstLine = lateBirth ? freshPick(latePool,P) : freshPick(base,P);
+  // 'red and furious' is a good line — fold it into the base pool so freshPick dedups it across the whole
+  // SESSION (the old S._usedFurious flag reset every new dynasty, so it recurred in nearly every house).
+  if(!lateBirth) base.push("Had a child, "+cn+" — red and furious and entirely unimpressed by any of it.");
+  const firstLine = lateBirth ? freshPick(latePool,P) : freshPick(base,P);
   logLine(kn>=3 ? "Had another child, "+cn+". By now {they} knew the shape of it, and was no less moved."
         : kn===2 ? "Had a second child, "+cn+". The house made room again, more easily this time."
         : firstLine, "joy");
@@ -247,7 +247,7 @@ function drawCard(){
     // marriage follows love by a few years at a VARIED age (a moderate per-draw nudge once in love),
     // strengthening into a late safety-net — so couples who met young also marry young, instead of every
     // marriage clustering at the window's end and reading "married late" no matter when they fell in love.
-    if(mc){ const late = mc.age && P.age>=mc.age[1]-4; if((late && chance(0.62)) || chance(0.42)){ presentCard(mc); return; } }
+    if(mc){ const late = mc.age && P.age>=mc.age[1]-4; if((late && chance(0.62)) || chance(0.55)){ presentCard(mc); return; } }   // marriage follows love within a few years, not decades
   }
   // callbacks are rare, memory-gated payoffs (cb_*) — the reach-back that gives a life its
   // particular shape. When one is finally eligible, strongly prefer it so the long arc

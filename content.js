@@ -221,7 +221,7 @@ const CARDS=[
   {t:"Read it again, slowly.",h:"a circle closes",do:p=>{const bk=recall('child_books')||{};echo(bk.inherited?"Read, at last with ease, the book the family has always kept.":"Read, at last with ease, the book that began everything at age "+bk.age+".");fx(p,{spirit:9,mind:4});}},
   {t:"Pass it to a young one.",h:"",do:p=>{const c=rels('child')[0];const bk=recall('child_books')||{};echo((bk.inherited?"Gave the book the family has always kept to ":"Gave the book that shaped {them} to ")+(c?c.given:'a child')+", saying nothing of why.");if(c)c.bond=clamp(c.bond+8);fx(p,{spirit:6,heart:4});}},
  ]},
-{id:'cb_outcast_return',stage:'adult',w:4,cond:()=>held('kind_to_outcast'),once:true,
+{id:'cb_outcast_return',stage:'adult',w:4,cond:()=>held('kind_to_outcast'),once:true,onceDyn:true,
  text:()=>{const f=rel('friend');return f?`The child from the yard — ${f.given}, grown — is somebody now, and has not forgotten that ${P.given} sat beside them when no one else would.`:`Someone ${P.given} helped once, years ago and asking nothing in return, is somebody now — and has not forgotten who stood with them.`;},
  choices:[
   {t:"Accept the hand up.",h:"kindness, returned with interest",do:p=>{const f=rel('friend');echo("A kindness done at "+recall('kind_to_outcast').age+" came back, decades later, as a door held open.","joy");fx(p,{means:14,spirit:8});if(f)f.bond=clamp(f.bond+10);}},
@@ -893,7 +893,10 @@ const CARDS=[
 
 /* ---- DYNASTY-MEMORY: the family, played back at the living ---- */
 {id:'d_ancestor',w:3,once:true,onceDyn:true,age:[20,70],cond:()=>typeof S!=='undefined'&&S&&S.lineage&&S.lineage.length>=1,
- text:p=>{const a=S.lineage[rotI(p,S.lineage.length)];const nm=a?a.given:"someone before";return "There is a story in the family about "+nm+", who came before {n} — a thing they did, and what it cost. {n} has heard it so often it has the worn shape of a lesson, though no two tellers agree on the moral.";},
+ text:p=>{const a=S.lineage[rotI(p,S.lineage.length)];const nm=a?a.given:"someone before";
+   const DEED={stray:"the one who took in every hurt and helpless thing",teacher:"the one who gave away everything they knew",secret:"the one who carried something to the grave the family still won't name",built:"the one who built something that outlasted the building of it",here:"the one who asked for no monument but the fact of having been here",kind:"the one remembered, above all, for a fierce plain kindness",mind:"the one who lived half in their own head and saw further for it",light:"the one nothing could quite discourage, to the very end",dark:"the one who carried more sorrow than they ever said aloud",poor:"the one who never had much and shared even that",generous:"the one who gave past what they could afford",warm:"the one who was easy to love and not always easy to live beside",content:"the one who had enough, and knew it",long:"the one who outlasted nearly everyone",early:"the one taken too soon, with so much unspent"};
+   const deed=(a&&a.cluster&&DEED[a.cluster])?DEED[a.cluster]:"the one who did a hard, particular thing the family still argues about";
+   return "There is a story in the family about "+nm+" — "+deed+". {n} has heard it so often it has the worn shape of a lesson, though no two tellers agree on the moral.";},
  choices:[
   {t:"Live up to the name.",h:"the line, continued",do:p=>{fx(p,{spirit:5,mind:3,heart:2});remember('honored_line');remember('took_a_stand');logLine("Took the old family story as a thing to live up to, and bent {their} own life, a little, toward its shape.","obs");}},
   {t:"Step out of its shadow.",h:"your own name, your own way",do:p=>{fx(p,{spirit:6,mind:3,means:2});remember('own_way');logLine("Decided the family story was theirs and not {n}'s, and stepped, deliberately, out from under it into {their} own plainer light.","obs");}},
