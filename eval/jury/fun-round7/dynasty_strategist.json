@@ -1,0 +1,50 @@
+{
+  "profile": "dynasty_strategist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The bequest card (e_bequest) is a genuinely satisfying cross-generational lever — choosing 'everything I know' vs 'every coin I can spare' vs 'their own freedom' has real mechanical consequence (nurture bonus, meansBeq, spirit/heart bumps at birth) and feels like an intentional act of dynasty-building rather than flavour.",
+    "The reckoning (x_reckoning) now fires and visibly moves the seat — Cassian Vasquez (Dynasty 4, gen 4) taking the hit head-on, the consequence logged in the same life that caused it, is exactly the downside feedback a strategist needs to plan around.",
+    "Seat-gated cards (s_great_burden, s_patronage, s_inheritance_dispute) create content that genuinely reads differently at a grand estate than at a rented room — the 'great name going into the room ahead of you' moment is the closest the game comes to a power-fantasy payoff.",
+    "Reputation-gated content (r_scholar_door, r_hard_name, r_old_shame, r_family_shadow) gives the house's accumulated character a forward bite — a ruthless name closes deals, a tainted name surfaces at the worst moment. These feel like consequences worth engineering.",
+    "The motto crystallisation is a memorable milestone — seeing 'We burn bright, and we burn' or 'Nothing was given; all was built' land mid-life names the dynasty's personality in a way that creates identity and a sense of arc.",
+    "Eras (war, plague, plenty, turning) shift which rare content is possible, so gen 8 born into a war genuinely diverges from gen 2 born into plenty — the era cards (w_war_call, w_plague_tend, w_plenty_ride) are structurally distinct beats.",
+    "The heirloom mechanic (book, stray, hardname, fortune, teaching) gives each dynasty a small material identity that persists across lives and surfaces in the heir screen — a nice nod to lineage without being purely numerical."
+  ],
+  "staleness": [
+    "The core structural loop is nearly invariant across all 15 dynasties in the transcript: c_origin/wonder/friend child card -> y_calling vocation -> y_love1 -> a_child -> a_work or vocation arc card -> midlife elder care -> e_legacy/bequest -> die. This sequence lands in roughly the same order in dynasty 1 and dynasty 15. The individual lines vary; the skeleton does not.",
+    "The seat ceiling problem: across all 15 dynasties, only Dynasty 4 (Vasquez, 5 generations) meaningfully climbs the seat ladder, reaching 'fine townhouse'. The mechanics require peakMeans >=80 to reliably gain a seat, and the inheritance formula caps wealth transfer (55% of peakMeans minus 6, minus 6 again). A strategist sees no realistic path to seat 6-7 in a 2-3 generation run without lucky high-stat founders — and there is no lever to deliberately stack wealth across generations except the 'every coin I can spare' bequest (+16 means) and m_invest_name (~62% chance of +1 seat). This gap between the system's promise (a house written into the histories) and its practical ceiling in a normal play session is the biggest fun-killer for this profile.",
+    "The reckoning fires too rarely and its downside is shallow. In 15 dynasties, only Cassian (D4 gen 4, age 72) and Greta (D15 gen 1, implicit) visibly faced it. The condition requires seat>=3 and !facedReckoning, cool:16 — so a house that stays at seat 1-2 never meets it, and a house that does face it can absorb the loss (means:-15 or means:-22) without losing the seat if spirit>62 or means>45. The 'fell' branch (seat-1, means:+6, spirit:-5) is the interesting bad outcome but the player is more likely to take 'held' since the hint says 'the house holds.' The reckoning does not yet feel like a house-shaking event.",
+    "The t_guarded trait fires repeatedly across dynasties (Cosima, Saoirse, Emory, Greta, Aldous, Tamsin all 'keep the wall' in the transcripts) because guarded is a common inherited trait. The same card (t_guarded), same prompt, same two choices appears in 6+ lives in the 15-dynasty sample. The once-per-life guard prevents same-life repeats but across the lineage it reads as a family tic rather than a characterful moment.",
+    "Observation lines ('Books have become a country she can live in', 'Mornings take longer to arrive in the body') repeat verbatim across unrelated dynasties. The freshPick deduplication works within a session window but the window (70 lines) is too small against the size of a 15-dynasty read: 'The body has started sending its small bills' appears in D6 gen3 AND D13, 'Some mornings the body answers the bell late, and grumbling' lands in D4 gen4 AND D7 gen2. These are ambient texture lines — their repetition is low-stakes but visible.",
+    "The marriage/child sequencing still clusters. Looking across the 15 dynasties: of ~28 lives who form relationships, ~22 face a_marry between ages 26-35 and a_child within 5 years of that. The engine's nudges (0.42 per-draw child odds, 0.42 marry odds) work but the clustering they suppress (late 40s) is replaced by a new cluster (late 20s/early 30s). A strategist who wants a child at 20 or no child at all has thin mechanical reason to expect either path — the 'no child' choice simply fires without consequence to the dynasty arc beyond foreclosing succession.",
+    "Vocation arcs are the strongest structural differentiator but soldier and scholar dominate the transcripts (soldier: 9 of 28 lives; scholar: 8 of 28; maker: 7; wanderer: 4). The wanderer arc is the thinnest — a_wanderer_settle and m_wanderer_return are interesting but there are only 2 adult-band wanderer-specific cards vs 3 each for soldier and scholar. A dynasty strategist who cultivates a wanderer house has the weakest mechanical payoff."
+  ],
+  "improvements": [
+    {
+      "what": "Add a deliberate wealth-compounding card or multi-life investment mechanic at seat 3-5: a 'found a trading venture / patronage chain / land trust' adult-band card (once-per-dynasty) that lets a wealthy life (means>70) lock in a persistent +8-12 to the seat's inheritMeans floor for the next 2 generations, at a cost of means:-20 and spirit:-4 to the spending life.",
+      "why": "The gap between wanting to build a storied house and actually reaching seat 6-7 is the core fun-killer for this profile. Currently the only deliberate levers are the bequest (+16 means, one generation) and m_invest_name (62% chance of +1 seat). Neither stacks across generations in a way the player can feel. A compounding mechanic would give the strategist a tangible 3-generation plan: build wealth, lock it in gen 2, cash out in gen 3.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the reckoning a 2nd harder variant at seat 5+ that can drop the house 2 seats and includes a reputation consequence ('tainted' bump), and make the 'fell' outcome's spirit hit steeper (-10) so a strategist who prepares (high means, strong spirit) feels the difference from one who doesn't.",
+      "why": "The current reckoning is a soft check — 'held' costs means:-15/-22, 'fell' costs seat-1 but gains means:+6. There is no reason to fear it if you have any buffer. A high-seat reckoning that can genuinely crater the house in one generation would make the precariousness of the top tier real instead of theoretical, which is exactly what a dynasty-builder finds engaging.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 once-per-dynasty cards for a house with a specific motto (e.g. a 'We burn bright' house gets a card in the adult band: a reckless heir who embodies the motto is offered a chance to live it fully, with peril and a potential seat-jump or seat-drop). Let the motto have mechanical downstream effects, not just narrative flavour.",
+      "why": "Right now the motto is a lovely text artefact but mechanically inert. A strategist wants to STEER toward a motto and then feel it pay off. One or two motto-gated cards (unlocked once S.house.motto is set) would make the motto a goal worth engineering rather than a pleasant decoration that appears after the fact.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'dynasty inheritance ledger' visible on the heir screen: a diegetic line showing the concrete mechanical effect of the bequest ('From Cosima, deliberately: +16 means at birth; +10 mind from teaching heirloom'). Currently the bequest lines are evocative but the player cannot verify that the choice mattered.",
+      "why": "For a strategist, invisible mechanics are wasted mechanics. The heir screen already shows 'Still ahead for the house' aspirations. One line showing what the current heir actually starts with vs. what a default heir would have started with would make the cross-generational choice feel consequential rather than atmospheric.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a wanderer-house-specific midlife card (age 44-62, vocation=wanderer, once-per-dynasty) where the wanderer heir builds a network of contacts across 3 towns that the NEXT heir can cash as a +12 means or +1 seat bump — a legacy that reads differently from a scholar or maker legacy and gives the 'unrooted' vocation a dynasty-building shape.",
+      "why": "The wanderer arc currently has the thinnest mechanical footprint for a dynasty builder. Soldier earns a blooded reputation; scholar earns scholarly rep and a callback; maker earns a masterwork heirloom. The wanderer earns spirit and a 'free and unrooted' epitaph but nothing that compounds into the house. A contact-network legacy would fix this asymmetry.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a beautifully written, structurally coherent generational sim whose dynasty layer has real ambition — reckoning, bequest, seat, reputation, motto — but whose practical ceiling for a player who wants to steer the house upward is too low and too opaque to sustain the 'one more dynasty' pull past dynasty 5 or 6, because the gap between wanting to reach seat 7 and having actual compounding levers to do it is too wide to bridge in a normal play session."
+}

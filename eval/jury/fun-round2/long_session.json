@@ -1,0 +1,60 @@
+{
+  "profile": "long_session",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system genuinely works: a childhood choice (keeping a stray, reading a hard book, looking away from a lonely child) pays off 30-40 years later with a prose line that names the exact age it first happened. This is the engine's best mechanic — it creates a sense that the life you played left a real mark, and it fires across dynasty boundaries via heirlooms.",
+    "The vocation fork (soldier / scholar / maker / wanderer) delivers structurally distinct adult arcs. A soldier life reliably produces the campaign card, the ghost-of-war card, and the elder reckoning; a scholar produces the hunger-and-question arc, the legacy card, the scholar's peace at the end. These make a wanderer's life read genuinely differently from a maker's, which is the hardest problem for this kind of game to solve.",
+    "The era layer (war / plague / plenty / hard / turning) provides meaningful cross-generation texture. Dynasty 10 (Aldecott, 5 generations) shows this working: generations 2 and 5 are born into 'fat years' and get the boom/bust card; generation 4 into 'lean years' and gets the hard-winter share-the-stores card. The same family genuinely lives through history.",
+    "The dynasty meta-progression — seat, motto, heirlooms, secret — gives a long session its throughline. Watching House Voss climb over 5 generations from nothing to 'an old and famous house' with the motto 'We answer to a longer ledger' creates a real sense of accumulation that pulls you forward.",
+    "Prose quality is high and consistent throughout the 18 dynasties. The writing never becomes perfunctory, which is rare in generative systems of this scale.",
+    "The 'once-per-dynasty' (onceDyn) flag on founding cards (c_sick, c_friend, y_mentor) successfully prevents each new house from reopening the same template. Dynasty 1 and Dynasty 13 both produce compelling founders without sharing the same childhood structure."
+  ],
+  "staleness": [
+    "The love/marriage/child pipeline is the most rigid structure in the game, and after ~6 dynasties it is visible to the point of intrusion. Every coupled life goes: love card → a_marry → a_child (usually said 'Yes. Make room in the world.') → the child becomes heir. The marry card has only three prompt variants and the child card has three. By dynasty 10 the player has read 'The question has been in the room for years' and 'Yes. Make room in the world.' many times. The engine has done real work to spread the timing, but the beats themselves are identical.",
+    "The end-of-wanderer-arc card (m_wanderer_return / e_wanderer_old) and the road-counting choice ('Count the doors you closed to keep moving' / 'Regret nothing. The going was the life.') appear so frequently across dynasties that they become a signature of the wanderer vocation in a bad way — by dynasty 12, seeing 'The road is mostly behind [n] now' triggers recognition rather than engagement. Five of the 18 dynasties fire this card.",
+    "The elder band is the thinnest in structural variety. The midlife body-check (m_health), the legacy question (e_legacy, almost always 'That I was kind'), the bequest card (e_bequest), and the death-framing card (e_peace) appear in nearly every life that survives to 60+. The sequence — body scare, then 'what do you want remembered', then how to leave something, then how to meet the end — is a formula the player will recognise by dynasty 4. The prose varies but the shape does not.",
+    "The 'Kind in the small daily ways that turn out to be the large ones' epitaph, and variants in that cluster, reappear across dynasties with noticeable frequency even though the RECENT_LINES dedup is in place. In the 18-dynasty transcript: dynasties 2 (Otto Holloway), 4 (Anders Vasquez), 7 (Cassian Sorrelle), 9 (Caleb Quint), 11 (Greta Salvedi), 13 (Tomas Voss), 18 (Rafael Ashcroft) all end with 'kindness' cluster epitaphs. That is 7 of 18 dynasties. The dedup prevents the exact same phrase landing twice in a row within one dynasty but cannot stop the thematic cluster from feeling overrepresent across many dynasties.",
+    "The 'said they hoped to be remembered as kind' (e_legacy) choice lands in dynasties 2, 5, 7, 9, 13, 16 founders — six times in 18 dynasties. The card only has three choices and 'kind' is the highest-spirit payoff, so stat-tuned play converges on it. Once a player learns this, the legacy card stops being a meaningful decision and becomes a ritual.",
+    "A long-session player will notice that ~40 of the 135 cards are universal or near-universal (no tight cond gate), meaning they appear in almost every life regardless of vocation/era/trait. These include: c_move, c_sibling, c_sick (onceDyn, so once per dynasty, but still), y_calling, a_work, a_role, m_parent_age, e_body, e_bequest, e_peace. The 'template' the brief warned about is real: born → childhood move or sibling → fever → youth calling → first job → love → work tradeoff → parent aging → body scare → legacy choice → how to meet death. By dynasty 8, this arc is recognisable even when the vocation cards flesh it out.",
+    "The 'fire' fate card (f_fire) and 'sudden loss' (f_sudden_loss) are interesting as unchosen events, but their prose resolution is single-option or two-option with no memory trace. They land, leave a cost, and vanish. After the third fire in different dynasties, the lack of callback — no 'the fire of your grandmother's generation' moment — makes them feel like entropy mechanics rather than narrative beats.",
+    "The grace card (f_grace) has only one choice and fires up to three times across a long session. 'Met plain grace from someone who wanted nothing back' appears in dynasties 5 (Ambrose), 6 (Otto Vane), 10 (Lucan), 11 (Greta), 13 (Cosima twice). It becomes the most repeated single line in the transcript — ironic for a card designed to feel like a surprise gift."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 marriage prompt variants that embed the character's specific vocation or era — a soldier marrying before a campaign, a scholar marrying someone who thinks differently, a wanderer who finally stops moving for this person. Currently all three marriage text variants are generic.",
+      "why": "The a_marry card fires in nearly every coupled life and is the single most repetition-visible moment because the three prompts are situation-blind. Vocation-aware text would cost minimal code (check P.flags.vocation in the text lambda) and break the template feeling at a high-frequency card.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate the e_legacy card differently per vocation. Soldiers should have a 4th option: 'That I kept the ones beside me alive.' Scholars: 'That the question was worth asking.' Makers: 'That the thing I built is still there.' Wanderers: 'That I saw it, all of it.' The current three choices are vocation-blind and converge on 'kind' mechanically.",
+      "why": "The legacy card is the most emotionally significant elder moment and fires once per life. It currently produces the same answer (~60% 'kind' across the transcript) regardless of what life was lived. Four vocation-aware options would make each life's ending feel earned by the arc that preceded it.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2 new callback cards that reach into the era layer. Example: if the player's parent lived through a war, a midlife card could surface 'Your mother never spoke of the war. You find her letters.' Another: if a plague-era ancestor kept their distance, a descendant might face a sick stranger and recall the family's tradition of looking away.",
+      "why": "The era system creates genuine texture but its memory is mostly lost at succession. Era callbacks would make a dynasty's history feel cumulative across more than one generation and give players a reason to remember what their ancestors lived through.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a cooldown to the 'said they hoped to be remembered as kind' / e_legacy outcome so it cannot produce 'kind' in more than 2 consecutive dynasties. Use the same RECENT_LINES / onceDyn mechanism already applied to epitaphs.",
+      "why": "Seven of 18 dynasties in the transcript end with the kindness-cluster epitaph. The semantic dedup catches exact phrase repetition but not thematic repetition across many dynasties. A 'recent cluster' tracker on the reputation-tag level (same as epitaphFor's blocked() mechanism) would diversify.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a single 'fire echo' callback: if a life was destroyed by fire (f_fire) and the next heir inherits anything from that life, a childhood card should be available — 'The fire your [parent] speaks of happened before you were born. You grew up with the gap it left.' This requires checking P.mem for inherited loss markers.",
+      "why": "The fate cards (fire, sudden loss, reversal) are the game's best structural divergence mechanism — things that simply happen — but they leave no dynasty-level mark. One callback each would reward a player who watches their dynasty's luck rather than only their choices.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the weight of vocation-specific elder cards (e_soldier_old, e_scholar_old, e_wanderer_old, e_maker_handoff) relative to universal elder cards, and add an equivalent e_maker_old that asks what a maker's body of work means now that the hands are slower. Currently the vocation elder cap cards compete with a pool of universal cards and are sometimes crowded out.",
+      "why": "The elder band is the weakest for structural variety. A soldier life should reliably feel like a soldier's old age; a maker's like a maker's. Increasing the weight ensures the vocation arc closes in its own voice rather than in the same 'quiet body' and 'meet the end' template every time.",
+      "impact": "med"
+    },
+    {
+      "what": "Cap the f_grace card at once-per-dynasty (onceDyn) rather than the current cooldown-only gate. Its single prose line ('Was handed an undeserved kindness by a stranger') appears 5+ times across 18 dynasties, more than any other individual line.",
+      "why": "f_grace is a single-choice fate card with only two prose variants and no cond gate except cooldown. It lands more often than any other line in the transcript precisely because it can fire at any stage, any age, any character. Restricting it to once-per-dynasty preserves the feeling of unexpected grace without making it routine.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life sustains genuine interest across roughly 4-6 dynasties — the vocation arcs, era layer, and callback cards work well enough to feel fresh — but by the 8th to 10th dynasty a long-session player will recognise the elder template, the kindness-cluster epitaph, and the marriage-child pipeline as load-bearing repetitions that no amount of prose variation fully conceals."
+}

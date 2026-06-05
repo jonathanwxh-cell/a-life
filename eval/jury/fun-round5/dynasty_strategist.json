@@ -1,0 +1,48 @@
+{
+  "profile": "dynasty_strategist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The bequest card is a genuine cross-generational lever: four meaningfully different choices (mind / means / heart / free) that land on the heir screen as named, concrete gifts, and the player feels the deliberateness of the handoff. This is the best single moment of dynasty-steering in the game.",
+    "Motto crystallization is satisfying and surprisingly varied across 15 dynasties — 'We decline the luxury of sentiment,' 'Better a short blaze than a long smoke,' 'By our own hands' each feel earned and characterful. The player who hunts for a specific reputation genuinely feels the payoff.",
+    "The era layer (war / plague / plenty / hard / turning) plus vocation x era intersections (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) give structurally different opening conditions that color whole generations. A plague-born child and a fat-years child read as different lives.",
+    "Callback cards are the best thing in the game for making individual choices feel durable: the childhood stray paying off at midlife, the looked-away child returning 40+ years later, the scholar's long bet finally called in. These land emotionally every time they fire.",
+    "Seat-7 ('a house written into the histories') as a genuinely precarious pinnacle that must be re-earned every generation is a good design decision — it creates ongoing tension rather than a won-and-done achievement. The repPeak mechanic makes the build-up legible.",
+    "Trait-gated cards (t_bookish, t_guarded, t_restless, t_shrewd, t_stubborn, t_warm, t_frail, t_dreaming) give each character a distinct internal texture, and the trait affinity weighting in drawCard() makes a bookish child feel demonstrably different from a restless one."
+  ],
+  "staleness": [
+    "The domestic spine repeats with near-total fidelity across every dynasty: love → (optional decline) → marriage → child → bequest. Across 15 dynasties in the transcripts, this sequence fires in 12-13 of them with the same prose template for the marriage card ('fell asleep first again, mid-sentence; X lay awake deciding to ask'). By dynasty 6 this is wallpaper.",
+    "Three elder callbacks fire in almost every life that reaches them: 'hand the question on, unanswered' (scholars, 7+ times across 15 dynasties), 'tell the better/true story to the grandchild' (10+ times), and the 'looked away → make up to a stranger' arc (5 times). These feel like required checkboxes rather than earned payoffs by dynasty 8.",
+    "The dynasty-steering cards — m_invest_name, x_reckoning, s_great_burden, s_patronage, r_scholar_door, r_hard_name — are the whole point for a strategist player, but they appear with far less frequency than the ordinary life beats. The reckoning fired once in 15 dynasties. m_invest_name fired once (and the player declined). The mechanically interesting house-steering moments are buried under an avalanche of domestic and personal events. A strategist player ends up watching 8-10 ordinary moments per life before getting one lever.",
+    "Seat progression is opaque and almost fully wealth-driven (peakMeans >= 80 triggers seat rises). A player making deliberately 'dynasty-building' choices — being known as scholarly, investing in the name, facing the reckoning — cannot reliably feel their choices moving the seat. The connection between discrete strategic choices and house outcomes is weak enough that two very different playing styles produce similar outcomes.",
+    "Vocation arcs are richer than the base game but converge structurally: every scholar life gets the 'long bet called in' callback and ends with 'hand the question on, unanswered.' Every soldier gets 'the war comes back at 3am.' Every maker gets 'the masterwork or the lights.' These are good beats but they fire so reliably that by the third soldier or second scholar the player knows exactly what is coming.",
+    "The grandchild storytelling card ('tell the true story / tell the better story') fires in 10 of 15 dynasties with identical prose. No variation gated on which life was lived, which secrets the house holds, or what the vocation was. A soldier who never made peace with the war and a kindly teacher get the same grandchild card."
+  ],
+  "improvements": [
+    {
+      "what": "Increase the reckoning card's base weight and lower its cool so it fires at least once per dynasty for a house at seat 3+, not once per 15 dynasties.",
+      "why": "The reckoning is the only card that directly costs the house a seat and tests whether the player has been building strategically (high means/spirit absorbs it; low does not). A strategist player who never faces it is playing a game with a missing core mechanic. Doubling the weight or halving the cooldown (to ~14 years) would still keep it rare within a life but near-certain across a dynasty.",
+      "impact": "high"
+    },
+    {
+      "what": "Add dynasty-memory variants to the grandchild storytelling card, the 'hand the question on' scholar closing, and the soldier war-ghost — gated on house state, not just vocation. A house with a tainted secret should have a different grandchild question. A scholarly house with a motto should have the scholar close differently than a founding scholar. A soldier in a house with a military heirloom should hear a different 3am.",
+      "why": "Right now these three cards account for roughly 1 in 4 visible moments in a deep dynasty and they are fully static. Variants gated on house.secret, house.motto, house.heirlooms, or house.seat would cost ~10 lines each and nearly eliminate the most visible repetition across dynasties 6-15.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the marriage card text vary on the relationship history: how long they have been together, whether a child came first, whether the love event was youth or late. The current template ('fell asleep first again, mid-sentence') is used for every single marriage across all dynasties regardless of context.",
+      "why": "Marriage is the most frequently repeated scene in the game. Seven distinct text variants already exist in the code (lines 109-110) but the one-sentence framing that sets up the scene ('fell asleep first again...') is identical for every life. Rotating three or four openers would reduce the déjà-vu by 75% at almost zero cost.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a concrete 'house goal screen' visible at succession — beyond the current houseAspirations list — that tracks the specific reputation-building progress toward the next motto threshold, and names which choices moved it up or down in the just-completed life. For example: 'Scholarly: 1.8 → 2.4 this generation. One or two more will crystallize into words.'",
+      "why": "The houseCharacter() readout exists but is buried in the heir screen's wall of text and doesn't tell the player which cards moved it or by how much. A strategist wants to see the dial move when they made a deliberate choice. Surfacing this as a named, end-of-life readout creates the compounding feedback loop that the dynasty system promises but doesn't currently deliver.",
+      "impact": "high"
+    },
+    {
+      "what": "Add two or three seat-6 / seat-7 exclusive cards that only a dynasty at the very top of the seat ladder can encounter — political intrigue, a royal or civic honour, a decision that could be written into the histories. Right now seat-7 ('a house written into the histories') has no exclusive content; it is a label, not an experience.",
+      "why": "Reaching the pinnacle should feel like arriving somewhere. Currently it changes the heir screen text but presents no new decisions. Even one card exclusive to seat-6+ that costs something real — a patronage with dynasty-level stakes, an inheritance dispute that could knock the seat back — would make the climb feel worth the narrative investment.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely good meditative game that goes pleasantly stale by dynasty 6 for a player who wants to steer the house: the levers that make dynasty-play interesting — the reckoning, the seat investments, the reputation-steering choices — are too rare and too weakly legible against the dense, repeating domestic spine that fills most of every life."
+}

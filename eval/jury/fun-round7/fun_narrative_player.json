@@ -1,0 +1,49 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is the standout mechanic for narrative players: when 'cb_lookaway' fires at 47 because you chose to ignore a child at 6, or 'cb_books_late' resurfaces the too-hard book from childhood, the game genuinely surprises. These moments feel like emergent story, not templated output.",
+    "Vocation-specific card clusters (soldier arc with ghost/old-soldier; scholar arc with the question-hunt and legacy decision; wanderer arc with settle/return) give meaningfully different shapes to adult life — a scholar's midlife reads nothing like a soldier's.",
+    "The era system (war/plague/plenty/hard/turning) delivers a genuine 'this generation is living through different times' feeling; the plague tend/distance card and the hard winter share/hoard card produce genuinely tense moments absent from settled eras.",
+    "Prose quality and line-rotation depth are excellent — the text freshpick pools are large enough that individual sentences rarely repeat even when the same card fires, which keeps reading feel fresh even when the structural beat is familiar.",
+    "The competing-goods dilemmas (x_honest_or_kind, x_dream_or_duty) are among the most narratively interesting cards: neither choice is clean, and the hint text signals genuine trade-off without finger-wagging.",
+    "The dynasty layer's motto crystallization and heirloom accumulation create a quiet pride of authorship — watching 'We burn bright, and we burn' crystallize for House Vasquez after five generations has real pull."
+  ],
+  "staleness": [
+    "The vocation fork (y_calling) fires in every single life across all 22 transcribed lives, always presenting the same four options verbatim with only the framing text rotating by era/standing. By dynasty 5-6 it reads as a mandatory form to fill out rather than a discovery.",
+    "The dominant life-shape — childhood card(s) → vocation → fall in love → marry → have child → work tension → parent care → health scare → reconcile → die — appears in roughly 70% of the 22 lives in the transcripts. Individual cards within the shape vary well; the shape itself does not. A narrative player notices this template by dynasty 4.",
+    "The elder band is structurally thin relative to its narrative weight: e_reconcile, e_legacy, e_garden, e_bequest, and e_peace appear in nearly every long life, and they appear in roughly the same order (reconcile mid-60s, legacy late-60s, garden 70s, bequest 70s, peace at the end). A 30-year elder stage resolves into a predictable five-beat coda.",
+    "Epitaphs visibly repeat across dynasties in a session. 'Poured what he knew into the young, and so refused, quietly, to die all the way' appears four times in 22 lives. 'Left people gentler than she found them' appears three times. The anti-repeat logic works within a dynasty but the cross-dynasty global filter either isn't firing or isn't large enough for a 15-dynasty session.",
+    "Callback density is low: in a typical 70-80 year life, a player might see 1-2 callback cards in a life, and the most powerful ones (cb_strayed, cb_principle) require specific earlier choices that don't always land. Most lives feel like they're playing out in a present-tense vacuum rather than accumulating into a felt past.",
+    "The dynasty mechanical layer doesn't generate forward pull for a narrative player. The seat climbs or falls but the player has limited deliberate agency over it (m_invest_name is the main lever, and it's probabilistic). There is no goal or itch to 'see what happens if I push this house to grand estate' because the path there feels opaque and luck-dependent.",
+    "Lives without love/marriage/children are structurally sparse — the adult and midlife bands lose several high-weight cards (a_marry, a_child, a_work, m_child_grown, m_parent_age) and the remaining cards don't fully compensate. Choosing the childless path reads as a thinner life in terms of sheer card count, which subtly nudges every life toward the same family arc."
+  ],
+  "improvements": [
+    {
+      "what": "Introduce 2-3 structurally divergent life-shapes as distinct card clusters — the hermit/solitary path, the public/civic path, the itinerant path — each with its own adult and midlife beats that replace the love→marry→child spine rather than merely supplementing it.",
+      "why": "The current game has exactly one dominant structural template for adult life. All four vocations converge on the same love/family/work spine. A solitary scholar's life should feel architecturally different from a wanderer's, not just differently dressed.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the callback density: add 4-6 more mid-life callbacks that fire based on common early choices (the childhood wonder card, the unfairness card, the stray, the sibling), and increase their base weight so at least 3-4 callbacks land in a typical life rather than 1-2.",
+      "why": "Callbacks are the mechanic narrative players remember. They produce exactly the 'I've never seen this before' feeling the brief calls for. Right now they're sparse enough that most lives feel self-contained rather than accumulative.",
+      "impact": "high"
+    },
+    {
+      "what": "Fix the cross-session epitaph de-dupe: the RECENT_LINES global tracks the last 70 lines, but the epitaph pool has fewer than 70 entries across all clusters, so in a 15-dynasty session some lines inevitably repeat. Either expand each cluster's pool by 2-3 lines or make the cross-session block window shorter (last 5 instead of scanning all recent).",
+      "why": "An identical epitaph on dynasty 3 and dynasty 11 is the single most visible staleness signal for a narrative player. The game's own anti-repeat logic is almost there; it just needs more raw material or a smarter window.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 elder-band cards that only appear for lives that took unusual paths (the childless elder confronting legacy; the wanderer elder returning to permanent stillness for the first time; the guarded elder who never let anyone in, facing the arithmetic of that), thinning the universal elder template.",
+      "why": "All elders currently converge on the same five-beat coda regardless of how they lived. The existing e_last_walk and the no-heir card (the Vesna Halloran 'leave the work not a name' card) show the pattern works; it just needs more coverage.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the dynasty layer one concrete, visible player-steerable goal per run — for example, a 'house ambition' set at founding (scholarly lineage, mercantile rise, military name, artistic legacy) that gates special late-game cards and a payoff event if the ambition is fulfilled by generation 5+. This creates the 'one more dynasty' pull.",
+      "why": "Right now a narrative player who has absorbed a dynasty's story has no mechanical reason to continue beyond curiosity. A stated ambition that the system tracks and occasionally references ('your house has long wanted to be learned — will this generation finally open the door?') creates forward pull without breaking the contemplative tone.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is a beautifully written, occasionally surprising literary toy that goes structurally stale around dynasty 4-5: the vocation fork, love/marriage/child spine, and elder coda are so dominant across the 22 transcribed lives that a narrative player increasingly feels they are filling in a template with elegant language rather than discovering a new person."
+}

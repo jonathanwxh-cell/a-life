@@ -1,0 +1,55 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "A single life fits a 4-7 minute snack session cleanly — the auto-pacing means you can pick up, watch a few years pass, hit a moment, make a choice, and put it down satisfied.",
+    "The fast-forward tap is exactly right for one-handed mobile play: lets you race through quiet years without losing the meditative feel.",
+    "The 4-choice calling card (soldier / scholar / maker / wanderer) is the game's best single moment — a real fork that genuinely changes which cards follow, so two quick sessions in the same dynasty can produce structurally different lives.",
+    "Dynasty artifacts (motto crystallizing mid-life, the seat climbing in the log, an heirloom named and traced to its ancestor) land as genuine small surprises in a short burst.",
+    "Callback cards — the old book re-read at 49, the kindness at age 34 returning as an open door at age 39 — are the freshest moments in the game; when they fire they briefly make a short session feel like it has memory.",
+    "The fate cards (fire, sudden loss, grace) that have no choice and just happen break the binary-choice rhythm in a good way — they land harder in a short session than they would if you were grinding.",
+    "Touch targets are correctly sized (44px minimums on all interactive controls); the choices are large rounded cards that are easy to hit one-handed; the hints auto-reveal on touch devices without requiring hover.",
+    "The solitary and childless life-shapes mean not every short session is building toward the same domestic arc — some lives are structurally quieter and complete."
+  ],
+  "staleness": [
+    "The opening beats of any new life — childhood card, calling at 14-22, love opens at 16-25, first child in the 20s-30s — repeat so reliably that by dynasty 3 or 4 they read as a checklist. A mobile snacker who dips in for 3-4 minutes will hit exactly this checklist zone every time they start a new life, because the fresh content (callbacks, dynasty-specific cards, vocation arcs) lives in the middle and late years that require a longer session to reach.",
+    "The 'Meet them halfway' love response fires in nearly every life in the transcript — Dynasties 2, 3, 4, 5, 7, 8, 9, 10, 12, 13 all open the same way. The seven text variants for y_love1 add some gloss but the structural beat is identical every time.",
+    "Observe lines repeat verbatim across many lives and dynasties: 'Thinking has become her favourite weather', 'The mind has become a room she can close the door of', 'She has learned to be alone without being lonely, which the mind makes possible' all appear multiple times across the 18-life transcript. A player reading the scroll log during a short session will see the same ambient line they saw two lives ago.",
+    "The epitaph 'Gave away everything she/he knew, and so kept it' fires on five of the eighteen recorded subjects. When you are playing in short snack sessions and the death/heir screen is a prominent moment, seeing the same epitaph that often is jarring.",
+    "The scholar arc is the dominant vocation path in the transcripts and has an almost scripted shape: study at 14 → love at 18-24 → study pays at 30-36 → scholar legacy at 48-70 → scholar old at 66+. Three of the five multi-generation dynasties (Sereno, Halloran, Marlowe) run consecutive scholar heirs. The vocation is supposed to create structural variety but becomes a monoculture when the calling card nudges it and players inherit scholarly reputation.",
+    "4-choice cards (calling, bequest) on short phones require scrolling to see the bottom option — the gradient fade cue is subtle and a one-handed snacker may not notice the fourth choice exists before tapping. Not a blocker but a friction point that reduces the impact of those cards' variety."
+  ],
+  "improvements": [
+    {
+      "what": "Randomize the youth love framing more aggressively at the structural level, not just the text. Gate y_love1 behind one prior childhood card (any) and add 15% chance it simply does not fire in a given life, letting a_meet_late or m_old_flame handle that life's romance. This makes the opening sequence less predictable.",
+      "why": "Right now 'Meet them halfway' is the 4th-7th event in nearly every life. A mobile snacker who has played 3 sessions has seen this exact beat 3 times. Structural variation in the early years — the snacker's primary territory — is the highest-leverage freshness fix.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 early-adult callback cards that fire at ages 26-35 (not 40+), referencing specific childhood choices. For example: if the player chose to keep the stray animal (age 6-11), a card at age 28-32 where that stray's legacy shows up — a soft spot for animals now costs or pays. This brings callback freshness into the snacker's window instead of requiring a long session to reach.",
+      "why": "The existing callbacks fire at midlife and elder stages. A snacker who plays 4-6 minutes never reaches them. Moving even 2-3 callbacks into the 26-35 band means a short session reliably contains a 'wait, I remember that' moment.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the observe (ambient) line pools for the most-repeated lines and add a per-dynasty seen-set so the same ambient line cannot appear in the same dynasty's log twice. 'Thinking has become her favourite weather' should be seen once per dynasty maximum.",
+      "why": "The ambient lines are the scroll-text a player reads while waiting for a card. When the same line appears twice in the same session it breaks the illusion of a unique life. This is a low-effort fix with high perceptible freshness impact.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the epitaph pool or add a guard against the same epitaph cluster firing more than twice per session (across all dynasties played in a single browser session). The 'gave away everything they knew' epitaph appears 5 times in 18 lives.",
+      "why": "The death screen is a prominent full-screen moment that punctuates every snack session. Repeated epitaphs undermine the sense that each life was its own story. The code already tracks RECENT_LINES for epitaphs — applying the same window across a longer session history would fix this.",
+      "impact": "med"
+    },
+    {
+      "what": "On mobile, make the 4-choice cards (calling, bequest) visually signal that there are more options below before the player taps — a small '+ 2 more' counter or a persistent scrollbar indicator, not just a gradient fade. The gradient is too subtle when holding a phone in bright light.",
+      "why": "The calling card is the game's best structural divergence point. If a snacker misses the fourth option because the scroll cue is invisible in sunlight, they are choosing from 3 paths instead of 4 without knowing it. The code already sets the 'scrollable' class — a text counter would use information already computed.",
+      "impact": "med"
+    },
+    {
+      "what": "Add one 'wild card' pool of 5-8 cards that can fire at any stage with no conditions except a 3-year cooldown — purely unexpected moments (a stranger does something inexplicable, a dream recurs, a season changes everything). These should have no stat memory and exist purely to break the predictable card-type rotation within a short session.",
+      "why": "The existing universal cards (u_windfall, u_loss, f_grace, f_fire) are good but most are gated on means thresholds. The snacker needs more 'I've never seen this before' moments that don't depend on accumulated state, because they often play before that state builds.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely beautiful to dip into for one life, but by the third or fourth dynasty the opening beats — love, calling, child — have become a recognizable checklist that a mobile snacker encounters every session, while the fresher callbacks and dynasty payoffs live too late in a life to reach in 4-6 minutes."
+}

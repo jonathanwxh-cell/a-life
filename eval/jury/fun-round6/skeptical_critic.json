@@ -1,0 +1,56 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier/scholar/maker/wanderer) genuinely gates distinct card clusters — a soldier's adult arc reads structurally different from a scholar's, and this holds up across many dynasties.",
+    "The era system (war, plague, plenty, turning, hard) injects legitimately different content: w_war_call, w_plague_tend, w_hard_winter produce situations that feel like they belong to a different world, not the same template with new paint.",
+    "Callback cards firing correctly is the game's best trick — when Annika (Dynasty 8) sits beside lonely Ottilie at age 6 and the cb_outcast_return fires 21 years later as a 'door held open,' it lands as a genuine payoff the player shaped.",
+    "The inherited heirloom thread — 'a book too hard for a child's hands' persisting across three Vane generations and triggering cb_books_late in each — produces a recognizable family identity that feels earned rather than stamped on.",
+    "The dynasty character system (reputation, motto, seat) gives each run a distinct flavor: House Holloway with 'In time, all is weighed' reads differently from House Vane with 'We give past what we can spare,' and the motto cards (d_motto_test) give these words narrative weight.",
+    "The prose quality is high enough that individual moments sustain re-reading; the writing rarely feels like a slot machine pulling random strings.",
+    "The bequest mechanic (mind/means/heart/free) is a genuine, visible lever across the generation boundary — one of the few places where a deliberate choice in one life demonstrably reshapes the conditions of the next."
+  ],
+  "staleness": [
+    "The macro arc never varies: every life progresses through child → vocation → love search → adult (work/marriage/child) → midlife (body/reckoning) → elder (legacy/death) in the same order. Vocation cards ADD to the phases; they never RESHAPE the arc. By dynasty 5 you recognize the template's bones even through different card selections.",
+    "Love-marriage-child clustering persists despite explicit engine patches: the transcripts show Dynasty 3 (love 33, child 43, marry 47), Dynasty 5 (love 51, marry 57), Dynasty 9 (love 48, marry 52), Dynasty 11 (love 39, unmarried until 58+). 'Found love late' is nominally one path but operates as the DEFAULT path for most founders and many heirs. After 6+ dynasties, the 'love arrives on an ordinary Tuesday in the wrong decade' framing reads as formula.",
+    "Epitaph clustering is the most visible repetition signal. 'Remembered, most of all, for a steady kindness' / 'Left people gentler than she found them' / 'Kind in the small daily ways that turn out to be the large ones' appear across Dynasties 1, 3, 4, 9, 13. The anti-repeat system (blocked(), RECENT_LINES) suppresses immediate re-use but a 15-dynasty session still hits multiple near-identical closing lines.",
+    "The cb_the_cost elder card ('one old decision keeps returning') appears in Dynasties 1, 5, 8, 11, 13 — five times across the run. It is the single most frequently triggered card and fires so reliably it becomes a structural guarantee rather than a surprise.",
+    "Ambient observation lines ('The stairs have started to ask a question of them,' 'Mornings take longer to arrive in the body') are stat-threshold triggered and deeply pooled, but the pools are not infinite. By dynasty 8 you have read every variant in the vit<35 and vit<18 pools and the rhythm of 'body begins to comment on itself' becomes a predictable beat regardless of which exact line draws.",
+    "No emergent collisions between systems: a plague era never interacts with a family secret surfacing in a midlife reckoning to produce a moment neither system would generate alone. The dynasty layer and the life layer are additive, not emergent — you could swap a life from Dynasty 3 into Dynasty 10 and the individual moments would change but the system pressure would feel the same.",
+    "Player agency over the dynasty arc is thin. Beyond the bequest and m_invest_name, the house's trajectory (seat, reputation, motto crystallization) is driven by updateHouse() reading end-of-life stats — effectively automatic. You don't feel like you are STEERING a dynasty across generations so much as watching one accrete from your choices, which is a meaningful distinction for replay motivation.",
+    "The 'settle early or choose road' axis dominates adult structure. Almost every life's adult tension reduces to: take the job/title/money (means up, bond down) OR stay present (means down, spirit up). The a_work card repeats this framing every 12 years. It is well-written but it is the same dilemma in a new coat."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 arc-bending events that can restructure a life's shape rather than just fill a phase — a political exile that skips the adult band entirely and dumps the player into midlife starting conditions, or a calling crisis that erases a vocation and forces a second calling card.",
+      "why": "The macro arc (child → youth → adult → midlife → elder) is the deepest staleness source. Individual card variety cannot fix it because the skeleton is always the same. A single structural interrupt per dynasty — rare, meaningful, consequential — would make each run feel like it could be shaped differently at the highest level.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the epitaph pool by 50% for the mid-tier and 'kind' clusters specifically, and add a 5-dynasty rolling blacklist (not just 2) so that the same cluster cannot appear within 5 consecutive lineage entries.",
+      "why": "Epitaphs are the closing statement of every life and the part a reader lingers on. Repeated near-identical epitaphs (three 'kind in the small daily ways' in 15 dynasties) are the single most visible staleness signal in the transcripts because they land at emotionally elevated moments where the player is paying attention.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the dynasty layer one cross-system interaction: when a house holds a secret AND enters a plague or war era, introduce a specific card (e.g., the secret threatens to surface under wartime pressure) that neither system would generate independently.",
+      "why": "Emergent collisions between systems are what make narrative sims feel generative rather than additive. Currently the era, the house's reputation, and the family secret all operate in their own lanes. One deliberate intersection — even one per dynasty — would produce the 'I've never seen this before' moments the genre requires for sustained play.",
+      "impact": "high"
+    },
+    {
+      "what": "Limit cb_the_cost to once-per-dynasty (onceDyn) and introduce 2-3 alternative elder-reckoning callbacks gated on different memory combinations (e.g., one specifically for people who chose_others over chose_self, one for those who strayed AND confessed).",
+      "why": "The cb_the_cost card fires in 5 of 15 dynasties because its conditions (chose_self OR strayed OR cut_a_corner OR chose_loyalty) are met by nearly every life. Its onceDyn promotion would force variety; the new alternatives would preserve the emotional payoff of an elder facing an old choice.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 late-love variants that do not follow the 'found love on an ordinary Tuesday in the wrong decade' framing — e.g., a rekindled arrangement between two people who already know each other (the sibling's old friend, a colleague from the vocation), so the structural arrival of love can feel like it belongs to THIS life rather than the universal late-love template.",
+      "why": "The late-love path (a_meet_late) has become the de facto dominant love-arrival mechanism, which means its poetic framing ('it was supposed to have passed') lands as rote rather than specific. Structural variety in HOW love arrives — not just its age-window — would preserve the emotional beat while breaking the formula.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'dynasty setback' mechanic: a seat-loss event that requires active player response over 2-3 consecutive lives (choose to rebuild, to accept the lower standing, or to attempt a risky recovery), making a falling house a multi-generation drama rather than a single-life stat consequence.",
+      "why": "Currently a dynasty decline is a one-life event (updateHouse reads poor stats and decrements seat). There is no sustained tension from watching a great house slip — the player absorbs the hit in one death screen and moves on. A multi-life recovery arc would create the 'one more dynasty' pull the game most needs for long-session engagement.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is an accomplished, beautifully written meditation that sustains genuine interest for 4-6 dynasties, but the macro arc never varies, the late-love and 'kind in the small daily ways' templates repeat conspicuously by dynasty 8, and the dynasty layer is too additive — not emergent — to generate the surprises a narrative sim needs to hold a player for 15 runs."
+}

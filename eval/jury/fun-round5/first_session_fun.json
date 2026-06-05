@@ -1,0 +1,48 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.8,
+  "fun_highlights": [
+    "The first life is genuinely hooky: c_origin produces a distinct opening (era-tinted, trait-tinted, or seat-tinted prose that varies across dynasties), the calling fork gives the life a real structural spine, and era cards (w_war_call, w_hard_winter, w_plague_tend, w_turning_new) deliver genuinely unique beats that a player born into 'settled' years will never see — Dynasty 4's wanderer-soldier going to war is a structurally different first life from Dynasty 2's tender-soldier in settled times.",
+    "The callback system pays off within a single life: the cb_lookaway payoff in Dynasty 2 (Joaquin at 57 'making up to a stranger for a child he ignored 47 years before') is the game's best moment — a genuinely emotional long-arc beat that no other life-sim delivers. When it fires, it feels earned.",
+    "The four vocation arcs (soldier / scholar / maker / wanderer) produce structurally distinct adult stretches — a scholar's m_scholar_legacy, a maker's m_maker_masterwork, a wanderer's m_wanderer_return are not interchangeable flavour; they gate genuinely different moments. Dynasty 3's Anders (scholar) and Dynasty 4's Anders (wanderer) are different shapes of life despite sharing a name.",
+    "Trait affinity in the childhood draw (bookish→c_book, warm→c_friend/c_animal, restless→c_move/c_steal, guarded→c_dark, dreaming→c_wonder) means a 'warm' child's childhood leans toward relational moments and a 'bright' child gets the talent/wonder cards — the early years diverge by who the child already is, which creates genuine first-life variety.",
+    "The solitary and childless arcs (m_solitary, a_chosen_family, e_solitary, e_childless) are content-bearing alternative life-shapes, not dead ends. Dynasty 5's Caleb (solitary scholar) is a coherent, interesting life despite never marrying or having children.",
+    "The dynasty aspiration system (heirlooms accumulating, mottos crystallising, seat climbing) gives a concrete forward pull — Dynasty 12's five-generation Castellane arc reaching 'an old and famous house' with the inherited book passing down four generations is the game's best long-session experience."
+  ],
+  "staleness": [
+    "The calling fork (y_calling) is the single most repeated visual prompt in the game — identical 4-option menu with only 3 rotating text variants — and it fires in every life without exception. By the second dynasty a player has read 'Everyone is suddenly asking [Name] the same question' and chosen from the same four labels. The fork is mechanically essential but its presentation is the most prominent sameness signal in the first 20 minutes.",
+    "The a_child first-child card has three text variants; 'It arrives sideways, the way it does — not quite a question yet, not quite not.' appears verbatim across D3-Anders (twice), D4-Anders, D5-Felix, D6-Annika, D6-Ren, D8-Theda, D8-Rafael, D8-Ingrid, D11-Cosima, D12-Saoirse, D14-Elias, D14-Iris, D14-Caleb and more. This is the most-repeated specific text in the transcripts, appearing 13+ times across 15 dynasties. A second-life player has already seen it.",
+    "The e_window grandchild card ('Improved his/her own childhood a little, for a child who'd never know') appears verbatim in Dynasty 3-Anders (64), Dynasty 5-Felix (80), Dynasty 7-Cosima (74), Dynasty 8-Ingrid (67), Dynasty 11-Cosima (74), Dynasty 12-Liv (76) — 6 of 15 dynasties in a single playthrough. It is the second-most-visible repeated outcome line in the session and is drawn from the losing choice side, making it extra legible as template.",
+    "The m_soldier_ghost card ('Kept the worst of it where he had always kept it — behind the teeth, unspoken, his own') fires identically in every soldier life that chose 'Go where it's worst': Dynasty 2-Joaquin (51), Dynasty 6-Ren (65), Dynasty 10-Ottilie (61), Dynasty 12-Yara (56), Dynasty 14-Elias (52 chose the other branch). By the third soldier the text is a known quantity, not a discovery.",
+    "The structural skeleton of a life becomes legible by dynasty 3: childhood (c_origin → 2-3 trait/situation cards) → calling fork → love card → a_marry → a_child → midlife cards (health, work, parent-aging) → elder cards (legacy, body, last-walk or garden). The ordering varies slightly but the skeleton is stable. A returning player is watching the same template with new names from dynasty 4 onward.",
+    "The dynasty-layer pull (mottos, heirlooms, seat, reputation) that creates the 'one more dynasty' hook requires 3+ generations to feel meaningful and is largely invisible to a first-session player finishing life 1. The heir screen shows aspirations, but after a single life the seat is 'a rented room', no motto exists, and there's nothing yet to build toward — the hook is structurally deferred past the first session's risk window."
+  ],
+  "improvements": [
+    {
+      "what": "Give a_child at least 6-7 text variants instead of 3, and move away from the 'It arrives sideways' formulation entirely for the first-child card — reserve that phrasing only for the second or third child.",
+      "why": "'It arrives sideways, the way it does — not quite a question yet, not quite not.' appears more times in the 15-dynasty transcript than any other single line. It is the first child moment, which nearly every coupled life hits, so even a small pool exhausts fast. The fix is more variants, not a structural change.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the y_calling visual identity: give each vocation option a brief sensory/situation hook in the hint text or as an inline flavour phrase so the four options read differently dynasty-to-dynasty, even if the underlying cards are the same. Alternatively, rotate the frame of the question itself (3-4 more text variants) so the 'fork screen' doesn't look identical every time.",
+      "why": "The calling fork is the dominant sameness signal in a first session. The player sees the same four-button layout in dynasty 2, 3, and 4. The text beneath each option doesn't change. Adding a sentence of situational colour per option ('the war makes this mean something different now') would make the fork feel situated rather than template-fixed.",
+      "impact": "high"
+    },
+    {
+      "what": "Add an 'early dynasty hook' to the post-first-life eulogy screen: a 2-3 line concrete readout of what the house has earned and what it lacks — formatted as narrative, not just the aspirations list. Something like: 'House [X] has its first stone in place — [seat]. No motto yet. No heirloom. Three things still unclaimed.' This makes the dynasty layer's pull visible immediately after life 1.",
+      "why": "The 'one more dynasty' hook is the game's best sustained-play mechanism but is invisible until the player has already seen 2-3 generations. Surfacing it explicitly after the very first death — before the player decides whether to continue — converts the first-session risk window into an invitation to keep going.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap the e_window (grandchild story) card so it fires at most once per dynasty rather than once per life (add onceDyn:true). Replace with a different elder connector for subsequent generations — 'an old letter', 'a photograph', 'a child asking about the house motto' — so the 'improved the childhood story' beat doesn't appear in 40% of all elder lives.",
+      "why": "The grandchild-story card with the 'improved her childhood' outcome is the single most-recognised repeated beat across the 15-dynasty transcript. It fires in 6 dynasties without meaningful variation. Making it once-per-dynasty forces elder lives to reach different connective moments.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 1-2 completely new text variants for the m_soldier_ghost card (the 'war comes back at 3am' midlife beat) that branch on whether the soldier 'went where it's worst' vs. 'kept their head down'. The player who chose glory should hear a different ghost than the one who survived carefully.",
+      "why": "Every soldier who went 'where it's worst' gets the identical midlife ghost card. The outcome branches ('talk about it' vs. 'carry it alone') but the setup text and the 'carry it alone' outcome line are verbatim every time. Tying the ghost's character to the earlier choice would make the callback feel like consequence, not template.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The first life is genuinely engaging — varied openers, a real calling fork, era-gated moments that feel like discovery — but the second life reveals a stable structural skeleton and two or three verbatim repeated lines ('it arrives sideways', 'improved her childhood a little') that signal template to any attentive player, and the dynasty layer's compelling long-arc pull is structurally invisible until after the first-session risk window has passed."
+}

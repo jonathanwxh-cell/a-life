@@ -1,0 +1,51 @@
+{
+  "profile": "genre_veteran",
+  "score": 7.0,
+  "fun_highlights": [
+    "The vocation system (soldier/scholar/maker/wanderer) is the game's strongest freshness engine — each calling gates 3-4 distinct arc cards that make a scholar's midlife structurally unlike a soldier's, not merely re-labelled prose. This is the thing BitLife never managed.",
+    "Era cards (war, plague, hard, plenty, turning) give the macro-layer genuine weight. The vx_soldier_war intersection card — the soldier meeting the real war, not a training exercise — is the game at its ceiling. A war-born generation and a fat-years generation genuinely live different lives.",
+    "The dynasty reputation and motto system creates a real 'one more dynasty' pull that the genre's best entries (Alter Ego, Reigns) mostly lack. Watching 'We decline the luxury of sentiment' crystallise across four Achterberg generations and then trying to get the house written into the histories is the best goal structure in the genre at this scope.",
+    "Callback cards are the game's most distinctive mechanic — the reach-back where a childhood choice returns in midlife (cb_lookaway, cb_study_pays, cb_books_late, cb_principle) gives individual lives a felt arc that pure event-decks never achieve. When a callback lands on a choice the player remembers making 40 in-game years earlier, it's a genuine 'I did not expect that' moment.",
+    "Competing-goods moments (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) resist binary moralising — both roads are defensible and the prose doesn't editorialize. This puts it ahead of most genre entries that telegraph the 'good' choice.",
+    "Fate cards (f_fire, f_grace, f_sudden_loss, f_reversal) that simply happen without the player choosing their way out are a smart asymmetry — they break the sense that every moment is a puzzle to optimise.",
+    "The solitary and childless life-shapes (m_solitary, a_chosen_family, e_solitary, e_childless) are genuine content-bearing shapes, not dead-ends. Dynasty 6 Tamsin ending alone with real prose for that ending is better than how most life-sims handle the unmarried path."
+  ],
+  "staleness": [
+    "The childhood band is nearly deterministic by dynasty 6. The fever card (c_sick) fires in 13 of the 15 dynasties, almost always in years 3-6. The lonely-child-in-the-yard moment (c_friend or c_unfair) fires nearly as often. A player can recite the first 4 years of any heir's life before seeing them. No matter how good the prose variants are, the scenario is the same template.",
+    "The 'town left long ago' return (cb_left_home) fires in every life that left home — 10+ instances across 15 dynasties — with identical structural beats: (a) a card offering to go back, (b) a choice of go vs. let stay a memory, (c) one log line. The prose rotates but the template is visible by dynasty 4.",
+    "The book heirloom (cb_books_late) compounds its staleness because it inherits into every heir as a latent memory. In the Achterberg dynasty it fires three consecutive generations (Aldous, Greta, Otto all pass the book to a child). By the third time it is furniture, not story.",
+    "Trait cards have exactly one card per trait (t_bookish, t_guarded, t_restless, t_shrewd, t_warm, t_stubborn, t_dreaming, t_frail). A 'guarded' character always faces the identical scenario — someone asks the question the walls are up against — once per life. Deep into a dynasty where guarded is a common inherited trait, this becomes a template beat.",
+    "'Carry it alone, as ever' and 'Kept the worst of it where he had always kept it' (the passive option on m_soldier_ghost) appears verbatim or near-verbatim in five soldier lives across the transcripts. It is a strong line that has lost its force by the fourth encounter.",
+    "The marriage proposal's framing ('fell asleep mid-sentence / lay awake deciding to ask in the morning') rotates through 3 variants tied to generation number, which means a long dynasty cycles them predictably. By dynasty 9 Achterberg, the marriage prompt appears twice in one life (lines 949-951 and 1128-1130) with the same variant.",
+    "The a_work card (promotion vs. presence) is extremely thin for how often the adult band is thin. It fires with 3 rotating framings and 2 choices, and its callbacks to itself ('climbed again, and the family learned again') start to feel formulaic by the second adult life in a multi-generation dynasty.",
+    "The elder band lacks late-surprise variety. Most elder lives proceed through some subset of: body observation, legacy question ('what do you want remembered'), garden or craft, reconcile, bequest, peace or rage. The order varies but the pool is shallow enough that the elder years feel like a checklist by dynasty 7."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 alternative childhood openers that replace or supplement c_sick as the near-universal first event. Options: a drought/flood that shapes the household economy; a traveller passing through who leaves something behind; a parent's unexplained absence for a season. Gate them on era or starting means so the childhood of a plague-era heir literally begins differently from a plenty-era one.",
+      "why": "The fever card appearing in 13 of 15 dynasties is the single most visible staleness signal. It trains players to skip the childhood band as template. Diverging the opener by era or family circumstance would make the childhood feel like it belongs to this life, in this world, right now.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a second trait card per trait (8 more cards total). The second card should trigger at a different life stage and present a different flavour of the same character tension. For 'guarded': the first fires in adulthood when someone tries to get close; the second fires in elderhood when the guard itself becomes the thing that needs examining. For 'restless': youth fires on the familiar leaving-home beat; a second midlife card on whether the restlessness ever settled.",
+      "why": "With one card per trait, the trait system is a label rather than a throughline. Two cards per trait at different life stages would make a bookish or guarded character feel like their nature is being probed across time, not announced once.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 new callback cards specifically for the book heirloom that are not 'pass it to a young one.' Possible variants: an heir who never read it discovers the book is worth something and must decide whether to sell it; an heir who resents the family's scholarly identity puts the book on a high shelf deliberately; an heir living in a plague or hard era uses the book pages to start a fire and must reckon with that.",
+      "why": "The current book callback (cb_books_late) has two choices — read it again, or pass it on — and has fired in 7 of 15 dynasties without structural variation. More options that depend on the current era or the heir's relationship to the scholarly reputation would make the heirloom feel alive rather than a recurring obligation.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a third choice to the a_work promotion card: 'Negotiate — some of both.' Make this option have a coin-flip outcome (sometimes the employer accepts, sometimes not) and a slightly different stat profile. Also add a cooldown-based follow-on card where a previous refusal creates a consequence (the opportunity closed, or a colleague who took it is now the boss).",
+      "why": "The work card is the most frequently repeated adult non-once card, and its two-option binary (provide vs. be present) is the weakest dilemma in the game. A third option and a consequence chain would give the adult band an economic texture it currently lacks.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 elder-band cards that are gated on how the whole life was actually lived, not just current stats. Examples: an elder soldier who never talked about the war (has soldier_ghost memory and chose 'carry alone') gets a grandchild who enlists; an elder scholar who gave knowledge away gets a former student who became famous and returns to credit them; an elder who strayed and never confessed sees a grandchild in an identical situation. These should be distinct from the existing e_reconcile and e_legacy cards.",
+      "why": "The elder band currently reads as a universal wind-down checklist. Life-specific elder cards that echo choices made decades earlier would make the end of life feel like the consequence of a particular life, not a generic aging phase.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life has the dynasty layer and vocation-arc depth to stand with the genre's better entries, but the childhood band's near-deterministic opener and a handful of high-frequency callbacks (the book heirloom, the town return, the soldier's silence) become a visible template by dynasty 6-8, holding it below the freshness threshold a genuinely replayable life-sim needs."
+}

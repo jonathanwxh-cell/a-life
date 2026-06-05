@@ -1,0 +1,47 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the clearest emergence engine in the game. A childhood kindness to an outcast (c_friend) returning as a door held open two decades later (cb_outcast_return), a childhood secret animal (c_animal) crystallizing into a dynasty heirloom, an unspoken love (y_love1 declined) resurfacing in an elder's slow evenings (cb_unspoken) — these chains feel genuinely unpredictable because they depend on YOUR choices much earlier, not a script. That is real emergence.",
+    "The vocation arcs (soldier/scholar/maker/wanderer) do deliver structurally different adult lives. A soldier's life includes 'ghost' trauma at 3am (m_soldier_ghost) that a scholar never sees; a wanderer's midlife is the return home (m_wanderer_return) and the 'stay or go' tension, not a midlife health scare. Dynasty 4's five-generation Vasquez run shows this working: Liv (maker) and Joaquin (wanderer) are demonstrably different shapes of life.",
+    "The era layer is a genuine surprise generator. Being born into a plague year vs. a plenty year changes which cards can even fire (w_plague_tend, w_war_call, w_hard_winter are era-locked). Dynasty 6's Soren choosing between making his trade or going to war, because the era is war, is an intersection that feels unscripted.",
+    "The dynasty reputation-and-motto system gives a cross-life goal that actually changes moment-to-moment reading. Dynasty 8 crystallizing into 'Beauty is the only argument we trust' after Caleb's artistic life and Mira's wandering-bookish one — and that motto being quoted back to heirs — creates a feeling of authoring a culture, not just watching individual deaths.",
+    "The 'competing goods' cards (x_honest_or_kind, x_dream_or_duty, x_loyalty_truth) are the best choices in the deck: no clean answer, both options carry real costs, and cb_the_cost echoes them back in old age. When these fire it feels like the game is reading your character back at you."
+  ],
+  "staleness": [
+    "The domestic arc is almost invariant across all 15 dynasties in the transcript: love arrives (y_love1 or a_meet_late), marriage is asked (a_marry), a child question comes (a_child), work/family tension appears (a_work). Every single dynasty hits this sequence. In ~26 lives I can count on one hand the ones that structurally escaped it — and those were lives that died young or chose childlessness. For an emergence-fan this is the core problem: the systems produce different surface prose but the same skeletal shape every time.",
+    "The 'red and furious and entirely unimpressed by any of it' birth line appears verbatim in dynasty 1/3/4/6/8/9/10/11/12/15 — ten of fifteen dynasties. The engine flags this (S._usedFurious guard) but only prevents it once per dynasty, not per session. By dynasty 8 reading it is a staleness alarm, not a funny line.",
+    "Love-opening is structurally monotone. In every life that accepts love, the choice text is 'Meet them halfway' / 'Pretend not to notice' — the same two buttons. The variety lives in the scene-setting prose around it (seven rotating framings), but the actual decision is identical every time. There is no love story that begins with conflict, or with an unusual context, or with a third option. The seven scene framings for y_love1 exhaust by dynasty 6.",
+    "The marriage card (a_marry) has no meaningful variance in the choice. 'Ask. Build a life.' vs 'Not yet. Maybe never.' — two options, every marriage, forever. Late marriages change the log line but not the choice structure. A life that keeps choosing 'Not yet' sees this same card until the window closes, with nothing mechanically different on the third refusal vs. the first.",
+    "Callback density drops sharply after the first 3-4 dynasties. The once-per-life and once-per-dynasty guards correctly prevent repeats, but as the session accumulates, more cards are exhausted or conditioned out. Lives 10-15 feel noticeably sparser in the adult band — more ambient observations ('The decades have arranged themselves around him') and fewer surprise moments. The adult middle feels the most like a template by late dynasties.",
+    "The trait affinity system (TRAIT_AFFINITY in drawCard) is the right idea but too narrow in practice. It boosts 11 child cards by trait, but most adult/midlife cards have no trait sensitivity at all — a 'bookish' adult and a 'restless' adult hit the same career and relationship cards. The trait only meaningfully gates t_bookish (midlife) and t_guarded and t_restless (youth). Three cards is not enough to make traits feel like they generate different life-shapes."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 love-opening cards with genuinely different mechanical structures — one that begins as antagonism ('this person keeps annoying me'), one that is forbidden or complicated (a friend's partner, someone from the wrong class), one that is the player's initiative rather than a passive noticing. The current 7 framings of y_love1 all describe the same thing: a mutual noticing. They produce variety in prose, not in decision.",
+      "why": "Love is the most-repeated sequence across all dynasties. Even a single alternate entry point that creates a different emotional shape (complicated / pursued rather than mutual) would break the sense that every romantic life is the same life in different clothes. This is the highest-leverage single card addition for emergence.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the 'child' card and the 'marry' card meaningful third options that are not just 'no': e.g., 'have a child outside the marriage structure', 'marry and keep separate households', 'make them a formal promise without ceremony'. The current binary (yes/no) means the only structural difference across 15 dynasties is whether the player said yes or no — not HOW they said yes.",
+      "why": "Both cards are drawn in almost every adult life that has a partner. With only two structurally identical options, choosing 'Ask. Build a life.' for the 12th time produces zero emergence. A third option that creates a distinct household form would fork the downstream cards (a_child, a_work, m_parent_age) in a way that actually diverges.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 6-8 adult-band cards gated on vocation that are NOT in the current vocation arc — specifically cards where the vocation creates an unexpected collision with the domestic system. A soldier who is asked to leave for a campaign while their child is an infant; a scholar whose obsession directly damages a relationship; a maker whose business failure threatens the family home. Right now vocation cards and domestic cards run in parallel tracks and rarely collide.",
+      "why": "Emergence for this type of player comes from SYSTEMS COLLIDING, not from systems running cleanly in parallel. The vocation arc (soldier/scholar/maker/wanderer) and the family arc (love/marry/child/work) are the two biggest systems and they almost never interact in the code. The a_work card is the only one that explicitly sets the tension, and it fires identically regardless of vocation.",
+      "impact": "high"
+    },
+    {
+      "what": "Extend the trait affinity system from child cards to adult and midlife cards. A 'restless' scholar should face different versions of the career-fork card than a 'bookish' scholar. A 'guarded' person in a marriage should have a different a_affair framing than a 'warm' one. This could be done by adding 10-15 trait-conditional text variants to existing high-frequency cards without adding new cards.",
+      "why": "Currently, once the childhood section is past, traits stop mattering mechanically. A 'bookish' 40-year-old and a 'restless' 40-year-old face the same midlife cards with the same text. Traits are listed on the heir screen and then forgotten. Paying off that label across the whole life would make 'bookish' vs. 'restless' feel like a genuine character difference, not a flavour note.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a per-session cooldown for the 'red and furious and entirely unimpressed' birth line (and any other phrases appearing in 5+ lives) across dynasties, not just within one dynasty. The current S._usedFurious flag resets on each new dynasty. Extend RECENT_LINES (already used for epitaphs) to cover birth announcements.",
+      "why": "The epitaph system already solves this correctly for death lines — it tracks RECENT_LINES across the session and avoids repeats. The same logic should apply to birth lines. Seeing an identical phrase in dynasty 8 that appeared in dynasty 2 is the single most visceral staleness signal in a reading session.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has real emergence machinery — callbacks, vocation arcs, era gates, and reputation systems that do collide in unexpected ways — but the domestic skeleton (meet, marry, child, work) is invariant across nearly every life, and by dynasty 8 you are watching the same frame with different wallpaper; the systems are parallel tracks that need more cross-wiring before the game can sustain the 'one more dynasty' pull its ambition deserves."
+}

@@ -1,0 +1,63 @@
+{
+  "profile": "completionist",
+  "score": 6.5,
+  "fun_highlights": [
+    "139 distinct cards is a genuinely large pool for a browser sim of this scope — a first-time player will encounter many moments that feel fresh and surprising across the first two or three dynasties.",
+    "The vocation system (soldier / scholar / maker / wanderer) creates meaningfully different adult arcs: each has its own 3-card spine (service, ghost, elder) that lands reliably and makes a soldier life read structurally unlike a scholar life.",
+    "Era cards (war, plague, hard, plenty, turning) are well-written and do colour a generation's emotional texture — being born into a plague year versus fat years produces genuinely different opening beats.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_lookaway, cb_strayed, cb_unspoken, cb_principle, etc.) are the game's strongest feature: when one fires, the sense of a life remembering itself is real and earns genuine feeling.",
+    "The dynasty layer — seat accumulation, reputation drift, heirlooms, secrets, the motto crystallising — gives a completionist a concrete long-run goal structure beyond 'watch one more life.' The heir screen naming aspirations ('still ahead for the house') is a genuinely effective pull.",
+    "Rare fate cards (fire, sudden loss, grace, reversal) with no player choice create genuine surprise: the fire in dynasty 3 and dynasty 7 both landed as distinct, memorable shocks.",
+    "The discovery count on the title screen ('X of 139 moments witnessed so far') is the right instinct — acknowledging to the player that there is a large pool and they have not yet seen all of it.",
+    "Solitary and childless life-shapes are properly supported with their own content (m_solitary, a_chosen_family, e_solitary, e_childless) rather than being dead-ends, which broadens what a completionist can pursue."
+  ],
+  "staleness": [
+    "The core skeleton repeats in almost every life regardless of choices: c_origin (age 3-5) → y_calling (age 14-22, always same 4-option menu) → y_love1 or a_meet_late → a_marry → a_child → e_legacy (3 options) → death. Across 15 dynasties the structural template is nearly never broken. The differences are in which branch is taken, not whether the checkpoint appears.",
+    "Repeated exact log lines are visible across dynasties even with the anti-repeat logic in place. 'Left people gentler than he found them' appears as epitaph in dynasties 1, 6, 7, 13, 15 (at least 5 of 15). 'Kind in the small daily ways' appears twice in the first 11. 'Carries a lightness the years never managed to take' appears as two epitaphs. 'Filed the death away with the others' (m_peer_dies 'put it out of your mind' line) fires verbatim in dynasties 1, 2, 4, 5. By dynasty 6 a completionist is finishing the sentence before it appears.",
+    "cb_principle ('Stand again, you know the price') fires in at least 7 of the 15 dynasties in the transcripts — making it not a rare callback but a near-guaranteed beat for any life that took a stand in youth. It is one of the most repeated moments in the whole run.",
+    "Only 3 vocation × era intersections exist (vx_scholar_turning, vx_soldier_war, vx_maker_plenty). A wanderer born in plague, a maker in war, a scholar in hard times — these produce zero intersection content. The combinatorial promise of era+vocation largely goes unfulfilled.",
+    "The discovery signal is invisible during play. The seenCount number appears only on the title screen. A completionist cannot see which moments they have and have not witnessed, cannot identify what rare conditions unlock unseen cards, and has no in-game way to know they are chasing the inheritance_dispute, the reckoning, the scholar_turning intersection, or the trait-gated t_shrewd/t_stubborn moments. The 'there is more to find' is asserted but not navigable.",
+    "The m_peer_dies card ('Someone Pname's own age is suddenly gone') fires with the same text block in at least 6 of 15 dynasties, and both 'Put it out of your mind' and 'Let it change how you live' produce extremely short log lines — it reads like a scheduling placeholder rather than a distinctive beat.",
+    "Repute gating is under-populated relative to the variety promised. The seat-gated high moments (s_great_burden, s_inheritance_dispute, s_patronage) and repute-gated moments (r_scholar_door, r_family_shadow, r_hard_name, r_old_shame, r_name_cost) are real gating, but reaching them requires sustained dynasty play to seat 3-5, and the transcripts show most dynasties never get above seat 2-3. A completionist wanting to see this content faces a long grind with no intermediate signal that they are approaching it.",
+    "The e_legacy card ('What do you want to be remembered for?') fires in almost every elder life with three fixed options and rotation variants that repeat across only 3 pools. By the 8th elder it reads as a formality rather than a meaningful final statement.",
+    "The 'peer dies' / 'm_peer_dies' moment and the 'u_windfall' / 'u_loss' universal cards are repeatable and do repeat, often landing in similar positions across multiple lives, thinning the texture of the middle years."
+  ],
+  "improvements": [
+    {
+      "what": "Add an in-game discovery log or 'chronicle of moments' — a minimal screen (accessible from the constellation or a new tab) listing how many of the 139 moments the player has witnessed, grouped roughly by rarity tier (common, uncommon, rare, once-per-dynasty), without spoiling the text. Show which trait/era/seat conditions unlock rare tiers.",
+      "why": "A completionist's primary fun is knowing what they are chasing. The seenCount on the title screen tells them there is more but not where to look or how close they are. Without this, the large rare-content pool is effectively invisible during play and provides no ongoing pull.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 6-9 more vocation × era intersection cards to cover the missing combinations: wanderer×war, wanderer×plague, maker×hard, scholar×hard, soldier×plague, soldier×plenty, wanderer×turning. Each should be only 5-10 lines — the point is structural differentiation, not volume.",
+      "why": "The era+vocation promise is the game's most powerful structural idea, but only 3 intersections exist of the 20+ possible. A completionist who tries every vocation in every era will find 85% of the combinations produce no special content. This is the single biggest gap between the game's implied depth and its actual content surface.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the universal elder checkpoint. Replace e_legacy (fires in almost every elder life) with a split pool: one version for soldiers, one for scholars, one for wanderers/settled, one for makers, one for solitary lives, one for lives with no children. Each version should feel earned by that specific shape of life, not a generic 3-option menu.",
+      "why": "e_legacy is the most-repeated elder beat in the transcripts and the most obvious 'same template' signal. Vocation-differentiated versions would make the end of life read as a consequence of how that specific person lived.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 8-12 more callback cards (cb_*), specifically for: soldier_blooded → cb_soldier_honour (did you stand for something?), maker_masterwork → cb_masterwork_found (someone discovers the old piece late), had_mentor → cb_pay_it_forward (the old mentor's lesson comes due), chosen_family → cb_chosen_family_test (one of your chosen people needs something real), made_art → cb_the_work_survives, self_made → cb_climber_cost. These callbacks are the strongest content in the game; there are only 15 and many memory paths have no payoff arc.",
+      "why": "Callbacks are the feature that makes the player feel their choices matter and reverberate. The existing 15 only cover a subset of the memory flags. A completionist notices when lived memories (driven, soldier_blooded, made_art) leave no downstream trace.",
+      "impact": "med"
+    },
+    {
+      "what": "Randomise the introductory text of the y_calling card more aggressively, or add one unique introductory line per vocation that appears on the choice (a 1-line preview of what that path means, pulled from the vocation arc). The calling card currently rotates 3 generic 'the road forks' texts and appears in every single life.",
+      "why": "Because it fires in every life in the same age window, it is the most repeated exact-structure moment in the game. Even modest framing variation (a soldier's path described differently in war vs. settled eras) would reduce the 'same checkpoint' feel.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the distinctiveness of m_peer_dies log lines. Currently both choices produce very short, generic outputs. Add 4-6 specific line variants that reference the character's own age, the era, and the vocation (a soldier learning a peer died in the next campaign; a scholar whose colleague's death makes the question louder).",
+      "why": "m_peer_dies appears in at least 6 of 15 dynasties and the 'filed the death away' log line repeats verbatim. It is a moment that should hit hard and differently each time; currently it lands as boilerplate.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the dynasty aspirations list (houseAspirations output) at some point during play — not just on the heir screen. A mid-life or elder-life card that quietly references where the house stands and what it is still reaching for would make the dynasty feel like an active project during the life, not just a handoff mechanic.",
+      "why": "A completionist wants to feel they are steering toward something across generations. The aspirations exist in the code but only appear between lives. Weaving one into a late-adult or elder moment would create a sense of cumulative purpose during play.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine depth — 139 cards, vocation arcs, era gating, a dynasty layer with real stakes — but by dynasty 5 the completionist is watching a familiar skeleton (calling → love → marry → child → e_legacy) dressed in new names, and the large rare-content pool is invisible to navigate during play, making the promise of discovery a title-screen number rather than a felt experience."
+}

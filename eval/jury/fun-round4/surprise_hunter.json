@@ -1,0 +1,57 @@
+{
+  "profile": "surprise_hunter",
+  "score": 6.5,
+  "fun_highlights": [
+    "f_sudden_loss is the game's single sharpest card: a high-bond person simply gone one morning with no warning, no choice to dodge it, and your character either breaks or goes cold — this is exactly what the genre needs more of.",
+    "The era system (war/plague/hard/turning/plenty) combined with vocation creates genuine structural forks unavailable any other way: a scholar in a turning age faces 'vx_scholar_turning'; a soldier in a war era faces the real thing at full weight ('vx_soldier_war'). These lives feel categorically different, not just cosmetically so.",
+    "Callback chains anchored to specific earlier choices (cb_lookaway, cb_books_late, cb_strayed, cb_corner) work beautifully when they first appear — they make the past feel consequential and alive, genuinely surprising when triggered.",
+    "The dynasty's reputation and seat accumulation creates genuine 'one more generation' pull: watching a house claw from nothing to 'a house written into the histories' over 5 generations (Dynasty 9) generates real investment that persists between lives.",
+    "Solitary and childless life-shapes (m_solitary, e_solitary, e_childless) avoid the assumption that every life tends toward family — when they fire on a character who has genuinely declined every attachment, they land with real weight.",
+    "f_grace — the unearned, unchosen kindness — is a lovely structural inversion: something good that simply happens, no decision, no merit required. It sits alongside f_fire and f_reversal as the game's only 'black swans' (events without a player exit).",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the game's best moral design — both roads are a kind of virtue, neither is clearly right, and the prose refuses to adjudicate."
+  ],
+  "staleness": [
+    "The childhood fever (c_sick) fires in every single one of the fifteen dynasties surveyed. By dynasty 3 you see it coming. It becomes invisible — a tax to pay before the real cards arrive, not an event.",
+    "The 'returned to hometown left long ago' moment (cb_left_home) fires in roughly 12 of 15 dynasties. After the third or fourth time, it is structural furniture, not a surprise. Its prose variants are not different enough to disguise the repetition.",
+    "f_grace fires twice in the same character's life in Dynasty 6 (Rafael, ages 23 and 65). The 'unchosen kindness' loses its power when it lands twice. The cool=30 cooldown is insufficient or incorrectly applied.",
+    "The soldier arc after dynasty 3 is predictable: join → campaign choice (head down vs. glory) → 3am war memories in midlife → elder truth-telling card. The structure is visible before the words are read.",
+    "The 'pass the book to a young one' callback (cb_books_late) fired in five or more dynasties across the transcripts. Once you recognise its trigger conditions (child_books memory + bookish character + midlife), you can see it coming. A callback that becomes clockwork stops being a revelation.",
+    "The body-decline observation pool is deep in text but shallow in structure: every elder gets a sequence of flavour-only lines with no choice attached. They are prose, not events. By dynasty 6, you skim them.",
+    "The elder arc converges too reliably: e_legacy (what to be remembered for) fires in almost every elder, followed by e_peace or e_last_walk, plus a fate card. This is the same elder shape across virtually every life regardless of how the preceding decades differed.",
+    "No card in the entire pool creates a truly unforeseeable outcome — a plot twist that rewires your understanding of the life you just lived. The fate events (f_fire, f_sudden_loss, f_reversal) come closest, but their structure is known: they hit, they hurt, you rebuild. The 'black swan' space is too thin.",
+    "The a_marry / a_child / a_work cluster fires so reliably in the adult band that — even across very different character builds — adult lives tend to share the same 3-5 structural beats. Vocation diverges them somewhat, but not enough."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 more truly unchosen fate events (f_* pattern: single choice, inescapable) distributed across all life stages, including youth and midlife — not just adult/elder. Consider: a rumour that spreads despite innocence, a windfall from a stranger's will, a public shaming, a war-era conscription that ignores vocation flags.",
+      "why": "The game currently has only 4 fate cards (f_fire, f_sudden_loss, f_grace, f_reversal). These are the game's only genuine surprises — events you cannot optimise around. Tripling this pool would make sessions feel less like a sequence of decisions and more like a life where things happen to you.",
+      "impact": "high"
+    },
+    {
+      "what": "Set c_sick (childhood fever) to onceDyn:true and raise its weight only for the first generation; after that, replace it with a rotating pool of 4-5 distinct childhood adversity starters so no two dynasties open the same way.",
+      "why": "The fever is the single most repeated card in the transcripts. Seeing it in dynasty 1 is touching; by dynasty 5 it is a loading screen. It currently carries onceDyn:true only in Dynasty 2+ (anol's inherited trait shows c_sick fires again), but the pattern persists because every heir restarts the child stage. Making the opener genuinely variable would reframe the reading of every new life.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'collision' event class: cards that only fire when two specific memories or flags are held simultaneously and have never been seen individually (e.g., chose_soldier AND strayed, or kept_stray AND lived_reckless AND elder). These compound callbacks would be statistically rare and feel like genuine emergent stories.",
+      "why": "The current callback system is depth-1: one memory triggers one callback. But real emergent stories come from the intersection of multiple threads. A soldier who also strayed, who also kept a stray animal as a child — that specific collision could generate a card no other character path reaches. These would be the 'I've never seen this before' moments the profile hunts for.",
+      "impact": "high"
+    },
+    {
+      "what": "Apply a global cooldown across the dynasty (not per-life) to cb_left_home, the hometown-return card. It currently re-fires for almost every character who has a 'left_home' memory. Cap it to once per 3 generations or gate it behind a longer dynasty-level flag.",
+      "why": "In the transcripts, the 'returned to hometown' card is Dynasty 1's Mira, Dynasty 2's Mira, Dynasty 3's Ronja, Dynasty 6's Tamsin, Dynasty 7's 3rd-gen, Dynasty 8's Beatrix, Dynasty 8's Aldous, Dynasty 9's Greta, Dynasty 10's Yara, Dynasty 11's Lazlo, Dynasty 12's Anouk, Dynasty 13's Mira, Dynasty 15's Linnea. This is structural wallpaper.",
+      "impact": "med"
+    },
+    {
+      "what": "Fix the f_grace double-fire bug (it fired at ages 23 and 65 in the same character in Dynasty 6). Verify the cool:30 guard is functioning correctly and is applied per-player-life rather than per-session.",
+      "why": "An 'unchosen grace' that lands twice on the same person undermines the rarity that makes it meaningful. It also signals to attentive players that the randomness engine has gaps.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the elder band 3-4 genuinely distinct arc shapes that depend on life history: a life of soldiering should have a different elder structure than a life of wandering, which should differ from a scholar's. Currently, e_legacy + e_last_walk/e_peace + fate event is the default elder regardless of vocation, except where the explicit e_soldier_old / e_scholar_old / e_wanderer_old caps fire. Extend these distinctive caps to every vocation and ensure they displace the generic elder deck rather than supplementing it.",
+      "why": "The elder band is where lives should feel most different — this is the payoff for decades of distinct choices. Currently, elder lives converge. The vocation caps exist but feel like extras bolted onto a shared template.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely beautiful game that earns its first three or four dynasties with real pleasure, then gradually reveals a skeletal template — fever, calling, love, marry, elder reckoning — that the prose dresses differently each time but cannot fully disguise; the surprise-hunting player will feel the lattice by dynasty 6 and be naming the next card before it arrives by dynasty 10."
+}

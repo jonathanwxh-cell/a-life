@@ -1,0 +1,47 @@
+{
+  "profile": "genre_veteran",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback arc system is the game's genuine jewel: when 'A kindness done at 6 came back, decades later' fires, or the unspoken love resurfaces in elder years, or the corner-cut returns with a larger face, it earns its moment. These are the game's best minutes, and no genre peer executes this particular trick more cleanly.",
+    "Vocations (soldier / scholar / maker / wanderer) produce structurally distinct adult arcs. Soldier-in-war-era is a meaningfully different life-shape from scholar-in-turning-era. The transcript evidence is clear: a Tariq Reyes (soldier, plague, tender) reads nothing like an Annika Vane (scholar, turning, dreaming). The four-calling-by-six-era matrix is the engine's best design decision.",
+    "Dynasty accumulation has genuine texture: the motto crystallising from play, heirlooms surfacing as latent memories in the heir, the hard-name or soft-spot shaping who you meet. The 'e_bequest' lever — choosing what to hand forward — is a real inter-generational decision with downstream teeth.",
+    "The 'fate' events (fire, sudden loss, grace, reversal) that offer no choice are a good instinct: they break the 'every bad thing is a choice' pattern and land grief with proper weight.",
+    "Writing quality on individual cards is high enough that encountering a new one mid-run feels like a small gift, not an obligation. 'The body has started keeping different hours than Ambrose does' is exemplary ambient prose."
+  ],
+  "staleness": [
+    "By dynasty 6–8, the late-love template is the game's most legible staleness: in the 15-dynasty packet, 'a_meet_late' fires in dynasties 1, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15 — roughly 12 of 15 adult lives, despite the engine comment about reducing it. The scholar-callback 'The long bet on [name]'s own mind, made hungry and young, is finally being called in' appears in dynasties 1, 3, 6, 8, 11, 12, 13, 14 in nearly identical prose. The e_scholar_old 'Make peace with not knowing' fires in dynasties 1, 6, 8. These are not discovered moments; they are the template.",
+    "The love–marry–child sequence, even when timing varies, forms a rigid structural spine in most lives. 'Could not say yes, and watched a good thing strain' / 'Not yet. Maybe never.' then later 'Ask. Build a life.' appears in at least 6 dynasties. The marriage card has 6 text variants but the player encounters the same beat every life — just with a different name in the slot. At dynasty 8 the cadence is entirely predictable.",
+    "The 'e_reckless' / 'Tell them it was worth it' / 'Tell them to slow down' elder-advisory pattern fires in 9 of 15 dynasties as a near-guarantee for anyone who lived recklessly — which most warriors and wanderers do. It is not a callback; it is a mandatory elder-stage card for a large subset of lives.",
+    "The 'm_peer_dies' (someone my own age is gone) card, 'cb_principle' (the old stand returns with higher stakes), and 'w_hard_winter'/'w_war_loss' appear multiple times per 15-dynasty run in prose that is recognisably recycled. The 'stand again, older and clearer-eyed' line is exact-matched across Ambrose, Marguerite, Tamsin, Theda in the packet.",
+    "The solitary/childless shape is theoretically content-bearing but in practice thin: 'm_solitary', 'a_chosen_family', 'e_solitary' are the only dedicated cards, and a childless life at elder stage largely draws the same universal elder pool (e_peace, e_old_letters, e_garden) as a richly-parented one. The structural promise of 'a different shape of life' is not delivered in enough distinct card coverage.",
+    "The dynasty layer, while smart conceptually, has a narrow mechanical lever: seat up/down, one reputation accumulating, one motto crystallising. By dynasty 5 the player has seen all six reputation types and the motto mechanic's arc is fully understood. There is no surprise in the dynasty system after that — only confirmation. The 'histories' ceiling (seat 7) is interesting as a goal but the path to it is opaque enough that most players will not feel they are steering toward it."
+  ],
+  "improvements": [
+    {
+      "what": "Cap how often 'a_meet_late' can fire relative to 'y_love1' across a dynasty — specifically, if 'a_meet_late' has already fired for 3+ prior lives in S.lineage, reduce its draw weight to near-zero. Add 2–3 structurally distinct love-free life-shapes (beyond solitary) with their own elder card clusters, not just the universal elder pool.",
+      "why": "Late love has become the unmarked default, not the rarer path the engine comments describe. A player on dynasty 8 can predict within 10 years when the love card will arrive. Removing the predictability restores surprise.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 8–12 'middle-band' cards (adult/midlife) that are NOT gated on vocation or era — general-life moments that vary the texture of ordinary lives that aren't soldier-in-war or scholar-in-turning. The current non-vocation, non-era adult band has roughly 15 eligible cards for a 20-year stretch; many fire every run.",
+      "why": "The adult band (26–45) is the most repeated section. Between the vocation arc (which fires its key cards once) and the love/marry/child spine, there is not enough variety for the long middle years. The transcripts show the same 4–5 non-signature adult cards appearing in nearly every life.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a dynasty-memory layer that makes the player's specific ancestors visible in more cards — not just d_ancestor (which is generic) but cards where 'Selma's choice to teach freely' or 'the fire Tomas survived' is named in the card text, not just the ancestor. The motto-test (d_motto_test) is the only card that does this; 4–6 more with specific ancestor echoes would transform the dynasty from a stat-layer to a story.",
+      "why": "The game's best emotional moment is 'Edmund finds the old book on a high shelf — the one too hard for a child's hands, kept all these years' — this is the family's history made tangible. There are very few cards of this type. The dynasty layer is mostly numeric (seat, repute); more named ancestor callbacks would give it genuine narrative texture.",
+      "impact": "high"
+    },
+    {
+      "what": "The 'once-per-dynasty' (onceDyn) flag needs wider use. Currently it covers about 10–12 cards, but major moments like 'm_health' (body's first letter), 'e_legacy' (what do you want remembered), and 'cb_reckless' (advising the reckless young) fire per-life, not per-dynasty. The e_legacy question in particular — 'what do you want remembered' — lands hardest the first time, much less so by the 5th. Moving these to onceDyn would force each dynasty to confront them once, then move on to something else.",
+      "why": "The staleness of the elder band comes almost entirely from e_legacy, e_garden, e_peace, e_window firing every single life. A player on dynasty 5 can name these cards before they arrive.",
+      "impact": "med"
+    },
+    {
+      "what": "Add an explicit 'dynasty goal' visible to the player — not a number, but a concrete named aspiration the current house is being steered toward. Something like 'House Lindholm is three lives of scholarship from a motto' or 'one fortune-life from the histories.' The existing houseAspirations() list is close but surfaces only at heir-transfer and reads abstractly. A persistent one-line 'what the house is building toward' in the UI would give the 'one more dynasty' pull a concrete shape.",
+      "why": "The 'one more life' pull is the genre's core replayability lever (BitLife: more achievements; Alter Ego: more endings; Reigns: further run). A Life currently offers vague long-term direction. A named, achievable, visible dynasty goal would give players a reason to push through dynasties 6–10.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely beautiful piece of craft with a well-engineered dynasty layer and excellent individual card writing, but by dynasty 6–8 the structure is fully legible — the late-love spine, the scholar-pays-off callback, the elder advisory cycle all arrive on schedule — and the 'one more life' pull collapses into watching a template execute rather than discovering a new story."
+}

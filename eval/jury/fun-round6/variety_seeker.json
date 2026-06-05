@@ -1,0 +1,56 @@
+{
+  "profile": "variety_seeker",
+  "score": 6.5,
+  "fun_highlights": [
+    "The four vocations (soldier/scholar/maker/wanderer) are the single biggest structural win: a soldier's life genuinely reads differently from a scholar's, with dedicated adult/midlife/elder card clusters that accumulate into a coherent arc rather than a loose pile of moments.",
+    "Era-gated cards (war/plague/plenty/hard/turning) inject macro-level variety at no cost to the player — a plague life and a settled life open differently from the first year, and the era can change at succession so gen-3 and gen-8 of the same dynasty can feel historically distinct.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_lookaway, cb_study_pays, cb_strayed, etc.) are the most structurally novel idea in the game: they reach twenty or thirty years back to a specific earlier choice and close a personal arc. When they fire they feel like a genuine narrative payoff that could not have happened in a different run — 'A kindness done at 6 came back, decades later, as a door held open' after the c_friend choice is the game at its best.",
+    "Trait affinity on card draws means a bookish child genuinely leans toward c_book, a warm one toward c_friend, a restless one toward c_steal/c_move — childhood is not a uniform checklist but a fingerprint of who this particular child already is.",
+    "The dynasty layer (seat, repute, motto, heirlooms, secret, era) genuinely accumulates: House Vane with motto 'We give past what we can spare' and the inherited book heirloom landing in Edmund and then Tariq's midlife is a cross-life payoff that no single-life game can do.",
+    "Once-per-dynasty (onceDyn) gating is smart design: c_sick, y_mentor, m_parent_age, e_legacy, cb_left_home and others fire at most once across a whole house, so a 5-generation dynasty does not replay identical milestone beats in every life.",
+    "Early death variety and voluntary childlessness (Adaline at 23, Henrik at 19, Cassian at 44, Tamsin refusing marriage, Tobias choosing no children initially) mean life-shape is not always the full arc — truncated lives and divergent family structures read as real variety, not padding."
+  ],
+  "staleness": [
+    "The love-marriage-child sequence is structurally almost universal. Scanning all 15 dynasties (~30 individual lives): the overwhelming majority follow the pattern of [meet love in youth or as late-adult] → [a_marry] → [a_child]. The age varies but the SEQUENCE does not. A life without love at all is rare in the transcripts; childlessness is rarer still. The engine nudges these cards strongly enough that a variety-seeker notices the domestic skeleton under every life by dynasty 5.",
+    "The scholar legacy card (m_scholar_legacy: 'give it all away vs guard it') appears in Selma, Emory, Soren (Marchetti), Vera (Okonkwo), Junia, Lazlo (Reyes), and Annika — seven out of fifteen dynasties — with functionally identical prose every time. The same applies to cb_books_late (the 'old book on a high shelf' callback): it fires in Annika (D8), Edmund (D8), Tariq Vane (D8), Idris (D13), Lazlo (D14), Soren (D13) — the reader's eye learns to skip it. When a callback fires in nearly every scholar-adjacent life it stops being a callback and becomes furniture.",
+    "The 'someone Ambrose/Cosima/X helped once, years ago, is somebody now' outcast-return callback (cb_outcast_return) fires in Annika (D8 at 27), Cosima (D13 at 35), Theda (D13 at 28), Lazlo (D10 at 34), and the neighbour-kindness variant in Lazlo (D10 at 52). The prose template — 'A kindness done at AGE came back, decades later, as a door held open' — is nearly verbatim across all instances. After seeing it twice it is recognisable as a slot, not a surprise.",
+    "The elder arc is the least varied section of any life. After midlife the draw pool narrows sharply: e_reconcile, e_legacy, e_garden, e_window, e_last_walk, e_peace, e_body, e_bequest, e_craft, e_journey, e_old_letters, e_soldier_old, m_scholar_legacy, the scholar-peace card. Most lives see 3-4 of these from the same pool, producing elder sections that feel interchangeable across vocations. A soldier's elder life and a maker's elder life share almost the same final beats.",
+    "Fate-event cards (fire, grace/windfall, the 'college collapse' economic crash) have no choice — they are single-option narration beats. In the transcripts the fire card ('Lost the house... and learned the cold lesson of how fast a life's accumulation burns') appears in Tomas (D1), Vesna (D7), Vera (D11), and Lazlo (D14). With no player agency, seeing the same forced narration four times in a play-through is especially flat.",
+    "The 'no-marked-traits' lives (Ottilie D13, Henrik D12, Lazlo D14 gen-2) lack the trait-affinity draw weighting that differentiates bookish or warm or restless childhoods. Their childhood sections read as nearly identical: c_origin (take the world as it comes) → random card → random card → y_calling. Without a trait fingerprint these lives feel like blanks.",
+    "The 'cb_principle' callback (stand again for the old principle) fires in Ambrose (D1), Tomas (D1), Marguerite (D9), Tamsin (D11/D3), Theda (D13), Edmund (D8) — six lives — always with nearly the same framing ('The thing X stood up for once, young and at a cost, comes round again'). The payoff text is rotated but the structural beat is the same: youth principle → midlife echo. A variety-seeker stops experiencing it as a callback after the second or third instance.",
+    "The dynasty-memory card (d_ancestor) has only one functional shape: 'live up to the name vs step out of its shadow.' It rotates which ancestor is named but the binary choice and consequences are identical every time. By dynasty 8+ every player who took 'step out of its shadow' once and 'live up to the name' once has exhausted the novelty of this card entirely."
+  ],
+  "improvements": [
+    {
+      "what": "Break the love-marriage-child spine into genuinely optional tracks with different content in each. A confirmed-solitary life should get 3-4 cards exploring what that shape feels like (chosen celibacy, a platonic partnership, investing in work or community instead of family) rather than simply missing the domestic cards. Currently childlessness is modelled as an absence, not a presence.",
+      "why": "The love/marry/child sequence is the single most visible repeated arc across all 15 dynasties. Giving the non-domestic path its own content means a variety-seeker faces genuinely different structural decisions rather than the same fork with one road blocked.",
+      "impact": "high"
+    },
+    {
+      "what": "The fate-only cards (fire, economic crash, grace-from-a-stranger) need a player choice or they should be retired. At minimum give the fire card a second option ('salvage one thing before it burns' vs 'let it all go') and the crash card a decision about what to cut. Single-outcome narration cards feel like cutscenes and are the most visibly repeated beats in the transcripts.",
+      "why": "Four fire appearances and three grace-from-stranger appearances in 15 dynasties, all with no agency, is the most direct staleness signal. A choice does not need to be dramatic — even a small decision about how to respond rescues the card from feeling like a plot railroad.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap the cb_books_late / scholar-legacy / outcast-return callbacks at once per DYNASTY (onceDyn), not once per life. These callbacks currently fire freely in every scholar-adjacent life, which removes the surprise of recognition that is the callback's whole point.",
+      "why": "The book-on-the-shelf callback fires in six separate lives across eight dynasties in the transcripts. When a 'personal' memory payoff becomes predictable infrastructure it degrades from callback to routine.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 elder cards that are vocation-exclusive and structurally different from the universal pool: a wanderer's elder cards about what rootlessness costs at 75, a soldier's PTSD-settled cards about making peace with what was done, a scholar's specific regret/pride beats. Currently all elder arcs converge on the same 6-7 cards regardless of the life lived.",
+      "why": "The elder section is where variety-seekers notice most strongly that they are watching the same template. Vocation-specific elder content is already partially implemented (e_soldier_old, e_maker_handoff) but needs depth — these single cards cannot carry a 15-20 year span against the universal pool.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the d_ancestor dynasty-memory card 3-4 distinct framings beyond 'live up to / step out of.' For example: a life that chose the hard path might receive the ancestor's story as a warning; a scholar house might have the ancestor's unanswered question resurface as a puzzle; a tainted house might have the ancestor appear in a way that makes the player implicate themselves in the old wrong.",
+      "why": "The current binary is exhausted after two encounters. Making the dynasty-memory card respond to what THIS life has already done (via cond checking current flags/memories) would make it feel like genuine generational echo rather than a reusable shell.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 late-adult (age 50-65) cards that only appear for lives WITHOUT a spouse or children — not absence-of-domestic-arc but presence of a different kind of midlife. A chosen-solitary at 55 faces different stakes than a married parent at 55, and the card pool should reflect that.",
+      "why": "Currently the adult band fills for domestic lives with a_work, a_child (×2-3), a_marry, m_parent_age, m_child_grown, m_estrange. Non-domestic lives miss most of these and end up with visibly thinner adult sections. The a_fallow and m_empty_house cards gesture at this but do not fill the gap.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has real structural ambition — vocations, eras, callbacks, dynasty reputation — that produces genuine variety across the first four or five dynasties, but the love-marriage-child spine is nearly universal, a handful of callbacks (book-on-shelf, outcast-return, stand-again) fire so frequently they lose the quality of surprise, and the elder arc converges to the same half-dozen cards regardless of the life lived, leaving a variety-seeker tracking recognisable slots rather than discovering new shapes by dynasty 8."
+}

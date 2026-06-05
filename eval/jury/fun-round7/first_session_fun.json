@@ -1,0 +1,62 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.5,
+  "fun_highlights": [
+    "The four-vocation calling card (y_calling) is a genuine structural fork — a soldier's life actually produces different adult cards than a scholar's, with era-vocation intersections (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) landing as a real surprise when they fire.",
+    "Callback cards are the game's single best mechanic: cb_outcast_return (a childhood kindness returned decades later), cb_study_pays (the scholar's hungry bet cashing in), cb_lookaway (facing a second chance to help after looking away young) create genuine 'oh, that' recognition moments that feel earned.",
+    "Era cards (plague, war, plenty, turning, hard) meaningfully reframe cards that would otherwise be generic — the y_calling text in a war era is a different card than in settled times, and this is visible in the transcripts with Elias Okonkwo's war-era road choice.",
+    "The dynasty house layer — seat climbs, reputation drift, motto crystallization, heirlooms, secrets, bequest — gives each new life a concrete starting situation and something specific to chase. Watching 'We burn bright, and we burn' crystallize across the Vasquez line (D4) is genuinely satisfying.",
+    "Solitary and childless life-shapes are properly supported with their own card arcs (m_solitary, a_chosen_family, e_solitary, e_childless), and Niall Vasquez (D7) plays as a meaningfully different shape of life.",
+    "Early death (Felix Okafor, 21 years; Yara Reyes, 43 years) is handled with grace and lands as a real gut punch rather than a mechanical failure state.",
+    "The fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) with no choice — just an outcome — are a smart design beat that breaks the player's sense of total agency and makes the world feel real."
+  ],
+  "staleness": [
+    "The 'red and furious and entirely unimpressed by any of it' first-child line appears verbatim in Dynasties 1, 2, 3, 4, 6, 7, 8, 9, 10, 12, 13, and 15 across the 15-dynasty transcript. The _usedFurious guard resets per dynasty, so every dynasty's first child after a chance(0.4) roll lands this same phrase. By dynasty 6 it reads as a running joke, not a fresh moment.",
+    "The love card (y_love1) has 7 prose variants that rotate among all the lives that fall in love young, and 'Meet them halfway' is accepted in nearly every instance. By dynasty 6 the love-beat is utterly predictable: someone appears at the edges of the days, the player clicks the first choice, a name is generated. The beat has lost all surprise.",
+    "The t_guarded trait card fires in Dynasties 1, 3, 7, and 15 with word-for-word identical prompt text and 'Keep the wall' chosen repeatedly. It reads as a stamp, not a character moment.",
+    "'Burned the old letters without reading them, and let the younger self she'd been keep, at last, her privacy' appears verbatim in Dynasties 6, 7, 8 (twice), and 13 — five times in 15 dynasties, across unrelated characters. The e_old_letters card fires too frequently and the 'burn unread' option dominates, so the same outcome line repeats without variation.",
+    "The s_from_nothing card ('no name that means a thing, no floor to fall back to') fires in nearly every early-dynasty adult life regardless of actual house standing — it appears at age 27 for Cosima (D1), 36 for Cyrus Marchetti (D2, after already having a child and a maker's career), 50 for Vesna (D3), 27 for Hale (D6-3). The cond (seat<=1) is either too loose or the card misfires, but the effect is that a 'starting from nothing' framing keeps landing on lives that clearly aren't.",
+    "Epitaph recycling becomes visible by dynasty 8: 'Gave away everything she knew, and so kept it' vs 'Gave away everything he knew, and so kept it' hit in D1, D6, D7, D9 — the teacher-cluster epitaphs exhaust themselves because teaching is a common life outcome. The code has anti-repeat logic but the pool is too small relative to how often the 'became_teacher' cluster is reached.",
+    "The adult structural cadence — love, child, work-promotion, aging parent, midlife health scare, elder legacy — is felt by dynasty 5-6 as a skeleton the cards are hung on rather than emergent story. Individual card text varies, but the sequence shape is recognizable enough that a player can anticipate what decade-of-life card is coming next.",
+    "The cb_outcast_return callback (childhood friend who became somebody) fires in five of the fifteen dynasties and becomes predictable as a mechanic: make friend in yard -> expect payoff in adulthood. The surprise of the first instance becomes a formulaic beat by the third.",
+    "The a_child log lines for the first child rotate well within a dynasty but across dynasties the 'red and furious' anchor and 'some door hadn't known was shut came quietly open' recur across unrelated houses, flattening what should feel like distinct births."
+  ],
+  "improvements": [
+    {
+      "what": "Make the _usedFurious flag session-global (attach to a module-level RECENT_LINES-style set) rather than per-dynasty (S._usedFurious). Expand the first-child log pool by 6-8 lines so no single phrase can appear more than once per session of play.",
+      "why": "'Red and furious and entirely unimpressed by any of it' appears 11+ times across 15 dynasties in the transcript — the single most visible verbatim repeat. It undercuts every birth after the first.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 additional prose variants to y_love1 (currently 7) and weight the 'Pretend not to notice' choice so it fires 25-30% of the time via the engine's nudge rather than being nearly always bypassed, producing more lives that miss early love and need the late or solitary arc.",
+      "why": "In the transcript, love is accepted in approximately 90% of eligible youth lives via 'Meet them halfway'. The beat is mechanically inevitable, which means it stops feeling like a choice and the prose variants (all framing someone appearing at the edges of the days) become wallpaper.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a session-level seen-recently guard to e_old_letters and t_guarded (similar to RECENT_LINES for epitaphs) so each fires at most once per 4-5 lives across the whole session, not just per dynasty.",
+      "why": "These two cards have no onceDyn gate and shallow enough pools that they repeat verbatim within a single evening's play. e_old_letters fires in 5 of 15 dynasties; t_guarded fires in 4 of 15 with identical prompt text each time.",
+      "impact": "high"
+    },
+    {
+      "what": "Tighten the s_from_nothing cond to require seat<=0 (not seat<=1) OR add an age/life-progress gate so it only fires before the player has accumulated a visible career, marriage, or child. Currently it fires mid-life on established characters and reads as false.",
+      "why": "Cyrus Marchetti is offered 'There is nothing behind you' at age 36 having already had a child at 27, established a maker's career at 21, and married. The card breaks narrative plausibility and the 'starting from nothing' framing appears so often it loses meaning.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the teacher-cluster epitaph pool from 6 lines to 10-12 lines and add a cluster-level seen-recently check (beyond the 2-ancestor lookback) that tracks the last 6 epitaphs session-wide rather than only the last 2 in the current lineage.",
+      "why": "The teacher cluster is reached by a wide variety of paths (became_teacher, gave_it_away, scholar_legacy) and the 6-line pool exhausts within a single focused session. Four variations of 'gave everything she knew' land in the 15-dynasty transcript.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 new card clusters in the adult 28-55 band that are NOT contingent on relationship or vocation status — pure character/ethical moments that can vary the middle years for any life shape. Candidates: a creative-crisis card, a political/civic card, a card about an unexpected medical windfall (contrast with the health scare).",
+      "why": "The adult band is the thinnest in terms of structural surprise. Players who have seen the love-work-child-health loop across several lives feel the skeleton of the arc by dynasty 5 even when individual card text differs.",
+      "impact": "med"
+    },
+    {
+      "what": "Add onceDyn gating to cb_outcast_return so it fires at most once per dynasty, preventing it from being a formulaic 'make friend in yard, get payback in adulthood' expected beat across every dynasty.",
+      "why": "The callback's power comes from surprise. Once a player has seen it twice (D2 Felix, D3 Vesna) they expect it whenever they choose 'Sit beside them' in childhood — which collapses the choice from a genuine moral act into a strategic investment.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a well-crafted literary toy that delivers genuine pleasure for the first 3-4 dynasties, but the adult structural cadence becomes legible by dynasty 5-6, a handful of verbal phrases repeat visibly enough to break immersion, and the love-and-family arc is close to mechanical by mid-session — leaving it a solid 6.5 rather than the 8 its writing quality otherwise deserves."
+}

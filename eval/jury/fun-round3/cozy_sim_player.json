@@ -1,0 +1,49 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 7.2,
+  "fun_highlights": [
+    "The prose sustains genuine warmth across the full transcript — lines like 'Had a child, and the whole shape of the days changed to make room' and 'Met the end with his affairs in order and his goodbyes said' land with real tenderness. The literary quality is consistent and never cold.",
+    "The callback card system creates genuinely moving moments: a character reading at 50 the book they kept at age 9, or the kindness done at 13 returning as a door held open decades later. These memory-arcs are the single most cozy and satisfying mechanic in the game.",
+    "The era layer (war, plague, plenty, turning age, hard years) gives each dynasty a distinct historical texture. A plague-era life that chooses to tend the sick, a hard-winter child sharing the last of the stores — these moments feel meaningful and shift the mood without breaking the gentleness.",
+    "The four vocations (soldier/scholar/maker/wanderer) each have their own clustered adult arc with cards that feel native to that life. A wanderer's 'the horizon calls / let the road end here' dilemma has a different emotional register than a scholar's 'chase the question or take the paid work'. The structural divergence is real.",
+    "Heirlooms, mottos, and the dynasty's rising and falling seat give each new life a sense of arriving into a story already in motion. Reading 'Raised on the family words: Better a short blaze than a long smoke' at a generation-3 birth is a genuine little thrill.",
+    "The death scenes are quiet and kind — epitaphs like 'An ordinary life, which is to say, a whole one' and 'Loved small helpless things her whole life long' are exactly what this genre should feel like at the end. They consistently land.",
+    "The ambient observation lines ('Thinking has become her favourite weather', 'The stairs have started to ask a question of him') create a gentle flowing texture between decisions that feels distinctly literary and cozy."
+  ],
+  "staleness": [
+    "The childhood band is the most repetitive stretch. Across 18 dynasties nearly every life opens with a recognizable 3-4 card cluster: the fever, the sibling arrival OR the stray, the wonder-at-the-world moment, and then the vocation fork at youth. The individual lines rotate, but the SHAPE is reliably the same. By dynasty 8 I can predict the structure of the first 20 years before the life begins.",
+    "The marry / child / parent-ages sequence is still a visible template in most adult lives. Even with improved timing, the mid-adult band often reads: love arrives, child happens, spouse finally asked, aging parent card, work/promotion dilemma. The specific choices differ, but the choreography is legible. A cozy player who sinks in for many dynasties will start anticipating beats rather than discovering them.",
+    "Several mid-life cards repeat verbatim across nearby dynasties in the transcript. 'The hungry years of study, begun at [age], at last came good' appears in Dynasty 2 gen 2, Dynasty 3 gens 2 and 3, Dynasty 4 gen 3, Dynasty 8, Dynasty 9 gen 4, and more. Scholar players specifically will see this line in nearly every generation they play scholar. The card is exactly the same scene each time.",
+    "The elder reckoning card ('Near the end, one old decision keeps returning...') fires in almost every single life in the transcript — dynasties 1, 2, 3, 4, 7, 8, 9 gen 3, 10 gen 2, 12 gen 1, 13 gen 2. It is effectively universal. For a cozy player the repetition of this beat drains it of its weight. By dynasty 5 it reads as 'the elder checkbox' rather than a genuine emotional moment.",
+    "The cb_reckless card ('a young one in the family lives the way [character] once did') appears in dynasties 2, 5, 6, 8, 9, 13 — nearly every life that touched 'lived_reckless'. Because that flag is set by several common youth/adult choices, this callback becomes extremely common and its emotional resonance wears thin.",
+    "The dynastic ambition layer — seat climbing, reputation building, motto earning — provides a structural goal across many lives, but it operates mostly invisibly. A cozy player reads the log but rarely feels they are steering toward the seat-7 pinnacle; the dynasty just rises or falls based on means without much felt agency. The 'still ahead for the house' aspirations list helps but the levers for actively building toward it are sparse and mostly accidental."
+  ],
+  "improvements": [
+    {
+      "what": "Add a per-dynasty cooldown (not just per-life) to the elder reckoning card (cb_the_cost / e_peace-style beats). Allow only 1-2 such 'life-reckoning' cards per dynasty, not one per every life.",
+      "why": "The elder reckoning fires in nearly every life and becomes a template-closer rather than a genuine emotional beat. Scarcity would restore its weight. The cozy player doesn't want to feel like they're watching a checklist; they want to feel surprised by the quiet moments.",
+      "impact": "high"
+    },
+    {
+      "what": "Widen childhood structural variety by adding 2-3 more exclusive childhood 'shapes' — e.g., a child who never gets sick and whose early life is all outdoors and friendship; a child whose family is unusually stable and warm; a child with a visible talent who becomes locally known. Gate these as alternative 'opening templates' that replace the fever+sibling+wonder cluster.",
+      "why": "The childhood band is the most predictable stretch across dynasties. The individual line choices rotate but the stage structure is invariant. A cozy player notices this quickly and it makes each new heir feel like the same small child.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-5 new mid-adult 'quiet life' cards — cards with no crisis, just texture: a good year of ordinary contentment, a season the character is simply flourishing. These should not be choices but ambient logged lines that fire when stats are high, to reward players who have tended their dynasty well.",
+      "why": "The adult band currently leans on dilemmas and losses. For a cozy player, the pleasure isn't only the hard choice — it's the warm stretch of a life going well. Rewarding a well-built life with a few genuinely peaceful, warm-toned passages would make the high-spirit/high-bond outcomes feel earned and satisfying.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the dynasty seat-climbing a felt steering lever: a card that explicitly offers 'spend this generation on the name' with a clear tradeoff visible in the prose. Something like a council-seat opportunity or a founding-a-school choice that explicitly states 'the house will be remembered for this'. Surface the aspiration more concretely.",
+      "why": "The dynasty ambition layer is enjoyable to read but feels indirect to steer. Cozy sims work best when the player feels gentle agency, not just witness. The houseAspirations list appears at succession but the cards to pursue it aren't always clearly recognizable as 'that's how I get there'.",
+      "impact": "med"
+    },
+    {
+      "what": "Throttle the scholar-arc 'pays off' line ('The hungry years of study, begun at [age], at last came good') to once per dynasty. Provide 2-3 alternate outcomes for repeated scholar generations: a life of scholarship that doesn't pay off financially, one that earns reputation instead of money, one that leads to a question they can't answer.",
+      "why": "The scholar-payoff card is the most visibly repeated specific line in the transcript. In a dynasty of scholars it fires generation after generation in the same form. Even with the rotated opening framing, the body of the card is identical. For a cozy player this erodes the sense that a scholar life is a distinct thing.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely warm and literarily accomplished game that earns its first three or four dynasties with ease — but by dynasty six or seven the childhood template, the elder-reckoning checkbox, and certain repeated scholar and callback lines become visible scaffolding, and the cozy absorption starts to thin into appreciation-at-a-distance."
+}

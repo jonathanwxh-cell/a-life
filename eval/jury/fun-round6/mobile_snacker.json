@@ -1,0 +1,53 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "Session length is a perfect fit for the profile — one life runs 3-5 minutes, with natural pause points at every card, so pickup-and-putdown is frictionless and satisfying",
+    "The tap-to-fast-forward mechanism gives a mobile player agency over pacing without breaking the meditative feel — quiet years race by on demand",
+    "Touch targets are correctly sized throughout (44px minimum confirmed in CSS), the card scroll-to-top on 3-choice cards works, and the portrait layout reads cleanly one-handed",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_lookaway, cb_study_pays) are the game's genuine discovery moments — when one fires, it genuinely surprises, and the cross-life payoff creates real delight in short bursts",
+    "Dynasty accumulation (mottos crystallising, heirlooms passing, the heir screen naming concrete aspirations) creates a credible 'one more' pull across sessions — the house goals give a snacker a reason to return",
+    "The era system (war/plague/plenty/hard/turning) genuinely changes the texture of a generation's early cards and shifts the emotional register of a play session",
+    "Vocation arcs (soldier ghost card, scholar legacy question, maker masterwork, wanderer return) give a life structural identity beyond the domestic template — a soldier's midlife genuinely reads differently from a scholar's",
+    "Trait-driven childhood divergence (bookish child leans to the book, warm to the friend, guarded to the wall) means two childhoods with different inherited traits produce different early sequences, which is noticeable and pleasant",
+    "Prose quality is consistently high — each choice reads like a real moment, not a game option, which is exactly what the genre needs",
+    "The solitary and childless life paths (m_solitary, e_solitary, e_childless) are real shapes with real content, not just narrative dead-ends"
+  ],
+  "staleness": [
+    "The love timeline monoculture persists despite the engine's fixes: across 13 dynasties and roughly 30 lives, late love (a_meet_late, 30s-50s) dominates overwhelmingly. 'Found love later than expected, and was almost embarrassed by the size of it' or close variants appear in dynasties 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13 — almost every founder and many heirs. A mobile snacker playing 4-5 lives in a session will notice this is the default love story, not the exception it is supposed to be",
+    "The childhood pipeline is structurally recognisable by dynasty 5: c_origin (3-5) → c_book or c_stray or c_wonder (7-12) → a talent/sibling/grandparent card → calling (14-22). The prose varies but the beat order is predictable. A snacker picking up the game after a day gap lands in a familiar sequence rather than a fresh one",
+    "The calling fork (y_calling) presents identically every single life — the same four options in the same order, only the weight of downstream consequence changes. After 4-5 lives the card itself feels like a formality rather than a genuine moment of discovery",
+    "Epitaph repetition becomes noticeable by dynasty 8-10 even with the deduplication buffer: 'Carried a lightness the years never managed to take' (dynasties 5 and 9), 'Kind in the small daily ways' (dynasties 1 and 11), 'Left people gentler than they found them' (dynasties 4 and 7), 'Taught what she knew, and so outlived the knowing of it' (dynasties 3 and 8). The eulogy is the session's closing beat — repeating it breaks the 'each life was its own world' feel at exactly the worst moment",
+    "The waiting between cards is paced for a contemplative desktop session; on mobile in a short burst, 3-4 quiet-year observations firing between choices ('the stairs have started to ask a question', 'mornings take longer to arrive') read as filler rather than texture, especially when similar observations land in consecutive lives",
+    "No mid-session achievement signal for a mobile player: the house meter rises at death, the motto crystallises at death, the heir screen arrives at death. A 5-minute burst that ends mid-life leaves no marker of progress or change. A snacker setting the game down mid-life has no sense of what changed this session",
+    "The a_child and a_marry beats land with near-mechanistic reliability even after the engine's nudge fixes — across the 13 dynasties, almost every coupled life ends with a child and a marriage, usually clustered in the 40s-50s. The genuine childless and unmarried endings are rare in the data, suggesting the engine still pulls hard toward the domestic arc"
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 distinct youth love paths to break the late-love monoculture: a 'young and certain' path (y_love1 fires at 17-21 with a higher probability nudge for that window), a 'college years' path (23-27), and keep late love (30s+) as genuinely rare. The engine already has the logic; the probability weights need rebalancing so that a multi-dynasty playthrough sees real distribution across ages rather than clustering at late-adult",
+      "why": "The single most visible staleness pattern in the transcripts. A snacker playing 4 lives in a row sees 'found love later than expected' 3-4 times. The love moment is emotionally central — it should feel like one of several possible shapes, not the default",
+      "impact": "high"
+    },
+    {
+      "what": "Break the childhood pipeline's predictable order by making c_book, c_wonder, c_stray, and c_animal compete more equally (reduce the weight advantage of whichever fires first) and gate them more aggressively by trait affinity — so a bookish child reliably gets the book but may skip the stray, while a warm child gets the friend or the stray but may skip the wonder. The goal is 2-3 distinct childhood 'flavours' a player can recognise rather than 1 pipeline with swapped midpoints",
+      "why": "A snacker's first 60 seconds of each new life is the childhood sequence. If that sequence feels familiar by dynasty 4, the 'fresh pick-up' feeling is gone before the interesting adult content arrives",
+      "impact": "high"
+    },
+    {
+      "what": "Give the calling card (y_calling) 2-3 text variants by the life's era and the character's traits — a child of war hears the question differently than a child of plenty, and a restless character hears it differently than a bookish one. The four choices stay the same; only the framing prose changes. This is already done for c_origin and it works well there",
+      "why": "The calling card is presented identically every life and feels like a menu after 3-4 plays. A single line of contextual framing costs almost nothing to implement and makes a repeated card feel specific to this life",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce a small in-session progress marker that fires during a life, not only at death: e.g., when the house seat rises mid-life (which can already happen from m_invest_name), show a brief ambient line in the flow text acknowledging it — 'the house has a better name today than it had this morning.' This gives a mobile snacker who sets the game down mid-life a sense that something accumulated",
+      "why": "All dynasty rewards currently arrive at the death/heir screen. A 5-minute mobile session frequently ends mid-life. Without any in-session marker, the snacker's last memory is 'I made two choices and watched years tick' rather than 'something changed'",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the epitaph pool by 40-50% and increase the RECENT_LINES deduplication window from 70 to 120, or tag epitaphs by cluster and enforce that no cluster repeats within the same dynasty (not just the last two ancestors). The epitaph is the session's emotional closing beat — it should feel unique to this life",
+      "why": "Verbatim epitaph repetition across nearby dynasties (confirmed in dynasties 3/8, 4/7, 5/9, 1/11) is the single most visible 'I've seen this before' moment in the game, arriving at exactly the moment designed to feel conclusive",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A polished, beautifully written life-sim that delivers genuine pleasure in short bursts and builds real dynasty pull across sessions, but goes stale faster than it should — the late-love monoculture, recognisable childhood pipeline, and repeating epitaphs make dynasty 5-8 feel like variations on a template rather than distinct lives, and a mobile snacker who plays 4-5 lives in one sitting will feel the seams."
+}

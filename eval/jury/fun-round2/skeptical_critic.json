@@ -1,0 +1,54 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier / scholar / maker / wanderer) is the best structural idea in the game: it genuinely gates a different cluster of adult and elder cards per life, so a soldier's midlife is not a scholar's. When this fires correctly the life has a spine.",
+    "Era cards (war, plague, plenty, turning, hard) inject macro-history that changes which moments are even possible — a soldier in a war era gets 'vx_soldier_war', a maker in plenty gets 'vx_maker_plenty'. This is real structural variety, not cosmetic name-swapping.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_lookaway, cb_strayed, etc.) are the game's finest mechanic: a choice made at age 8 echoing back at age 48 gives individual lives a felt arc. When they land — and they do land — the 'oh, that's what that meant' is genuinely moving.",
+    "The dynasty layer accumulates real texture: house seat, reputation tags, heirlooms, secrets, motto. Reading 'Raised on the family words: Nothing was given; all was built.' at the start of a 4th-generation life actually changes how you play that person. This is the best reason to keep going.",
+    "The prose has genuine quality at the sentence level — not just flavour-text wallpaper but writing that earns a second read. That carries a contemplative game further than mechanics alone could.",
+    "The bequest card (e_bequest) is a smart cross-generational lever: choosing 'mind' vs. 'means' vs. 'heart' vs. 'free' materially shapes the next heir's starting conditions and is one of the few decisions that feels genuinely strategic."
+  ],
+  "staleness": [
+    "Of 135 cards, 91 are flagged once:true (fire at most once per life) and only 7 are onceDyn (once per dynasty). This means a player who plays 10+ lives has seen nearly every once-gated card. From dynasty 8 onward in the transcripts, the childhood and youth sections are visibly drawing from the same shallow pool: c_sick, c_friend, c_sibling, c_talent, c_move, c_grandparent appear in almost every life in the same order. By dynasty 12 you are reading the same six childhood beats verbatim with new proper nouns.",
+    "The vocation choice (y_calling) is structurally important but lopsided in practice: across the 18 dynasties examined, 'wanderer' appears in roughly a third of all lives. The wanderer arc's repeatability card (a_wanderer_settle, repeatable with a 14-year cooldown) means wanderer lives all hit the same 'move on / settle' rhythm every ~15 years, producing multiple near-identical adult sequences within a single dynasty's transcript.",
+    "The 'marry late' monoculture is still visible despite the engine fix. Across dynasties 2-13, the marriage age clusters overwhelmingly in the 50s. The love relationship arrives via y_love1 in youth, then the a_marry card keeps not firing through the adult window (no cooldown enforcement pushes it early), and the safety-net near the window's end kicks in at 55+. Dynasty 3 Gen 2 Iris marries at 55; Gen 3 Lucan at 56; dynasty 9 Caleb at 50; dynasty 11 Greta at 54; dynasty 13 Cassian at 58. This is not occasional — it is the default arc.",
+    "Observation lines (non-choice prose) repeat verbatim across dynasties. 'She has started taking the stairs the way one takes a difficult conversation' appears in dynasty 1 (Liv Calloway age 65), dynasty 6 (Vesna Vane age 76), dynasty 7 (Cassian Sorrelle age 65), dynasty 13 (Annika Voss age 71). 'He has grown used to being the most interested person in the room' appears in dynasties 2, 6, 7, 9, 11. These repeat within a single session — the freshPick guards are per-life, but across a long session the same observation lands three or four times.",
+    "The elder section collapses to three or four cards in almost every long life: e_body or e_last_walk, e_reconcile, e_legacy or e_peace, plus the bequest if there is an heir. For lives that reach 70+, the final 20 years are structurally indistinguishable between characters — the tempo and card sequence is the same regardless of vocation or prior choices. The vocation elder-caps (e_scholar_old, e_wanderer_old, e_soldier_old) add one card, but the rest of the elder arc is unchanged.",
+    "The consequence weight is very shallow: choices alter stat numbers that are invisible and rarely produce visibly different narrative outcomes. A player choosing every 'generous' option vs. every 'ruthless' option across a life will see the dynasty motto diverge — but within a single life, the two paths produce nearly identical prose because the observable outcome is almost always the same logLine, just with different tone tags. 'Kept what they knew close' vs. 'gave it all away' produce different one-line summaries, but neither unlocks a qualitatively different arc. Stakes feel low because consequences don't cascade visibly within a life.",
+    "The name pool of 30 male and 30 female given names is extremely small for an 18-dynasty run. By dynasty 8, Tomas, Otto, Cassian, Ambrose, Ingrid, Liv, Greta and Tamsin have all appeared as playable ancestors, spouses, friends, AND again as new characters. The engine's name-collision guard prevents exact duplicates in a single life but can't prevent the sense that every house is populated by the same 60 people."
+  ],
+  "improvements": [
+    {
+      "what": "Convert the 12 most-seen childhood cards (c_sick, c_friend, c_sibling, c_talent, c_move, c_grandparent, c_book, c_steal, c_animal, c_grandparent, c_talent, c_move) from once:true to a pool-based draw where at most 3-4 fire per life, randomly weighted, so childhood is genuinely unpredictable across dynasties.",
+      "why": "Childhood is the most exposed repeat: every life in the transcripts opens with an identical 3-4 card sequence drawn from the same small pool. The player has seen all of them by dynasty 4. Pooling and capping them means no two childhoods feel scripted.",
+      "impact": "high"
+    },
+    {
+      "what": "Add an early marriage forcing function: if the love relationship has been established for 4+ years and the character is between 22-32, apply a strong nudge (0.6+ probability) to draw a_marry before the adult window advances past 38. Currently the engine's marriage safety-net only kicks in near the window's end (age 54+), clustering marriage into late 50s for most lives.",
+      "why": "The 'married late, and found the lateness made the vow weigh more' line appears in over 60% of the 38 lives in the transcript. It has become not a poignant exception but the predictable default. Early marriage would diversify the domestic arc and make the late-love path feel rare again.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the observation line pools from ~8-10 variants per stat-threshold to 20+, and make the freshPick guard session-global (tracking used lines across all lives in a session, not just within a life). Currently RECENT_LINES in epitaphFor() does this for epitaphs but the observe() function pools are much smaller and un-guarded across lives.",
+      "why": "Observation lines are the ambient texture between choices. Reading 'The stairs have started to ask a question of them' for the fourth time in a session breaks immersion more than any repeated card, because they appear even in lives where no thematic overlap exists.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 15-20 new mid-life cards (age 35-55) that are NOT once:true but have 14-18 year cooldowns, covering the blank years between 'adult setup' (marriage, child, vocation payoff) and 'midlife reckoning' (health, aging parents, empty house). Specifically: a recurring neighbourhood or civic scene that varies by era; a trade/professional encounter that varies by vocation; a moral dilemma involving the grown relationship network (spouse's decision, friend's failure).",
+      "why": "The adult band 30-45 is the thinnest section in the transcripts. After the vocation payoff card and the child decision, many lives go 10-15 years drawing only generic filler (a_windfall, a_loss, a_fallow). The mid-life years are where most human drama actually lives; the card density is too sparse.",
+      "impact": "high"
+    },
+    {
+      "what": "Double the given-name pools to 60 male / 60 female names. The current pool of 30/30 creates obvious name recycling across a 10-dynasty session where playable ancestors, spouses, children, and friends are all drawn from the same list.",
+      "why": "A name appearing as both a great-grandmother and a new love interest in the same dynasty shatters narrative coherence. This is the cheapest possible fix for one of the most visible immersion breaks in long play.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 5-6 vocation-specific midlife consequence cards that are NOT once:true (use a 20-year cooldown) so a wanderer's fourth decade and a scholar's fourth decade accumulate meaningfully different experiences beyond the single vocation payoff card already in each arc.",
+      "why": "Right now, a vocation determines one adult card (e.g. a_scholar_question), one midlife card (m_scholar_legacy), and one elder card (e_scholar_old). Three cards across a 60-year arc is not enough to make the vocation feel like a real identity. The soldier arc is best because it has a midlife trauma card (m_soldier_ghost); the scholar, maker, and wanderer arcs need the same.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely literate piece of work that earns its contemplative identity — but by dynasty 8 the template is visible: the same childhood shuffle, the same late marriage, the same observation lines, and an elder section with barely three moving parts; the vocation and era systems buy real variety but cannot cover for the thin card density in the middle years and the repeat-saturated early ones."
+}

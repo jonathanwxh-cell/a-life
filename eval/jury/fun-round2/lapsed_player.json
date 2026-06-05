@@ -1,0 +1,54 @@
+{
+  "profile": "lapsed_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system genuinely works: watching Lazlo (Sorrelle, gen 3) pay back at age 48 the debt of looking away from a lonely child at age 12 — 36 years of diegetic time — is the most alive moment in the transcripts. This is the 'emergent story I didn't expect' the genre promises.",
+    "Vocation arcs create structurally different lives: a scholar's life (Ottilie Vasquez, Tariq Salvedi) has a distinct adult spine — the hungry study years, the payoff card, the legacy question — that a wanderer's or maker's life does not share. When the vocation fires early and sticks, you feel like you're playing a different person.",
+    "Era cards add genuine surprise. Dynasty 6's plague forces a moral choice about survival vs. care that doesn't exist in settled times. The war cards (Otto Quint losing someone to the conflict, the vx_soldier_war intersection) are the kind of 'world collides with life' beat the genre needs more of.",
+    "The dynasty accumulation — seat climbing, motto crystallising, heirlooms passing down — provides forward momentum that makes starting the next life feel purposeful rather than arbitrary. Seeing 'Nothing was given; all was built' at the top of Ingrid's life (Aldecott gen 3) as something already earned across two prior lives is the genre's 'one more dynasty' hook working correctly.",
+    "Short early deaths (Henrik Bjornsen at 39, Beatrix Okafor at 30, Ambrose Aldecott at 36) break the formula and leave a sharp, genuinely sad impression. The brevity read as a statement, not a failure.",
+    "Competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the strongest individual writing in the game: no clean answer, both roads are virtue, the hint text refuses to reassure. These are the moments I wanted more of."
+  ],
+  "staleness": [
+    "The wanderer vocation dominates the transcripts at a rate that feels like a default rather than a choice. Across 13 dynasties roughly half the founders choose 'The road — go where the work is.' The downstream wanderer arc then produces a recognisable template: wander → late love → settle or move on again → come home → count the doors. By dynasty 5 I could anticipate this shape before the cards appeared.",
+    "The elder 'reckless young one' beat (cb_reckless) fires in nearly every life that had the peril flag, which is a large proportion. 'Told a reckless young one the truth' or 'Counselled the caution he had never once managed himself' appears as a stock elder card across at least eight lives in the transcripts. The two choices differ but the setup is identical each time, and by dynasty 7 it reads as furniture.",
+    "'Said he/she hoped to be remembered as kind' dominates the e_legacy card. The three choices exist but the heart stat naturally runs warm in many lives (warm/tender traits, generous choices), so 'kind' lands in a large majority of lives that reach the card. Reading the epitaphs, 'kind' variants appear in nearly half the lineage across all dynasties.",
+    "The 'Counted, at the end of the road, the doors she had closed in order to keep walking' line is verbatim in six of the thirteen dynasties — always for wanderers, always the same prose. The e_wanderer_old card has only one text variant for this choice. It is the single most visible staleness signal across the full transcript run.",
+    "Late marriage clustering persists. Despite the engine comment describing a fix, in practice almost all marriages occur in the 50s–60s in the transcripts: Hale at 55, Anders at 57, Niall at 56, Ingrid at 57, Lucan at 56, Greta at 54. The y_love1 card fires early in some lives (love in the teens or twenties) but the a_marry card is still heavily delayed — partly by the cond() requiring both love and the age window, partly because love arrives late in wanderer lives anyway. The result is that almost no life has a young marriage with a long shared arc.",
+    "Childhood is formulaic: the fever card (c_sick, once:true) fires in nearly every founder and many heirs. Because it's once-per-life and age-gated to 3–10, it almost always lands within the first few playable years. Combined with the near-certain y_calling card and the frequent early c_friend or c_steal, most childhoods read: fever → friend-or-stray or steal → calling. The childhood pool needs more genuine competition at the top weight tier so not every childhood shares the same three anchors.",
+    "No genuine surprise from mechanical failure. Choices that notionally 'go wrong' (the risky investment, the affair, the reckless peril flag) rarely visibly reshape what events arrive in later life. The systems track the stats but the player doesn't feel them pivot the story. After a few dynasties it becomes clear that 'bad' choices are just slightly different flavour text, not different structural outcomes."
+  ],
+  "improvements": [
+    {
+      "what": "Rebalance the calling card so wanderer does not dominate; add distinct structural consequences for the non-wanderer paths.",
+      "why": "In the transcripts wanderer accounts for roughly half of all founder vocations. Scholar and maker arcs exist and are good, but they're underrepresented partly because wanderer's downstream weight (wanderer_settle, wanderer_return, late-love timing) compounds. Giving scholar and maker a slightly higher base weight in y_calling, or making the calling card slightly more likely to avoid re-drawing the same vocation the prior generation chose, would break the monoculture.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a second or third text variant to the 'count the doors' choice on e_wanderer_old so the most-repeated verbatim line stops repeating verbatim.",
+      "why": "'Counted, at the end of the road, the doors she had closed in order to keep walking — and felt each one, plainly, for the first time' is word-for-word identical in six dynasties. This is the single most visible staleness signal across the transcript. One additional variant per choice branch on this card would eliminate the verbatim repetition that breaks the illusion most sharply.",
+      "impact": "high"
+    },
+    {
+      "what": "Dilute the e_legacy 'kind' dominance by making the card more responsive to what the life actually did: a soldier with high means and low heart should not routinely land on 'I was kind'; a ruthless high-means life should be offered 'I built something' as the weighted choice.",
+      "why": "The three-choice e_legacy card currently treats all three options as equal regardless of the life's actual character. Stat-weighting the choice order or adjusting the hint text would produce more varied legacy claims and more varied epitaphs.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2–3 more elder beats that only fire if the life had NO marriage and NO children — a distinctly solitary elder arc — to complement the existing e_solitary card.",
+      "why": "Solitary lives currently get e_solitary (good) but then fall back on the same elder pool as paired lives. A solo craftsperson's final years should feel different from a widower's. A second solitary-only card (e.g., taking in someone else's grandchild, or having the neighbourhood adopt you as a fixture) would make this life-shape feel complete rather than like a paired life with the spouse card missing.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the cb_reckless callback more varied setups — not always 'a young one in the family' but sometimes a stranger, a patient, a student, a neighbour's kid — so the trigger feels less like a scheduled appointment.",
+      "why": "The 'reckless young one' elder callback fires reliably in almost every life with a peril flag, always framed identically. Varying the person in the scene (not always family) and giving the card a second text variant would break the predictability without changing the mechanical function.",
+      "impact": "med"
+    },
+    {
+      "what": "Add one or two 'bad path' structural consequences: if a player chose the affair and the marriage broke, a specific adult card that can only appear if the spouse left should exist — something that makes estrangement feel like a different life-shape, not just a stat penalty.",
+      "why": "Currently the affair choice reduces bond and may end a marriage, but subsequent life-event eligibility doesn't change. A card gated on 'spouse.kind === ex and P.flags.married' would make that choice feel like it genuinely branched the story rather than just adjusting numbers.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a well-crafted literary toy with genuine moments of emergent grace — the callback chain works, the dynasty accumulation hooks, the vocation arcs create real structural variety — but by dynasty 5 the wanderer template, the late-marriage clustering, and the stock elder beats (count the doors, reckless young one, remembered as kind) have settled into a recognisable pattern that a returning player will feel before the year-counter reaches double digits."
+}

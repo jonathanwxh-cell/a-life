@@ -1,0 +1,49 @@
+{
+  "profile": "long_session",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the game's best mechanic: when a decades-old choice (the stray, the looked-away child, the unspoken love) surfaces in a later life stage, the payoff is genuinely moving and structurally clever. These moments create the 'one more life' pull better than anything else in the game.",
+    "Vocation arcs (soldier/scholar/maker/wanderer) give each life a recognisably different skeleton: soldier-path lives cluster around the campaign card, the 3am ghost card, and the elder's truth-telling moment; scholar lives build toward the scholarship payoff; maker lives toward the masterwork decision. In the first 4-5 dynasties these feel fresh.",
+    "Era cards (war, plague, hard winter, fat years, the turning age) are the engine's best anti-staleness lever. When a life opens under plague, the sickness-tends-them card fires as the defining pressure of that generation. The alternation across dynasties means the world backdrop genuinely shifts.",
+    "The dynasty reputation layer — tainted house, hard name, scholarly house — gates real content (r_hard_name, r_old_shame, r_scholar_door, r_name_cost) that only certain lineages will ever see. A house that runs ruthless for three generations meets different events than a generous one.",
+    "The prose quality is excellent and the line-variant pools (7 variants for the first love card, 6 for the child-birth lines, multiple epitaph clusters) genuinely stretch before repeating. Within a single session the writing rarely reads as recycled.",
+    "The 'one more dynasty' pull exists: watching a house climb from a rented room to an old and famous house across 4-5 generations, and seeing the motto crystallise, is satisfying in a low-key but real way."
+  ],
+  "staleness": [
+    "The structural skeleton of every life is almost identical by dynasty 7-8: fever (child) → sibling arrival → vocation fork → first love → marriage → child → midlife reckoning → elder legacy choice → death. The CONTENT in each slot varies but the SHAPE is fixed. By the 10th dynasty a long-session player is completing each phase on autopilot, reading for line-variants rather than discovering.",
+    "The love/marriage/child pipeline is nearly inescapable and structurally identical across every life. In 38 lives across 12 dynasties, almost every life follows: love card (or a_meet_late) → a_marry → a_child. The rare exceptions (a life dying at 11, one staying single) are draw-luck accidents rather than a distinct structural path. A deliberately childless or solitary life is not really a playable shape.",
+    "The elder sequence has the highest staleness rate in the transcripts. By dynasty 8 the pattern is transparent: body-decline observation lines, then e_legacy ('what do you want remembered'), then e_bequest (what do you leave the heir), then death. Every elder plays all three within a few years of each other. At dynasty 11-12 these three consecutive elder beats feel like a checklist.",
+    "Three callbacks appear in almost every long life: the 'old decision keeps returning' (cb_the_cost/Decide it was right / Let it stay unsettled), the grandchild lap-story card (e_window), and the soldier's ghost card (m_soldier_ghost) for soldier-path lives. By dynasty 9 the player recognises these the moment the prompt text starts and knows the outcome either way has little felt consequence.",
+    "The prosperity-climb arc is mechanically thin as a long-session driver. The house seat (rented room → grand estate → old and famous house) rises and falls but the player has limited control: only m_invest_name and the reckoning card are direct levers. Most of the time the player watches the seat tick up as a counter rather than making choices that feel strategically weighted.",
+    "The 'sinceCard' ramp means every life reliably draws 10-15 cards. The pool is wide enough that within a single life the content feels varied, but at 38 lives the finite card set (roughly 85 distinct cards) means most 'once-per-life' cards have appeared across the dynasty many times. The player stops reading the prompt text of familiar cards and goes straight to the choice buttons.",
+    "World-context writing (the opening era line) is thin at only one sentence per era, and the era itself fires only 1-2 cards. The 'turning age' era, for instance, delivers one card (w_turning_new) and then behaves identically to any other era. The macro world backdrop never meaningfully differentiates a turning-age dynasty from a war dynasty except at one narrow moment."
+  ],
+  "improvements": [
+    {
+      "what": "Add a 'life shape' selector at birth that gates an alternate structural path — the solitary life (no spouse/child, different midlife and elder content), the short life (dies 35-50 by choice/sacrifice rather than luck), or the twice-started life (divorce or widowhood triggers a second arc). Each shape needs its own 3-4 exclusive cards so the path reads structurally distinct, not just 'the normal life minus some beats'.",
+      "why": "The marriage/child pipeline is the single biggest source of structural sameness. A player who has seen 15 lives all following the same arc cannot re-engage with the system just by seeing different text; they need different gates and different consequences. Solitary lives and second-start lives would provide that.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the elder band from 3 predictable beats (legacy → bequest → death) to a pool of 8-10 once-per-life elder cards, of which a given life only draws 3-4. The current 3 (e_legacy, e_bequest, e_garden/e_window/e_last_walk) all fire in quick succession and read as a rote checklist by mid-session. Adding cards like: reconciliation with the house's worst moment, a decision about the family secret, a late relationship repair that either closes or stays open, and a physical final-year card that changes by how the character lived — would make elder stages varied across generations.",
+      "why": "The elder sequence is the most-played and most-recognised band. Every long-session player will cycle through it 15-20 times. If those 20 elders all feel like variations on the same 3-card checklist, the end of every life becomes fatiguing. Expanding the pool and allowing partial draw creates genuine curiosity about which elder beats this particular life will hit.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the dynasty reputation system mechanical teeth by adding 2-3 reputation-gated storylines that span multiple generations — a 'long shadow' arc for a tainted/ruthless house that can only be resolved over 3+ lives, and a 'great house crisis' arc for houses at seat 5+ that risks catastrophic fall. These would give long-session players a meta-goal beyond watching the seat number tick.",
+      "why": "Currently the house reputation affects which individual cards can draw (r_hard_name, r_scholar_door, etc.) but there is no multi-generation dramatic structure that a player can deliberately pursue or fear. A ruthless house's player watches the heirloom 'a name that opens doors by being feared' accumulate but cannot shape a deliberate narrative around it. Multi-generation arcs would make the dynasty layer a real game instead of a stat display.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'vocation crisis' card for each calling that fires in midlife when the vocation has extracted real cost — the soldier broken by what the war made them do (not just the ghost card, but a decision to leave the military life), the scholar who discovers their life's work was built on a flawed foundation, the maker who must choose between the craft and a relationship the craft is consuming. These would give vocation arcs their own dramatic arc, not just a suite of three life-stage checkpoints.",
+      "why": "The current vocation system delivers a youth card, an adult card, and an elder card, each once-per-life. After 5-6 soldier lives the player has seen all three soldier-vocation cards and knows their beats. A midlife crisis card that forces the character to decide whether the vocation was worth it — and that has different consequences depending on whether they chose glory or survival at the adult card — would create genuine vocation-specific drama and make earlier choices feel higher-stakes.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the once-per-DYNASTY throttle (onceDyn) usage for the structural backbone cards (c_sick, y_calling, a_child prompt variants, a_marry prompt variants) so that within a single dynasty, later heirs get meaningfully different versions of the pivotal life moments — or skip them if the dynasty's earlier lives consumed the shared slots. This would create genuine generational contrast within a house rather than the same cards appearing life after life with rotated pronoun variants.",
+      "why": "Reading the transcripts, dynasty-internal repetition is the most acute staleness source: within House Vasquez (5 generations), all five lives hit the fever card, the vocation fork, the late-love card, and the late-marriage card. The once-per-dynasty flag exists but is used only on a few cards. Extending it to the structural backbone would mean gen-4 and gen-5 heirs within a long house have visibly different life shapes from the founder.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely beautiful piece of contemplative game-writing that sustains well across 4-6 dynasties, then reveals a fixed structural skeleton — fever/vocation/love/child/midlife/elder/bequest — that the prose cannot disguise past dynasty 8, and no current mechanic breaks."
+}

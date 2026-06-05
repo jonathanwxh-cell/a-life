@@ -1,0 +1,47 @@
+{
+  "profile": "choice_savorer",
+  "score": 6.5,
+  "fun_highlights": [
+    "The four callings (soldier/scholar/maker/wanderer) are genuinely structural — each gates its own 3-4 card arc that makes a soldier's late life read unmistakably different from a scholar's, and this is the game's strongest single lever for variety.",
+    "The callback system is the best mechanic in the game. When the outcast from the yard returns twenty years later as a benefactor, or the old love surfaces in a newspaper column, or the corner you cut comes back demanding a larger dishonesty, the reach-back is emotionally earned and creates the sensation of a life that coheres.",
+    "Era-plus-vocation intersections (vx_scholar_turning, vx_soldier_war, vx_maker_plenty) are rare but excellent — the scholar humbled by younger thinkers in a turning age, the soldier who faces the real war they trained for, land with specificity that the general cards lack.",
+    "The competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the closest the game gets to truly agonising choices — both options carry genuine cost, and neither is coded as the 'right' answer.",
+    "The dynasty layer — motto, heirlooms, the seat climbing from 'nothing but a name' to 'a fine townhouse', repute drifting across generations — creates a genuine 'one more dynasty' pull and makes some lives feel like they carry history."
+  ],
+  "staleness": [
+    "The love-and-marriage pipeline is deeply grooved by dynasty 4. In the 15-dynasty transcript, a_meet_late fires as the love entry point in the majority of adult lives, and a_marry is resolved with 'Ask. Build a life.' in roughly 18 of 20 eligible cases. The engine tries to spread love across ages but the transcripts still cluster. The player's choice at the marriage card almost never diverges.",
+    "The binary open/close grammar is unrelenting. Even the 'competing goods' cards present as two labelled options with legible polarity. A shrewd, cold character and a warm, open-handed one face the same set of frames ('tell the truth / spare them', 'keep the promise / release yourself') and the right answer is usually readable from the character they've built. Choices feel like confirmations of type rather than tests.",
+    "The adult band (26-45) is the stalest section. After vocation-specific cards land once, the shared pool dominates: a_work (promotion vs presence), a_child, a_affair, x_honest_or_kind, a_belief — these recur across nearly every life with a family and have identical framing regardless of who is living them. A scholar and a maker both face the same evening-or-title dilemma with the same text.",
+    "The callback payoffs are high-quality but there are fewer than the game's ambition requires. In the 15 dynasties, cb_books_late, cb_outcast_return, and cb_strayed/cb_unspoken are the callbacks that reliably land with weight; others (cb_trade_regret, cb_home_keep) are narrower and less often triggered. A life with no callback feels incomplete, and several in the transcripts have none at all.",
+    "Choices rarely produce surprising downstream consequences the player couldn't predict. The 'strayed' flag opens cb_strayed in old age, but the player knows this is coming. The 'chose_soldier' flag gates the soldier arc, but which soldier cards fire is invisible. There is no moment equivalent to 'I did not know that choice would matter this way' — the gates are legible from the outside.",
+    "The elder band goes stale fastest across a dynasty. By the 8th life, e_legacy (what do you want remembered), e_garden/e_last_walk/e_peace, and the body-slow observe lines are a near-certain sequence. The variation is prose-level (different epitaph lines, different legacy choices), not structural. Dying reads the same shape every time."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 choice options that are only unlockable by specific life histories — options the player cannot see unless they have a relevant memory. For example, on a_work, a third option 'Teach what you know — take your best apprentice with you' gated on became_teacher, or on a_marry a 'Make a contract, not a vow' option gated on chose_trade. These would make the player feel their choices built something invisible and specific.",
+      "why": "The binary grammar makes choices feel like the game asking 'warm or cold?' A third option that only exists because of who you became turns choice into discovery and makes prior decisions feel genuinely generative rather than stat-adjusting.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 vocation-specific reframings of the shared adult cards. The a_work card should read differently for a soldier (the campaign versus the family), a scholar (the paid lectureship versus the question), a maker (the commission versus the personal work). Same stakes, same beat, but voiced through who this person actually is.",
+      "why": "Right now the adult band is shared text regardless of calling. The vocation arc adds dedicated cards, but the 70% of adult life that is shared template ignores who the player chose to be at 18. Vocation-aware text would make the calling feel like it permeates the life, not just its dedicated cluster.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce at least one choice per life whose downstream consequence is delayed and non-obvious — the player cannot predict which card it enables. For instance, refusing the affair ('Close the door') could, 15 years later, trigger a card where the temptation returns but in a different form entirely (a business partner, a rekindled old connection) — not flagged as 'this is about that'. The gap between cause and effect is what creates the feeling that the simulation is watching.",
+      "why": "Currently every callback is legible: cb_strayed follows strayed, cb_books_late follows child_books. The player can trace the wire. True surprise — the kind that makes you sit back and say 'that came from the thing I did at 24' — would require non-obvious connections with a longer delay.",
+      "impact": "high"
+    },
+    {
+      "what": "Diversify the love entry point. The a_meet_late card is currently the most common love opener in the transcripts despite engine efforts to spread it. Add 2-3 distinct love-entry cards for youth (besides y_love1): one for soldiers in barracks, one for scholars at study, one for wanderers on the road — each voiced in the register of that life. This would prevent the 'late love across a counter on an ordinary Tuesday' line from becoming the dynasty's ambient soundtrack.",
+      "why": "When the same prose construction — 'later than the stories say it should be / someone' — lands in dynasty 3, 5, 7, and 9, the player stops reading it. Vocation-gated love cards would let the calling shape even this most personal beat.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the elder band a structural fork that depends on how the life was lived — not just which elder cards fire, but whether an elder gets an 'accounting' arc (a reckoning with the shape of a whole life, open to those with high spirit and many decisions made) or a 'drift' arc (a quieter close, available to those with low spirit or few choices). This would make dying feel different depending on whether the player engaged or receded throughout the life.",
+      "why": "Currently every elder band resolves through the same pool regardless of what came before. The epitaph is the only differentiation at death, and epitaphs are elegant but short. A structurally divergent elder arc would make the whole game feel like it has been watching.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has a genuinely moving callback system and real vocation-level structural variety, but the adult band's shared template and the binary grammar's legible polarity mean that by dynasty 6-8 the player is savouring the prose rather than the choices — which is not the same thing as meaningful, characterful decision-making."
+}

@@ -1,0 +1,54 @@
+{
+  "profile": "dynasty_strategist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The seat system (0–7) with prose-only feedback gives a compounding long-run goal that reads as genuinely earned — watching House Achterberg climb from 'nothing but a name' to 'a house written into the histories' over five generations (D9) is the game's best moment for this profile.",
+    "Era variation (war/plague/plenty/turning) does gate distinct content and changes the texture of a generation; a plague life and a fat-years life are structurally different in ways a dynasty player can feel.",
+    "The bequest (4 choices: mind/means/heart/free) is the cleanest cross-generation lever — a real decision with real downstream effect on the heir's starting conditions — and the 'still ahead for the house' aspirations list gives legible steering targets.",
+    "Seat-gated and repute-gated cards (s_great_burden, r_scholar_door, r_hard_name, r_old_shame, s_patronage) give a high-standing house genuinely different content from a struggling one — the strategist does encounter a different game at seat 5+ than at seat 1.",
+    "The houseCharacter prose (with trajectory tier: 'has lasted / has real weight / would take several more lives') gives enough signal to plan reputation investment without raw numbers — this is exactly the right idiom for the genre.",
+    "Vocation arcs (soldier/scholar/maker/wanderer) do meaningfully differentiate adult content; a soldier's dynasty and a scholar's dynasty feel structurally distinct in the middle years."
+  ],
+  "staleness": [
+    "The reckoning card (x_reckoning) — the primary downward pressure event, explicitly designed as the thing that can cost a house a seat and punish complacency — does not appear in any of the 15 dynasties in the transcript. Without genuine downside risk materialising, the dynasty layer runs almost purely as a slow upward ratchet. Steering the house toward 'protect what you've built' is close to a phantom goal.",
+    "The bequest card appears in only 2 of 15 dynasties (D7, D15), despite being the main deliberate cross-generation steering tool. A dynasty strategist who never sees it in most runs loses the most meaningful lever. The 'still time to decide' hint fires correctly but the card itself is crowd-out-vulnerable in late-life pools.",
+    "Near-identical life templates: every life in the transcript follows the same structural spine — childhood fever + sibling + calling fork (14–22) + love + marriage + child + midlife dilemma + elder legacy card + close-out. The CONTENT changes (which calling, which era) but the SEQUENCE does not. By dynasty 5 a strategist is navigating familiar rails.",
+    "Mottos repeat: 'We give past what we can spare' appears in D8 and D10; 'We decline the luxury of sentiment' in D9 and D11; 'We burn bright, and we burn' in D6 and D15 — within just 15 dynasties. A strategist trying to steer toward a specific motto character encounters the same words under a different house name.",
+    "The a_make_name card (explicit 3-way reputation-steering decision) only surfaces in 4 of 15 dynasties despite being the clearest strategic lever for shaping house character. A player who wants to deliberately build a scholarly or hard-dealing house often cannot; the card is simply not drawn.",
+    "The cb_left_home beat (returning to a town left years before) fires in 10 of 15 dynasties. The prose varies but the structural event is so common it reads as a universal life-beat rather than a personal one — it arrives whether or not it fits who this person became.",
+    "Seat 7 (the pinnacle) appears in only one dynasty of 15, and the game never demonstrates what maintaining or losing it looks like. The strategic 'summit and its precariousness' is described in the code but never experienced in the transcript — the mountain is climbed once and the dynasty ends before the re-earning pressure activates."
+  ],
+  "improvements": [
+    {
+      "what": "Raise x_reckoning's draw weight significantly (w:2 → w:5) and remove the cooldown, or trigger it deterministically at seat-3+ every 2–3 generations rather than relying on chance.",
+      "why": "The reckoning is the game's only mechanism for genuine strategic loss — a house can fall a seat if the player chose 'protect your own' — but it never fired in 15 dynasties. Without it, dynasty strategy is maximisation without risk. Adding reliable downward pressure would make the seat-level a thing worth defending, not just accumulating.",
+      "impact": "high"
+    },
+    {
+      "what": "Make e_bequest once-per-dynasty mandatory when an heir exists (like e_legacy) rather than probability-gated, and move it earlier (age 55+) so it reliably lands.",
+      "why": "The bequest is the single most powerful cross-generation lever for a dynasty strategist — the one place a deliberate mind-over-means or heart-over-money choice actually propagates. It appeared in only 2/15 dynasties; a strategist who never sees it is playing a passive inheritance system, not a dynasty game.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'once-per-dynasty' flag to a_make_name and raise its weight so it fires reliably in at least one adult life per house.",
+      "why": "The reputation-steering card — the explicit 'choose what the family becomes known for' moment — is the strategist's main character-shaping tool. Firing in only 4/15 dynasties means many houses drift to whatever reputation the stats happen to push rather than the one the player chose. Reliable access to this card turns passive drift into active house-building.",
+      "impact": "high"
+    },
+    {
+      "what": "Give each motto 5+ variants (current max is 3) and add a once-per-session global block so the same motto text cannot crystallise in two dynasties within the same play session.",
+      "why": "'We give past what we can spare' and 'We decline the luxury of sentiment' each appeared in two dynasties within this 15-dynasty run. A dynasty strategist notices this immediately; it collapses the sense that each house is singular.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a seat-7 experience — at least one card that only fires when the house IS at seat 7, showing what the summit feels like and what it costs to hold — so the pinnacle has gameplay rather than just being a final-score destination.",
+      "why": "Seat 7 is the stated goal of a dynasty run, but in the one dynasty that reached it (D9) the house immediately lapsed back to 6 because Iris died at 38. A player who gets there and then watches the house drop has no way to understand whether it was achievable with different play. One or two seat-7-only cards would make the summit feel like a place rather than just a number.",
+      "impact": "med"
+    },
+    {
+      "what": "Add structural divergence to childhood: a 'nomadic founding' path (no fever, no sibling, different card pool) and a 'wealthy heir' path (born into seat 4+, skips certain poverty gates) so the first 15 years of life read differently depending on where the house stands.",
+      "why": "The childhood template is the stalest part of the transcript — fever + sibling + calling fork is almost universal regardless of whether this is a founder born with nothing or a 4th-generation heir born into 'an old and famous house.' The seat-floor system already affects inheritance; it should also shape which childhood cards even surface.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life's dynasty layer has the vocabulary of strategy — seats, reputations, mottos, bequests — but the reckoning (the game's only real risk event) never fires, the bequest (the main intentional lever) rarely appears, and the structural life-template repeats closely enough that by dynasty 6 a strategist is steering familiar rails with new names on the characters."
+}

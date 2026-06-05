@@ -1,0 +1,49 @@
+{
+  "profile": "surprise_hunter",
+  "score": 5.5,
+  "fun_highlights": [
+    "The era system (war, plague, plenty, hard, turning, settled) is the single best source of exogenous surprise: being born into a war-era and having the conflict reach into the household (w_war_loss) feels genuinely outside your control, and it changes the texture of an adult life in ways the base cards cannot.",
+    "The 'onceDyn' mechanic is sound design: burning certain beats once per dynasty (y_mentor, c_sick) prevents the founding generation from reliably hitting the same emotional peaks every run, and it forces subsequent heirs to discover different moments.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_lookaway, cb_strayed) are the game's best emergent story engine: when 'the child from the yard' returns decades later with a door held open, it feels genuinely earned and occasionally surprising. This mechanism has real potential.",
+    "The vocation arcs (soldier, scholar, maker, wanderer) create structurally distinct adult bands: a soldier's life includes m_soldier_ghost at 3am with no warning, which has genuine unease. A wanderer who stays vs. a scholar who hoards knowledge vs. a maker who opens their own door feel like different shapes of life, not just different stat distributions.",
+    "A child dying at age 11 (Dynasty 2, Pavel Delacroix) is the most genuinely shocking outcome in the transcripts — uncontrolled, unfair, narratively devastating. This is exactly the black-swan moment this reviewer lives for, and the game CAN produce it.",
+    "The reckoning card (x_reckoning) arriving for a great house with 'a debt called in, a name questioned' is the closest the game gets to external world-pressure landing on you: it tests what you've built, not what you've just chosen."
+  ],
+  "staleness": [
+    "By dynasty 4-5, the life-template is fully legible: child (fever + sibling + stray/book) -> youth (calling fork) -> adult (late love + marry + child born late) -> midlife (aging parent + health scare) -> elder (bequest + legacy + last walk). The same 8-10 structural beats arrive in the same developmental order in nearly every life. Names change, prose rotates through variants, but the skeleton is identical across 30+ lives in the transcript.",
+    "The phrase 'had a child, X, well past when they had thought that particular door had closed' and 'married X late, and found the lateness made the vow weigh more, not less' appear in the transcripts across virtually every dynasty. The rotated variants of the marriage/child prose are insufficiently distinct — by dynasty 6 a reader can predict both the card AND its emotional register before it arrives.",
+    "True exogenous surprise — something happening TO you, not a choice node presented AT you — is nearly absent. Every event in the game, including war and plague, is a binary choice moment. There are no outcomes that just occur: no windfall that simply lands and changes your stat, no early death from a random fever that just kills without offering 'be brave alone / let mother sit.' The player always has agency, which is admirable design but devastating to the surprise-hunter experience. You cannot be blindsided because you are always asked.",
+    "The war cards (w_war_call, w_war_loss) are the most interesting exogenous-feeling events, but w_war_loss still offers a binary grieving choice rather than simply taking someone. The game cannot produce an outcome you did not participate in choosing, which forecloses the entire category of 'I didn't see that coming.'",
+    "The callback chain is predictable within 2-3 dynasties: if you took the 'sit beside the lonely child' choice, you know the cb_outcast_return is coming in midlife. Once you understand which early choices trigger which later callbacks, you can anticipate the life-arc's full shape before it arrives. The callbacks stop being surprises and become a checklist.",
+    "Early childhood cards repeat heavily: c_sick (fever), c_sibling (new baby), c_book, c_animal appear in almost every life in the transcript, with text variants cycling in a predictable rotation. By dynasty 8, reading 'A new baby arrives in the house — small, loud, and suddenly the centre of everything' for the 12th time in a row produces fatigue, not delight.",
+    "The elder band is particularly thin from a surprise perspective: e_reconcile, e_legacy, e_garden, e_last_walk, e_peace arrive in near-identical order every time, and all are quiet moral choices rather than events. Dying is always peaceful or resistant; there are no elder lives upended by something unexpected arriving late."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 purely exogenous events per life stage that do NOT present a choice: outcomes that simply happen (a fire takes the workshop, a patron dies leaving a commission unpaid, a sibling's illness costs you a year of income). These are logged as observations, not decisions, and their stat effects are fixed. The player sees the consequence and must carry it.",
+      "why": "Every card in the current game is a choice node, which means the player always has agency and can never be genuinely surprised. A handful of unchosen outcomes would create the 'I didn't see that coming' moment this reviewer (and the broader surprise-seeking player) lives for. It would also make the choice cards feel more meaningful by contrast — you chose these, but not those.",
+      "impact": "high"
+    },
+    {
+      "what": "Make era cards fire with genuine world consequences BEFORE the player can respond: 'The war has reached your district. Two men from your street are gone this week.' as a logged line that sets a peril flag and reduces means, WITHOUT presenting a choice, before later offering war_call as the decision moment.",
+      "why": "Currently w_war_loss and w_plague_tend feel external but are still framed as choice moments. Splitting them into a forced-consequence phase followed by a response-choice phase would let the world hit the player before they can respond — the defining experience of a war-era life.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a per-life 'random crisis' draw at adult/midlife stage: from a small pool of 8-10 asymmetric events (business partner absconds; child has a serious accident; drought wipes local market; a false accusation; a windfall from an unknown relative) that fire with low probability (10-15%), have no choice, and set permanent flags that gate later content.",
+      "why": "These would be the black-swan layer: rare enough that a player can go 3 lives without seeing one, common enough that over 12 dynasties every run includes 2-3 completely unexpected pivots. This is the structural fix for 'I can predict what cards will come.'",
+      "impact": "high"
+    },
+    {
+      "what": "Deepen the elder band with 3-4 new cards that are genuinely structurally different from each other: a sudden loss (a spouse dies mid-sentence, no warning, no choice — just a log line), an unexpected late public role thrust upon an unwilling elder, a late accusation or legal trouble that rewrites what the life was 'about.'",
+      "why": "The elder band currently reads as a peaceful wind-down (bequest, legacy, last walk, peace) in nearly every life. The most surprising event in the entire transcript was the 11-year-old child dying — it was uncontrolled and devastating. The elder years need at least one event that can crack the mood without giving the player a choice about whether it happens.",
+      "impact": "med"
+    },
+    {
+      "what": "Add child-band variation by making c_sick, c_sibling, and c_book compete with each other in a once-per-dynasty pool so at most 1-2 of the trio fires per life, rather than all three potentially appearing in the same childhood.",
+      "why": "By dynasty 8 the transcript shows every childhood containing the fever + sibling + book/stray cluster, which makes early childhood the most predictable band. Forcing the engine to pick from the cluster rather than draw from it freely would make some childhoods radically different from others.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a beautiful prose engine with a legible structural skeleton that reveals itself fully by dynasty 4: every life hits the same developmental beats in the same order, every event is a binary choice node (so true surprise is architecturally foreclosed), and the absence of any unchosen outcome — anything that simply happens to you — means a surprise-hunter will be engaged for 3-4 dynasties and then watching a sophisticated template replay with new names."
+}

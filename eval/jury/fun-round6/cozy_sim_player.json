@@ -1,0 +1,54 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 6.8,
+  "fun_highlights": [
+    "The prose is genuinely warming — individual lines ('Had a child, Lazlo — red and furious and entirely unimpressed by any of it.', 'Fell in love, and was aware, with a cold clarity, of everything it now made possible to lose.') create the precise low-stakes emotional texture this genre needs. Reading a transcript feels like browsing a handwritten family album.",
+    "Callback cards are the best single mechanic: when 'A kindness done at 6 came back, decades later, as a door held open' lands in the Annika Vane run, it produces a genuine cozy-sim hit — a sense that this specific life's choices had weight. The handful of lives that trigger cb_outcast_return, cb_lookaway, cb_books_late, or cb_study_pays feel structurally different from those that don't.",
+    "Dynasty-level accumulation (seat rising, motto crystallising, heirlooms passing, the family words being tested by a descendant) supplies the 'one more generation' itch that cozy/sim players need. Watching the Holloway house go nothing->rented->small house->fine townhouse across three lives, with 'In time, all is weighed' appearing and then being held by Theda, is the game's strongest sustained pleasure.",
+    "Era cards (war, plague, plenty, hard, turning) meaningfully tilt each life's texture — Tariq Vane in plague time feels different from Greta Holloway in fat years. The intersection cards (vx_scholar_turning, vx_soldier_war, vx_maker_plenty) are particularly welcome: they reward having made a specific earlier choice.",
+    "The observe() ambient layer — the body starting to 'keep its own ledger,' curiosity wearing grooves — provides quiet atmospheric texture between choices without requiring interaction, which is exactly right for a meditative genre. It fills the silence rather than rupturing it.",
+    "Solitary and childless life-shapes are meaningfully supported (m_solitary, a_chosen_family, e_solitary, e_childless), so a life without the standard spouse+child arc doesn't feel like a dead-end — it feels like its own shape."
+  ],
+  "staleness": [
+    "The love-and-marriage beat is structurally identical in nearly every life across all 15 dynasties: meet someone (y_love1 or a_meet_late), years pass, a_marry fires, then a_child. The card text for a_marry has seven variants but they all resolve the same emotional note. By dynasty 6 the beat is furniture, not event. Out of 30+ adult lives examined, only two (Tariq Vane dynasty 8 who never married, Tobias Okonkwo who chose no child at first) escape the template, and both eventually circled back. The 'one more life' pull needs at least one life to feel married-life-free in a way that's interesting, not just punishing.",
+    "The vocation fork (soldier/scholar/maker/wanderer) fires in every single life but the downstream adult arc is often thin for wanderer and maker unless specific era conditions apply. Scholar lives feel the richest (cb_study_pays, m_scholar_legacy, e_scholar_old all fire reliably); soldier lives are reasonably distinct; maker lives often reduce to a_maker_shop plus m_maker_masterwork with nothing in between; wanderer lives after the initial choice often look almost identical to each other — a_wanderer_settle plus m_wanderer_return plus e_wanderer_old, same three beats, same order, same emotional register.",
+    "The childhood band (ages 3-12) shows clear repetition by dynasty 8. Across the 15 dynasties, c_origin, c_book, c_unfair, c_sibling, c_talent, c_grandparent appear so reliably that childhood starts to feel templated: origin card at 3-5, book card at 7-12, one more childhood card, done. The c_sick/c_friend/c_wonder/c_dark cards fire less frequently and their non-appearance means some childhoods are thinner than others — but there are only 11 childhood cards total for a 12-year window, and once-per-life gating means a veteran player has seen all of them within 4-5 dynasties.",
+    "Epitaph clustering: across 15 dynasties, 'Left people gentler than she found them' appears three times (Vera Ashby, Cosima Lindholm, Vesna Mercer). 'Never could pass a hurt creature without stopping for it' appears twice (Vera Okonkwo, Tariq Reyes). 'Kind in the small daily ways' appears twice. The anti-repeat logic in epitaphFor() works within a dynasty (blocked() checks the last two ancestors) but dynasties are reset, so a session-level player sees repeats. The RECENT_LINES guard exists but with a cap of 70 entries it doesn't prevent within-session re-use across dynasties.",
+    "The reckoning card (x_reckoning) and seat-gated content (s_great_burden, s_patronage, s_inheritance_dispute) barely appear in the transcripts — only one reckoning fires across all 15 dynasties — because the seat stays low for most houses. The interesting dynasty-layer content is structurally gatekept behind prosperity that takes 3-4 generations to reach, meaning a player who doesn't reach seat 3+ never sees a significant portion of the cards.",
+    "The elder band (ages 66+) has visible structural repetition: e_legacy fires, e_garden or e_last_walk fires, e_peace fires, the body-observation lines accumulate. In longer-lived characters (Emory Holloway lived to 89, Annika Vane to 80, Soren Lindholm to 79) the elder years feel stretched thin — several consecutive years of ambient body-decline observations with no new choices, until the final cluster. The elder band is the quietest stretch in the sim and by dynasty 10+ it reads as a holding pattern.",
+    "Structural shape across many lives converges to: childhood cards -> y_calling -> early love -> a_marry -> a_child -> a_work or a_fork_career -> midlife health/parent-age -> elder legacy/peace -> die. Players who have seen this arc 6-8 times will start predicting the next card category even when the specific text varies."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 life-shapes where the love/marriage arc is either genuinely absent or resolved in an entirely different structure — e.g., a 'formal arrangement' path that replaces romance with alliance, or a late-life companionship that never asks the marriage question at all. The current a_meet_late and m_old_flame exist but they still funnel into a_marry.",
+      "why": "The love-meet-marry-child sequence is the single most repeated structural beat. Cozy sim players are patient with warmth but sensitive to template. A life that skips or wholly redirects this arc would feel like a genuinely different shape, not just different prose on the same scaffold.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the childhood card pool from 11 to at least 16-18 cards, with 3-4 having no 'once' gate so they can recur across dynasties with fresh text. Make c_sick, c_friend, c_wonder, c_dark fire more reliably (increase weight or lower cool threshold) so childhood doesn't compress to origin + book + one more.",
+      "why": "Childhood is the opening texture of every life. By dynasty 5-6 a player has seen all 11 childhood cards. Adding non-once band-fillers (a school friendship that sours, a first experience of beauty, a childhood game with stakes) would keep the opening fresh without requiring new gated content.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the wanderer and maker vocations 1-2 additional mid-life cards each that don't depend on era intersection. Currently the maker arc is: shop decision, masterwork decision, handoff at elder — three beats across 40+ years. A 'commission that compromises the craft' or 'apprentice who outgrows the master' card would fill the gap.",
+      "why": "Vocation choice is the most structurally significant decision in the game and players lean into it expecting a distinct arc. Scholar and soldier arcs feel richly populated; maker and wanderer feel thin in comparison, and the thinness is noticeable by dynasty 4 when a second maker life appears.",
+      "impact": "med"
+    },
+    {
+      "what": "Change the epitaph RECENT_LINES guard to a session-wide cross-dynasty list with a longer cap (150+), and weight the selection away from clusters that have appeared in the current session — not just within the current dynasty.",
+      "why": "The epitaph is the last thing a player reads for each life and the first thing they carry into the next. Seeing 'Left people gentler than they found them' three times in a 15-dynasty session is the most visible staleness signal in the whole game — it makes different lives feel like the same life.",
+      "impact": "med"
+    },
+    {
+      "what": "Lower the seat threshold for x_reckoning from seat>=3 to seat>=2, and add a 'near-miss reckoning' card for struggling houses (seat 0-1) that creates tension without requiring prior prosperity. The reckoning cards are the game's strongest source of dynasty-level drama but are almost invisible in practice.",
+      "why": "In all 15 dynasties only one reckoning fires. The seat-gated content is the game's most interesting structural layer (it makes high-standing houses feel genuinely different) but the gate is set too high for the pace at which most houses climb. Lowering it by one tier would make dynasty-layer drama accessible to players before they give up.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 elder cards (age 66-95) that are neither body-decline observations nor legacy/peace resolutions — e.g., a late creative obsession, an unexpected reconciliation initiated by the other party, a purely joyful card with no cost. The current elder band is weighted toward winding-down, which is appropriate but produces a muted sameness in the game's final stretch.",
+      "why": "The elder years are where cozy sim players spend the most contemplative time, watching the body fail and waiting for the final choice. More variety here would keep the last quarter of each life as engaging as the first, rather than feeling like a quiet wait for the death screen.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life delivers genuine cozy warmth and the dynasty layer is its best idea, but by dynasty 6-8 the structural template — childhood in 2-3 cards, vocation, love-meet-marry-child, midlife, elder wind-down — becomes predictable enough that a patient cozy player is reading for prose texture rather than surprise, which is pleasant but not the sustained engagement that earns an 8."
+}

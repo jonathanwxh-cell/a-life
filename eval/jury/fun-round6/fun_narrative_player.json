@@ -1,0 +1,55 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 7.0,
+  "fun_highlights": [
+    "The callback system is the game's best idea: when a childhood choice (c_friend, c_steal, c_books) resurfaces 20-30 years later with full narrative memory, it produces exactly the 'I remember you' pleasure a literary sim should deliver. Annika's kindness to the outcast returning as 'a door held open' at 27 is a genuine story beat, not just a stat bump.",
+    "The era gating (war, plague, hard, plenty, turning) meaningfully reshapes what a life can encounter. Dynasty 8 (Tariq Vane) in a plague year, where tending the sick is a real moral choice, reads structurally differently from Dynasty 5 (Elias) in a turning age. This is a real variety lever.",
+    "The bequest system is the best cross-generational mechanic — choosing whether to leave mind, means, heart, or freedom creates different opening conditions that can be felt in the heir's first several cards. Dynasty 13 (Lindholm, 5 generations) shows this working: inherited heirlooms accumulate into a readable house identity.",
+    "Vocation-specific arcs (soldier's ghost at 3am, the maker's masterwork, the scholar's deferred question) give each life an internal shape. A soldier-scholar are structurally different people with different late-life cards, not just different labels on the same template.",
+    "The prose is consistently good enough that individual moments land as small stories. 'Had a child, and was asleep on his feet for a month, and had never once been so awake' is the kind of line you remember. The writing does genuine narrative work rather than just descriptive flavour.",
+    "The 'competing goods' cluster (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) avoids the virtue-reward binary and leaves the player genuinely unsure which was right. For a narrative player, this is exactly the right design register."
+  ],
+  "staleness": [
+    "The marriage beat is structurally identical in every life that reaches it. By dynasty 8 the player can predict: love interest appears, some years pass, 'Ambrose and Vesna have been a quiet certainty... Vesna is waiting for a question' (or one of its six rotations). The rotations are not enough — the event always arrives, always resolves the same two ways, always yields the same log line pool. Across 15 dynasties it appears roughly 20 times and the beat is mechanically indistinct by dynasty 5.",
+    "The c_book card (book left on desk) fires in nearly every life: Dynasties 1, 2, 3, 6, 7, 8, 9, 10, 12, 13, 14, 15. Its two-choice structure is identical each time and its log lines rotate quickly into repetition. By dynasty 4 a narrative player has absorbed everything this card can say.",
+    "The calling card (y_calling) and its four-vocation menu fires in every life without exception, and its 'The years ahead want a shape' / 'the wide-open future narrows' text rotates across only three variants. By dynasty 6 you are reading the same vocation-selection prompt again. The prompt needs to feel different based on what the prior generation was, what the era is, what traits the character carries — it doesn't.",
+    "The 'body/age' observation lines (stairs asking a question, body keeping its own ledger, mornings taking longer to arrive) repeat heavily from dynasty 8 onward. The pool is large but not large enough: 'Some mornings the body answers the bell late, and grumbling' appears in Dynasties 8, 11, 13, and 14 within the transcripts. These ambient lines are the game's texture, and their repetition is the most corrosive form of staleness because it makes every elder feel the same.",
+    "The 'cb_principle' callback (principle stood for once comes round again, older and more tangled) fires in Dynasties 1 (Ambrose, Tomas), 5 (Elias), 8 (Marguerite), 9 (Lazlo), 11 (Tamsin), 13 (Theda, Idris) — essentially any life that picked 'took_a_stand'. Its two choices ('Stand again' / 'You've paid enough') and its three log-line variants exhaust quickly. It becomes a routine beat rather than a meaningful echo.",
+    "The 'd_ancestor' card (story in the family about the one before) appears multiple times per multi-generation dynasty but its structure is always the same: 'a thing they did, and what it cost / no two tellers agree on the moral / live up to the name OR step out of its shadow'. Dynasty 13 shows Ottilie hearing the story, Theda hearing it, Idris hearing it, Soren hearing it — all the same framing. A dynasty-5 player has already made this choice twice before their current life begins.",
+    "Several structural beats almost always occur in the same life-sequence: late-love card in the 30s, marriage card a few years after, child card shortly after marriage, empty-house card in the 50s, body-letter card in the 60s. By dynasty 6 a narrative player can roughly predict the shape of the next 30 years once love arrives. The cards vary; the shape does not.",
+    "There is no 'one more dynasty' goal or curiosity beyond the aesthetic pleasure of seeing how a house develops. The dynasty layer (seat, reputation, mottos, heirlooms) is interesting but lacks teeth — the player cannot lose a house catastrophically, cannot build toward a specific named outcome, cannot 'win' a legacy in a way that creates a goal for the next dynasty. After 5-6 dynasties, this absence is felt."
+  ],
+  "improvements": [
+    {
+      "what": "Replace the calling card's static 'years ahead want a shape' text with era + house + trait combinations that make the prompt feel earned. A 'hard' era + 'no name behind you' + 'frail' trait should read very differently from 'plenty' + high seat + 'shrewd'. The vocation choices themselves should also narrow: a high-seat house might not plausibly present 'the road' as an open option; a war era should foreground the blade without removing other paths.",
+      "why": "The calling card fires in every single life and is often the most consequential choice. If the framing is identical across dynasties 3 through 15, the player is making a mechanical selection, not a narrative one. A characterised prompt makes the choice feel like it belongs to this person in this moment.",
+      "impact": "high"
+    },
+    {
+      "what": "Add two or three entirely new marriage / partnership shapes that bypass the 'quiet certainty / Vesna is waiting for a question' frame: a reluctant marriage (arranged, or pragmatic), a marriage that fails and the aftermath, or a life-partner who is not romantic at all. The current binary (ask / not yet) after a love event handles the 'Romeo and Juliet' arc but not the much wider range of human partnership.",
+      "why": "The marriage beat is the single most repeated structural moment in the transcripts and its text variants are the fastest to exhaust. Giving it one or two alternative structural paths (not just different log lines from the same decision) would meaningfully differentiate lives.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the body/age observation pool by 50% and enforce a dynasty-level 'no repeat within 4 generations' rule on ambient observation lines (not just per-life). These lines are the ambient wallpaper of every elder life; they define how the game feels in the back half. Their current repeat rate is the most consistently corrosive staleness source across dynasties 8-15.",
+      "why": "A narrative player notices when the same line appears in the life they are playing and the one two dynasties ago. The pool is already good; it just needs to be bigger and have a longer cooldown.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the d_ancestor card (family story from before) more than two choices. Add a third option per ancestor type: a choice to investigate the story, to find out what actually happened, or to retell it differently. This could branch into a small sub-event that reveals one specific fact about the ancestor's life — a secret, a regret, an accomplishment — drawn from what that ancestor actually chose in the transcripts if possible, or from the house's secret system.",
+      "why": "The ancestor card is a strong concept but its 'live up to / step out of' binary is exhausted by the third generation. A richer third branch would make multi-generational play feel like it actually accumulates knowledge rather than just recirculating the same two stances.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a dynasty-scale 'long game' target: a visible goal like 'reach estate' standing, or 'expose the family secret', or 'establish a scholarly reputation across three consecutive generations'. Display it as a house aspiration at the dynasty-start screen. This gives the narrative player a reason to play a sixth, seventh, eighth dynasty beyond curiosity — they are steering toward something.",
+      "why": "The 'one more dynasty' pull is currently purely aesthetic. A soft goal with a named outcome creates the narrative frame a literary player needs to sustain motivation through staleness. The goal should be achievable in 2-4 dynasties, not 10, so it refreshes.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce at least one 'wild' card per life — an event that has no analog in prior dynasties, that fires only once across the entire run (not once-per-life), and that has high impact on subsequent inheritance. Examples: a plague that reshapes the era mid-life; a political upheaval that closes all high-seat doors for a generation; a discovery that makes one vocation's arc radically different for the next heir. These events would be surprises that no amount of prior play could predict.",
+      "why": "Discovery is the primary pleasure of a narrative sim, and right now the discovery curve is steep early and flat after dynasty 5. One or two unrepeatable events across a 15-dynasty run would keep the 'I have never seen this before' feeling alive much longer.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a well-crafted, genuinely touching literary sim that delivers real narrative pleasure for the first four or five dynasties, but whose core beats — the book, the calling, the love, the marriage, the ancestor story, the body's complaints — become predictable structural slots rather than fresh moments by dynasty 6 or 7, and it lacks any goal or pull beyond aesthetic curiosity to sustain a player through that staleness."
+}

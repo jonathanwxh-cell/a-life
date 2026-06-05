@@ -1,0 +1,54 @@
+{
+  "profile": "choice_savorer",
+  "score": 6.5,
+  "fun_highlights": [
+    "Callback cards are the game's strongest mechanic: 'cb_books_late' recalls the exact age you kept the book, 'cb_outcast_return' names the friend you sat with in the yard, 'cb_strayed' puts the affair back in the room at the end of life. When they land, a choice from thirty years ago suddenly has weight — this is genuine cross-life consequence.",
+    "Vocation branching (soldier/scholar/maker/wanderer) creates structurally distinct lives. A soldier who went where the fighting was worst gets 'm_soldier_ghost' at 3am decades later. A maker who stayed waged gets 'e_maker_handoff'. The arcs diverge in ways that feel earned, not cosmetic.",
+    "The era system (war/plague/plenty/hard/turning) genuinely gates unique content and tilts which dilemmas arrive. A scholar in a turning age gets 'vx_scholar_turning' — made half of what they mastered suddenly quaint — which a scholar in settled years never sees. Dynasty 2 (scholar in fat years) reads differently from Dynasty 4 (soldier in war years).",
+    "The dynasty reputation and seat system gives choices cross-generational stakes. House Thorne accumulates a 'hard name' heirloom; the next generation faces 'r_hard_name' and 'r_name_cost' — the family's moral history arrives in the room ahead of them. Elias Vane fights an inheritance dispute (s_inheritance_dispute) that only a seat-4+ house ever meets.",
+    "The 'competing-goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are genuinely dilemmatic — both options carry real tradeoffs and neither is clearly 'right'. These are the cards where the choice-savorer profile sits forward.",
+    "Bequest choice (e_bequest: everything I know / every coin / the stories / nothing but freedom) is a rare moment where the player steers something concrete across the generational handoff, with the heir's starting stats shaped by it."
+  ],
+  "staleness": [
+    "Epitaphs repeat verbatim: 'Gave away everything she knew, and so kept it' appears as the final epitaph for at least five different characters across 18 dynasties (Marguerite Sereno, Caleb Voss, Yara Marlowe, Tamsin Reyes, and at least one more). 'Kind in the small daily ways that turn out to be the large ones' lands for Idris Sereno, Rafael Ashby, and Cyrus Vane. 'Remembered, most of all, for a steady kindness' for Lazlo Halloran, Adaline Thorne, and Cosima Vane. By dynasty 8, the epitaph is the last thing you read about a life — and it has already landed on someone you just read.",
+    "Scholar vocation dominates the transcript: of roughly 38 lives in 18 dynasties, well over a third chose 'The book — the scholar's road.' The pull toward scholarly reputation and the 'cb_study_pays' callback make it the mechanically rewarded path. A scholar's midlife card 'm_scholar_legacy' fires predictably; a maker's 'm_maker_masterwork' feels rarer. The vocation system is supposed to be the engine of structural variety, but the distribution is skewed.",
+    "The domestic arc is near-universal despite the engine's stated intent to create solitary lives: across 38 lives in the transcript, nearly every life that survives past 25 reaches the love → marriage → child sequence in that order. The solitary and childless cards (m_solitary, e_solitary, e_childless) appear in only 2-3 lives total. The engine comments say '~a sixth of couples stay childless' but the transcript evidence doesn't bear this out.",
+    "The moral asymmetry in most binary choices means they are less dilemmatic than they appear. 'Give it all away. Teach' versus 'Guard it. It was dearly bought' — the teaching option gives heart+spirit bonuses; guarding gives mind+means. The game's prose consistently inflects 'open' choices as warm and 'closed' choices as slightly cold. A careful reader can feel the author's thumb on the scale. The choice feels less like a genuine fork and more like a character-expression toggle with a preferred answer.",
+    "Callback cards (cb_principle, cb_the_cost) fire so broadly — held('took_a_stand') triggers on multiple paths — that they become near-guaranteed beats in any long life, stripping them of the rarity that gives them resonance. 'cb_the_cost' can fire if held any of four different memories. In the transcripts, it appears in Dynasty 3 (Lazlo), Dynasty 7 (Cyrus), Dynasty 8 (Caleb), Dynasty 12 (Mateo Ashby), Dynasty 13 (Mateo Reyes) — every third life or so.",
+    "The 'cb_left_home' card appears identically worded in Dynasty 1 (Adaline), Dynasty 4 (Yara), Dynasty 5 (Naima), Dynasty 6 (Linnea), Dynasty 8 (Caleb), and Dynasty 13 (Tamsin) — all with 'It is smaller than [name] remembered, and mostly gone. She could go back, once.' The framing is identical each time; only the name changes. For a choice-savorer reading many lives in sequence, this becomes a wallpaper card.",
+    "The competing-goods dilemmas (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) — the cards that actually resist easy answers — are individually once-per-dynasty or once-per-life. Across 18 dynasties and 38 lives in the transcript, x_honest_or_kind fires visibly only once, x_loyalty_truth twice. These are the cards worth savouring, and they're rationed too tightly while morally lopsided filler cards cycle repeatedly."
+  ],
+  "improvements": [
+    {
+      "what": "Add a RECENT_EPITAPHS guard across the session (not just per dynasty) — the same approach used for RECENT_LINES in epitaphFor() — and expand the epitaph pool for the most common clusters ('teacher', 'kind', 'scholar'). The 'teacher' cluster has 6 variants; the session needs to cycle through all 6 before repeating. Currently RECENT_LINES blocks per-dynasty but not cross-dynasty reads.",
+      "why": "The epitaph is the last sentence of every life and the first thing the next-of-kin screen shows. Verbatim repeats across nearby dynasties ('Gave away everything she knew, and so kept it' appearing five times) are the single most visceral staleness signal — they tell the reader the system has run out of things to say.",
+      "impact": "high"
+    },
+    {
+      "what": "Rebalance vocation draw weights: reduce the scholar arc's implicit advantage by making 'cb_study_pays' and the scholar reputation bump require a higher mind threshold (e.g. mind > 70 rather than > 62), and give soldier and wanderer callback cards equal weight and trigger frequency. Specifically, 'cb_reckless' (onceDyn, fires for lived_reckless) should have the same pull as 'cb_study_pays' (w:4, fires for chose_study + mind>62).",
+      "why": "Scholar is overrepresented in transcripts because it has both a higher-weighted callback (w:4) that fires mid-adult and a reputation bump pathway. Players who optimize — or even just follow the prose's warm inflection — end up on the scholar arc repeatedly. The vocation fork is the game's primary structural divergence; if one path is disproportionately rewarded, variety collapses.",
+      "impact": "high"
+    },
+    {
+      "what": "Make 2-3 of the competing-goods cards repeatable with cooldowns instead of once/onceDyn: specifically x_honest_or_kind (currently onceDyn, cool:22) could fire twice per dynasty with a 28-year cooldown, and x_dream_or_duty could fire once per life (not once per dynasty). These are the cards that create genuine moral texture. Gate them more tightly on relationship state (bond > 55 for x_honest_or_kind) to keep them meaningful rather than diluting them.",
+      "why": "In 38 lives of transcripts, x_honest_or_kind appears once visibly. The competing-goods cards are where the choice-savorer profile gets real engagement — both options are virtuous, neither is obviously correct, and the log line doesn't resolve the ambiguity. They're too rare relative to the morally lopsided filler cards that cycle multiple times per life.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'closed_to_love' arc that carries actual downstream content: if a character chose 'It's too late for that' at a_meet_late or 'Pretend not to notice' at y_love1, gate a distinct elder card (e.g. 'e_the_unlived_life') that confronts the unlived relationship directly. Currently the only downstream consequence of refusing love is a spirit penalty and the generic e_solitary/e_childless cards, which have no memory of the specific refusal.",
+      "why": "One of the game's stated structures is that choices shape a distinct person down the line. But 'Pretend not to notice' at y_love1 and 'It's too late for that' at a_meet_late leave almost no callback — compared to 'cb_unspoken' which only fires if the memory 'unspoken_love' was set. A character who flatly refused love is not textually distinguishable from one who simply never got the card.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a stat-based text variant to the cb_left_home card body so that the 'It is smaller than remembered' framing differs based on spirit and heart at the time of return. A high-spirit life might find the return bittersweet; a low-heart life finds it merely smaller. Currently the card prompt is identical for all six instances across the transcript.",
+      "why": "The cb_left_home card is one of the most-fired callbacks — it requires only held('left_home'), which is set by four different cards (y_leave, a_wanderer_settle, t_restless, a_road_not_taken). By dynasty 6, a reader has seen 'It is smaller than remembered, and mostly gone' multiple times with no variation in the dilemma framing, only the name changes.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce a small number (3-4) of genuinely no-win choice cards — moments where both options cause a real named loss, not just a stat penalty. E.g. 'You can save the friendship or the money, not both' where both represent named relationships with tracked bonds. The current design gives every card at least one option that is net-positive on spirit; a card that costs something real on all paths would register as high stakes.",
+      "why": "The moral asymmetry problem (one option clearly 'warmer' than the other) is partly a consequence of every card having a 'safe' positive outcome. For a choice-savorer, a decision only feels weighty when the roads not taken are also genuinely costly. The fate cards (f_fire, f_reversal) show the game can deliver unchosen consequences; the choice cards should do the same occasionally.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine choice-consequence architecture — the callback cards and vocation arcs give some decisions real weight across decades — but the transcript evidence of repeated epitaphs, scholar-path dominance, near-universal domestic arcs, and morally lopsided binary choices reveals a game that goes noticeably stale for a choice-savorer by dynasty 5-6, and is not yet the 8 it could be."
+}

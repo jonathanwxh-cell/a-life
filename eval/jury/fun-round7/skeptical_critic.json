@@ -1,0 +1,49 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the single most interesting mechanic: 19% of lives get explicit callbacks, and when they land they genuinely feel like a life echoing — the child-books card resolving in midlife, the kindness-to-outcast paying off decades later. These moments create a fleeting sense of authorship rather than witnessing.",
+    "Vocation variety across 26 lives is real: blade/book/hands/road all appear in roughly equal measure (7/7/6/6) and each genuinely gates different adult cards (scholar-question, maker-masterwork, wanderer-settle). A scholar's life and a soldier's life have structurally different mid-bands.",
+    "The era system (war/plague/plenty/hard/turning) injects unpredictable world-flavour and gates era-specific cards that a settled-era life never sees. Dynasty 4's Gen 5 living through plague in the transcript adds unique tone and stakes not available to settled-era lives.",
+    "Love is no longer late-clustered: 20 love events in the transcripts occur entirely between ages 16-25 (avg 20.8), with only one late-love fire at 32. The system correctly distributes coupling across youth rather than cramming it into midlife.",
+    "The 'chosen family' card and solitary/childless life shapes (30% of 31 lives have no child) are real structural alternatives that read differently from the domestic arc, not dead-ends.",
+    "Prose variety across a 358-line unique log is strong: across 515 total fires in 31 lives, only 'Lost her/his mother/father' repeats excessively (expected mortality logic), and most narrative lines are genuinely fresh per-life."
+  ],
+  "staleness": [
+    "The marriage age distribution is a persistent monoculture concern: despite fixed love clustering at 16-25, marriages cluster in a long tail of 24-57 with an average of 39.3 — meaning couples who fall in love at 18 routinely don't marry until 40+. The 'not yet, maybe never' card fires 5 times in 31 lives (16%), creating a recurring 'deferred marriage' beat. Five distinct lives chose not to marry and then had to navigate the 'watched a good thing strain' line — that exact phrase appears 5 times.",
+    "The 'from nothing' founding card (s_from_nothing) fires in 4+ gen-1 lives with near-identical framing, and those 15 founding lives share an identifiable structural skeleton: childhood cards, calling at 14-21, love at 16-25, child at 26-48, marriage anywhere in between, midlife health/work/parent card, elder legacy/peace. The order varies but the composition is recognizable by dynasty 5.",
+    "The c_friend 'made a friend nobody else wanted' fires 5 times, the cb_outcast_return callback fires at least twice, and 'Built a life out of chosen people instead of given ones' fires 5 times — the kindness-to-outcast arc has become a predictable mid-game routine rather than a surprise.",
+    "The elder band is noticeably thin compared to the child/youth band in structural terms: most elder lives rotate through just 3-4 cards (garden/craft, peace/rage, legacy, bequest) with high overlap. 'Found a late, gentle happiness in small daily things' fires 4 times in 31 lives. The elder experience is contemplative but not surprising.",
+    "Callbacks are rare: only 19% of lives get any explicit memory-callback reference, and many of those are the generic 'kindness done at age X' rather than personally-charged echoes. Most lives fire through the card pool without generating the sense of 'this life in particular' — you get a life, not your life.",
+    "The dynasty mechanics (seat, repute, motto, heirlooms) are legible in the transcript but they exert little felt pressure on individual card selection. The reckoning/seat-gated cards appear occasionally but do not noticeably shape the 12-card arc of a typical life. Knowing the house is at seat 3 doesn't change what cards you're likely to face in that life.",
+    "Marriage and child rarely co-occur in a compact arc: children appear at 26-48 (avg ~33), marriage follows or precedes at wildly varying ages. There is no feedback from these choices — marrying late doesn't close off content or unlock different elder cards. The domestic life-shape is a theme without mechanical consequence."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 marriage-age-aware card variants or post-marriage milestone cards that diverge based on when the couple married (young-married vs. late-married vs. never-married should read structurally differently in the adult band, not just in the prose)",
+      "why": "Right now the game nudges early love but allows marriage to slip arbitrarily late without altering what follows. A couple who married at 24 and one who married at 54 have identical adult-band card pools. Branching even one card (e.g. a 'young household' card vs. a 'late household' card with different choices) would make the choice feel structural.",
+      "impact": "high"
+    },
+    {
+      "what": "Double the callback hit rate from ~19% to ~40% by making more of the card pool store light memory-seeds that can trigger late-life callbacks — even simple ones like 'the year you left home' or 'the first time you said no to someone you loved' that reference the specific age and choice",
+      "why": "Callbacks are the single biggest differentiator between a generic life and a felt life. At 19% they feel lucky rather than structural. Many cards already call remember() but few generate actual cb_ payoffs. Closing more of these loops would make replaying feel like building something personal rather than observing a random procedural sketch.",
+      "impact": "high"
+    },
+    {
+      "what": "Add one or two vocation-era crossover cards that exist only at the intersection of a calling and an era (e.g. a scholar in a turning age gets a card about whether their field itself is being made obsolete; a maker in a hard era gets a card about whether their craft is a luxury no one can afford)",
+      "why": "The era cards and vocation cards currently fire independently and never combine. Their intersection would multiply structural variety without adding many cards — two dimensions of differentiation used multiplicatively rather than additively would make a wanderer in war feel different from a wanderer in plenty.",
+      "impact": "med"
+    },
+    {
+      "what": "Cap or rotate the c_friend / cb_outcast_return arc so it fires at most once per dynasty, and replace later instances with a fresh 'chosen connection' arc that doesn't start with the yard-outcast framing",
+      "why": "The yard-outcast kindness arc (5 fires of c_friend + 2+ of cb_outcast_return + 5 of 'Built a life out of chosen people') has become a recognizable routine. Players spot it. The mechanic is sound but the specific content is overloaded. The dynasty-seenDyn flag exists precisely for this — apply it.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the elder band 3-5 new unique cards gated on what kind of life was actually lived — not just the vocation (which already gates 2-3 elder cards), but on whether the person was married/solitary, rich/poor, reckless/careful — so elders who lived differently encounter a genuinely different final chapter",
+      "why": "The elder band (60+) currently rotates ~6-8 cards across all lives regardless of trajectory. A life of accumulated wealth hits the same garden card as a life of perpetual poverty. Differentiated elder content is where the simulation's long view should pay off most, but currently it's the flattest life-stage structurally.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A genuinely crafted and often moving piece of life-fiction with real procedural bones — but by dynasty 6-8 you're recognizing the template: the yard-outcast routine, the deferred marriage, the thin elder band, and the low callback hit rate mean you're watching well-written variations on a formula rather than discovering new lives."
+}

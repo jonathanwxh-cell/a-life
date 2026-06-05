@@ -1,0 +1,54 @@
+{
+  "profile": "replay_addict",
+  "score": 6.0,
+  "fun_highlights": [
+    "The dynasty layer — seat, reputation, motto, heirlooms, family secret — gives each run a distinct identity and a genuine accumulation goal; watching 'We burn bright, and we burn' crystallize over four generations has real pull.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_strayed, cb_lookaway, etc.) are genuinely satisfying: an arc set up at age 7 closes at age 48, and the payoff lands because you remember making the choice. This is the game's best mechanic.",
+    "Vocation arcs create structurally different lives — a scholar's life reads differently from a wanderer's; the soldier ghost card (m_soldier_ghost) and scholar payoff (cb_study_pays) make the calling choice feel consequential.",
+    "Era cards (war, plague, hard winter, turning age) surprise you when they hit; a plague generation followed by a fat-years generation genuinely changes the texture of those lives.",
+    "The prose quality is high enough that even on a repeated beat (the fever, the first job), the specific line variant pulled can still land — the rotI() system keeps individual lines from repeating back-to-back.",
+    "Repute-gated cards (r_scholar_door, r_hard_name, r_old_shame) mean a deliberately-focused dynasty occasionally unlocks moments a generic one never sees — which is a real reason to try a different house character."
+  ],
+  "staleness": [
+    "By dynasty 5-6, the life template is visible and predictable: childhood fever -> sibling arrival -> vocation fork -> late love -> late marriage -> late child -> one financial event -> elder reckoning -> bequest. Almost every life in the transcripts hits this skeleton in the same order; structural divergence is thinner than the card count suggests.",
+    "Soldier vocation dominates actual play (appears in roughly 60% of transcript lives). Because the calling card's weight and nudge logic are equal for all four paths, the randomizer over-selects soldier in practice, collapsing 'vocation variety' into one template with slightly different flavor text.",
+    "The 'late love / late child' default is so mechanical that by dynasty 8 you stop being surprised by it. Nearly every adult in the transcripts finds love after 30, marries after 40, and has a child after 45. The engine's aggressive 'no foreclosure' nudge creates a new kind of monotony: the certainty that love and an heir will always arrive.",
+    "Five of the first nine dynasties produce the epitaph 'Never could pass a hurt creature without stopping for it' — a direct, countable staleness signal. The epitaph system's cluster-blocking works within a single dynasty but not across the session, so re-running the game produces the same short list of themes.",
+    "The elder band is the thinnest. After age 65, most lives see: body-decline observation, elder reckoning card (cb_the_cost or e_legacy), garden/window choice, and bequest. The vocation arcs have essentially ended; elder soldiers and elder scholars play the same four cards.",
+    "There is no cross-run meta-progression or unlock that gives a replay addict a reason to start over. Once you've built a grand estate, earned a motto, and seen all four vocation arcs, the 'one more dynasty' pull softens to 'see what name I get' — which is not a gameplay hook.",
+    "The era system, which is the strongest source of structural variety, gates on S.era which changes only 45% of the time at succession. Many consecutive heirs are born 'settled', meaning the era layer can vanish for 3-4 lives in a row."
+  ],
+  "improvements": [
+    {
+      "what": "Add a per-session run goal or challenge system: e.g., 'this dynasty aims for a scholarly house', 'this run starts in war', or 'try to reach seat 7 in 4 generations'. Display the goal at the start of each new dynasty.",
+      "why": "A replay addict needs a reason to START a new run, not just continue one. Right now there is no carrot on the restart side — you only continue or begin a new line with no specific aim. Even a simple declared challenge ('found a great house from nothing in hard years') gives each run a distinct success condition.",
+      "impact": "high"
+    },
+    {
+      "what": "Rebalance vocation draw weights or introduce a per-dynasty 'calling memory' that makes soldier less likely if the previous 2 founders were also soldiers. The engine already has S.seenDyn for once-per-dynasty beats — apply similar de-repetition logic to the vocation outcome, not just the card draw.",
+      "why": "Soldier dominating ~60% of play collapses vocation variety. Scholar, maker, and wanderer have equally rich arc cards but rarely appear in practice, so most lives feel structurally similar past the calling fork.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the universal late-love/late-child formula: introduce 2-3 genuinely childless adult life shapes (confirmed through a 'no' at a_child that then gates out the card entirely for the rest of that life) and at least one solitary elder arc with its own unique cards.",
+      "why": "Knowing love and an heir will almost certainly arrive regardless of choices undercuts agency. A life where you actually remain alone and face a different set of elder moments would be genuinely surprising — and make the 'yes, have a child' choice feel like a decision rather than a mechanical nudge.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the elder band with 6-8 new differentiated cards tied to the accumulated character: a ruthless elder facing a reckoning with someone they harmed; a scholarly elder confronting a life of knowledge with nothing built; a wanderer elder who never settled and now has no one to grieve them.",
+      "why": "The elder stage currently has the same 4-5 cards regardless of how the life was lived. It is the band where a lifetime of choices should converge into distinct late-life shapes, but instead it converges into the same quiet template.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a dynasty collection screen showing all houses you've raised — not just the current one — with their mottos, peak seats, and lineages. Make this the title screen rather than a hidden 'recordHouseLegacy' backend call.",
+      "why": "The meta-progression hook (collect different houses, see your history) exists in the code but is not surfaced to the player. Making the collection visible turns 'one more run' into 'I want to add a pious house to my collection' — the classic roguelite unlock pull.",
+      "impact": "med"
+    },
+    {
+      "what": "Extend the epitaph cluster-blocking to look back across the full session (all previous dynasties), not just the last 2 ancestors. The current per-life de-duplication is too narrow — 'Never could pass a hurt creature without stopping for it' appearing 5 times in 9 dynasties breaks immersion.",
+      "why": "Repetitive epitaphs are the most visible symptom of staleness to a player who has run multiple dynasties. A session-level block list would keep themes fresh across the full sitting.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a beautifully written game with a dynasty layer that genuinely pulls you forward, but by the 5th or 6th dynasty the life template is legible — soldier, late love, late child, bequest — and without a declared run goal, a meta-collection, or meaningful divergence in the elder band, the 'one more dynasty' pull fades faster than it should for a replay addict."
+}

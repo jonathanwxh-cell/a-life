@@ -1,0 +1,49 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system genuinely shapes structurally different lives: a soldier's arc (deployment, the ghost at three in the morning, the elder truth-telling) reads nothing like a wanderer's arc (horizon calls, settle-or-keep-moving, the final tally of doors closed). Four callings times distinct elder caps is real variety.",
+    "Callback cards are the game's most satisfying mechanic — 'cb_outcast_return' paying back a childhood kindness decades later, 'cb_books_late' re-encountering the too-hard book, 'cb_lookaway' asking you to undo a child's cowardice in middle age. These are the moments that feel earned and emotionally resonant.",
+    "Era cards (war, plague, plenty, hard, turning) work well in short bursts — dynasty 6's war-era soldier and dynasty 12's plague-era heir live noticeably different lives. The vocation-x-era intersection cards (vx_scholar_turning, vx_soldier_war) are a genuine highlight: they fire rarely enough to feel like a surprise.",
+    "The dynasty layer (seat, repute, motto, heirlooms, secret) gives a pleasingly cozy 'tending a family garden' feel. Watching the motto crystallise — 'We keep what we have learned,' 'We burn bright, and we burn,' 'Beauty is the only argument we trust' — across three to five lives is the strongest 'one more dynasty' pull the game has.",
+    "Prose quality is high and the freshPick/rotI rotation means the same beat rarely lands identically twice. The observe() ambient lines (body-aging, means-hi/lo, spirit-lo) add texture between cards without demanding attention.",
+    "Solitary and childless life-shapes are genuine content, not dead-ends. Dynasty 14's Vesna Halloran ending without an heir, choosing 'Leave the work, not a name,' reads as a complete life, not a failure."
+  ],
+  "staleness": [
+    "The structural arc of almost every life is identical: childhood wonder/friend/animal -> vocation fork at 14-22 -> fall-in-love at ~18-25 -> marry -> child -> work promotion decision -> midlife health/reckoning -> elder legacy/garden/peace. The transcripts confirm this: across 15 dynasties, every coupled-with-children life hits these beats in the same order. The vocation and era cards provide flavour within the template but do not break the template.",
+    "Love and marriage feel automatic regardless of player intent. In the transcripts, the 'meet them halfway' choice fires in every life that has a partner — dynasty 1 Cosima, dynasty 3 Vesna, dynasty 4 Liv, Joaquin, Noor, Cassian, Yara, dynasty 6 Soren, dynasty 8 Caleb, dynasty 9 Otto, dynasty 12 Elias, dynasty 14 Vesna, dynasty 15 Greta. The phrasing of the card rotates (seven variants) but the event itself is structurally invariant. By dynasty 5 the cozy player knows it is coming.",
+    "The child card fires in nearly every eligible life. 'Yes. Make room in the world' is the statistically dominant choice in the transcripts (~80% of cases) because the engine nudges toward it. Dynasty 4 alone has five consecutive generations all saying yes. The card text rotates ('half decision, half tide,' 'the question arrives sideways') but the structural function is the same beat every adult life.",
+    "Callback cards, while individually rewarding, are drawn from a fixed pool (cb_books_late, cb_outcast_return, cb_lookaway, cb_study_pays, cb_left_home, cb_strayed, cb_unspoken, cb_trade_regret, cb_principle, cb_home_keep). By dynasty 8-10, a regular player will have seen all of them. The 'cb_outcast_return' callback fires in dynasty 2, dynasty 3, dynasty 4 (twice — Cassian and his friend Ren), dynasty 9, dynasty 12. Its emotional power diminishes with repetition.",
+    "Epitaphs repeat. 'Gave away everything she knew, and so kept it' appears for Saoirse Thorne (dynasty 1 gen 2) and is the functional template for Niall Vasquez (dynasty 7) and Cyrus Okonkwo (dynasty 9). 'Left people gentler than he found them' appears for Felix Marchetti (dynasty 2), Noor Vasquez (dynasty 4), and Mira Salvedi (dynasty 8). 'Kind in the small daily ways' appears for Soren Okonkwo (dynasty 6) and Mira Salvedi (dynasty 8). The game works to rotate these but still cycles them inside 15 dynasties.",
+    "The adult midlife band (ages 28-64) is still the least differentiated stretch: a_work (promotion), a_old_friend (money request), m_parent_age (aging parent), m_health (body letter), and a_neighbour appear in nearly every life as filler. The band-filler cards (a_smallchoice, a_fallow, m_empty_house, a_friend_drift) are low-stakes and emotionally interchangeable — they read as texture, not as distinct moments.",
+    "There is no meaningful failure spiral or dynasty collapse story. The reckoning card (x_reckoning) exists but rarely fires in the transcripts; the seat system mostly goes up (dynasties 2, 3, 4, 6, 9, 12 all rise). A cozy player wants tension within safety — the sense that the family might slide — but in practice the house almost always climbs. Dynasty 7 (Ingrid Vasquez) ends with the same 'rented room' it started with despite two generations; the 'fell' feeling is narrated but not dramatically developed."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 structural life-shape divergers that fire in early adulthood and genuinely skip the standard domestic arc. Examples: a 'sworn off' card where the character commits to a solitary vocation and the child/marriage cards are suppressed for a decade; a 'crisis of faith' that sends a scholar-vocation character into a decade of wandering before potentially returning; a 'tragedy early' flag that removes the love interest and gates an entirely different adult cluster.",
+      "why": "The single biggest staleness source is not the individual cards but the template: fall-in-love -> marry -> child is the default arc and it fires so reliably that the player can predict it. Structural divergers would make some lives feel like different genres of story, not different-flavoured versions of the same story.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap the 'cb_outcast_return' callback (and cb_study_pays, cb_principle) at once per dynasty instead of once per life. Gate them behind a new 'seenDyn' flag the same way onceDyn cards work. Replace the freed slot with 1-2 new per-life callbacks that reach back to vocation-specific memories (a soldier recalling a specific battle decision; a maker revisiting a commission they refused).",
+      "why": "The outcast-return callback is the most emotionally effective card in the game and its power deflates fast with repetition. Seeing it in dynasty 2, 3, 4 (twice), 9, and 12 within the transcript run makes it a known quantity by mid-session.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'descent' track: 2-3 cards that only fire when the house has lost seat since the previous generation, giving the falling dynasty its own content (a proud family reduced, the name becoming a burden, a specific card asking whether to accept the new circumstances or fight to restore them). Currently a falling house just gets fewer seat-gated cards; it has no drama of its own.",
+      "why": "Dynasty management is the cozy 'tending' pleasure, but it only generates interesting feelings on the way up. The way down is structurally empty. A failing line should feel different from a rising one.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce one new 'wild' card per vocation that fires at most once per full run (cross-dynasty, using RECENT_LINES or a run-level flag), resolves into something genuinely unexpected (a soldier who becomes famous/infamous in a specific named event that echoes across subsequent generations; a scholar who discovers a fraud that their house must reckon with; a maker whose object is still named in dynasty 6). This creates a persistent world event with ripple effects.",
+      "why": "The biggest gap is emergent stories — the brief says the system should 'collide into stories you didn't expect.' Currently everything resolves in the same life it occurs. A named event that echoes across generations would provide the kind of 'oh, so THAT's why the family has that heirloom' discovery moment.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the epitaph pool by 50% and add vocation-specific epitaphs (soldier: 3-4 that name the specific kind of service; scholar: 3-4 that name the field or the unanswered question; maker: 3-4 that name the craft). Track used epitaphs across the session (the RECENT_LINES mechanism already exists) with a longer memory window (150 lines instead of 70).",
+      "why": "Repeated epitaphs are the most visible staleness signal because they appear at the emotionally charged moment of death. 'Gave away everything she knew, and so kept it' appearing in the same run for Saoirse, Niall, and Cyrus collapses the sense that each life was distinct.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely pleasant, sometimes touching experience for the first 4-6 dynasties, but by dynasty 8-10 the cozy player is watching a template (fall in love, marry, child, midlife health scare, elder peace) execute with swapped prose rather than living distinct lives — good enough to sit with for an afternoon, not good enough to keep returning to across weeks."
+}

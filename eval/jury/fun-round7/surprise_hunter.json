@@ -1,0 +1,56 @@
+{
+  "profile": "surprise_hunter",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system (cb_* cards) is the game's best mechanic — a kindness shown at age 6 returning as a door held open in the thirties genuinely surprises, and the specificity ('a kindness done at 6 came back, decades later') makes it feel like a real life, not a template.",
+    "Fate cards with no choice (f_fire, f_sudden_loss, f_reversal, f_grace) are the purest black swans here — they happen to you, you only choose how to absorb them. The fire at dynasty 4 gen 5 (age 68, after a market reversal at 63) produced a genuinely unexpected two-disaster stretch.",
+    "Vocation x Era intersections (vx_scholar_turning, vx_soldier_war, vx_maker_plenty) fire rarely and feel like real system collisions — a scholar-scholar in a turning age producing different content than a scholar in a war era is the kind of structural freshness the game promises and occasionally delivers.",
+    "The motto crystallization event lands differently each time it arrives because it names a character the player built across multiple lives. Watching 'Nothing was given; all was built' emerge from an industrious three-generation line feels earned.",
+    "The era system (plague, war, plenty, hard, turning, settled) does meaningfully reframe the opening card (c_origin) and the childhood world — a child born in plague years reads entirely differently from one born in plenty years, and this distinction persists into era-specific adult cards.",
+    "Trait affinity weighting in drawCard() means a bookish child genuinely leans toward c_book and c_wonder, producing different childhoods rather than random card salads — this mostly works.",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) offer genuinely hard choices where neither option is clearly right, which is more morally interesting than most of the binary open/closed grammar."
+  ],
+  "staleness": [
+    "The marriage arc fires in every single life across all 15 dynasties without exception (for coupled lives). The text varies ('married in a downpour,' 'without ceremony') but the structural beat is always: fall in love → years pass → marriage card → yes or delayed yes. By dynasty 5 this is pure muscle memory, not a decision.",
+    "The y_calling card — while offering 4 roads — is framed identically every time and arrives at nearly the same age (14-22) for every life. After the third dynasty, the player is filling in a form, not making a discovery. The era-flavored text variants help at the margins but don't change the underlying repetition.",
+    "s_from_nothing fires in nearly every founding life (dynasties 1,2,3,4,6,7,8,9,11,12,13,14,15 all show it) because every dynasty starts from low standing. It becomes wallpaper — a card that announces the same condition with the same binary choice run after run.",
+    "Ambient observation lines repeat verbatim across dynasties despite RECENT_LINES anti-repeat logic. 'Books have become a country she can live in' appears in dynasty 3 Emory, dynasty 7 Niall, dynasty 9 Cyrus, dynasty 12 Aldous — all with the same phrasing. The deduplication burns the line within a dynasty but allows it to recur in the next house.",
+    "The elder arc converges on the same 2-3 beats in nearly every life: e_legacy (what do you want remembered), e_garden (slow days, take up something small), e_peace (it is close now). The vocation-specific elder caps exist but fire inconsistently. After dynasty 6, elder sections feel like epilogues following the same script.",
+    "cb_study_pays fires predictably in every scholar life and is experienced as a reward for the scholar calling rather than as a surprise. It is now a known beat, not a discovery — by dynasty 7 the player is waiting for it.",
+    "The 't_guarded' trait card always resolves to 'kept the wall exactly where it had always stood' when declined, appearing verbatim in dynasty 1 Cosima (age 33), dynasty 1 Saoirse (age 43), dynasty 3 Emory (age 29), dynasty 15 Greta (age 48). Trait gating is good; the prose needs more variant lines per trait-choice combination.",
+    "Most lives in the transcript produce a child — the childless/solitary shapes exist in the code but appear in only 3 of the 30 lives examined. The childless-life cards (m_solitary, e_childless) are present but the draw pressure toward a_child is still strong enough that the domestic arc remains the modal life-shape, which makes dynasties feel structurally similar even when vocations differ."
+  ],
+  "improvements": [
+    {
+      "what": "Break the marriage-beat monoculture by letting some love relationships persist without ever reaching the marriage card — a partner who stays, never formally asked, is a distinct life-shape that currently almost never happens.",
+      "why": "Every coupled life in the transcript follows the identical arc. Even when the text says 'married late' or 'married in a hurry,' the structural event is the same. Allowing a meaningful percentage (~20%) of love relationships to simply never reach the marriage question — with a late-life card that names this directly ('the question was never asked, and the life was not smaller for it') — would produce a genuinely different shape.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 more unique ambient observation pools per stat-cluster (mind-high, spirit-low, etc.) that are dynasty-scoped rather than life-scoped, so the same observation can't repeat across consecutive dynasties even from the same stat.",
+      "why": "'Books have become a country she can live in' appearing identically in dynasties 3, 7, 9, and 12 is the single most visible staleness signal in the transcript — it makes the game feel like it's reading from a small list. The RECENT_LINES system works within a run but doesn't persist across the session's dynasty boundaries.",
+      "impact": "med"
+    },
+    {
+      "what": "Gate s_from_nothing as onceDyn (once per dynasty) rather than once per life, and replace it for non-founding heirs with 2-3 different 'nothing-behind-me' cards that name the inherited starting conditions more specifically.",
+      "why": "Every founder draws s_from_nothing because every dynasty starts at seat 0-1. In a 15-dynasty run the player sees this card 13 times. Making it burn per dynasty so heirs of still-poor houses get a different card naming their specific poverty would maintain the content without the repetition.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'surprise' card category that has no stat conditions, no trait conditions, no era conditions — pure random events (a strange encounter, an animal that follows the person for years, a piece of news from a far-off place) — weighted low and drawn from a large pool that never deduplicates within a session.",
+      "why": "The current card system is heavily conditioned: every card gate-checks stats, memories, or eras. This produces coherent lives but eliminates pure serendipity. A surprise-hunter craves the card that could appear in any life at any time and doesn't fit the narrative. Three or four such cards per dynasty session would generate stories that couldn't have been predicted.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the guarded, warm, bookish, and restless trait cards 4-6 unique line variants per choice outcome (instead of 1-2), specifically ensuring the 'refused' branch of t_guarded doesn't land on 'kept the wall exactly where it had always stood' more than once per session.",
+      "why": "Trait-gated cards are among the strongest variety drivers — they make a bookish child feel different from a warm one. But when the prose for the negative choice is the same across 4 lives, the gating succeeds but the prose collapses the distinction.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 vocation x era combinations that currently don't exist: maker x plague (the workshop serves the sick vs. closes its doors), wanderer x plenty (the road in fat years pulls differently), scholar x war (the library burns / is protected). The existing vx_ cards are the game's most interesting content and are too rare.",
+      "why": "The three vx_ cards in the code are the best examples of structural freshness — a soldier in a war is entirely different from a soldier in settled years. Doubling the vx_ set would meaningfully expand the intersection space that produces lives with genuinely different textures.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is a genuinely crafted piece of work with a callback system and fate events that can surprise — but across 15 dynasties the structural spine (fall in love, marry, have child, face vocation arc, meet elder beats) repeats with sufficient regularity that by dynasty 8 the surprise-hunter is anticipating the template rather than discovering a life, and the score cannot reach 8."
+}

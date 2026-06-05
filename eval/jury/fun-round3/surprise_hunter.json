@@ -1,0 +1,50 @@
+{
+  "profile": "surprise_hunter",
+  "score": 6.5,
+  "fun_highlights": [
+    "FATE cards (fire, sudden_loss, grace, reversal) are single-choice and inescapable — they simply happen, which is exactly right for a surprise-hunter. A fire wiping Yara Marlowe's savings at 61 with no way out is the game at its best.",
+    "Era system (war/plague/hard/plenty/turning) genuinely shifts which rare cards can appear and what the world feels like — Dynasty 2 born into plague, Dynasty 4 third-gen living through war, creates meaningfully different textures.",
+    "Vocation × Era intersections (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) are the game's highest-quality content: combinations that can only exist at one specific crossing. A soldier born into a war era gets a card no one else ever sees.",
+    "Callback cards (cb_*) create genuine 'I remember that' payoffs across decades — the old book re-read at 49, the outcast from the yard now powerful, the unspoken love reappearing in midlife. These feel like earned narrative, not template.",
+    "Early death actually happens and is non-punishing — Liv Renner died at 25 with only 3 cards, yet the dynasty survived. The irreversibility of a short life is quietly affecting.",
+    "onceDyn gating means a few beats (the mentor, the founding hardship) genuinely disappear for the rest of the dynasty after firing once — one small genuine anti-repetition mechanism that works.",
+    "The solitary/childless life-shapes (m_solitary, e_solitary, e_childless) are content-bearing, not dead-ends — a life without heirs still has its own arc, which is rare for a generational sim."
+  ],
+  "staleness": [
+    "The scholar payoff beat ('the hungry years of study, begun at X, at last came good') fires in Dynasties 2, 3, 4, 8, 9, and 12 — six times in eighteen dynasties. Scholar is the most common vocation in the transcripts and this card is its centrepiece, so a reader of multiple dynasties sees it constantly, often with near-identical prose.",
+    "cb_reckless ('told them it was worth it / told them to slow down') appears in dynasties 2, 3, 5, 6, 9, and 13. It fires whenever anyone has lived_reckless, which is a common memory, so the same exact two-line framing recurs throughout the transcript — it becomes a recognisable landmark, not a surprise.",
+    "Era distribution is badly skewed: 'fat years / plenty' dominates the transcript (dynasties 1, 2, 3, 4, 5, 10, 11, 12, 13). The rollEra logic has a 40% chance of 'settled' and equal weight across the six non-settled eras — but plenty recurs because each succession re-rolls independently. The qualitative result is that ~70% of dynasties read as prosperous, gutting the macro-surprise the era system was meant to deliver.",
+    "The FATE cards (fire, sudden_loss, reversal) have weight 1 and cooldowns of 28-30 years. They are the game's most effective surprise mechanism but appear very rarely in practice — many lives in the transcripts pass without one. A surprise-hunter needs these more often to stay engaged.",
+    "The recognisable skeleton is visible by dynasty 5-6: fever/dark → calling → love → child → midlife work/health → elder reconciliation/legacy → death. Vocation and era add flavour but rarely alter the structural shape. A dynasty with a scholar founder and a maker heir still hits almost every beat in the same order.",
+    "The given-name pool (30 per sex) is too small for 18+ dynasties. Mateo appears as protagonist in dynasties 3, 5, 12, and 13; Idris in 2 and 3; Adaline in 1 and 10. By dynasty 10, names feel recycled, which breaks the illusion that each life is a distinct person.",
+    "The world has no uncontrollable catastrophes at dynasty scale: no plague that wipes the heir before succession, no war that ends the family line, no political event that collapses a grand estate overnight. The death mechanics and seat-fall are gradual enough that a dynasty almost always survives its bad generation. The black-swan events that exist (fire, reversal) affect wealth, not the existence of the line — the dynasty itself is never truly threatened from outside."
+  ],
+  "improvements": [
+    {
+      "what": "Double the FATE card weight (from 1 to 2) and halve their cooldowns (from 28-30 to 14-16 years). Add one or two new FATE cards with dynasty-scale consequences: a sudden heir death before succession (forcing a sibling or cousin), a political/legal crisis that can strip a seat in a single generation, a plague that kills the spouse and the eldest child in the same year.",
+      "why": "The existing FATE cards are the game's best surprise mechanism but are statistically rare. A surprise-hunter needs a roughly 1-in-4 chance of a major uncontrollable event per life, not 1-in-10. Dynasty-scale catastrophes that can erase a seat or end a line create the kind of 'I never saw that coming' moment that defines the profile.",
+      "impact": "high"
+    },
+    {
+      "what": "Fix era distribution by making the era at dynasty founding persist for 2-3 generations before rolling, and weight the non-settled eras evenly in the roll (currently all six non-settled eras share equal weight but 'settled' has 40% on its own — change to settled:25%, each other era:12.5%). Log the era change prominently at succession so a player notices the world shift.",
+      "why": "The transcript shows ~70% of dynasties feel like prosperous times, which makes the war/plague/hard cards feel like rare flourishes instead of structurally different eras. A dynasty that actually lives through three consecutive hard-winter generations would feel completely different from the default experience.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the given-name pool from 30 per sex to at least 60-80 per sex, and add a generation-skip mechanic: the engine already avoids reusing the immediate ancestor's name — extend this to a 3-generation rolling block list so no name recurs within living memory.",
+      "why": "Name collisions are the most immediately visible staleness signal when reading multiple dynasties. A surprise-hunter notices when the 4th 'Mateo' appears as protagonist — it collapses the illusion of distinct individuals.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-5 new vocation-specific cards for the mid-life band (currently thin: adult has only 1-2 vocation cards per calling). Specifically: a scholar who becomes entangled in a political dispute over their work; a soldier who is offered a generalship that would mean never coming home; a maker whose workshop burns and they must choose whether to rebuild or walk away; a wanderer who is offered passage to a genuinely unknown place.",
+      "why": "Vocation gates the most structurally distinct content but the vocation arcs are shallow (2-4 cards each). Adding mid-life vocation cards means a soldier life and a scholar life stay structurally different through the 40s-50s band, not just youth and early adulthood.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'dynasty reputation consequence' card pool: 5-8 cards that can only appear if the house's repute tag is at 2.0+ and fire at most once per dynasty. Examples: a ruthless house is publicly accused of a crime it may or may not have committed; a scholarly house is invited to advise a ruler; a tainted house's secret is discovered by an outsider who must be dealt with. These should have branching outcomes that can shift the seat by ±2.",
+      "why": "Currently the reputation system shapes which ordinary cards appear (r_scholar_door, r_hard_name) but creates no black-swan moments. A high-reputation house meeting a crisis uniquely shaped by that reputation is exactly the kind of emergent surprise the dynasty layer should generate.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine surprise mechanics — FATE cards, era shifts, vocation-era intersections, callback payoffs — but they are too rare and too lightly weighted against a recognisable life-template that shows through clearly by dynasty 5 or 6, and a name pool too small to sustain the illusion of distinct individuals across 15+ dynasties."
+}

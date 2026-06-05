@@ -1,0 +1,48 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is genuinely surprising and emotionally effective — when the childhood book reappears at midlife, or when the 'looked away' child comes back as a stranger sleeping rough, these moments land because the engine earned them across decades of play. That is real narrative emergence.",
+    "The prose line rotation is impressive in volume: the 'have a child' pool, the love-falling pool, the body-failing observation lines are each 7-10 lines deep, which delays the repeat-detection far enough into a dynasty that you rarely catch the same sentence twice in a single life.",
+    "The era system (war/plague/plenty/hard/settled/turning) does real work structuring why gen 8 feels different from gen 2. A plague-era founder who 'kept your distance, survive' and a war-era heir who loses someone to the front create genuinely distinct life-shapes without demanding new card logic.",
+    "The dynasty arc — 'nothing but a name' climbing toward 'a house written into the histories' — provides a satisfying multi-session goal loop. Dynasty 9 Achterberg reaching the histories across five generations is the kind of generational payoff narrative players come for.",
+    "The trait system (restless, frail, bookish, dreaming, etc.) visibly bends which cards surface and what the aura lines say. A 'frail' character negotiating with her body for sixty years reads structurally different from a 'warm' founder who keeps the door open, even when they share some of the same card pool.",
+    "The moment-writing itself is excellent at the sentence level — 'felt the terror and the relief of it together', 'the having of money has become as unremarkable to her as the lacking once was unrelenting' — this is the genre's primary currency and the game is genuinely rich in it."
+  ],
+  "staleness": [
+    "The calling card (y_calling) fires in virtually every life at 14-22 and is the structural spine of the whole run: scholar/soldier/maker/wanderer. Across 15 dynasties, every character picks one of these four and the rest of the life organises around it. The vocation tree is thin — no healer, no priest, no farmer, no sea-trade, no court bureaucrat. By dynasty 6 the player has seen all four callings multiple times and is replaying the same four branching templates.",
+    "Several high-weight cards recur so frequently that they become the skeleton of every life, detectable by dynasty 4-5: childhood fever, childhood book, y_calling, first love (or late love), marriage, a_work (promotion), m_health, e_legacy. The order varies slightly by lifespan but the set is nearly identical. By dynasty 8 the player is guessing the next beat before the card arrives.",
+    "The 'return to old town' card (cb_left_home) fires in nearly every life that ever chose 'Go. Don't look back.' — and the two possible outcomes (go back / keep it perfect) produce two very similar lines regardless of choice. This card is a staleness exemplar: it is once-per-life, but across 15 dynasties it appears in roughly 11 of them, always around the same midlife age, always with the same framing. Dynasties 2, 3, 6, 7, 8, 10, 11, 12, 13, 14, 15 all have it.",
+    "The 'body keeping its own counsel' and 'stairs asking a question' observation lines begin appearing so predictably in the 65-82 age band that the late-life texture collapses into a recognisable set: body observation + e_legacy + e_garden/e_craft + death. The elder stage is shorter in variety than any other.",
+    "The structural life-shape is nearly always: some childhood cards (3-5 of a fixed set), y_calling, first or late love, work tension, marriage (or not), child (or not), parent care, midlife health scare, legacy card, elder garden/craft, death. After five dynasties a player who pays attention can predict the card sequence within a few years. The 'emergent arc' promise is partly illusory — the engine shuffles the cards but the hand is dealt from the same small deck.",
+    "The morality of choices seldom has mechanical surprise: the 'good' fork almost always gives spirit/heart, the 'hard' fork gives mind/means or incurs spirit loss. Players learn the stat logic within two or three lives, which flattens the tension in later choices — you can game the ending you want rather than making genuine moral decisions."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 new calling branches to y_calling: healer/midwife, clergy/faith-keeper, sailor/merchant, court official/scribe. Gate some with era (clergy is richer in 'settled' or 'turning' eras; sailor needs 'plenty' or coastal flavour). Each calling should unlock 2-3 unique adult/midlife cards the other four don't see.",
+      "why": "The four current vocations are the single largest source of staleness. Veteran players have exhausted all four by dynasty 5-6. New callings double the structural variety of adult lives without touching the card pool at all.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the cool-down on cb_left_home from 'once-per-life-if-you-left' to a dynasty-scoped flag: once the 'return to old town' card has appeared in any ancestor's life, remove it from the pool for the next two heirs (replace with a different callback about the old town having new meaning for the descendant). This would cut repeat appearances from ~11/15 dynasties to ~5/15.",
+      "why": "This is the most visibly repeated beat across the transcripts. A dynasty-scope suppression is already the pattern used for epitaph lines (RECENT_LINES) and the 'red and furious' child line — applying it here would immediately reduce the most detectable staleness.",
+      "impact": "high"
+    },
+    {
+      "what": "Add an elder-stage expansion pack: 4-6 new cards for age 68-90 that are mutually exclusive with each other (so each life gets at most 2 of 6, not the same 2 of 3). Candidates: a last creative project reaching the world; a grandchild who mirrors the player's early choices; a chance to correct a historical record; a final journey; a confrontation with a community wrong the player ignored young.",
+      "why": "The elder phase (e_legacy, e_garden, e_craft, e_window, e_reconcile) is the thinnest in the game. Every elder life runs the same 2-3 beats. Expanding this stage increases end-of-life variety at the exact moment when veteran players are most alert to repetition.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 5-8 new adult-stage 'event' cards (not choices, or choices with genuinely uncertain mechanical outcomes unknown to the player) that fire based on unusual stat combinations — e.g. a card that only fires if heart>70 AND means<25; or if mind>75 AND spirit<40. These would be unexpected interjections into the familiar template.",
+      "why": "Right now stat-gating mostly controls when standard cards appear. Cards gated on rare COMBINATIONS would generate the 'I've never seen this before' moments the game promises. They would also make the choice-to-stat feedback loop less predictable.",
+      "impact": "med"
+    },
+    {
+      "what": "Give choices visible uncertainty on 1 in 5 cards: instead of deterministic 'means+16', some choices should announce a range ('fortune is fickle' is already used once) or a genuine coin-flip framing so the player genuinely doesn't know the outcome. The current system is learnable enough that veteran players game it.",
+      "why": "Predictable mechanics = flat tension. If the player knows 'take the promotion' gives +means and the 'good' fork always gives spirit, the moral weight of the choices collapses into a mechanical optimisation. Surprise outcomes restore authentic stakes.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life earns its prose reputation fully — the writing is the best in class for the genre — but by dynasty 5 the four vocations, the fixed skeleton of life-beats, and the predictably repeating 'old town return' and elder-stage template expose a card pool that is wide in language but narrow in structural variety, making the game feel less like emergent fiction and more like reading the same story in beautiful new sentences."
+}

@@ -1,0 +1,54 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "The fast-forward tap mechanic is a genuine win for one-handed mobile play: quiet years race by, moments pause and demand attention. This is exactly the rhythm a phone snacker needs — burst of prose, a choice, back to flow.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_lookaway) land as genuine 'oh, I remember that' moments mid-session. When they fire they feel payoff-ful in a way that earns a second life.",
+    "The vocation gate (soldier / scholar / maker / wanderer) gives each pickup session a different structural spine. A scholar's arc reads differently than a soldier's, and the era layer (war / plague / plenty) adds a thin coat of 'this generation is different from the last'.",
+    "The heir screen — 'You are no longer Mira. You are Anouk' — is an effective momentum hook at the end of a burst. The dynasty-seat trajectory and aspirations list give the player a concrete 'one more generation' target.",
+    "Touch targets are well-considered (44px minimum, safe-area padding, at-bottom scroll cue for tall cards), so the physical act of playing on a phone is comfortable rather than frustrating.",
+    "The ambiguity of outcomes (the affair may or may not break the marriage; the risky investment may pay or tank) injects genuine tension into choices that could otherwise feel mechanical.",
+    "Per-dynasty once-gates (onceDyn) stop a handful of structural beats from repeating, which is a real freshness lever in the first four or five dynasties."
+  ],
+  "staleness": [
+    "The opening childhood always starts from the same small pool: fever, book, dark, wonder, unfair, friend, sibling, animal, grandparent — and because most are once-or-onceDyn gated, by dynasty 4-5 you have seen every childhood card at least once. A five-minute mobile session that starts a new life hits nearly the same beats in the same order because the child stage has fewer than 12 cards and they saturate fast.",
+    "The 'a_child' card text ('The question of a child arrives, the way it does — half decision, half tide') recurs nearly verbatim in every dynasty with a partner, often two or three times per life. The transcripts show it verbatim across Dynasties 1, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15. A snacker who plays a life or two per session encounters this in almost every pickup.",
+    "Marriage always resolves the same way: love exists → marriage card → same three variants of 'fell asleep mid-sentence' or 'quiet certainty for years'. In fifteen dynasties the phrase 'fell asleep first again, mid-sentence' appears at least six times nearly word-for-word. On mobile — where the text is large and the screen small — repetition registers more viscerally.",
+    "The body-decay observations ('the stairs have started to ask a question', 'mornings take longer to arrive') are pulled from a deep pool, but the pool is drawn from heavily across a single two-life session: three or four distinct bodies, three or four end-of-life decay observations, and the per-stat thresholds all fire within a narrow vitality window so they cluster at the same life-stage every time.",
+    "The elder phase feels structurally thin for a mobile burst: once a life reaches 66+ the available non-once cards collapse to e_garden, e_legacy, e_peace, e_body, e_reconcile, e_bequest, and a couple of vocation callbacks — and most of these will have fired once already. The last 15-20 years of a life can feel like waiting, which is noticed especially on phone where you can fast-forward but the moment card density drops noticeably.",
+    "Dynasty-to-dynasty staleness sets in around dynasty 6-8: the surname changes, the traits change, but the life-shape template (childhood → calling → love → marriage → child → midlife-health → elder legacy) is largely invariant. The transcripts confirm it: every founder hits calling at 14-22, love at 16-32, marriage at a delay, first child at 29-50. The structural variety exists (soldier vs. scholar vs. wanderer) but only one axis of difference, and even that repeats: 'Kept your head down. Come home whole' vs. 'Go where it's worst' is the only soldier fork."
+  ],
+  "improvements": [
+    {
+      "what": "Add at least 6-8 new childhood cards with distinct trigger conditions so the child stage does not exhaust within 3 dynasties. Suggestions: a fire or flood in the neighbourhood (env), a lie told and discovered, a first act of cruelty witnessed, a physical challenge or disability discovered early, a parent's secret overheard.",
+      "why": "Childhood is the first thing every new session shows. If a snacker picks up for ten minutes and the first four beats are ones they've seen, the game signals 'same old' before the unique callout arc even begins. Childhood cards are also all once-gated, so they never recur — density must come from breadth.",
+      "impact": "high"
+    },
+    {
+      "what": "Rotate or weight-suppress the 'a_child' card's three scene-text variants more aggressively, or add four more variants, and add a cooldown at the dynasty level (not just per-life) so the same phrasing cannot appear more than twice across a full run.",
+      "why": "This single card's near-verbatim text appears in roughly 60% of all lives in the transcripts. On mobile, where prose is large and attention short, seeing 'fell asleep first again, mid-sentence' for the fourth time in a session actively breaks immersion.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-5 elder-stage repeatable cards (non-once, with 12-16 year cooldowns) so the 66-90 band always has at least two eligible non-structural moments. Candidates: a younger person's question about the old world, a windfall or unexpected small loss, an argument with a neighbour, a dream recalled, a skill rediscovered.",
+      "why": "The elder band is where a mobile session is most likely to stall — the player can fast-forward, but when the card density visibly drops it breaks the 'just one more year' pull. This is felt acutely on a phone where pacing is everything.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a second structural axis of variety beyond vocation. Specifically: a 'disposition' fork in late youth (idealist vs. pragmatist vs. fatalist) that gates 2-3 exclusive cards in adult/midlife, similar to how vocation gates a_soldier_service / m_soldier_ghost. This gives a scholar-idealist a different adult arc from a scholar-fatalist.",
+      "why": "Vocation is currently the only player-chosen lever that gates exclusive content. After 4-6 lives across two or three vocations, the player has sampled most of the structural variety the system offers. A second axis doubles the combinatorial space without requiring a large card count.",
+      "impact": "med"
+    },
+    {
+      "what": "Show the dynasty motto and seat in a persistent one-line footer or the existing header area during normal play (not only in the Chronicle), so a mobile snacker who returns after a break immediately knows 'I am 3rd of House Vane, a rented room, motto: We burn bright' without navigating.",
+      "why": "The 'one more life / one more dynasty' pull relies on the player carrying the dynasty's story between sessions. On mobile that context is frequently lost. A persistent ambient reminder costs zero code complexity and raises re-engagement.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'quick session' badge or milestone — something that completes within a single life (e.g., 'soldier who kept their head down' or 'scholar who gave it all away') — surfaced on the eulogy screen, so a five-minute pickup has a satisfying micro-close even if the player doesn't start another dynasty.",
+      "why": "Mobile snackers often can't finish even one full life in one sitting. A life that ends mid-session with no visible mark of what it became feels unresolved. A per-life flavour badge (derived from existing epitaph clusters, no new data needed) gives the burst a closing beat.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely atmospheric and mechanically thoughtful, but for a mobile snacker picking it up for 10-minute bursts across multiple sessions, the childhood and marriage cards repeat too visibly by dynasty 4-6 and the elder phase runs thin — the game is a 7 in sessions 1-3 and slides toward a 5 by session 8 as the structural template outpaces the content pool."
+}

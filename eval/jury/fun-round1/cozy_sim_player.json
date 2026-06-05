@@ -1,0 +1,50 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The prose quality stays genuinely warm and literary across all 16 dynasties — not a single jarring or grim line that breaks the meditative mood. For a cozy player this is the whole atmosphere, and it holds.",
+    "Callback cards (the childhood book re-read at midlife, the looked-away outcast who reappears decades later, the unspoken love finally written to in elderhood) produce real emotional payoff. These are the moments that make a life feel *earned*, not random.",
+    "The bequest card — choosing what to hand down to the heir — is a perfect cozy mechanic: low stakes, character-revealing, and it makes succession feel warm rather than mechanical.",
+    "Era flavour (war, plague, plenty, turning age) genuinely changes the opening texture of a life. A plague-era founding feels different from a fat-year one, and the prose captures it in a single sentence that sets the generational mood before the first card drops.",
+    "Epitaph generation is thoughtful: the de-duplication logic means a house doesn't read the same goodbye twice in a row, and the stat-derived themes ('Was elsewhere as often as here'; 'Carried a lightness the years never managed to take') regularly land with emotional precision.",
+    "The vocation arc (soldier/scholar/maker/wanderer) does give each career a distinct mid-life cluster of cards — the scholar's masterwork dilemma, the wanderer's recurring 'stay or move on' tension, the maker's shop gamble — that keeps the adult band from being identical paste.",
+    "Dynasty-level heirlooms and reputation accumulate visibly (the family's feared name reaching the next generation who can accept or refuse it) and give a cozy sense of continuity without demanding strategy."
+  ],
+  "staleness": [
+    "Almost every life in the transcripts follows the same structural skeleton: childhood fever / sibling → youth calling → adult late-love → adult child → midlife health scare → elder deathbed reckoning. By dynasty 5 this skeleton is fully legible. A cozy player doesn't need tension but does need variation in *shape*, and the shapes are not varying.",
+    "The 'late love' card fires in nearly every single life, using almost identical framing ('It is later than the stories say it should be / The time for this was supposed to have passed / Later than anyone plans for'). These are good lines the first three times; by dynasty 8 the cozy player recognises the formula before the prose finishes. The marriage card immediately following is equally formulaic.",
+    "Soldier vocation dominates the playthrough (over half the 38 lives choose the blade), which means the soldier-specific arc cards — the hard campaign, the war ghost at 3am, the old veteran asked about soldiering — repeat so frequently they stop feeling like discovery. The calling should distribute more evenly to keep each dynasty fresh.",
+    "Silent-observer floating lines ('her legs know something the rest of her is not yet ready to hear,' 'reading has stopped being something she does, and has become somewhere she goes,' 'the decades have arranged themselves around her and somehow never sat down') are beautiful but recur verbatim across characters without attribution. By dynasty 6 they have the texture of furniture rather than character.",
+    "The elder band is thin as an active *decision* zone. Once health and the deathbed reckoning card fire, most elders have only one or two more choices. The cozy genre's highest pleasure is the 'winding down' — tending a garden, last journeys, reconciliations — and there are cards for this, but the engine rarely delivers more than one of them per elder, making late life feel like a short corridor to the obituary.",
+    "Era darkness (war's conscription / plague's impossible tenderness choice) briefly pushes the emotional register from 'cozy' to 'heavy'. The prose handles it gracefully, but for a cozy player specifically the war era can feel like an unwanted intrusion rather than welcome variety. There is no 'settled / peaceful' era that stays gentle for the life's full run.",
+    "By dynasty 10-12 in the transcripts, the mottos are visibly reusing the same handful of phrases ('We burn bright, and we burn' appears for three separate dynasties). For a cozy player tracking the house's emerging personality, this dilutes the sense that each house is its own distinct story."
+  ],
+  "improvements": [
+    {
+      "what": "Add 6-8 elder-band cards focused on gentle completion: tending a late garden across multiple seasons, a correspondence with a distant grandchild, organising the family archive, teaching a final skill over several visits. Make them *serial* (card A unlocks card B two years later) so the elder years feel like an unfolding chapter rather than a waiting room.",
+      "why": "The cozy genre's core pleasure is the 'winding down'. Currently elders get one or two moments then die. Expanding the elder band with chained quiet moments would make each life feel fully inhabited to its end, which is the feeling cozy players come for.",
+      "impact": "high"
+    },
+    {
+      "what": "Add vocation-distribution weighting that depresses the soldier choice if it has appeared more than twice in the current dynasty, gently nudging wanderer and scholar lives to appear more often across a long session.",
+      "why": "The soldier arc is overrepresented in 16 dynasties — its combat callbacks and war-era cards then dominate the emotional texture. More scholar and wanderer lives (quieter, more domestic, no war callbacks) would push the overall session tone toward the calm the cozy player wants and vary the structural shapes being played out.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'settled' or 'prosperous peace' era that carries through an entire life with no war or plague card eligibility, only era-specific 'abundance' moments (a town fair, an unusually kind decade, a generation of unlikely friendship). Make it fire at roughly 20% probability on era roll, balanced against the heavier eras.",
+      "why": "War and plague eras introduce darkness that can feel jarring in a cozy session. A fully gentle era would let some lives feel unhurried from opening to close, which is exactly what a cozy player periodically needs as a counterweight to the heavier generations.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the late-love card and marriage card each 3-4 genuinely distinct framings that vary by the character's life history — a widowed person falling in love frames differently from a never-married one; a soldier's late love has different texture than a scholar's. Currently variants rotate by generation index rather than by who the person actually is.",
+      "why": "These are the most frequently repeated cards. If the prose were genuinely personalised to prior choices (the soldier's love framed around 'someone who asks no questions about the war', the scholar's around 'someone who borrowed one of their books'), repetition would read as depth rather than formula.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the dynasty motto pool significantly (currently 3-4 phrases appear repeatedly across 12 dynasties). Each motto should ideally be unique per dynasty; a pool of 30+ short phrases would make house identity feel individual.",
+      "why": "Seeing 'We burn bright, and we burn' appear for dynasties 7, 9, and 11 breaks the sense that this particular family is its own story. The motto is a cozy player's favourite dynasty artefact — it should never recycle within a session.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is warm, beautifully written, and a pleasure to inhabit for a dynasty or two, but by dynasty 5 the structural skeleton is fully legible — late love, child, health scare, deathbed reckoning, repeat — and the cozy player finds herself watching a familiar template softly refurnished rather than discovering genuinely new shapes of life."
+}

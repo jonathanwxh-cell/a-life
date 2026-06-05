@@ -1,0 +1,53 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system genuinely delivers on its promise. When the childhood outcast returns as a grown success and holds a door open (cb_outcast_return), or when the too-hard book is finally re-read at 50 (cb_books_late), these feel like earned story beats. The arc-memory works.",
+    "The vocation system creates structurally divergent lives. A scholar run (cb_study_pays at 27, scholar_question in the 30s, scholar_legacy at 50, e_scholar_old at 70) reads and feels different from a wanderer run. The three-card clusters per calling are the game's strongest engine for structural variety.",
+    "The era layer (war/plague/plenty/hard/turning) does real work. A plague-era life has a unique and morally charged card (w_plague_tend) that a settled-era life will never see. The macro-world changes between generations create genuine between-dynasty contrast.",
+    "Prose rotation is genuinely high-effort. The RECENT_LINES deduplication for epitaphs, the 7-variant love-approach text, the 10-line observation pools per stat-band — these delay the feeling of exact repetition meaningfully. The writing stays alive longer than a lesser system would allow.",
+    "The dynasty-arc rewards patience. Watching a house earn its motto, accumulate heirlooms (the family book in Dynasty 12 passing from Saoirse to Liv to Yara to Emory across four generations is a small emergent continuity), and hit 'an old and famous house' after five generations is a real payoff.",
+    "The competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) resist the binary-virtue framing of most cards. These feel like genuine dilemmas that leave you uncertain. The e_childless and e_solitary variants for lives without heirs are quietly moving."
+  ],
+  "staleness": [
+    "The childhood card pool is too thin for cross-dynasty play. Only ~8 child cards exist and ~5 are once-per-dynasty. By dynasty 5, most childhood sessions draw from the same 3-card rotation: c_steal ('Stole, once, and the taste was guilt as much as fruit' — fires verbatim in dynasties 2, 3, 5, 8, 10, 12, 14, 15), c_friend, and c_book. The c_steal card in particular has a single resolution line that survives without variation regardless of trait or era.",
+    "The marriage arc is structurally identical in nearly every dynasty. Love interest appears (y_love1 or a_meet_late) → a_marry fires with the rotating 'fell asleep mid-sentence' / 'quiet certainty for years' / 'question has been in the room' prompt → 'Ask. Build a life.' → haveChild(). By dynasty 8 this sequence reads like clockwork. The a_child card's opening — 'It arrives sideways, the way it does — not quite a question yet, not quite not' — appears in a majority of adult lives and is never recontextualised.",
+    "The soldier ghost card (m_soldier_ghost) produces near-identical prose in every soldier vocation: 'Kept the worst of it where he had always kept it — behind the teeth, unspoken, his own' appears in dynasties 2, 10, 12, 14 with identical wording. The 'carry it alone / talk about it finally' binary lands identically regardless of relationship context.",
+    "The elder closing arc is a predictable template by dynasty 6-7: body-decline observation (vit_tire pool) → e_garden or e_journey → e_legacy (the three-option legacy choice) → e_peace or e_last_walk. All these cards are once-per-life, which means they reliably sequence in the same order. The closing of a long life feels like completing a checklist rather than arriving at a person's particular end.",
+    "The dynasty-layer lever is shallow for players who want to steer it. The m_invest_name card (62% seat-rise chance) and x_reckoning (seat-collapse threat) are the only deliberate controls. Reputation-gated cards require conditions (reputeTop === 'scholarly', seat >= 4) that take 4-5 generations to reach, and even then the gated cards (r_scholar_door, s_patronage) add one or two moments, not a fundamentally different texture. The 'one more dynasty' pull is weak mechanically; it's almost entirely aesthetic.",
+    "The observation-line pools (spirit_hi, vit_tire, means_lo) have 8-10 lines each. In a long dynasty, the body-decline pool exhausts itself visibly: 'The stairs have started to ask a question,' 'The body has begun keeping its own quiet counsel,' 'His legs know something' etc. cycle recognisably by dynasty 8 in a player reading a full run."
+  ],
+  "improvements": [
+    {
+      "what": "Add 6-8 more child cards (stage:'child') covering distinct emotional registers that are currently absent: a childhood friendship that ends badly before adulthood, a moment of family economic pride or shame that the child internalises, a creative discovery, an early experience of injustice done *to someone else* (not just to the character). Weight them lower than c_origin but high enough to ensure childhood still varies across lives.",
+      "why": "Childhood is 8 cards for a 12-year window. With 5 of those once-per-dynasty, the 3rd-and-beyond dynasty consistently draws c_steal and c_friend from an exhausted pool. The 'Stole, once, and the taste was guilt as much as fruit' line has appeared verbatim in over half the transcript dynasties — the single most visible repeating line in the run.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the a_marry card at least 3 structurally different framings based on relationship context: a short courtship (love formed < 3 years ago), a long-delayed question (love formed > 8 years ago), and a late-life remarriage (character age > 50). Each framing should have its own prompt text and a distinct set of result lines. The current rotation of 3 prompts doesn't differentiate these relationship shapes.",
+      "why": "The marriage beat fires in nearly every dynasty that reaches adulthood and is structurally identical each time. Players notice it as a hinge-event they pass through, not a moment with weight. Even small structural differentiation would break the template feeling.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'wanderer callback' for lives where vocation=settled (the ex-wanderer who chose to stop): a midlife card where a traveller knocks and offers news of the old road, forcing the character to feel the weight of the road not taken. Currently wanderer→settled lives drop the vocation almost entirely after a_wanderer_settle fires.",
+      "why": "The wanderer vocation has the weakest downstream arc. Once a_wanderer_settle fires ('Let the road end here'), nothing in the remaining 40 years of the life references the former road. The scholar, soldier, and maker each get midlife and elder callbacks; the settled-wanderer gets nothing. This makes the wanderer path feel like a dead-end rather than a life-shape.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'dynasty inheritance card' that fires in early adulthood (age 22-32) and is conditioned on having a dynasty with at least 2 ancestors: a memory of an ancestor surfacing — not just the family motto, but a specific thing the character has heard about a grandparent or great-grandparent (pulled from S.lineage). This would create an emotional bridge to the historical dynasty, not just the abstract house stats.",
+      "why": "The existing 'family story' card (the ancestor-echo card in the midlife band) fires once and references a single ancestor by name. For a dynasty that has 4-5 members, the rich lineage is almost entirely invisible to later heirs beyond the motto and heirlooms. Making the past feel present would strengthen the 'one more dynasty' pull.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a `cool` to c_steal (currently has none) and diversify its resolution lines by child trait. A 'shrewd' child stealing should read differently than a 'tender' child stealing. The current single-line resolution ('the taste was guilt as much as fruit') is trait-blind and fires identically regardless of who this person is.",
+      "why": "c_steal is the single most visible verbatim repeat in the transcript run, appearing in at least 8 of 15 dynasties with identical output. A cool of 12 and trait-branched lines would both reduce frequency and increase variety when it does fire.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the elder stage variety by adding 3-4 elder cards that are conditioned on *how* the life was lived rather than just vit/mind/means thresholds: a card for someone who had children but outlived them; a card for someone who never had children and has no heirs but has a close friend; a card for the second-gen+ heir who knew their parent-character personally (lineageEcho alive into the character's adulthood). The current elder template (body-decline → legacy → garden/peace) repeats structurally in nearly every long life.",
+      "why": "The elder band has the most fixed structure of any life-stage. Almost every long life ends with the same 4-5 cards in close sequence. Conditional variety here — 'this elder's specific regret or peace' — would make individual deaths feel more particular.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine craft in its callback system and vocation arcs, which create real structural divergence between some lives, but by dynasty 6-8 the thin childhood pool, the mechanical marriage-and-child sequence, and the templated elder closing expose a game that delivers a beautiful first dynasty and a recognisable template by the fifth."
+}

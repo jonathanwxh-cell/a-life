@@ -1,0 +1,53 @@
+{
+  "profile": "replay_addict",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system (cb_books_late, cb_outcast_return, cb_strayed, cb_principle) is the best mechanic in the game — an early choice resurfaces decades later and closes a loop you did not know was open. These produce genuinely unexpected stories and create the 'I've never seen THIS before' feeling the genre lives on.",
+    "The vocation system (soldier / scholar / maker / wanderer) does create structurally different adult arcs: a soldier life has the deployment card, the 3am haunting, the elder reckoning; a wanderer gets the settle-or-move cycle and the homecoming accounting. When these combine with an era (vx_soldier_war, vx_scholar_turning), the content is genuinely distinct.",
+    "Dynasty accumulation — motto crystallization, the inherited secret, the hard name as heirloom, seat aspiration — gives a replay-addict a real goal structure to pursue across runs. Reaching 'an old and famous house' at Dynasty 15 gen 4 (House Vane) is a concrete payoff. The 'still ahead' aspirations surfaced on the heir screen give each new life a direction.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) are singletons with no player choice that simply happen; they break the rhythm of two-option binary morality and create the feeling that the world is larger than the player's decisions.",
+    "The era system (war / plague / plenty / hard / turning / settled) means gen 8 is born into a world gen 2 never lived in. The era-gated cards and the vocation x era intersections (a soldier in a war, a scholar in a turning age) are the game's highest-leverage freshness mechanism.",
+    "The competing-goods cards (x_honest_or_kind, x_dream_or_duty, x_loyalty_truth) are the most re-playable choices because neither branch is cleanly right, and the elder callback (cb_the_cost) returns them in a way that feels earned rather than mechanical."
+  ],
+  "staleness": [
+    "Scholar vocation saturates the transcripts: roughly half the 38 lives across 17 dynasties chose the book. Once a scholarly house takes hold, the reputation mechanism nudges successive heirs toward the same path; the scholar arc then closes near-identically (name your worth vs. teach it cheap; guard the knowledge vs. give it away; hand the question on vs. make peace with not knowing). By dynasty 8 the scholar shape is completely predictable.",
+    "The love-marriage-child pipeline repeats in ~80% of lives despite engine comments about fixing the monoculture. The ordering is nearly always: youth love card → adult marriage prompt → adult child card. The lines vary (seven y_love1 variants, eight a_child birth lines) but the structural beat is the same. Most runs feel like variations on one domestic arc.",
+    "Epitaphs blur across runs. 'Gave away everything she knew, and so kept it' appears in Dynasties 2, 8, 9, and 13. 'Poured what he knew into the young...' and 'Kind in the small daily ways that turn out to be the large ones' each appear three or more times in 17 dynasties. The anti-repeat logic in epitaphFor() only guards within a lineage; cross-dynasty, the same lines land verbatim.",
+    "No meta-progression unlock surfaces to the player. The code tracks markMomentSeen and recordHouseLegacy, but from the player's perspective there is no badge, no escalating title screen, no new card pool, no 'houses raised: 7' counter with a visible goal. A replay addict needs a reason the 8th dynasty is different from the 3rd beyond what they bring to it.",
+    "The elder cluster is near-universal template: e_legacy (what do you want remembered) + e_peace or e_last_walk + cb_the_cost (one old decision reckoned at the end) + e_bequest. Every long life ends the same way. The variation is in the stat-flavoring of the epitaph, not the shape of the final act.",
+    "The seat-climb meta-goal is shallower than it appears. Seat advancement is driven more by whether peakMeans happened to cross 80 than by interesting decisions — a player cannot reliably say 'I am building toward seat 5 THIS dynasty by choosing X.' The invest-name card (m_invest_name) is one real lever but it fires rarely and has a 38% miss rate, making the climb feel partly arbitrary."
+  ],
+  "improvements": [
+    {
+      "what": "Surface a persistent cross-dynasty discovery counter on the title screen and/or heir screen: 'X of Y distinct moments witnessed across your lineage.' Lock 5-10 rare cards behind a discovery threshold (e.g., a secret dynasty-specific event unlocks after 40 distinct moments seen).",
+      "why": "A replay addict's primary fuel is novelty-seeking and visible progress. Right now the markMomentSeen mechanic exists in the engine but does nothing for the player. Making it visible and gating rare content behind it gives the 8th dynasty a genuine reason to exist beyond aesthetic appreciation.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2 new vocations (healer / merchant) or split 'wanderer' into 'wanderer' and 'outlaw' — any new calling must bring its own 3-card adult arc, one midlife reckoning card, and an elder cap. Simultaneously downweight scholar in the eligible pool when house repute is already 'scholarly' (so a scholarly house's heir doesn't default to book again).",
+      "why": "Scholar monoculture is the single most visible staler in the transcripts. New vocations diversify structural life-shapes and give the dynasty layer new reputation paths (healer → pious/generous; merchant → ruthless/industrious). Reducing the hereditary pull on vocation also rewards breaking with the house.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a hard per-session epitaph blacklist: any epitaph line used in the last 8 deaths across dynasties (not just within a lineage) is blocked for future picks. Extend the freshPick pool for the 5 most-repeated lines ('Gave away everything... and so kept it', 'Kind in the small daily ways', 'Poured what he knew into the young') to 10+ variants each.",
+      "why": "Verbatim epitaph repetition is the most visible staleness signal a transcript reader (and observant player) will catch. The existing logic guards within a lineage but not across dynasties. A cross-dynasty blacklist costs nothing structurally and eliminates the 'I've seen this before' jolt.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the seat-climb legible and player-steerable: surface the two or three concrete actions that would most likely advance the seat this dynasty (e.g., 'The house needs a life that reaches a means peak of 80, or a strong reputation push') on the heir screen. Don't display numbers — use prose ('The house climbs on fortune or on character; this heir has the latter').  ",
+      "why": "The dynasty layer's strongest replay hook (building toward the histories) is currently opaque. Players cannot plan a dynasty arc because they don't know whether they're one generation away or five. Making the gap legible without exposing raw numbers gives the aspiration teeth — a replay addict will now intentionally target a wealth run vs. a reputation run.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-5 'dynasty-memory' events that only fire if the current house has survived 4+ generations AND has a specific reputation OR heirloom. Example: a card that fires only for a house with the 'hard name' heirloom at seat 4+, presenting an external diplomatic challenge only a feared house would face. Gate these explicitly on lineage depth.",
+      "why": "Right now, gen 10 of a storied house plays almost identically to gen 2 of a new house (same card pool, same beats). Deep-lineage-gated content would reward persistence and make the 10th dynasty genuinely different from the 2nd — the replay addict's core ask.",
+      "impact": "med"
+    },
+    {
+      "what": "Add one 'wildcard' life shape — the amnesiac/exiled/bastard founder who begins mid-life (age 30) with scrambled stats and no lineage memory, available as an option when starting a new dynasty after 3+ completed runs. This is the roguelike 'challenge run' equivalent.",
+      "why": "After 5-8 dynasties, a replay addict wants asymmetric challenge, not just more of the same arc. A mid-life founder with unusual starting conditions breaks the childhood/youth template and creates immediately different structural variety without requiring new card content.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely pleasant literary sim that offers more cross-run variety than most genre entries, but by dynasty 8-10 the scholar monoculture, the repeating love-marriage-child pipeline, and near-identical elder closings make the scaffolding visible — and without a visible meta-progression hook to pull a replay addict back, 'one more dynasty' becomes habit, not hunger."
+}

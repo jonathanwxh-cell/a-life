@@ -1,0 +1,53 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 6.0,
+  "fun_highlights": [
+    "The callback system is the game's single best feature for narrative players: 'c_book' at age 7 returning as 'cb_books_late' in midlife, a childhood stray becoming the 'heirloom' that defines a house, a kindness to an outcast at age 9 coming back as a door held open at age 27. These chains create the 'I remember that person' feeling that makes a life cohere into a story.",
+    "Vocation gating genuinely diversifies adult years. A scholar life (hungry years, the question, cb_study_pays, scholar_legacy) feels structurally different from a soldier life (service, PTSD at 60, the elder truth-telling), which differs from a maker life (shop, masterwork, handoff). These are not just relabeled cards — they change which moments can happen and produce distinct life shapes.",
+    "The era system (war, plague, plenty, hard, turning) is a real structural lever. A life born into plague faces different moral stakes than one born into fat years, and the era-gated cards (w_plague_tend, w_hard_winter, w_plenty_ride) produce moments that cannot appear otherwise. Dynasty 5's war arc through three generations genuinely accumulated.",
+    "The dynasty-memory cards (d_ancestor, d_motto_test) are the most exciting content in the game for a narrative player — the moment the family words turn from inherited phrase into tested conviction is exactly the kind of emergent characterisation this genre should deliver.",
+    "Individual sentence-level writing is exceptional and the rotation system (rotI, rotN with 3-7 variants per card) means a single card rarely lands in identical wording twice. The prose is consistent in voice and literary quality across the whole pool."
+  ],
+  "staleness": [
+    "The late-love formula is near-universal and its log-line pool is too thin. In the first 10 dynasties almost every character who does not find young love receives 'a_meet_late', and the three output lines ('Found love later than expected, and was almost embarrassed by the size of it' / 'Let love in late, and was astonished how little the lateness seemed to matter to it' / 'Came to love past the age they thought it was meant for') rotate visibly within 4-5 dynasties. By dynasty 6 the arrival of love is not a story moment — it is a slot that fills.",
+    "The marriage log-line pool is three variants, all structurally identical ('Married [name] after both had long stopped expecting it, and meant it the more for that' / 'with most of a life already behind them, and counted it the best thing in any of it'). In the first 10 dynasties this marriage announcement appears more than 20 times. It never surprises.",
+    "The 'had a child late' cluster has only 3 output lines and fires for the overwhelming majority of characters, because the a_child card fires at 26-50 and most characters reach it after 40. By dynasty 5 this line has already lost all weight.",
+    "The elder band converges almost every life onto the same template: body-decline observation, cb_the_cost ('Near the end, one old decision keeps returning'), legacy choice ('That I was kind' / 'That I built something'), death. The specific decisions vary but the structural shape does not. A narrative player who has watched 8 elders age will feel they are watching a formula.",
+    "Observation lines repeat across dynasties more than the rotation suppresses. 'The mind has become a room she can close the door of' appears in dynasties 2, 6, 7, 8, 9, and 10 of the transcript (6 times in 16 lives). 'Time has not yet managed to talk her out of being glad' appears in dynasties 4, 5, 7, 8, and 9. These are ambient prose fired by stat thresholds — the thresholds are common enough that the same lines cluster.",
+    "The soldier vocation dominates the transcript heavily. Eight of the first sixteen lives chose soldier at the calling fork, producing near-identical early adult arcs (service card, then the PTSD 'soldier_ghost' at 60, then the elder truth-telling card). This is partly a weight issue (the soldier calling is plausible for many stat combinations) but results in a dynasty feeling like 'the soldier house' regardless of what the dynasty meta-layer intends.",
+    "Structural arc shape is rigid regardless of content. Even with different cards filling each stage, almost every life follows: 2-4 childhood cards, calling fork at ~15, love falls at ~16-25 or ~26-50 (late), marriage, child late, body begins at ~50, midlife reckoning, elder observations, cb_the_cost, death. A narrative player tracking life-shapes rather than individual moments will notice the template by dynasty 4."
+  ],
+  "improvements": [
+    {
+      "what": "Double the late-love and marriage log-line pools to at least 8-10 distinct entries each, and add 2-3 variants where love arrives dramatically differently — abruptly, reluctantly, as a surprise to the character themselves.",
+      "why": "These are the most-fired log lines in the game. Any card that fires in nearly every life needs a pool deep enough that it never feels rote. The current pool of 3 for each is the single biggest driver of perceived repetitiveness.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 'no-child' elder moments that only fire when the character has zero children — meditations on legacy without progeny, relationships with others' children, what it means to end a line. Currently childless lives are structurally thinner because so many midlife/elder cards require a child or spouse relationship.",
+      "why": "The game nudges heavily toward 'have a child late' because the card fires for nearly every adult with a spouse/love and the yes-choice is the warmer of the two. A childless path needs its own late-life texture to feel like a real alternative rather than a closed door.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a dynasty-level 'character brake' that suppresses the soldier vocation for 2-3 generations if the house has already run a soldier line, or lowers its draw weight for inherited 'scholarly' or 'maker' reputation houses.",
+      "why": "The soldier arc is heavy enough that it crowds out maker and wanderer paths. A scholarly house watching its heirs keep taking up the blade instead of the book breaks the dynasty identity that the repute system promises.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the elder band 2-3 more structurally distinct paths: an elder who has outlived almost everyone (relationship pool near-empty), an elder who is still in the thick of something (no winding-down at all), an elder who reconnects with a life abandoned in youth. These could be cond-gated so they only fire for the right life-shapes.",
+      "why": "The current elder band is the most convergent part of the game. Every elder, regardless of what kind of life they lived, tends to arrive at the same quiet sequence. An elder whose life was genuinely reckless or rootless should feel different in old age than one who built a family and stayed.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'restless wanderer' meta-outcome for lives that chose the wanderer vocation and kept moving — a house that never settles, with a motto about roads and leaving, an heirloom that is a habit rather than an object, and elder cards specific to the person who never stopped moving. Currently the wanderer path mostly converges on 'settled' by midlife via a_wanderer_settle.",
+      "why": "The wanderer vocation promises a structurally different life but the engine's marriage/child/home system gently absorbs it. A true wanderer dynasty should feel demonstrably unlike a maker or scholar dynasty even 4 generations in.",
+      "impact": "med"
+    },
+    {
+      "what": "Reduce the observation line firing frequency by raising the stat thresholds or adding a per-dynasty cap on how many times a given observation cluster can fire. 'The mind has become a room she can close the door of' should be remarkable, not ambient.",
+      "why": "Observation lines are designed as texture but they behave like content because there are too few and the stat conditions that trigger them are common. Seeing the same line in dynasties 2, 6, 7, 8, 9 and 10 teaches the player to skim rather than read.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely beautiful piece of writing with a clever callback system that occasionally produces memorable narrative arcs, but by dynasty 4-5 the structural template — late love, late child, body declines, the elder reckoning, death — becomes visible and the thin log-line pools for the most-fired moments (marriage, late love, child birth) mean the words themselves stop landing, which is a fatal problem for a game that is entirely words."
+}

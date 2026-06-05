@@ -1,0 +1,57 @@
+{
+  "profile": "completionist",
+  "score": 6.5,
+  "fun_highlights": [
+    "Callback cards genuinely surprise: cb_lookaway (the ignored child, redeemed decades later), cb_outcast_return (kindness paid back as a door held open), cb_books_late (the child book re-read at last) — these are the game's best mechanic. When one fires, it feels discovered.",
+    "Vocation arcs (soldier/scholar/maker/wanderer) create real structural divergence: a soldier's midlife is ghosts-at-3am; a scholar's is the unanswered question handed forward; a wanderer's is the question of whether the road was a life. Each reads differently enough to motivate re-running the game with a different calling.",
+    "Era gating is quietly effective. A plague life (tend-or-distance, keep-your-distance vs. stay-and-risk) and a war life (the call, the actual-war vocation-intersection) drop genuinely rare moments that a settled-era life never sees. The completionist notices there are still unseen era cards deep into a run.",
+    "Dynasty aspirations and the seat-climb give a concrete goal hierarchy: motto, heirloom, seat-5, seat-7-pinnacle. The 'still ahead' language on the heir screen is well-calibrated pull — especially the warning that seat-7 is re-earned not won-and-done.",
+    "Discovery counter (39 of 139 moments witnessed, shown on title screen) is exactly the right completionist hook: opaque enough not to spoil, present enough to signal there is more.",
+    "The solitary/childless life-shapes (m_solitary, a_chosen_family, e_solitary) are real content, not dead-ends — a completionist who forces a no-children run gets distinct elder beats.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) land without warning and are the only truly unchosen events. f_sudden_loss in particular hits hard when a high-bond relation vanishes mid-life — genuine surprise.",
+    "The bequest choice is the best cross-life lever: choosing 'the stories and the warmth' versus 'every coin I can spare' visibly alters the heir screen and starting conditions, and a completionist will experiment with all four options across dynasties."
+  ],
+  "staleness": [
+    "The t_warm 'open-table' card ('People keep ending up at X's table...') fires in every warm/tender life with near-certainty and its two choices ('Keep the door open' / 'Learn to say no') are the same regardless of dynasty, seat, or reputation. It appears verbatim in 10+ of the 15 transcribed dynasties. The writing is good but the once-per-life gate is insufficient — the mechanic reads as required-tax rather than discovery by dynasty 5.",
+    "'Improved her own childhood a little, for a child who'd never know' (e_window, tell-the-better-story) surfaces in 8 of 15 dynasties, almost always near the same late-life window. Its phrasing is identical every time. By dynasty 6 it registers as a template beat, not a moment.",
+    "The scholar elder arc — 'Hand the question on, unanswered' — fires in every scholar life that reaches elder age (D3, D5, D8, D12, D14, D15). It is once-per-life but not once-per-dynasty, so a scholarly house sees it every generation. The line is beautiful the first time; by the third it is a ritual.",
+    "The adult band (ages 28-45) is the thinnest stretch. Most lives in the transcripts receive only 2-3 adult moments before midlife: a work/family tradeoff (a_work), possibly a_old_friend or a_affair, and one competing-goods dilemma. The vocation-arc adult card adds one more, but for non-scholars who lack callbacks, the adult years feel like a brief corridor between youth and midlife.",
+    "Love/marry/child follows the same structural template in nearly every coupled life: y_love1 or a_meet_late → a_marry → a_child. The player declines occasionally but the cards re-offer. The result is that ~80% of lives in the transcripts follow the same domestic shape with different names. Solitary paths are present but feel like outliers, not equal alternatives.",
+    "Dynasty-gated high-seat content (s_great_burden, s_patronage, s_inheritance_dispute, r_hard_name, r_scholar_door) is essentially invisible in this 15-dynasty run because no dynasty climbed past seat 2-3 in more than 1-2 lives. A completionist discovers these exist via the discovery counter but has no legible path to them without sustained dynasty focus — the aspirations system hints at seat targets but doesn't signal that rare card categories unlock at seat 3/4/5.",
+    "The 'Tell the better story' / 'Tell the true story' grandchild choice (e_window) repeats verbatim across dynasties with no variation gated on what childhood memories actually exist. A life that had c_stray or c_book gets slightly different callback text only if it chooses 'Tell the true story'; choosing 'Tell the better story' always produces the identical line regardless of who the person was.",
+    "Epitaphs begin to cluster after dynasty 8. 'Taught what he knew, and so outlived the knowing of it' appears in D3, D5, D6, D7, D14. 'Kind in the small daily ways' appears 3 times. The cross-dynasty deduplication guard (RECENT_LINES) helps but doesn't prevent the same cluster themes dominating a long run."
+  ],
+  "improvements": [
+    {
+      "what": "Add a 'seen in this house' gate to t_warm (and 2-3 other highest-frequency cards like the grandchild-story card) in addition to the per-life once gate",
+      "why": "The open-table card fires in effectively every warm/tender life because warm/tender traits are common and the card's weight is high. A onceDyn flag (or a 'seen twice in this house' gate) would make it feel like an earned recurrence rather than mandatory toll. The grandchild-story card already varies its closing text by memory but the 'Tell the better story' outcome never does.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the seat-gated card categories to the player earlier — specifically, add a line to houseAspirations() once seat >= 2 mentioning that 'a house of standing meets situations a lesser name never sees'",
+      "why": "The completionist knows there are 139 moments and has seen ~50 after 10+ dynasties, but has no legible signal that 15-20 of the unseen cards require seat 3-5 to unlock. Without that signal, the high-seat content (s_great_burden, s_patronage, s_inheritance_dispute, r_hard_name) feels like the game is withholding content arbitrarily rather than rewarding dynasty-building.",
+      "impact": "high"
+    },
+    {
+      "what": "Thicken the adult band (28-45) with 4-6 additional non-repeating situation cards that do not gate on vocation, love status, or means",
+      "why": "The transcripts show most lives receive 2-3 adult moments before midlife, making the adult years the quickest and least varied stretch. Cards like a_fallow (already present) and a_road_not_taken are good but infrequent. A few more 'ordinary adult situation' cards (a neighbourhood dispute, a professional reputation moment, a surprising piece of news from far away) would thicken the mid-section and reduce the sense that adult years are a waiting room between youth choices and midlife reckoning.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the e_window grandchild card (tell-the-better-story branch) at least 4 more distinct closing lines keyed to this life's dominant memory, so the 'improved my own childhood' line does not repeat verbatim across 8 of 15 dynasties",
+      "why": "The once-per-life gate prevents triple-firing within a dynasty, but the card fires in nearly every life that has grandchildren and reaches elder age. A line drawn from p.flags.vocation or a dominant memory (e.g. 'told the one about the years away' for wanderers, 'told the one about the lean study years' for scholars) would make the same structural beat read as particular.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 vocation-era intersection cards beyond the current 3 (vx_scholar_turning, vx_soldier_war, vx_maker_plenty), specifically covering maker+plague and wanderer+war and scholar+hard",
+      "why": "The vocation x era space is the most structurally novel content the game has, but only 3 intersections are currently implemented. A plague-era maker (tools needed for the sick, risk of proximity vs. profit) or a wanderer in a war era (pressed into service vs. staying mobile) would be fresh beats that only a player who built the right combination of dynasty and era would ever see.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the discovery counter a soft spoiler: when seen >= 80, show a 1-line hint like 'The rarest moments only find a house of certain standing — the name must climb' or 'Some moments require a particular calling in a particular age'",
+      "why": "A completionist who has seen 80+ moments and is stuck needs a hint-layer to know WHERE to look next without full spoilers. The current counter is motivating but direction-free — a player can grind 15 more dynasties and still not know that seat-4 unlocks a whole card category.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has a genuinely fresh first 4-6 dynasties and a discovery architecture that promises more than it delivers by dynasty 10 — the callback system and vocation arcs are its best ideas, but the adult band is thin, a handful of high-frequency cards (open-table, grandchild-story, scholar-hands-down-question) repeat verbatim across the majority of lives, and the high-seat gated content that would reward dynasty focus is effectively invisible without a signal that it exists."
+}

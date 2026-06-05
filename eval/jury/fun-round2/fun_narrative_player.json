@@ -1,0 +1,49 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the game's best trick: a childhood choice (hiding the stray, reading the hard book, looking away from the lonely child) resurfaces decades later with specific, earned weight. When Lazlo at 48 makes up 'to a stranger for a child he had ignored 36 years before,' that lands as a genuine story beat, not a random card.",
+    "Vocation arcs give structurally different lives. A soldier's life accumulates distinct cards — the campaign, the war-ghost at 3 a.m., the elder asked what it was really like — that a wanderer or scholar never sees. A scholar in a 'turning' era faces the specific anguish of watching their mastery go quaint. These branching clusters are the most fun the system offers.",
+    "Era overlays (war, plague, plenty, hard, turning) are genuinely differentiated. Tobias Vane keeping careful distance from the plague and carrying 'the arithmetic of it a long time' feels like a different life-shape than Tamsin Voss sharing the last stores in a hard winter. When vocation meets era (the soldier in wartime, the maker in plenty), the intersection produces content that couldn't appear any other way.",
+    "The dynasty arc has real pull across multiple generations. Watching House Voss climb from rented room to grand estate across five lives, with the inherited book threading through each one, creates the 'one more life' itch the brief asks about. The motto crystallising mid-dynasty and then being tested (d_motto_test) is a small but effective generational echo.",
+    "Writing quality is consistently high. The observation lines — 'She has started taking the stairs the way one takes a difficult conversation,' 'Reading has stopped being something he does and become somewhere he goes' — are genuinely pleasurable to encounter and give the game its meditative quality.",
+    "Fate cards (fire, sudden loss, grace, reversal) that offer no choice introduce genuine drama; losing most of what you have to a fire and beginning again from ash has narrative force precisely because it cannot be opted out of."
+  ],
+  "staleness": [
+    "By dynasty 5-6, the childhood block is visibly formulaic: a fever card, a sibling card, a stray-or-book card, a grandparent-death or friend card, in recognisably similar order. Every life opens with the same 3-4 beats at ages 3-12. A narrative player notices this before the halfway point of the transcript.",
+    "The youth calling card (y_calling) appears in almost every life at age 14-22 and presents the same four options every time. The prose wrapper rotates among three variants but the decision is structurally identical. By dynasty 8 the player is reading past it. Combined with y_love1 reliably triggering in youth, the first quarter of every life collapses into a near-identical preamble.",
+    "Elder lives are thin and repetitive. After midlife, nearly every character hits the same 4-5 cards in the same band: the body slowing (observation lines that rotate among ~5 variants), the bequest choice, the end-of-road reckoning (e_wanderer_old), the peace/rage death card, and sometimes the grandchild card. By dynasty 10 the elder years feel like a mandatory checklist. The transcripts confirm this: Caleb, Otto, Ambrose, Pavel, Tomas, Cassian, Rafael all end with near-identical sequences.",
+    "Several individual card results produce near-identical log lines across different lives because the pools are small. 'Left people gentler than he found them' appears as a death epitaph for at least five different characters in the 18-dynasty run (Junia Holloway's line matches Caleb Quint, Otto Quint, and Rafael Ashcroft). 'Kind in the small daily ways that turn out to be the large ones' is used as both a log line and a death epitaph for multiple characters, visible in dynasties 1, 4, 6.",
+    "The mid-life band (ages 30-55) is where variety is widest but the cooldown system means a player who makes similar choices sees the same cluster of cards. Wanderer vocations hit 'settled vs. keep moving' every 14 years, creating a loop rather than a journey. Scholar vocations often repeat the scholar-legacy choice and the scholarly-door within the same life.",
+    "The dynasty layer's seat-gated and repute-gated content is mostly invisible across these 18 dynasties. Only House Voss reaches the territory where 's_great_burden', 's_patronage', and 'x_reckoning' could fire meaningfully. For a player who isn't actively managing house standing — which requires reading the hidden mechanics — the dynasty layer feels ornamental rather than driven. The 'one more dynasty' pull is real but the systemic levers to steer the dynasty are opaque.",
+    "No single playthrough moment in the transcripts produces genuine surprise or a story the system collides into unexpectedly. The narratives are warm and well-written but structurally predictable: a wanderer moves and settles, a soldier carries the war, a scholar gives or guards knowledge. The shape is legible by dynasty 3 and confirmed by dynasty 7."
+  ],
+  "improvements": [
+    {
+      "what": "Break the childhood block's predictability by gating at least two of the four standard child cards behind a condition that varies by era, house standing, or parent vocation — so a child born into a plague era opens differently from one born in fat years, and a founder's child opens differently from a fourth-generation heir.",
+      "why": "Currently every life opens with the same 3-4 cards regardless of dynasty context. The era system already exists and is well-used in adult content but it is almost silent in childhood. A plague child who faces the sickness card at age 6 (as a single-choice fate event) instead of the standard fever card would feel structurally distinct from the first dynasty.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 8-10 elder cards that are explicitly conditioned on accumulated memory flags from the whole life — cards that can only appear if the player has, for example, both 'chose_road' and 'knew_loss', or 'soldier_blooded' and 'chose_self'. These would produce elder experiences that are genuinely specific to that life's shape, not generic age-band content.",
+      "why": "The elder years are the weakest band for variety: the same 4-5 cards appear in nearly every long life in the transcript. The callback system (which already works beautifully in the adult-to-midlife band) needs to extend into the elder years. A soldier who was also 'strayed' should meet a different end than a scholar who 'became_teacher' — currently they often share the same death-approach cards.",
+      "impact": "high"
+    },
+    {
+      "what": "Retire or retitle at least 6 repeated death-epitaph and log-line strings that appear across multiple unrelated characters. Specifically: 'Left people gentler than he found them,' 'Kind in the small daily ways,' 'Remembered, above all, as kind,' 'Made something real, and the making was the life,' 'Taught what she knew, and so outlived the knowing of it,' 'Built something that outlasted the building of it.' Either expand the pool to 8-10 variants each or gate specific variants behind the memories/traits that earned them.",
+      "why": "A narrative player reading 18 dynasties sees the same epitaphs on people with very different lives. This is the single most visible sign of content exhaustion and breaks the fiction that each life was distinct. When a ruthless wanderer and a gentle scholar receive the same death line, the game's core promise — that choices matter — becomes unconvincing.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the youth calling card (y_calling) genuinely optional for some lives by allowing a small chance that no calling card fires and instead a 'drifted into it' card appears — or add a fifth vocation ('the cause' — a public or ideological commitment that gates civic/activist adult content) to break the four-way symmetry.",
+      "why": "The calling card is the most repeated structural beat in the game. Every life has it. By dynasty 6 the player knows it's coming and the choice feels like a form to fill in rather than a life-defining fork. Even one additional vocation, or one alternative path that skips the formal calling entirely, would restore some of the surprise.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the dynasty steering mechanics more explicitly. When the house reaches a new seat level, show a brief dynasty panel (even a single line of prose) that names what changed and what doors that opens. Add 1-2 in-life events that fire only when the house is in active decline (seat falling) so that losing ground feels as driven as gaining it.",
+      "why": "The seat-gated and repute-gated content is the game's most differentiated material (s_great_burden, x_reckoning, r_hard_name) but it is practically invisible in these 18 dynasties because the mechanics are hidden. A narrative player has no way to know they're steering a house until something unexpected fires. Making the dynasty arc feel like a game rather than a consequence engine is the single biggest unlock for 'one more dynasty' pull.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely lovely piece of literary craft that earns its first three or four dynasties on the strength of its callbacks and vocation arcs, then settles into a warm but visible loop: the same childhood preamble, the same elder checklist, the same five epitaphs worn by lives that deserved different endings."
+}

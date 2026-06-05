@@ -1,0 +1,52 @@
+{
+  "profile": "lapsed_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The four-calling system (soldier/scholar/maker/wanderer) genuinely delivers structural variety — a soldier's life and a scholar's life feel like different shapes, not just different paint. The vocation-gated adult arc cards (a_soldier_service, m_soldier_ghost, a_scholar_question, m_scholar_legacy, a_maker_shop, m_maker_masterwork) are the single strongest engine of replay value.",
+    "Era cards (war, plague, plenty, hard, turning) are excellent and surprising — they inject macro-historical colour that genuinely differentiates a generation born into war from one born into fat years. The plague tend-or-distance and hard-winter share-or-hold dilemmas land as real moral weight, not flavour.",
+    "The callback system is the game's best idea: cards that reach back to what you did at 12 and make you pay or profit at 40 (cb_lookaway, cb_outcast_return, cb_books_late, cb_corner) create the 'long-arc payoff' that makes literary sims worth replaying. When these fire, it genuinely feels like a life.",
+    "Dynasty heirlooms and mottos are a pleasurable 'one more life' hook — seeing 'By our own hands' inherited and the Castellane line reach an old and famous house across five generations is the game's most satisfying multi-session experience.",
+    "The c_origin card is cleverly tuned — era-branch, seat-branch, and trait-branch variants mean the first card often hits fresh and frames the childhood differently."
+  ],
+  "staleness": [
+    "By dynasty 5-6, three cards are appearing in almost every life regardless of player choices: the 'open table' hospitality card (a_neighbor / a_table), the doctor's letter (m_health), and the grandchild storytelling card (e_window). The grandchild card appeared six times across 15 dynasties — more than once every other life. These are not gated narrowly enough; they crowd out rarer cards and the template becomes legible.",
+    "The fruit-stall theft card (c_steal) is a low-means child card but still appeared across Dynasties 3, 5, 6, 8, 9, and 12. Its prose ('Stole, once, and the taste was guilt as much as fruit') is verbatim every time. The line itself is good — but hearing it six times dissolves it. Cards with a single logged-line outcome are most vulnerable to this.",
+    "The love-marry-child-work-health-death skeleton is present in nearly every life that survives past 40, regardless of calling. A wanderer who chose 'the road' still ends up with love arriving late, a child, a doctor's letter, and a grandchild. The structural arc of a life is too convergent — the calling differentiates the middle acts but the frame is the same.",
+    "Several ambient observe() lines recur visibly within a single session's reading. 'He/she still laughs like someone the years have not yet learned how to reach' appeared in D3-g2, D4-g2, D8-g2, D9 within a close reading span. The observe pool is large but the trigger conditions (spirit>88 after age 30) mean particular stat profiles reliably pull the same lines.",
+    "The marriage card (a_marry) uses only three scenario openers rotated by generation index. Across 15 dynasties all three have appeared repeatedly. 'Junia fell asleep first again, mid-sentence' appears as the marriage setup for characters named Junia in D2, D4, D10, D14 — even the name 'Junia' recurs as a spouse name, breaking immersion.",
+    "No mechanic creates a genuine reason to play an anti-dynasty — to try to fall, to stay poor, to make morally dark choices consistently. A ruthless or tainted house gains some gated cards (r_hard_name, r_name_cost) but these are sparse. A player who stays poor across four generations doesn't encounter a meaningfully different game, just less content."
+  ],
+  "improvements": [
+    {
+      "what": "Add a cooldown or per-dynasty cap to the three highest-frequency universal cards (grandchild e_window, doctor's letter m_health, open-table a_table): fire each at most once per dynasty, not once per life.",
+      "why": "These three cards appear in 40-60% of lives in the transcripts. Capping them per dynasty forces the draw pool to serve up rarer content in later generations, and makes these moments feel like events rather than template items.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the 'once' cards that fire at most once per life but whose single log-line is always identical — particularly c_steal ('Stole, once, and the taste was guilt as much as fruit'). Add a freshPick pool of 4-6 log lines for each such card.",
+      "why": "Single-line outcomes become the most glaring repetition because there is no variety to rotate. The card situation prose can stay fixed but the outcome line being verbatim identical across six dynasties is the most visible staleness signal.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 new structural life-shapes by gating a set of linked cards behind a 'solitary life' path: if the player declines love multiple times, a distinct 'solitude' arc opens (a_found_calling, m_solitude_depth, e_solitude_peace) with content that treats chosen aloneness as a complete shape rather than a foreclosure.",
+      "why": "Currently a life without love/spouse/children hits the same beats but with gaps where the couple/parent cards would be. A dedicated solitary arc would make 'no' to love a genuinely different game rather than the same game with missing content.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce name-collision prevention across spouse names. 'Junia' appeared as a spouse name in four separate dynasties. Add a session-level pool of used given names that addRel() avoids when generating spouses.",
+      "why": "Repeated spouse names across dynasties break the sense that each line is its own story. This is a small implementation change (a Set already exists for lineage names) with outsized immersion impact.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 4-6 genuinely dark-path content cards that only appear if a player has consistently cut corners, strayed, or chosen ruthlessly across 2+ lives: a reckoning that acknowledges the dynasty's moral character, not just its reputation score.",
+      "why": "The tainted/ruthless reputation gates a couple of extra cards but there is no unique content that makes a consistently dark dynasty feel like a different game. Moral anti-patterns deserve as much structural variation as scholarly or kind ones.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the 'settled era' a small pool of quiet-world cards that are only available during settled eras, so those generations have some content variety rather than simply being 'an era without the war/plague cards'.",
+      "why": "Settled eras currently mean fewer card options because the era-gated cards are unavailable. A few 'quiet times' cards (prosperity's ambiguity, complacency, a cultural flowering) would mean every era has both positive and negative content, not just the dramatic ones.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has a genuinely good engine under the hood — the calling arcs, callback system, and era cards show real structural ambition — but by dynasty 6-8 the template becomes visible: the same three universal cards (grandchild, doctor's letter, open table) appear in nearly every life, the love-marry-child-work skeleton dominates regardless of vocation, and several once-per-life log lines repeat verbatim across the session, which is the most glaring staleness signal in a literary game where prose is the medium."
+}

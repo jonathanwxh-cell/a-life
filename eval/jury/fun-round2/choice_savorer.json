@@ -1,0 +1,53 @@
+{
+  "profile": "choice_savorer",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation fork (soldier / scholar / maker / wanderer) is the game's best design: a single choice at ages 14-22 gates a structurally distinct adult arc, so two lives with identical early beats diverge at the career card and stay divergent through midlife and elder. This is exactly the kind of choice that feels characterful.",
+    "Callback cards are a genuine delight when they fire: 'cb_lookaway' reaching back to a childhood cowardice decades later, 'cb_strayed' surfacing a betrayal at the deathbed, 'cb_books_late' closing a loop that opened at age 7. These make individual choices feel like they matter — they have a downstream echo that arrives years later and feels earned.",
+    "The competing-goods section (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) breaks the binary open/closed grammar in the most interesting way: both options are virtues and neither is clearly right, which is the most satisfying kind of choice in this genre.",
+    "Dynasty-layer choices (the bequest's 4-way fork, the reckoning, m_invest_name) create genuine cross-generation stakes. Choosing 'Everything I know' vs. 'Every coin I can spare' is a real decision with real downstream differences in the heir's starting conditions — the kind of thing a choice-savoring player thinks about.",
+    "Trait-gated moments give each life a textured inner logic: a 'guarded' person facing the question that breaks their wall, a 'warm' person asked whether the open door finally costs them too much. These feel characterful rather than generic.",
+    "The 135-card pool is substantive. Even by dynasty 8, new cards surface (era-gated war/plague/plenty/hard/turning moments, seat-gated high-standing dilemmas, repute-gated scholar or ruthless doors). The discovery layer is real."
+  ],
+  "staleness": [
+    "The wanderer vocation is over-represented in the transcript: 8+ of 18 founders chose 'The road — go where the work is.' Because the wanderer's follow-on cards (a_wanderer_settle, m_wanderer_return) are tied to that vocation and fire repeatedly (the 'Move on. The horizon calls / Stay. Let the road end here' binary appears 2-4 times per wanderer life), the dominant dynasty experience becomes a loop of leaving and staying. By dynasty 5, the line 'Counted, at the end of the road, the doors she had closed in order to keep walking' feels like a genre tic rather than a revelation. It appears in at least 9 of the 18 dynasties.",
+    "Almost every adult life in the transcript ends with a late marriage: 'Married X late, and found the lateness made the vow weigh more, not less' (or a close variant). This is the dominant adult shape across Dynasties 2, 3, 4, 5, 6, 7, 9, 10, 11. The late-love monoculture the code comments acknowledge patching still dominates the transcript — the engine's love-nudge logic has not fully broken it. By dynasty 6, the late marriage beat is anticipated rather than felt.",
+    "The e_legacy card ('That I was kind / That I built something / That I was here at all') fires in the elder band of nearly every long life. As a choice it is binary and low-stakes — the hint text on all three options is blank, signalling they are near-interchangeable flavour. A choice-savorer does not feel anything choosing between them. This card should either have real consequences or be converted to pure prose.",
+    "The callback 'A kindness done at X came back, decades later, as a door held open' fires in Dynasties 4, 5, 7, 10, 11, 12 — often triggered by cb_outcast_return or the a_neighbour + cb_outcast chain. The payoff line is nearly verbatim each time. After the third instance it reads as a template, not a story.",
+    "Most two-option cards have an asymmetric hint structure: one option has a characterful hint ('a door that won't close again', 'pay, and odds') and one has a blank hint. The blank-hint option is almost always the 'safe, slightly worse' path. This makes many choices feel like a quality-of-life selection rather than a genuine moral fork — the 'real' dilemma is only in the minority competing-goods cards.",
+    "The child decision (a_child) and the marriage decision (a_marry) each fire up to 3-4 times across a single multi-child life and feel purely structural rather than characterful. 'Yes. Make room in the world / No. This life, as it is.' reads the same on the third child as the first. There is no acknowledgement that this is the third time — the text variants for k>=2 help but the choice itself is binary and its stakes feel flat."
+  ],
+  "improvements": [
+    {
+      "what": "Weight the vocation draw more evenly — or add an in-engine signal that 'wanderer' was recently dominant — so the four vocations distribute across a session rather than clustering. A per-session cooldown on vocation choices (similar to the existing onceDyn mechanic) would prevent one calling from dominating 50%+ of lives.",
+      "why": "The wanderer vocation's follow-on cards are the source of the most visibly repeated beats in the transcript. Structural variety requires all four callings to appear regularly.",
+      "impact": "high"
+    },
+    {
+      "what": "Give e_legacy real mechanical weight: a 'kind' legacy should bump the 'kind' reputation tag; 'built' should bump 'industrious'; 'here' should leave a specific heirloom or boost the house motto pool differently. Currently these three options have no distinct downstream effect and feel cosmetically identical.",
+      "why": "A choice a choice-savoring player can't feel is wasted. The legacy moment arrives at peak emotional weight and should matter dynastically.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the late-marriage monoculture more aggressively: give the youth love card (y_love1) a stronger draw weight (currently 0.34 per-draw nudge, not a guaranteed early offer), and add a young-marriage path that fires in the 18-26 window with distinct follow-on cards (young-couple cards: shared hardship, early children, the strain of growing up together rather than the comfort of two seasoned adults). The current system still defaults late.",
+      "why": "The late-marriage template is the most visible repeated life-shape in 18 dynasties. A choice-savorer who has seen 'Married X late, and found the lateness made the vow weigh more' six times no longer feels that line.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a third option — or deeper consequence framing — to the binary 'Meet them halfway / Pretend not to notice' love card and the 'Yes / No' child card. The child decision in particular should vary its framing on the second and third child with different stakes and stakes-framing ('the house is already stretched' vs. 'there is a second bedroom for the first time').",
+      "why": "These cards are among the most frequently repeated. Structural variety at the choice-grammar level matters as much as variety in card content.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce a once-per-dynasty 'character divergence' card in midlife that is only available if a life has accumulated at least two contrary-direction choices (e.g., chose-kindness + cut-a-corner) — a genuine reckoning about the contradiction in who this person has become. This would reward players who make morally complex choices by closing a loop specific to their path.",
+      "why": "The most satisfying choices in the game are ones that echo forward. A contradiction-reckoning card would make the inconsistencies in a life feel like a story rather than random draws.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 additional callback chains that close loops on currently un-echoed choices: the 'y_risk' gambling card, the 'a_affair' / no-affair fork, and the 'm_money' spend-vs-compound decision should each produce a late-life callback. Currently only ~10 of the 135 cards have downstream echoes, so many high-stakes choices disappear without consequence.",
+      "why": "The callback mechanic is the game's strongest argument for choices mattering. Extending it to more choices would raise the 'I've never seen this before' discovery rate for players who deliberately take unusual paths.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuinely characterful choices — particularly its vocation fork, its callback system, and its competing-goods dilemmas — but by dynasty 5 or 6 the wanderer monoculture, late-marriage template, and binary open/closed grammar on most minor cards produce a creeping sameness that a choice-savoring player will notice and be frustrated by; it earns a 6.5, solidly fun but not the 8 it needs to stay fresh across a long session."
+}

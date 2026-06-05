@@ -1,0 +1,49 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.5,
+  "fun_highlights": [
+    "Vocation × era collisions produce genuinely distinct life-shapes: a frail bookish scholar born into war faces the war-loss card, the soldier-call card (era-gated), AND the scholar arc's callbacks — three independent systems intersecting so that one life becomes structurally unrepeatable. This is exactly the emergence I came for.",
+    "Callback depth is real: Otto Renner keeps a book at age 10 and re-reads it at age 49; the 39-year arc closes with a line that consciously names the gap ('began everything at age 10'). This is the kind of long-loop payoff that makes each past choice feel like it had weight.",
+    "The heirloom + reputation + secret trifecta creates cross-generational texture with teeth: House Thorne's 'hard name that opens doors by being feared' forces Anouk (3rd gen) to face a card (r_hard_name) that no other house can see, then another (r_name_cost) that asks whether to soften the name her grandmother built. A genuinely emergent three-generation story.",
+    "Trait affinity in childhood card selection visibly shapes early lives: bookish children lean toward c_book; restless children get t_restless and c_steal. This makes the early years feel like the specific child who already exists, not a random childhood.",
+    "The era system does what it promises: the same dynasty living through fat years then war then turning genuinely reads differently, not just labelled differently. The w_war_call, w_plague_tend cards add structurally distinct beats that can't appear in a settled era.",
+    "The dynasty aspirations (houseAspirations) and 'still ahead for the house' copy on the heir screen creates a genuine 'one more life' pull — there is always a legible thing to try to build toward, and the seat/reputation/motto ladder is satisfying to climb."
+  ],
+  "staleness": [
+    "Exact epitaph phrases repeat verbatim across dynasties despite the freshPick system: 'Gave away everything she knew, and so kept it' is the epitaph for both Dynasty 2's founder (Marguerite) and Dynasty 8's Caleb Voss. 'Poured what he knew into the young, and so refused, quietly, to die all the way' is the epitaph for Dynasty 3's 2nd gen AND Dynasty 13's 2nd gen. The RECENT_LINES rolling window helps within a session but the pool for scholarly/teaching lives is simply too small — scholar-path players see the same epitaph twice in one sitting.",
+    "The 'return to the town you left' card (cb_left_home) fires in the same phrasing — 'found it both smaller and larger than memory' — in Dynasty 3 (age 50), Dynasty 4 (age 52), Dynasty 5 (age 52), Dynasty 6 (age 60), Dynasty 9, Dynasty 12, Dynasty 13, Dynasty 15. Eight of eighteen lives, same sentence. The card's variant pool has only two endings ('Go back' vs 'Let it stay') and a single result line with no branching prose. By dynasty 6 this is furniture.",
+    "The elder reflection beat ('Near the end, one old decision keeps returning...') fires in at least 10 of 18 lives because nearly any significant choice seeds it. The two outputs ('Decide it was right' / 'Let it stay unsettled') use the same template line regardless of WHICH decision is being re-examined — so the card reads identical whether the player strayed in marriage or set down a dream. The promise of personalised echo collapses into a generic twilight card.",
+    "Scholar vocation has the richest callback density in the game (cb_study_pays at adult, m_scholar_legacy at midlife, a_scholar_question, e_craft) making it structurally more rewarding than soldier (3 cards) or wanderer (2 payoff cards). In the transcripts, ~40% of all lives chose scholar — a monoculture that means the 'unique scholar arc' stops feeling unique by dynasty 4. Maker and wanderer need more mid-game distinctives.",
+    "The love/marriage arc is structurally inescapable: 16 of 18 lives in the transcripts end up married. The wanderer vocation is supposed to enable a non-domestic shape, but Naima Reyes (wanderer, Dynasty 5) and Tamsin Reyes (wanderer, Dynasty 13) both marry. Only two lives genuinely avoided it — one died at 25 before the window closed, one ended childless. The engine strongly nudges love and marriage into every life via drawCard()'s repeated preference logic; the 'solitary wanderer' is an aspirational life-shape the game says exists but rarely lets happen.",
+    "No dynasty in the transcripts visibly collapsed: every multi-generation run trends upward in seat. The mechanics of decline (facedReckoning='fell', endMeans<14) exist in code but the probability tuning means players rarely see a storied house fall to a rented room. The possibility of genuine dynastic failure — which would make success feel earned — remains theoretical.",
+    "The 'red and furious and entirely unimpressed' first-child line is once-per-dynasty, but 15 dynasties means 15 uses, and reading the transcripts end-to-end the phrase lands as a recurring joke rather than a memorable first birth. The underlying issue is that any single line burned once-per-dynasty will still repeat across a long session of reading."
+  ],
+  "improvements": [
+    {
+      "what": "Give each vocation 2–3 more mid-game cards that only that vocation can see, including at least one that reads a different-vocation life and marks it as a road not taken. E.g. a maker-only card at midlife where a scholar's book falls into their hands and they must decide whether to envy or ignore it.",
+      "why": "Scholar's card density advantage is the single biggest driver of monoculture. Equalising depth across all four vocations makes the choosing feel like a genuine structural fork rather than 'scholar gets the rich arc'.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the cb_left_home result prose to at least 6 distinct variants keyed to vocation or trait (e.g. the soldier's homecoming reads differently from the wanderer's; a bookish returnee finds the library gone, a warm one finds the neighbours aged). Apply the same expansion to the elder reflection card (cb_the_cost) — make it name the specific decision type in the outcome prose, not just in the setup.",
+      "why": "These are the two most frequently repeating cards in the transcripts. A larger prose pool AND vocation/trait branching would make each firing feel specific to the life that earned it rather than a generic seasonal beat.",
+      "impact": "high"
+    },
+    {
+      "what": "Add one firmly seat-gating decline mechanic: a card visible only to houses at seat 5–7 that, if chosen badly (or if the house is seat 7 and the heir's peakMeans is low), drops the seat two steps and announces it. Make the fall feel as dramatic as the rise.",
+      "why": "Without observable collapse, the dynasty layer is a one-way ratchet. Players optimise to never fall. Visible decline makes each generation's choices feel precarious and creates 'oh no' stories — the emergence I want most.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce a 'solitary life' mechanical path that actually delivers: if a wanderer-vocation life reaches age 40 without a love relation, trigger a unique card cluster (a_wanderer_alone) that gives the solitary wanderer its own mid-game content (a travelling companion who is NOT a love interest, a mentorship chain, a found community) rather than just deferring to a_meet_late. Give the childless elder a unique bequest-equivalent card.",
+      "why": "The promise of structural variety in life-shapes fails because the engine always nudges toward love/marriage. Giving solitary lives their own content makes the fork real.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the epitaph pool for scholar/teaching lives specifically — add at least 6 new scholar-cluster epitaphs and 6 teacher-cluster epitaphs. The current 3–4 variants are exhausted within 3–4 scholar lives in a session.",
+      "why": "The epitaph is the final emotional punctuation of a life. Seeing it repeated verbatim two dynasties later is the most visible staleness signal in the transcripts and the most corrosive to the 'each life is its own whole world' feeling.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has real system collisions — vocation × era × callbacks produce moments of genuine emergence — but the scholar monoculture, a love/marriage arc that structural nudges make nearly inescapable, exact phrase repetitions in the transcripts by dynasty 5, and an elder reflection card that fires the same way regardless of which decision it's echoing keep it a 6.5: the seams in the anti-staleness machinery are visible enough that a dynasty-long session starts to feel like variations on a template rather than a new story each time."
+}

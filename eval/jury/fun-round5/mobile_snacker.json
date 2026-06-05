@@ -1,0 +1,48 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "A single life completes in roughly 5-15 minutes of real time at idle pace, fitting perfectly into phone-sized sessions — pick it up, live a life, set it down with a satisfying epitaph.",
+    "The calling choice (soldier / scholar / maker / wanderer) creates genuine structural divergence: a soldier's life has the blooding card, the 3am ghost at midlife, and the old-soldier elder arc — you can feel the shape switch.",
+    "Callback cards ('cb_') are genuinely satisfying micro-payoffs on mobile: the one where you ignored a lonely child years ago and then walk past a rough sleeper closes a loop that feels earned even in a short session.",
+    "The 'fast-forward' tap mechanic works well one-handed — quiet years race, a card snaps the flow — this is the right pacing rhythm for a snacker.",
+    "The death screen + epitaph is an excellent one-screen session closure: even a 13-year life (Dynasty 1) gets a complete emotional beat, so no session feels cut short.",
+    "Era variety (war, plague, plenty, turning, hard) genuinely re-colours the opening of a life in a short burst: 'The war that was far off is not far off now' on first screen immediately sets a different tone than 'fat years, money loose.'"
+  ],
+  "staleness": [
+    "By dynasty 4-5 the structural skeleton is transparent: c_origin → calling → y_love1 → a_marry → a_child → m_health/m_parent_age → e_legacy/e_bequest → die. The surface prose rotates but the beats arrive in the same order at roughly the same ages, every single life. A mobile snacker dipping in for a 10-minute burst will hit this ceiling around session 3.",
+    "The t_warm / open-door card ('People keep ending up at N's table') fires in almost every life that has the warm or tender trait — which is common — and the two choices ('Keep the door open' / 'Learn to say no') are the same every time. In the 15-dynasty transcript it appears at least 7 times with minor wording variation. On mobile, where you're paying close attention to each card, the repetition is obvious.",
+    "The grandchild-tells-childhood-story card ('Tell the better story' vs 'Tell the true story') fires in nearly every long-lived character — it appears in Dynasty 3 gen 1, Dynasty 4 gen 2, Dynasty 5 gen 1, Dynasty 6 gen 3, Dynasty 8 gen 3, Dynasty 9, Dynasty 11, Dynasty 12 gen 2. On a phone this card's text doesn't change enough per occurrence for it to stay interesting.",
+    "The 'Carry it alone / Talk about it finally' soldier-ghost card fires verbatim in four of the dynasty 6, 8, 10, 12 soldier lives. The prose is different for each outcome but the card prompt text is identical. On mobile, where you're reading closely, this is very noticeable by the third sighting.",
+    "Love timing still clusters despite the engine fix. In the 15 dynasties, the 'late love' framing ('later than the stories say it should be') fires in roughly half the lives — Dynasty 3 gen 1 (age 25), Dynasty 4 gen 1 (age 34), Dynasty 5 gen 1 (age 34), Dynasty 6 gen 4 (age 51), Dynasty 8 gen 4 (age 51), Dynasty 10 gen 1 (age 43), Dynasty 12 gen 4 (age — married at 44), Dynasty 14 gen 4 (age 51). The engine pushed love into adulthood on the y_love1 path OR fires a_meet_late; neither lands 'early' reliably. A snacker who notices this on dynasty 3 loses the surprise.",
+    "The 'once-per-dynasty' (onceDyn) mechanics are underused for freshness from a mobile perspective: they fire once and are done, but the player often can't tell — there's no signal that a particular beat won't recur. Since most cards are `once:true` (per life) rather than `onceDyn`, many 'special' moments actually repeat across dynasties."
+  ],
+  "improvements": [
+    {
+      "what": "Add a brief visual tag or colour cue (different border or background on the card) for cards that are callbacks or dynasty-unique moments, distinct from standard life-beats",
+      "why": "Mobile snackers are time-compressed and need faster orientation. If 'cb_lookaway' feels special and 'a_work' feels routine, the difference in texture should be visible at a glance, not only legible in the prose. This costs nothing in content and directly rewards the player for earlier choices.",
+      "impact": "med"
+    },
+    {
+      "what": "Rotate the prompt text of high-frequency repeating cards (t_warm, e_window / grandchild-story, m_soldier_ghost) across at least 3 distinct scenario framings rather than just varying the log-line responses",
+      "why": "The card PROMPT is what the player reads before choosing; if it is word-for-word identical on the 4th occurrence the player knows they've seen it before the choices appear. The log-line variants (which only appear after the choice) do the heavy rotation work, but the prompt does not. Rotating the scenario frame ('This time it's a grandchild at a school play' vs 'a sticky small child in your lap') changes the felt experience even when the choice grammar is similar.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the dynasty-arc explicitly on the heir/transition screen as a single-line 'still ahead' for the CURRENT SESSION — e.g., 'You haven't yet seen a plague era' or 'Your house has never had a motto' — making the 'one more life' pull visible on mobile",
+      "why": "The houseAspirations() function already computes this but only shows it at the heir screen. A mobile snacker who just died and is deciding whether to keep playing needs the hook immediately and legibly: a concrete dangling thread is far more compelling than abstract continuity. The function output is already perfect; it just needs more prominence.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate 2-3 more cards on COMBINATION triggers (e.g., a card that only fires if the current life has both 'soldier' vocation AND the dynasty has a 'tainted' reputation, or a card only for the eldest heir of a house that has reached seat 4+ and already has a secret) to create experiences that require 5+ dynasties to reach",
+      "why": "The current deepest gate is seat-gated (s_great_burden, seat>=4) or repute-gated, but these are independent. Intersection-gated content gives long-run players a sense that the game still has rooms they haven't entered after 10 dynasties — the 'I've never seen this before' feeling the brief calls the highest goal. Even 2-3 such cards would meaningfully extend novelty.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the base weight of t_warm's 'open table' card (a_friend_need also uses the warm/tender path) so that warm/tender characters still embody their nature but do not have the same card fire more than twice in a single life or more than once per 3 dynasties",
+      "why": "The 7+ occurrences of 'People keep ending up at the table' in 15 dynasties is the single most visible staleness signal in the transcript. Lowering its weight to 1 and adding onceDyn:true would eliminate the impression without removing the thematic identity — the trait would still gate other warm-specific content.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is a beautifully paced phone game for 1-3 sessions, but the structural skeleton of each life becomes transparent by dynasty 4-5, a handful of high-frequency cards (the open-door, the grandchild, the soldier's 3am) repeat visibly enough to break the spell for an attentive mobile snacker, and there is no clear 'one more dynasty' hook surfaced at the moment when the player is deciding whether to continue."
+}

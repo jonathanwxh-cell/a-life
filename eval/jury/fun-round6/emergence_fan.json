@@ -1,0 +1,55 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.5,
+  "fun_highlights": [
+    "Named-NPC callbacks land genuinely: Annika's yard-kindness at age 6 returns as cb_outcast_return with Ottilie's name decades later, and Ottilie later recurs again in a separate dynasty as a character name — when these threads close, the surprise is real and unscripted.",
+    "The book heirloom + cb_books_late chain across generations earns its keep in the FIRST dynasty that inherits it (Edmund Vane reading 'the book the family has always kept' at 51 references Annika's act at 20) — genuine cross-generational memory.",
+    "Vocation x era intersections (vx_scholar_turning, vx_soldier_war) produce lives that are structurally unique: a scholar in a turning age sitting grey-haired among younger thinkers is a different card-cluster than any other path.",
+    "Trait affinity in card selection is subtle and real: a bookish heir leans toward c_book over c_outdoor; a guarded trait fires the exclusive t_guarded card mid-adulthood, asking the specific question the walls defend against.",
+    "The reputation/motto crystallization is the game's best dynasty emergence — 'We give past what we can spare' appearing in Dynasty 13 and then being tested by Soren (gen 5) via the x_motto card feels like the system working exactly as intended.",
+    "The seat-gated and repute-gated card layer (s_patronage, r_scholar_door, r_hard_name) makes a house that has climbed to seat 4+ feel genuinely different — a fine townhouse life meets cards a rented-room founder never sees.",
+    "Era variance in c_origin (the opening card) is the single most effective personalization: a plague-era child and a fat-years child read the same card as completely different human beginnings."
+  ],
+  "staleness": [
+    "Late love is so probabilistically dominant (a_meet_late fires for the majority of lives in the transcripts — Ambrose, Emory, Annika, Marguerite, Elias, Cleo, Vera Okonkwo, Anouk Vane, and more) that 'married X after both had long stopped expecting it, and meant it the more for that' stops surprising by dynasty 4. What should be one life-shape among several is the near-default path for most adults.",
+    "The cb_books_late callback fires in EVERY house that passes the book heirloom: Edmund Vane at 51, Tariq Vane at 47, Idris Lindholm at 46, Soren Lindholm at 50, Lazlo Reyes at 46 — five lives in the transcripts, identical structural beat at midlife. Once an heirloom propagates, its callback becomes a known template, not a surprise.",
+    "The cb_principle callback (youth stand echoed at midlife) fires in Dynasty 1 (2 different lives), Dynasty 8, Dynasty 9, Dynasty 11, Dynasty 13 (2 lives), Dynasty 15 — it is nearly guaranteed for any player who takes a stand in youth. By dynasty 6 an experienced player can predict it is coming. The text variants are good but the beat's predictability erodes the emergence.",
+    "The life-shape skeleton is stable enough to see by dynasty 5: c_origin → child cards → y_calling → love → a_marry → a_child → midlife reckoning/health → elder reflection → die. Vocation and era shuffle the filling but the load-bearing structure rarely changes. Two wanderer lives (Vera Ashby and Cosima Lindholm) and two soldier lives (Elias Reyes and Ottilie Lindholm) are more similar in shape than they are different despite different eras and traits.",
+    "The body-aging observation pool (vit_tire) is shallow relative to how often it fires: 'Some mornings the body answers the bell late, and grumbling' appears identically for Tariq Vane (66), Edmund Vane (67), Tobias Okonkwo (60), Theda Lindholm (62), Matthias Vane (66) across consecutive dynasties. freshPick deduplication within a session helps but the pool is not deep enough for 15 dynasties.",
+    "The soldier 'careful' outcome ('Soldiered carefully, took no medals and no needless risks, and came home with everything he left with') fires identically for four different soldiers (Ambrose, Elias, Vesna, Ottilie) across the transcripts — the pool for the 'safe' choice is essentially one line. This makes the soldier vocation feel thinner than it should.",
+    "m_peer_dies ('Someone Ambrose's own age... the arithmetic of his own remaining years') fires for Ambrose (64), Vera Ashby (60), Ingrid Halloran (49), Elias Reyes — and the 'put it out of your mind' choice produces the same log line each time. It reads as a band-filler that does not deepen the specific life."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 alternative love-arrival shapes at different life-stages so a_meet_late is not the near-default. Specifically: give y_love1 higher per-draw weight in mid-youth (20-24), create a 'domestic first love' path that concludes earlier (married 25-30), and make the a_meet_late path explicitly rare (10-15% of lives). Most lives should reach love before 30, with late love as the exception that lands harder because it is genuinely uncommon.",
+      "why": "When 'married after both had long stopped expecting it' is the majority outcome, the poignancy of lateness is lost. Late love is supposed to feel like a surprise; if it fires for 7 of 10 lives, it becomes the template.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap the book heirloom callback (cb_books_late) to fire at most twice across a whole dynasty, and after the first firing, replace subsequent instances with a new card that escalates the heirloom's meaning (e.g. the book becomes a contested inheritance, or a child refuses it, or it is finally lost). The current mechanic is a flat loop: inherit book → read it at midlife → pass it down → inherit book → read it at midlife.",
+      "why": "By the third consecutive generation reading 'the book the family has always kept,' the resonance is gone. The heirloom should evolve or be tested across generations, not simply re-fired.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the vit_tire observation pool from ~10 lines to 20+, and split it into early-aging (55-70) and late-aging (70+) sub-pools so the same line cannot recur in adjacent lives. The current pool is exhausted by dynasty 6 even with freshPick deduplication.",
+      "why": "Body-aging observations fire in nearly every life past 55 and the pool repetition is the single most visible staleness signal — the lines are good prose but they become wallpaper when the same one lands in two consecutive lives.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a second 'safe soldier' log-line variant to a_soldier_service and a third to the elder soldier card (e_soldier_old). The 'careful' path currently has one log line; the 'truth-telling' elder outcome has two. Four soldier lives across the transcripts is enough to exhaust one-line pools completely.",
+      "why": "A soldier who keeps their head down should read differently each time, because the player has seen that story before. More prose variants in the vocation arcs directly reduce staleness in the most commonly replayed paths.",
+      "impact": "med"
+    },
+    {
+      "what": "Gate the cb_principle callback so it fires at most once per dynasty (onceDyn), not once per life. Alternatively, when it fires a second time in a dynasty, present a materially different framing: 'the same stand, but now you are the one being asked — not to take it yourself, but to give cover to someone else who will.' The current repeat is structurally identical.",
+      "why": "cb_principle is the best callback in the game but it fires so frequently (7 times in 15 dynasties) that it becomes a known beat rather than a surprise. Scarcity would restore its impact; a dynasty-level version would make it feel like a lineage theme rather than a per-life checkbox.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 vx_ (vocation x era) intersections for the currently uncovered combinations: wanderer in war, maker in hard years, scholar in plague, soldier in plenty. Currently only 3 of ~20 possible combinations have dedicated content. Each intersection that fires is a moment of genuine emergence; doubling the coverage meaningfully expands the space of distinct lives.",
+      "why": "The vx_ cards are the most successful emergence mechanic in the game — they feel earned and specific. But the coverage is thin: a wanderer in a war year and a soldier in a war year are structurally identical except the soldier gets the better card. More intersections reward the systems colliding.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has real emergence machinery — trait affinity, vocation arcs, dynasty reputation, named-NPC callbacks — and when the systems collide they produce genuinely unscripted moments, but by dynasty 6 the dominant life-shape skeleton (child → calling → late love → marry → child → midlife → elder) is legible enough that the variety feels like new paint on a familiar template, and a few callback cards (cb_books_late, cb_principle) have burned through their surprise by firing in every other dynasty."
+}

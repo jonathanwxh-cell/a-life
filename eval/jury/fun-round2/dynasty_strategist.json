@@ -1,0 +1,49 @@
+{
+  "profile": "dynasty_strategist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The bequest (mind/means/heart/free) is a genuine cross-generation lever that visibly reshapes the heir's opening stats and mood — the one moment where deliberate steering across the generation boundary feels real and consequential.",
+    "The seat-7 pinnacle ('a house written into the histories') is authentically rare and re-earnable every generation, giving the long dynasty a goal that doesn't trivially accumulate — reaching it in Dynasty 13 (Voss, 5 generations) felt earned.",
+    "The m_invest_name card is a real spend-yourself-to-lift-the-house mechanism that creates genuine trade-off tension between a comfortable life and advancing the family.",
+    "The x_reckoning card lands hard when it hits an established house — the 'protect yourself / let the name take the hit' fork produces a visible seat-demotion consequence and a reputation bump toward 'ruthless', which downstream gates distinct content (r_hard_name, r_name_cost). That's a proper strategy loop.",
+    "Era intersections (vx_soldier_war, vx_maker_plenty, vx_scholar_turning) are the freshest content in the transcripts — the only moments where a vocation choice made two generations ago materially collides with a world event and produces something you haven't seen before.",
+    "Heirloom chains (particularly the book in Aldecott Dynasty 10 across 5 generations) produce the kind of through-line that makes a dynasty feel like a living document rather than a sequence of separate lives.",
+    "The motto-test card (d_motto_test) is a satisfying payoff once the house has words — forcing the current heir to either honour or break with the family character is the clearest example of dynasty memory reaching forward into present play."
+  ],
+  "staleness": [
+    "Wanderer is dramatically over-represented in the transcripts — roughly 40% of lives pick 'The road — go where the work is,' producing a near-template arc: leave, settle-or-not, m_wanderer_return, e_wanderer_old, 'count the doors.' The 'Counted, at the end of the road, the doors he had closed...' beat lands in at least 8 of 38 lives across 13 dynasties. By dynasty 5 this read is audible before the card even fires.",
+    "Motto diversity is lower than the pool implies: two dynasties in the packet crystallize 'What we have, we share' and two crystallize 'We take in what the world turns out' — mottos repeat before dynasty 10. This happens because reputation paths funnel toward 'kind' and 'generous' across many life-shapes regardless of explicit steering, making every softly-played dynasty converge toward the same two or three words.",
+    "The dynasty strategy layer is underinformative at the moment decisions matter. The heir screen tells you where the house stands, but during a life you have no ongoing read of 'house is at seat 4, needs a strong peakMeans AND a leading reputation to reach 5.' The levers exist (m_invest_name, the bequest, managing reckoning) but without a legible target state the strategy degrades to vibes-based play rather than deliberate steering.",
+    "Callback depletion: the richest, most surprising content is the once-per-life (and often once-per-dynasty) callbacks. By dynasty 4-5 the callback pool is substantially depleted per life, leaving the adult band noticeably thinner — frequently collapsing to: work promotion, windfall or loss, marriage question, child question, with no dynasty-specific texture until a vocation card lands.",
+    "The scholar vocation fires rarely in the transcripts relative to its design ambition. Across 13 dynasties only Tariq Salvedi (Dynasty 11) runs a full scholar arc. The maker vocation similarly under-fires. This means vx_ intersection cards (which require both a specific vocation AND a specific era) are almost theoretical — most plays won't see them at all, removing a key source of structural variety.",
+    "The seat-advancement feedback loop is too quiet between the heir screen and the next heir screen. A dynasty strategist playing for the seat wants to feel, during a life, when they are on or off track — the mid-life houseCharacter prose (visible only on the heir screen, after the life ends) is too late to inform choices like 'should I take m_invest_name now or save means for the reckoning?'"
+  ],
+  "improvements": [
+    {
+      "what": "Add a brief dynasty-dashboard line to the living log (not a number — a prose reading) when seat-relevant things happen: e.g. when peakMeans crosses a threshold, when reputation reaches 'settling into the house's character,' or when a reckoning is survived. Something like 'The name sits higher this season than it has in years.' This gives the strategist a mid-life signal without breaking the literary voice.",
+      "why": "The strategy loop for seat-climbing requires knowing whether a life is on or off trajectory. Currently that signal arrives only at death. Making it ambient — one quiet line when a meaningful threshold clears — lets deliberate choices (take m_invest_name? spend the reckoning down?) feel connected to observable outcomes.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the wanderer vocation's draw probability at the y_calling fork, or add 1-2 wanderer-specific once-per-dynasty cards that deplete and gate wanderer from repeating the same elder arc across consecutive generations in a single dynasty. Alternatively, make the wanderer's terminal elder card ('count the doors' vs. 'regret nothing') gate on whether an heirloom or secret is present, so identical wanderers in consecutive generations still close differently.",
+      "why": "The wanderer arc's structural sameness is the single most audible repetition across a long session — the 'count the doors' line is a tell that this life will close identically to the last three. Differentiating the wanderer's closing beat by dynasty context would break the template without restructuring the vocation.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a per-dynasty reputation 'target' or 'drift' signal visible at succession, naming both the current reputation and what the house is converging toward — e.g. 'The family is becoming known as generous, though the reckless years pulled against it.' This replaces or supplements the flat houseCharacter() prose with the direction of movement, not just the current position.",
+      "why": "Motto crystallization feels like a surprise event rather than a culmination because reputation drift is invisible during play. Showing the direction gives the dynasty-strategist a real steering target and makes the a_make_name, r_scholar_door, and x_reckoning choices feel like they belong to a larger arc rather than isolated decisions.",
+      "impact": "med"
+    },
+    {
+      "what": "Gate 1-2 additional scholar-arc and maker-arc activation cards earlier in adult life (age 26-35) so these vocations fire with similar reliability to wanderer in the transcripts. Specifically: add an adult-band scholar card (analogous to a_wanderer_settle in frequency) that fires at roughly 50% probability once the vocation is set, ensuring the scholar/maker distinctive arc reliably appears rather than waiting for the cb_study_pays callback.",
+      "why": "In 38 lives across 13 dynasties the scholar and maker vocations are under-represented by a large margin. This means vx_ intersection cards (the freshest content in the game) effectively don't exist for most players. Closing this gap would double the structural variety players actually encounter.",
+      "impact": "high"
+    },
+    {
+      "what": "Add one motto per reputation type that is unique to houses that reach seat 5+ before crystallization — i.e. a grander or more formal phrasing of the same underlying character. A scholarly house that crystallizes at seat 2 gets 'What the mind holds cannot be taken'; at seat 5 it gets 'The house of knowledge stands where others fall.' Same reputation, different register, so two scholarly houses at different standing feel distinct.",
+      "why": "Currently two scholarly (or kind, or generous) dynasties in the same session crystallize identical mottoes regardless of seat level. This is the single clearest signal that the house arcs are the same template at different heights. Seat-differentiated mottos would make the pinnacle dynasties feel categorically different from the modest ones.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely thoughtful generational sim with real dynasty levers — bequest, reckoning, m_invest_name, seat-gated content — but the strategy layer is too quiet during lives (feedback arrives only at death), the wanderer vocation dominates the transcript to the point of producing a recognizable template by dynasty 4, and motto diversity collapses before the midpoint of a long session; it earns consistent play for 3-4 dynasties but goes perceptibly stale for the player trying to deliberately steer a house toward a distinct character."
+}

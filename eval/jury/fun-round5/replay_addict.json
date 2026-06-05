@@ -1,0 +1,54 @@
+{
+  "profile": "replay_addict",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system (cb_lookaway, cb_books_late, cb_outcast_return, cb_strayed) genuinely earns its pay: a small act at age 8 echoing back at 57 with new weight is the game's best trick, and it creates real 'one more life' pull to see which callbacks crystallize.",
+    "Vocation x era intersections (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) produce structurally distinct lives — a soldier born into a war year genuinely reads differently from a scholar in a turning age; this is the strongest anti-staleness mechanism in the whole system.",
+    "Dynasty accumulation has real cross-run pull: watching the motto crystallize ('We keep what we have learned'), an heirloom book pass from Saoirse to Liv to Yara to Emory, and the seat inch toward 'old and famous house' creates the replay-addict's core itch.",
+    "The solitary/childless life-shapes (m_solitary, e_solitary, e_childless, a_chosen_family) are well-executed alternatives that genuinely close differently — they don't feel like failure states.",
+    "Competing-goods cards (x_honest_or_kind, x_dream_or_duty, x_loyalty_truth) resist the binary virtue template and make choices feel genuinely uncomfortable rather than tag-you're-kind."
+  ],
+  "staleness": [
+    "The 't_warm' open-table card ('People keep ending up at [name]'s table...') fires in 11 of 15 dynasties in the transcript, nearly every time the warm/tender trait is present — the identical prompt text appears so often it becomes the single most visible staleness signal across a long session.",
+    "The 'a_marry' card recycles 'fell asleep first again, mid-sentence; [name] lay awake deciding to ask in the morning — and then, by morning, did not' as one of only 3 rotating framings; it appears verbatim or near-verbatim in Dynasty 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14. A replay-addict sees this dozens of times.",
+    "The 'e_legacy' deathbed card ('what do you want remembered?') fires in nearly every elder life — it reads as a mandatory end-of-life beat rather than an earned moment, and its 3 options ('kind', 'built', 'here') are mechanically identical in effect.",
+    "The 'e_grandchild' grandchild-in-the-lap card fires in Dynasty 3, 5, 6, 7, 8, 10, 11, 12, with 'Tell the better story' and 'Tell the true story' appearing interchangeably. The prose distinguishes them mildly but a replay-addict registers the same emotional beat again and again.",
+    "Childhood is structurally thin: of ~10 child cards, c_steal (fruit/hunger) fires whenever means<35 and appears in D2, D3, D5, D6, D9, D12 with identical text. c_friend (lonely-yard child) also repeats across many lives. By dynasty 6 the childhood sequence feels like a template: origin → steal or book → friend or sibling → calling.",
+    "Epitaphs repeat verbatim despite the de-duplication logic: 'Kind in the small daily ways that turn out to be the large ones' lands in D4, D12, D14; 'Left her knowing in other heads where it kept on being used' in D3, D5, D6. These are the lines the player sees at the most emotionally resonant moment — repetition here breaks the illusion most sharply.",
+    "The 'y_calling' card text variants (only 3 phrases) plus the same 4-option menu appear in every single life that reaches youth. Even with varied choice, the prompt itself is identical each time across 15 dynasties, and the 4-option layout makes it read as a menu rather than a lived moment.",
+    "No meta-progression mechanic rewards the replay-addict's accumulation: there is no discovery log the player can watch fill up, no cross-dynasty achievement, no sense that playing 20 dynasties unlocks content the first 3 couldn't reach. The dynasty layer (seat, motto, heirlooms) is compelling but resets each new line — there is no persistent 'world' that deepens."
+  ],
+  "improvements": [
+    {
+      "what": "Add 4-6 additional framings to the 'a_marry' card and split 'e_legacy' into 3 separate late-elder cards (one for each legacy type, gated by the vocation and accumulated memories), each firing at most once per dynasty.",
+      "why": "These are the two highest-frequency repetition points in a long session. Splitting 'e_legacy' by vocation (a soldier's deathbed is not a scholar's) would make it feel earned rather than mandatory, and would add 8-12 distinct end-of-life moments the player rarely sees.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate the 't_warm' table card (and other trait-affinity cards like 't_shrewd') with a dynasty-level onceDyn flag or a higher cooldown (20+ years), so it fires at most once per dynasty rather than once per warm/tender life.",
+      "why": "It is the single most visible staleness signal: same prompt, same choice, many dynasties in a row. Raising the cool or burning it dynasty-wide would force other adult cards into the slot, diversifying the mid-life band.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a persistent cross-dynasty discovery log ('moments witnessed') that the player can see between runs — a constellation or list of card IDs they have encountered — so replay-addicts have a tangible goal of 'seeing everything' that deepens with each dynasty.",
+      "why": "The game already calls markMomentSeen() but does not surface this to the player. Showing a fill-rate ('47 of 120 moments seen') gives a replay-addict a concrete reason to keep playing beyond the current dynasty's arc.",
+      "impact": "high"
+    },
+    {
+      "what": "Double the childhood card pool (currently ~10 cards, several with onceDyn potential) by adding 4-6 more once-per-dynasty childhood moments that vary with era, seat, or sibling count, and give c_steal and c_friend higher cooldowns or onceDyn flags.",
+      "why": "Childhood is the most template-like phase: steal-or-book, friend-or-sibling, wonder-or-unfair. By dynasty 4 it reads as the same checklist. More era-gated childhood cards (e.g. a plague-era sick-season card, a plenty-era childhood card distinct from c_origin) would make early life feel less formulaic.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the epitaph de-duplication to block any epitaph cluster used in the past 5 dynasties (not just the past 2 generations of the current lineage), and add 3-4 new mid-tier epitaph clusters for the 'decent, unremarkable life' that currently bottoms out at generic fallbacks.",
+      "why": "Epitaphs are the single most emotionally charged text the player reads, and verbatim repeats across nearby dynasties are the sharpest staleness signal. The current RECENT_LINES guard (70-line buffer) does not prevent cross-dynasty cluster repetition.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 'second-life' cards that only unlock after a player has run at least 5+ dynasties — content that references the weight of having watched many houses rise and fall, framed as the player-character's accumulated wisdom rather than any in-fiction character's.",
+      "why": "A replay-addict has no content reward for depth. A few cards that fire only on dynasty 5+ (and say so — 'You have watched this before') would give experienced players a genuine sense that the game knows they are veterans.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life earns its quietude and the dynasty layer has genuine pull, but the replay-addict hits a wall around dynasty 4-6: the marriage prompt, the open-table card, the legacy question, and the grandchild scene repeat so visibly that the game starts reading as a template engine with new names, not a world that keeps surprising."
+}

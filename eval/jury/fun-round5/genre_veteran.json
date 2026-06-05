@@ -1,0 +1,48 @@
+{
+  "profile": "genre_veteran",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system genuinely earns its genre stripes: 'cb_lookaway', 'cb_outcast_return', 'cb_books_late', 'cb_strayed' create the rare 'oh, that was me 40 years ago' payoff that BitLife never manages and Cultist Simulator only does abstractly. When Ren reads the family book at 50 that he kept at 12, it actually lands.",
+    "The vocation x era cards ('vx_soldier_war', 'vx_scholar_turning', 'vx_maker_plenty') are a genuine design win — they exist only at intersections the player chose, so a war-era soldier life is structurally different from a war-era scholar life. The dynasty is not just witnessing history, it's *in* history via its choices.",
+    "The dynasty accumulation layer is the strongest 'one more' hook: the house seat, motto crystallisation, heirlooms, and the 'still ahead' aspirations list create concrete cross-generational goals that Alter Ego never had. Watching House Castellane climb from 'a rented room' to 'an old and famous house' over 5 generations while maintaining 'By our own hands' as a live motto is genuinely satisfying.",
+    "Solitary and childless life-shapes ('m_solitary', 'a_chosen_family', 'e_solitary', 'e_childless') are real, not dead-ends. Caleb Castellane (D5 gen2) lives a complete and characterful solitary arc; Lena Holloway (D6 gen4) has no heir and still feels like a full life. This is rare in the genre.",
+    "The prose quality is high enough that even repeated structural beats land differently — seven variant phrasings for the love moment, multiple marriage-line pools keyed to age-at-marriage, late-birth vs. regular-birth child lines. The game is working hard to not be verbally monotonous.",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) have no clean answer and don't patronise the player. This is the Reigns quality level — both options are virtues in tension."
+  ],
+  "staleness": [
+    "By dynasty 6-8, a template is legible and inescapable: born → c_origin → c_friend or c_animal → y_calling → y_love1 or a_meet_late → a_marry → a_child → a_work → m_health → e_legacy → e_bequest → die. The cards vary; the skeleton does not. Comparing D3-founder Anders Aldecott with D9-founder Sabine Reyes or D13-founder Adaline Vasquez: different prose, same rhythm. A genre veteran will feel it by dynasty 8 and name it by dynasty 10.",
+    "Love and marriage are near-deterministic milestones. The engine nudges love strongly (0.34 per draw in youth, 0.10 in adulthood), then marriage, then child. Even lives that 'choose' solitude often have the love card appear and be declined — which is not the same as the card not appearing. The result is that the love arc lands in almost every life, just sometimes with a declined option. True structural variety (a life where love was never even offered) is rarer than the transcripts suggest.",
+    "The 'a_child' once-per-dynasty flag and 'f_fire' once-per-dynasty flag are among very few genuinely non-repeating cards. Most 'once' flags are per-life, not per-dynasty, so mid-game veteran players see 'm_health', 'e_legacy', 'e_bequest', 'y_calling', 'a_marry' in almost every single life. These are the load-bearing beats of the structure and they cannot be exhausted — which means they can never be surprising.",
+    "The trait affinity system (bookish→c_book, warm→c_friend) adds per-trait weighting but only 2-3 cards per trait. A bookish child gets slightly higher odds of c_book, c_wonder, c_sibling — it's a nudge, not a distinct childhood. Across 15 dynasties, childhood card sequences look similar regardless of trait because the pool is small and most childhood cards are short-lived once-fires.",
+    "The era system is shallower than it first appears. Each era has exactly one or two gated cards (w_war_call/w_war_loss, w_plague_tend, w_hard_winter, w_plenty_ride, w_turning_new) plus two vocation-era intersections. A war-era life that is neither a soldier nor a wanderer gets w_war_call (once) and w_war_loss (once) — two extra cards across an 80-year life. That is not enough to make the era *feel* like a different world; it feels like two extra events in an otherwise identical life.",
+    "The dynasty-memory 'd_ancestor' and 'd_motto_test' cards are elegant but their payoff is shallow: two choices each, both reasonable, both resolve in one log line with no downstream consequence. The family story is referenced but does not *change the world* the heir navigates. A house known as ruthless does get 'r_hard_name' and 'r_name_cost' — but these are 2-card arcs. A truly deep dynasty layer would let the house's reputation open and close specific plot-paths across many cards, not just two."
+  ],
+  "improvements": [
+    {
+      "what": "Make 3-4 milestone cards 'once-per-dynasty' instead of 'once-per-life': specifically e_legacy, m_health (or give it 3 structurally distinct variants keyed to vocation), and a_work. Let a dynasty exhaust these so late-generation heirs live genuinely different mid-game sequences.",
+      "why": "These three cards appear in nearly every single life across all 15 dynasties. The once-per-life flag means they never exhaust, so the skeleton never changes. Making them once-per-dynasty — or giving each vocation a distinct version — would mean a scholar dynasty's 5th generation has a structurally different midlife than its 1st, which is the core 'still fresh' question.",
+      "impact": "high"
+    },
+    {
+      "what": "Extend the era system from 1-2 gated cards to a 5-6 card arc per era, with at least 2 that affect all vocations (not just the era-specific soldier/scholar/maker). A plague era should make 3-4 distinctly different moral moments across child/youth/adult/midlife, not just one nursing scene. The 'hard' era should pressure means across the whole life, not just one winter.",
+      "why": "Currently the era background is announced in text but barely changes gameplay. A player in a war dynasty vs. a plague dynasty should feel it in most life-stages, not two events. The era is the best tool for structural differentiation between generations and it is currently underused.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 cards that are reputation-gated at mid-tier ('scholarly' at repute>=1.2, 'generous' at repute>=1.0, etc.) not just at the top (seat>=4 or repute>=2). These should appear in adult and midlife, not just as elder rewards. The current system only gates significant content at high standing, so most houses never see reputation-specific content until late.",
+      "why": "A player trying to build a scholarly house should feel the house's identity shaping individual lives from generation 2 onward, not generation 4. Right now the reputation arc is largely invisible during play and only visible in text summaries. Mid-tier gating would make the 'what kind of house am I building' question feel live in every generation.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'dynasty secret' mechanic that is more plot-active: if a secret exists and is unconfessed, add 1-2 specific cards that only the secret-carrying dynasty can face (a blackmailer, a relative who has figured it out, an inheritance that hinges on the truth). Currently the secret can be inherited and exposed but otherwise has no gameplay footprint.",
+      "why": "The secret is the most narratively interesting dynasty object and currently the least mechanically interesting. It passes down and can be revealed but does not generate events. Giving it 2 active cards would make the 'strayed-and-unconfessed' decision ripple forward in a way players can feel and anticipate.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'calling switch' moment in midlife (one per dynasty): a life that chose soldier can be offered a chance to become a scholar or maker, and vice versa. This would open entirely new card clusters mid-life and create a structurally distinct arc for late-switcher generations.",
+      "why": "Vocation is the strongest structural differentiator the game has, but it is locked at 14-22 and never revisited except via the general m_reinvent card. A mid-life vocation shift would be the biggest single source of structural novelty and would give veteran players a reason to play tactically against the calling system.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life plays better than most genre competitors in its first 5 dynasties — the callback system and dynasty accumulation are genuinely well-designed — but by dynasty 8 a genre veteran will be narrating the skeleton rather than discovering a life, because the milestone cards never exhaust and the era system is too thin to make the macro-context feel different."
+}

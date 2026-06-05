@@ -1,0 +1,55 @@
+{
+  "profile": "completionist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier/scholar/maker/wanderer) creates genuinely distinct adult arcs. A scholar life reads differently from a wanderer life at the level of cards offered, not just log flavour — and the vocation×era intersections (vx_scholar_turning, vx_soldier_war, vx_maker_plenty) are rare enough to feel like a real find.",
+    "The callback chain is the best design in the game. cb_books_late, cb_outcast_return, cb_lookaway, cb_strayed, cb_principle all feel earned: they reach back to a specific choice made years earlier and return it with weight. A completionist hunting callbacks has genuine reason to vary early-life decisions.",
+    "The dynasty accumulation layer — seat rise and fall, reputation drift, heirlooms, motto crystallisation — gives a multi-generation goal that is legible, cumulative, and not purely statistical. The moment a motto appears in the log ('the family's character has settled, at last, into words') is a genuine milestone.",
+    "Era colouring (war / plague / plenty / hard / turning) changes the world a generation opens into, gates unique cards, and makes generation 8 feel different from generation 2 in ways beyond name and trait.",
+    "Early mortality (Dynasties 5/11 age-43, Dynasty 11-gen2 age-21) produces structurally short, complete lives that feel poignant rather than punitive — a legitimately different shape of life.",
+    "The seat-gated cards (s_great_burden, s_inheritance_dispute, s_patronage) and repute-gated cards (r_scholar_door, r_family_shadow, r_hard_name) reward a long-running house with content a starting house cannot access. A completionist has reason to keep playing for these."
+  ],
+  "staleness": [
+    "The 'red and furious and entirely unimpressed by any of it' birth line fires in 9 of 15 dynasties in the transcripts. The code uses S._usedFurious to gate it once per dynasty, but since most dynasties have one coupled life with a child, this line becomes a recognisable template beat rather than a surprise. By dynasty 6 a player will anticipate it.",
+    "The marriage prompt ('Ask. Build a life.') fires in nearly every coupled life across all 15 dynasties, with only 6 rotating lead-in frames. The choices and their stat effects are identical each time. A completionist will feel this as a mandatory check-box in every domestically-routed life.",
+    "The 'word comes from the town left long ago' callback (cb_left_home) fires in 9 of 15 dynasties because the left_home memory is so easily acquired (y_leave, y_calling road, wanderer vocation, c_move). Its two outcomes produce nearly the same log line regardless of choice. It has become ambient rather than a payoff.",
+    "The d_ancestor card fires in 6+ dynasties with the same two-choice binary ('Live up to the name' / 'Step out of its shadow') and no mechanical or narrative consequence that differs from the choice — both yield minor stat bumps and a log line. The promise of 'your ancestor's story returned to you' is not delivered: there is no distinct content depending on WHICH ancestor or WHAT they did.",
+    "The observe() pool ('The stairs have started to ask a question of them', 'The body has begun sending its small bills') fires so frequently across long lives that it becomes background noise rather than character texture. By dynasty 5 these lines read as filler rather than voice.",
+    "The elder arc has a structural sameness regardless of vocation: body card → garden card → legacy card → bequest card → peace card → die. The vocation-specific elder caps (e_scholar_old, e_soldier_old, e_wanderer_old) are present but not reliably weighted above the generic sequence, so many elder lives still read as the same closing template.",
+    "Several high-weight cards recur every life with only log-line rotation at the response level, not at the prompt level: the guarded-wall card (t_guarded), the work-promotion card (a_work), the parent-aging card (m_parent_age). The player reads the same dilemma text repeatedly even when the log line varies.",
+    "No in-game discovery tracker is visible to the player. A completionist has no signal about what cards they have and have not seen, no 'new!' indicator, no way to know whether a variant fire is genuinely fresh or a reshuffle of familiar text. The engine tracks markMomentSeen() internally but exposes nothing — the discovery signal that would sustain a completionist across many dynasties is invisible."
+  ],
+  "improvements": [
+    {
+      "what": "Add a visible discovery register — a constellation or chronicle section showing how many distinct moments have been witnessed across all dynasties, with unlocked silhouettes for categories (childhood, youth, adult, vocation-soldier, era-war, etc.).",
+      "why": "A completionist's core drive is knowing what they have not seen yet. Without a signal, every new dynasty feels like it might be repeating rather than expanding. Even a simple count ('43 of ~130 moments witnessed') would create a concrete reason to vary choices and vocations.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the d_ancestor card distinct prompt text and a mechanical consequence based on the ancestor's actual epitaph cluster or vocation — e.g., an ancestor who died as 'teacher' produces a different version of the card than one who died 'in shadow'. The two current options could branch into 6 depending on ancestor character.",
+      "why": "This is the card most explicitly about dynasty-memory, but its content is currently ancestor-agnostic. It fires repeatedly with identical text, breaking the illusion that the specific lineage matters. Making it personalised would be the single biggest improvement to the dynasty-layer payoff.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap the 'red and furious' birth line at once per session (across all dynasties), not once per dynasty, and add 4-5 new first-birth lines that are equally strong but structurally distinct.",
+      "why": "The line appears verbatim in 9 of 15 dynasties in the transcript. It is now the most recognisable beat in the game — a player will start expecting it. Once-per-session is the right scope for a line this distinctive.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 high-weight onceDyn cards that fire only when specific cross-generational conditions are met — e.g., a secret that has been carried for 3+ generations without being spoken produces a distinct confession card; a house that has held the scholarly reputation for 4+ lives produces a 'the library is famous now' moment. These are emergent payoffs that a completionist will keep playing for.",
+      "why": "Currently the onceDyn system prevents repetition but does not reward sustained play. Cross-generational triggers would create moments only reachable through deliberate multi-dynasty play — the 'one more dynasty' pull the game currently lacks after dynasty 6.",
+      "impact": "high"
+    },
+    {
+      "what": "Vary the marriage card's prompt text by relationship age: a couple who met at 16 and are asking at 24 should see different framing from a couple who met at 32 and are asking at 46. The current 6 rotating frames do not distinguish these situations.",
+      "why": "Marriage is the card a player sees most often across a long run. Its binary choice and fixed stat effects are acceptable, but the same framing regardless of life context makes it feel mechanical. Situational text (young-love vs. late-love, cautious vs. certain) would restore the sense that this particular marriage matters.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a seat-7 exclusive card cluster (2-3 cards) that only a house that has reached 'a house written into the histories' can encounter — content the player cannot have seen in a shorter run. Make this the tangible reward for the long climb.",
+      "why": "Currently seat-7 is presented as the goal, but reaching it produces no unique content — just a log line that the standing changed. A completionist who builds to seat-7 expects something they could not have seen at seat-4. Without it, the goal feels hollow once reached.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely atmospheric literary sim that earns its first 4–5 dynasties cleanly, but the structural template — meet, marry, birth-cry, parent-care, elder-body, die — becomes visible around dynasty 6–7, the key recurrence markers ('red and furious', the guarded-wall prompt, the married-late phrasing) begin to feel predictable, and a completionist has no discovery signal to guide continued play toward the cards they have not yet seen."
+}

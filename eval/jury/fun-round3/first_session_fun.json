@@ -1,0 +1,49 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the game's strongest mechanic: the childhood book returning in midlife, the stray following you home and its meaning echoing decades later — these create genuine 'I made that happen' moments that feel earned rather than scripted.",
+    "The vocation fork (soldier/scholar/maker/wanderer) gives four structurally distinct adult arcs. A soldier life reads differently from a scholar life. This is real divergence, not paint.",
+    "The era system (war/plague/plenty/hard/turning/settled) tints the world each generation enters and gates unique cards — a war-era life can face 'the loss that goes into the work' that a settled-era life never will. It keeps the macro-world from feeling static.",
+    "The dynasty layer — heirlooms, mottos, house aspirations, reputation — provides a genuine 'one more dynasty' pull. Watching a motto crystallise ('Better a short blaze than a long smoke') or an heirloom book pass through three generations is satisfying.",
+    "The prose is uniformly good and occasionally excellent. 'Fell in love, and was aware, with a cold clarity, of everything it now made possible to lose' lands on first read and earns its place. The writing carries the opening sessions.",
+    "Trait-affinity weighting in the draw engine (bookish children lean toward c_book, warm children toward c_friend) makes early lives feel character-consistent rather than random. This is a quiet but real source of variety.",
+    "The competitive-goods cards (honest-or-kind, loyalty-vs-truth, dream-vs-duty) have no right answer, which is the correct design for a contemplative genre. They produce genuine player reflection, not optimisation."
+  ],
+  "staleness": [
+    "Childhood is thin and front-loaded with onceDyn burns. There are ~12 child-stage cards total, but c_sick and c_friend are onceDyn: after dynasty 1 they never return. By dynasty 3 the opening 7-12 years collapse to a predictable pick from {stray, grandparent, sibling, move, wonder, unfair, dark, talent}. Most lives present 2-3 of these in similar combinations — not enough variety to make each new child feel like a different person.",
+    "The scholar path dominates the transcripts: in 18 dynasties, scholar is chosen more often than the other three vocations combined (Marguerite, Noor, Mateo Halloran, Idris Halloran, Yara Renner via book-keeper, Mateo Voss, Caleb Voss, Carys Marlowe via wanderer+scholar-adjacent, Yara Marlowe). This is partly player choice, but the scholar arc's callback (cb_study_pays: 'the long bet paid off') is one of the most reliably fired cards in the game and gives scholars a narrative payoff the other paths lack proportionally.",
+    "Epitaphs repeat verbatim across dynasties in the same session: 'Gave away everything she knew, and so kept it' lands on D2-founder Marguerite, D8-Caleb, and D9-Yara-4th. 'Kept a whole country behind the eyes, and lived there often' lands on D4-Yara-founder and D9-Carys-founder. 'Made something real, and the making was the life' appears on D8-Caleb-epitaph note and D11-Tomas. The epitaph pool has a de-duplication mechanism but it isn't wide enough to avoid verbatim repeats across a 12-dynasty session.",
+    "The love/romance sequence is structurally identical across the majority of lives: y_love1 fires ('Someone keeps finding reasons to be where {n} is') in 7 variant texts, then a_marry fires ('X and Y have been a quiet certainty for years now'). By dynasty 5 the player has seen 4-5 of the 7 y_love1 variants and the marriage card's 3 text variants. The relationship arc stops feeling like discovery and starts feeling like form-filling.",
+    "The adult mid-band (ages 28-55) is the stalest section. Most lives draw from the same small rotation: work dilemma (take promotion/refuse), a_small_lie, a_neighbour, a_work (repeatable). The repeatable cards have 2-3 text variants with a rotN counter, but by dynasty 6-7 the player recognises 'the promotion card' before reading the second sentence. The 14-year cooldown prevents immediate repetition within a life but not across dynasties.",
+    "There is no 'emergent collision' in the transcripts — no moment where two systems interact to produce something neither could produce alone (e.g., a secret from an affair surfaces when a child is also estranged and an inheritance dispute fires simultaneously). The systems run in parallel but rarely compound. This is the ceiling on long-session freshness."
+  ],
+  "improvements": [
+    {
+      "what": "Add 6-8 more child-stage cards (ages 5-12), none of them onceDyn, all with distinct situational conditions (e.g., requires a sibling, requires poverty, requires war era). Target the gap between age 5 and the calling card at 14: most lives currently have 1-2 child events in this window.",
+      "why": "The first 20 minutes of a new player's experience is nearly the entire childhood of the first life. If childhood is thin or repeats on the second life, the hook fails before the vocation fork. This is the highest-leverage fix for first-session retention.",
+      "impact": "high"
+    },
+    {
+      "what": "Give scholar, maker, and wanderer their own reliable callback equivalent of cb_study_pays. Soldiers have a_soldier_service + m_soldier_ghost + e_soldier_old (three-card arc). Scholars have cb_study_pays. Makers and wanderers have weaker, less reliable payoff chains. Specifically: a 'maker's masterwork' three-act (commission / the making / the legacy) and a 'wanderer returns' arc (the horizon / the homecoming reckoning / what the going cost).",
+      "why": "When scholars consistently feel like they have a narrative arc with a satisfying payoff and other vocations feel like stat modifiers, players drift toward scholar. More importantly: the 'one more life' pull depends on feeling like the next life's choices will compound into something. The arc is what creates that pull.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the epitaph pool to at least 6-8 lines per cluster (currently most clusters have 3-4), and add a session-global recent-lines list that prevents any verbatim line repeating within the same 18-dynasty session. The current RECENT_LINES implementation blocks same-line repetition only within the last 30 uses — at 1-2 epitaphs per dynasty, a pool of 3 means repetition within ~3 dynasties.",
+      "why": "The epitaph is the emotional punctuation of each life. A repeat is the most visible staleness signal in a session — it tells the player 'you have seen this before' at the one moment the game most needs to feel singular. The fix is cheap relative to its impact.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 2-3 cross-system compound triggers: moments that only fire when two unrelated systems have both left marks. Example: if the player carries 'strayed' AND has a low-bond child AND a sibling is alive, a card fires where the child finds out from the sibling — and the player must choose whether to confess to both or maintain the silence with new stakes. These do not require new prose volume — they reuse existing characters in new configurations.",
+      "why": "Emergent compound moments are what create 'I've never seen THIS before' — the hallmark of sustained freshness in a sim. The current system's cards are independent. Crossing just 3-4 existing flags into compound conditions would generate story shapes that feel genuinely unscripted.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 y_love1 equivalents that fire based on the character's vocation or traits rather than just age — a soldier meets someone at the border, a wanderer meets someone in a far city, a scholar meets someone across a margin note — so that the love entry point is structurally different depending on who the player has made this character.",
+      "why": "The love entry is one of the most-repeated sequences in the transcript. Vocation-gated love cards would let it feel native to the life rather than a universal-human-experience overlay, and would reduce the 'recognising the same card' problem.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely engaging for the first one or two dynasties — the callback arcs, vocation structure, and prose quality create real investment — but by dynasty 5-6 the thin childhood pool, repeated epitaphs, scholar-path dominance, and structurally identical adult mid-band make it feel like watching the same well-written play with new actors rather than a living system; it earns a 6.5."
+}

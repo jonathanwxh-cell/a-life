@@ -1,0 +1,48 @@
+{
+  "profile": "lapsed_player",
+  "score": 7.0,
+  "fun_highlights": [
+    "The callback system is genuinely good: early choices (the lonely-yard child, the unspoken love, the cut corner) reach back across decades and sometimes across generations; that's the 'one more life' pull at its best and it works.",
+    "Vocation-gated arcs (soldier's ghost, scholar's question, maker's masterwork) give structurally different middle years so the scholar and the wanderer don't just hit the same beats with different paint.",
+    "The era layer (war/plague/plenty/hard/turning) refreshes the world each dynasty and surfaces cards that are impossible in a different era — the plague-tending card versus the keep-your-distance fork is a genuinely different moral weight.",
+    "Competitive-goods cards ('honesty vs. kindness', 'loyalty vs. truth', 'dream vs. duty') have no clean answer; for this genre that's exactly right, and they appear unpredictably enough to feel fresh.",
+    "The dynasty layer — rising and falling seat level, inherited heirlooms, the family motto crystallising around gen 2-3, secrets that pass down — gives real cross-life continuity and the 'what does my house stand for' question is a genuine lure.",
+    "Prose quality sustains the genre promise across all 15 dynasties without becoming precious; the rotating observation lines (body-aging, spirit, means) keep ambient texture fresh without choices."
+  ],
+  "staleness": [
+    "The fever card (c_sick, age 3-10) appears in dynasty 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 — literally every single dynasty. Three variants rotate but all are recognisably 'the same card.' By dynasty 6 I stopped reading it. The child-band is the stalest band in the game and the fever is the most visible culprit.",
+    "The calling fork (y_calling) and the love opener (y_love1 / a_meet_late) are structural pillars that hit every life. Four vocation lines and seven love-preamble variants do buffer this, but a lapsed player who remembers bouncing off the game will recognise these immediately as 'the same two pivots in slightly different dress.'",
+    "The 'return to the old town' callback (cb_left_home) fires in Dynasty 1 Anouk, Dynasty 2 Mira, Dynasty 3 Ronja, Dynasty 4 Linnea, Dynasty 5 Selma — five of the first five dynasties. It's technically conditional on left_home being set, but the early callings strongly push left_home, so it fires almost every life. Three line variants cannot carry that frequency.",
+    "The 'fire destroys what I had, and I begin again' moment fires in Dynasty 2, 5, 7, 9, 11, 14, 15 — nearly every other dynasty. It has only one effective choice (the other is grayed out in the transcripts — 'passed over: '). A forced, consequence-free card that appears this often with no actual decision is pure texture-debt.",
+    "Dying epitaphs and end-of-dynasty summaries repeat across close generations: 'Gave away everything she knew, and so kept it' appears in Dynasty 1 Anouk (70), Dynasty 7 Roman (66), Dynasty 11 Lazlo (69), Dynasty 14 Linnea (63). The anti-repeat logic exists but its lookback window isn't stopping near-dynasty recurrence. A lapsed player whose prior gripe was repetition will notice this immediately.",
+    "Midlife band thins structurally: most adult-midlife lives run through marry → child → work-promotion-dilemma → aging-parent → midlife-reinvention in broadly that order. The vocation arcs add one distinct fork per calling, but the supporting cards (a_work, m_parent_age, m_who_became) hit multiple lives per run in recognisable order. By dynasty 10+ the middle years feel scheduled, not emergent."
+  ],
+  "improvements": [
+    {
+      "what": "Add 4-6 genuinely new childhood cards and cap the fever card to fire at most once every 4 dynasties (via a dynasty-level cooldown in S, not just a per-life once flag). Replace 'the fever' as the default child-band opener with a rotating pool of equally universal childhood pressures: first theft, first big move, first fight with a parent, a moment of inherited family shame.",
+      "why": "The fever is the single most visible staleness signal across the transcripts — it appears in every dynasty and is the first card most heirs see. Eliminating it as a default and replacing it with a deeper pool directly addresses the lapsed player's core memory of 'same template, new names'.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate the 'return to the old town' callback (cb_left_home) behind a dynasty-level cooldown of 3 (not just per-life once). Alternatively, pool it with 2-3 structurally similar callbacks (the old letters, the unspoken love, the look-away) so only one fires per life via a shared cooldown slot.",
+      "why": "It fires 5 times in the first 7 dynasties in the transcripts. The prose is good but no prose survives that frequency. A shared slot mechanism would preserve the reach-back feeling while preventing any one callback from dominating.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the fire event (u_fire / the ash-beginning) a real second choice with mechanical weight — not just the 'passed over:' ghost it currently has — or gate it behind means>N and give the two paths meaningfully different outcomes (rebuild at cost; don't rebuild, house drops a seat). Also cap it to once per 3 dynasties.",
+      "why": "As currently implemented it fires with no choice and appears every other dynasty. A forced no-decision event that appears this often reads as a narrative tic, not a simulation. Giving it a real fork (fight vs. accept) and rarity would make it feel like misfortune instead of clockwork.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce 2-3 'dynasty arc' goals visible to the player — explicit milestones like 'reach a fine townhouse', 'achieve the scholarly reputation', 'heal the family secret' — with a small visible indicator (not a number, just a phrase on the dynasty panel). The current constellation and house-standing exist but don't translate into a felt goal for the next session.",
+      "why": "The 'one more dynasty' pull exists implicitly but the transcripts show the player often starts without a specific purpose. An explicit arc goal gives the lapsed player a reason to start the next house beyond generic curiosity. It is the single biggest structural gap between 'pleasant' and 'genuinely can't stop'.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a thin 'rival house' mechanic: once per run, the game names another house (procedural, never playable) that is at the same seat level and occasionally appears in cards — a rival merchant, a competing scholarly name, a harder-than-yours house. Give the player one or two reactions (cooperate, compete, ignore) with ripple effects.",
+      "why": "The current sim is entirely inward-facing. A rival house creates external stakes and a narrative through-line that survives individual life deaths. Even one card per two dynasties referencing the rival would give the dynasty layer a concrete antagonist to push against.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely good literary sim that earns 7 out of 10 — the prose is honest, the callback system is often moving, and the era and vocation layers do prevent the worst of the repetition I bounced off before — but the childhood band is still stale (the fever appears in all 15 dynasties), the fire event is a forced non-choice that recurs every other dynasty, and by dynasty 10 the adult structure runs on a schedule the lapsed player can feel, which is exactly what kept me from coming back before and still keeps this below the 8 it needs to be."
+}

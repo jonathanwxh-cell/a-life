@@ -1,0 +1,50 @@
+{
+  "profile": "variety_seeker",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation fork (soldier/scholar/maker/wanderer) genuinely bifurcates adult card pools — a soldier's 30s surface 'a_soldier_service', 'm_soldier_ghost', 'e_soldier_old' that a maker simply never sees, so the dominant life-shape does vary by chosen path.",
+    "Era cards (war, plague, plenty, hard, turning) inject era-exclusive moments — 'w_war_call', 'w_plague_tend', 'w_hard_winter', 'w_plenty_ride' — that a settled-era life cannot access, making gen-8 feel genuinely unlike gen-2 when the eras differ.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_strayed, cb_unspoken, cb_lookaway) close arcs seeded years earlier and produce real 'oh — that's you' moments; the best structural feature of the game.",
+    "The dynasty memory system (d_ancestor, d_motto_test) lets later heirs literally encounter their ancestor's name and test the family motto, creating genuine cross-generational identity that is unique to this design.",
+    "The seat-gated and repute-gated cards ('s_great_burden', 'r_scholar_door', 'r_hard_name', 's_inheritance_dispute', 's_patronage') mean a storied house meets structurally different content than a landless one; the gap is real and perceptible.",
+    "Short lives (Pavel Delacroix, died at 11) and long ones (Iris Vasquez, lived 95) produce radically different shapes; early death works as a genuine structural event rather than a punishment.",
+    "Prose-level variant rotation (rotI, rotN, houseOff) ensures the same card rarely prints the same sentence twice, so surface repetition is well-suppressed even when the same card fires."
+  ],
+  "staleness": [
+    "The late-love arc is near-universal: across 16 dynasties, almost every life that did not find love in youth found it via 'a_meet_late' at 26–54. The marriage beat ('Ask. Build a life.') appears in every single surviving adult life in the transcript without exception. The prose variants (7 for y_love1, 3 for a_meet_late, 6 for a_marry) are all competent, but the structural beat is identical every time — 'lateness makes the vow weigh more' is virtually the epitaph for the marriage arc in dynasty after dynasty.",
+    "The child arrival card fires in every coupled life at a nearly predictable cadence (age 40–50, late birth framing). The 'late child, felt the lateness as a kind of luck' variant appears identically in Dynasty 1 (Bram, age 48), Dynasty 2 (Cosima, age 49; Annika, age 46), Dynasty 5 (Otto, age 33; Calla, age 48; Caleb, age 49), Dynasty 6 (Vesna, age 47; Bram, age 47), Dynasty 7 (Lucan, age 47; Tariq, age 48; Carys, age 48; Joaquin, age 46; Iris, age 44), Dynasty 8 (Liv, age 44; Naima, age 44; Ronja, age 47; Lucan, age 49), Dynasty 9 (Cyrus, age 47; Idris, age 47; Yara, age 42; Emory, age 48), Dynasty 10 (Greta, age 50; Mira, age —). The 'lateness as a kind of luck' framing becomes a self-parody by dynasty 5.",
+    "The maker vocation's card sequence is conspicuously repetitive: 'a_maker_shop' → 'm_maker_masterwork' (usually refused: 'kept the lights on') → 'e_maker_handoff' appears in at least six different lives across the transcript (Annika, Caleb, Bram Salvedi, Carys, Idris, Ronja), and the refusal of the masterwork is chosen by the majority. The 'kept the lights on instead' line appears verbatim across Dynasty 2, 5, 6, 7, 8, 9.",
+    "The c_sick / c_sibling / c_friend / c_book child band fires in almost every life in the same approximate order (ages 3–12). Every childhood reads as a slight remix of the same four beats: fever, sibling rivalry OR friend-in-yard, book OR outdoor play, occasionally a stray. The trait moments (t_bookish, t_guarded, t_warm) help but do not fundamentally alter this.",
+    "Elder arcs converge on a narrow template: parent care (m_parent_age), legacy declaration (e_legacy, nearly always 'kind' or 'built'), body card (e_body), and the 'cb_the_cost' ending reflection. The 'Let it stay unsettled' choice at the end of 'cb_the_cost' is chosen by almost every elder in the transcript. Seven distinct lives make this exact closing choice.",
+    "The m_soldier_ghost card ('the war comes back at three in the morning') fires in every soldier life that reaches midlife, and the two choices ('Talk about it' vs 'Carry it alone') alternate in a pattern that becomes predictable rather than surprising by the 5th soldier life.",
+    "Structural skeleton across nearly every life: [childhood 4-card band] → [vocation fork] → [early love or late love] → [financial event] → [marriage] → [late child] → [parent care] → [body health scare] → [elder reflection and legacy]. The variation lives almost entirely within prose and stat flavor, not in the order, frequency, or nature of beats. A maker and a wanderer have different cards in the adult band, but the frame before and after is identical."
+  ],
+  "improvements": [
+    {
+      "what": "Cap the late-birth framing: once 'lateness as a kind of luck' has been used in a dynasty, subsequent children in that lineage should draw from an alternative pool that does not use the lateness frame.",
+      "why": "By dynasty 5, 'felt the lateness itself as a kind of luck' is the single most repeated phrase in the transcript. The rotI system prevents verbatim repetition within a life but does not guard against the same thematic framing appearing in 12 consecutive generations. A once-per-dynasty flag on the lateness variant, analogous to _usedFurious for the 'red and furious' child line, would force the engine to find other framings.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'solitary' life-path: when the love window closes without a match (either y_love1 and a_meet_late both declined or missed), gate a distinct adult card cluster that does not require spouse/love — e.g. a deeper friendship arc, a mentor-chain, a chosen-family beat, late-career obsession. Currently the engine ensures love is almost always offered; a deliberate solitary life has almost no distinct content to discover.",
+      "why": "The engine's comment notes 'a genuinely different life, not the same domestic arc with new names' as a goal, but the card pool for a loveless adult is thin: windfall, loss, work, occasional neighbour/friend cards. Without a positive solitary arc the game implicitly penalises the choice and every 'real' life reads as domestically anchored.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the maker vocation a 'masterwork completed' branch that gates later content — e.g. a cb_masterwork callback in elder that surfaces the made thing's legacy, an heir who inherits its name, a reputation pivot. Currently refusing the masterwork ('kept the lights on') has no downstream consequence and the masterwork success ('the thing held it') also has none.",
+      "why": "The masterwork choice is one of the most structurally interesting in the game — the tension between art and livelihood — but both roads lead to the same elder arc. Adding a downstream consequence (even one card that fires only if the masterwork was completed) would make the choice feel like it actually bent the life's shape.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce a once-per-dynasty 'founding crisis' card that fires only in gen 1 and has permanent structural consequences for the house — e.g. choosing 'go into debt' vs 'stay small' determines whether the house starts at seat 0 or seat 2 but also which reckoning variant appears if x_reckoning fires. Currently all founders start from the same seat-1 floor.",
+      "why": "Dynasties feel structurally similar in generation 1 because all founders begin from essentially the same position (rented room, means ~20–35, the same childhood band). A founding decision with permanent house-level consequences would make 'which dynasty are we?' a different question from 'which vocation did this person pick?'",
+      "impact": "med"
+    },
+    {
+      "what": "Break the elder arc into at least two distinct sub-arcs gated on life-shape: a 'long-quiet elder' who had a stable domestic life gets c_peace / e_garden / e_old_letters, while a 'turbulent elder' who had high-peril or reckless flags gets different elder content — revisiting an old battlefield, a late public accounting, a deathbed confession scenario. Currently all elders draw from the same pool regardless of who they were.",
+      "why": "The transcript shows near-identical elder arcs across soldiers, scholars, wanderers, and makers. A soldier who 'went where it was worst' and a maker who 'kept the lights on' both end with the same body-scare, legacy-question, and settling reflection. The elder stage is where the structural divergence earned in adult life should pay off most visibly — and currently it collapses back into a single shape.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life has real structural depth — vocations, eras, callbacks, and dynasty-gated cards genuinely diverge lives in the middle years — but the childhood band, the marriage and late-child arc, and the elder stage form an unvarying skeleton that reasserts itself so reliably that by dynasty 6 the transcript reads as the same life remixed, not re-invented."
+}

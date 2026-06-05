@@ -1,0 +1,54 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.5,
+  "fun_highlights": [
+    "The first two or three lives of each dynasty are genuinely engaging. Each CALLING choice (soldier/scholar/maker/wanderer) produces a meaningfully different cluster of adult cards — the soldier gets war trauma, the maker gets the masterwork dilemma, the scholar gets the 'chase the question or eat' fork — so the first life you actually see content you won't see in every life.",
+    "Era cards (war, plague, hard winters, turning age) land with real weight and produce genuinely different life-shapes. A plague-era life reads nothing like a fat-years life. This is the best structural variety the game has.",
+    "Callback cards are the game's strongest moment. When 'cb_books_late' fires at 48 after you kept the book at 12, or when 'cb_outcast_return' pays off a childhood kindness thirty years later, the sense of a coherent personal arc is genuinely moving — this is the 'emergent story' the genre promises.",
+    "The bequest system and dynasty reputation mechanics give a genuine one-more-dynasty pull. Watching a motto crystallize ('We burn bright, and we burn') or a house climb to 'old and famous' is satisfying, and the seat/reputation feedback loop rewards planning across generations.",
+    "The prose has sufficient variant pools (5-8 lines per frequently-repeating moment) that the same beat rarely reads identically in consecutive lives, which blunts staleness considerably.",
+    "Heirlooms and inherited secrets create a real sense of a house accumulating identity over time — you notice the 'book too hard for a child's hands' passing down generations and it registers as dynasty-specific lore, not a generic bonus."
+  ],
+  "staleness": [
+    "The dominant life-shape is nearly identical across all sixteen dynasties in the transcript: childhood card or two → CALLING (age 14-22) → late love at 26-54 → a_marry → a_child → midlife body-check → elder legacy question → death. A first-session player will see this template lock in by dynasty 3 at the latest. The structural variety from vocations is real but happens inside the same biographical skeleton every single time.",
+    "Child cards are thin relative to how often the first life opens on them. The transcript shows the same three or four cards — c_sick, c_sibling, c_book, c_animal — appearing in almost every dynasty's first two lives. A player starting their third or fourth dynasty will have already resolved all of these. Because most child cards are once-per-dynasty (onceDyn), later-dynasty heirs often open their early years with almost nothing (Adaline Okonkwo's childhood in dynasty 5 is three cards in twelve years; Emory Holloway's in dynasty 9 is similarly sparse).",
+    "Love and marriage feel mechanical rather than meaningful after the first dynasty. The late-love card (a_meet_late) appears in nearly every single life and becomes a near-certain event. By dynasty 4 the player knows: 'at around 35-52 someone will appear, I'll click Let it begin, then a_marry will fire 5 years later.' The seven variant texts for y_love1 help superficially but the underlying structure is identical every time.",
+    "The 'once-per-dynasty' throttle on foundational cards (c_sick, y_mentor, s_from_nothing) means later-dynasty heirs miss entire categories of childhood and youth content permanently. Dynasty 7-12 founders have noticeably fewer childhood cards than dynasty 1-2 founders, producing earlier-life voids that feel empty rather than quiet.",
+    "The vocation-gated arcs, while structurally distinct, are each only 3 cards deep (service/ghost/elder for soldier; question/legacy for scholar; shop/masterwork/handoff for maker; settle/return for wanderer). After a player has taken each vocation once, they've seen the full arc. Replayability within a vocation drops sharply on the second life with that calling.",
+    "The 'u_loss' and 'u_windfall' universal cards appear frequently enough across dynasties that they begin to read as pure noise — budget fluctuations without character. The cb_corner callback is the only thing that gives repeated financial-pressure cards any narrative texture.",
+    "The epitaph pool recycles visibly. 'Never could pass a hurt creature without stopping for it' appears in six of the sixteen dynasty summaries in the transcript — three times in consecutive dynasties (5, 6, 8). While there is anti-repeat logic in the code, the epitaph clusters are narrow enough that a player who accumulates a 'kind' tendency across most lives will keep reading the same handful of closing lines."
+  ],
+  "improvements": [
+    {
+      "what": "Add 6-8 new child/youth cards that are NOT once-per-dynasty — meaning they can appear in every heir's early life, not just the founder's. Tag them with enough variety (cool:8 minimum) to avoid immediate repetition. The current child band is functionally exhausted by dynasty 3.",
+      "why": "Every life begins in childhood, but the child-card pool is the most depleted section of the game after a few dynasties. Heirs born into later dynasties frequently get only 1-2 childhood events before the vocation fork, giving their early years no character. Refilling this band keeps first-session players from feeling like heirs are born as blank slates.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 additional vocation-gated cards to each arc (soldier, scholar, maker, wanderer), spread across adult AND midlife stages. Specifically: a second adult-band card for each vocation that poses a different kind of dilemma from the first one (e.g. a soldier who has to decide whether to train a child; a maker who is asked to destroy their masterwork).",
+      "why": "Each vocation arc currently runs 3 cards deep — enough to feel distinct on first encounter but fully consumed by the second playthrough of that vocation. Deeper arcs keep replays within the same calling interesting.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the late-love / marriage lock. Currently a_meet_late has weight:5 and is nudged to near-certainty for single adults. Let some lives reach 60 genuinely unpartnered and give those lives 2-3 elder cards that only fire for the solitary (different relationship to memory, to death, to what they leave behind). Make singlehood a structurally distinct life-shape rather than a missed trigger.",
+      "why": "In 38 lives across 16 dynasties in the transcript, only 1-2 lives end without a love/spouse. The system nudges too hard, making every life converge on the partnered domestic arc. A solitary life would be a genuinely different story.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the epitaph pool for the 'kind/generous/stray' cluster and weight the anti-repeat logic more aggressively. Currently the stray/kind cluster produces the same 2-3 lines across dynasties with heavy warm-heart populations. Aim for no epitaph phrase to appear more than once in any five consecutive ancestors shown in the constellation.",
+      "why": "The closing line of a life is the most visible piece of prose — it's what the player reads at the moment of transition. Repetition there is more damaging than anywhere else.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a mid-dynasty 'generation skip' possibility: a card at birth or in early childhood that signals this heir will NOT follow the conventional domestic arc (e.g. 'This one was born for something different' — gates a childless or wandering path without it feeling like a foreclosure). Let the player choose it deliberately rather than having it happen by accident.",
+      "why": "The game promises dynasty as a layer above individual lives, but almost every heir follows the same birth-love-child-death pipeline. A deliberate off-template path would make the dynasty feel like a collection of distinct people rather than the same biographical formula repeated with varied card draws.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 era-crossing cards that reference a previous era in a later generation (e.g. 'Your grandmother lived through the plague years; the family still keeps the old remedies'). This would make the era system feel like actual history rather than a random world-tone assigned at succession.",
+      "why": "The era system is the game's best structural variety tool, but eras currently leave no trace in later-generation content. A connection between eras would make the dynasty feel like it actually lived through time.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is beautiful and well-constructed, and its first two dynasties are genuinely engaging — but by dynasty 4 or 5 a first-session player will have recognized the skeleton every life hangs on (childhood→calling→late love→marry→child→midlife→elder→die), and what keeps them playing is the prose quality and dynasty accumulation rather than structural freshness, which is a narrower hook than the game deserves."
+}

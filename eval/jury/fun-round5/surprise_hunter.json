@@ -1,0 +1,49 @@
+{
+  "profile": "surprise_hunter",
+  "score": 6.5,
+  "fun_highlights": [
+    "The FATE cards (f_fire, f_sudden_loss, f_grace, f_reversal) are genuinely uninvited — a fire at 21 during Anders's scholar arc, Cosima's son Tobias dying suddenly at 69, the economic reversal blindsiding Vera at 39 — these land as actual shocks inside an otherwise choice-driven flow and are the closest the game comes to 'I've never seen this before'.",
+    "Vocation x Era intersections (vx_ cards) are a bright spot: a scholar in a turning age sitting back down among the young to learn anew, a soldier in wartime being pushed to the real front while already carrying the blade — these combinations produce genuinely different textural stretches that a settled-era scholar never sees.",
+    "The callback system (cb_*) when it fires cleanly is the game's sharpest surprise mechanic: Felix in Dynasty 4 having a 'kindness done at 13 came back, decades later, as a door held open' is the kind of long-arc payoff this genre lives for, and it lands because the card is genuinely gated on a prior memory.",
+    "Trait affinity in the draw weighting means a bookish child and a restless child actually face different early years — Ren (bookish) is nudged toward c_book while a restless child gets c_move/c_steal — so childhood is not one universal checklist.",
+    "The succession screen and heirloom/motto system do produce a genuine pull to 'one more dynasty': seeing 'By our own hands' crystallise at gen-2 and then watching gens 3-5 of the Castellanes live under it or against it is a real small narrative engine.",
+    "Era rotation (war, plague, plenty, hard, turning, settled) means gen-8 is not gen-2's world, and the era-gated cards back this up with exclusive content — w_war_call, w_plague_tend, w_hard_winter are events the player may never see in a settled run."
+  ],
+  "staleness": [
+    "The CALLING card (y_calling) lands in nearly every life and presents the same four binary branches every time — soldier / scholar / maker / wanderer. By dynasty 5 the player has seen all four roads chosen, and from dynasty 6 onward the calling selection has the feeling of a required form to fill in, not a discovery. It is the single most repeated structural beat in the transcripts.",
+    "Love, marriage, child — this triple sequence fires in the majority of lives and the beats are always the same: 'someone keeps finding reasons to be where {n} is', then a_marry, then a_child. Even with line variation the underlying rhythm is identical across dynasties 2, 3, 4, 5, 6, 8, 10, 12, 13, 14. Solitary and childless lives are present but rare; the domestic arc is the gravitational default.",
+    "Several cards recur verbatim across many lives because their conditions are broadly met: a_warm ('people keep ending up at {n}'s table') fires in D3/Anders, D3/Idris, D4/Felix, D5/Caleb, D6/Lena, D6/Vera, D11/Cosima, D14/Iris — that is 8 of 20-odd lives. The prose rotates but the card premise and binary are the same. A surprise-hungry player is not surprised.",
+    "The observation lines (observe()) recur constantly because they are stat-triggered not event-triggered: 'the body has begun keeping its own quiet counsel' appears as ambient prose in D3, D5, D6, D8, D10, D12. After three dynasties, these lines are ambient wallpaper rather than live description.",
+    "The 'grandchild asks what you were like' elder card (e_window) and the 'tell the true/better story' binary fire in almost every long-lived life that has children — D3/Anders, D5/Felix, D6/Ren, D6/Lena variant (childless skips it but gets e_childless), D8/Ingrid, D11/Cosima, D12/Liv — giving elder arcs a sameness even when vocation differs.",
+    "There are zero multi-generation surprise events: nothing happens that requires the current heir to respond to something the PREVIOUS life set in motion except heirlooms (passive inheritance) and secrets (narrow gate). A surprise hunter wants to discover that grandpa's affair is now public knowledge and a door slammed in the heir's face — the systemic surprise of stored state exploding unpredictably. The secret system exists but it is fragile and rarely fires.",
+    "The fate events — the game's best randomness — are all `once:true` and have long cooldowns. Once you've seen the fire, the sudden loss, the reversal, and grace across four or five dynasties, that class of surprise is exhausted. There is no mechanism to generate a qualitatively new type of uncontrolled event."
+  ],
+  "improvements": [
+    {
+      "what": "Eliminate or radically vary the Calling card's framing. Instead of always presenting the same four-way fork with the same prose at 14-22, make vocation emerge from earlier choices: a child who pursued c_book gets the scholar path offered as a fait accompli (the mentor found them), a restless child's wanderer path is already in motion. Gate the actual y_calling text to lives that have NOT strongly seeded a direction, so it only appears as a genuine fork for ambiguous characters.",
+      "why": "y_calling is the most repeated structural beat — appearing in every life in the transcripts — and by dynasty 4 the four options feel like a dropdown menu. The surprise comes from vocations emerging rather than being declared.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-5 cross-generational cascade events: moments where a specific ancestor's recorded choice explodes into the current life unpredictably. E.g., if an ancestor 'walked through' the affair door and the secret was never confessed, a creditor or an illegitimate sibling appears in the heir's adult life — not as a legacy screen item but as a full card with stakes. If a soldier ancestor 'carried it alone', their ghost reputation occasionally surfaces in a vocation-gated moment two generations later.",
+      "why": "The single biggest gap for a surprise hunter: stored state from past lives should occasionally produce events the player cannot predict or prevent. Right now, past choices affect starting stats and heirlooms passively; they almost never generate emergent situations.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 new fate-class events (no choice, just happens) that are NOT expendable on a once-per-dynasty basis: a recurring-but-unpredictable class of minor black swans. Options: a plague year returns in a later generation even if it appeared before (since this is historically realistic); an economic crash lands mid-life for a high-means character without telegraphing; a fire of reputation (a rumour, not a physical fire) hits a high-seat house. These should be weighted low but have no `once` flag, so they remain surprising across many dynasties.",
+      "why": "f_fire, f_sudden_loss, f_grace, f_reversal are all `once:true` — by dynasty 6-7 the player has seen every fate event and the 'uncontrollable things happen' space is empty. Surprise requires a replenishable source of uninvited events.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the solitary/childless life-shape more exclusive content, not just different versions of shared cards. A solitary scholar in midlife should face 1-2 moments that coupled lives never encounter — a chance to adopt, an epistolary love affair with no arc toward marriage, a crisis of meaning that only the unpartnered face. Right now solitary lives feel like domestic-arc lives with the relationship cards skipped, not a structurally distinct shape.",
+      "why": "The transcripts show solitary characters (Idris D3, Caleb D5, Annika D7) hitting a_warm, m_solitary, e_solitary, and then largely the same elder cards as everyone else. The shape exists but it is thinner in exclusive content.",
+      "impact": "med"
+    },
+    {
+      "what": "Add at least one 'reputation consequence' card that only fires when the house is known for ruthless/tainted and the player has NOT taken any corrective action across 2+ lives: the family's hard name shuts a door so publicly that the heir loses a relationship they had already invested in (a bond > 50 NPC stops seeing them). This makes reputation feel like a living thing with unpredictable teeth, not just a stat that gates one or two optional cards.",
+      "why": "The r_hard_name and r_old_shame cards exist but they require the player to already be in the right condition and they offer a clean binary. The surprise-hunter wants reputation to occasionally act on the player rather than always being something the player opts into.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life earns genuine admiration for its writing and architecture but lands at a 6.5 for the surprise hunter: the fate events and vocation-era intersections are the real machinery of freshness, but the calling-card rhythm, the domestic-arc default, and the once-only fate class mean that by dynasty 7 an attentive player has mapped the surprise space and is navigating a known terrain with new names on it."
+}

@@ -87,6 +87,32 @@ Supporting files:
   the heir screen. A cross-run **"houses you have raised"** collection persists in
   `localStorage` (`recordHouseLegacy`/`renderHousesRaised` in `persistence.js`).
   Full design + jury journey: [docs/ten-juror-gameplay-journey.md](./docs/ten-juror-gameplay-journey.md).
+- **Life-shape variety & the anti-staleness layer.** Lives diverge by **vocation**
+  (`y_calling` sets `P.flags.vocation` ∈ soldier/scholar/maker/wanderer; each gates an
+  adult→elder cluster) and by **era** (`S.era`, set in `dynasty.js` `setEra`/`rollEra`,
+  drifts at succession; era cards gate on `S.era==='war'` etc.). The repeat-control
+  machinery — **use it when adding content**:
+  - **`onceDyn: true`** — fires at most once per *dynasty* (tracked in `S.seenDyn`,
+    checked in `eligible()`, reset per house). Use for special beats, and for
+    midlife/elder "milestone" cards so they **rotate across generations** instead of
+    firing every life (a dynasty's gen-5 must differ from gen-1).
+  - **`freshPick(pool, who)` (core.js)** — the canonical way to emit any multi-variant
+    line. Backed by a session-global `RECENT_LINES` ring buffer; it avoids lines used
+    recently *across the whole session*, not just one life. Route every log-line pool,
+    `observe()` pool, epitaph, and motto through it (`rotI`-only pools repeat across a
+    long read).
+  - **The signature-card preference (`SIG` regex in `engine.js` `drawCard`)** — vocation
+    arcs, era moments (`w_*`/`vx_*`), and trait moments (`t_*`) are *preferred* when
+    eligible so the choices that should shape a life reliably land. New arc/era/trait
+    cards should match that pattern.
+  - **Solitary/childless content** (`m_solitary`, `a_chosen_family`, `e_solitary`,
+    `e_childless`) makes the un-coupled life a real shape, not a dead end; the love nudge
+    in `drawCard` is deliberately partial so ~a quarter of lives stay solitary.
+  - **The chase**: a cross-run **discovery counter** (`markMomentSeen`/`seenCount` in
+    `persistence.js`, shown on the title screen) and diegetic **house aspirations**
+    (`houseAspirations` in `dynasty.js`, shown on the heir screen + "how things stand").
+  - **Fate events** (`f_*`) simply happen (one acknowledgment choice), for surprise.
+  Full design + the honest ceiling analysis: [docs/anti-staleness-journey.md](./docs/anti-staleness-journey.md).
 - **Persistence (`core.js` + `persistence.js`).** All reads/writes go through an
   async `window.storage` (`get/set/delete/list`). A sandbox host may supply one;
   otherwise `core.js` shims it with `localStorage`. Keys: `alife:index` (slot
@@ -142,10 +168,14 @@ Supporting files:
   gating fields (prefer these — moments should fit the years/situation):
   `age:[lo,hi]` (eligible only while `lo ≤ P.age ≤ hi`; **replaces** the `stage`
   check when present), `cond: () => bool` (situation gate — reads the global `P`),
-  `once: true` (fires at most once a life), `cool: N` (min years before a non-`once`
-  card may redraw; default 10). A choice may set `p.flags.peril = p.age + N` to
-  raise death odds for N years (earned risk — see `deathRoll`). The full field
-  reference is in the header comment of `content.js`.
+  `once: true` (fires at most once a life), `onceDyn: true` (at most once per
+  *dynasty* — use for special/milestone beats so they rotate across generations),
+  `cool: N` (min years before a non-`once` card may redraw; default 10). A choice may
+  set `p.flags.peril = p.age + N` to raise death odds for N years (earned risk — see
+  `deathRoll`). **Emit multi-variant lines through `freshPick(pool, p)`, not
+  `pool[rotI(...)]`** — freshPick dedups across the whole session, which matters when a
+  long playthrough is read end-to-end. The full field reference is in the header comment
+  of `content.js`; the variety/anti-staleness systems are under **Key systems** above.
 - **Add / regenerate an image** → see [docs/images.md](./docs/images.md). Generate
   via Codex's built-in `image_gen` tool (key-free), optimize to WebP, place in `assets/`.
 - **Tune scene / transitions** → `scene.js` (e.g. the `STAGE_ART` map and the

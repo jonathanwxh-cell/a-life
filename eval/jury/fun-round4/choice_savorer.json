@@ -1,0 +1,48 @@
+{
+  "profile": "choice_savorer",
+  "score": 6.5,
+  "fun_highlights": [
+    "The four vocations (soldier/scholar/maker/wanderer) genuinely fork the life — a soldier gets 'soldier_ghost' at 3am, a scholar gets 'scholar_question' and the dilemma of guarding vs. giving knowledge, a maker gets the masterwork moment. These are not mere flavour; they gate structurally distinct mid-life arcs that read as different shapes of existence.",
+    "The callback system is the game's strongest achievement for a choice savorer. Choices land years later: the child who looked away from a lonely classmate meets a homeless stranger at 47 and gets to pay the debt or compound it. 'cb_books_late', 'cb_study_pays', 'cb_strayed' — these are the moments where the game earns real weight. The look-back is precise enough to name the age: 'the hungry years of study, begun at 16, came good.'",
+    "Competing-goods cards ('x_honest_or_kind', 'x_loyalty_truth', 'x_dream_or_duty') are genuinely hard — both options are virtues and both cost something real. The marriage affair is framed differently depending on whether spirit is low or heart-led; the text is actually character-conditional, not a fixed prompt.",
+    "The bequest system (mind/means/heart/freedom) is the cleanest cross-generation lever: it visibly reshapes the heir screen and the opening stat line, making the dying choice feel real rather than decorative.",
+    "Dynasty-level stakes — the seat, reputation clustering toward a motto, secrets passing down, heirlooms arriving as 'latent memories' — give a choice-savoring player something to deliberately build across lives. The Achterberg run reaching 'a house written into the histories' via 5 focused generations had earned weight."
+  ],
+  "staleness": [
+    "Most childhood choices are thin binaries: keep the book / return it, call out in the dark / face it alone, steal the fruit / walk hungry. The 'passed over' options are mechanically present but don't feel like genuine competing goods — they're more 'safe vs. adventurous' or 'open vs. closed.' By dynasty 5 or 6, reading 'There is a child at the edge of the yard who never gets picked for anything. / Sit beside them. / Look away.' for the fourth time registers as a template event, not a moral moment. The hint text is terse ('a bond for life' vs 'a small cowardice, kept') but the stakes don't feel elevated.",
+    "The calling card (y_calling) is fired once per life but the four options are always the same four: blade/book/hands/road. After three or four dynasties, picking 'The book — the scholar's road' or 'The blade — a soldier's life' no longer feels like a revelation about a person; it's a track selector. The divergence is real in mid-life, but the fork itself reads identically every time.",
+    "Love progression is a repeat template: y_love1 or a_meet_late fires → 'Meet them halfway' / 'Pretend not to notice' → years later a_marry fires with one of the same three framings (Cyrus / Niall / Felix is waiting). Across 15 dynasties the 'fell asleep first again, mid-sentence' marriage prompt appears almost verbatim in Dynasties 1, 4, 6, 7, 9, 10, 11, 13, 15. The late-marriage line 'found the lateness made the vow weigh more, not less' appears in Dynasties 4 (Linnea), 7 (Roman), 9 (Sabine), 10 (Henrik), 11 (Lazlo), 13 (Mira). That is six identical conclusions to different love stories — a choice savorer notices.",
+    "The 'cb_left_home' callback fires for virtually every life that ever left a town and returns the same three prose variants. In the transcripts it appears in Dynasties 2, 3, 4 (twice), 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 — nearly every dynasty. It is the least callback-feeling callback, because leaving and returning is such a common path that the 'reach-back' loses its earned surprise quality.",
+    "The 'a_child' card text is almost always one of three rotating framings ('The question of a child arrives, the way it does'; 'It arrives sideways'; 'They have not spoken of it in a while') and is always yes/no with the same two outcomes. With child counts capped at 3, this card fires repeatedly per life (up to 3 times) with minimal variation. Dynasty 10, Henrik Lindholm: 'Chose a life without children, with clear eyes.' (age 34), then 'Had a child, Yara — red and furious...' (age 40) — both the yes and no fire in the same life because the cooldown allows it; the reversal reads as an engine artifact rather than a meaningful character turn.",
+    "The 'Work vs. presence' card (a_work) appears in only a handful of dynasties, but its framing — 'a promotion, but it eats the evenings' — is identical every time and the choice is always the same binary between means and relationships. It lacks the contextual specificity that makes the vocation cards feel tailored.",
+    "No choice ever has a downstream consequence visible to the player in the same life except through log text and (invisibly) stats. The player is told 'watched a good thing strain' after declining to marry, but they never see that relationship visibly damage or repair. Without visible proof that their earlier choices created this specific later condition, a choice savorer is left reading descriptions rather than experiencing causation."
+  ],
+  "improvements": [
+    {
+      "what": "Variant calling-fork text per vocation, and more than 4 options once the house has a strong reputation. When a house is 'scholarly', a bookish heir's calling prompt should name that inheritance — 'The family has always been scholars. The question is whether you will be one too, or the first of a different kind.' Add a fifth option visible only to certain reputation/house states.",
+      "why": "The fork fires once per life and is the biggest structural branch. Its sameness makes every life start from identical possibility-space. Character-conditional framing would make a 3rd-generation scholar heir feel different from a wanderer founder's child taking the same road.",
+      "impact": "high"
+    },
+    {
+      "what": "Rotate the marriage prompt text more aggressively and retire 'found the lateness made the vow weigh more, not less' as a shared pool line — give it to only one card variant. Currently the same conclusion line appears for any late marriage regardless of how the love started. Tie the marriage conclusion prose to how love arrived: youth love → one pool, late love → a different pool, after unspoken_love was triggered → a third pool.",
+      "why": "Across the 15 dynasties, the late-marriage conclusion is the single most repeated exact phrase, landing in at least 6 distinct lives. A choice savorer scans past it by dynasty 4. The love arc is emotionally central; its conclusion should feel specific to each person.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the cb_left_home callback a hard onceDyn flag or a much higher cooldown. It fires in almost every dynasty. Alternatively, branch its text based on WHY the character left: if they left as a 'wanderer' vocation, the return reads differently than if they left as a young adult fleeing a small town. Right now it reads the same for both.",
+      "why": "The callback loses its earned weight when it fires every dynasty. The 'reach-back' system is the game's best feature; diluting it with a near-universal trigger undermines the moments that are genuinely rare.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 childhood dilemmas with genuine competing goods (not just safe/brave or kind/unkind binaries). Example: a child is asked to keep a family secret from a friend — loyalty-to-kin vs. honesty-to-friend, both sympathetic. Or: a sibling is being bullied and the player can speak up (costs something) or cover for them quietly (a different kind of loyalty). The current childhood pool has the structure of virtue exercises, not genuine dilemmas.",
+      "why": "The early years set a person's character most visibly. Right now most childhood cards resolve into 'the open option' vs 'the cautious option'. A choice savorer wants to feel like they are deciding who this child is, not whether they are brave or timid.",
+      "impact": "med"
+    },
+    {
+      "what": "Make one downstream consequence per life visibly legible to the player — not just in log text, but in the moment card prompt. If the player refused the marriage proposal (watched a good thing strain), the subsequent child card should reference the unstable bond: 'The question of a child arrives — and between them, still, the unasked question that was never answered.' This is already architecturally possible (the cond system reads relationship states); it needs to be used for prose variation.",
+      "why": "A choice savorer's core pleasure is seeing their choices matter. The callback system does this for memories, but not for live relationship states. Without legible downstream pressure, choices feel like they go into a ledger the player cannot read.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A genuinely characterful choice system that earns its best moments (callbacks, vocation arcs, competing-goods dilemmas) but is undercut by a roster of repeated templates — the calling fork, the late-marriage conclusion, the leave-and-return callback, the binary childhood cards — that a choice savorer will see through by dynasty 5 or 6, leaving the game stuck between 'pleasantly literary' and 'actually fresh' without quite reaching the latter."
+}

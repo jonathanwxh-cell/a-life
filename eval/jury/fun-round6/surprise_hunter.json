@@ -1,0 +1,57 @@
+{
+  "profile": "surprise_hunter",
+  "score": 6.5,
+  "fun_highlights": [
+    "Fate events (f_fire, f_sudden_loss, f_grace, f_reversal) are genuinely uncontrollable and structurally disruptive — a fire at age 66 or a sudden death of a bonded character mid-life generates real shock that the player cannot choose away from, which is exactly what this genre needs more of.",
+    "Vocation x era intersections (vx_scholar_turning, vx_soldier_war, vx_maker_plenty) are rare but hit hard when they land — a scholar suddenly made quaint by a turning age is a moment unavailable to any other life-shape.",
+    "The dynasty accumulation layer (seat, reputation, motto, heirloom, secret) creates genuine cross-life curiosity. Watching a 'hard name' heirloom carry forward into three generations and finally force an heir to choose whether to use it for a deal is emergent in a way individual cards are not.",
+    "Solitary and childless life-shapes (Lazlo Okafor, Soren Lindholm's celibate fifth generation) read structurally distinct from the domestic arc and give the sense that a life can be a different shape entirely.",
+    "Early death (Dynasty 2's Adaline at 23, Dynasty 12's Henrik at 19) hits with genuine asymmetry — the life just stops, the line passes through, and the brevity is its own kind of statement.",
+    "The callback system (cb_outcast_return, cb_books_late, cb_lookaway, cb_principle) works as intended for fresh players: a childhood cruelty coming back in midlife as a stranger sleeping rough is a surprise payoff that only this system can produce.",
+    "The 'how things stand' dynasty aspiration text ('still ahead: a place in the histories') gives the player a concrete goal to pursue across lives, something most games in this genre fail to provide.",
+    "Era-gated opening lines for c_origin genuinely colour the first moment differently: a plague childhood vs. a turning-age childhood vs. a high-seat birth each sets a different tone."
+  ],
+  "staleness": [
+    "The d_ancestor card ('There is a story in the family about X, who came before Y — a thing they did, and what it cost... the worn shape of a lesson, though no two tellers agree on the moral') fires with near-verbatim structural framing across 9+ instances in the 15-dynasty transcript. Only the ancestor name changes. By dynasty 5 the prompt is entirely predictable; by dynasty 10 it reads as boilerplate.",
+    "The cb_books_late / inherited book heirloom becomes mechanical in multi-generational dynasties. In House Vane (Dynasty 8), the same callback fires for three consecutive generations with nearly identical text ('finds the old book on a high shelf — the one too hard for a child's hands'). The freshPick pool is small enough that 'Read it again, slowly' lands verbatim twice in that run.",
+    "The a_marry card has a very limited structural variety: every marriage resolves through essentially the same framing ('the question has been in the room for years'; 'Ask. Build a life.'). Across 15 dynasties this fires at least 14 times. The prose variants rotate but the situation is always the same couple, the same beat, the same choice menu.",
+    "e_old_letters ('In a box X has not opened in years are the letters — their own hand, younger') is an effectively gate-free elder card that lands for any character who survives to old age. It fires identically in Dynasties 6, 8, and 13. Being unremarkable as a beat while also being highly recurrent is the worst combination.",
+    "m_soldier_ghost is formulaic: every soldier who lives to midlife gets 'the war comes back at three in the morning, with no warning and no mercy.' The two-choice framing (talk vs. carry alone) produces one of two identical outcome lines across every soldier life. There is no structural variation to distinguish one soldier's haunting from another's.",
+    "The love/marriage funnel collapses nearly all long lives into the same arc: y_love1 or a_meet_late (cosmetically different text, identical function) → a_marry → a_child → a_work → elder arcs. By dynasty 8, a player who has seen this sequence several times will correctly predict the next beat before it fires.",
+    "The c_book card ('A teacher leaves a book on X's desk by mistake. It is far too difficult.') fires across 10 of the 15 dynasties. It is effectively a universal childhood beat, undermining the sense that each childhood is different.",
+    "The onceDyn system (20 cards marked once-per-dynasty) is a good idea structurally, but most of these cards are mid-importance moments (y_mentor, cb_left_home, e_window, e_craft). The high-recurrence cards that actually define staleness — d_ancestor, a_marry, c_book — are not onceDyn, so the dynasty boundary provides no relief from them."
+  ],
+  "improvements": [
+    {
+      "what": "Make d_ancestor dynamically reflect WHAT the ancestor actually did, not just that they existed. If the ancestor was a strayed-and-secret person, the story should be about a shadow; if they were a teacher, the story should be about knowledge. The card text should branch on the ancestor's epitaph cluster or dominant memory, not deliver the same 'worn shape of a lesson' wrapper every time.",
+      "why": "This is the single most-repeated structural beat in the transcript. Every instance is structurally identical; only the name differs. Giving it 6-8 distinct framings keyed to what the ancestor actually did would turn a stale mirror into a genuine payoff.",
+      "impact": "high"
+    },
+    {
+      "what": "Mark a_marry as onceDyn and introduce a second, structurally different marriage moment (e.g. a rushed marriage in a war era, a marriage of necessity when means is low, a politically arranged one in a high-seat house). The current card assumes all marriages are the same quiet domestic decision.",
+      "why": "Marriage fires in nearly every long life and is currently cosmetically varied but structurally identical across the entire 15-dynasty run. Making it once-per-dynasty forces variety; the alternatives inject era and seat context that the card currently ignores.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap cb_books_late as onceDyn or, when the inherited heirloom is present, transform the callback into something that escalates rather than repeats — the third heir to read the same book should discover a note inside it, or find it has been defaced by a previous reader, not simply re-read the same 'book too hard for a child's hands' framing.",
+      "why": "Three consecutive identical callbacks in House Vane is the clearest evidence of callback staleness. Escalation within a multi-generational heirloom chain would make it feel alive rather than looping.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 more vocation x era intersections beyond the current 3. Specifically: wanderer x war (a wanderer caught in a foreign war), scholar x plague (a scholar trying to understand the disease), soldier x plenty (a soldier during peacetime, useless and restless), maker x hard (a craftsman during lean years, rationing materials). These are the most reliably fresh cards in the game and there are not enough of them.",
+      "why": "The 3 existing vx_ cards are among the best in content.js — they create moments that exist only at a specific intersection and cannot be predicted by pattern. Six more would substantially broaden the space of lives that feel structurally unique.",
+      "impact": "high"
+    },
+    {
+      "what": "Make c_book onceDyn or replace it as a universal childhood beat with a pool of 6-8 childhood 'signature objects' (a tool, an instrument, a map, a locked door, a stranger's letter) that rotate per dynasty, each with its own callback potential. The book is now close to universal — it fires in 10 of 15 dynasties.",
+      "why": "A universal childhood beat undermines the claim that each childhood is different. One rotating 'childhood encounter with something larger than yourself' per dynasty would give each house a distinct childhood texture.",
+      "impact": "med"
+    },
+    {
+      "what": "Give m_soldier_ghost at least 3-4 structurally distinct variants keyed to what the soldier actually did: one for 'blooded' (went where it was worst), one for 'survived' (kept their head down), one for soldiers who refused an order (vx_soldier_war, 'refuse' branch). The current framing — 'the war comes back at three in the morning' — is the same for every soldier regardless of what they actually did.",
+      "why": "The haunting of a soldier who refused orders should feel different from one who followed them. Using the memory flags already set on these branches would require almost no new architecture and would make the soldier arc feel coherent rather than templated.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life delivers genuine surprise in its fate events, dynasty-layer mechanics, and vocation intersections, but the core life arc — childhood book, youth calling, late love, marriage, child, work, elder reflection — becomes a legible template by dynasty 6-8, and the d_ancestor and cb_books_late cards in particular repeat with near-verbatim framing often enough to confirm the pattern rather than break it."
+}

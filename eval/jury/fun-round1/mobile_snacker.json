@@ -1,0 +1,46 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "Each individual life genuinely fits a short burst session (5-10 min) with 8-16 choice cards — picking up and playing one life between other things works as intended.",
+    "The four-vocation fork (soldier / scholar / maker / wanderer) delivers structurally different adult arcs across sessions: a soldier's midlife looks nothing like a scholar's, which is real variety that keeps early pick-ups fresh.",
+    "The dynasty meta-progression (seat climbing, motto crystallising, heirlooms accumulating) gives a concrete one-more-dynasty pull — seeing 'grand estate' or a motto emerge is a satisfying micro-reward for a snacker.",
+    "Touch UX is well-executed: 44px tap targets throughout, hints reveal without hover, scrollable tall cards with a 'more below' fade cue, and pace-tap on the flow text. Short-phone adaptations at 740px and 600px are real and considered.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_lookaway) deliver genuine 'I remember that' moments when they fire — the best surprise-hit a snacker can get in a brief session."
+  ],
+  "staleness": [
+    "The late-love / late-child pipeline is nearly universal across all 16 dynasties in the transcripts. 'Had a child, X, at an age she had stopped expecting it — and was the more undone' appears in almost every second generation of every dynasty. A snacker who plays 5-6 lives will notice the template long before dynasty 8.",
+    "The elder phase converges to an almost identical script by dynasty 4: e_body (body sending bills) + cb_the_cost ('near the end, one old decision keeps returning') + e_legacy ('what do you want remembered') appear together in virtually every long-lived elder. The elder phase reads like a form letter after a few plays.",
+    "Ambient observer lines — 'The body has begun sending its small bills', 'The stairs have started to ask a question', 'Mornings take longer to arrive in the body' — appear across many different lives verbatim. These are not 'I've never seen this before' moments; they become predictable wallpaper by dynasty 3.",
+    "The c_sick fever card (age 3-5, 'Bram is small in a large bed') appears in Dynasty 1, 2, 3, 4, 5, 6, 8 of the transcripts despite being marked onceDyn — it fires fresh each new dynasty. A player running multiple houses in short bursts will hit this early-childhood beat repeatedly across fresh starts.",
+    "The 'one more life pull' is weaker than it feels on paper. The dynasty arc (seat, motto, repute) is not surfaced during play except in flashes. A snacker who just finished a 5-minute life gets the eulogy screen and heir card with some inherited stats, but no visible scoreboard or 'you are this close to a motto' gauge during the life itself — so the between-session motivation requires reading Chronicle text rather than feeling a live pull."
+  ],
+  "improvements": [
+    {
+      "what": "Add a visible dynasty-progress indicator during play — a one-line 'House Renner: modest / climbing toward comfortable' in the header or a small dynasty pulse at life-end — so a snacker can see the meta-goal without opening the Chronicle.",
+      "why": "The most important 'one more run' hook (dynasty seat, motto) is buried in the Chronicle panel. Mobile snackers do not open menus between quick sessions. Making it ambient surfaces the long arc for players who never dig in.",
+      "impact": "high"
+    },
+    {
+      "what": "Thin the elder template: randomise which of {e_body, e_legacy, cb_the_cost, e_garden, e_peace} appear per life rather than all firing in every long elder. Cap any two of these four per life via a once-per-cluster rule.",
+      "why": "The elder phase is the most repetitive block in the transcripts — virtually identical across dynasties 2-8. Reducing convergence here would make each life's ending feel less like a form letter and more like a distinct character's close.",
+      "impact": "high"
+    },
+    {
+      "what": "Mark c_sick (childhood fever) as truly once-per-dynasty so it does not fire in every new house start. Replace its slot in later dynasties with c_sibling, c_animal, c_grandparent, or c_talent — which appear less frequently in the transcripts.",
+      "why": "A player starting a new dynasty after the line ends repeatedly encounters the same childhood fever as their very first event. It signals 'here we go again' rather than 'a fresh house.'",
+      "impact": "med"
+    },
+    {
+      "what": "For the 4-choice vocation card (y_calling), add a swipeable/paginated layout on mobile (or reduce to visible 2 + 'more' disclosure) so all options are accessible without scroll on phones shorter than 700px.",
+      "why": "The code itself flags this card overflows short phones. The vocation fork is the single most structurally important decision in the game; burying options 3-4 below the fold on small phones means some players never see wanderer or scholar.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce 2-3 new elder beats tied to vocation that feel distinct — an elder soldier's specific reckoning, an elder scholar's late revelation — so the elder arc diverges by path taken rather than converging to the same four cards for everyone.",
+      "why": "Vocation drives real structural variety in adult/midlife but then drops out in the elder phase. Extending it through death would make the whole life feel coherent and distinct even 8 dynasties in.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A-Life is a beautifully made short-burst game with genuine vocation-driven variety and a real one-more-dynasty pull, but the late-love/late-child pipeline, the convergent elder template, and repeated ambient observer lines mean a player who picks it up often across a week starts seeing the scaffolding by dynasty 4-5 — fun to visit, but not yet fresh enough to keep the snacker coming back past a handful of houses."
+}

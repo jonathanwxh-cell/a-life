@@ -1,0 +1,51 @@
+{
+  "profile": "surprise_hunter",
+  "score": 6.5,
+  "fun_highlights": [
+    "The FATE cards (f_fire, f_sudden_loss, f_reversal) are genuinely exogenous — the fire arrives with one choice-line and no exit ramp, a loved one is simply gone one morning with no warning, a distant market decision collapses your footing. When they land they feel exactly right: the world doing something to you that you could not have controlled.",
+    "The callback chain when 'looked_away' resolves 36 years later as Lazlo stops for a sleeping rough stranger (dynasty 7, age 48) is the game's best surprise moment — it surfaces something I had almost forgotten making, and recontextualises a childhood choice as a lifelong debt. The time-gap makes it feel like memory, not mechanics.",
+    "The cb_outcast_return card (the child nobody wanted is now somebody, and hasn't forgotten) is structurally elegant: a mundane childhood choice becomes a midlife door-open. Causality across decades is exactly what the surprise_hunter wants.",
+    "The era system (war, plague, plenty, turning) is a genuine macro-surprise lever — dynasty 6 opens into plague, which forces a binary the purely domestic-arc game never offers: stay and risk dying, or survive and carry the arithmetic. War reaching into the house and taking someone (dynasty 9, dynasty 13) without the player being able to choose who has real punch.",
+    "The vocation x era intersections (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) are the freshest cards in the deck — they only exist at a specific crossing of life-shape and world-moment, and the first time a soldier-born heir meets a real war it reads as genuinely unrepeatable.",
+    "Early death by deathRoll is a black-swan the player cannot see coming — Henrik Bjornsen at 39, Ambrose Aldecott at 36, Beatrix Okafor at 30, the line ending before it even had a chance. These are the most structurally surprising outcomes in the whole game: they break the template.",
+    "The f_sudden_loss of Sabine in dynasty 10 (Niall's partner gone one morning, no illness, no warning) is the closest the game gets to the gut-punch I came for — loss that simply arrives, that the player did nothing to cause."
+  ],
+  "staleness": [
+    "The fate cards (w:1, cool:28-30) are so infrequent that across 38 lives I counted roughly 2 fires, 2 sudden-losses, 1 reversal, and 4 graces — about one genuine fate event per 4 lives. That weight is too low for a surprise_hunter: most lives are entirely predictable in their arc once you know the vocation and the era.",
+    "By dynasty 5 I could enumerate the template: childhood fever → vocation fork at 15-22 → fall in love (youth or late) → first child → a_work/a_role tension → body-decline cards → wanderer-return or legacy → death. Every life hits these beats in this order. The text rotates elegantly but the structural shape does not change.",
+    "The wanderer-return cluster (m_wanderer_return, e_wanderer_old, cb_left_home, 'counted the doors') appeared as the dominant elder shape in at least 8 of the 38 lives. By dynasty 7 seeing a wanderer vocation, I could predict the closing act: they will go home once, tally the doors, and be asked to decide if the going was worth it. The specific text line 'counted, at the end of the road, the doors she had closed in order to keep walking' appeared verbatim across multiple dynasties.",
+    "f_grace (a stranger's plain kindness) appeared in dynasties 4, 5, 6, 9, 10, 11 — six of twelve dynasties. By dynasty 6 I no longer experienced it as grace; it is expected wallpaper. A surprise that reliably appears is not a surprise.",
+    "The era system is undercut by its own rarity and thinness: an era gate only fires 1-2 cards per life, and most lives have no era card at all (the baseline is 'settled' 55% of the time, and even non-settled eras only tilt 1-2 moments). A war-era life looks almost identical to a settled-era life for 80% of its events.",
+    "Once I had seen each vocation arc once (soldier: 3 cards; scholar: 3 cards; maker: 3 cards; wanderer: 3 cards), replay surprise for those arcs collapsed entirely. The arc cards are once-per-life and once-per-person, but the player who has seen a scholar life before knows exactly which 3 beats to expect — cb_study_pays at ~34, m_scholar_legacy at ~55, e_scholar_old at ~70.",
+    "The 'a_work' (promotion vs. presence) and 'a_role' (public weight vs. private life) cards appear in nearly every adult life and rotate only through 3 text variants each. After the third dynasty these feel like scheduled maintenance, not events.",
+    "There are no world-historical surprises that arrive without any player action being the proximate cause. The era is set at succession, so the player effectively 'knows' the era from the birth screen. A mid-life coup, a sudden famine not telegraphed from birth, a plague that arrives in generation 3 after two generations of peace — these would be genuinely surprising; the current era-at-birth model is not."
+  ],
+  "improvements": [
+    {
+      "what": "Increase the base weight of fate cards (f_fire, f_sudden_loss, f_reversal) from w:1 to w:2-3, and reduce their cooldown from 28-30 to 18-20 years",
+      "why": "At w:1 and cool:30, a player can complete 10+ lives without encountering a fire or sudden loss. These are the game's only genuinely uncontrollable events; they need to land roughly once every 2-3 lives to anchor the sense that the world can intrude unexpectedly. The current rarity makes them feel like easter eggs, not the texture of living.",
+      "impact": "high"
+    },
+    {
+      "what": "Add mid-life era shifts: a small per-tick probability (~3% per year between successions) that the current era changes — a war breaks out, a plague arrives, fat years end — announced via a logLine so the player feels the world turning under their feet mid-life, not only between generations",
+      "why": "The current model sets era once at succession, so a player on the heir screen already knows what world they're entering. A mid-life eruption (war declared at age 40, plague arriving at 55) is structurally unpredictable in a way birth-era is not. This is the single highest-leverage surprise mechanic currently missing.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 new 'collision' cards that only fire when two specific memories co-exist — e.g., a character who both 'strayed' AND 'chose_others' faces a card where those two facts confront each other; a soldier who also 'kept_stray' meets a moment where the two natures are in direct tension",
+      "why": "The existing callbacks connect a single past choice to a future moment. True emergent surprise requires two independent decisions colliding in an unexpected third outcome. These intersections are where the 'I've never seen this before' feeling lives.",
+      "impact": "high"
+    },
+    {
+      "what": "Give f_grace a 'second face': 40% of the time it arrives as pure luck (current text), 60% of the time it arrives as something that looks like luck but turns out to have a hidden cost that surfaces 10-15 years later via a callback card",
+      "why": "f_grace currently fires and closes. A grace-with-a-cost would transform the 'unearned kindness' into a mystery: why did that stranger help? The delayed reveal would be genuinely surprising, and would give the grace card narrative legs across the life rather than being a pleasant one-time beat.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 dynasty-level black-swan events to the succession screen: rare (~15% chance per succession) events that affect the entire next generation — a family scandal, a war that displaces the house, a blight that strips the seat by one regardless of heir wealth — framed as something the heir is BORN into and cannot reverse",
+      "why": "Currently the dynasty layer is additive and directional (seat climbs with wealth, reputation accumulates). There is no mechanism for the house to be struck from outside. A scandal the heir inherits, a displacement they must claw back from, gives the dynasty arc genuine stakes and unpredictability that the current slow-climb model lacks.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life has genuine surprise machinery — the fate cards, the callbacks, the era intersections — but weights them too lightly and too rarely for a surprise_hunter: by dynasty 5 the life-template is fully enumerable, the fate events feel like easter eggs rather than texture, and the wanderer/scholar/soldier arcs, once seen, play out on schedule — beautifully written, but not surprising."
+}

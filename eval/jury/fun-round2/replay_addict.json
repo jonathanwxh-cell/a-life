@@ -1,0 +1,47 @@
+{
+  "profile": "replay_addict",
+  "score": 6.5,
+  "fun_highlights": [
+    "The dynasty layer is the real hook: watching a house climb from 'a rented room' to 'an old and famous house' across 4–5 generations, with a motto crystallizing and heirlooms accumulating, gives a concrete cross-run goal that is genuinely satisfying to pursue.",
+    "Vocation arcs (soldier/scholar/maker/wanderer) plus era cards (war, plague, plenty, turning) do create structurally distinct life-shapes — a scholar in a turning age reads differently from a wanderer in a plague year.",
+    "Callback cards are the game's best mechanic: the cb_outcast_return payoff 15 years after sitting beside a lonely child, or the book heirloom passing through three generations, creates the 'I remember where that came from' resonance that keeps narrative sims alive.",
+    "Fate cards (fire, sudden loss, f_grace) that offer no alternative choice create genuine shock and break the sense that every outcome is authored by the player.",
+    "The bequest system (mind/means/heart/free) is an underrated lever — it is one of the few decisions that visibly shapes the next run's starting conditions, giving each dynasty handoff a genuine choice."
+  ],
+  "staleness": [
+    "The 'wanderer' vocation dominates the transcript sample — dynasties 1, 2, 3, 4, 5, 7, 9, 10, 11, 13, 14 all feature wanderer founders or primary wanderer-path lives. 'Soldier' is genuinely rare. The four-vocation promise translates in practice to two dominant paths (wanderer and maker), with scholar and soldier much less likely to appear.",
+    "Late marriage is near-universal: 'Married X late, and found the lateness made the vow weigh more, not less' or identical variants appears in dynasties 2, 3, 4, 5, 6, 7, 9, 10, 11, 13, 14, and more. The engine's love nudge logic still clusters first relationships into the late-adult band in the vast majority of lives.",
+    "The m_wanderer_return / 'went home at last' beat fires in an outsized fraction of lives regardless of whether the character was a wanderer — because 'left_home' is set by many youth and adult cards. By dynasty 7 this card has become expected.",
+    "Body-aging observations repeat verbatim: 'She has started taking the stairs the way one takes a difficult conversation' appears in dynasties 1, 5, and 13; 'Getting up has become the first real work of every day' in 2, 9, 10; 'The body keeps its own ledger' in 3, 9, 13. By the 6th dynasty these are no longer observations — they are wallpaper.",
+    "The 'cb_reckless' elder card ('Counselled the caution he had never once managed himself') appears in dynasties 2, 5, 6, 7, 9, and Tamsin in dynasty 13 — roughly every other life with any reckless flag. It becomes a predictable beat rather than a surprising callback.",
+    "There is no meaningful meta-progression between separate dynasties beyond a passive 'houses you've raised' tally. No unlocked cards, no persistent collection, no evolving title-screen that reflects what the player has achieved. Starting a new house after dynasty 12 feels identical to starting after dynasty 1 — the game does not accumulate."
+  ],
+  "improvements": [
+    {
+      "what": "Rebalance the vocation draw weights so 'soldier' has a significantly higher base probability (raise from effective ~10% to ~25%) and 'wanderer' does not crowd out the others. Consider making the calling card present all four vocations as roughly equal live options rather than relying on the player's random draw.",
+      "why": "In 18+ dynasties of transcripts, soldier lives are rare and wanderer lives dominate. The full vocation system's structural variety only pays off if all four paths appear with meaningful regularity across a session.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a small cross-dynasty persistent layer: a title-screen 'chronicle of houses' that shows each completed house's motto, seat, and one distinctive fact, and unlocks 1–2 new starting-condition options (a rare surname, a founding trait, an inherited memory from a prior house) after a house reaches certain milestones.",
+      "why": "As a replay addict, the question after dynasty 6 is 'what am I playing toward?' The dynasty-within-run system is good, but there is no reward for completing a run and starting fresh. Even a thin persistent unlock layer (purely cosmetic surnames or a new founder trait) creates the 'one more dynasty' pull between sessions.",
+      "impact": "high"
+    },
+    {
+      "what": "Throttle the body-aging observation pool per session rather than per life: track a RECENT_LINES-style ring buffer for ambient observations (not just epitaphs) and exclude any observation that has fired in the last 3 lives across the session.",
+      "why": "The same body-aging lines ('the stairs,' 'getting up,' 'the body keeps its ledger') can appear in consecutive generations of the same house AND across separate dynasties. They read as prose the first time and as boilerplate by the fifth.",
+      "impact": "med"
+    },
+    {
+      "what": "Break the late-marriage monoculture more aggressively: add a youth-exclusive marriage card (age 18–26, requires love rel established at youth) that fires with 30% probability when eligible, and give the love nudge a stronger early-youth bias so a meaningful fraction of couples (target ~30%) marry before 35.",
+      "why": "Currently the engine description says it spreads love across ages, but the transcripts show 'Married X late' as the modal outcome across dynasties 3 through 14. The late-marriage variant has lost its emotional weight through repetition.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2–3 new vocation x era intersections for currently-missing pairs: maker in war (conscription of the workshop), scholar in plague (the doctor's dilemma), wanderer in hard years (going hungry on the road vs. settling for work). These cards exist for soldier+war and maker+plenty but not others.",
+      "why": "Vocation x era intersections are the most structurally novel cards in the game — they gate content that can only appear at a specific combinatorial moment. More of them means more lives that are uniquely shaped by their historical context.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine structural ambition — vocations, eras, callbacks, and the dynasty seat system are all real variety engines — but by dynasty 6–8 the wanderer-dominated vocation distribution, near-universal late marriage, and verbatim-repeating body-aging observations have collapsed into a recognizable template, and there is no cross-run meta-progression to sustain the 'one more dynasty' pull between sessions."
+}

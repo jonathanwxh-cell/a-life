@@ -1,0 +1,48 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.0,
+  "fun_highlights": [
+    "The callback chain system is the game's real emergent engine: the book heirloom passes from Greta to Mira to Idris across three dynasties, each triggering a distinct cb_books_late moment with different stakes. The look-away callback (c_friend at age 9, resolved by cb_lookaway decades later with 'made up, to a stranger, for a child she had ignored 39 years before') is exactly the cross-life collision I want — a personal failing from childhood echoed forward into a mid-life moral reckoning.",
+    "Reputation × heirloom collisions do produce genuine emergence: Dynasty 6 (Salvedi) shows the 'hard name' heirloom (ancestor cut corners, left a feared name) directly confronting a descendent via r_hard_name — Vesna choosing to refuse the family's feared reputation and deal straight. That's the designer NOT hand-scripting the outcome: the heirloom injected a real moral fork.",
+    "The era system lands cleanly in Dynasty 5 (Okonkwo): war era + soldier vocation produces a four-card arc (w_war_call, a_soldier_service, w_war_loss, m_soldier_ghost) that reads as an integrated story of a soldier in wartime, not just disconnected moments. When it works, the era + vocation combination makes a life feel structurally unlike a settled-era maker's life.",
+    "The bequest choice (e_bequest) is a rare genuine lever across the generation boundary: Lucan Voss choosing 'Nothing but their own freedom' visibly changes the heir's trait roll, giving Iris Voss a fully randomized nature — a concrete dynasty-steering decision with downstream consequences.",
+    "The motto-crystallization arc (earning a motto by sustained reputation) gives the dynasty layer a legible goal and genuine 'one more generation' pull. Watching a tainted reputation accumulate, or a scholarly house settle its words, provides forward momentum across generations.",
+    "The d_motto_test card (Iris Voss at age 39: 'met the test the way the family words said to, and felt, for once, the old motto turn from a phrase into a thing she meant') is the best cross-generational collision in the game: the living heir testing herself against the dead ancestor's crystallized values."
+  ],
+  "staleness": [
+    "The late-love/late-marriage/late-child template dominates the structural shape of nearly every life. Of the ~38 lives in the transcripts, roughly 90% follow the same arc: find love late (a_meet_late), then 'Married [X] late, and found the lateness made the vow weigh more, not less,' then 'Had a child [X], at an age she had stopped expecting it.' The engine's guarantees mean this sequence is near-certain, and by dynasty 5 the player can predict the entire adult arc's beats before they land.",
+    "The sibling card (c_sibling) fires with the outcome 'Learned early that love is divided, and counted her share' in Dynasty 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 — it's the single most repeated printed line in the transcripts. The 'once per dynasty' flag prevents some repetition, but the card still fires in most dynasties, and the resentment branch dominates. After five dynasties this line has lost all emotional weight.",
+    "The cb_the_cost card fires at the elder stage of almost every life: 'Near the end, one old decision keeps returning to [name] — not a wrong one, exactly, but the one with a cost she has never quite finished paying.' Twelve of sixteen dynasties use this framing verbatim. It becomes background noise by dynasty 4.",
+    "The observe() prose repeats at fixed stat thresholds across lives without contextual variation. 'His legs know something the rest of him is not yet ready to hear' appears verbatim in Bram (D1), Adaline (D7), Lucan (D8), Emory (D9). When the same ambient line lands in the same phrasing across completely different characters and eras, it drains the literary register.",
+    "Era × vocation combinations do not produce cross-system content. A scholar in a turning age gets the scholar arc AND the turning-age card, but they run in parallel — there is no card or prose that says 'a scholar adapting to the new machines' or 'a soldier whose skills are being made obsolete by the turning age.' The two systems are additively siloed, not multiplicative. This is the largest missed emergence opportunity.",
+    "The soldier vocation appears in nearly every dynasty and dominates the transcript. Wanderer and scholar paths are rarer partly because soldier is selected frequently, but also because the soldiering cards (three-part arc, war-era amplification) make that path feel 'fullest' — pulling the game toward a default life shape. By dynasty 8 reading another soldier life feels routine."
+  ],
+  "improvements": [
+    {
+      "what": "Add 6–10 cross-system 'intersection cards' that gate on two conditions simultaneously: one vocation flag AND one era flag (e.g., id:'a_scholar_turning' gated on vocation==='scholar' && S.era==='turning'; id:'a_soldier_plague' gated on vocation==='soldier' && S.era==='plague'). These cards should produce prose and consequences neither system alone would generate.",
+      "why": "Currently era and vocation fire their own isolated cards. A scholar-during-turning-age should face 'the new machines are outpacing what you know, and someone younger is learning faster' — a crisis that only exists at that intersection. This is the cheapest route to genuine emergence: the two systems are already tracking the right state, they just never talk to each other.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'no-print' deduplication guard to the sibling-resentment outcome text and the three most-repeated observe() lines, so that if the exact string has appeared in the last 3 lives of the same dynasty, the card rotates to an alternate variant rather than reprinting the same phrase. The rotI() mechanism exists for this; extend it to check S.lineage for recent exact matches.",
+      "why": "The single line 'Learned early that love is divided, and counted her share' appearing verbatim in consecutive dynasty entries is the clearest staleness signal in the transcripts. The literary effect collapses completely on repetition. This is a low-effort fix — the rotation pool can be thin (3–4 variants) and it would eliminate the most visible repetition.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the late-marriage structural lock by adding a 'deliberate solitary' life path: a card in the adult band (age 32–50) that, when the player explicitly closes the last love opportunity, opens a distinct 'solitary adult' arc with 2–3 unique cards (deeper work, unconventional relationships, late-life reckoning about chosen aloneness). Right now declining love feels like a foreclosure, not a genuine alternative shape.",
+      "why": "The current engine nudges love so heavily (chance(0.17) per tick for love cards + the near-guarantee near the window's edge) that a life without a partner feels like a bug rather than a valid life shape. A deliberate solitary arc would make the structure feel optional rather than mandatory, and would produce lives that read differently from birth to death.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 2–3 reputation × era collision moments: a 'tainted house during war' card that surfaces the old family shame at the worst possible moment (a military commission denied, a neighbor's accusation in a time of suspicion); a 'scholarly house during plague' card where the family's learning gives them a real choice (apply knowledge to treat the sick at personal risk). Gate these on S.era AND reputeTop(S.house) simultaneously.",
+      "why": "Dynasty-level reputation and era both affect which cards can fire, but they never combine into a card that couldn't have appeared without both conditions. Adding 5–6 such cards would make the macro systems feel intertwined rather than parallel.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the soldier vocation's structural dominance by slightly lowering its weight in the y_calling pool (from the current implicit 'equal' to weighted toward the other three) or adding a 'soldier fatigue' flag per dynasty that reduces soldier probability after two consecutive soldier lives in the same house.",
+      "why": "The transcripts show soldier appearing in every dynasty, often multiple times. Scholar, maker, and wanderer arcs are structurally richer-feeling when they do appear (the scholar payoff via cb_study_pays, the wanderer settle/return arc). Rebalancing toward the less-seen vocations would increase structural variety across dynasties without removing any content.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has a genuine emergent core in its callback-memory chains and heirloom-reputation system, but the structural life template (late love, late marriage, late child, elder reflection) is so reliably guaranteed by the engine that by dynasty 5 each life feels like the same skeleton in different clothes — and the era and vocation systems, which could multiply the variety, instead fire in parallel isolation rather than colliding into content neither produces alone."
+}

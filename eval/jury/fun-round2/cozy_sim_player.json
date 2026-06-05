@@ -1,0 +1,50 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The writing is genuinely warm and literary — each moment lands with a quiet, specific weight that cozy players treasure. Lines like 'Fell in love, and was aware, with a cold clarity, of everything it now made possible to lose' are the reason to stay.",
+    "Callback cards are the game's best trick: when Lazlo at age 48 atones for looking away from a lonely child 36 years earlier, or when Otto re-reads the book that shaped him, the reach-back creates real continuity of self that cozy narrative players crave.",
+    "The dynasty layer — watching a name climb from 'a rented room' to 'a grand estate', the motto crystallising, heirlooms passing down — gives the 'one more generation' pull that cozy sim players live for. Dynasty 10 (House Aldecott, 5 generations, motto 'Nothing was given; all was built') is the game at its best.",
+    "Era overlays (war, plague, plenty, turning) genuinely shift the mood and gate rare cards. Dynasty 9 born into 'fat years', then generation 2 born into 'a war on in these years' — these feel like weather changing over a family, not just a palette swap.",
+    "Vocation arcs are distinct and legible: a soldier's life has its own arc (the campaign, the ghost at 3am, the old songs question), the scholar's life has the hungry bet and the great unanswered question at the end. These structural spines stop lives from being shapeless.",
+    "Fate events (fire, sudden loss, f_grace) are the most cozy-friendly design choice: things that just happen, unasked — the world intervening gently — give the sim texture without asking the player to optimise.",
+    "The eulogy system avoids most repetition via cluster-blocking and rotation, and epitaphs like 'An ordinary life, which is to say, a whole world' land exactly right for this genre."
+  ],
+  "staleness": [
+    "The 'wanderer' vocation monoculture: scanning all 18 dynasties, 'The road — go where the work is' is the single most common calling. Across dynasties 1–13, roughly half the founders chose wanderer. Soldier is second-most common. Scholar and maker appear much less. This means a disproportionate number of lives hit the same structural beats: left_home, wanderer_settle, wanderer_return — and the 'Counted the doors she closed' elder card fires so frequently it becomes a fixture. Dynasty 1, 2, 3 founder, 4, 5 founder, 6 founder, 7, 8, 9 founder all chose wanderer or soldier. The structural diversity the vocations were supposed to create gets diluted by the pool skewing heavily toward two paths.",
+    "Late love as the dominant adult template: the vast majority of lives — including nearly every wanderer and soldier — meet their partner after 30, often after 40, via 'a_meet_late'. Even after the engine's fix to prioritise youth love, the transcripts show 'Found love later than expected' landing in life after life. Dynasties 2, 3, 4, 5, 6, 7, 9, 10 (generations 1 and 3–4), 11 — almost every founder or generation-1 life gets the late-love template. What was designed to be the 'rarer path' is in practice the modal one. For a cozy player this is numbing: the beat of 'marriage late, child even later, widow/widower young' becomes the default arc.",
+    "The 'cb_reckless' elder card fires relentlessly. Across the transcripts, the card where an old person counsels or validates a reckless young family member appears in dynasties 2 (Otto), 4 (Anders, Ottilie), 5 (Liv), 6 (Vesna, Lazlo), 7, 8 (Caleb), 10 (Ingrid, Tamsin), 13 (Annika) — at least 12 distinct life appearances. The prose variants are slim ('Counselled the caution he had never once managed himself' appears verbatim in dynasties 2, 4, 6, 7, 9). By dynasty 6 a cozy player has memorised this card.",
+    "The 'wanderer_return' and 'cb_left_home' beats cluster together almost every time a wanderer path is taken: the pilgrim returns, makes peace, counts the doors. Dynasties 3, 4, 5, 6, 7, 9, 10, 11, 13 all contain this sequence. Each individual rendering is warm, but the shape repeats so closely — at similar ages, with similar prose — that by dynasty 7 the player is watching a familiar template.",
+    "The body-ageing ambient observations recycle early and obviously: 'The stairs have started to ask a question of him', 'Getting up has become the first real work of every day', 'The weather has begun living in his joints' all appear multiple times within the 13 dynasties. These are meant to be background texture, but when the same line lands in dynasty 2 and dynasty 9 the immersion fades.",
+    "War and plague eras, while atmospheric, do tip the cozy mood for a player who came for warmth: 'The sickness is in the next street, then the next house' (plague card) and the war-loss card ('takes someone out of it who is not given back') introduce genuine grimness that can feel jarring against the literary-quiet baseline. Not a dealbreaker but notable for this profile.",
+    "The e_legacy 'what do you want remembered?' card fires near the end of many lives and the three choice-texts — 'That I was kind', 'That I built something', 'That I was here at all' — recur in identical wording across dozens of lives. The same is true of the 'cb_the_cost' elder card. Once seen three or four times, these feel like a form, not a moment."
+  ],
+  "improvements": [
+    {
+      "what": "Reweight the y_calling card pool to give scholar and maker a stronger nudge in the draw logic, and reduce wanderer's effective weight at the dynasty-wide level (e.g., onceDyn for wanderer in a house that already produced two wanderers this dynasty).",
+      "why": "Wanderer and soldier together dominate across 18 dynasties, meaning scholar arcs (the hungry bet, the great unanswered question) and maker arcs (the masterwork, the handoff to young hands) are underplayed. A scholar dynasty and a maker dynasty feel structurally distinct in a way wanderer-soldier runs do not, and they carry more distinct elder caps.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the youth love card (y_love1) a meaningfully stronger nudge over a_meet_late in the draw logic — perhaps raising the 0.34 chance to 0.55 and lowering the late-love 0.10 to 0.04 — so that most lives meet their person young, and the late arc genuinely becomes the rarer, surprising branch.",
+      "why": "Late love is currently the modal outcome across the transcripts, not a distinguished exception. When 'Found love later than expected' fires in 9 of 13 dynasties' founders, the 'lateness' framing loses its emotional weight. Youth love opens a different structural shape (earlier marriage, earlier children, different midlife cards, different elder arcs) and more variety of life-shape is the game's single biggest freshness lever.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4–6 new prose variants to the cb_reckless card text and the elder-body ambient observations ('stairs', 'getting up', 'weather in joints'), and expand the cool timer on cb_reckless to 30+ years so it cannot fire in two consecutive generations of the same dynasty.",
+      "why": "The cb_reckless card fires verbatim ('Counselled the caution he had never once managed himself') in at least 12 lives across 13 dynasties — it is the single most visibly repeated line in the transcripts. The body-ageing ambients are the second-most repeated. For a cozy player who reads closely, verbatim repetition is the fastest route to disenchantment.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'chosen calling' diversity gate to the dynasty state: track S.seenVocations and reduce the weight of any vocation already chosen by the previous two ancestors, nudging the family to rotate its trades rather than produce a dynasty of soldiers or wanderers.",
+      "why": "This directly creates structural dynasty-to-dynasty variety. A house that went soldier → scholar → maker over three generations would read as a genuinely different story than three wanderers — different vocation-era crossings, different midlife cards, different elder caps, different reputations.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce 2–3 'cozy pivot' elder cards specific to the maker and scholar paths that surface rich, warm domestic imagery — a craftsperson surrounded by things they built, a scholar putting down the last book and noticing the garden for the first time. Give these elevated weights when the player has had a mostly low-stakes, domestic-scale life.",
+      "why": "The elder band currently relies heavily on universal cards (e_legacy, e_peace, e_body, cb_reckless). Maker and scholar vocations have their own elder caps, but the universal cards still dominate numerically. Richer vocation-specific elder endings would give the cozy player a payoff moment that feels earned by the specific life they played, not a generic template.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely warm and often beautiful, but by dynasty 6 the wanderer-late-love-wanderer-return template has become the game's dominant shape — and cozy players, who read every word, will notice long before that."
+}

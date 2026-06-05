@@ -1,0 +1,47 @@
+{
+  "profile": "lapsed_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier / scholar / maker / wanderer) genuinely delivers structurally different adult arcs — a soldier life in Dynasty 6 (Linnea) reads nothing like a scholar life in Dynasty 8 (Caleb), and the vocation-specific elder cards (e_soldier_old, m_scholar_legacy, e_maker_handoff) close each arc in its own shape.",
+    "The era macro-layer (war / plague / fat years / turning age / lean years) is the single best anti-staleness tool: Dynasty 4 (Renner) living through a war produces a meaningfully different world than Dynasty 2 (Sereno) riding the plenty years. Vocation x era intersections (vx_soldier_war, vx_scholar_turning) are highlights — rare, bespoke, and they land.",
+    "Callback cards genuinely pay off when they fire: Otto reading the book at age 49 that he kept at age 10, Lazlo's war ghost returning 30 years later, the unspoken love reappearing in midlife. These are the game at its best — choices echoing forward in ways that feel earned.",
+    "Dynasty-layer goals (seat, motto, heirlooms, secret) supply real 'one more generation' pull. Watching House Vane climb from a rented room to an old and famous house across 4 generations, each life tilting the trajectory, is satisfying as a strategy game.",
+    "The writing variety at the line-by-line level is impressive — even repeated structural beats (having a child, a loss) rotate through genuinely different prose so individual moments rarely feel verbatim, even if the shape recurs."
+  ],
+  "staleness": [
+    "The fever card (c_sick) is not onceDyn, only once-per-life, so it appears in almost every dynasty — dynasties 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 all open with it. By dynasty 8 it is a background noise card, genre boilerplate, not a moment.",
+    "The scholar calling log-line 'Chose study, and hunger, and the long bet on her own head' appears verbatim in at least 12 of the 18 dynasties. The calling card rotates the prompt text but the log output for the scholar path is a fixed string. It becomes a tell that a familiar template is running.",
+    "The elder-regret card (cb_the_cost: 'Near the end, one old decision keeps returning...') fires in almost every long life. It is supposed to be a once-per-life payoff reaching back to a genuine prior choice, but because so many cards tag the relevant memories (chose_self, chose_others, a_kind_silence, chose_loyalty), it triggers very reliably and reads as the game's mandatory penultimate beat.",
+    "The structural template is legible by dynasty 6 and locked by dynasty 10: childhood (fever, wonder, sibling, or friend), calling, love, marriage, child, midlife parent-care or work-pressure, elder health scare, elder legacy declaration, death. Vocation cards and era cards interrupt this reliably for 2-4 life-beats, but the skeleton is always there underneath.",
+    "Solitary and childless life-shapes, which the code explicitly provisions (m_solitary, e_solitary, e_childless, a_chosen_family), do not appear once in 18 dynasties. The engine's nudge toward y_love1 and a_child is strong enough to route nearly every life into the domestic arc. The structural variety the code promises is not the structural variety the transcripts deliver.",
+    "Scholar vocation is heavily overrepresented (about half the lives in the transcripts), which means the scholar arc (study pays, scholar question, scholar legacy, scholar elder) repeats more than any other. The soldier arc fires rarely enough to feel fresh; the scholar arc runs enough to feel like the default."
+  ],
+  "improvements": [
+    {
+      "what": "Make c_sick (the fever card) onceDyn rather than once-per-life — and apply the same change to c_grandparent, c_unfair, and c_wonder, which show the same pattern.",
+      "why": "These four childhood cards appear in nearly every dynasty because the once-per-life flag resets at succession. Burning them once per house means a player who has seen them three times will finally see c_dark, c_steal, c_animal, c_talent, c_move, c_sibling in childhood instead — making early years feel fresh per dynasty, not just per life.",
+      "impact": "high"
+    },
+    {
+      "what": "Rotate the scholar calling log-line ('Chose study, and hunger...') through at least 4-5 variants the same way the maker and wanderer paths are handled — and do the same for the scholar cb_study_pays payoff line.",
+      "why": "These two strings appear verbatim 12+ times in the transcript. They are the most visible staleness signal in the whole run. The writing elsewhere already uses freshPick and rotI; these just need the same treatment.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the per-draw love nudge (currently 0.34 for y_love1, 0.10 for a_meet_late) so that roughly one-quarter of lives actually run solitary, and strengthen the m_solitary / a_chosen_family / e_solitary cards so a solitary life has its own content arc rather than feeling like a missed connection.",
+      "why": "The code says solitary is a 'real, content-bearing life-shape, not a dead-end' but the transcripts show zero solitary lives in 18 dynasties. The love nudge is doing too much. A solitary scholar life, a solitary soldier life, should read as a structurally distinct arc — not just a domestic arc with the love scene missing.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate cb_the_cost behind a narrower condition — require that the player chose one of the competing-goods cards (x_dream_or_duty, x_loyalty_truth) specifically, rather than any of the broad memory tags that half the game sets, and add a cool window so it fires at most once per dynasty.",
+      "why": "Currently it triggers for almost every long life (chose_self OR chose_others OR chose_loyalty OR a_kind_silence all qualify), making the 'near the end, one old decision...' beat feel like the mandatory penultimate moment rather than a rare earned payoff.",
+      "impact": "med"
+    },
+    {
+      "what": "Rebalance vocation draw weights or add a small penalty to the scholar calling path when a dynasty has already produced two consecutive scholars — so maker, soldier, and wanderer arcs appear more often and the scholar arc stops defaulting as the familiar template.",
+      "why": "Scholar is overrepresented not because players prefer it but because its mid-game payoff (cb_study_pays) is reliable and satisfying, compounding the draw toward it. Even a modest rebalance would put maker masterworks, soldier ghosts, and wanderer returns in front of players far more often.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine structural variety in its vocation and era systems — but the underlying template (fever, calling, love, child, midlife, elder regret, death) is legible by dynasty 6, the scholar path runs so often it becomes the default, and the solitary life-shapes the code promises never actually appear, which is exactly the repetition that made me quit last time."
+}

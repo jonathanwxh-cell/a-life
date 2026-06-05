@@ -1,0 +1,54 @@
+{
+  "profile": "replay_addict",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation × era intersection cards (vx_soldier_war, vx_maker_plenty, vx_scholar_turning) are the game's best content: a soldier born into a war year meets fundamentally different beats than one born in peacetime, and this is the clearest structural divergence the game delivers.",
+    "Callback chains — when they land — produce genuine 'one more run' pull. cb_books_late (reading the childhood book decades on), cb_lookaway (the stranger sleeping rough, the old cowardice resurfacing), cb_unspoken (writing the letter at last) feel earned and personal in a way static cards cannot.",
+    "The dynasty meta layer (seat 0–7, reputation types, heirlooms, motto crystallization) is a real cross-session goal. Watching 'Nothing was given; all was built' emerge for House Okonkwo or 'We burn bright, and we burn' for the Vasquez reckless line does create a sense of accumulation across lives.",
+    "Solitary and childless life-shapes are genuinely realized — Niall in Dynasty 7 choosing no children then reconsidering, Ingrid in Dynasty 10 choosing childless with clear eyes, Mira in Dynasty 8 ending alone — these feel like distinct structures, not foreclosures.",
+    "The trait-affinity system (a bookish child skewed toward c_book; a warm child toward c_friend) makes early childhood genuinely read differently per character, which is the most invisible feature and one of the best.",
+    "The era system changes the opening texture of each dynasty in ways that compound: a plague-era heir tending the sick (Aldous D12) lives a structurally different youth than a plenty-era heir riding the boom."
+  ],
+  "staleness": [
+    "'Red and furious and entirely unimpressed by any of it' appears for first-born children across at least 9 of the 15 dynasties in the transcript. The S._usedFurious guard fires once per dynasty but the dynasty scope is too narrow — across a long session this line lands in almost every dynasty and reads as the game's signature birth line, not a surprise.",
+    "The love → marriage → child → work promotion → midlife health → elder legacy arc is the skeleton of roughly 80% of lives by dynasties 8–15. The card texts rotate well but the structural beats arrive in the same order at the same life-stages in dynasty after dynasty. The replay-addict sees the chassis by dynasty 4 and spends the rest watching the upholstery change.",
+    "The 'outcast returns as somebody' callback (cb_outcast_return) fires in nearly every life that chose to befriend the lonely child. Because c_friend itself fires in almost every childhood, this means the callback fires in almost every life — it stops feeling like a meaningful reach-back and becomes an expected beat.",
+    "The adult band (ages 28–60) is still the thinnest in variety per-run. The repeatable filler cards (a_smallchoice, a_recognition, m_smaller_body, a_fallow, a_friend_drift) are well-written but they carry no memory of who the character is — they could happen to anyone. A soldier in midlife and a scholar in midlife get the same generic 'promotion or presence' and 'recognition' cards alongside their vocation cards.",
+    "The discovery layer is invisible. With ~150+ distinct cards, a replay-addict's central question is 'what haven't I seen yet?' — but the game surfaces no answer. There is no discovery log, no hint that rare cards exist, no way to know whether a solitary wanderer in a war era will unlock content you've never encountered. The pull to replay is present but diffuse rather than directed.",
+    "Mottos repeat across dynasties: 'What the mind holds cannot be taken' crystallizes in Dynasties 1, 3, 7, and 15 in this fifteen-dynasty run. 'We burn bright, and we burn' appears in Dynasties 4, 9, and 12. The freshPick variant selection prevents exact line repetition within a dynasty but does not prevent the same motto from becoming the dominant scholar/reckless house outcome across many runs.",
+    "The 'work promotion vs. presence' card (a_work) fires in many lives in mid-adulthood and its two lines — 'Worked for the family until the family barely saw them' vs. 'Said no to the title, and yes to the evenings' — become recognizable templates. By dynasty 10 the player knows which stat this card is optimizing for without reading the choice text."
+  ],
+  "improvements": [
+    {
+      "what": "Extend the S._usedFurious guard to a session-level set (e.g., RECENT_LINES already exists — add the birth line pool to it) so the 'red and furious' birth line cannot repeat within the same session regardless of dynasty boundaries.",
+      "why": "This is the single most-repeated line in the transcript — 9 appearances in 15 dynasties. It is the first thing a player sees for most heirs and training it to be surprising is cheap (the pool exists; just widen the exclusion window).",
+      "impact": "high"
+    },
+    {
+      "what": "Surface a 'moments witnessed' counter or constellation discovery map in the UI — even a simple 'X of Y moments seen this session' badge, or greyed-out star shapes in the constellation for card categories not yet encountered.",
+      "why": "The game has ~150 cards but the player has no way to know this. A replay-addict's core motivation is exhausting a possibility space; without a visible frontier, the pull to keep playing is vague. Even a rough count ('you have seen 43 distinct moments') would transform passive replay into directed exploration.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate cb_outcast_return on a minimum bond threshold AND a minimum life-years gap (e.g., the friend must be at least 20 years older than when befriended), and lower its base weight from 4 to 2 so it fires less reliably. Add 1–2 alternative friendship callbacks with different flavors (a betrayal that resurfaces; a friend who simply stays ordinary).",
+      "why": "The current callback fires so reliably it becomes an expected beat rather than a payoff. Lowering its fire rate and adding variety to what 'an early friendship echoes into' would make the callback feel earned rather than clockwork.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3–4 adult-band cards that are gated on the intersection of vocation AND a personal memory (not just vocation OR a memory), so a scholar who also had the childhood book gets a different midlife beat than a scholar who didn't.",
+      "why": "The adult band is the thinnest for character-specific divergence. A soldier-with-reckless-past and a soldier-without should diverge more in midlife than the current system allows. These intersections are the game's best content (cb_ chains, vx_ cards) and the adult band has fewer of them than childhood or elder.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2–3 additional motto variants per reputation type so that a scholarly house has at least 5 possible mottos, and add a session-level exclusion so the same motto string cannot crystallize in two dynasties within the same session.",
+      "why": "Motto crystallization is a high-moment event; seeing 'What the mind holds cannot be taken' four times in fifteen dynasties devalues it. The RECENT_LINES system already tracks recent epitaphs — applying the same logic to mottos is a small addition with meaningful payoff.",
+      "impact": "med"
+    },
+    {
+      "what": "Add one or two 'deep cut' card chains that require 3+ specific memories across 2+ generations to unlock — content that a player who has seen everything else might stumble on in dynasty 12 having never seen it before.",
+      "why": "The replay-addict's long-arc motivation is exhausting the possibility space. Cards that require unlikely multi-generation conditions (e.g., a scholar whose parent strayed AND who inherited the secret AND who also took a stand in youth) create genuine 'I've never seen this before' moments deep into a session, which is exactly what this profile needs.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is pleasant and literary, and its card pool is larger and more varied than a first impression suggests, but by dynasty 5–6 a replay-addict has learned the chassis — love, calling, child, promotion, midlife health, elder legacy — and subsequent runs feel like the same template with rotating prose rather than structurally different lives; the invisible discovery layer and a handful of over-firing beats keep it below the 8 bar."
+}

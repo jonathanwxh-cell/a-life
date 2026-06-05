@@ -1,0 +1,51 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.5,
+  "fun_highlights": [
+    "The first life is genuinely hooky: the c_origin opener varies meaningfully by era and standing, the vocation fork gives each life structural shape from the start, and callback cards (cb_outcast_return, cb_books_late, cb_study_pays) land as earned surprises the first time they fire.",
+    "The dynasty layer provides real 'one more' pull in the first two or three dynasties: watching a motto crystallize ('We make, and so remain.'), a seat rise, an heirloom pass down — these are satisfying milestones that feel like progress rather than decoration.",
+    "Era-gated content (war, plague, hard years, plenty) genuinely differentiates the world a life is born into; a plague-era life and a fat-years life feel structurally different in a way that is legible without explanation.",
+    "Trait affinity shaping childhood card selection is well-designed: a bookish child leans toward c_book, a warm child toward c_friend, a restless child toward leaving — so the first dozen years feel characterful rather than random.",
+    "The competing-goods dilemma cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the sharpest moments in the game — genuinely two real virtues in tension, no clean answer, and they leave a residue.",
+    "The fate cards (f_fire, f_sudden_loss, f_grace) are the only truly uncontrollable beats, and that powerlessness is exactly right for the genre — they punch through the prose with unexpected weight.",
+    "The vocation x era intersection cards (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) are smart structural design: content that only exists at the crossroads of a choice and a circumstance."
+  ],
+  "staleness": [
+    "The love monoculture is severe and persists across 15 dynasties: a_meet_late dominates in roughly 12 of 15 dynasties despite engine nudges toward y_love1. The effect is that nearly every life reads as 'found love later than expected' — the very line the code tried to retire — and by dynasty 6 the player can predict it. The youth love path (y_love1) fires almost never in the transcripts.",
+    "The per-vocation arc is a fixed 4-5 beat rail: every scholar life runs c_book → scholar_question → study_pays → scholar_legacy → scholar_old in roughly that order; every soldier runs service → ghost → old. By dynasty 6 you know exactly what a scholar life will contain before it begins. The arc provides structure at the cost of surprise.",
+    "The 'guard it / give it away' scholar beat (m_scholar_legacy) appears in nearly every scholar dynasty (D1, D3, D6, D8, D11, D14). Six appearances, two choices, identical framing. The pool-rotation logic cannot rescue a card this frequently re-encountered.",
+    "Marriage almost always clusters in the 44-58 age band across the transcripts despite the engine's stated goal of varying it. This is downstream of the late-love monoculture: if love nearly always arrives at 34-52, marriage follows at 44-58. The 'married late' lines, which are clearly written as the rarer path, become the default.",
+    "The a_child card surfaces with low variation in text and consequence; the 'had a child late, felt the lateness as luck' line appears verbatim or near-verbatim multiple times across the transcript (Dynasties 1, 2, 3, 6, 8, 11, 13, 14). This is the most frequently repeated log-line family in the data.",
+    "The high-water-mark uncle cards — d_ancestor, d_motto_test — fire but do not differentiate enough: the ancestor card always reads 'a thing they did, and what it cost / no two tellers agree on the moral,' the text changes only in the name. By dynasty 5 the structure is transparent and the content feels templated.",
+    "The death/eulogy screen is genuinely poetic the first time; by the fourth or fifth life the player has internalized all the epitaph clusters (teacher, stray, secret, built, kind) and can predict which will fire from the stat readout. The set of ~12 clusters is too small for 15 dynasties.",
+    "Midlife is the thinnest band: after once-per-dynasty cards fire (m_parent_age, m_health, m_child_grown), the remaining midlife pool is shallow and repeating. Lives in dynasties 8-15 often show 2-3 midlife decisions versus 5-7 in earlier dynasties, suggesting the pool exhaustion is real."
+  ],
+  "improvements": [
+    {
+      "what": "Break the late-love monoculture: strengthen the engine nudge toward y_love1 (raise from 34% chance to 55-60%), and add 2-3 new youth love cards with different social textures (forbidden, class-crossing, abrupt loss of the first love) to make the early-love path feel as rich as the late-love path currently does.",
+      "why": "The single most visible staleness pattern across all 15 dynasties is 'found love later than expected.' It was supposed to be a rare path; it is nearly universal. Correcting this would diversify the mid-life section and the marriage-age distribution simultaneously.",
+      "impact": "high"
+    },
+    {
+      "what": "Add one branch-point to each vocation arc — a true fork where two scholar lives (or two soldier lives) diverge into different adult content clusters. For example: a scholar who 'named their worth' (took the money) should get different midlife events than one who 'taught cheap' (spread it wide), not just the same m_scholar_legacy card.",
+      "why": "Currently the vocation arcs are rails: the same 4-5 cards in the same order regardless of how the player chose within the arc. Adding a single fork per vocation would double the perceived variety of each calling without proportional writing cost.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the midlife card pool by 8-10 new cards, specifically non-vocation, non-callback adult-band moments (aged 38-58) with cool:12 so they recirculate within a dynasty but not constantly. Focus on the 'quiet decades' — mundane inflections of character that aren't tied to a dramatic event: a friendship drifting, a neighborhood changing, a habit forming.",
+      "why": "Midlife is the thinnest band in the transcript evidence. Once once-per-dynasty and once-per-life cards exhaust, 48-64 year olds coast on ambient observations. New cards here would directly address the 'same template' feeling in sessions 4-8.",
+      "impact": "high"
+    },
+    {
+      "what": "Double the epitaph cluster pool from ~12 to ~24 by adding fine-grained clusters for mixed-stat lives (e.g., a person who was rich and hard-dealing, or poor and bitter, or scholarly and cold). Currently mid-tier lives always fall into 'ordinary / quiet / decent' regardless of their actual character.",
+      "why": "The epitaph is the game's final punctuation on a life; a player who has seen all 12 clusters by dynasty 5 stops feeling surprised by death. More clusters, especially for morally complex lives, would restore the ending's impact.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'second heart' love path: if y_love1 was declined (unspoken love, held in memory), add 2-3 new midlife love cards beyond m_old_flame that are specific to having-chosen-solitude rather than the current solitary tracks which feel like consolation prizes. A life that chose to be alone should get distinct mid-life content, not just the m_solitary 'claim the width' card.",
+      "why": "The solitary life shape is designed but underwritten. Right now a character who declined y_love1 early mostly waits for a_meet_late to fire, which dilutes the 'deliberate solitude' arc into just a delayed romance arc.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely compelling for the first two dynasties — the opener varies well, callback cards land as real payoffs, and the dynasty layer provides authentic forward pull — but the love monoculture, fixed vocation rails, and thin midlife pool converge into a recognizable template by dynasty 4-5 that makes subsequent play feel like watching the same structure with new names."
+}

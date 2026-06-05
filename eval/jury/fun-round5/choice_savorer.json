@@ -1,0 +1,62 @@
+{
+  "profile": "choice_savorer",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the game's best feature: watching Joaquin (Dynasty 2) pay back, to a stranger, the child he ignored 47 years earlier is genuinely affecting — it makes the early choice feel like it mattered rather than just a stat toggle.",
+    "Vocation × era intersections create the sharpest structural variety: a soldier in a war era faces a categorically different life-shape than a scholar in a turning age. These crossings feel like real discovery.",
+    "The competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the design's most honest work — no clean answer, both roads a form of virtue, and the choice genuinely characterises the person. The hint text that labels both paths as goods rather than good vs. bad is exactly right.",
+    "The bequest system (e_bequest) is the best cross-generational lever in the game: 'Everything I know' versus 'Nothing but their own freedom' lands as a real decision about what kind of parent and founder you want to be, and its effects ripple visibly into the heir screen.",
+    "Trait-gated cards work well: the frail scholar (Dynasty 5 Caleb) gets t_frail + the full scholar arc, producing a recognisably different character from the guarded soldier (Dynasty 8 Ingrid). When traits and vocation compound, the life reads as a particular person.",
+    "Dynasty-memory cards (d_ancestor, d_motto_test) are quietly excellent when they fire — 'met the test the way the family words said to, and felt, for once, the old motto turn from a phrase into a thing he meant' is exactly the promise of a generational game.",
+    "Solitary and childless life-shapes are handled with real care rather than treated as failure states — the m_solitary / e_solitary / e_childless cards give those lives their own emotional grammar."
+  ],
+  "staleness": [
+    "c_steal (the fruit-stall theft) fires in 12 of 15 dynasties across the transcript — virtually every childhood. It appears in Dynasties 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14. Because means starts low in almost every life, the cond gate (means < 35) is nearly always satisfied. By dynasty 6 this beat is as expected as the opening scene of a play.",
+    "The grandchild-asks-about-childhood card (e_window) fires in at least 6 of the 15 dynasties (D3 Anders, D5 Felix, D6 Annika, D8 Ingrid, D11 Cosima, D12 Liv). It is not marked once-per-dynasty. More damning: 'Improved his/her own childhood a little, for a child who'd never know' appears verbatim — the exact same log line — in D3, D5, D6, D8, D11, and D12. Six times in the transcript. This is the single most visible staleness signal.",
+    "The adult template is legible by dynasty 4: youth calling → fall in love → marry → a_child → a_work promotion (take/refuse) → m_health scare → e_legacy (what do you want remembered?) → e_garden or e_window. The vocation arc adds ~3 specific cards to this skeleton but does not restructure it.",
+    "e_legacy ('what do you want to be remembered for?') fires in nearly every elder life in the transcript — Dynasties 2, 3, 4, 6, 7, 8, 9, 14 — and the three-option framing (kind / built / here) is identical each time. The vocation-personalised text intro helps but the three choices are always the same three.",
+    "Most non-competing-goods choices are binary flavour toggles with a legible 'virtue option' and a 'pragmatism option': keep the book / go outside; sit with the child / look away; tend the garden / sit in the window; take the work / be present; confess / keep the secret. After a few dynasties the grammar is cracked and the choices register as stat adjustments rather than character definition.",
+    "The competing-goods cards — the game's most meaningful choices — are rare. In the full transcript (15 dynasties, ~30 lives), x_honest_or_kind, x_loyalty_truth, and x_dream_or_duty each fire at most 2-3 times total. The bulk of play is the binary grammar, not these genuinely ambiguous moments.",
+    "m_peer_dies fires in D6 (Annika), D8 (Theda), D12 (Saoirse) with no personalisation — always 'someone your own age, not close, but a fixed point.' It reads as filler in the midlife band rather than a moment with weight.",
+    "The fire (f_fire) strikes three different characters across the transcript (D3 Anders, D4 Felix, D6 Ren) and is the only fate event that fires with any frequency — grace and reversal appear once each. A player who plays to dynasty 12 will have seen the fire scene four or five times, and its single-choice design (begin again from the ash) gives nothing to decide.",
+    "Childhood as a stage is thin structurally: most lives see the origin card, c_steal, and one or two developmental cards (book/friend/dark/wonder), but the order and combination vary only slightly. The trait-affinity weighting in drawCard() helps but does not prevent the childhood stage from reading as a short checklist rather than a world."
+  ],
+  "improvements": [
+    {
+      "what": "Make c_steal (fruit stall) gated on a hunger memory or an 'impoverished childhood' flag rather than the raw means stat, and mark it onceDyn so it fires at most once per dynasty across the whole house",
+      "why": "The current means gate fires for almost every starting character since all founders begin with low means. Marking it onceDyn would ensure it is a discovery in the first dynasty, not a template fixture in every one. A 'first-generation poverty' or 'era=hard' conditional would make it feel earned rather than automatic.",
+      "impact": "high"
+    },
+    {
+      "what": "Mark e_window (grandchild asks about your childhood) as onceDyn, and create one alternative elder card for each vocation that covers the same emotional beat (receiving a question from the young) with vocation-specific content",
+      "why": "This card appears verbatim in six lives in the transcript and produces the same log line six times. It is the clearest repetition in the whole run. Marking it onceDyn ensures it lands as a memorable moment in one generation rather than a recurring fixture. Vocation variants (a grandchild asks what the soldiering was really like; a student asks what first drew you to the question) would serve the same purpose with real variety.",
+      "impact": "high"
+    },
+    {
+      "what": "Double the density of competing-goods cards — the x_* series — relative to binary virtue/pragmatism cards in the adult and midlife pools",
+      "why": "The honest/kind, loyalty/truth, and dream/duty cards are the strongest choices in the game because both options are defensible. A player who is characterising rather than optimising reaches for these naturally. Currently they are rare enough that most choices in the adult band feel like toggles. Adding 4-6 more competing-goods cards (e.g.: honesty vs. protecting a child's innocence; loyalty to a friend vs. the truth owed to a spouse; ambition now vs. time with an aging parent) would raise the average weight of a session's choices substantially.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the e_legacy card per-vocation branching choices rather than the same three options (kind / built / here) for every life",
+      "why": "The card already personalises its opening line by vocation — a soldier is asked differently than a scholar. But the three choices are identical regardless of who is being asked. A soldier should have options like 'that I stood when others didn't' or 'that I came home'; a wanderer 'that I kept moving' or 'that I finally stopped'; a maker 'the things I made, while they last'. This would give the most frequently-appearing elder card real variety.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 childhood cards that are gated on the house's current standing (seat) and/or era, not just the character's traits and means, so a child born to a grand estate has a structurally different childhood than a founder's child",
+      "why": "The c_origin card already does this — its text varies by era and seat — but the rest of childhood runs on universal cards (c_steal, c_book, c_friend, c_dark, c_wonder). A child born into a seat-5 house could face cards about the weight of expectation, the tutors who come to you, the loneliness of privilege. A child born in war could face loss before the first lesson. This would make the inheritance of standing feel like more than a starting-means adjustment.",
+      "impact": "med"
+    },
+    {
+      "what": "Replace m_peer_dies with a pool of 3-4 distinct 'mortality reminder' cards that have different triggers and different emotional registers — one for a peer who was a rival, one for a peer who achieved what you didn't, one for an unexpected death close enough to feel personal",
+      "why": "In its current form m_peer_dies ('someone your own age, not close') always reads as a thin filler card. If the same emotional beat (confronting your own finitude through someone else's death) were delivered through cards that respond to the player's actual relationships and choices — the rival who pulled ahead, the friend who got everything you wanted — it would land with real weight instead of feeling generic.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'consequence surfacing' log note to choices whose downstream callback will be significant — a subtle signal that this choice is remembered, not just flavour",
+      "why": "The callback system is the game's best feature but players may not trust it enough to feel the weight of early choices. A young choice that 47 years later becomes the callback about the sleeping rough stranger is moving — but only if the player senses, making the original choice, that it might matter later. A light mechanic (perhaps the constellation flickers; perhaps the log note gets a visual marker) would increase the felt weight of choices without explaining anything.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a well-crafted literary sim whose callback system and vocation arcs genuinely reward careful play, but by dynasty 6-8 the childhood theft scene, the grandchild's lap question, and the elder legacy card have become furniture — the game's template is cracked, and most choices outside the too-rare competing-goods cards resolve as stat toggles rather than character definition."
+}

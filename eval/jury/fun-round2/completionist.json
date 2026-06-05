@@ -1,0 +1,55 @@
+{
+  "profile": "completionist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The card pool is genuinely large: 135 distinct cards spanning once-per-life moments, 14 memory-gated callbacks, 12 vocation-specific arcs (soldier/scholar/maker/wanderer), 6 era events, 8 trait-specific moments, 5 reputation-gated and 5 seat-gated cards, 3 vocation-x-era intersections, 6 competing-goods dilemmas, 4 single-choice fate events — there is real content depth here.",
+    "The callback system (cb_* cards) is the best completionist feature in the game: choices made in childhood literally echo back decades later with specific references to ages and acts. Seeing 'cb_lookaway' fire at age 48 for a character who chose cowardice at age 12 is exactly the kind of long-arc payoff that keeps completionists hunting for combinations.",
+    "Vocation arcs provide structurally different life shapes — a wanderer's midlife card pool is genuinely different from a soldier's, and the vx_* intersection cards (e.g. vx_soldier_war) create genuinely novel moments that require both the right calling AND the right era to surface, making them rare by construction.",
+    "The dynasty layer adds legitimate long-tail content: mottos, seat-gated cards, repute-gated cards, heirlooms, and family secrets all require deliberate multi-generational effort to unlock. House Voss reaching 'an old and famous house' with motto 'We answer to a longer ledger' after 5 generations (Dynasty 13) is a real completionist reward.",
+    "Era variation (war, plague, plenty, hard, turning, settled) means a completionist must play through all 6 eras to see every era card, and era x vocation intersections triple that requirement — this creates a real checklist to chase.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) surface unpredictably and are not controllable, creating genuine surprise even in late play.",
+    "The game does NOT telegraph what you have and have not seen — a completionist must read closely to notice a cb_* card reference a specific childhood act. There is a real sense of puzzle in assembling which prior choices unlock which callbacks."
+  ],
+  "staleness": [
+    "The transcript reveals a severe structural monoculture across all 18 dynasties: virtually every life that reaches adulthood follows the arc CALL -> youth love/late love -> child (yes) -> work -> parent aging -> reconcile/body -> death. Looking at dynasties 3-13, the event sequence is nearly identical in stage distribution; the prose varies but the beat skeleton does not. A completionist clocking the shapes of lives quickly notices there are really only 4 life structures: wanderer-with-family, soldier-with-family, scholar-with-family, maker-with-family — and a thin solitary variant that appears only ~10% of the time.",
+    "The 'wanderer' vocation is dramatically over-represented across all 18 dynasties. In the 38 lives recorded, wanderer appears in roughly half, making the cb_left_home and m_wanderer_return callbacks extremely common. By dynasty 5 a completionist has seen the 'all those roads' elder arc multiple times. Soldier and maker are secondary; scholar is the rarest calling in practice, appearing in only ~6 of 38 lives.",
+    "Three specific beats repeat with visible frequency across the 18-dynasty packet and land nearly identically in prose: (1) the windfall/loss pair (u_windfall 'An envelope, a forgotten debt repaid' and u_loss appear in well over half of lives — repeatable cards with cooldowns that still surface enough to feel templated); (2) cb_reckless ('Tell them to slow down / Tell them it was worth it') fires in almost every soldier or reckless-flagged life at elder stage; (3) the exact phrase 'Counted, at the end of the road, the doors she had closed' appears verbatim across dynasties 2, 4, 5, 9, 10, 11, 13, 14, 18 — nine out of eighteen dynasties show this identical line for wanderer-arc elders.",
+    "There is NO discoverable content inventory. A completionist has no way to know: how many cards exist, which ones they have NOT yet seen, what flags/memories are required to unlock specific callbacks, which trait combinations gate which moments, or what the seat/repute thresholds for gated cards are. The game has no constellation view that tracks card discovery, no log of 'moments you've faced,' no signal that there is more to find. A completionist must reverse-engineer the source code to know what they are chasing — the game offers no internal hook for the collector mentality.",
+    "The heirloom system's completionist ceiling is very low: only 5 heirloom types exist (book, stray, fortune, teaching, hardname), and most dynasties surface 1-2 of them. The book heirloom appears in 12 of 18 dynasties, making it feel universal rather than collected. The hardname heirloom requires a specific combination (cut_a_corner + high means) and appears only in dynasties 13 and 14 — but the player cannot know this threshold or how close they are.",
+    "The reputation system has 9 possible tags (scholarly, kind, ruthless, industrious, generous, tainted, artistic, pious, reckless) but the 18 dynasties surface only 4 distinct mottos with substantial repetition: 'What we have, we share' appears in TWO separate dynasties (6 and 4), and 'kind'/'generous'/'scholarly' dominate. 'Artistic' and 'pious' appear once each (dynasties 15/18); 'ruthless' and 'reckless' appear once each. The less common reputations require very specific play patterns that are counterintuitive from in-game signals.",
+    "The game gives no feedback on dynasty progress toward rare content: no 'the house is three choices away from gaining a motto' signal, no 'you have never seen the plague era' indicator, no 'this vocation has cards you have not yet unlocked' hint. For a completionist this makes the long-tail feel like fog rather than a horizon."
+  ],
+  "improvements": [
+    {
+      "what": "Add a 'chronicle of moments' to the constellation view — a list of card IDs (or condensed prose titles) the current dynasty has seen, separated from a ghosted/blurred list of card archetypes not yet surfaced (without spoiling content, just marking 'unseen: 3 childhood moments, 2 vocation moments, 1 era moment').",
+      "why": "A completionist's primary frustration is not knowing what exists to chase. Even a coarse 'you have seen X of Y cards in this life' meter transforms the same content into an active hunt rather than passive witnessing. The constellation already tracks decisions — extending it to track card types seen/unseen is the single highest-leverage addition for this profile.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the weight diversity across vocations in the calling card (y_calling): currently 'wanderer' appears disproportionately often (present in ~50% of 38 surveyed lives). Consider adding a dynasty-level onceDyn gate that forces vocation variety across successive heirs — e.g. if the last two generations were wanderers, reduce wanderer weight for the next heir's y_calling draw.",
+      "why": "The single biggest staleness driver in the transcripts is wanderer monoculture. Almost every life with wanderer triggers cb_left_home, m_wanderer_return, e_wanderer_old, and 'Counted, at the end of the road' — creating an identical elder arc across half the dynasty. Breaking this repetition structurally, not just textually, would do more for freshness than adding new cards.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 new callback cards that reference dynasty-level rather than single-life memories: e.g. a card that fires when the current heir shares a reputation with a grandparent (ancestor echo), or a card that fires when a seat-7 house produces an heir who breaks the family motto deliberately (dynasty betrayal arc).",
+      "why": "The current cb_* cards are excellent but all reference single-life memories (what YOU did at age X). Dynasty-spanning callbacks — 'your grandmother was known for the same ruthlessness, and you've inherited the question' — would give completionists a reason to build specific house reputations as a precondition for new content, deepening the collecting layer.",
+      "impact": "high"
+    },
+    {
+      "what": "Add visible era tracking to the dynasty constellation: mark which eras the current house has lived through, and indicate that 6 distinct eras exist. No spoilers needed — just 'Eras witnessed: settled, war (gen 2), plenty (gen 5)' gives completionists a concrete checklist to pursue.",
+      "why": "Era cards (w_war_call, w_plague_tend, etc.) are some of the most interesting rare content in the game — plague especially is striking in the transcript. But without knowing 6 eras exist or that a given house has never seen 'turning' or 'hard,' a player has no reason to start a new dynasty hoping for a different macro-context.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 4-6 new once-per-dynasty secrets or heirloom types: currently there are only 5 heirloom tags and 1 secret type (strayed marriage). Ideas: an heirloom for a life that achieved seat 6+ (a title deed or family crest), a secret tied to a life that 'chose_self_over_house' during the reckoning, a new callback when a house produces 3 consecutive scholars that gates a 'library' heirloom and an exclusive elder card.",
+      "why": "Five heirlooms are too few for a completionist to chase across many dynasties. The book heirloom appears in 12 of 18 dynasties (67%), making it feel baseline rather than earned. More heirloom variety with more specific unlock conditions creates the 'one more dynasty to get that combination' pull the brief asks about.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the cb_unspoken -> m_old_flame pipeline more explicitly in-game (e.g. a faint 'the unspoken question has a shape it might one day take' line in the log), so completionists know this 3-card arc (y_love1 refused -> cb_unspoken -> m_old_flame or cb_unspoken in elder) exists and can pursue it intentionally.",
+      "why": "This is one of the game's best long arcs and it appeared only once across all 18 dynasties. Its invisibility means completionists who would love to chase it never know to look. A subtle in-log hint ('the question stayed with them') after the refusal card would double surfacing without breaking immersion.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has a real completionist spine — 135 cards, genuine gating by vocation/era/trait/seat/repute, and a callback system that rewards specific childhood choices decades later — but the absence of any discoverable content inventory, the wanderer monoculture that dominates half of all lives, and the verbatim repetition of key elder lines across 9 of 18 dynasties mean a completionist will feel the ceiling by dynasty 6-8 without ever knowing what rare content they are missing or how to find it."
+}

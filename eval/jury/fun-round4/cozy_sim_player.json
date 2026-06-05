@@ -1,0 +1,56 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The dynasty layer (motto crystallization, seat rising/falling, heirlooms passing down) creates genuine 'one more generation' pull — the Achterberg run to 'a house written into the histories' felt earned and absorbing.",
+    "Vocation arcs genuinely differentiate lives: a soldier dynasty reads structurally and tonally different from a scholar dynasty. Four distinct adult arcs is real structural variety, not paint.",
+    "Era cards (war, plague, fat years, turning age) colored entire dynasties differently — the war in D4 put a distinct shadow on Linnea Brandt's life that no other dynasty shared.",
+    "Callback cards landing felt like payoffs: the childhood book heirloom cascading through four Achterberg generations created a real sense of a family story accumulating.",
+    "Trait affinity in the draw engine means bookish children actually get the book card, guarded children get the dark/isolation cards — early years diverge by who the child already is, which is quietly pleasing.",
+    "Fate cards (fire, sudden loss, f_grace) arrive unannounced and feel genuinely surprising — the fire at age 82 landing on an already-aged character hit differently than the same fire at 28.",
+    "Solitary and childless life-shapes exist and have their own content (m_solitary, e_solitary, e_childless) — these aren't dead-ends, they're distinct arcs with real texture."
+  ],
+  "staleness": [
+    "The childhood fever (c_sick) appeared in 14 of 15 dynasties across the transcripts. It is `once` per life but not `onceDyn`, so it resets per heir. By dynasty 8 it is a recognized template beat, not a surprise.",
+    "The arc structure is readable by dynasty 6-7: childhood fever → calling → love → child → work tension → aging parent → legacy/reconcile → death. Individual card phrasings vary but the beat sequence is predictable enough to feel like watching the same template.",
+    "The 'return to old town' card (cb_left_home) appeared in 8 of 15 dynasties and fires for essentially every life that chose left_home. By mid-run it is an expected mid-adult checkpoint, not a surprising callback.",
+    "Ambient observation lines recur verbatim across nearby lives. 'Time has not yet managed to talk her out of being glad', 'She has kept, against most of the evidence, a stubborn appetite for the days', and several others appeared in multiple transcripts — these fire on common stat conditions, so they cluster.",
+    "Love-opening text variants (7 in the pool, rotated by generation index) begin cycling visibly by dynasty 5-6; the same scene-setting phrasing appears across different characters.",
+    "The calling card (y_calling) lands in virtually every life by engine design, and its three opening-text variants rotate predictably. By dynasty 7 a player knows the choice is coming and approximately when.",
+    "The inherited-book callback (cb_books_late) fires every generation in a dynasty with the book heirloom — beautiful once, mechanical by the third pass in the same dynasty.",
+    "Choices rarely produce structurally divergent outcomes: whether a life takes the soldier or scholar road, or stays/goes, the life-arc shape stays similar. The systems do not collide into emergent stories you didn't expect — the outcomes are always a gentle eulogy in a known arc."
+  ],
+  "improvements": [
+    {
+      "what": "Add `onceDyn: true` to c_sick (childhood fever) so it fires at most once across a dynasty, not once per life. Replace the per-heir gap with 1-2 alternative child illness/vulnerability cards that are also `once` per life but draw from a wider pool.",
+      "why": "c_sick is the single most-repeated beat in the transcripts. It appeared in 14 of 15 dynasties, always in the same slot. Burning it dynasty-wide and spreading into 2-3 variant cards would immediately break the most visible template.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 more callback trigger memories so `cb_left_home` is not the only mid-life callback that fires for most lives. For example: a callback on `first_wage` (old boss reappears), on `looked_away_child` (the lonely child from the yard surfaces in news), on `stayed_home` (the city you never went to). Spread the callback variety.",
+      "why": "Currently, the callback layer is dominated by cb_left_home (which fires whenever left_home is in memory, which is very common) and a handful of others. More diverse callbacks would make the mid-adult years feel less like the same set of closures.",
+      "impact": "high"
+    },
+    {
+      "what": "Give each era 1-2 'ambient texture' log lines that fire during the years of that era (not choices, just prose woven into the passing years) — something the observe() system already does for stats, but tied to the world-state rather than the person's stats.",
+      "why": "The era system currently gates a handful of once-per-life choice cards (w_war_call, w_plague_tend, etc.) but does not color the ordinary passing years. A war era should feel different in the ambient log lines even when no war-card is firing.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the textual pool for love-opening (y_love1) from 7 to 12+ variants, and tag each with a trait or stat condition so the right temperament gets the right framing — a guarded character should get a different opening than a warm one. Currently they rotate by generation index regardless of who the person is.",
+      "why": "Love scenes are among the most-repeated beats, and the existing 7 variants cycle visibly by dynasty 5. Trait-specific framings would both expand the pool and make each iteration feel more particular to that person.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce 2-3 'dynasty crisis' cards that fire only when a house has been at a given seat for 3+ generations without moving — a stagnation event that creates pressure either to sacrifice personally to lift the house, or accept the plateau. Analogous to x_reckoning but triggered by stasis rather than success.",
+      "why": "The dynasty layer currently has positive momentum (seat rises on wealth/reputation) and crisis-from-fall (reckoning). There is no mechanic for the quiet danger of a house that neither rises nor falls. A stagnation event would add longitudinal tension for players who are managing a dynasty over many lives.",
+      "impact": "med"
+    },
+    {
+      "what": "Add `onceDyn: true` to the y_calling card's three prompt-text variants, so each text is only used once per dynasty. Currently rotI(p,3) rotates by generation, so generation 1 and generation 4 of the same dynasty see the same prompt text.",
+      "why": "Small fix, but the calling prompt is one of the most-repeated prompt texts in the transcripts — it fires in every life. Even a dynasty-level uniqueness constraint on the three variants would meaningfully vary the surface texture.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life is genuinely warm and the dynasty layer gives it real purpose, but by dynasty 7-8 the childhood fever, the calling, the love intro, and the return-to-old-town callback have settled into a readable template that the writing quality can no longer fully disguise — cozy, yes, but not reliably fresh."
+}

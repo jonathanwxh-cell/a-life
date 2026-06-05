@@ -1,0 +1,54 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system genuinely works: cb_books_late, cb_outcast_return, cb_strayed, and cb_left_home land with real emotional weight when they arrive, delivering the 'my past came back' payoff this genre promises. These are the game's best moments.",
+    "Vocation x era intersections (vx_scholar_turning, vx_soldier_war, vx_maker_plenty) produce lives that actually feel structurally different from one another — a soldier born into a war era plays a meaningfully different shape than a wanderer born into a plague year.",
+    "The dynasty layer has genuine teeth: heirlooms create real callbacks (the inherited book recurs across multiple generations of the Renner and Quint lines with different meaning each time), the motto crystallization is a satisfying milestone, and the seat/reputation mechanics make deliberate long-arc play legible.",
+    "Trait affinity in card weighting (bookish child leans to c_book, restless to c_steal/c_move) is a quietly clever systemic touch that makes early childhood feel less random without announcing itself.",
+    "The fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) are a real structural improvement — they remove the implicit 'I can optimize my way through this life' illusion and restore mortality to the proceedings.",
+    "Prose variation at the sentence level is genuinely impressive. The rotN/freshPick dedup logic means the exact same event rarely reads word-for-word identically across two consecutive dynasties."
+  ],
+  "staleness": [
+    "The love-and-marriage arc is the single most repeated shape in the transcripts. Even with the engine fix that was meant to spread love across ages, 28 of 38 lives in the packet have the same skeleton: someone appears, the player clicks 'Meet them halfway,' years pass, 'Ask. Build a life.' is chosen. The prose variations on the marriage lines are polished, but they're decorating the same structural beat. A player who has done this six times in a row will feel the template long before Dynasty 12.",
+    "The 'cb_the_cost / near the end, one old decision keeps returning' card fires in almost every elder life in the packet — Adaline (Dynasty 1, age 70), Lazlo (Dynasty 3, age 66), Idris Sereno (Dynasty 2, age 71), Carys Marlowe (age 71), Ambrose Marlowe (age 56), Vesna Thorne (age 79), Caleb Voss (age 74), Mateo Ashby (age 83). Oncality and cooldown should be protecting against this, but eight appearances out of ~38 lives is far too frequent for what is meant to be a resonant elder payoff. It has become wallpaper.",
+    "The scholar arc specifically calculates to the same sequence in dynasties 2, 3, 4, and 9: chose_study at youth (lines like 'the long bet on her own head') -> cb_study_pays in adult ('the hungry years of study, begun at X, at last came good') -> m_scholar_legacy in midlife ('give it all away / guard it'). Noor Sereno, Mateo Halloran, Idris Halloran, Tomas Renner, Yara Marlowe, Yara Renner all walk this exact three-beat scholar corridor. The word 'corridor' is correct — there is very little room for a scholar's life to be surprised.",
+    "The 'a_work' promotion card is structurally identical every time it fires ('the home gets the leftovers of X') and it appears as a mid-life filler in Dynasty 1, 2, 3, and 12 without any callback or consequence — it changes means and a bond number but leaves no lasting memory in the log and fires no downstream card. It is pure padding.",
+    "Eight of the eighteen dynasties are one-generation lines that end with no heir. While solitary-and-childless is explicitly a supported life-shape, in practice these feel like incomplete runs rather than thematically complete arcs — the dynasty layer (mottos, heirlooms, seat trajectories) barely activates, and the 'one more dynasty' pull is absent because there is nothing to carry forward. The game claims this is a real shape but the content doesn't fill it as richly as the generational arc.",
+    "The era system is promising in concept but thin in execution for the settled, turning, and hard eras. 'Settled' years produce no unique cards at all — it is simply the absence of the other eras' cards. The 'hard' era gates w_hard_winter once and has no other unique content. Two of the three 'interesting' eras (war, plague) gate genuinely distinct cards; the other four mostly colour the opening line and nothing else. By dynasty 8 a player has seen 'These are fat years — trade good, the granaries full' as the opening line four times.",
+    "The 'y_drink' reckless-season card and 'y_dare' card both flag P.flags.peril and remember('lived_reckless'), and both exist in roughly the same age window. They are structurally indistinguishable — same mechanical effect, overlapping age bands, no downstream differentiation between them. The cb_reckless callback fires on both. The player can't tell, in the elder callback, which reckless choice mattered."
+  ],
+  "improvements": [
+    {
+      "what": "Break the love-and-marriage template into at least three structurally distinct arc types: the classic trajectory (youth love → adult marriage), the deliberately-chosen-single arc (triggering m_solitary and a_chosen_family as a proper narrative spine, not a fallback), and a late-love arc that includes unique adult beats unavailable to the early-lovers. The current code has the pieces (m_solitary, a_chosen_family, e_solitary, e_childless) but they are positioned as consolation prizes for when the main arc fails, rather than designed-in alternatives with their own satisfying beats.",
+      "why": "The love-and-marriage template is the single most repeated shape. Structural diversity here would do more for freshness than fifty new cards in other life stages.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate 'cb_the_cost' (the 'one old decision keeps returning' elder card) with a stricter `onceDyn: true` flag and ensure it references a *specific* named earlier choice in its prose — not a generic 'one old decision' but the actual moment the player flagged with chose_self / chose_others / chose_loyalty. The card text should name what was decided and at what age, making it a genuine callback rather than a generic philosophical musing.",
+      "why": "It fires too often and reads generically. Eight appearances across 38 lives signals the cooldown is not protecting it. As a near-death card it should feel singular, not routine.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 scholar arc divergence points that break the corridor: a rival scholar who forces a comparison (not just a_rival's generic framing), a moment where the scholar's expertise is *wrong* (belief overturned by evidence), and a late-life card where the scholarly reputation opens a door unavailable to other vocations that isn't just r_scholar_door. Currently the scholar path has one adult cluster, one midlife moment, and one elder moment — they fire in the same order every time.",
+      "why": "Scholar is the most-chosen vocation in the transcripts and the most template-like. Maker and wanderer have more branch points; scholar deserves the same.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the settled era actual unique cards — at minimum one child-era event unique to 'settled' (perhaps a surplus-years prosperity beat with its own downstream callback) and one adult card that only fires when the era is settled and another when it has recently changed FROM settled. 'Settled' currently means 'nothing special happens,' which makes a player in settled eras feel they got the boring roll.",
+      "why": "Four of six eras have at least one gated card; settled and hard are thin. The era system is one of the game's best structural ideas and its weakest eras undermine it.",
+      "impact": "med"
+    },
+    {
+      "what": "Differentiate y_drink and y_dare mechanically. Give each a distinct remember() tag (e.g. 'reckless_youth' vs 'reckless_dare') and write a separate callback for each: the drunk-season callback should appear in adult as a health/relationship consequence, the dare callback in midlife when the player's own child does something dangerous. Currently both feed the same cb_reckless, making the elder callback feel disconnected from which reckless thing actually happened.",
+      "why": "Mechanically identical cards with different prose names waste the callback system's potential. The point of callbacks is specificity — 'remember the dare?' should feel different from 'remember the reckless season?'",
+      "impact": "med"
+    },
+    {
+      "what": "The eight one-generation dynasties that end with no heir need 2-3 unique elder cards exclusively available to founding-only runs: a card that lets the player explicitly name what this life 'started' (even if no one continues it), a card where the player meets someone else's heir and reflects on the line they didn't start, and a final eulogy beat that closes the single-life run as a complete arc rather than a truncated one. Currently the 'line ends here' death screen reads as failure.",
+      "why": "The game claims solitary lives are a real shape, but the content doesn't honor that claim. A player who built a rich single life and died without heirs gets less narrative closure than one who had three children.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine craft and the dynasty layer is a meaningful structural achievement, but by dynasty 5-6 the scholar corridor, the repeated elder cost-reckoning card, and the love-and-marriage template make each new life feel less like a fresh story and more like a theme-and-variations on two or three underlying shapes — polished prose cannot fully disguise that the structures underneath are narrower than they appear."
+}

@@ -1,0 +1,56 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier / scholar / maker / wanderer) provides genuine structural divergence — a soldier's life with the midlife ghost card and the deathbed question about what to tell the young is a meaningfully different shape from a scholar's arc of 'teach cheap / guard the knowing'. This is real depth, not paint.",
+    "Era cards (war, plague, plenty, turning) genuinely shift which moments can land and create dynasties that feel historically textured — a plague-born founder who dodged the sickness reads differently from one born into fat years who rode the boom.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_study_pays, cb_lookaway) are the game's single strongest feature: they close arcs across 20-40 years in ways that feel earned. When cb_outcast_return fires after cb_kind_to_outcast, it is genuinely moving.",
+    "The dynasty layer (motto crystallization, seat climbing, heirlooms, reputation accumulation, the reckoning card) gives a 'one more dynasty' pull that is structurally sound — watching House Achterberg reach 'a house written into the histories' over 5 generations is satisfying.",
+    "Competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) avoid the binary 'virtue vs. vice' template and produce genuine ambivalence — the better dilemmas in the game.",
+    "Trait-affinity weighting means a 'bookish' child genuinely leans toward c_book and c_wonder — this is subtle but real: inherited nature does bend a life's early shape."
+  ],
+  "staleness": [
+    "The childhood fever card (c_sick) appears in 14 of the 15 dynasties in the transcript — effectively every life begins with a fever. 'The fever passed; what stayed was the shape of a hand on a forehead, kept for decades' appears verbatim across dynasties 2, 3, 6, 10. A player who runs more than four or five dynasties will notice this is not variety but a fixed opening.",
+    "'Kept the door and the table open to whoever turned up, fed more people than he could afford to, and was the richer in every way but the one' appears as identical text in six separate lives across the transcript (Dynasties 4, 6, 7, 8, 10, 15). The freshPick/rotI logic is not rotating this line across a long session.",
+    "The fire event (apparent from source as a late-game crisis) appears in six of fifteen dynasties — 40% hit rate against what should feel like a rare calamity. By dynasty 8 the player recognises the event immediately on prompt.",
+    "The cb_left_home callback fires in a large majority of lives (Dynasties 3, 4, 6, 7, 8, 9, 10, 11, 12, 14, 15 all contain it or the return beat). The three variant lines for going back wear thin fast. By dynasty 5, 'Went back to the place she left at X, stood in it, and felt the strange double size of an old home' is a cliche the player now expects.",
+    "Scholar lives overwhelmingly converge on the same epitaph cluster: 'Gave away everything she knew, and so kept it' or 'Taught what she knew, and so outlived the knowing of it.' Dynasties 1 (Anouk), 7 (Roman), 9 (Sabine), 11 (Lazlo), and 14 (Linnea) all land the same epitaph or a near-identical variant. With four vocations and nine distinct epitaph clusters, collisions are too frequent.",
+    "The 'book too hard for a child's hands' heirloom passes to heirs as an inherited memory, which means cb_books_late becomes available every generation in a scholarly house. The callback fires in Dynasties 1, 7, 9, 10, 15 — the same poignant beat repeated to the point of template. The inherited-flag guard prevents reputation abuse but not emotional repeat.",
+    "The structural macro of each life remains largely fixed: child cards (2-4) → calling fork (~14-22) → love card → marriage card → child card → one midlife crisis → elder cards → death. The beats shift in texture but not in skeleton. A fifth-dynasty player can predict the shape of the next life before it begins.",
+    "Adult and midlife bands are the thinnest. The 'promotion dilemma' (a_work) fires repeatedly with the same binary and the same two-line rotation — by the third time a player sees 'Climbed again, and the family learned, again, to fit around the work' they know this is the same card re-weighted.",
+    "The once-per-dynasty guard on some cards (onceDyn) is a good design instinct, but the high-weight core cards (love, calling, child, marry) are NOT once-per-dynasty, so the domestic arc replicates identically across generations within the same house. An 8-generation Achterberg run will include 8 love cards, 8 calling forks, and approximately 8 marriages — all using the same 7-variant text pool."
+  ],
+  "improvements": [
+    {
+      "what": "Give c_sick an 'onceDyn' flag (or at minimum a very heavy weight penalty after first fire this dynasty) and add 2-3 alternative childhood openers with equivalent weight so the game does not always begin with a fever.",
+      "why": "The fever is the single most-repeated opening beat in the transcript. Fourteen of fifteen dynasties begin with it. For a genre that depends on 'I've never seen this before,' a universal opener is fatal to freshness.",
+      "impact": "high"
+    },
+    {
+      "what": "Audit and double the freshPick variant pools for the 8-10 most-used logLine strings — specifically: 'the door and the table open,' 'the shape of a hand on a forehead,' 'the strange double size of an old home,' and the cb_left_home trio. The current pools of 3-5 variants exhaust within a single long session.",
+      "why": "The RECENT_LINES guard in epitaphFor() shows the developer knows verbatim repetition is the #1 staleness signal. Apply the same mechanism to the high-frequency logLine strings in the main card pool — currently unguarded.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the scholar epitaph cluster onceDyn (or at minimum suppress a specific epitaph variant if it appeared in the last two generations of the same house). The 'gave away everything she knew, and so kept it' epitaph fires for scholar lives regardless of which scholar choices were actually made.",
+      "why": "Five scholar lives in the transcript share the same or a near-identical epitaph. This collapses the sense of a distinct person into a repeating template. Distinct choice-paths (guard vs. give, teach cheap vs. name your worth) should produce meaningfully different closings.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the fire event's per-life probability by ~60% or gate it on specific stat/vocation conditions rather than late-age universal eligibility. Add 2-3 alternative late crisis events (a debt called in, a reputation blow, a health collapse that isn't the midlife-health card) so not all late-life disruption looks like the same event.",
+      "why": "A 40% hit rate in the transcript reduces 'a fire' from a memorable calamity to a predictable event the player clockwatches for after age 65.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 4-6 structurally divergent life shapes beyond the domestic arc — a life that never forms a romantic relationship and gets a distinct mid-adult card pool; a life that fails its calling badly (the scholar who never earns the pay-off, the soldier who breaks); a life of genuine poverty that gates different midlife events. Currently 'no love, no children' is content-bearing per the code comments but the transcripts show it is rare and lives that hit it still follow the same mid-adult shape.",
+      "why": "The macro skeleton (child → calling → love → family → midlife → elder) is the core staleness driver. Adding 2-3 genuinely alternate skeletons would make dynasty 10 feel structurally possible to have never seen.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 1-2 cross-generational secrets or unsolved threads that persist beyond heirlooms — a founding crime that limits which reputation-gains are possible until it is resolved, or a lineage debt that makes certain adult doors cost more means. Currently the secret system (h.secret) is light: one binary (kept/confessed) and it dissolves. Make it gate at least one additional unique card cluster.",
+      "why": "The dynasty layer's promise ('a house that accrues across the generations') is most compelling when the past constrains or unlocks the present in non-cosmetic ways. The 'tainted' reputation and the cb_inherited_secret exist but resolve too easily and gate too few distinct moments.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely lovely and has earned its 'polished' label, but as a repeatable game it has a staleness ceiling around dynasty 5-6: the fever opening, the domestic arc skeleton, the scholar epitaph cluster, and a handful of verbatim lines that escape the dedup guards mean a player going deep will stop discovering and start recognising — which is the opposite of what keeps this genre alive."
+}

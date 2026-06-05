@@ -1,0 +1,49 @@
+{
+  "profile": "long_session",
+  "score": 6.5,
+  "fun_highlights": [
+    "Vocation arcs (soldier/scholar/maker/wanderer) produce genuinely structurally different adult bands — a soldier's life reads differently from a scholar's at the card level, not just prose-level.",
+    "Callback chains are the best-feeling moments: 'kind to outcast' returning decades later, the inherited book re-read in midlife, the unspoken love resurfacing — these feel like earned payoffs and create the strongest 'I did not expect this' surprise.",
+    "The era system (war/plague/hard/plenty/turning) tilts which rare moments surface and prevents a dynasty from feeling timeless — war-era and plague-era lives open with genuinely different pressure.",
+    "Dynasty accumulation (motto, heirlooms, seat, repute, the ancestor echo) gives a session-level arc and a legible 'what am I building toward' goal.",
+    "Prose variant depth is high — freshPick and rotI pools suppress verbatim repetition within a session effectively for single lines; the writing itself stays pleasurable for many hours."
+  ],
+  "staleness": [
+    "Love-to-marriage-to-child is the same structural beat in nearly every life: meet at y_love1 or a_meet_late, a_marry offered, a_child offered. The prose variants rotate but the sequence is reliable enough that by dynasty 6-8 you are waiting for it rather than discovering it.",
+    "'Red and furious and entirely unimpressed' appears visibly multiple times across the 15-dynasty transcript despite a per-session burn flag (S._usedFurious). In practice, across 26+ lives the line recurs enough to land as a joke.",
+    "The elder band is structurally very similar in every long-lived character: e_body, then some of e_garden/e_window/e_last_walk, then e_legacy or e_bequest, then e_peace or e_reconcile. The ordering varies but the types of beats are reliably the same regardless of who the person was.",
+    "Observe lines ('The stairs have started to ask a question of them', 'The weather has begun living in his joints') repeat visibly across consecutive lives in the transcript — they fire once-per-life but not once-per-dynasty, so a reader sees them in every dynasty.",
+    "s_from_nothing fires in nearly every founding life because all 15 dynasties start at seat 0-1. What should be a conditional, contingent card reads as a universal beat for founders.",
+    "The ruthless/tainted/scholarly reputation paths each have only 2-4 reputation-gated cards, which is not enough to make 'building a ruthless house' feel like a substantively different experience — the gates feel thin rather than genuinely forking.",
+    "Mid-life band outside vocation is thin: without a vocation-specific card, adult years frequently draw from the same short rotation of a_work, u_windfall/u_loss, a_small_lie, a_neighbour — repeating within a single life on their cooldowns.",
+    "There is no moment where a choice closes off an entire narrative sub-tree or opens a dramatically new branch. The soldier and scholar both rejoin the same elder pool. Decisions shape probabilities and callback eligibility, but never gate the player out of a structurally different life shape."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 vocation-specific elder cards per calling so the elder band diverges by who the person actually was, not only what phrases are used.",
+      "why": "Currently, a soldier and a scholar share the same e_body/e_garden/e_legacy/e_peace pool. The vocation-arc investment (soldier_blooded, scholar_legacy, maker_masterwork) should generate distinct closing beats — a soldier who never talked about it dies differently from one who did.",
+      "impact": "high"
+    },
+    {
+      "what": "Make 4-6 key observe lines onceDyn (fire once per dynasty) rather than once-per-life, so they cannot appear in consecutive dynasties read in a session.",
+      "why": "'The stairs have started to ask a question of them' is the most visible repeat in the transcript — it lands in dynasties 1, 4, 6, 9, 12. It is a good line that is being burned by overexposure. Once-per-dynasty would preserve its impact.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a second child-birth line pool that activates after the 'red and furious' flag is set at the dynasty level, rather than only the session level.",
+      "why": "S._usedFurious is a session-level flag that correctly prevents repetition within one play session, but the 15-dynasty transcript shows the line appearing across dynasties 1, 2, 3, 4, 6, 8, 9, 12 — suggesting the flag is not persisted across dynasty resets. Move the burn to S.seenDyn or ensure the pool without 'red and furious' is wide enough to cover a session.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the reputation system 2-3 more gated cards per top reputation (ruthless, scholarly, artistic, generous) so that a player who deliberately builds toward a house character sees 5-7 unique moments rather than 2-4.",
+      "why": "The reputation gates (r_scholar_door, r_family_shadow, r_hard_name, r_old_shame, r_name_cost) are the most legible dynasty-level goal, but they are too thin to make 'I want to build a scholarly house' feel like a distinct playstyle. More payoff cards would make the long-game goal worth pursuing across many dynasties.",
+      "impact": "high"
+    },
+    {
+      "what": "Add one 'love not taken' narrative branch — a life shape where no romantic relationship forms and a specific cluster of alternative cards (chosen solitude, close platonic friendship, late-life regret or peace with aloneness) replace the love/marriage/child sequence structurally.",
+      "why": "The current solitary life path is the absence of the love arc rather than a distinct presence. A genuine 'chosen solitude' shape with its own arc would make opting away from y_love1 feel like choosing a different life, not just missing the default.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is a genuinely well-crafted literary sim that stays fresh and surprising for roughly 5-7 dynasties, then settles into a comfortable template: the love-marriage-child sequence arrives reliably, the elder band runs the same types of beats regardless of who the person was, and key observe lines recur visibly — below the 8 bar for sustained long-session play."
+}

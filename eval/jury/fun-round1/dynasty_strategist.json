@@ -1,0 +1,55 @@
+{
+  "profile": "dynasty_strategist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The seat ladder (8 tiers, 0-7) gives a genuine long-arc goal: climb toward 'a house written into the histories' across dynasties. The seat-7 condition requiring repPeak>=3.5 AND peakMeans>=76 AND a seat-6 base means it genuinely has to be earned and re-earned — that precariousness is the right design.",
+    "The bequest (mind/means/heart/free) is the clearest cross-generational lever in the game. Choosing 'mind' over 'means' when the house is struggling, or 'free' when you want to break a reckoning cycle, feels like a real decision with downstream consequences visible at the heir screen.",
+    "Reputation system with distinct mottos (9 options, each requiring a consistent pattern of play) gives a real steering goal. A ruthless house gets seat-gated r_hard_name and r_name_cost cards that a kind house never sees — this is the kind of differentiation that makes dynasty play feel strategic rather than cosmetic.",
+    "Era rotation (war/plague/plenty/hard/turning/settled) means generation 8 can be structurally different from generation 2: a war-era soldier's arc (w_war_call + a_soldier_service + m_soldier_ghost + e_soldier_old) is four cards you simply cannot see in settled times.",
+    "The reckoning card (x_reckoning, seat>=3) creating real downward pressure on houses above 'comfortable household' is a good friction point — it gives established houses something to fear and plan around (build means buffer vs. let the name take the hit).",
+    "Callback cards that reach back 20-40 years (cb_books_late, cb_outcast_return, cb_strayed, cb_inherited_secret) are the best moments in the transcripts — they create the feeling of a coherent life arc rather than a sequence of disconnected choices.",
+    "The inherited secret mechanic (a strayed ancestor leaving a dormant cb_inherited_secret for a descendant to expose or bury) is exactly the kind of multi-generational cause-and-effect that makes dynasty play feel alive."
+  ],
+  "staleness": [
+    "The vocation draw is near-mandatory (y_calling forced if the window is closing) but only creates four paths; across 16 dynasties in the transcripts, soldier and maker dominate because the soldier arc has the deepest card cluster (a_soldier_service, m_soldier_ghost, e_soldier_old). By dynasty 5, I had seen the full soldier arc twice and the scholar arc twice. The wanderer and maker arcs are thinner (3 and 4 cards respectively vs. soldier's 3 + era cards). A player steering a dynasty notices the vocation arcs run out of content faster than the dynasty itself.",
+    "Love, marriage, and child are structurally identical in almost every life because the engine forces them near the window's edge: 'found love later than expected, was almost embarrassed by the size of it' appears verbatim or near-verbatim in roughly 70% of the 38 lives in the transcripts. The late-love framing is beautiful prose but it becomes the default template rather than a character note. A dynasty strategist has NO lever to influence the marriage arc — there is no 'arrange a match above our standing' or 'marry strategically for the house' even when seat>=4.",
+    "The seat lift mechanic is only loosely connected to in-life choices. A life's seat movement depends mainly on peakMeans and the reckoning card — but the choices that build means (a_work, a_fork_career, m_invest_name, w_plenty_ride) compete with each other and there is no real planning surface. m_invest_name (62% chance of +1 seat, costs 17 means) is the most obvious lever but appears only once per life at cool:14 and only at seat 2-5. There is no 'multi-turn plan' possible — just one tactical spend per life at best.",
+    "Across the 12 dynasties and 38 lives, the cb_the_cost card ('near the end, one old decision keeps returning') fires in 15 of the 38 lives with almost identical framing. Similarly, 'decided it was right — and mostly believed it' appears as the outcome in at least 10 lives. These elder reflection cards become recognizable furniture rather than meaningful moments by dynasty 4.",
+    "The reputation system has a subtle flattening problem visible in the transcripts: 9 of 12 dynasties end with motto 'We burn bright / We take in / We leave something beautiful / What the mind holds / In time, all is weighed' — three mottos ('kind', 'artistic/beautiful', 'reckless') account for the majority of runs. The 'ruthless' path that generates the r_hard_name, r_old_shame, and r_name_cost triangle is the most strategically interesting but requires consistently choosing the cold option every life, which the random draw often interrupts. A dynasty strategist wants to be able to hold a ruthless line but the system's soft stat checks (heart<40, means>82) are hard to sustain intentionally.",
+    "There is no visible feedback on whether a life is 'building toward' a goal versus 'drifting'. The houseCharacter() prose is excellent at stating where the reputation currently sits, but it appears only at heir-screen transition, not during play. During a life I cannot see whether this life's choices are helping or hurting the motto goal. The dynasty strategist's core frustration: I commit to a scholarly life at y_calling but then the scholar arc delivers only 2-3 extra cards that push reputation, and I cannot tell from the ambient log whether it's working.",
+    "The seat-7 pinnacle ('a house written into the histories') is the only explicit dynasty-scale achievement goal, but it requires seat-6 + repPeak>=3.5 + peakMeans>=76 — meaning roughly 6-8 generations of sustained performance with no interruption. In 12 dynasties of play only one reaches it (House Marlowe, dynasty 12, gen 5). The climb is satisfying but there is no secondary goal structure: no reason to keep playing *after* reaching seat-7 (since it collapses to seat-6 immediately and you restart the climb), and no dynasty-level achievement short of seat-7 to celebrate at dynasty end."
+  ],
+  "improvements": [
+    {
+      "what": "Add 1-2 cards per vocation that can appear in the SECOND generation (not just the one who chose it) — e.g. a child inheriting a soldier parent's weapon, a scholar parent's unfinished question. This extends vocation depth across generations instead of exhausting it in one.",
+      "why": "Currently each vocation arc is owned entirely by the life that chose it. By the next life, the calling is gone. A dynasty strategist choosing 'soldier for this generation' should see it echo forward — both as content and as a house characteristic that shapes how outsiders react.",
+      "impact": "high"
+    },
+    {
+      "what": "Add at least one seat-gated marriage/alliance card (seat>=4: 'A proposal arrives that would join two great names. The alliance would strengthen both houses — but it is also a bargain, not a love.') that the player can pursue as a strategic house move rather than a personal romantic outcome.",
+      "why": "In every transcript love arrives as personal, not strategic — a clear gap for the dynasty-strategist profile who wants to use succession as a tool. Even one card that lets the player trade romance for house advantage would make the succession layer feel like a genuine game.",
+      "impact": "high"
+    },
+    {
+      "what": "Add an in-life reputation readout — a one-sentence ambient log line every 15-20 years at midlife that names the current house trend ('The family's name for open-handedness is growing' or 'The house's old reputation for learning has begun to fade'). This should NOT appear as a card choice, only as ambient prose.",
+      "why": "A dynasty strategist cannot currently plan reputation without checking the star-map. The information exists in houseCharacter() but only appears at heir-transition. Without mid-life feedback, the steering layer is invisible during play.",
+      "impact": "med"
+    },
+    {
+      "what": "Thin the 'late love, was almost embarrassed by the size of it' framing variant from appearing as the default in 70%+ of lives. The seven text variants in y_love1 and a_meet_late should rotate more aggressively, and the a_meet_late card (w:5, the heaviest weight in its tier) should have its weight reduced to match y_love1 (w:4). The effect: some lives will genuinely find love young, others in midlife, others never — rather than most finding it 'later than expected'.",
+      "why": "The transcripts show late love becoming the template: 'later than anyone plans for' appears in 26 of 38 lives. This is a prose rotation issue compounded by a_meet_late's high weight crowding out y_love1.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a dynasty-end summary card or screen that shows the house's ledger across all generations: how many lives, the peak seat reached, the motto (if earned), and a two-sentence prose epitaph for the house as a whole ('House Vasquez: five lives, soldiers and scholars, known for burning bright — a house that never stayed still'). This fires at line-end before beginNewLine().",
+      "why": "Currently the line ends with a brief 'House X ends here — N generations' sentence inside the eulogy. A dynasty strategist wants to feel the whole arc culminate. A house-level epitaph would give the 'one more dynasty' pull — wanting to see what the next house's character becomes.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a second dynasty-scale achievement beyond seat-7: 'a house of letters' (3+ scholarly-motto lives in a row) or 'the hard name endures' (ruthless motto maintained 3+ generations without breaking). These would surface as rare log lines when achieved, giving a secondary goal structure for players who have already hit seat-7.",
+      "why": "After reaching seat-7 there is no reason to keep playing the dynasty — it immediately lapses. Secondary achievements give the dynasty-strategist a reason to try specific play styles across multiple runs.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life has a real dynasty layer — seat, reputation, bequest, era, heirlooms all compound meaningfully — but the strategy surface is too thin to sustain dedicated steering play: most choices that matter to the house happen only once per life, the vocation arcs exhaust their content in a single generation, and mid-life feedback on whether your steering is working is absent, leaving the dynasty strategist watching a beautiful system they can barely touch."
+}

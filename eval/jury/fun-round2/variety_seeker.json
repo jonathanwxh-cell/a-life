@@ -1,0 +1,54 @@
+{
+  "profile": "variety_seeker",
+  "score": 7.2,
+  "fun_highlights": [
+    "The vocation system genuinely creates structural divergence: a soldier's life produces a cluster (a_soldier_service, m_soldier_ghost, e_soldier_old, vx_soldier_war) that a wanderer, maker, or scholar never sees — the adult band truly fragments by calling, not just by prose flavor.",
+    "Era injection (war, plague, plenty, hard, turning) adds a macro-layer that shifts which rare events can fire; Dynasty 9's Otto living through a war era while his maker father lived through settled years is a meaningfully different world to inhabit.",
+    "The callback system is the game's best structural trick: a childhood kindness or cowardice resurfaces 20-40 years later as a full narrative moment (cb_outcast_return, cb_lookaway, cb_strayed, cb_corner), so past choices genuinely reshape later life-shape. When these land, they create emergent stories no template could predict.",
+    "Solitary and childless life-shapes now have their own card cluster (m_solitary, a_chosen_family, e_solitary, e_childless), preventing the 'failed to marry, therefore empty life' dead-end that would otherwise punish a large fraction of runs.",
+    "The dynasty-level accumulation layer (seat, reputation, heirlooms, motto, inherited secret, the d_ancestor and d_motto_test cards) gives multi-generation play genuine stakes: a 'ruthless' house meets r_hard_name, r_name_cost, and r_old_shame that a 'scholarly' house never sees.",
+    "Death before 40 happens with real menace (Henrik at 39, Ambrose at 36, Beatrix at 30), and the truncated lives read as genuinely different shapes — short blaze vs. long flame — which is variety of the most irreversible kind.",
+    "The prose variation pool is deep enough that within a single life the same 'type' of moment rarely phrases itself identically twice; rotI/freshPick discipline keeps the surface texture fresh even when the structure repeats."
+  ],
+  "staleness": [
+    "The late-love funnel is the game's most visible monoculture. In 18+ dynasties of transcripts, the absence-then-late-marriage arc (fall in love → don't marry → a_meet_late fires → marry after 50) is the modal adult sequence. Junia at 32, Anders at 57, Hale at 55, Vesna at 53, Caleb at 50, Niall at 56, Saoirse at 32, Ingrid at 57, Lucan at 37, Tamsin at 46, Annika (no marriage shown), Greta at 54 — nearly every founder or second-gen follows this late-settle shape. The system heavily penalizes early marriage (the a_marry card requires love to be a 'love' not yet 'spouse', but the vocation/wanderer pool delays commitment); the result is that almost no life reads as 'married young and built from there.'",
+    "The childhood band produces the same 4-5 moments in almost every life: fever (c_sick), stray OR book OR friend, sibling arrival, first grandparent death, first job — and in that approximate order. Reading transcripts 1 through 18, the childhood section feels like a checklist. The gates are age-not-situation-based, so the sequencing is nearly deterministic regardless of who the person is.",
+    "The elder band collapses toward the same trio of caps across almost every life: e_wanderer_old (count the doors / regret nothing), e_legacy ('that I was kind' wins disproportionately — said by Junia, Anders, Cassian, Lazlo, Otto Quint, and Pavel in the transcripts), and e_peace or e_body. Elder lives read as differently-named variants of the same closing chapter.",
+    "The 'cb_reckless' callback fires in nearly every life that took any risk (lived_reckless tags both y_drink and y_dare and a_soldier_service's glory path and t_frail's spend-freely option), producing the near-universal late-life beat of 'counsel a reckless young one' — seen verbatim or near-verbatim in Ottilie, Vesna, Lazlo, Caleb, Annika, and Tamsin's transcripts within this packet.",
+    "The wanderer vocation arc has an internal loop problem: the a_wanderer_settle card can fire repeatedly (cool:14, no once:true) with near-identical framing, and then m_wanderer_return and e_wanderer_old close every wanderer the same way. Wanderer lives therefore converge on a single shape: road → stay/leave → road again → regret or peace about roads. A scholar's or maker's life has distinctly different architecture; the wanderer's does not.",
+    "The 'cb_reckless' / e_wanderer_old elder-recap cards, and the universal 'what I want remembered' e_legacy, create a closing ritual that every life shares regardless of how it was lived — there is no such thing as a quietly anticlimactic end. Every elder passage asks the same three retrospective questions (regret the roads? what is your legacy? face the body?), which compresses structural diversity exactly when the player is most sensitive to repetition."
+  ],
+  "improvements": [
+    {
+      "what": "Add a 'young marriage' life-shape: a card that can fire at 20-28 if both love and vocation are settled early, with its own 30-year arc of consequences (midlife restlessness, early empty-nest, a different elder shape). Currently the system structurally punishes early commitment; the adult band should reward it with content only married-young characters reach.",
+      "why": "The late-love monoculture is the single most visible structural repetition in the transcripts. Every dynasty reads as 'found love late'; no dynasty reads as 'married young and weathered thirty years together.' That is a missing life-shape, not a choice distribution.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate e_legacy ('what I want remembered') behind a stat or memory threshold so not every character reaches it. Replace the always-fires elder close with three or four alternate elder caps: a 'quiet end with nothing resolved' path, a 'died mid-project, unfinished' path, and a 'outlived everyone who mattered' path — each producing a different last chapter shape.",
+      "why": "The elder band is the game's staleness pressure point. Every life ends with the same ritual questions. Structural variety at the end of a life would make earlier choices feel like they're pointing somewhere distinct rather than converging on the same retrospective.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the childhood band situational rather than purely age-based draw weights. A 'bookish' child should be dramatically more likely to draw c_book and dramatically less likely to draw c_animal; a 'warm' child should nearly always meet c_friend. Currently traits drift stats but don't reshape which childhood a character actually has.",
+      "why": "Childhood reads as a checklist across all 18 dynasties. Trait-weighted childhood draw logic would make a bookish child's early years read structurally different from a warm child's — which is the variety-seeker's core test.",
+      "impact": "high"
+    },
+    {
+      "what": "Add the 'once:true' flag to cb_reckless and raise its cond to require either a high-bond living relationship OR a specific memory tag — not just 'lived_reckless'. This prevents it from becoming the universal elder beat it currently is, and frees that slot for more individuated elder content.",
+      "why": "cb_reckless fires in Dynasty 2, 4, 5, 6, 7, 9, 10, 11, 13 of this packet. The 'counsel a reckless young one' beat has become the most common elder moment in the game, more common than any deliberate once-per-life elder card.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce a 'vocation x vocation' card cluster for children who inherit a different calling from their parent — e.g., a soldier-parent / scholar-child tension (3-4 cards about the parent's expectations vs. the child's direction). Currently the vocation gates content within a life but creates no inter-generational friction.",
+      "why": "Dynasties where the parent's vocation differs from the heir's feel no different from dynasties where they match. Cross-vocation generational conflict would be a structural source of variety that compounds across long runs.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 'no choice' fate cards to the midlife band (equivalent to f_fire and f_sudden_loss which exist but only fire in the full age range). A forced career disruption, a forced relocation, a forced public humiliation — events that happen to the character rather than being chosen — would break the pattern where every midlife moment is a virtue test.",
+      "why": "The adult and midlife bands are 100% choice-structured: every moment is a fork between two virtues. This is tonally consistent but structurally monotonous. Events that simply happen (and have only one response option, like f_fire) create a different texture of life and signal that the world acts on the character, not only through them.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has done genuine structural work — vocations, eras, callbacks, and solitary paths make it better than a template — but the late-love monoculture, the identical childhood checklist, and the collapsing elder ritual mean that by dynasty 5 a variety-seeker is reading variations on three or four recognizable life-shapes rather than discovering new ones."
+}

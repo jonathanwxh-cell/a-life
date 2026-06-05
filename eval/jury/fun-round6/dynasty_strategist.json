@@ -1,0 +1,49 @@
+{
+  "profile": "dynasty_strategist",
+  "score": 6.5,
+  "fun_highlights": [
+    "Callback cards are the game at its best: the lonely child who becomes a patron, the scholar's bet paying off decades later, the book re-read at midlife. These deliver genuine narrative surprise and closure within a single life.",
+    "The four-calling fork (soldier / scholar / maker / wanderer) plus era-gating creates structurally distinct adult arcs — a soldier born into a war year gets vx_soldier_war, a scholar in a turning age gets vx_scholar_turning. This is real content differentiation, not just text flavour.",
+    "The motto crystallization moment is genuinely satisfying: watching a reputation build across 3-4 generations toward words the family can live by is the dynasty layer working as intended.",
+    "Heirlooms carry meaning: 'the book too hard for a child's hands' reappearing at cb_books_late, read by the third or fourth heir who actually traces it to the ancestor who kept it, is the kind of cross-generational texture that makes the dynasty system worth building.",
+    "The bequest card (e_bequest) is a real lever — choosing 'everything I know' vs. 'every coin I can spare' vs. 'their own freedom' produces meaningfully different heir starting conditions, and the heir screen names the choice explicitly. As a dynasty player, this is the one moment I feel agency across the generation boundary.",
+    "The seat-gated and repute-gated cards (r_scholar_door, r_hard_name, s_patronage, s_great_burden) give genuine dynasty-tier payoffs — content that a low-seat house simply never sees.",
+    "Era variety is real: plague, war, hard years, plenty, and the turning age each produce distinct opening circumstances and gate distinct events. Dynasty 8 (Vane) born into 'turning' reads differently from Dynasty 9 (Bjornsen) born into 'hard years'."
+  ],
+  "staleness": [
+    "The reckoning (x_reckoning) — the one explicitly adversarial dynasty event — does not fire in any of the 15 dynasties in the transcript. Not once across 30+ individual lives, including several that reach seat 3-6. For a dynasty-strategist this is the moment: 'a debt called in, a name questioned.' Its absence means the downside risk of holding a great seat is never felt. The code requires seat>=3 and cool:16 and fires during ages 30-80; the likely cause is a cooldown-vs-lifespan mismatch or seats rarely staying above 3 long enough before the player's eligible age window. Either way, the player never faces the reckoning, which hollows the dynasty's tension.",
+    "The love-marry-child sequence is structurally monotonous. Across 15 dynasties, the dominant pattern is: love arrives late (30s-50s via a_meet_late), marriage follows, child arrives near the window's end or not at all. The code added spread mechanisms but the transcripts show it clustering. By dynasty 6 the player knows this beat is coming and it has stopped being discovery. A dynasty strategist wants to plan around heirs — the heir is mechanically important — but the when and whether feel out of their hands in a way that doesn't feel like meaningful uncertainty, just pattern.",
+    "Body-aging observation lines repeat across every late-life within a session. 'Some mornings the body answers the bell late,' 'The body keeps its own ledger now,' 'Mornings take longer to arrive in the body' — multiple variants of the same image land in nearly every life that passes 55, and across 15 dynasties they become a familiar texture rather than a fresh one. The freshPick() pool for aging observations is smaller than for other categories and it shows.",
+    "The y_calling card has only three prompt variants and four fixed options. By dynasty 4 the player knows: here comes the fork. It has stopped being a fork in a life and become a form to fill. The 'structural moment' that is supposed to differentiate adult arcs is itself one of the most predictable beats in the game.",
+    "The secret and tainted reputation track is nearly invisible in play. The cb_inherited_secret fires once in 15 dynasties, r_old_shame and r_family_shadow do not appear at all. A dynasty that deliberately pursues the 'tainted' reputation path — one of the nine available — gets almost nothing back from it in terms of distinctive content. The shadow track is the least developed of the reputation arcs.",
+    "Seat climbing is mechanically opaque and non-interactive for most of a life. m_invest_name (the deliberate lever) fires rarely in the transcripts; the seat mostly moves on peakMeans thresholds the player cannot directly see or control. A dynasty strategist wants to know: what can I do THIS generation to move the house? Outside the bequest and the invest-in-name card, the answer is largely 'play well and hope,' which dulls the strategic layer."
+  ],
+  "improvements": [
+    {
+      "what": "Fix the reckoning's firing rate for seat-3+ houses. Audit the cooldown-vs-lifespan arithmetic: with cool:16 and an eligible window of 30-80, a life that reaches seat 3 at gen 2 and lives 65 years should see it at least once. Consider dropping cool to 12, widening the eligible age window, or adding a guaranteed-fire trigger when a house has been at seat>=3 for two consecutive generations without facing it.",
+      "why": "The reckoning is the only card that applies real downside pressure to a high-standing house. Without it, the dynasty layer has no adversarial tension — you climb and you stay climbed, which removes the strategic interest of protecting what you've built.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the dynasty-strategist two or three more direct levers per generation: a 'commit to an alliance' card that boosts seat probability next gen but costs means this gen; a 'groom the heir' card that improves the bequest effects if taken before e_bequest; or a 'burn the bridges' ruthless-investment card distinct from m_invest_name. The point is predictable, plannable agency: I did X this generation TO SET UP Y next generation.",
+      "why": "Right now the only truly cross-generational player lever is e_bequest (mind/means/heart/free). More levers would make the dynasty feel steerable rather than witnessed.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand and differentiate the body-aging observation pool, or gate body lines behind vocation/trait/stat so they read distinctly per character. A frail scholar's late years should feel different from a soldier's. The current pool is smaller than other observation categories and the same images recur across every long life in a session.",
+      "why": "The ambient observations are the primary texture of years-without-cards. When they repeat across 10 consecutive lives they stop being texture and become wallpaper.",
+      "impact": "med"
+    },
+    {
+      "what": "Enrich the tainted/secret reputation track with 2-3 more repute-gated cards so a house that deliberately builds a 'we do not speak of everything' identity gets distinctive content. Currently r_old_shame and r_family_shadow exist but never appeared in 15 dynasties; add at least one guaranteed-fire 'shadow card' when a house has held the tainted reputation for 2+ generations.",
+      "why": "The tainted/secret path is one of nine available reputation arcs but has the thinnest content. A dynasty player who chose to cultivate it gets no payoff.",
+      "impact": "med"
+    },
+    {
+      "what": "Vary the y_calling prompt more radically by era and house-seat. A child born into a great house in a war era should face a meaningfully different version of the fork than a landless founder in settled times. The current three variants are structurally identical — same prose rhythm, same four options. Era-specific calling text (or at minimum, seat-specific framing for the high-seat variant) would make this inevitable beat feel fresh longer.",
+      "why": "The calling card is the most predictable moment in every life; it's also supposed to be the structural fork that makes lives different. It can carry more of that work.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "As a dynasty strategist the game offers a genuinely interesting skeleton — mottos, heirlooms, the bequest lever, seat-gated content — but the reckoning never fires, the direct levers are thin, and by dynasty 6 the life-template (late love, calling fork, body-aging observations) is familiar enough that I'm watching the house accrue standing rather than steering it."
+}

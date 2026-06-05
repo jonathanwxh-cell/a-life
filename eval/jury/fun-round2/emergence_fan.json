@@ -1,0 +1,55 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.5,
+  "fun_highlights": [
+    "Callback cards are the single best emergent moment the game has: Lazlo Sorrelle (Dynasty 7) looking away from the yard-child at 12, then being ambushed by cb_lookaway at 48 — 'Made up, to a stranger, for a child he had ignored 36 years before' — is a genuine collision between a choice, time, and consequence that no designer hand-scripted for that specific person.",
+    "The vocation × era intersection cards (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) are structurally correct — they exist only at the cross-product of two independent systems. A soldier born in a war year gets a qualitatively different life-shape than a scholar in the same era. Dynasty 13, Tamsin Voss (shrewd + hard-name heirloom, born into lean years) sharing the stores in a hard winter then getting the kindness returned at 41 is exactly the system-collision I came here for.",
+    "The heirloom × callback pipeline actually fires. The 'book too hard for a child's hands' threading through six generations of House Aldecott — each generation either re-reading it or passing it on, with the cb_books_late closing the circle — produces the feeling of a true dynasty artifact rather than a static label.",
+    "Reputation + seat gates do produce novel content unavailable to low-standing houses: r_family_shadow, r_hard_name, s_patronage, s_great_burden, and the motto-test card (d_motto_test) that asks 'do you actually believe the family words?' These are moments a player in dynasty 3 has never seen in dynasties 1–2.",
+    "The era system genuinely tilts the texture of a life. Otto Quint (Dynasty 9, gen 2–3) living through a war-era as a maker — losing someone to the war at 62, getting w_war_loss — when his vocation never put him on the battlefield produces a civilian-grief note that is structurally different from the soldier arcs in the same era.",
+    "Solitary and childless life-shapes now have dedicated content (m_solitary, a_chosen_family, e_solitary, e_childless). Dynasty 10's Tamsin Aldecott dying at 79 with no heir but a 'fortune, and the fear of losing it' heirloom, and the line ending with a house-summary, lands as a real felt loss not a mechanical dead-end."
+  ],
+  "staleness": [
+    "The 'wanderer road' is by far the most chosen vocation in the transcripts — 9 of the 18 founders or heirs pick 'The road — go where the work is.' The vocation system's intended structural divergence (soldier/scholar/maker/wanderer each gating a distinct adult cluster) collapses in practice because the wanderer arc is the least penalized and its cards (a_wanderer_settle, m_wanderer_return) apply to nearly anyone who has held 'left_home'. By dynasty 5 the wanderer template — 'young love late, return to hometown, count the doors at the end' — reads as a monoculture.",
+    "The cb_lookaway / cb_outcast_return callbacks both resolve an early moral wound with a heartwarming payoff (you make good, you get the door opened). The mechanic is good but the two callbacks are so structurally identical in feel (child-era sin redeemed by adult generosity) that when they appear in quick succession across dynasties they are indistinguishable in emotional register.",
+    "Across 18 dynasties, 14 characters arrive at love late (30s–50s) and the 'a_meet_late' card fires far more than intended despite the engine trying to preference youth love. The prose pool for late love is excellent ('discovered the heart had been keeping a room aired the whole time') but the circumstance is so common — and so template-identical — that by dynasty 8 the player is predicting it.",
+    "The epitaph system works but its pool is small enough that repeated themes land within a single session. 'Kind in the small daily ways that turn out to be the large ones' appears as an epitaph verbatim for Anders Vasquez (D4), Otto Quint (D9 gen2), and Cassian Quint — three distinct dynasties — within the first 13 dynasties. The 'RECENT_LINES' deduplication logic does guard against same-dynasty repeats but not cross-dynasty repetition at a session scale.",
+    "The 'cb_reckless' card (elder counselling a reckless young one) fires in almost every dynasty that has a reckless/peril memory, always with the same structural irony: the reckless elder tells the young one either 'slow down' or 'it was worth it.' This is the most visible staleness beat in the transcripts — it appears in Dynasty 2 (Otto), 4 (Ottilie), 5 (Liv), 6 (Vesna, Lazlo), 9 (Caleb, Tamsin), 10 (Tamsin), 11 (Tariq), 13 (Annika). The card has the right idea but insufficient variety in framing to sustain eight appearances.",
+    "The 'cb_the_cost' elder reckoning (near death, an old hard choice returns) also fires repeatedly and always resolves to the same two options and near-identical log lines ('Decided it was right — and mostly believed it'). Across a dozen dynasties its structural sameness overwhelms the personality differences between lives.",
+    "The systems mostly add texture to the SAME life-arc template rather than creating divergent shapes. Most lives follow: childhood card(s) → vocation fork → love (usually late) → child → work/midlife moments → elder resolution. The vocation arc cards add vocation-specific beats inside this template but do not change the template's skeleton — a scholar's life and a maker's life hit the same structural joints in the same order, with different flavor on each joint. An 'emergence' outcome would require a vocation or era to short-circuit a life-beat entirely (a soldier's war killing the marriage arc, a plague-era preventing the child beat), but the systems do not constrain each other's eligibility.",
+    "The `onceDyn` flag is underused for the exact cards that would create most cross-dynasty freshness. Only a handful of cards are onceDyn (c_sick, c_friend, y_mentor, etc.) — most interesting adult and vocation cards are `once` per life, meaning they reliably appear in EVERY life of that type in every dynasty. A scholar always gets a_scholar_question and m_scholar_legacy; a maker always gets a_maker_shop and m_maker_masterwork. The vocation arcs are deterministic across dynasties."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2–3 hard vocation × relationship exclusions or redirections: e.g., a soldier in a war year who has a spouse gets a card at age 30–40 where the war threatens the marriage specifically (not just the soldier's body), creating a structural choice — desert / stay / send spouse away — that a wanderer-with-no-ties never faces. Make the vocation genuinely change which beats are available, not just which flavour cards appear inside the universal template.",
+      "why": "Right now vocation changes the prose of adult moments but does not constrain or redirect the marriage/child/midlife skeleton. A soldier and a scholar can have the identical domestic arc with different surface text. True structural divergence is what the profile craves.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the wanderer vocation harder to sustain: add an explicit wanderer-specific relationship cost (a_wanderer_settle should have a 40% chance of producing genuine relationship fallout — a child who barely knows them, a love who leaves — surfacing in a midlife card that is gated ONLY on wanderer + has_child or wanderer + had_spouse). This raises the stakes of the vocation choice and makes the wanderer's late-life reckoning feel earned rather than generic.",
+      "why": "The wanderer monoculture exists because wanderer is the path of least resistance. Adding a real cost that surfaces as a later card creates a meaningful trade-off.",
+      "impact": "high"
+    },
+    {
+      "what": "Promote the most common repeated-feeling callbacks (cb_reckless, cb_the_cost) to `onceDyn` or give them a rotating framing pool of 6+ variants keyed on the specific memory content rather than generic prose. E.g., if the reckless act was a soldier's war, the elder card should reference the soldiering specifically rather than 'the breakable years.'",
+      "why": "cb_reckless fires 8+ times in 13 dynasties. Every instance feels like the same beat. Keying the prose to the specific reckless context (war vs. youth-dare vs. frail-body-defied) would make each feel like a different story.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3–4 era cards that can permanently close a life-beat or redirect it: plague-era should have a non-zero chance (via a new fate card f_plague_death or a conditional on w_plague_tend) of killing the spouse or child before they age into normal beats, forcing an elder arc that has no default domestic resolution. This would produce structurally unique dynasties rather than the same template in different historical flavour.",
+      "why": "Right now era cards add events but do not alter the structure of the life. A plague that actually takes someone means a widower/childless arc that is forced, not chosen — a genuinely different shape.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the epitaph RECENT_LINES deduplication window from 18 to 40+ entries, OR add dynasty-tagging so the same epitaph cannot appear in the same session across different dynasties at all (the current guard only blocks consecutive recurrence within 18 entries, not cross-dynasty same-session repetition).",
+      "why": "Three verbatim identical epitaphs in 13 dynasties is the most visible staleness signal for a player reading the constellation across their session.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 1–2 repute-gated 'negative' content cards that only a tainted or ruthless house meets in YOUTH, not just adulthood — e.g., a child of a tainted house faces a childhood shaming card (a peer in the yard knows the family's shame) that has no equivalent in clean houses. This would make the house's character felt from the first moments of a new life, not only when the adult repute-gates kick in.",
+      "why": "Currently the repute system is invisible in childhood and youth. A new heir is born into the house's standing (prose only) but the first real gate doesn't open until adulthood. Earlier gates would make the house's character a structural fact from the start.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has all the right systems for emergence — vocation, era, reputation, callbacks, heirlooms, secrets — but they mostly run in parallel lanes rather than colliding: the wanderer monoculture, the deterministic vocation arc structure, and a small set of late-firing callbacks that repeat identically across dynasties mean that by dynasty 6 the template is more visible than the story, and the 'one more dynasty' pull weakens because you are predicting the skeleton before you have played it."
+}

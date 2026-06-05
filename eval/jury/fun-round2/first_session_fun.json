@@ -1,0 +1,48 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the best thing in the game. When 'looked_away' at age 12 resurfaces at 48 as a stranger sleeping rough, the recognition is genuinely moving — this is the 'one more life' hook working as intended.",
+    "Card density in the first 20 years is surprisingly good. A child gets fever, friend, stray, book, sibling, grandparent — six distinct childhood shapes — before the vocational fork. The opening lives do not feel empty.",
+    "The vocation fork (soldier / scholar / maker / wanderer) structurally differentiates early-adult arcs. Dynasty 11's Tariq (scholar path) plays visibly differently from Dynasty 2's Junia (wanderer) and Dynasty 6's Vesna (soldier). This is the most reliable source of structural variety in the first session.",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) have no clean answer. These are the standout moments — they feel like real moral weight, not flavour-text selection.",
+    "The dynasty layer's inheritance mechanic (heirlooms, motto crystallization, house standing) creates genuine 'one more dynasty' pull. Seeing a line reach a grand estate after 5 generations is the closest thing the game has to a systemic reward.",
+    "Observation lines (the ambient stat-driven prose) are deep and avoid immediate repetition within a single life — the pool of 8-10 variants per observation type buys real session time before the machinery shows."
+  ],
+  "staleness": [
+    "By dynasty 4-6, the structural life-shape is apparent and repetitive: childhood cards (fever + friend + stray/book/sibling in various combinations) -> vocational fork -> y_love1 or a_meet_late -> a_child -> a_work/a_home/a_role -> midlife health scare or parent-ageing -> elder reconciliation/legacy/garden. Knowing the template removes the feeling of discovery. This is visible in the transcripts even at dynasty 5 (House Aldecott): the beats are predictable, only the prose varies.",
+    "The c_sick (fever) card appears in the opening pages of almost every dynasty in the transcript — Dynasty 1 (age 6), Dynasty 2 (age 6), Dynasty 3 (age 4), Dynasty 4 (age 6), Dynasty 5 (age 5), Dynasty 6 (age 4), etc. It is marked onceDyn but the transcript shows it re-firing every generation, suggesting the flag is life-scoped not dynasty-scoped for this card. The near-universal same opening beat signals engine familiarity within 2-3 dynasties.",
+    "The 'road wanderer' vocation is chosen by an outsized proportion of founders in the transcript (Dynasty 1: road, Dynasty 2: road, Dynasty 3: road, Dynasty 4: road, Dynasty 5: road — five consecutive dynasties open on the wanderer path). This produces a homogenised founder arc: the lone wanderer who finds love late and settles in middle age. The vocation weights are not balanced; wanderer appears to pull too strongly, or the other paths are underweighted early.",
+    "Log-line repetition is visible to an attentive player by dynasty 6-8. Across the transcripts, 'Kind in the small daily ways that turn out to be the large ones' is the epitaph for Junia Holloway (D2), Anders Vasquez (D4), Lazlo Sorrelle (D7), and Pavel Salvedi (D11). 'Left people gentler than he found them' is the epitaph for Otto Holloway (D2), Caleb Quint (D9), Tomas Voss (D13), and Rafael Ashcroft (D18). Both are beautiful lines — but their repetition makes the writing feel like a finite pool being cycled, not emergent.",
+    "Midlife is the thinnest life-stage for structural surprise. The adult/midlife cards (a_work, m_health, m_money, m_parent_age, m_child_grown, m_rival, m_reinvent) are mostly universal and do not vary by vocation or prior choices. A soldier's midlife and a scholar's midlife often look nearly identical in the transcript — the vocation differentiation that begins in youth mostly dissipates by 40.",
+    "The 'bequest' mechanic (what to leave the heir) and the dynasty standing system create inter-generational stakes on paper, but their effect on moment-to-moment gameplay is indirect and invisible to a first-session player. A newcomer 20 minutes in will not yet feel the dynasty layer as a reason to keep going — it pays off too late to hook the first session."
+  ],
+  "improvements": [
+    {
+      "what": "Make c_sick (fever) truly onceDyn — fix or verify the flag. Gate at least two other high-weight childhood cards (c_friend, c_book) as onceDyn as well, replacing them with a second tier of childhood moments (a founding-era event, a culturally specific detail, a random-seed childhood that differs by house standing) so dynasties open differently.",
+      "why": "The fever card opening every dynasty within the first 10 lines of the transcript is the single fastest signal that the game is on a loop. A first-session player will notice this by dynasty 3.",
+      "impact": "high"
+    },
+    {
+      "what": "Rebalance vocation weights or add a vocation bias seeded from house traits. If the prior dynasty was a wanderer, sharply downweight wanderer for the next founder. Alternatively, let the inherited trait (bookish, restless, guarded, warm) softly surface one vocation as the 'natural' choice in the hint text, guiding variety.",
+      "why": "Five consecutive wanderer dynasties in the transcript is not player choice — it is a weighting artefact. Structural variety across vocations is the primary engine of life-shape differentiation; if the fork keeps landing in the same lane, the arc sameness accelerates.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 vocation-specific midlife cards (not elder, not adult-early) — one per calling — that fire mid-40s to late-50s and are only eligible for that vocation. A soldier's midlife should present a moment no maker will ever see.",
+      "why": "The vocation differentiation that begins at the calling fork mostly evaporates by adulthood. Mid-career and midlife are when the player is most alert to sameness. Soldier/scholar/maker/wanderer arcs that visibly diverge through their 40s would extend the freshness window by a full dynasty or two.",
+      "impact": "high"
+    },
+    {
+      "what": "Rotate the epitaph pool by house character, vocation, or trait rather than drawing from a single shared pool. A scholar house should die with different epitaphs than a soldier house.",
+      "why": "The repeated epitaphs ('Kind in the small daily ways', 'Left people gentler') are the most legible proof to a player that the game's writing is finite. Epitaphs are the last word of every life — they must feel earned and distinct.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface one dynasty-layer payoff within the first life itself — not just at generation 3 or 5. A small visible consequence of the current life's choices on the heir (a starting skill, a named trait, an opening event) that appears in the first successor's opening beat would hook the generational loop much earlier.",
+      "why": "The dynasty mechanic's strongest 'one more' pull is invisible for 20+ minutes of first-session play. A new player who dies after one life and sees nothing change except the name has no mechanical reason to continue, only aesthetic curiosity about the prose.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is a well-written prose toy that is genuinely affecting for 2-3 dynasties, then goes pleasantly stale: the fever-friend-vocation-love-child-elder template becomes apparent by dynasty 4-6, vocation imbalance produces sameness in the wanderer path, midlife loses the structural variety that early life briefly promises, and the dynasty layer that should sustain long play pays off too slowly to hook the first session."
+}

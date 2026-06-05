@@ -1,0 +1,51 @@
+{
+  "profile": "long_session",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system delivers genuine structural divergence at the macro level: a scholar life and a soldier life hit meaningfully different card clusters across adulthood and old age, and a player choosing different callings across dynasties does see different arcs.",
+    "The callback system — especially the reach-back cards (cb_lookaway, cb_books_late, cb_outcast_return, cb_study_pays) — creates the best moments in the game. When one fires, it genuinely feels like a consequence of who this person was, not a random event. These are the game's highest points.",
+    "The dynasty layer (motto, seat, heirlooms, reputation, secrets) gives the long session its only durable mechanical goal. Watching a house rise from 'nothing but a name' to 'an old and famous house' across six generations, with a motto and a secret, provides enough forward pull to justify continuing past the point where individual lives feel fresh.",
+    "Era cards (war, plague, plenty, hard, turning) genuinely change the texture of a life — a plague-era life with 'w_plague_tend' fires a card that never appears in a settled era, and the opening world-description gives each dynasty a distinct historical flavor.",
+    "Solitary and childless life-shapes are real content, not dead ends. The m_solitary / e_solitary / e_childless cards mean a life without family hits its own arc rather than just skipping cards, which is unusual and well-done.",
+    "Line-level freshness is high within a single session. The freshPick/rotI systems mean individual log lines and ambient observations rarely repeat verbatim within a dynasty, so the prose experience stays varied even when the card structure is familiar.",
+    "The writing quality is consistently good enough that even a 'stale' arc (the scholar's final question, the soldier's ghost at 3am) reads with dignity — the staleness is structural, not prose-level."
+  ],
+  "staleness": [
+    "By dynasty 6-8, the template of a full life is legible before it happens. Vocation determines which 4-5 arc cards will fire and in what order; those arcs are nearly invariant across every life with that calling. A scholar always: chose_study, then cb_study_pays (name your worth), then a_scholar_question, then m_scholar_legacy, then e_scholar_old (hand the unanswered question on). Seeing this arc for the third time produces no surprise.",
+    "The soldier elder arc is the single most repeated structural pattern in the transcript. 'Years on, the war comes back... at three in the morning' (m_soldier_ghost) followed by 'A young one asks what it was really like... the old songs' (e_soldier_old) fires in Dynasties 6, 10, 12, 14, and 15 — five of fifteen dynasties, always in the same two-beat sequence, always with the same pair of choices. The soldier vocation has the thinnest arc.",
+    "The grandchild 'tell me what you were like' card (e_window) fires in a majority of lives regardless of vocation, and the 'Tell the better story' choice is taken most of the time, producing 'Improved his/her own childhood a little, for a child who'd never know' as one of the most repeated log lines across the whole transcript — visible in Dynasties 3, 5, 8, 10, 11, 12, and 15.",
+    "The elder band is the most template-like of all life stages. Every life that survives past 65 tends to collect a subset of the same 6-7 elder cards: e_garden or e_peace or e_legacy or e_last_walk or e_body, plus the vocation-specific elder card if applicable. The prose varies but the questions asked are recognizable: how do you meet the body failing, what do you want remembered, how do you spend the last clear day.",
+    "The vocation-x-era intersection cards (vx_*), which are the game's most interesting structural idea, almost never fire. Across 16 dynasties' worth of transcripts — covering soldiers, scholars, makers, and wanderers across war, plague, plenty, and turning eras — only one vx_ card appears (vx_scholar_turning in Dynasty 6). This is the emergent content the brief calls for, and it is nearly absent in practice.",
+    "The cb_lookaway callback ('made up to a stranger for a child ignored X years before') fires in Dynasties 2, 9, 12, and 15 with near-identical phrasing. Since 'Look away. It's safer' is a common choice for exploratory players, this callback appears frequently and its structure is immediately recognizable by the second or third time.",
+    "The 'Carry it alone, as ever' / 'Talk about it, finally' binary for the soldier ghost, and 'Give them the songs' / 'Tell it true' for the soldier elder, produce the same log line patterns in almost every soldier life regardless of what else that person lived. The soldier arc lacks callbacks that differentiate a soldier who married early from one who stayed solitary, or who lived through a war era versus a settled one.",
+    "No genuine systemic surprise — no moment across 16 dynasties where the intersection of a specific reputation, vocation, era, and prior choices produced a card that felt genuinely unexpected. The seat-gated and repute-gated cards (s_great_burden, s_patronage, r_scholar_door, r_hard_name) are rare in the transcripts, and when they do appear they don't produce meaningfully different outcomes than non-gated equivalents. The promise of emergent story from system collision is not being kept at this content level."
+  ],
+  "improvements": [
+    {
+      "what": "Expand the soldier arc with at least 3 more once-per-life adult cards that are gated on specific prior choices (e.g., a card for soldiers who also have children, a card for soldiers who refused an order, a card for soldiers who married), so the arc branches rather than funneling every soldier into the same 5-beat sequence.",
+      "why": "The soldier is the most common vocation in the transcripts (appears in ~7 of 15 dynasties) and has the least internal variety — once you recognize the arc you know every beat before it happens. Branching it on combinations the player already made would give it the same 'consequence of who I was' feeling as the callback cards.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the base eligibility weight of vx_ (vocation-x-era) cards from their current effective rate to something that guarantees at least one fires per eligible life. Currently they appear to require both the right vocation flag AND the right S.era AND luck in the weighted draw — the conditions rarely align. Consider making vx_ cards replace rather than compete with the normal vocation arc when the era matches.",
+      "why": "These cards are the game's strongest anti-staleness idea — a scholar in a turning age faces something categorically different from a scholar in a settled age — but they effectively don't exist in practice. Making them reliable would create the 'I've never seen this before' discovery the brief asks for.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate the e_window ('grandchild asks what you were like') card behind at least one meaningful prior condition — either the player having a grandchild in their relationship list OR at least one interesting callback memory — so it doesn't fire in the majority of elder lives as a generic beat.",
+      "why": "It is the most visually repeated log line in the transcript. Because it asks so little of prior state, it fires broadly and its two outcomes produce lines that feel like filler. Gating it tightly would make it feel earned when it appears.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 midlife and elder cards gated on two-condition intersections that don't currently exist: e.g., a card that fires only if you were a soldier AND had children AND they grew up (combining m_soldier and m_child_grown territory), or only if you are a scholar AND your house has a tainted reputation. These would produce the emergent story collisions the current system architecture supports but doesn't yet exploit.",
+      "why": "The current gating tends to use single conditions (vocation OR era OR a single memory flag). The richest moments in narrative games come from AND-conditions that the player can recognize as unique to their specific life-path.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the scholar elder arc a branching outcome based on whether the scholar gave their knowledge away (became_teacher memory) or guarded it (set_scholar_rep without became_teacher): the 'hand the unanswered question on' card should play very differently — perhaps the question has already partially answered itself through the students, or alternatively the scholar realizes no one will carry it forward. The current card ignores this entire prior choice.",
+      "why": "m_scholar_legacy offers 'give it all away / guard it', but e_scholar_old ignores which was chosen, always landing on the same 'hand the question on / make peace with not knowing' binary. The prior choice should change what the elder question even is.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely good literary sim with excellent prose and a well-engineered anti-repetition layer that keeps individual lines fresh, but by dynasty 6-8 the structural template of each vocation's life is fully legible — you know which 5 arc beats are coming before they arrive — and the emergent collision content (vocation-x-era intersections, multi-condition gates) that would sustain a long session almost never fires in practice, leaving the game pleasantly contemplative but not genuinely surprising across many dynasties."
+}

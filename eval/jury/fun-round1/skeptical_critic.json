@@ -1,0 +1,48 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system (cb_* cards) is the game's genuine design achievement: a choice at age 7 can resurface as a named moment at 48, and the reach-back lands with real emotional weight because the engine preserved the exact age and memory. This is what makes the 'literary sim' claim credible.",
+    "The vocation fork (soldier/scholar/maker/wanderer) gates distinct adult card clusters. A soldier's life does read differently — the blooding, the 3AM war-haunting, the elder truth-telling — than a scholar's or maker's. This is structural variety, not cosmetic.",
+    "The era system (war, plague, hard, plenty, turning) meaningfully tilts which rare moments can appear. A plague-era life really does encounter w_plague_tend where a settled-era life never will. Dynasty 5's war arc across two generations creates a genuinely different texture.",
+    "The dynasty reputation/motto/heirloom system gives a plausible 'one more dynasty' pull: watching a ruthless house accumulate its 'We do not ask twice' motto across four generations, and seeing the hardname heirloom seed the next generation's temptations, is real cross-session continuity.",
+    "The prose is high quality throughout, and the rotI/rotN variant cycling genuinely delays the moment you notice a repeated line — the game buys more time than most narrative games before the seams show."
+  ],
+  "staleness": [
+    "The 'late love, late child, late marriage' triple dominates every dynasty in the transcript. Dynasty 1 Bram: love age 33, child age 48. Dynasty 2 Cosima: love 41, child 49. Dynasty 2 Annika: child 46. Dynasty 5 Calla: love 43, child 48. Dynasty 5 Caleb: love 16, child 49. Dynasty 6 Vesna: love 32, child 47. Dynasty 7 Tariq: love 38, child 48. Dynasty 7 Carys: child 48. Dynasty 7 Joaquin: child 46. Dynasty 7 Iris: child 44. This is structural convergence, not variety. The engine's forced marriage/child offer at window edge plus a_meet_late's weight-5 dominance pulls almost every life into the same family-formation arc regardless of vocation.",
+    "The single most repeated exact ambient observation across the transcripts is 'The decades have arranged themselves around her/him and somehow never sat down' — appearing verbatim in Dynasty 1 (Bram, age 60), Dynasty 2 (Cosima, age 38), Dynasty 5 (Caleb, age 31), Dynasty 6 (Bram, age 38), Dynasty 7 (Carys, age 41), Dynasty 8 (Ronja, age 31), Dynasty 8 (Iris, age 31). The rotI cycling is not deep enough: with only 4-6 variants per pool and 38 lives in the transcript, repeat lines land as early as the second or third dynasty.",
+    "The structural skeleton of every life is almost identical: childhood fever + sibling card (ages 3-10) → y_calling fork (14-22) → love card (20s-40s) → marriage → child in late 40s → m_health scare → elder bequest card → death. This template is legible by dynasty 3 and nakedly visible by dynasty 6. The vocations and eras tile over the skeleton but do not change it.",
+    "The wanderer vocation collapses almost immediately. Cosima chose 'the road' at 16, left home at 22, and settled at 27 — five years of wandering before the engine's love-nudge and a_wanderer_settle converged her into the same domestic arc as everyone else. Wanderer is the one calling that promises genuine structural divergence (no fixed home, no children, late or no love) and delivers the least.",
+    "Solo/childless lives are mechanically possible but nearly absent from the transcripts because the engine near-guarantees an heir. Without an heir the dynasty ends, which creates implicit pressure to always say yes to the child card. The 'No. This life, as it is.' choice exists but the engine actively conspires against it landing cleanly.",
+    "The house seat rises automatically with moderately successful play — no life in the transcripts ends with means collapse — so the 'dynasty game' layer lacks real tension. Dynasty 5 Okonkwo reaches 'an old and famous house' in four generations without any exceptional steering or explicit strategy. The reckoning card (x_reckoning) requires seat>=3 AND no prior reckoning this life, so a player who plays cautiously may never face it.",
+    "Many elder-band cards feel interchangeable in effect: e_legacy, e_peace, e_garden, e_body, e_window, e_last_walk, e_old_letters all arrive in the same stage, deliver small spirit/heart adjustments, and read as minor variations on the same 'coming to terms with mortality' theme. A player who has watched five elder arcs will recognize the beat before reading the card text."
+  ],
+  "improvements": [
+    {
+      "what": "Cap the a_meet_late card's weight to 2 (down from 5) and remove the love-nudge 17% preference boost once the character is past age 35. Let some lives run genuinely loveless.",
+      "why": "The current engine so strongly prefers surfacing a love-opening card that almost no life reaches elder years without a spouse. This collapses structural variety more than any other single mechanism. A life that ends alone should be a reachable, meaningfully different shape — not an accident of bad draw luck.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 6-8 new adult/midlife cards gated on P.flags.vocation that are NOT in the domestic arc at all — professional crises, calling-specific rivalries, craft-specific losses — so choosing 'soldier' or 'scholar' visibly displaces some of the love/child/work cards rather than just adding to them.",
+      "why": "Currently vocation adds 3 cards (one per life-stage) on top of the universal template. A soldier life still hits a_marry, a_child, a_work, m_parent_age, m_health. The vocation should replace some of those slots, not supplement them, to create structurally different lives rather than identically-shaped lives with a soldier-flavored topping.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand each observe() pool from 5-6 variants to 10-12, and add a per-dynasty rotation offset so the same observation doesn't land on the same generation across consecutive dynasties.",
+      "why": "'The decades have arranged themselves around her and somehow never sat down' appears seven times across 16 lives in the transcript. The rotI cycling is correct in theory but the pools are too shallow to carry a 38-life transcript. Doubling the pool size would push the repetition collision point past a typical session length.",
+      "impact": "med"
+    },
+    {
+      "what": "Make the house seat genuinely precarious: add a once-per-dynasty 'generational failure' event at seat 3+ where a single bad combination (low spirit + low means + failed reckoning) can strip TWO seats in one life. Currently the seat rises but essentially never falls more than one step.",
+      "why": "The 'dynasty game' lacks tension because upward drift is nearly automatic. Real 'one more dynasty' pull requires the possibility of catastrophic decline — a house that was comfortable becoming nothing — not just the mild oscillation visible in the transcripts.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 'turning point' dilemma cards (age 28-45) that are mutually exclusive with the child card for that life: if the player takes the dilemma, the child window closes permanently. Frame this as a genuine life-path fork, not a punishment.",
+      "why": "Currently the child card competes in the pool with other adult cards, but the engine's forced-offer guarantee means a willing couple essentially always gets the child offer before the window closes. A deliberate 'this life or the child' trade-off would create genuinely different life shapes — the ambitious who sacrificed the heir, the mission-driven who let the line end.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is a beautiful literary object with a structural skeleton that becomes visible by dynasty 3 and unignorable by dynasty 6: almost every life converges on the same late-love, late-child, late-marriage arc regardless of vocation, and the prose variants cycle too thin to hide the template for a long session."
+}

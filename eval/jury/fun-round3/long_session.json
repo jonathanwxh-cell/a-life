@@ -1,0 +1,54 @@
+{
+  "profile": "long_session",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is the game's best feature for long sessions: when 'cb_outcast_return' fires decades after 'c_friend', or 'cb_books_late' closes the loop started in childhood, the game briefly delivers exactly what this genre promises — a life that remembers itself. These moments feel earned and surprise even on the third or fourth dynasty.",
+    "Vocation divergence (soldier/scholar/maker/wanderer) gives lives genuinely different structural skeletons. A soldier who went where it was worst, then faces 'm_soldier_ghost' at 50, reads differently from a scholar grinding through hunger into 'cb_study_pays'. The four paths aren't symmetrically deep but they are real.",
+    "The dynasty layer's accumulating artefacts — motto, heirlooms, seat, a house secret — create a 'one more generation' pull that works well through the first five or six dynasties. Seeing 'Better a short blaze and a long smoke' or 'Nothing was given; all was built' crystallise, then be handed down, gives the long player something to steer toward.",
+    "Era variation (war, plague, plenty, hard, turning) adds a genuine macro-texture. A soldier born in wartime playing 'vx_' war cards is not just a reskinned scholar. The era system is light but it is real; a few dynasties in lean years feel categorically different from fat-years ones.",
+    "The prose quality sustains interest longer than the mechanical content alone. Because the writing is genuinely good — not template-genre-game writing — a player reads each card even on the third pass, not just clicks through.",
+    "The bequest card ('e_bequest') is a smart late-life lever. Choosing 'Everything I know' versus 'Nothing but their own freedom' as an inheritance framing is a satisfying cross-generational decision with visible downstream consequences."
+  ],
+  "staleness": [
+    "The child-stage sequence calcifies quickly into a predictable cluster: fever / sibling / stray / wonder / unfairness — all once-per-life, all short. By dynasty 4–5, a player running a long session will recognise the childhood checklist within the first few years of each new life. The 'onceDyn' flag prevents one or two of these from repeating per dynasty, but most fire in nearly every life. Transcripts confirm: fever appears in D1 (Adaline), D2 (Marguerite), D3 (Lazlo, Mateo), D4 (Otto, Tomas), D5 (absent), D6–D18 mostly. The stray appears in D1, D9, D10 (Joaquin), D13 (Mateo, Hale), D15 (Ren), D16 (Annika, Hale), D17 (Pavel, Bram). The childhood stage structurally repeats at a rate that a two-hour session — spanning perhaps 8–12 dynasties with 2–4 lives each — makes very visible.",
+    "The youth calling ('y_calling') and first-love ('y_love1'/'a_meet_late') fire in near-every life in predictable sequence. Across all 18 dynasties in the transcripts, every life with a normal lifespan gets one of the four vocations and a love arc. These are essential structural beats, but they are also sameness: the vocation choice text rotates only 3 variants, and after the fourth dynasty a long-session player knows exactly what 'The years ahead want a shape' means before reading it.",
+    "The adult band has a recurrent template: marry → child → work-promotion dilemma → parent-care → midlife reckoning. The 'a_work' card and 'a_child' card are not once-only, so they repeat within a life. Across dynasties the pattern is very legible by dynasty 6–8. Transcripts show 'a_work' appearing in D1, D2, D5, D13 with near-identical framing ('promotion / evenings'). The choices differ but the card is familiar template.",
+    "The elder band is thin and formulaic. Nearly every long-lived character gets 'e_legacy' (what to be remembered for), 'e_peace' (how to meet the end), 'cb_the_cost' (one old decision revisited), and 'e_bequest'. By dynasty 5 a player knows the elder years will pose these four questions in some order. The 'e_garden', 'e_window', 'e_last_walk' cards add texture but are once-only; after they fire the final years are mostly observe-lines and relationship losses — passive reading.",
+    "The 'hand the unanswered question on' scholar-elder card fires in D2 (Marguerite), D3 (Mateo), D4 (Tomas), D8 (Caleb), D9 (Yara), D16 (Hale), D17 (Pavel) — seven of eighteen dynasties in the transcripts. The line 'handed a great unanswered question to someone younger, the way a runner hands on a flame' is verbatim-identical across all of them. The deduplication logic in 'epitaphFor' and 'freshPick' works within a life but not across dynasties for this card's log line, because it calls 'logLine' with a fixed string, not 'freshPick'. This is the single most repeated verbatim sentence in the transcript.",
+    "The observation lines that fill quiet years ('The mind has become a room she can close the door of', 'Books have become a country she can live in', 'Thinking has become his favourite weather') have large pools but appear in the same life-stages at high frequency. A mind-stat scholar will almost always see multiple of these, and across dynasties 2–17 in the transcripts 'Thinking has become his/her favourite weather' appears six times. These are beautiful once; noticed twice they become wallpaper.",
+    "Structural variety between lives within the same dynasty is weaker than across dynasties. A long-session player running a 4-generation house sees four lives that all get: child-cluster → calling → love → adult-work → elder. The vocation differs; the scaffold is the same. There is no life-shape that looks genuinely different in outline (e.g. a life that skips love entirely and goes deep on career, or a very short life that reshapes the dynasty). Short early-death lives exist but are passive, not structured differently."
+  ],
+  "improvements": [
+    {
+      "what": "Give the 'hand the question on' scholar card 3–4 distinct log lines (via freshPick) instead of a single fixed string",
+      "why": "It fires in nearly half of all dynasties in the transcripts and produces an identical verbatim line every time. This is the most visible single-card staleness signal across a long session. A 10-minute fix would remove the most glaring repeat.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2–3 genuinely alternative childhood shapes: a 'withdrawn child' path (skips sibling/friend cards entirely, gets inward-facing substitutes) and an 'outlier talent' path (leapfrogs several child cards into an early-teen vocation hint). Gate via trait — guarded/bookish/restless child diverges early.",
+      "why": "The childhood stage is the most recognisable repeated template in a long session. Currently all children get the same 5–7 once-per-life cards in roughly the same order. Trait-affinity exists in the engine but the card pool doesn't diverge enough to make a guarded child's youth read structurally differently from a warm one's.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the elder band with 4–5 new cards: a 'late friendship' card (someone new appears in the final decade), a 'body of work' card for non-scholar vocations, a 'regret the road not taken' card that surfaces the unchosen vocation. Make at least two of these repeatable (not once-only), so elder years don't deplete in a long-lived character.",
+      "why": "By dynasty 5 the elder band is predictable: legacy → peace → reckoning → bequest. A player who has lived five or six elder lives has seen all the major cards. The elder years are the emotionally richest territory but the system has the fewest cards there per year lived.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'childless elder' card arc: for characters who chose no children, give 3 distinct elder cards that explore that shape (not just a single 'no heir' note at death). The 'e_no_heir' note in Dynasty 13 (Tamsin) is one good card; it needs siblings.",
+      "why": "Currently a childless life gets the same elder arc minus the bequest and e_window card. About a sixth of couples stay childless per the engine comment, but those lives feel structurally truncated rather than differently shaped in the final act.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce one more 'world-event' card type for each era (plague, war, plenty, hard, turning) that fires mid-adult rather than only at birth, so an era visibly alters the middle years of a life, not just its opening line",
+      "why": "The era system currently gates 'vx_' cards and colours the opening birth line, but a turning-age or plague era rarely changes what a 40-year-old faces in any concrete way. A mid-life era-specific card (plague: a neighbour taken; plenty: a windfall temptation; war: a conscription choice) would make eras feel like they run through a life, not just frame its opening.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3–4 cross-dynasty callback moments: a card that fires only if a grandparent (two lives back) held a specific memory, surfacing in the current life as an inherited habit or curiosity — something deeper than the heirloom system",
+      "why": "The heirloom system creates some cross-generation texture but it is one-step: parent to child. A 'long echo' — grandparent's 'early_wonder' surfacing as a trait-boost in a grandchild two generations later — would create the generational depth that distinguishes this game from a single-life sim. The engine's mem-inheritance infrastructure is already there (inherited:true pattern) but it doesn't reach back two lives.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life sustains genuine pleasure through four or five dynasties — the prose, the callback system, and the dynasty layer all working — but by the eighth dynasty a long-session player is watching the same five childhood cards, the same four vocation paths, and the same elder quartet repeat with different names, and the freshness the game promises is carried almost entirely by prose variation rather than structural novelty."
+}

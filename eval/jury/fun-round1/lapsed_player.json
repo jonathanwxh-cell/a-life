@@ -1,0 +1,54 @@
+{
+  "profile": "lapsed_player",
+  "score": 6.0,
+  "fun_highlights": [
+    "The vocation-arc system (soldier/scholar/maker/wanderer) genuinely differentiates lives at the structural level — a soldier's life reads nothing like a scholar's, the arc-specific cards (a_soldier_service, m_soldier_ghost, a_scholar_question, m_scholar_legacy, a_maker_masterwork) are substantive and arrive in the right years.",
+    "Era cards (war, plague, plenty, hard, turning) create real macro-level divergence across dynasties. A generation born into war faces decisions (w_war_call, w_war_loss, w_plague_tend) that simply never appear in a settled era — this is the clearest case of 'gen 8 is not gen 2 with new names'.",
+    "Callback cards are the game's best design. When 'cb_outcast_return' fires 30 in-game years after the yard moment, or when a book from age 7 reappears at 48 with the exact age cited, the reach-back produces genuine micro-drama that money-on-rails systems can't manufacture.",
+    "The dynasty layer — heirlooms, reputation drift, motto crystallization, seat-gated content — gives 'one more dynasty' pull that I didn't expect. Wanting to see the house reach 'an old and famous house' or watching a 'reckless' motto settle is a real goal that carries across multiple sessions.",
+    "Competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are among the most morally interesting in the game and break the otherwise reliable binary-open/closed structure."
+  ],
+  "staleness": [
+    "The 'late child' phrasing rotates through exactly three variants ('well past when they had thought that particular door had closed', 'at an age they had stopped expecting it', 'felt the lateness itself as a kind of luck') and every single dynasty in the 12-dynasty transcript hits at least one of them. By dynasty 6 the player has read all three and is just rotating through known text.",
+    "The cb_the_cost elder card ('near the end, one old decision keeps returning') appears in dynasty 1 Bram, dynasty 1 Calla, dynasty 2 Cosima, dynasty 2 Annika, dynasty 5 Caleb, dynasty 6 Lena, dynasty 6 Vesna, dynasty 6 Calla S, dynasty 7 Tariq, dynasty 8 Naima, dynasty 9 Yara, dynasty 10 Idris, dynasty 11 Elias, dynasty 11 Aldous... It is effectively universal. Marking it 'once' per life does not prevent it feeling like a mandatory template beat.",
+    "Body-decline ambient observations ('the stairs have started to ask a question', 'the body keeps its own ledger', 'mornings take longer to arrive', 'getting up has become the first real work') are a pool of 6 lines that every character over 55 cycles through. In the transcripts these appear in almost every life without exception. The pool is too small and the trigger too broad for a game this long.",
+    "The childhood fever (c_sick) and new-sibling (c_sibling) cards together appear in the large majority of childhoods across all 12 dynasties. By dynasty 4 these read as expected setup rather than events. The childhood section of each life feels like it hits the same two or three notes before the vocation fork arrives.",
+    "Marriage phrasing is another tight rotation. 'Married X after both had long stopped expecting it, and meant it the more for that' appears in Cosima, Otto, Calla O, Caleb O, Lena S, Vesna S, Tariq V, Lucan V, Yara H, Naima V, and many more — functionally a mandatory template line. Three marriage variants, delivered to nearly every character who marries late (which is nearly all of them).",
+    "The a_child card's childbirth logLine pool ('The world rearranged itself around a small weight', 'Was sure of nothing, that first night', 'Some door that hadn't known was shut came quietly open') also exhausts itself within a single long dynasty's run. Across 12 dynasties these phrases have appeared dozens of times.",
+    "Structural shape is too uniform: nearly every life follows born → childhood fever/sibling → vocation fork → late love → child → body decline elder cards → cb_the_cost → death. The vocation arcs diversify the adult middle, but the bookends are near-identical. A childless wanderer or a life that never finds love is rare enough in the transcripts to be exceptional, not structural variety.",
+    "There is no mid-game goal tension. Once the dynasty layer is understood (seat rises with means, reputation drifts with choices), the player can see the machine running but there is no meaningful setback system — the 'reckoning' card (x_reckoning) appeared only in one dynasty across the 12 sampled, making seat decline feel implausible rather than earned drama."
+  ],
+  "improvements": [
+    {
+      "what": "Make cb_the_cost a rare callback contingent on actually flagging a significant competing-goods choice (chose_self, chose_others, chose_loyalty, a_kind_silence — NOT as a near-universal fallback). Move the 'near the end' reflection to 2-3 distinct elder cards gated on different flag clusters rather than one card that 70%+ of lives see.",
+      "why": "Currently the card fires so universally it functions as mandatory end-of-life template text, not a meaningful callback. It undermines the illusion that each life has a distinct shape.",
+      "impact": "high"
+    },
+    {
+      "what": "Quadruple the body-decline ambient observation pool (currently ~6 lines per trigger condition). Each observation already fires at most once per life — the problem is the pool is so small that across a long session every line has been read. Add 20-25 new lines across the vit_tire, vit_neg, vit_neg2 bands so the ambient texture stays fresh into dynasty 8+.",
+      "why": "These lines are heard dozens of times across a session. Staleness here is the most purely mechanical: small pool, broad trigger.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the marriage logLine pool from 3 late-marriage variants to 8-10, and make the 'both had long stopped expecting it' phrasing gated on age>46 only (not the near-universal outcome it currently is). Add distinct lines for ordinary-age marriages that do not invoke lateness at all.",
+      "why": "In the transcripts, 'married X after both had long stopped expecting it' became the de facto universal marriage line. The game's late-love card (a_meet_late) is working well but its downstream marriage phrasing doesn't differentiate enough from the early-love path.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 new childhood structural cards so the child-age band has real competition for the fever and sibling slots. Suggested new cards: an early friendship with a specific resolution (distinct from c_friend), a first encounter with a parent working/absent, a neighborhood crisis. The childhood section currently reads as a 2-3 beat preamble rather than a distinct life stage with variety.",
+      "why": "The childhood-fever + new-sibling combo appears in over 70% of the 12-dynasty transcripts' childhoods. Even players who notice the repetition at dynasty 3 will keep seeing it at dynasty 12.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce a 'quiet failure' reckoning path: a recurring but non-seat-gated card (perhaps every 2-3 dynasties) that can set a house back by reputation or seat regardless of wealth level, creating tension that the current system lacks. The x_reckoning card's seat>=3 gate means most early dynasties never face structured adversity.",
+      "why": "Without meaningful downward pressure the dynasty game becomes additive (keep accumulating) rather than dramatic (hold what you built). The one-more-dynasty pull needs both aspiration and risk.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 childbirth logLine variants specific to child number 1 only, separate from child 2 and 3 pools, and add 5-6 new lines to the existing base pool. The 'red and furious' guard (fires at most once per dynasty) is clever — extend that logic to 4-5 more fresh first-child lines with per-dynasty burn flags.",
+      "why": "The child-birth prose is heard 2-3 times per dynasty across 12 dynasties, exhausting the pool well before dynasty 4 in a committed session.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life has real bones — the vocation arcs, era system, and callback cards create genuine structural variety and occasional 'I've never seen this before' moments — but by dynasty 4-5 the bookends of every life (same childhood notes, universal late-love/child arrival, mandatory cb_the_cost elder reckoning, recycled body-decline prose) have settled into a recognizable template that doesn't change enough across the remaining 7 dynasties to keep a lapsed-pattern-recognizer engaged."
+}

@@ -1,0 +1,47 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the game's best feature: when 'cb_books_late' fires at midlife and the prose anchors it to the exact childhood card ('at age 9'), or when 'cb_outcast_return' pays off a decades-old kindness with a named door held open, these moments produce the literary pleasure the genre promises — a story that loops back on itself and means something.",
+    "The vocation fork (soldier / scholar / maker / wanderer) genuinely produces different adult clusters. A soldier's life in Dynasty 13 hits 'a_soldier_service', 'm_soldier_ghost', 'e_soldier_old' in a coherent through-line. A maker in Dynasty 10 gets 'a_maker_shop', 'm_maker_masterwork', 'e_maker_handoff'. These are structurally distinct life-shapes, not just name-swaps.",
+    "Era cards give the macro-texture a long dynasty needs: Dynasties 4 and 9 are born into war; the Idris Sereno line faces a turning age. The 'vx_' vocation-x-era intersections (vx_soldier_war, vx_maker_plenty, vx_scholar_turning) are the game's most interesting content, gating moments no other path can produce.",
+    "The dynasty accumulation layer — seat, motto crystallization, heirlooms passed down, inherited secrets — provides a genuine generational goal and a reason to keep playing past dynasty 3. Watching House Vane climb from a rented room to an old and famous house across four generations, and reading the motto 'The quiet ones are listening' land in the life that earned it, is satisfying.",
+    "The prose is almost uniformly excellent. The binary choice structure is used for moral texture rather than reward optimization: both options on 'x_honest_or_kind', 'x_dream_or_duty', 'x_loyalty_truth' feel equally defensible, which is unusual for the genre and keeps choices interesting."
+  ],
+  "staleness": [
+    "The elder reckoning beat ('Near the end, one old decision keeps returning') appears in virtually every life of normal length. Across the 18-dynasty transcript it lands on Lazlo Halloran (age 66), Idris Sereno (age 71), Caleb Voss (age 74), Vesna Thorne (age 79), Mateo Ashby (age 75), Cyrus Vane (age 70), Ren Vane (age 72), and others — always as 'cb_the_cost' with the same two options. By dynasty 6 a narrative player has fully internalized this beat and is just selecting the variant.",
+    "The scholar pathway collapses into a near-identical sequence regardless of player choices: (1) choose scholar at ~15 years, (2) scholar question card at ~30-40, (3) 'cb_study_pays' pays off the study, (4) 'm_scholar_legacy' asks whether to teach or guard knowledge, (5) 'e_scholar_old' closes the arc. This exact five-beat spine appears in Marguerite, Noor, Mateo Halloran, Idris Halloran (3rd Renner), Tomas Renner, Yara Marlowe, and Cosima Vane. The scholar vocation is the most commonly drawn in the transcript and has the most rigid shape.",
+    "The body-decay observation lines repeat verbatim or near-verbatim across dynasties. 'The stairs have started to ask a question' appears in Dynasties 3, 4, 5, 13. 'Mornings take longer to arrive in the body' appears in Dynasties 2, 3, 9, 10, 12, 15. 'The body has begun keeping its own quiet counsel' appears in Dynasties 3, 4, 12, 14. These are ambient lines (not choices), but their repetition is highly visible when reading many lives in sequence — they become white noise rather than observed detail.",
+    "The love and marriage beats (y_love1, a_marry) follow the same pattern in the vast majority of lives: fall in love in youth or midlife, a_marry triggers later with one of its 8 variants cycling, producing lines like 'married X on an ordinary day, and meant every word of it' or 'married X with grey already coming in, and found the promise none the lighter for it.' At dynasty 8 these feel interchangeable. The nominal variety (8 youth-love lines, 8 marriage lines) is exhausted by the volume.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) are narratively thin. Each is a one-choice card (a single response to a thing that simply happened), which means they deliver texture without agency. A fire losing everything appears in Dynasties 4 (Otto), 9 (Yara Marlowe), 10 (Ren), 12 (Sabine), 14 (Lena). By dynasty 12 the player has read 'stood in the wet ash a while, and began again' multiple times. These events should create divergent consequences but instead close with the same single paragraph.",
+    "No life in the transcript produced a genuinely unexpected narrative collision — a combination of cards that created a story the player could not have anticipated. The drama is always variation-within-template (which vocation, which era, which callbacks fire) rather than combinatorial emergence. The 'once-per-dynasty' (onceDyn) gates help but are few: most interesting cards are 'once-per-life', which means they reliably land but do not produce cross-life surprise."
+  ],
+  "improvements": [
+    {
+      "what": "Reduce the frequency of 'cb_the_cost' and give it a higher weight only when the founding choice is contextually potent (e.g., it fires much more powerfully after 'strayed' or 'chose_self' than after a generic 'a_kind_silence'). Alternatively, split it into three separate elder cards keyed to the specific past decision rather than one general reckoning.",
+      "why": "The card currently lands in almost every life of normal length. When an elder beat fires this reliably, it stops feeling like a payoff and starts feeling like a mandatory stop on a tour. Contextual specificity would make each elder reckoning feel earned rather than scheduled.",
+      "impact": "high"
+    },
+    {
+      "what": "Add two or three scholar-vocation moments with branching structural consequences, so the scholar arc can reach genuinely different endpoints. For example: a scholar who guards knowledge might attract a rival who exposes a flaw in their work; one who teaches might have a student surpass and overshadow them. Currently both paths converge at 'e_scholar_old' with the same two options.",
+      "why": "Scholar is the most-drawn vocation in the transcript and has the most rigid five-beat template. A player who has seen two scholar lives has seen the shape of all of them. Structural divergence late in the arc (not just flavour variation) would make the vocation choice feel consequential past youth.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the fate cards (f_fire, f_sudden_loss, f_reversal) to have two divergent choices with downstream consequences rather than a single response. The fire card in particular is purely reactive: 'Begin again from the ash' is the only option, and the log line is identical every time. Even a simple split — absorb the loss quietly vs. rage against it — would differentiate the five fire-loss moments in the transcript.",
+      "why": "Fate events that give no choice strip player agency at exactly the moment drama peaks (a sudden, total loss). Worse, when these one-option cards repeat across dynasties the single prose line becomes one of the most-seen strings in the whole game.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the cooldown on body-decay observation lines globally. The current once-per-life gate prevents them from firing twice in one life, but multiple lives in the same session see 'the stairs have started to ask a question of him/her' or 'mornings take longer to arrive in the body' because there are only 10 slots per observation bucket and the bucket empties quickly across a dynasty. Add a session-level seen-set (like RECENT_LINES already does for epitaphs) to suppress observation lines recently seen in any life.",
+      "why": "Observation lines are ambient texture — they are supposed to disappear into the background as lived detail. When they repeat verbatim, they pop out as system scaffolding instead. The epitaph system already has cross-life deduplication; observation lines should too.",
+      "impact": "med"
+    },
+    {
+      "what": "Add at least two onceDyn cards in the adult band that produce genuinely different consequences depending on dynasty reputation or house standing, rather than unlocking only at seat >= 3 or seat >= 4. For example, a 'tainted' house should face a moment that a 'kind' house never encounters, and vice versa. Currently repute-gated cards (r_scholar_door, r_family_shadow, r_hard_name, r_old_shame) exist but are triggered by fairly common conditions. Add one or two rare 'this could only happen to THIS house' moments with unique prose.",
+      "why": "The dynasty layer's promise is that the house you build changes the lives you live. Right now it changes which cards are in the pool but rarely creates moments that feel singular to a particular dynasty's trajectory. A moment unique to a house with a specific combination of motto + heirloom + high seat would make each dynasty feel more irreducibly its own.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has real narrative architecture — callbacks, vocation arcs, and a dynasty layer that genuinely accumulates — but by dynasty 6-8, the reader-player sees the template clearly enough that each new life feels like filling in a familiar form rather than discovering a new one, and the scholar arc, elder reckoning beat, and ambient body-decay lines repeat so visibly that the freshness window closes before the game's deeper systems (era intersections, seat-gated content, heirloom echoes) have had time to fully pay off."
+}

@@ -1,0 +1,61 @@
+{
+  "profile": "variety_seeker",
+  "score": 6.5,
+  "fun_highlights": [
+    "The c_origin card is a genuine differentiator: the era-gate and seat/trait branching produce meaningfully different opening lines (plague dread vs. wealthy house expectations vs. a frail child) that set each life's emotional register before any choice is made.",
+    "Vocation clusters (soldier/scholar/maker/wanderer) create structurally distinct adult arcs — a soldier life visits 'ghosted at 3am' midlife cards a wanderer never sees, and a scholar x turning-age life produces a unique crisis of obsolescence unavailable to any other combination.",
+    "Era gating (war, plague, plenty, hard, turning) occasionally produces genuine structural surprises: the plague-era 'tend them or keep your distance' moment, the war-era 'go when called' moment, and the vocation-x-era intersections (vx_soldier_war, vx_maker_plenty) are content that simply does not appear in a settled-era life.",
+    "Callback chains are the strongest freshness mechanic: 'looked away at 6 -> cb_lookaway at midlife -> corrects it at 51' creates a miniature three-act arc that feels causally earned. The cb_outcast_return payoff (kindness done at 6 repaid at 28) generated genuine 'I caused this' satisfaction across multiple dynasties.",
+    "The dynasty layer (heirlooms, motto, seat, lineage echo) gives a cross-life meta-story: watching the Castellane book pass generation to generation (Saoirse -> Liv -> Yara -> Emory -> Niall all interact with cb_books_late) is a real recurring motif that stays fresh because each character's relationship to it differs.",
+    "Solitary and childless life-shapes (m_solitary, a_chosen_family, e_solitary, e_childless) are genuine structural alternatives, not dead-ends — the Annika Ashcroft life felt qualitatively different in texture from the family-formation lives around it.",
+    "The 'fate' cards (f_fire, f_sudden_loss, f_grace, f_reversal) are the right design move: unavoidable events interrupt the 'binary virtue' rhythm and create dramatic beats the player did not choose and cannot optimise away."
+  ],
+  "staleness": [
+    "The fall-in-love / marry / first-child sequence fires in nearly every life that doesn't explicitly take the solitary path, and the structural arc of that sequence (y_love1 or a_meet_late -> a_marry -> a_child) is recognisable by dynasty 4 as a default template. In the transcripts, 19 of the 28 lives with surviving adults hit love -> marriage -> child in that order, usually within 12-20 years of youth. The variability is in the prose, not the shape.",
+    "The opening childhood band is thin and repeats fast. Across 28 lives, c_friend (look away / sit beside), c_steal, c_book, and c_origin fire in roughly 60% of all lives. By dynasty 8 a player has seen every childhood card at least twice. The child stage averages only 3 decisions per life; the opening always feels like the same warm-up.",
+    "The 'calling' card (y_calling) fires in every life, always as the same four-option fork with the same framing ('the roads fork'). This is the game's highest-traffic single moment and it reads identically regardless of era, trait, or house standing. A soldier, a scholar, and a maker all get the same card with the same four options; only the downstream consequences differ.",
+    "Elder arcs converge structurally: e_legacy (what to be remembered for), e_garden or e_peace, e_bequest, and the solitary/childless caps form a reliable closing bracket. By dynasty 6 the elder chapter feels like filling in a familiar grid — legacy-choice, garden-or-window, bequeath, die. The elder prose is often beautiful but the shape is not variable enough to surprise.",
+    "Several high-traffic cards repeat their exact prose across dynasties. 'Improved her own childhood a little, for a child who'd never know' (e_window / 'Tell the better story') appears verbatim in Anders Aldecott (D3), Felix Castellane (D5), Cosima Achterberg (D11), Liv Castellane (D12 line 1267), and Ingrid Lindholm (D15). The RECENT_LINES guard in epitaphFor exists but does not protect card body prose, only epitaphs. This is the most visible staleness signal in the transcripts.",
+    "The midlife band is the thinnest in structural variety. m_parent_age, m_child_grown, m_health, and m_money are reliable midlife fixtures, but beyond those the midlife 'expansion' cards (m_reinvent, m_who_became, m_peer_dies, m_rival, m_empty_house) often don't reach a given life because the cooldown timers and the midlife window are short relative to the card pool. Many lives show 4-5 midlife decisions total, most of them from the same half-dozen cards.",
+    "The 'a_work' promote-vs-presence card recurs with visible regularity in multi-generation dynasties; Ingrid Sereno (D8 3rd), Elias Vasquez (D14) and others all encounter the same framing ('a better title, longer hours, the family would get whatever was left'). The prose alternates well but the dilemma feels structurally identical each time.",
+    "The four-vocation fork creates persistent structural imbalance: soldier and scholar paths have deeper clusters (vocation-specific adult, midlife, and elder cards) than maker or wanderer, which trail off at the elder level. A wanderer life that settles early essentially becomes a generic adult life with no further vocation gating after a_wanderer_settle."
+  ],
+  "improvements": [
+    {
+      "what": "Replace the single y_calling card with era-inflected or trait-inflected variants that frame the fork differently depending on the world and the person",
+      "why": "It is the highest-traffic moment in the game and always reads identically. A 'calling in wartime' should feel like a different kind of pressure than a 'calling in plenty'; a frail character choosing the blade should carry a visible weight that a healthy character does not. Even two or three alternate framings tied to S.era or P.traits would break the sameness at what players experience as the pivotal decision of every life.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a RECENT_PROSE guard (mirror of the RECENT_LINES epitaph guard) to freshPick so that the same logLine string cannot appear in the same dynasty within N lives",
+      "why": "'Improved her own childhood a little, for a child who'd never know' appearing verbatim across five dynasties is the single most-named staleness signal in long sessions. The engine already does this for epitaphs; extending it to the card body logLine pool would eliminate the most jarring word-for-word repeats.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 childhood cards gated by era, so the child stage has structural variety beyond the current trait/means gates",
+      "why": "The child band is the fastest to exhaust (roughly 3 decisions per life from a small pool). A war-era childhood should have content — rationing, evacuations, an absent father — that a plague or plenty childhood does not. Currently the era only colours c_origin's text; it doesn't gate any distinct child cards. This would make the opener's structural shape vary, not just its prose.",
+      "impact": "high"
+    },
+    {
+      "what": "Add at least two distinct elder-arc templates so the closing chapter doesn't always resolve through the same legacy-garden-bequest bracket",
+      "why": "By dynasty 6 the elder chapter is structurally predictable: a legacy choice, a quiet activity, and a bequest. Players who have seen a few dynasties can feel the end coming from age 65. Even one alternate template — a late public reckoning for a high-seat house, or a solitary elder who skips the legacy question entirely — would break the pattern.",
+      "impact": "med"
+    },
+    {
+      "what": "Gate the maker and wanderer paths to elder-specific arc cards (parallel to e_soldier_old and e_scholar_old) so all four vocations have full three-act depth",
+      "why": "The soldier and scholar vocations have adult, midlife, and elder-capping cards. The maker has e_maker_handoff but no elder-philosophical cap analogous to e_scholar_old. The wanderer has e_wanderer_old but it fires regardless of whether the character settled or kept roaming, losing specificity. Full parity would make vocation choice feel like it has structural consequences all the way to the end.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a second-marriage or late-love disruption card for lives where the spouse dies mid-game, so widowed characters have structural options rather than just drifting into the solitary template",
+      "why": "When a spouse dies (ageRelations kills them by probability), the affected character loses all gated marital-content paths and silently converges on the solitary arc without any card acknowledging the specific loss of a long marriage. A card that fires only after spousal death (different from a_meet_late's tone) would create a distinct shape for widowed lives.",
+      "impact": "med"
+    },
+    {
+      "what": "Reduce the cooldown on era-specific cards (w_war_call, w_plague_tend, etc.) or allow them to fire for children as well as adults, so the era layer gates more than one or two moments per life",
+      "why": "Each era card is once:true, so a life born into war gets at most w_war_call and w_war_loss. A war-born child who becomes a scholar and never takes the blade still gets the same two war cards as anyone else. Making the era layer touch three or four different life-stages (including childhood and elder) would make the era feel like a world the character lives inside, not a pair of events that happen and then stop.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has thoughtful structural ambition — vocations, eras, callbacks, and dynasty memory are all real freshness mechanisms — but by dynasty 6 the life-shape template (childhood warm-up, single calling fork, fall-in-love arc, midlife quartet, elder bracket) is recognisable enough that variety feels like new paint on a familiar scaffold rather than a genuinely different kind of life."
+}

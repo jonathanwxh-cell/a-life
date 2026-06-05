@@ -1,0 +1,50 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.5,
+  "fun_highlights": [
+    "The four-vocation calling fork (soldier / scholar / maker / wanderer) fires reliably and gates genuinely distinct adult arc cards — a soldier's life in Dynasties 4, 7, 9, 10, 11, 13 reads structurally different from a scholar's, not just cosmetically.",
+    "Era cards (war, plague, plenty, hard, turning) surface real additional moments and colour the world a generation is born into; generation 3 of Dynasty 4 is born into war years and gets w_war_loss that founders never saw.",
+    "Trait affinity (bookish→c_book, warm→c_friend/c_animal, restless→c_move/c_steal) subtly tilts which childhood each character has — by dynasty 3 or 4 a returning player notices their bookish heir is getting a different childhood than the warm one.",
+    "The callback system genuinely pays off: cb_books_late, cb_outcast_return, cb_principle, cb_strayed give lives emotional through-lines rather than disconnected moments, and they land as promised.",
+    "Dynasty 9 accumulating across five generations into 'a house written into the histories' — watching heirlooms stack (the feared name, the fortune, the book), the motto crystallise, and the seat climb — is the game's best experience and is genuinely worth chasing.",
+    "Prose deduplication (freshPick / RECENT_LINES / rotI) is technically thorough; individual lines rarely repeat verbatim within a dynasty, and the observation pool is deep enough that the ambient texture stays fresh per-life.",
+    "The solitary and childless life-shapes are real, content-bearing alternative arcs rather than dead ends — m_solitary, a_chosen_family, e_solitary each have distinct cards."
+  ],
+  "staleness": [
+    "The childhood beat-sheet is visible by dynasty 3: c_sick (fever at age 3-6) appears in 10+ of 15 first-generation lives in the transcripts and is effectively the reliable first moment of nearly every childhood, signalling 'same template' before any choice is made.",
+    "The calling card (y_calling) fires in every single life across 30+ transcripted lives without exception — intended, but means the structural spine of every life is identical: born → fever → childhood card(s) → calling fork → love → marriage → children/work → elder. This shape is the game's repetition problem more than any single repeated line.",
+    "The 'married late, and found the lateness made the vow weigh more, not less' line appears verbatim in five separate lives across Dynasty 1, 4, 7, 9, and 10 — the single most re-landed specific outcome despite the RECENT_LINES dedup system, which apparently does not prevent cross-dynasty repeats at this frequency.",
+    "Epitaphs repeat more than the system intends: 'Taught what she knew, and so outlived the knowing of it' appears in D1-G2, D9-G1, D11-G2, D14-G1 (four times); 'Remembered, most of all, for a steady kindness' in D4-G2, D10-G1, D10-G3 (three times). By dynasty 8-10 a player has seen most epitaph clusters.",
+    "The cb_left_home callback fires in roughly every life where y_leave or wanderer-calling was chosen — by dynasty 6 it is fully predictable; it is no longer a surprising payoff but an expected entry in the life template.",
+    "The dynasty layer's 'one more dynasty' pull requires 3+ generations to feel real. For the first-session scope (first 20 minutes, first 1-2 lives), the seat number is abstract and the motto/heirloom system hasn't had time to accumulate — so the hook that would sustain a long session is invisible to a new player.",
+    "The adult band (age 28-60) is the thinnest relative to its length. Non-vocation adult lives can go 10-15 years between meaningful cards; the fallow/band-filler cards (a_fallow, a_neighbour, a_small_lie) fire but feel lower-stakes than the structural moments that precede and follow them."
+  ],
+  "improvements": [
+    {
+      "what": "Break the fever monopoly on early childhood: lower c_sick's weight from 1 to 0.4 and raise the weight of c_wonder, c_unfair, c_dark, and c_sibling so the first childhood moment is genuinely varied across dynasties rather than reliably the fever at age 3-6.",
+      "why": "c_sick currently fires in ~70% of first generations in the transcripts, making the opening beat of almost every new dynasty identical. The most important impression is the first card; varying it would make dynasty 2 feel like a new story rather than a replay.",
+      "impact": "high"
+    },
+    {
+      "what": "Extend RECENT_LINES to 120 entries (from 70) and add a dynasty-boundary flush of the oldest 30 entries so the system's memory actually spans across the 5-8 dynasties a session player will see in 20-30 minutes.",
+      "why": "The 'married late, and found the lateness made the vow weigh more' repetition and the repeated epitaph clusters ('Taught what she knew') demonstrate the 70-entry window is too short for a multi-dynasty session. The dedup system works within a dynasty but fails across them.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 calling variants that are NOT the four vocations — 'The land — a farmer's life' and 'The stage — a performer's life' or similar — to break the visual monotony of the same four-option fork in every life, even if they gate their own content lazily (reusing existing adult cards with a flavour wrapper).",
+      "why": "Every single life in 15 dynasties hits the exact same 4-choice calling fork with the same four labels. Even if the adult arc is the key differentiator, a new player sees this fork as 'the same screen again' by dynasty 3. Adding structural variety at the fork itself creates the impression of a wider space.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a visible, legible first-session goal to the UI: something concrete the player can see after life 1 that makes them want life 2 — e.g. 'Three things still ahead for your house: a name, a motto, a secret.' Show aspirations from houseAspirations() after the first eulogy screen, not just on the heir screen.",
+      "why": "The dynasty layer's 'one more dynasty' pull is the game's best feature but it's invisible in the first session. A new player finishing their first life sees a beautiful eulogy but no concrete hook. Surfacing the aspirations list earlier turns the contemplative ending into a forward-pointing prompt.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-5 new adult-band cards (age 28-55, not once-per-life) that are structurally distinct from the existing ones — specifically: a community or civic event, a creative work that could succeed or fail publicly, a health decision not tied to the m_health medical scare. These would give the long adult stretch more texture without requiring a vocation or era gate.",
+      "why": "The 28-60 band is the longest in a life and currently the thinnest in the transcripts for non-vocation characters. Players spend real clock time in this stretch; more varied moments here reduce the 'long quiet stretch' that breaks the meditative engagement.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely contemplative game with deep prose and real structural variety that a returning player will find — but a first-session player in the first 20 minutes will likely notice the same childhood template (fever, calling fork, love, marriage) before the vocation arcs and dynasty layer reveal the game's real depth, and the 'one more life' hook isn't surfaced early enough to grip before repetition registers."
+}

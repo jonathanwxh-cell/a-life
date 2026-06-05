@@ -1,0 +1,48 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "A single life genuinely fits a phone snack session (5-12 minutes depending on lifespan), and the tap-to-fast-forward mechanic is well-suited to one-handed play — the years race by satisfyingly when you push the flow text.",
+    "The vocation system (soldier / scholar / maker / wanderer) gives each life a structurally different arc; a soldier life and a scholar life really do read differently, and the vocation-specific midlife and elder cards (e.g. m_soldier_ghost, m_scholar_legacy, m_maker_masterwork) feel earned.",
+    "The dynasty layer — watching a house accumulate a motto, heirlooms, a seat level — provides a genuine 'one more generation' pull across sessions, and the moment a family motto crystallises ('We burn bright, and we burn') is genuinely satisfying.",
+    "Callback cards that reference a specific earlier choice by age ('the kindness done at 12 came back as a door held open') are the game's best trick: they make a life feel continuous and personally authored, not modular.",
+    "Era events (war, plague, fat years, turning age) add surprise that doesn't depend on the player's prior choices — a plague life or a war-generation life reads freshly against a settled-era one.",
+    "Touch targets are competently sized (44px minimums enforced in CSS), the scrollable-card indicator works, and height breakpoints at 740px/600px tighten the layout on short phones. For a casual phone game the touch experience is solid."
+  ],
+  "staleness": [
+    "The childhood fever card (c_sick) fires in nearly every life that starts young — across 18 dynasties it appeared in dynasties 1, 2, 3, 4, 5, 6, 7, 9, and 10. For a mobile snacker picking up for a quick life, this is the first concrete moment and it is almost always the same moment. Once-per-dynasty gating is not enough when dynasties are short.",
+    "The legacy card ('That I was kind') and its associated epitaph text ('Kind in the small daily ways that turn out to be the large ones') appeared verbatim in dynasties 4, 6, 7, 9, and 10. This is the single most visible staleness signal: by dynasty 4, a player has seen this eulogy note before and will see it again. The epitaph dedup logic in dynasty.js helps within a session but the phrase pool for the 'kind' cluster is small.",
+    "The 'remembered as kind' syndrome is partly downstream of the late-marriage monoculture: a large share of lives in the transcripts marry in the 40s-50s and the 'married X late, and found the lateness made the vow weigh more' line appears across dynasties 1, 2, 3, 4, 5, 6, 8, 9, 10. The engine's love-nudge logic has improved this, but the default outcome is still 'marries late' more often than not.",
+    "The 'reckless young one' callback (cb_reckless) — where an elder character tells a young family member about their own reckless youth — fires in dynasties 2, 4, 5, 6, 7, 9 among soldier/wanderer lives. For a snacker who plays soldier-type lives, this callback becomes predictable.",
+    "A single short session (one or two lives, 10-20 minutes) for a mobile player who hasn't built up a dynasty is missing almost all the freshest content: the era gates, the high-seat reputation gates, the dynasty-memory cards (d_ancestor, d_motto_test), and the competing-goods elder callbacks. These require 3-5 generations to unlock, which is a full hour — not a snack. The game's best variety is locked behind a time investment that fights the casual format.",
+    "Four-choice cards (the calling card, the bequest card, a_make_name) require scrolling on phones with screen height below ~740px. The 'more below' cue is subtle and the scrolling interrupts the game's contemplative flow. Not a dealbreaker but it costs immersion on shorter devices."
+  ],
+  "improvements": [
+    {
+      "what": "Replace the childhood fever card's once-per-dynasty gate with once-per-two-dynasties, and expand the fever card pool to 3-4 distinct situations (not just the fever — a broken bone, a lost thing, a frightening night). Gate different situations to different traits so a 'frail' child gets the fever but a 'restless' child gets something physical and kinetic.",
+      "why": "The fever card is the first non-generic moment for almost every young character and it fires constantly. It sets the tone for whether the game feels fresh or template-like. A mobile snacker notices it by dynasty 3.",
+      "impact": "high"
+    },
+    {
+      "what": "Double the epitaph phrase pool for the 'kind' and 'built' clusters, and add a third dedup level: no phrase used in the last 4 ancestors (currently 2). The 'Kind in the small daily ways' line should effectively retire after one use per session.",
+      "why": "The repeated epitaph is the most concrete 'I've seen this before' moment for a player reading the death screen. It undermines the emotion of a life ending uniquely.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface one era-gated or dynasty-memory card in the very first life of a new dynasty, even with seat=0. Currently these cards require a house to have some standing or lineage. A 'founding hardship' or 'the world your generation was born into' moment in life 1 would immediately signal that the game's world shifts across time, not just across choices.",
+      "why": "For a snacker who plays one or two lives and moves on, the era and dynasty-memory systems are invisible. They are among the best freshness mechanisms in the code but require patience to encounter.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a lightweight 'session summary' after each succession — one sentence naming the era, the house's current motto (if any), and one ancestor the new life will have heard stories about. This can be the eraLine() + a d_ancestor seed, displayed before the new life's first card. It takes 10 seconds to read and immediately contextualises generational play.",
+      "why": "A mobile snacker who picks up mid-dynasty has no way to quickly re-orient to what the house has become. The constellation exists but requires navigating away from the main flow. An inline handoff moment reinforces continuity without extra taps.",
+      "impact": "med"
+    },
+    {
+      "what": "For 4-choice cards on screens below 680px height, collapse two of the choices behind a 'show more' expand rather than requiring scroll. Or reduce 4-choice cards to present only the 2-3 most contextually relevant options (gated by stats/flags), keeping the full 4 as edge-case outcomes.",
+      "why": "On a short phone held one-handed, discovering that choices are off-screen requires a deliberate scroll gesture that breaks the contemplative tap rhythm. Some players will simply not see all options.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely pleasant for a session or two, with real freshness in its vocation arcs and callback system, but a mobile snacker picking it up for a quick life by dynasty 4 will have a reliable template waiting for them — fever, calling, late marriage, reckless callback, 'remembered as kind' — and the game's best variety is locked behind a generational investment that fights the casual format."
+}

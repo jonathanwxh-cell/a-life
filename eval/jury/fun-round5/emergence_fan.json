@@ -1,0 +1,51 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vx_ cards (scholar-in-turning-age, soldier-in-war-era, maker-in-plenty) are genuine system intersections that no other combination can produce — a scholar who hits a turning era gets a specific crisis about obsolescence that a soldier or maker in the same era never faces.",
+    "Trait affinity in draw weighting (bookish child leans toward c_book, warm child toward c_friend, guarded child toward c_dark) means the early years actually diverge by who the person already is — a bookish-frail life and a warm-restless life feel structurally different in childhood, not just cosmetically.",
+    "The callback chain is the game's strongest emergence vector: cb_lookaway referencing the precise age of the c_friend card 30-40 years later, cb_books_late closing the loop on a kept book, cb_strayed at elder naming the exact age of the affair — these feel genuinely discovered rather than scripted.",
+    "Dynasty reputation gating produces real differentiation: a tainted house meets r_old_shame and r_family_shadow that a kind or scholarly house never encounters; a ruthless house with the hardname heirloom gets r_hard_name deals a clean house cannot close. Playing toward a specific reputation unlocks a distinct content track.",
+    "The motto system earns its resonance: seeing 'Better a short blaze than a long smoke' at the top of Vera Halloran's birth screen, and then watching her live recklessly and die at 68 without apology, is the game's best emergent moment — a compact, cross-generational story no designer hand-scripted.",
+    "The d_ancestor and d_motto_test cards create genuine dynasty memory: 'The family has words it lives by — In time, all is weighed — and Caleb has come today to a moment that asks whether he actually believes them' lands differently when you watched Iris crystallize that motto two generations ago.",
+    "Heirlooms as inherited memories (child_books={inherited:true} seeding the callback eligibility in the next generation) means the family book genuinely propagates across generations and fires the cb_books_late callback in a different person's midlife — a cross-generational mechanical loop, not just flavour text.",
+    "The bequest system (e_bequest choosing mind/means/heart/free) is the one deliberate cross-generation lever the player actually controls, and the heir screen making it explicit ('From Anders, deliberately: everything they knew — a mind with a running start') gives succession real weight."
+  ],
+  "staleness": [
+    "The soldier-ghost card 'gave them the songs, let them keep them' appears in 6 of the 15 transcript dynasties — the most visible repeated beat in the run. Because it is once-per-life gated (not once-per-dynasty), it reliably lands in every soldier elder regardless of how differently that soldier lived. By dynasty 10 the pattern is recognisable before the card fires.",
+    "The elder arc has a visible template by dynasty 6: e_body or e_last_walk, e_legacy (one of three framings), e_bequest, then the epitaph. The prose changes and the vocation-specific elder card adds texture, but the skeleton — body slows, what to be remembered for, what to leave behind, die — is the same every life. The 'Tell the better story' response to e_window appears in 8 of 15 dynasties as a default elder beat.",
+    "Trait-on-trait intersections do not exist. The engine reads one trait at a time for affinity purposes; there is no card requiring bookish AND guarded, warm AND restless, or shrewd AND frail. A person with two traits gets two independent nudges, not a combined emergent identity. The richest emergence territory — how a specific combination of traits creates a distinct person-shape — is untapped.",
+    "Era modulates which world-event fires (w_war_call, w_plague_tend, w_hard_winter) but does not modulate how the core relationship or character cards read. The a_work promotion tension, the m_health scare, the a_affair framing are era-neutral. A family surviving a plague era and one living through plenty make the same decisions about the same marriage and midlife crises, with the era event arriving as an add-on rather than a filter that changes everything else.",
+    "Cross-vocation content does not exist. A wanderer who settles becomes vocation='settled' and gets the wanderer elder cap — but a scholar who once chose the road, a soldier who studied, a maker who wandered: these intersections are architecturally impossible. The four vocations are parallel tracks that never interact with each other or with the era layer (except the three vx_ cards).",
+    "Seat-gated high content (s_great_burden, s_patronage, s_inheritance_dispute, m_invest_name) requires seat-4 or seat-5, which in the transcripts is reached only in dynasties 6 and 12 — and only late in a life, meaning the heir who inherits that standing starts from low means and may not sustain it. The content that rewards a built house is rate-limited in practice because few dynasties hold high standing across multiple consecutive generations.",
+    "The love-marriage-child sequence reproduces in almost every life with a connected partner, across all 15 dynasties. The age varies (early, mid, late) and the prose rotates, but the mechanical beat — love card fires, marriage card fires, child card fires — is structurally identical regardless of vocation, era, or trait. There is no path where a soldier-in-war-era's relationship is mechanically different from a maker-in-plenty's."
+  ],
+  "improvements": [
+    {
+      "what": "Add 4-6 trait-pair combination cards that require BOTH traits simultaneously (e.g., id:'t_bookish_guarded' gated on traits.includes('bookish') && traits.includes('guarded')). These should produce moments impossible for either trait alone — a brilliant introvert's specific crisis, a warm-restless person's particular conflict.",
+      "why": "Trait combinations are the most obvious untapped emergence surface. The engine already knows both traits; the only missing piece is a card pool that treats the combination as its own identity. A bookish-guarded person and a bookish-warm person currently receive the same bookish card with a different ambient texture; they should face structurally different dilemmas.",
+      "impact": "high"
+    },
+    {
+      "what": "Make 8-10 existing core cards era-sensitive: add era-branch prose or conditional outcomes to a_work, m_health, a_affair, a_marry, and a_child. A wartime marriage should feel different from a plenty-era one; a health scare in a plague era is not the same as one in settled years. This does not require new cards — only branching text and conditional outcome modifiers inside existing ones.",
+      "why": "Currently the era layer adds world-events but doesn't colour the personal-life cards that dominate most lives. Making the intimate decisions feel placed in their historical moment would make the same card read differently across dynasties without requiring new content.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 vocation-cross-era cards beyond the three vx_ cards already present. Specifically: vx_maker_war (a maker in wartime drafted or making weapons), vx_wanderer_plague (a wanderer who cannot travel because the roads are closed), vx_scholar_war (a scholar conscripted or asked to legitimise the war). These six intersections currently produce no content.",
+      "why": "The three existing vx_ cards demonstrate that vocation x era intersections work and are legible to players. Extending them from 3 to 6-9 covers more of the combination space and rewards players who engineer specific vocation-era pairings across dynasties.",
+      "impact": "high"
+    },
+    {
+      "what": "Mark 'e_soldier_old' (gave-them-the-songs variant), 'e_window' (grandchild asks), and 'e_body' as onceDyn (once per dynasty) rather than once (once per life). Each firing once per dynasty instead of once per life would reduce the repetition rate from 6/15 to at most 1/15 for these overexposed beats.",
+      "why": "These three cards are the most visible staleness signals in the transcript. onceDyn already exists in the engine (S.seenDyn) and is used for other cards; applying it here requires only adding onceDyn:true to the card definitions.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 cards gated on reputation-AND-era intersections: a scholarly-house life born into a turning age gets a specific crisis about whether the family's learning is now obsolete; a tainted house in a plague era faces specific judgment; a reckless house in plenty years gets a specific boom-and-ruin arc. These require S.house.repute AND S.era checks simultaneously.",
+      "why": "Reputation and era are two of the game's strongest cross-dynasty systems, and they currently never interact with each other. Crossing them would create content that requires multiple generations of deliberate play to encounter — the highest-value emergence for dedicated players.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine emergence machinery — callbacks, vx_ intersections, reputation gating, trait affinity — but in play the collision rate is lower than the architecture promises: most lives run on a pool of ~40 universal cards with one vocation arc layered on top, and by dynasty 8-10 the elder template and the soldier-ghost repetitions are impossible to unsee, leaving an emergence fan wanting the trait-pair combinations and era-modulated relationship cards the engine is already structured to support but hasn't yet built."
+}

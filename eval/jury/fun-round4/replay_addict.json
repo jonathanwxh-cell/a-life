@@ -1,0 +1,49 @@
+{
+  "profile": "replay_addict",
+  "score": 6.5,
+  "fun_highlights": [
+    "The four vocation arcs (soldier/scholar/maker/wanderer) are the engine of structural variety — a soldier's life genuinely reads differently from a scholar's across three distinct stage-spread cards, and the ghost-at-3am callback closes the loop memorably.",
+    "Callback cards, when they land, are the single most satisfying mechanic: the book read at age 7 reappearing on a high shelf at 49, the child you looked away from showing up as a sleeping rough at 47. These are what 'one more dynasty' runs feel like.",
+    "The dynasty layer — seat progression, reputation drift, motto crystallisation, heirlooms and a family secret — gives a genuine cross-run goal and a reason to think dynastically. Dynasty 9 (Achterberg, 5 gens, 'We decline the luxury of sentiment', a house written into the histories) felt like an actual achievement.",
+    "Era cards (plague that demands you breathe the same air, the war that reaches into the house and takes someone, fat years that tempt you to overreach) inject genuine surprise and tilt the world in ways that feel historically contingent rather than personal.",
+    "The bequest card ('Everything I know' vs 'Nothing but their own freedom') is a smart inter-generational lever — you feel the next heir start differently when you choose deliberately.",
+    "Competing-goods moments (x_honest_or_kind, x_dream_or_duty, x_loyalty_truth) resist the clean answer and leave a productive moral residue. These are when the literary register earns its keep."
+  ],
+  "staleness": [
+    "By dynasty 8-10, the childhood sequence has become a recognisable checklist — fever card, book-or-yard, sibling jealousy-or-adore, friend-or-animal — arriving in almost every life regardless of traits. The trait-affinity weighting helps but does not break the template. Reading 15 dynasties back-to-back, you can see the same scaffold appear with different prose paint.",
+    "Late marriage is the near-universal shape despite the dispersal fix: 'Married [X] late, and found the lateness made the vow weigh more, not less' appears in dynasties 4, 6, 7, 9, 10, 11, 12, 13, and 15. The fix moved marriage off the window's last year but clustered it around 50-58 instead, so 'married late' remains the signature line of most adult lives.",
+    "The return-to-town callback (cb_left_home) fires in nearly every life that chose y_leave — dynasties 2, 3, 4, 5, 6, 9, 10, 11, 13, 14, 15. Because y_leave is itself common, the callback is almost universal, which robs it of the payoff rarity it needs. By dynasty 6 it reads as a structural beat, not a surprise.",
+    "The 'taught what she/he knew, and so outlived the knowing of it' epitaph cluster dominates the transcript — appearing in D1, D9, D11, D14 verbatim, and 'gave away everything he knew, and so kept it' in D2, D8 (Roman and Emory), D11 (Lazlo), D15 (Caleb). The epitaph pool has 7-8 clusters; the 'teacher' and 'kind' clusters are over-weighted relative to how many paths lead to them.",
+    "The elder band is thin in content variety: body card, legacy card, craft-handoff or garden, reconcile, and for soldiers the old-soldier tell. The elder years of a long life often feel like running the same closing checklist regardless of who the person was. A soldier elder and a scholar elder both get the same body-mechanics cards in the same order.",
+    "There is no structural divergence for childless lives: a character who chose 'No. This life, as it is.' at the child card receives no alternative adult arc — they just skip the a_child and m_child_grown beats and get the same pool as everyone else. The solo life-shape is a stated design goal but the content doesn't back it up with distinct cards.",
+    "The seat progression stalls in the low-to-middle range for most dynasties (rented room to small house in town), and the mechanics that lift it (m_invest_name, wealth peak) often don't fire early or clearly enough for a player to plan around. Of 15 dynasties only 2 reached seat 7 ('written into the histories'), and that achievement felt somewhat opaque rather than earned-and-understood."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 childhood cards exclusive to childless/solo adult lives, and 2-3 mid-life cards for the person who has no spouse and no children — moments of chosen solitude, found-family, or late vocation-deepen that make the solo arc feel like a structural shape rather than an omission.",
+      "why": "Currently the solo life gets the same card pool minus the family cards, producing a hollowed-out version of the domestic arc. A distinct pool — e.g. a card about the liberty of an unshared house, a found-family bond that functions like the spouse bond — would make 'no. this life, as it is' feel like a genuine choice with its own content rather than a foreclosure.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the weight or add a dynasty-level once-gate on cb_left_home (the return-to-town callback). Fire it at most once or twice per dynasty, not once per life that chose y_leave.",
+      "why": "When a callback fires in nine of fifteen dynasties it stops reading as a personal echo and becomes structural furniture. The rarity is what makes callbacks sing — cb_strayed and cb_unspoken work precisely because they are rare. cb_left_home has lost that quality by being near-universal.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 4-6 elder-stage cards that are vocation-exclusive and structurally distinct from the generic body/legacy/craft triad — a scholar's elder card about whether a lifetime of knowing has added up to wisdom, a wanderer elder card about mapping a life's geography, a maker elder card about the thing still unmade.",
+      "why": "The elder years are where a life's particular shape should crystallise, but currently elder content is largely vocation-agnostic. Soldier and scholar elders play the same closing sequence with only m_soldier_ghost and e_soldier_old as differentiators. More vocation-gated elder moments would make the elder years feel earned-by-the-life rather than applied universally.",
+      "impact": "high"
+    },
+    {
+      "what": "Diversify the marriage timing distribution more aggressively: add a 'married young' prose variant cluster (ages 18-28) with 4-5 lines, and weight the a_marry nudge more strongly when the love relationship is young. Currently the dispersal logic still clusters most marriages post-50 in the transcripts.",
+      "why": "Fifteen dynasties show the late-marriage line ('the lateness made the vow weigh more') in nine of them. This is the most visible staleness signal after the book callback. A life that found love at 18 and married at 22 should play and read structurally differently from one that married at 54 — but currently they mostly converge on the same 'late' prose because the safety-net timing pushes marriage late.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a visible 'dynasty goal' UI hint on the heir screen — not numbers, but prose like 'the family has never reached a grand estate' or 'the motto the family chose at generation 4 has not been lived up to' — so a replay-addict has a concrete, legible thing to pursue in the next dynasty.",
+      "why": "The dynasty layer is the strongest replay hook, but it is somewhat opaque: houseAspirations() exists in dynasty.js but the player only sees it on the heir/succession screen. A clearer statement of what the house has and has not achieved would make the cross-dynasty pull more concrete and deliberate, turning 'one more dynasty' from a vague pull into a targeted goal.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely fresh for 5-6 dynasties on the strength of its callback system, vocation arcs, and dynasty goals, but the childhood-marriage-elder template becomes legible by dynasty 8 and the transcript shows late marriage, the return-to-town callback, and the teacher epitaph cluster repeating at a frequency that tips the game from contemplative into familiar — a 6.5 that could be a 7.5 with a stronger solo-life arc and better elder-stage vocation differentiation."
+}

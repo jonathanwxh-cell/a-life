@@ -1,0 +1,59 @@
+{
+  "profile": "variety_seeker",
+  "score": 6.5,
+  "fun_highlights": [
+    "Vocation arcs create genuine structural divergence: a soldier's life (war haunting, m_soldier_ghost firing at 3am, e_soldier_old truth-telling) reads as a qualitatively different shape from a scholar's (the hungry-years gamble, cb_study_pays payoff, m_scholar_legacy) or a wanderer's (restlessness firing as a trait-gated moment, settle-vs-go tension, the roads-behind-you elder cap). This is the game's strongest variety engine and it works.",
+    "Era cards land meaningfully when they appear. A war-era life with w_war_call and w_war_loss produces a genuinely different texture — the war reaches in and takes someone, the peril flag haunts subsequent draws. A plague life, a turning-age life, a lean-years life each tilt the world differently. The macro-layer earns its keep.",
+    "Callback cards are the game's best surprise mechanism. cb_books_late (the child's difficult book re-read decades later), cb_outcast_return (the yard child, grown, holding a door open), cb_strayed (the affair carried to the end) — when these fire, they close a personal arc that rewards memory. The 'long arc closes' feeling is genuinely satisfying.",
+    "Solitary and childless lives are real shapes, not dead-ends. Adaline (D1), Naima (D5), Tomas (D11), Tamsin (D13 gen2) — these lives have distinct pacing, hit solitary-specific cards (m_solitary, e_solitary, e_childless), and end with a different register of reckoning. The content is there.",
+    "Trait affinity weighting in the draw engine is a subtle but genuine variety lever. A bookish child genuinely leans toward c_book; a warm child toward c_friend; a restless one toward c_move or c_steal. Childhood plays differently across the trait pool without the player noticing the seam.",
+    "The once-per-dynasty (onceDyn) gate on a few key cards is smart design: it stops the founding hardship or defining dilemma from becoming a ritual every generation visits."
+  ],
+  "staleness": [
+    "The scholar 'hungry years came good' beat (cb_study_pays / 'The hungry years of study, begun at X, at last came good') fires in nearly every scholar life across the 18 lives sampled: Marguerite (D2), Noor (D2), Mateo (D3 gen2), Tomas (D4 gen3), Idris (D3 gen3), Yara (D9 gen4), and others. It is the default scholar mid-arc beat and its exact prose repeats. By dynasty 5 a player who has run three scholar lives has read this sentence three times. The scholar arc is real but it bottlenecks at this one beat.",
+    "The elder-coda card ('Near the end, one old decision keeps returning') appears in 9 of the 18 lives in the transcript packet: Adaline D1, Lazlo D3, Mateo D3gen2, Idris D3gen3, Caleb D8, Ambrose D9gen2, Vesna D10gen2, Mateo D12, Tamsin D13gen2. That is half of all lives. The prose variants ('Decide it was right' / 'Let it stay unsettled') are only two, and both land in nearly every elder phase. It stops feeling like a personal reckoning and starts feeling like a required checkbox.",
+    "Marriage timing still bunches late despite the engine fix. The transcripts show love arriving at: Yara D4 at 57, Naima D5 at 58, Otto D4 at 54, Cyrus D7 at 57, Caleb D8 at 47 (late love card), Joaquin D9gen3 at 54, Tamsin D13gen2 at 57. The 'married late, and found the lateness made the vow weigh more, not less' phrasing appears verbatim at least five times. This was supposed to be the minority path after the engine fix; it remains majority behavior across this sample.",
+    "The teaching epitaph cluster collapses variety at death. 'Gave away everything she knew, and so kept it' or 'Poured what he knew into the young, and so refused, quietly, to die all the way' appears as the final epitaph for: Marguerite D2, Mateo D3gen2, Idris D3gen3, Caleb D8, Yara D9gen4, Tamsin D13gen2. Six out of 18 lives end on one of two near-identical teacher-epitaph phrases. The epitaph anti-repeat logic works within a dynasty but not across the session.",
+    "The adult band has a predictable topic spine even when individual cards vary. Almost every adult life runs: [love/meet] -> [a_child yes/no] -> [a_work take/refuse] -> [m_parent_age] -> [cb_something] -> [e_legacy] -> [cb_the_cost]. The cards at each slot rotate but the slot sequence itself is recognizable by dynasty 4. A variety-seeking player feels the skeleton under the prose.",
+    "The 'Tell the reckless young one' callback (cb_reckless) fires in Marguerite D2, Lazlo D3, Carys D9, Naima D5, Vesna D10. The two-option binary ('tell them to slow down' / 'tell them it was worth it') and the moment's setup are identical across all five appearances. No variant text, no personalisation beyond the pronouns.",
+    "Fate cards with a single choice (no real decision) — f_fire (appears for Otto D4, Yara D9gen4, Sabine D12gen3), f_grace, f_reversal — fire multiple times in a session with identical prose. A single-option card that uses the same lines feels like a cutscene, not a moment."
+  ],
+  "improvements": [
+    {
+      "what": "Retire or gate cb_study_pays after it has fired once in a dynasty; replace it with two or three vocation-specific mid-arc callbacks that are structurally parallel but NOT the same beat — e.g. a maker whose early shop is now famous being asked to franchise it, or a soldier who trained a unit running into that unit's survivors.",
+      "why": "cb_study_pays is the single most repeated named beat in the transcript packet. Every scholar hits it. A per-dynasty gate exists for some cards (onceDyn) — applying it here would guarantee players never see the same scholar payoff twice in a row.",
+      "impact": "high"
+    },
+    {
+      "what": "Break cb_the_cost (the late-life 'one decision keeps returning' card) into four vocation/memory-specific variants that require a distinct flag to trigger — one for strayed lives, one for soldier lives (the order they refused or obeyed), one for chosen-solitude lives, one for lives that chose self over family. Gate each so it fires at most once per session, not just per dynasty.",
+      "why": "At 9/18 appearances it has become a structural universal rather than a personal reckoning. Specificity — this card only if you strayed; this card only if you were soldier — would make it feel earned rather than templated.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a per-session RECENT_EPITAPH_CLUSTERS list (parallel to the existing RECENT_LINES list) that blocks the top 2-3 epitaph clusters ('teacher', 'scholar', 'built') from landing in consecutive dynasties, forcing the epitaph engine to reach for rarer clusters.",
+      "why": "The existing RECENT_LINES anti-repeat logic works within a dynasty but not across the session. A player who runs 4 dynasties has a 50%+ chance of seeing the teacher epitaph at least twice because the cluster is massively over-represented by the 'gave it all away' scholar path.",
+      "impact": "high"
+    },
+    {
+      "what": "Tune the late-love draw weight downward and the youth-love nudge upward so that 'married young' is the modal outcome rather than 'married late'. Currently, a_meet_late at 0.10 per draw and the youth nudge at 0.34 still produce late marriage as the transcript majority. The 'married late, and found the lateness made the vow weigh more' line needs to become a genuine minority result — perhaps 20-25% of coupled lives — not the default.",
+      "why": "When a life-shape that was intended as a rare variant ('love found after all hope') is the most common experience, its prose ceases to be poignant and becomes boilerplate. The variety-seeker reads 'lateness made the vow weigh more' for the fifth time and stops feeling it.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a second or third prose variant to the cb_reckless callback and to each single-option fate card (f_fire, f_grace, f_reversal), tied to vocation or era — a wanderer's fire is not a maker's fire; a scholar's grace lands differently than a soldier's.",
+      "why": "Single-option cards are already structurally unusual (no decision). When they also use identical text across five appearances, they read as scripted interruptions rather than emergent life-events. Two vocation-coloured variants would eliminate most of the repetition.",
+      "impact": "med"
+    },
+    {
+      "what": "Add at least two more scholar adult-arc cards beyond a_scholar_question and m_scholar_legacy, gated on different flags (e.g. one for a scholar who also took a stand, one for a scholar in a war era, one for a scholar who strayed). The scholar arc currently bottlenecks at exactly two events plus one callback, making every scholar life run the same three beats in the same order.",
+      "why": "The vocation-arc system is the game's strongest variety engine, but the scholar track has the thinnest content. Soldiers get three distinct arc cards plus the war-era cross. Wanderers get settle, return, and the era cross. Scholars get question and legacy — and both fire in nearly every scholar life.",
+      "impact": "med"
+    },
+    {
+      "what": "Gate the a_work card so it cannot fire more than once in a life (currently it uses a cooldown but can repeat). The 'take the promotion / refuse and be present' binary is the most content-neutral card in the adult band — it creates no memory, gates no callback, and leaves no flag. Once per life is sufficient; the slot it frees can be filled by trait or vocation-specific content.",
+      "why": "It currently fires twice in some longer lives (Adaline D1 at 44 and 60; Mateo D13 at 43). The second instance reads as a pure echo of the first with no accumulated weight.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life has earned genuine structural variety through its vocation and era systems — a soldier's life, a scholar's, a wanderer's each have distinct shapes — but a variety-seeker will start noticing the skeleton by dynasty 4 and be confident they know the adult beat-sequence and elder coda by dynasty 6, because the scholar study-payoff callback, the 'one decision keeps returning' elder card, and the late-marriage prose repeat across more than half of all lives, collapsing what should be personal reckonings into familiar template slots."
+}

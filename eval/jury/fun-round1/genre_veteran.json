@@ -1,0 +1,56 @@
+{
+  "profile": "genre_veteran",
+  "score": 6.5,
+  "fun_highlights": [
+    "Callback cards (cb_books_late, cb_outcast_return, cb_lookaway, cb_strayed, cb_unspoken) are the game's best design: they make a single life feel like a coherent arc rather than a sequence of isolated choices, and when they fire they land with genuine emotional weight.",
+    "The 'competing goods' dilemmas (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are refreshingly free of obvious correct answers — rare in the genre and a real strength.",
+    "Era events (war, plague, hard winter, fat years) genuinely diversify the emotional texture of a generation; a war dynasty reads differently from a plague dynasty at the level of available cards, not just flavour text.",
+    "Dynasty-level progression (seat, reputation, heirlooms, motto, secret) creates legitimate cross-session stakes — watching a scholarly or ruthless identity crystallise over four generations delivers genuine 'one more life' pull.",
+    "Prose quality is well above genre average; individual moments ('lateness made the vow weigh more', 'the body has started keeping different hours') land with real literary care.",
+    "Vocation arcs (soldier-ghost, scholar-legacy, maker-masterwork, wanderer-settle) are structurally distinct: a soldier's midlife reads differently from a scholar's, and the 3-card arc within each vocation is genuinely satisfying the first two times you see it.",
+    "The trait system (frail, bookish, guarded, restless, warm, dreaming, shrewd, stubborn) surfaces distinct moments and shapes the ambient-observation layer in ways that make two 'frail' lives feel different from two 'dreaming' lives."
+  ],
+  "staleness": [
+    "The life-shape is almost invariant across all 52 transcribed lives: calling at ~16-22 → late love at ~30-50 → child late at ~44-50 → marriage at ~50-56 → elder reflection → death. The engine's nudging guarantees these milestones fire, so 'calling + late love + late child + late marriage' is not a possible shape among others — it is effectively the only shape. By dynasty 4 this reads as a template.",
+    "Late love is catastrophically over-represented: 26 of 52 lives reach love late and note 'how little the lateness seemed to matter' or 'came to love past the age they thought it was meant for.' This is the game's dominant emotional note, and it loses its resonance through sheer repetition. A player who has watched it happen in 10 consecutive lives stops finding it moving.",
+    "Soldier is chosen by ~27% of lives (14/52), and within soldier lives the arc fires identically: soldier-service card → soldier-ghost card → soldier-old card, in the same order, with the same emotional beats. Across a long dynasty session you will watch this three-beat soldier arc replay verbatim in different names.",
+    "Epitaphs repeat concretely: 'Never could pass a hurt creature without stopping for it' appears 5 times across the 16-dynasty packet; 'Gave away everything he knew, and so kept it' appears 5 times; 'Left her knowing in other heads' appears 3 times in adjacent dynasties. The anti-repeat guard (blocking the last two ancestors' exact lines) is not enough when the stat profile keeps landing in the same cluster.",
+    "Childhood is structurally thin: the same 4-5 childhood cards (c_sick, c_sibling, c_grandparent, c_friend/c_animal) fire in nearly every life in years 3-12, giving every founder's early years an identical texture. By dynasty 6 the 'fever / new baby / dead grandparent / childhood friend' cluster is indistinguishable from dynasty 2.",
+    "Non-domestic lives are nearly absent: no life in 52 refuses love entirely, refuses all children, or refuses the calling. The engine nudges so reliably toward marriage-and-heir that solitary, childless, or deliberately uncalled lives — which would be genuinely different structural shapes — almost never emerge in practice.",
+    "Marriage prose rotates within a narrow band ('lateness made the vow weigh more,' 'most of a life already behind them,' 'without ceremony and without a single doubt') that by dynasty 5 has become a recognised formula even when the specific variant is new.",
+    "The bequest mechanic (mind / means / heart / free) is the clearest lever across generations, but its effects are subtle enough that a player rarely feels the downstream impact as a distinct difference — the next life's starting stats shift slightly, but the life-shape remains identical."
+  ],
+  "improvements": [
+    {
+      "what": "Structurally gate late love so that 40-60% of lives genuinely do NOT get a love arc — make solitary, chosen-solitude, or closed-to-love lives a real structural outcome with their own card paths (elder cards that only fire for the unpartnered; a different set of midlife dilemmas for the solo life).",
+      "why": "The late-love beat's emotional power depends on its rarity. When it fires in every second life it becomes the genre cliche the game is otherwise trying to avoid. A convincing solo-life shape would be genuinely different from anything in the transcript.",
+      "impact": "high"
+    },
+    {
+      "what": "Rebalance vocation draw weights or add a vocation-variety guard so that no single vocation (currently soldier) can appear in more than ~20% of lives per dynasty. Alternatively, expand the maker and wanderer adult-arc card counts to equal the soldier arc's three-card depth.",
+      "why": "With 14/52 soldier lives, a player in a 5-generation dynasty will watch the soldier-ghost/soldier-old beats fire at least twice. Maker and wanderer arcs are structurally thinner (fewer unique cards per arc) and so feel less distinct when they do appear.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the epitaph pool substantially (double it), and tighten the anti-repeat guard to block the last four ancestors' clusters rather than the last two, with a hard cap: no cluster may appear more than twice in any single dynasty's lineage.",
+      "why": "Five 'hurt creature' epitaphs in 16 dynasties is directly observable to the player reading the Chronicle. The epitaph is the final word on a life — repetition there is uniquely deflating.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 8-10 childhood cards covering genuinely distinct life-openings (extreme poverty that gates different adult paths, a prodigy track, a child who loses a parent very early, a child in a privileged household who must navigate a different kind of problem). Age-gate tightly so each life only gets 3-4 childhood cards, not the same 5.",
+      "why": "Currently years 0-12 are virtually identical across every life. The childhood is the most-seen part of the game and the most template-like — it sets no distinct character before the calling card.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 'no-child' content: a dedicated card arc for adult characters with neither spouse nor children that fires in the midlife and elder bands — distinct dilemmas about chosen solitude, found family, or late-life creative legacy that only this shape of life can access.",
+      "why": "Currently a childless life is punished by line extinction (forced new house), so players are nudged toward children. If childlessness were a genuine structural path with its own rewards (unique cards, a different legacy system), the 'one more life' pull would include 'I want to try a solitary life' as a real option.",
+      "impact": "med"
+    },
+    {
+      "what": "Make the bequest mechanic's downstream effects more legible: when an heir starts with a 'mind' bequest, show 1-2 concrete early-life moments that explicitly trace to that advantage (e.g., a card that fires only for mind-bequest heirs, framing the head start). Same for means and heart.",
+      "why": "The bequest is the game's best cross-generational lever but players cannot feel its effects because they manifest only as slightly different stat starting values. Making it surface in prose makes the dynasty layer feel more mechanically alive.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuinely beautiful moments and a dynasty system with real depth, but the transcripts expose a hard structural truth: every life follows the same late-love, late-child, late-marriage, elder-reflection skeleton so reliably that by dynasty 5 the player is watching a formula with rotating names, not emergent stories."
+}

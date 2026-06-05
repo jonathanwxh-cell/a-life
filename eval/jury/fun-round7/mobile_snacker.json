@@ -1,0 +1,47 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is genuinely delightful — when 'A kindness done at 12 came back, decades later, as a door held open' fires, it rewards players who remember their choices and creates a real sense of a lived life. On mobile this works especially well because the payoff is immediate and emotionally legible.",
+    "Four vocation tracks (soldier/scholar/maker/wanderer) each gate a distinct arc of 3-4 cards, so a short session picking 'the blade' gets a structurally different cluster than 'the book.' For bite-sized play this is the strongest source of variety — you can feel in one session that a soldier life and a scholar life are different shapes.",
+    "Era variation (war/plague/plenty/hard/turning/settled) genuinely freshens the world-opening text and gates unique era cards that don't appear otherwise. In a five-minute phone session Dynasty 5 (Yara Reyes, turning era) read visibly differently from Dynasty 6 (Soren Okonkwo, war era).",
+    "The prose quality sustains attention at mobile read speed. The log lines are short, punchy, and rarely feel like filler. A guarded character who 'kept the wall exactly where it had always stood, and watched someone give up trying' arriving three lives in a row communicates character through repetition rather than annoyance.",
+    "The dynasty 'seat' arc (nothing → rented room → fine townhouse → histories) provides a genuine one-more-dynasty pull. The aspirations list gives a concrete goal each time you start — for mobile snacking this is exactly the right lightweight hook to drive re-entry."
+  ],
+  "staleness": [
+    "By dynasty 6-8, the child/marriage cluster has calcified into a recognizable groove. Across all 15 dynasties in the transcript, the structural sequence — love encounter → maybe marry → child question → a_work or midlife health → elder reconcile/legacy — repeats with only cosmetic variation. The life *shape* does not change even when the vocation does; soldier and scholar lives both hit the same midlife trench (work vs. presence, aging parent, grown child's blessing) in the same order.",
+    "The marriage prompt text rotates through six variants but they all read as the same beat. In fifteen dynasties 'ask. build a life' fires in every dynasty that produces an heir, with the only variation being whether it lands at 24 or 46. For a mobile snacker who has seen four of these, the prompt text has lost surprise even if the character name changes.",
+    "The 'c_friend' / 'cb_outcast_return' pair repeats too visibly: at least nine of fifteen dynasties include a child befriending the yard outcast and the same callback firing in adulthood ('A kindness done at X came back, decades later...'). The prose is good but the beat is now a recognizable template, not a surprise.",
+    "The ambient observation lines (not choices — the 'his body has begun sending small bills' passages) repeat verbatim across lives in the same session. 'Some mornings the body answers the bell late, and grumbling' appears in Dynasties 2, 4, 6, 7, 9 within the transcript. The RECENT_LINES guard in dynasty.js applies to epitaphs but not to the observe() pool. On a phone where you're reading closely, this lands as copy-paste.",
+    "The elder band is the most formulaic. Nearly every life that reaches 66+ receives e_legacy (what do you want remembered), e_body or e_garden, e_peace, and the log 'mornings take longer' — regardless of vocation. A soldier elder and a scholar elder feel identical in their last ten card-years. The vocation-capped elder cards (e_scholar_old, e_soldier_old, e_wanderer_old) exist but the generic elder cards crowd them out consistently in the transcript.",
+    "Callback depth is shallow for a dynasty-length commitment. After dynasty 3-4 most of the once-per-life callbacks (cb_books_late, cb_outcast_return, cb_left_home) have already appeared once in the run. The cross-dynasty memory system (d_ancestor, d_motto_test) is underrepresented — only six of thirty lives in the transcript triggered an ancestor card. The dynasty layer is thin for what it promises."
+  ],
+  "improvements": [
+    {
+      "what": "Apply the RECENT_LINES de-duplication guard used for epitaphs to the observe() ambient pool (the stat-observation lines). Add a per-session seen-set that prevents any observe() line from firing verbatim within a 4-life window.",
+      "why": "The ambient observation prose ('mornings take longer'; 'body answers the bell late, and grumbling') is the single most visible staleness signal in the transcript because it repeats verbatim across nearby lives with no gating. Epitaphs already have this guard; observe() does not.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 distinct structural branches to the elder band gated on vocation. Currently e_legacy + e_body + e_peace fire for every elder regardless of calling. Gate these generics behind a 'no vocation-elder seen yet' check, and bump the weights of e_soldier_old / e_scholar_old / e_wanderer_old / e_maker_handoff so each calling reliably ends differently.",
+      "why": "The elder band is where staleness concentrates hardest — fifteen dynasties and most elders get the same three beats. Vocation-gated elder cards already exist but are crowded out. The fix is scheduling, not writing new content.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the weight of c_friend from 2 to 1 and mark cb_outcast_return as onceDyn (once per dynasty rather than once per life). Currently the yard-friend + callback pair fires in over half of all dynasties, making it the most reliably predictable beat in the game.",
+      "why": "The c_friend → cb_outcast_return pipeline is a genuine emotional beat the first two times and a template by dynasty 4. Making cb_outcast_return once-per-dynasty would let it land with weight when it does appear rather than becoming expected.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 1-2 marriage prompt variants that acknowledge the life stage explicitly for mid-life and late couplings (age 38+). The current prompt pool is shared across all ages; the lateness remark only appears in the marriage *log line*, not in the presented card text. A mobile reader sees the same six prompts whether the couple met at 18 or 44.",
+      "why": "The marriage card is the highest-frequency repeated beat in the game. Differentiated prompt text for early/late pairings would give the moment more felt variety, especially since late-love paths are already a distinct design intention.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the weight of d_ancestor and d_motto_test cards to ensure at least one ancestor-memory or motto-test card fires per generation in dynasties with 3+ generations. Currently across thirty transcript lives, only six triggered an ancestor card. The dynasty memory system is the game's strongest potential differentiator across dynasties but it barely surfaces.",
+      "why": "For a mobile snacker, the dynasty layer — the heirloom, motto, and ancestor callbacks — is the main reason to start another dynasty. If it rarely fires in play, the layer is decorative. These cards are gated on S.lineage.length >= 1 and S.house.motto which are often met; the issue is weight competition with ordinary cards.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is genuinely pleasant to pick up for a session — the prose holds, the vocation tracks and era system create real structural variety — but by dynasty 5-6 the life template has become recognizable: same child-befriending, same mid-life trench, same elder observations repeating verbatim, and the dynasty layer that promises accumulated meaning rarely surfaces enough to earn it."
+}

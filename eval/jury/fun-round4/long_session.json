@@ -1,0 +1,51 @@
+{
+  "profile": "long_session",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the game's single strongest freshness mechanic. When 'cb_outcast_return' fires and echoes a choice made at age 7 back into a midlife moment at age 33 with the exact earlier age cited, it genuinely surprises — it is the clearest 'I didn't expect that' beat in the whole transcript. Callbacks land maybe once per life and they are each time the most distinctive thing that happened.",
+    "The vocation arcs (soldier/scholar/maker/wanderer) produce structurally different adult bands. A soldier life reads materially unlike a scholar life — the content is different, the specific dilemmas differ, the elder reckoning ('at three in the morning, with no warning and no mercy') is unique to that track. Over 15 dynasties the four callings genuinely diverge.",
+    "The era system adds a macro-texture that prevents dynasty 8 from being dynasty 2 with new names. A plague life gates 'w_plague_tend' and recolours the opening; a war life gates two distinct cards. This is subtle but real — seeing 'These are war years. The drums are someone else's problem' at gen-start shifts the mood of what follows.",
+    "The dynasty-memory cards (d_ancestor, d_motto_test) are elegantly small and effective. 'There is a story in the family about [actual ancestor name from the lineage]' is personal without being heavy. The motto-test card asking whether the player actually believes the inherited words is a genuinely interesting dilemma the brief format earns.",
+    "The prose is consistently high-quality and the observe() ambient layer (firing at most once per life per trigger, from large pools) means the quiet years have texture. The 'body keeping its own quiet counsel' lines and the spirit/means observations stay fresh because freshPick and the once-per-life guard prevent them repeating within a single life.",
+    "The bequest card giving four meaningfully different inheritance flavours (mind/means/heart/free) is a real dynasty-steering lever. A player paying attention across many generations can use it to tilt heirs and feel agency over the house's character."
+  ],
+  "staleness": [
+    "The childhood band is exhausted by dynasty 5-6. All fifteen dynasties open with variants of the same four or five childhood cards in roughly the same order: fever (c_sick), book (c_book) or stray (c_animal), sibling (c_sibling), grandparent (c_grandparent), wonder (c_wonder), unfair (c_unfair). The cards are once-per-life but not once-per-dynasty, so a long-session player sees each childhood card in nearly every single life. By dynasty 10 the childhood checklist is invisible — you parse it as routine preamble rather than discovery.",
+    "The youth calling (y_calling) is near-certain by engine design, so every life contains the calling card. The four options produce different downstream content, but the frame — 'The years ahead want a shape. [Name] stands where the roads fork' — is the same every time. The three rotated text variants are not enough: across 30+ lives in a long session, a player has seen all three many times and the card has become the most templated moment in the game.",
+    "The love arc (y_love1 or a_meet_late) + marriage (a_marry) sequence is structurally present in roughly 80% of lives in the transcript. The love-opening text rotates through seven variants, the marriage text through three, but by dynasty 8-10 the sequence reads as boilerplate. Even the variation — 'young and hasty' vs 'married late' — is now a known beat, not a surprise.",
+    "The 'childhood fever' card (c_sick) appears in almost every dynasty — dynasties 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 all include a fever moment in the first 5 years. It is flagged 'once:true, onceDyn:true' but the onceDyn flag only prevents it twice per dynasty, not across dynasties. In a 15-dynasty session it fires 15 times. Even with three log-line variants and freshPick, 'Was nursed through a fever / Got through the fever alone' is the single most repeated sentence-template in the transcript.",
+    "The 'return to the old town' callback (cb_left_home) appears in dynasties 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15 — twelve of fifteen dynasties. The three prose variants ('returned to the town she fled at [age]', 'went back to the place she left at [age]', 'came back to where she began') are all seen multiple times by dynasty 8. It is not exhausted, but it is no longer a discovery.",
+    "The 'a young one in the family lives the way [name] once did' callback (cb_reckless) fires in dynasties 4, 6, 7, 9, 10, 13, 15 — nearly every other dynasty. It is onceDyn, so it fires once per dynasty, but across a long session its two choices and three line variants are completely familiar by dynasty 7.",
+    "The elder band is thin in structural variety. Most lives end with a recognisable sequence: e_legacy (what do you want remembered), e_body (body keeping different hours), e_peace or e_last_walk, and a dying observation. The four legacy choices ('kind/built/here') rotate but by dynasty 6 a long-session player has seen all three, and the framing question is fully predictable.",
+    "The 'fire destroys what she had' event (a fire card) appears in dynasties 2, 5, 7, 9, 11, 14 — six of fifteen. It has only one choice ('Begin again from the ash' with no alternative in the transcript — the second option appears to be missing or unrendered). This makes it feel more like a fate announcement than a decision. Seeing it six times in a session is blunting.",
+    "Epitaphs repeat verbatim across dynasties despite the anti-repetition code in dynasty.js. 'Gave away everything she knew, and so kept it' appears as the epitaph for Lazlo Fenn (D11-2) and also for Roman Bjornsen (D7-2) and the dynasty.js code is supposed to prevent this — but the cross-dynasty RECENT_LINES guard only has a window of 70, and with many lives the recycling starts to show. 'Remembered, above all, as kind' and 'Remembered, most of all, for a steady kindness' both appear as epitaphs multiple times in the 15-dynasty run."
+  ],
+  "improvements": [
+    {
+      "what": "Mark childhood cards onceDyn across the whole session, not just within a single dynasty. The fever (c_sick), book (c_book), stray (c_animal), grandparent (c_grandparent) should each fire at most 2-3 times across the entire run, then retire. Replace them with a larger pool of alternate childhood openers that can vary the texture of the early years.",
+      "why": "These cards appear in nearly every life. A player in session for two hours sees each one 10+ times. The childhood band is where staleness hits hardest because it is the entry point for every new life — if it feels familiar, the new life already feels old before it starts.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 8-10 new calling variants or split y_calling into two separate cards drawn at different youth ages — one that sets the broad domain (work with hands / work with mind / service / freedom) and a second that specifies within that domain. This doubles the structural variety of the adult band without duplicating content.",
+      "why": "y_calling is the most-seen card in the entire session. Its three rotated text variants are exhausted by dynasty 4. The four vocation paths are the game's best anti-staleness lever and they are already working well, but the gateway to them is too recognisable.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the fire event (the unnamed disaster card) at least two full binary choices and weight it so it fires at most 3 times in a full session. Currently it appears six times and the player cannot choose not to rebuild. A second option ('Walk away. Don't rebuild this time') that leads to a structurally different outcome (wanderer arc, loss of standing, or solitude life-shape) would make the event genuinely branching.",
+      "why": "Repeated fate events with no real choice are the least satisfying pattern in a choice-based game. The fire card in its current form is a statement, not a moment.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the elder band with 6-8 new cards gated on life-path combinations that do not yet exist: an elder card for a scholar who never married, an elder card for a soldier who had children and chose presence over glory, an elder card for a maker who made the masterwork and one who didn't. These gates exist in the data but the elder card pool does not use them as conditions — it draws from the same small elder pool for all life-shapes.",
+      "why": "By dynasty 8-10 the elder band feels most repetitive in a long session because e_legacy, e_body, e_peace, and e_last_walk are the same small set for every life regardless of how the earlier decades were lived. The game's best writing connects back to earlier choices; the elder band needs more of that.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the onceDyn pool by converting cb_left_home and cb_reckless to session-once (rather than dynasty-once). Both appear in over half the dynasties in the 15-dynasty run. Replace the 'gap' they leave with callbacks that draw from a longer memory — e.g. a grandchild who inherited a specific heirloom asking about it, or an elderly neighbor who remembers the ancestor who chose 'look away' in childhood.",
+      "why": "Callbacks are the game's best discovery mechanic, but when the same two callbacks appear every other dynasty their surprise value collapses. The game needs more callbacks and fewer repeated ones.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely lovely object — the writing is better than anything in the genre — but two-plus hours of play in one sitting exhausts the childhood and elder bands, renders the fever/book/stray/return-home beats invisible by dynasty 8, and leaves the mid-session player reading not new stories but familiar templates in slightly varied prose; the gameplay pleasure becomes purely aesthetic rather than the discovery and surprise the genre promises."
+}

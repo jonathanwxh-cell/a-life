@@ -1,0 +1,56 @@
+{
+  "profile": "completionist",
+  "score": 5.5,
+  "fun_highlights": [
+    "Vocation arcs (soldier / scholar / maker / wanderer) genuinely fork the adult experience — a soldier's life has a structurally different card sequence from a scholar's, and the arc spans all three stages (service, ghost, elder truth-telling). This is the game's most durable structural variety.",
+    "The callback system is its best design: when cb_outcast_return pays back a childhood kindness decades later, or cb_lookaway confronts you with the same avoidance 30 years on, it creates a genuinely earned 'whoa' moment that feels unique to that life.",
+    "The era system (war / plague / hard / plenty / turning) does real work — a plague-generation life is tonally and mechanically different from a fat-years one. The forced w_plague_tend and w_war_call cards make the world feel historically alive rather than static.",
+    "Heirlooms and the dynasty secret system create a legitimate long-tail chase for a completionist: the hardname / book / stray / teaching heirloom combinations, and a secret that can be exposed or buried, give multi-generation investment hooks.",
+    "Seat-gated and reputation-gated content (s_patronage, s_inheritance_dispute, r_hard_name, r_scholar_door) rarely surfaces in normal play — spotting it for the first time in a high-seat dynasty feels like a genuine discovery.",
+    "The early-death clause (Pavel Delacroix dying at 11; a frail founder dying at 59) creates structurally short lives that are tonally distinct from the long domestic arc, giving the completionist a 'different shape of life' to seek."
+  ],
+  "staleness": [
+    "No discovery log or seen/unseen signal: there are ~115 distinct cards, but the game never tells you what you've missed or what exists to find. A completionist's core pleasure — 'I found a new thing' — is undercut because there is no way to know the space. After dynasty 8 you cannot tell whether you are hitting repetition because you've actually seen most content or because draw luck is unfavorable.",
+    "The domestic architecture is nearly identical across lives: almost every life in the 16-dynasty transcript finds love late (via a_meet_late or y_love1), marries late, has a child late, and hits e_bequest if they have children. The sequence born → maybe-childhood-card → vocation → late-love → late-marriage → late-child → work → elder-reckoning (cb_the_cost) is the overwhelming template. Structural variety below the vocation layer is thin.",
+    "The most common epitaph in the transcripts is 'Never could pass a hurt creature without stopping for it' — appearing as the final line for at least 5 different characters across different dynasties. By dynasty 6, a completionist sees this as a repeating slot rather than a memorial. The epitaph rotation is similarly exposed by dynasty 8 or so.",
+    "The motto pool has 9 mottos for 9 reputation types, but the draw is heavily skewed: 'We burn bright, and we burn' (reckless) appears in 4 of the 12 transcript dynasties; 'We leave something beautiful behind' (artistic) in 3. A completionist sees most motto variants by dynasty 8-10 and no new ones emerge.",
+    "The late-love meeting card (a_meet_late) has only 3 text variants and fires in the large majority of lives — nearly every life in the transcripts finds love through this card. All 3 variants are exposed within 3-4 dynasties. The 7-variant y_love1 pool is similarly exhausted quickly.",
+    "Rare trait-gated cards (t_bookish, t_guarded, t_shrewd, t_stubborn, t_dreaming, t_frail, t_warm, t_restless) almost never surface in the transcripts across 53 lives, despite traits being assigned to characters. These cards exist but are effectively invisible in normal play — a completionist hunting for them has no lever to pull.",
+    "Competing-goods dilemmas (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, x_promise, x_mercy, x_favour) are the game's most interesting moral moments, but they are weight-1 or once-per-life with cool 16-22 years, and largely absent from the 53-life transcript sample. A completionist cannot reliably surface them.",
+    "The three marriage text-variants are a small pool exposed within 2-3 dynasties, after which every marriage reads 'after both had long stopped expecting it, and meant it the more for that' or a close rotation. Same for the child-birth lines.",
+    "There is no 'one more dynasty' mechanical hook specifically for a completionist — no hint system, no visible rarity tier, no achievement for reaching seat 7 and then falling, no way to target the tainted/exposed-secret arc. The dynasty summary screen shows only what happened, not what else could have happened."
+  ],
+  "improvements": [
+    {
+      "what": "Add a 'chronicle of the unseen' or discovered-moments log accessible from the constellation screen — not a list that spoils, but a counter and unlocked titles ('You have witnessed 12 kinds of moment. There are many more.'). On death, show 1 card the just-completed life was eligible for but never drew, in a greyed-out 'what might have been' panel.",
+      "why": "The completionist's central itch is 'what am I missing?' The game has ~115 cards but no signal that they exist. This single change would give every dynasty-end a 'I need to see that' pull. The greyed-out card is pure information, not spoiler-level — it just proves the space is larger than it looks.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase weight and surface frequency of the trait-gated cards (t_bookish, t_guarded, t_shrewd, etc.) — currently they almost never fire even when the trait is active. Either raise their weight from 2 to 4, or add a 'signature' boost in the draw loop similar to how vocation cards get preferential treatment.",
+      "why": "Traits are presented as defining character but the cards they gate are practically invisible across 53 lives. A bookish character should reliably get t_bookish; a guarded one should reliably get t_guarded. Right now traits shape stats via drift but rarely gate visible moments — a completionist who chooses a bookish heir to unlock new content will be disappointed.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 more motto options and diversify which reputations accumulate — specifically 'generous' and 'pious' mottos appeared zero times in 12 dynasties despite their reputation paths existing. Audit the reputation bump weights in updateHouse() to ensure all 9 paths to reputation are roughly equally achievable.",
+      "why": "A completionist chasing all 9 mottos finds that reckless and artistic crowd out the rest. If pious/generous mottos are unreachable through natural play, they aren't content — they're dead code. The completionist who discovers this loses trust in the game's depth.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce 2-3 'dark path' multi-life arcs that require specific choices across consecutive generations to unlock — e.g., three consecutive lives choosing the affair/strayed path reveals cb_inherited_secret and r_family_shadow together; a dynasty that stays at seat 0 for 4 generations unlocks a 'house reborn' founding moment. These should be hinted but not guaranteed.",
+      "why": "The completionist's 'one more dynasty' pull requires a cross-dynasty goal beyond 'reach seat 7.' Currently the dynasty layer is accumulative (seat rises, mottos crystallize) but not experientially branching. A dark-house or tainted-line arc would give a concrete alternative dynasty shape to pursue.",
+      "impact": "high"
+    },
+    {
+      "what": "Thin out the a_meet_late card's near-universal surfacing — it currently fires in the majority of lives that lack early love, crowding out variety in the adult band. Raise its minimum age gate from 26 to 32, reduce weight to 3 (from 5), and add 4 more text variants to the pool. The 3-variant pool is exhausted in the first session.",
+      "why": "The late-love template dominates the adult arc and makes lives feel structurally identical. A completionist notices by dynasty 3 that 'someone, across an ordinary Tuesday' is a nearly-guaranteed beat. Thinning it would allow the competing-goods x_ dilemmas and the trait moments more surface time in that life-band.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a non-linear 'secrets board' to the constellation/dynasty view — a visual of the house's known heirlooms, the sealed secret (marked ??? if unknown), and the reputation trail. Give one deliberately mysterious entry labelled 'something the family has not yet faced' to signal that unexplored content exists without naming it.",
+      "why": "A completionist without a map has no reason to keep playing beyond 'it might be new.' A mysteries board makes the gaps legible without spoiling them. It also makes the dynasty layer feel like a persistent world rather than a score.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine structural depth — vocation arcs, eras, callbacks, dynasty-gated content — but a completionist will exhaust most of the visible surface within 6-8 dynasties and have no way to know what rare content remains hidden, no lever to chase it, and no 'one more dynasty' hook beyond the dynastic treadmill of seat-climbing and motto-crystallization."
+}

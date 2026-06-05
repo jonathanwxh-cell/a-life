@@ -1,0 +1,57 @@
+{
+  "profile": "genre_veteran",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation-gated arc clusters (soldier/scholar/maker/wanderer) with their own adult/midlife/elder beats are the game's strongest structural move — a scholar life and a soldier life are genuinely different shapes, not just different paint on the same skeleton.",
+    "The callback system (cb_books_late, cb_outcast_return, cb_study_pays, cb_the_cost) is the game's best mechanic: choices made at age 9 resonate at 50, and that's exactly what the genre's best entries do.",
+    "The dynasty layer accumulates genuine texture — motto crystallization, seat arc, heirloom pass-down, the book that goes from a child's hands to an adult's shelf to a grandchild's gift — this is the 'one more dynasty' pull working.",
+    "Vocation x era intersections (vx_soldier_war, vx_maker_plenty, vx_scholar_turning) are the freshest content in the game: content that only exists at a specific life-shape meeting a specific world-shape.",
+    "Competing-goods dilemmas (x_honest_or_kind, x_dream_or_duty, x_loyalty_truth) are genuinely hard and non-obvious — neither option is clearly right, which is rare in the genre.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) with no player-chosen way out are a smart genre subversion — life occasionally just happens.",
+    "The dynasty-memory cards (d_ancestor naming prior lineage members by name, d_motto_test) create emergent cross-generation stories that the genre's weaker entries never attempt.",
+    "Solitary and childless life-shapes being given their own content (m_solitary, e_solitary, e_childless) rather than treated as failure states is the right design instinct."
+  ],
+  "staleness": [
+    "The scholar arc is effectively templated by dynasty 3: y_calling (scholar) → a_scholar_question → cb_study_pays (name your worth / teach it cheap) → m_scholar_legacy (give vs. guard) → e_scholar_old (hand the question on). Dynasties 2, 3, 4, 8, 9, 12 all hit this skeleton with near-identical narrative shape. The prose variants rotate but the beat structure is fixed.",
+    "The elder 'one old decision' reckoning (cb_the_cost) lands in 7 of 12 dynasties in the transcripts, and the two choices ('decide it was right' / 'let it stay unsettled') produce near-identical philosophical resignation lines. It reads as the mandatory elder finale, not as an earned callback.",
+    "The 'red and furious' birth line has a dynasty-wide burn flag, but still appears in 5 of 12 dynasties' first-child births — it registers as a cliche by dynasty 4.",
+    "The body-observation prose ('the stairs have started to ask a question', 'mornings take longer to arrive') fires across nearly every life in the transcript — the once-per-life gate prevents repeats within one life, but across a session reading 38 lives, the lines repeat verbatim 4-6 times each and become the game's most visible wallpaper.",
+    "Most lives contain 10-14 player decisions. That's a thin decision-count for a full life-sim: the space of possible paths is smaller than it appears, and by dynasty 6-8 a pattern-fluent player will start predicting which cards are coming based on their vocation and age.",
+    "The marriage and child beats cluster tightly despite engine nudges — most lives in the transcripts marry 40-58 and have a first child in the late 30s-40s. The 'married late, found the lateness made the vow weigh more' variant appears in 6+ lives across different dynasties and stops landing.",
+    "Wanderer and maker arcs have roughly half the content depth of the scholar arc — a wanderer's life often gets a_wanderer_settle and m_wanderer_return but then falls through to generic adult/midlife cards, reading more like a lightly-flavoured ordinary life than a structurally distinct one.",
+    "The first 3-4 childhood cards (c_sick, c_friend, c_wonder, c_unfair) form a near-mandatory childhood checklist: most lives in the transcripts touch 2-3 of these in the first 12 years, and the variation between 'faced: The fever' / 'faced: The unfairness' becomes recognisable as template by dynasty 5."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 additional vocation-arc beats for maker and wanderer at the adult/midlife stages, matching the scholar arc's density (5 gated cards vs maker's 3).",
+      "why": "The scholar arc's depth is what makes it feel like a distinct life-shape; maker and wanderer lives collapse back to generic adult cards mid-run because their gated pool is thin. Giving a maker a shop-politics card and a wanderer a 'roots vs. the road' relationship card at midlife would make all four vocations feel structurally equivalent.",
+      "impact": "high"
+    },
+    {
+      "what": "Retire or heavily rotate the elder 'one old decision' card (cb_the_cost). Replace it with at least 3 elder caps that are gated by WHAT the life actually did — a 'soldier's peace', a 'scholar's final question', a 'kind life's reckoning' — rather than a single universal callback.",
+      "why": "The current cb_the_cost fires in almost every long life and produces the same two resignation options regardless of how the life was lived. It flattens the elder stage into a single philosophical template and is the single strongest staleness signal across the transcripts.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the observation pool (the ambient prose lines that fire from observe()) by 40-50% and rotate them with stronger dynasty-position sensitivity — lines about legacy and standing for high-seat lives, lines about obscurity and making-do for low-seat ones.",
+      "why": "The current observation lines repeat verbatim across 38 lives in the transcript (5-6 hits on 'the stairs have started to ask a question'; 4 hits on 'mornings take longer to arrive'). These lines are the most-read prose in the game — they appear whether or not a card fires — and their repetition is the most visible staleness signal to a session reader.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 2-3 card 'dark middle' arc: a period of genuine struggle, stagnation, or moral failure in adulthood that fires only for lives with certain stat patterns (low spirit + low means, or high means + low heart), gated by neither vocation nor era.",
+      "why": "Every life in the transcripts tends toward a gentle, contemplative arc — even 'bad' choices rarely produce a genuinely dark life-shape. A midlife failure arc (different from the generic u_loss / a_fallow cards) would create structural asymmetry between lucky and unlucky lives, making the dynasty's high-water marks feel earned against a real possibility of ruin.",
+      "impact": "med"
+    },
+    {
+      "what": "Replace the 'red and furious' first-child birth line with a pool of 6-8 lines gated by the parent's vocation and the era, so a soldier's first child lands differently from a scholar's, and a wartime birth is different from a fat-years one.",
+      "why": "The single memorable 'red and furious' line has a dynasty-burn flag but still appears in 5 of 12 dynasties. Era and vocation are already tracked — using them to tint this high-visibility moment is a low-effort, high-payoff way to differentiate what is currently the most repeated single line in the game.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'house in decline' arc: 2-3 cards that only fire when the dynasty seat is actively falling (seat dropped last generation), giving a player managing decline a different set of decisions from one building upward.",
+      "why": "The current system has reckonings and falls, but both rising and falling houses mostly draw from the same card pool. A player watching a proud house slide from 'fine townhouse' to 'rented room' over three generations deserves content that names and wrestles with that decline, not just the standard adult arc with lower starting stats.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine bones — the callback system, vocation arcs, and dynasty layer are all doing real work — but by dynasty 5-6 a genre-fluent player will recognise that roughly 8-10 beats form the life-template, the scholar arc is effectively scripted, and the elder stage collapses to the same philosophical resignation regardless of how a life was actually lived, landing it firmly in the 'pleasant but goes stale' tier."
+}

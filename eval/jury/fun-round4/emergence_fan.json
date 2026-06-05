@@ -1,0 +1,55 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.5,
+  "fun_highlights": [
+    "Vocation x era intersections (vx_ cards) are the game's best idea: a scholar in a turning age, a soldier in a war era, a maker in fat years — these few cards genuinely collide two independent systems and produce outcomes that feel unscripted. The vx_soldier_war card in particular (soldier who chose the blade now faces the actual war) lands as a proper emergent beat.",
+    "Callback cards (cb_*) work. When they fire they produce real arc-closure: Anouk D1 keeps the book at 7, finds it at 64; Ronja D3 looks away from a child at 8, meets the same moment at 47 as a stranger sleeping rough; Otto D9 befriends the outcast at 7, gets the door held open at 33. These are the game's most emotionally alive moments because they reach back across decades of your own choices.",
+    "The trait-affinity draw weighting in the engine is clever and mostly invisible: a bookish child leans toward c_book, warm toward c_friend, restless toward c_steal or c_move. Two bookish heirs do not have identical childhoods but their childhoods tilt toward the same pole — this is character-coherent emergence rather than raw randomness.",
+    "Dynasty-layer accumulation does create meaningful 'one more generation' pull. Watching a house climb from nothing to a fine townhouse (D9 Achterberg, 4 generations) feels like a shaped story, not just scored stats. The motto crystallization is a genuine reward beat.",
+    "Solitary and childless life-shapes now exist as real content-bearing paths rather than dead ends. D4 Ronja Brandt's solitary scholar arc and D6 Tamsin Reyes's wanderer-then-solitary arc feel structurally distinct from the domestic template.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) with no opt-out add texture and occasionally collide with the life's existing state in ways that feel genuinely unchosen."
+  ],
+  "staleness": [
+    "The childhood fever card (c_sick) is functionally mandatory. It appears in 13 of 15 dynasties as one of the first 1-3 moments in a life. A player learns within two dynasties that childhood begins with: fever → (book or friend or animal or sibling) → calling. This is a recognisable template, not an open space.",
+    "The 'left-home and returned' beat is the single most repeated structural unit in the transcripts. 14 of 15 dynasties contain some version of cb_left_home or the 'smaller than remembered' callback line. The prose variants are good but the player recognises the skeleton by dynasty 4.",
+    "The love arc is near-universal. Virtually every life produces either y_love1 or a_meet_late followed by a_marry. The engine's draw nudging (0.34 chance to prioritise y_love1 each tick, 0.10 for a_meet_late) means love is not a possibility that might not happen — it is a scheduled event. By dynasty 6 the player can predict: 'a love card will appear in the teens or twenties, marriage will follow in the thirties or forties, the a_child card will come up.' Structural sameness, not structural variety.",
+    "Vocation tracks are prewritten arcs, not collision spaces. Each vocation has exactly 3 dedicated cards (youth/adult, midlife, elder) that fire in order and are once-per-life. By dynasty 8 a player who has seen multiple soldier lives has seen all 3 soldier cards (a_soldier_service, m_soldier_ghost, e_soldier_old) and knows the arc before it fires. The vocation gates a track; it does not fork into unpredictable territory.",
+    "The book heirloom (cb_books_late / 'pass it to a young one') fires in every dynasty that carries the heirloom, becoming mechanical: heir inherits memory, finds book on shelf in midlife, passes it to a child. D1 Anouk, D9 Aldous, D9 Greta, D9 Otto, D15 Linnea, D15 Caleb — the same beat, near-identical framing every time. Heirloom callbacks do not vary by how the current life has been lived.",
+    "The cb_corner pattern (cut a corner once, corner returns bigger) fires identically in D8 Elias, D9 Aldous, and D10 Yara across three different dynasties. The machinery of the callback becomes visible: if you see 'a_small_lie', you know a midlife callback is coming. This is telegraph, not surprise.",
+    "Observation lines cycle into repetition by dynasty 8-10. The high-mind pool ('Books have become a country she can live in'; 'There is a whole life she keeps behind the eyes') has ~8-10 entries that rotate visibly. A player reading the chronicle sees the same 2-3 lines reappear across different lives. The ambient prose that was meant to vary the texture becomes the texture's sameness.",
+    "No vx_ intersection card fires in more than 1-2 of the 15 dynasties, suggesting they are too rare. The system that produces the best emergent collisions (vocation meets era) is the most underused. The era-gated cards (w_war_call, w_plague_tend, etc.) do fire reliably but produce the same single-axis pressure; only the vx_ cards would cross two character-defining systems, and they barely land."
+  ],
+  "improvements": [
+    {
+      "what": "Replace c_sick as a near-mandatory childhood opener with a weighted pool of 6-8 childhood 'opening conditions' (illness, early move, family hardship, early wonder, early loss, sibling arrival) that each appear at most once per dynasty and are drawn probabilistically. The current structure means every child is sick first.",
+      "why": "c_sick fires in 13/15 dynasties because it is the lowest-age eligible card with w:1 and no cooldown issue — it always wins the early draw. Breaking the 'fever as default opening' would immediately diversify the first chapter of every life, which is the player's most repeated experience.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate heirloom callbacks on how the current life has actually been lived, not just on whether the heirloom exists. The inherited book should produce a different callback if the heir is bookish vs. restless vs. guarded — e.g., the guarded heir finds the book and it's the one thing they've kept close; the restless one almost threw it out twice. Currently cb_books_late fires the same text regardless of the heir's traits.",
+      "why": "Heirlooms are the dynasty layer's most visceral cross-generational tool, but they currently trigger the same scripted moment across every heir. Trait-branching the callback text would make inheritance feel like collision (the heirloom meets this particular person) instead of a scheduled reminder.",
+      "impact": "high"
+    },
+    {
+      "what": "Double or triple the pool of vx_ (vocation-x-era) intersection cards. Currently there are only 3 (vx_scholar_turning, vx_soldier_war, vx_maker_plenty). There is no vx_wanderer_war, vx_scholar_plague, vx_soldier_hard, vx_maker_turning, vx_scholar_plenty, vx_wanderer_plague, etc. These are the game's best emergent moments and there are almost none of them.",
+      "why": "In 15 dynasties the existing 3 vx_ cards fired a combined ~4-5 times. The richest design space in the game — where a character's chosen path collides with the world's condition — is nearly empty. Each new vx_ card costs one card worth of writing and doubles the felt variety for anyone who has picked that vocation in that era.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a love/non-love BRANCH at the calling fork: the y_calling card (or its successor) should acknowledge whether a love interest exists and vary the calling's texture accordingly. Separately, reduce the love-card nudge probability from 0.34 to ~0.18 for y_love1 and let a_meet_late compete more fairly. Roughly 30% of lives should stay solitary through youth.",
+      "why": "Love is currently the second most predictable event after the fever. Reducing the nudge probability and letting it compete normally would make love feel like something that happened to this life rather than the scheduled second chapter. Solitary paths already have content; they just need a higher baseline probability.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 'dynasty memory' moments that fire only after generation 4+ and reference the accumulated reputation or heirlooms in an unpredicted way — e.g., a moment where the family's ruthless reputation creates an unexpected opening OR closing, or where two inherited heirlooms create a combined moment that neither alone would produce. These would be the 'stories the designer didn't hand-script' that the emergence_fan archetype specifically wants.",
+      "why": "The dynasty layer currently influences which seat-gated and repute-gated cards appear, but it does not produce genuinely unexpected combinations. A 'hardname + war era' combination moment, or a 'scholarly house + tainted secret' collision, would make the accumulated dynasty state feel like it is generating content rather than just unlocking pre-existing slots.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the cb_left_home / return-to-hometown beat a once-per-dynasty flag (onceDyn) rather than once-per-life. Currently it fires in essentially every dynasty because every life that chose 'left_home' is eligible, and most lives do leave. Once a dynasty has done the 'smaller than remembered' beat, subsequent heirs who leave should face a different callback — perhaps the town is now genuinely changed, or the heir never knew it at all.",
+      "why": "This is the single most repeated structural beat in the 15-dynasty transcripts. It fires 14 times. Making it dynasty-once would immediately eliminate the most visible source of template repetition without removing any content from first experiences.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has real emergence machinery — vocation-era intersections, trait-weighted draws, callback arc-closures — but the transcripts show the skeleton of a template (fever, love, marriage, left-home callback, vocation track, elder legacy question) repeating clearly enough that by dynasty 6-8 a player is completing a familiar structure with varying prose rather than discovering an unscripted life."
+}

@@ -1,0 +1,56 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is the game's warmest design idea — 'cb_lookaway' firing 47 years after 'looked_away', with the exact age embedded, delivers a genuine payoff that feels earned rather than procedural. Cozy players will feel that slow-burn connection as a hug.",
+    "Vocational arcs give each life a structural backbone that actually differs. A bookish scholar's life in Dynasty 6 (Lena Holloway) reads differently from a wanderer's (Ottilie Holloway in the same dynasty), and the vocation-gated cards (soldier_blooded, scholar_question, maker_masterwork) land with their own distinct texture.",
+    "The dynasty accumulation — seat climbing, motto crystallisation, heirlooms passing down — supplies exactly the gentle long-term goal that this genre needs. Watching House Castellane climb across five generations to 'an old and famous house', building the motto 'By our own hands', gave a genuinely warm sense of a thing being built.",
+    "The 'fate' cards (f_fire, f_sudden_loss, f_grace, f_reversal) remove player control and land harder for it. A sudden bereavement in Dynasty 11 that broke the cozy tone briefly felt true to life rather than punishing — the right kind of cozy disturbance.",
+    "The ambient observe() layer (body tiredness lines, spirit-high glow lines) keeps the game breathing between cards. These quiet observations are the game's best prose and they never feel stale.",
+    "Era cards genuinely change the flavour — a 'plague' life, a 'war' life, and a 'plenty' life feel placed in different worlds. When they intersect a vocation (vx_soldier_war), the result is the game at its most particular.",
+    "The bequest mechanic — choosing what you leave the heir, with visible consequences at the handoff screen — is a small but real lever that invites strategy across the generation boundary. Cozy players enjoy this kind of soft long-game thinking."
+  ],
+  "staleness": [
+    "The falling-in-love beat is the single most repeated structure in the transcripts. Every life that is not solitary hits y_love1 or a_meet_late with almost identical prose rhythms ('someone keeps finding reasons to be where {n} is'), then a_marry with the same three or four rotating lines about Junia/Soren falling asleep mid-sentence. By Dynasty 8 I knew this sequence was coming, and by Dynasty 12 I was skimming it. The seven y_love1 text variants exhaust quickly because the player sees roughly one per life.",
+    "The a_child card is practically universal for coupled lives and its prose pool is shallow by mid-session. 'The question of a child arrives, the way it does' appeared with that exact phrasing across Dynasties 3, 4, 5, 6, 8, 10, 11, 12, 13, 14 — effectively every coupled life. The variant texts for second and third children are even thinner. The line 'red and furious and entirely unimpressed by any of it' appeared verbatim three times in the read sample (Ottilie Holloway, Ingrid Sereno, Elias Vasquez). The engine tries to suppress this with S._usedFurious but the pool only protects the specific 'red and furious' line; the surrounding base pool of eight 'had a child' lines rotates visibly.",
+    "The a_marry card shows the same three-or-four set-up texts on virtually every coupled life — 'fell asleep first again mid-sentence / lay awake deciding to ask in the morning' is the most common and appeared in Dynasties 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14. It's the most visible repetition in the whole transcript set. After six dynasties this card announces itself before the text finishes loading.",
+    "The midlife cluster is thin on structural variety. Most lives pass through the same three-beat pattern: a_work or a_affair (adult), m_health (the doctor letter), e_legacy or e_garden. The 'body sends its first real letter' / 'carry on as before' vs 'change everything now' binary appeared in Dynasties 3 (Idris), 5 (Theda), 7 (Annika), 8 (Theda again), 10 (Cosima), 11 (Sabine Reyes), 12 (Liv, Niall), 13 (Vesna). It arrives reliably around 50 and its two outcomes are familiar by the fourth dynasty.",
+    "The e_window card ('a grandchild climbs into {n}'s lap') appeared in nearly every elder who had grandchildren, and its prose — 'told the better story' vs 'told the true story' — became a visible watermark. Eight appearances in the transcript set.",
+    "Childhood is structurally the most uniform zone. Most lives hit the same 3-4 childhood cards (c_origin, c_book or c_friend or c_animal, c_sick occasionally), sometimes c_steal. The trait-affinity weighting helps but the pool is small enough that by dynasty 6 the childhood feels like a brief formality before the real game. The 'Stole, once, and the taste was guilt as much as fruit' line appeared in Dynasties 2 (Idris), 3 (Aldecott D4's Felix), 4, 6 (Annika), 12 (Saoirse) — five times verbatim.",
+    "Death speeches and epitaphs repeat their cluster themes quickly. 'Made of her own mind a thing other people got to keep' (teacher cluster) appeared as an epitaph three times across the read set: Annika Holloway, Elias Vasquez, and Vera Halloran. The engine's anti-repeat logic suppresses consecutive-life repeats but the window is too narrow for a 15-dynasty run. 'Kind in the small daily ways that turn out to be the large ones' (kind cluster) appeared as both a logline and an epitaph for multiple characters.",
+    "There is no mechanical surprise or meta-discovery: no hidden unlocks, no cross-dynasty goals surfaced mid-run, nothing the player can discover about the system itself. The dynasty aspirations panel is good but passive. A cozy player eventually stops feeling the 'one more life' pull and starts feeling they are watching the same four life-shapes (scholar/maker/soldier/wanderer) replay with name substitution."
+  ],
+  "improvements": [
+    {
+      "what": "Expand and diversify the marriage and first-child prose pools by at least 3x, and add a third set-up text variant for a_marry that does not rely on the 'fell asleep mid-sentence' frame — reserve that frame to fire once per dynasty maximum.",
+      "why": "The 'fell asleep mid-sentence / decided to ask in the morning' set-up is the most visible repeated line in the entire transcript set, appearing in roughly 10 of 15 dynasties. It is a bright staleness signal that breaks immersion exactly at the moment that should feel most personal.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce a 'c_steal' dynasty-cooldown or remove the non-once flag — it appears verbatim five times across the run. More broadly, give the full childhood pool an 'onceDyn' budget: any card with a 2-3 word repeating log line should fire at most twice per dynasty.",
+      "why": "Childhood is where the player should feel they are meeting a new person; instead, the same guilt-stained fruit theft creates a sense of manufactured childhood rather than a discovered one.",
+      "impact": "high"
+    },
+    {
+      "what": "Add at least one structurally novel life-shape: a 'caretaker' arc (someone who sacrifices a career to tend others across adult and midlife), or a 'public figure' arc that gates different midlife moments. The current four vocations (soldier/scholar/maker/wanderer) are good but by dynasty 8 a player has seen all four at least twice.",
+      "why": "Variety of structural shape — not just prose variation — is what keeps the genre fresh. New callings with distinct card sets would give the player a reason to start a fifth or sixth dynasty that isn't just 'let's try the other choices'.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a few non-binary 'fate' events that can shift a dynasty mid-stream without player input: a sudden windfall that lands the family at a new seat, a plague death that skips a generation, a secret being revealed publicly without the player choosing to reveal it. These would punctuate the 'same template, new names' feeling with genuine surprise.",
+      "why": "The current fate events (f_fire, f_sudden_loss, f_reversal) are good but rare and all follow the same grammar (one card, two responses). True fate — events that simply change the state of the dynasty without a choice — would create the emergent story moments the brief identifies.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a cross-dynasty meta-objective system visible at the title screen: two or three per-run goals that generate fresh each dynasty run ('reach seat 7', 'earn two different mottos across two houses', 'have a life end before 30 and still continue the line'). Give the player something to aim at beyond the passive aspiration list.",
+      "why": "The 'one more dynasty' pull is the weakest part of the game. Without a pull, the cozy genre tips into wallpaper. Meta-objectives preserve the meditative tone while giving the player a reason to restart.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the epitaph cluster pool to 6-8 distinct texts per cluster, and widen the anti-repeat window to the last four ancestors rather than two, so a 15-dynasty run never sees the same epitaph more than twice.",
+      "why": "Epitaphs are the most emotionally resonant moment in each life and the moment most likely to be re-read. Repeated epitaphs signal that the game has run out of things to say, which is the mood the cozy genre most needs to avoid.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely beautiful and earns a warm first session, but by dynasty 6-8 the marriage-and-child beats, repeated 'doctor letter' and 'grandchild on the knee' cards, and visibly recycled epitaphs make the cozy atmosphere tip into comfortable predictability — it stays pleasant, but the 'one more dynasty' pull goes slack well before the game has shown a player everything it has."
+}

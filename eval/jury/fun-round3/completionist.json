@@ -1,0 +1,53 @@
+{
+  "profile": "completionist",
+  "score": 7.2,
+  "fun_highlights": [
+    "The card pool is genuinely large (138 cards) with meaningful gating: 14 callback cards, 6 era cards, 3 vocation-x-era intersections, 4 fate events, 8 trait-moment cards, 4 seat-gated cards, 5 repute-gated cards, 7 competing-goods dilemmas — large swaths of content a given life will never see.",
+    "Vocation gating (soldier/scholar/maker/wanderer) creates structurally distinct adult arcs: a soldier's war ghost at 3am, a scholar's unanswered question, a maker's masterwork, a wanderer's reckoning — these read as different shapes of life, not the same template with new labels.",
+    "Era system (war/plague/hard/plenty/turning/settled) works as genuine context drift. A soldier in a war era gets vx_soldier_war, which is rarer and weightier than standard soldier content. Dynasty 4 (Renner) running across a war era felt substantively different from Dynasty 2 (Sereno) in plenty.",
+    "Discovery count on the title screen (N of 138 moments witnessed) is exactly the right signal for a completionist: it names the scale of the unseen pool without spoiling what is in it. This is a genuine reason to keep playing.",
+    "Callback cards are the game's best mechanic: the child who kept the stray and gets it back as an epitaph cluster; the child_books heirloom returning three generations later; the unspoken love resurfacing in midlife. These feel earned, not random — a completionist will want to see all 14.",
+    "Housechar and houseAspirations give a concrete forward-facing list ('still ahead: words the family can live by; a line six generations deep') — the completionist pull is explicit and well-constructed.",
+    "onceDyn burning cards dynasty-wide means each new house still has a first encounter with the founding-hardship and defining-dilemma beats. The pool resets per house, keeping early dynasties feeling fresh.",
+    "Solitary/childless life-shapes (m_solitary, e_solitary, e_childless) are real content, not empty outcomes — a completionist wanting to see every branch needs to intentionally close love paths.",
+    "The meta-progression layer (houses raised list, motto collection, discovery count) across runs provides a tangible record of what the completionist has built, which is satisfying to accumulate."
+  ],
+  "staleness": [
+    "Across 18 dynasties, five cards surface in nearly every single life regardless of vocation or trait: y_calling (vocation fork), a_child (child question), a_marry (marriage), m_parent_age (aging parent), e_legacy (what to be remembered for). These are high-weight anchor cards that the draw engine nudges strongly toward. A completionist will have seen all five within two or three dynasties and will see them in virtually every life thereafter — they are structural wallpaper by dynasty 6.",
+    "The cb_reckless and cb_the_cost elder callbacks appear in a large fraction of transcripts because their conditions (lived_reckless, chose_self/chose_others/chose_loyalty) are triggered by several common paths. They feel less like rare discoveries and more like near-guaranteed elder content.",
+    "Scholar lives are over-represented across the 18 dynasties in the transcripts — seven of the eighteen dynasties have at least one scholar — because y_calling has equal weight on all four vocations but the scholar_study callback chain (cb_study_pays, a_scholar_question, m_scholar_legacy, e_scholar_old) adds four extra cards making that path notably longer and more visible than the wanderer path, which has fewer exclusive mid-life beats.",
+    "The discovery count on the title screen shows 'N of 138' but a player has no granular signal of which categories remain unseen. A completionist wants to know 'I have seen 2 of 6 era cards' or 'I have seen 5 of 14 callbacks' — the aggregate total is less actionable than a category breakdown would be. Without this, the sense of chase is present but imprecise.",
+    "Seat-7 ('a house written into the histories') is the completionist's summit but the conditions (seat-6 house, repPeak >= 3.5, peakMeans >= 76, 45% chance) mean it requires a very focused multi-dynasty run and may not trigger even when conditions are met. In 18 dynasties across the transcripts, no house reached seat-7 — the summit is visible but no playthrough landed there, making it feel possible-in-theory rather than achievable-in-practice.",
+    "Repute mottos can repeat across dynasties — Dynasty 4 (Renner) and Dynasty 12 (Ashby) both crystallize 'We earn the bread we eat'; Dynasty 2 (Sereno) and Dynasty 13 (Reyes) both get 'Better a short blaze and a long smoke'. The MOTTOS table has 3 variants per reputation type but those are not being drawn freshly enough across dynasties to prevent repetition in a single extended session.",
+    "The 'competing goods' dilemma cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, x_promise, x_mercy, x_favour) are excellent in isolation but their cond gates are broad — x_honest_or_kind fires on any rel with bond > 45, which most lives have by midlife. In practice these run once per life on cooldown rather than feeling rare.",
+    "No visible inventory of unlocked heirlooms, earned mottos, or seen epitaph clusters exists across all runs (only the titles-screen motto list and discovery count). A completionist wants to know which of the 9 reputation-type mottos they have crystallised, which of the 5 heirloom types they have passed down, and which epitaph clusters they have seen — the absence makes cross-run progress opaque."
+  ],
+  "improvements": [
+    {
+      "what": "Add a category-level discovery breakdown on the title screen or constellation: show 'Callbacks seen: 5/14 | Era moments: 3/6 | Vocation x Era: 1/3 | Fate: 2/4 | Trait: 4/8' instead of (or alongside) the single aggregate count.",
+      "why": "A completionist knows there is more to find but cannot aim at specific gaps. Category counts give a concrete hunt: 'I have never played a plague era, never seen the seat-gated s_patronage card.' This turns the discovery system from a vague progress bar into a real collection challenge without spoiling card text.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the weight of the five template anchors (y_calling, a_child, a_marry, m_parent_age, e_legacy) or cap how strongly the engine nudges them, so a larger fraction of a life is drawn from the mid-tier and rarer pool.",
+      "why": "These five fire in 80-90% of lives, making them structural wallpaper rather than moments. Lowering their engine nudge from near-certain to probable (say, 60-70%) would let the rarer cards surface more often per life, reducing the sense that every life hits the same five beats before getting to the interesting variation.",
+      "impact": "high"
+    },
+    {
+      "what": "Add one or two more midlife cards exclusive to the wanderer and maker vocations to bring their late-career depth up to the scholar's arc (currently scholar has 4 exclusive mid-life cards: a_scholar_question, m_scholar_legacy, e_scholar_old, vx_scholar_turning; wanderer has 2: a_wanderer_settle, m_wanderer_return).",
+      "why": "Vocation choice is supposed to be the major structural differentiator but wanderer and maker have thinner mid-life content than scholar, making those paths feel shorter and less characterful. A completionist who discovers this will feel the asymmetry and be less motivated to pursue those arcs.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a cross-run 'Dynasties Compendium' view (accessible from the title screen) that shows the full list of earned mottos, heirloom types collected, epitaph clusters witnessed, and seat-peak reached, persisted across all houses via localStorage.",
+      "why": "The completionist's primary joy is knowing what they have found and seeing what remains. The current meta-persistence (houses list, discovery count) is minimal. A compendium that showed 'Mottos unlocked: 4/9 — scholarly, kind, industrious, generous' would make the long-game collection loop explicit and satisfying without spoiling content.",
+      "impact": "high"
+    },
+    {
+      "what": "Make seat-7 ('a house written into the histories') slightly more achievable or signal its path more clearly in houseAspirations — currently the conditions are underdocumented and no house in 18 dynasties reached it.",
+      "why": "The summit a completionist most wants to reach appears unreachable in practice during a normal extended session. Either lower the 45% chance gate, make repPeak cumulative across dynasties (not resetting), or surface a clearer readable trajectory ('the name is at 3.1 — the histories need 3.5 and the seat raised to 6') so the climb feels tractable.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely large, well-gated content library with a real completionist pull — 138 cards, 14 callbacks, 6 eras, layered dynasty arcs — but five near-universal template cards appear in almost every life, the discovery signal lacks category granularity, and seat-7 remains unreachable in practice, leaving a completionist who has played 6+ dynasties feeling they have seen the skeleton of every life even as the rare content stays genuinely elusive."
+}

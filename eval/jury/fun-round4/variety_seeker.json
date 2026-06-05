@@ -1,0 +1,54 @@
+{
+  "profile": "variety_seeker",
+  "score": 6.5,
+  "fun_highlights": [
+    "Vocation gating genuinely diverges life-shapes: a soldier's arc (blooded/survived, war ghost, old soldier truth-telling) is a structurally different sequence from a scholar's (study pays, scholar question, scholar legacy) or a wanderer's (settle-or-keep-moving, return to origin, tally the going). These are not the same arc with new paint.",
+    "Era events (war call, war loss, plague tending, hard winter, turning age) inject entirely unique cards that non-era lives never see — a soldier born in a war era gets vx_soldier_war, a genuinely distinct moment unavailable any other way. This creates real divergence between generations.",
+    "Callback cards (cb_lookaway, cb_outcast_return, cb_study_pays, cb_corner, cb_principle, cb_books_late) make earlier decisions feel load-bearing. A kindness at age 8 that pays back at age 35 as an opened door is genuinely surprising and earns an 'I didn't expect that' moment.",
+    "Solitary lives (m_solitary, a_chosen_family, e_solitary) and childless lives (e_childless) are real life-shapes with distinct card sequences — they do not just hit the same domestic arc with the spouse slot missing. The 'width' of a solitary life reads as a genuine alternative, not a dead end.",
+    "Dynasty standing, reputation, motto, heirlooms, and secrets add cross-life texture. Watching a house climb from 'nothing but a name' to 'a house written into the histories' across five generations (Achterbergs) gives the run a real goal with consequences, and the inherited heirloom-book callback (cb_books_late) landing with a different name each time is satisfying continuity.",
+    "Trait affinity in card drawing means a bookish child genuinely leans toward c_book, a warm one toward c_friend, a restless one toward c_move — so childhood itself diverges by nature, not only by player choice."
+  ],
+  "staleness": [
+    "The childhood fever card (c_sick) fires in nearly every single life across all 15 dynasties. It is not once-per-dynasty, not once-per-life, only once-per-*life* — which means every player who lives a childhood sees it. By dynasty 4 the fever is as predictable as sunrise. The two choices flip (brave alone vs. mother sits) but the framing is identical, and its ambient contribution to character is minor. A card this ubiquitous erases the sense that 'this childhood is different'.",
+    "The 'late marriage / lateness makes the vow weigh more' line runs in the majority of adult arcs. Mira Reyes: love at 25, child at 39, marry at 45. Anouk Reyes: love at 50, marry at 56. Anouk Bjornsen: love at 32, marry at 42, child at 48. Beatrix Delacroix: love at 42, child at 46 (never marries). Carys Fenn: love at 22, child at 43, marry at 56. The engine nudge for love/marriage was tuned to spread timing, but late coupling remains dominant — the 'married late, found the lateness made the vow weigh more' line is the most repeated single sentence in the transcripts.",
+    "The 'return to the old town' callback (cb_left_home) fires in roughly half of all lives that ever chose 'leave home', and the card prompt and framing are nearly identical every time: 'it is smaller than she remembered.' The two choices (go back / let it stay a memory) vary the player's outcome but the moment itself is predictable once you've seen it twice.",
+    "The d_ancestor card ('there is a story in the family about [name]…') fires multiple times within a single long dynasty (four Delacroix lives all get it) and its framing ('the worn shape of a lesson, though no two tellers agree on the moral') is verbatim each time. By the third recurrence in a dynasty, the card has stopped creating texture and become filler.",
+    "The scholar vocation arc is tight to the point of rigidity. Three specific cards fire in near-fixed order: cb_study_pays (teach cheap vs. name your worth) → a_scholar_question (chase the question vs. paid work) → m_scholar_legacy (give it all vs. guard it). Every scholar in the transcripts hits all three. The arc has real character, but it delivers the same beats in the same sequence — scholar lives feel less like divergent people and more like the same person making slightly different sub-choices.",
+    "The elder legacy card (e_legacy) fires in the vast majority of lives, presenting the same three-choice question ('that I was kind / built something / was here at all') with vocation-flavored preambles. The preambles are good, but the question and the three answers are identical. By dynasty 6 the 'what do you want remembered' beat is predictable and the outcome rarely feels earned — it lands by timer, not by who this person actually was.",
+    "No life in the transcripts ends before age 38 except Iris Achterberg (38, the dynasty's 5th life). Early death is listed at 8-12% but the transcripts show very few in the 20-35 range. Lives that choose reckless options (peril flag) still mostly survive to mid-60s or later. The structural variety promised by 'some lives are short' barely materialises in play."
+  ],
+  "improvements": [
+    {
+      "what": "Make c_sick (the childhood fever) once-per-dynasty rather than once-per-life, and add 2–3 alternative 'first childhood difficulty' cards at the same weight to fill the vacated slot.",
+      "why": "The fever is the single most reliably repeated card across the entire run. Making it once-per-dynasty means a player will see it at most once across a whole house, and the other childhood difficulty cards (c_dark, c_unfair, c_grandparent, c_move, c_animal) can vary the opening more. The childhood years are the player's first impression of a new life; a guaranteed repeat card here trains them to feel 'here we go again' from the first moment.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2 alternative love-timing pools: a 'young coupling' pool (ages 16–22) and a 'mid-life coupling' pool (ages 30–40), each with distinct prose that does NOT use the 'lateness made the vow weigh more' line. Reserve that line for marriages that are genuinely late (50+).",
+      "why": "The 'married late, lateness made the vow weigh more' text is the most repeated single sentence in the transcripts. It appears even for marriages at 34 and 41, which are not late by any definition. Distinct prose pools for young/mid/late coupling would make each relationship feel proportional to where it falls in the life, rather than all of them reading as bittersweet late affairs.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap the d_ancestor card (dynasty-memory) at once-per-life AND vary the prompt text more aggressively — perhaps have it reference a specific act the ancestor chose rather than 'a thing they did', so recurring players see a different framing each firing.",
+      "why": "The card already fires once-per-life but within a long dynasty that is still 4+ exposures. 'There is a story in the family about [name], who came before — the worn shape of a lesson' is verbatim-identical preamble each time. If the card quoted a specific decision from the ancestor's chronicle (which the engine already records), it would feel personalised rather than boilerplate.",
+      "impact": "med"
+    },
+    {
+      "what": "Break the scholar arc's rigid sequence by adding one 'scholar wild card' at the midlife stage — an event that fires only for scholars but has nothing to do with the learning/teaching axis: a crisis of doubt, a public humiliation, an unexpected patron, a personal loss that makes the work feel meaningless. This should replace m_scholar_legacy in about half of scholar lives.",
+      "why": "All scholar lives in the transcripts follow: call → study pays → scholar question → scholar legacy. The arc has personality but its beat sequence is fixed. A disruptive midlife card that only scholars can see — not about teaching or hoarding knowledge — would make some scholar lives feel like a person first and a vocation second.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a small set of 'signature elder' cards gated on prior life-defining choices (not just vocation) — e.g. an elder card that only fires if the player strayed AND confessed, or only if they made the masterwork, or only if they built a chosen family. These would replace the generic e_legacy or e_peace cards in those lives.",
+      "why": "Currently the elder years tend to converge regardless of how the adult years went. A person who made a masterwork and a person who spent their life in cautious service both get e_legacy and e_peace in much the same order. Elder-stage callbacks to defining adult choices (not just childhood callbacks) would make the last years feel earned rather than universal.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase early death probability enough that 10–15% of lives in the transcripts end before age 45, and make short lives end with a distinct 'incomplete' epitaph track that acknowledges what was not yet done.",
+      "why": "The transcripts show almost no premature deaths despite the engine's stated 8–12% rate. Short lives are described as a real structural shape in the design, but they barely appear. A life cut at 38 reads very differently from one at 78 — the short-life shape would be a powerful source of variety and dynasty drama if it actually occurred at the stated rate.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine structural variety in its vocation/era/callback architecture — a soldier in a war era is a meaningfully different shape from a wanderer in a plague era — but by dynasty 6 its childhood checklist (the near-ubiquitous fever card), its convergent late-marriage prose, and its rigid scholar sequence create a repetition tax that a variety-seeker will feel before the halfway point of the transcripts."
+}

@@ -1,0 +1,48 @@
+{
+  "profile": "lapsed_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the game's single best mechanic: when 'cb_books_late' fires because you kept the book at age 9, or 'cb_outcast_return' pays back a childhood kindness 21 years later, the long arc closing feels genuinely earned — not scripted. These moments are the reason to play another life.",
+    "Vocation branching works. A soldier's life and a scholar's life are structurally different enough that the adult band reads differently: war-PTSD cards, the 'frail body bill' for soldiers vs. 'does the scholar's wager pay off' — the four callings are real divergences, not just flavour text on the same beats.",
+    "Era variety (war/plague/plenty/hard/turning) visibly changes what childhood opens on and which rare cards can fire. Arriving into a plague year versus fat years is felt, not just labelled.",
+    "Dynasty-layer rewards are genuinely satisfying: a motto crystallising mid-generation, a house-standing rise you caused by investment, a secret passing down through three lives — these make the player feel like they're playing a long game, not just watching a loop.",
+    "The prose pool is wide enough that individual lines rarely repeat within a session. The anti-staleness machinery (RECENT_LINES, per-dynasty RECENT, cluster-blocking in epitaphFor) is real and mostly works across 15 dynasties.",
+    "The 'inherited secret' and 'family shadow' mechanics (repute-gated cards, tainted reputation gating) make a ruthless house feel different to inhabit than a scholarly one — there are doors a disgraced name will never open."
+  ],
+  "staleness": [
+    "The structural skeleton of almost every life is identical across all 15 dynasties: origin card (age 3-5) → book or stray or sibling (age 6-12) → calling fork at 14-22 → late love (30-51) → marriage → child → work/trade midlife card → elder body/legacy/bequest → die. The player sees the same spine every single time. By dynasty 6-8 this is fully visible and the meditative pace makes it harder to ignore, not easier.",
+    "Late love is far too dominant as the default romantic arc. Scanning the transcripts: Dynasties 1, 3, 5, 6 (Emory), 7, 8 (Annika), 9, 11 (Vera, Tobias), 12 (Junia), 13 (Ottilie), 14 (Tariq) — nearly every founder and many heirs fall in love in their 30s-50s via 'a_meet_late' or late-nudged 'y_love1'. The fix was to spread love across ages, but the transcripts show the most common shape is still: no youth love → late love in 30s-40s → child close to 50. Dynasty 2 (Vera, age 23) and Dynasty 14 (Tariq, age 18) are the exceptions. The 'lapsed player' notices this hardening into a template.",
+    "Several individual cards recur in almost every playthrough because they're not 'once-per-dynasty': 'a_marry' and the marriage beat lands identically phrased in 12 of 15 dynasties, 'u_loss' and 'u_windfall' recur with minimal variation, the 'cb_principle' re-stand fires in Dynasties 1, 9, 11, 13, 14, 15 all with near-identical phrasing ('Paid, a second time and more dearly, for a principle he would not set down'). The text variants exist but the same lines dominate.",
+    "Midlife is the thinnest band structurally. Adult cards are plentiful (26 ids) but midlife only has 18, and several are heavily conditional. Most midlife sections in the transcripts run: parent-aging card OR work offer → m_health OR m_money → maybe one repute-gated card → bequest → done. It reads as a compressed slide toward death rather than a full life-stage.",
+    "The 'one more dynasty' pull is present in abstract (the aspiration list, building toward seat-7, a motto not yet crystallised) but the dynasty layer does not produce enough player-legible surprise. Rising from 'a rented room' to 'a comfortable household' across four generations is satisfying once; the second time it's a slower repeat of the same climb. There are no dramatically different dynasty archetypes — no way a ruthless house plays out through multiple generations that feels fundamentally unlike a scholarly one in the mid-game.",
+    "Lives that stay solitary (no spouse, no children) are mechanically thin: Dynasties 4 (Ingrid), 5 (Elias), 9 (Marguerite), 10 (Lazlo) all end without an heir or spouse and their transcripts are noticeably shorter and more repetitive in the elder band, because many elder cards require a spouse or child as a condition. A deliberately childless or solitary run is under-supported with late content."
+  ],
+  "improvements": [
+    {
+      "what": "Break the spine earlier: introduce 2-3 structural forks that change which mid-band a life enters, before the calling card. E.g., a childhood 'fortune/crisis' that sets the house to 'poor' or 'comfortable' opening, which then gates different adult clusters rather than just adjusting stats.",
+      "why": "Right now every life's first 30 years run child-pool → calling → love → marriage. The spine is identical regardless of choices because the calling only diverges the life after it fires. Starting structural divergence at age 6-12 would mean two lives genuinely start from different places, not different prose on the same shape.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 'shape cards' that are mutually exclusive and each redirect the adult band: e.g., 'took monastic vows' (kills marriage/child arc entirely, opens a different midlife cluster), 'became itinerant' (unlocks wanderer-specific mid/elder cards), 'inherited an obligation' (gates a duty-vs-freedom cluster for adult). These are not more choices; they are different life shapes.",
+      "why": "The lapsed player's complaint is not 'not enough cards' — it's 'same template with new paint.' Shape cards would mean a player who takes vows genuinely has a different structural arc for 50 years, not just different stat outcomes from the same beat sequence.",
+      "impact": "high"
+    },
+    {
+      "what": "Spread love across ages more aggressively. Make youth love (y_love1) fire with high probability before age 21 for a majority of non-once-per-dynasty founders; make late love genuinely rare (15-20% of lives, not 65%). Give youth-married lives a distinct set of adult complications (early parenthood pressures, growing-apart cards, a 'married too young' callback) that late-love lives never see.",
+      "why": "In the transcripts, the 'late love across an ordinary Tuesday — someone' phrasing lands in 10+ dynasties at ages 30-52. It is now the default template, not the poignant exception. The intended structural variety (early love vs. late love vs. solitary) is not realised in practice.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand and gate the solitary/childless life. Add 8-10 elder and midlife cards that only fire when no spouse and no child exist: chosen solitude moments, the relationship with work or craft as the primary bond, a 'made family of chosen people' arc that has its own bequest card, late-found companionship of a non-romantic kind. Currently a solitary run has a visibly shorter and more repetitive log.",
+      "why": "A deliberate 'no family' run is a real life shape that the game acknowledges but doesn't support with commensurate content. When it becomes a legitimate third structural path (not a foreclosed domestic arc), it adds replay value without requiring a full new card set.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the dynasty layer 2-3 more legible 'house events' that fire once per dynasty at dramatic moments: a great windfall that changes the house overnight, a catastrophe that collapses standing by 2 seats and forces a recovery arc, a generation that inherits a secret and must decide whether the dynasty pivots. These should be in the log, named in the flow, and feel like turning points — not just stat updates discovered at the heir screen.",
+      "why": "The dynasty rises and falls quietly. 'The family climbed in the world this generation' is noted but not dramatised. A dynasty-level event that visibly shapes the next life's circumstances (born into the ruins of a great house, or into unexpected windfall) would create the 'story I didn't expect' that defines the best narrative-sim sessions.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is beautifully made and genuinely does some things well — the callback system, vocation branching, and dynasty-layer accumulation are real pleasures — but the structural skeleton of nearly every life is the same, late love is the default rather than the exception, and by dynasty 6-8 the lapsed player is watching the same template in different prose, which is exactly what drove them away the first time."
+}

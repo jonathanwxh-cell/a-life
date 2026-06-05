@@ -1,0 +1,48 @@
+{
+  "profile": "choice_savorer",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the single best design in the game for my profile. A choice at age 7 (the too-hard book, the stray, looking away from the lonely child) firing as a genuine payoff 30-40 years later — with the elapsed years named — is exactly what meaningful choices should feel like. These arcs are rare enough to land hard.",
+    "Vocation calling (soldier / scholar / maker / wanderer) genuinely gates distinct mid-life card clusters. A soldier life has structurally different beats than a scholar life. This creates real divergence in what the player encounters, not just what the prose says.",
+    "Era cards (war, plague, plenty, hard, turning) meaningfully tilt the available moment-menu. A plague life has plague-specific moral weight (tend-or-distance) that a settled life never sees. The turning-age card gives the clearest sense of historical friction.",
+    "The bequest choice (mind/means/heart/free) is the best dynasty-boundary decision: it is visible in the next life's opening screen, shapes starting conditions, and has downstream consequences that a player can plan around.",
+    "The 'competing goods' cluster (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) and the 'hard name' / reputation-gated cards represent the design at its moral sharpest. Neither answer is cleanly right, and the hint text doesn't moralize.",
+    "The dynasty's reputation and motto crystallizing over generations gives a real longitudinal goal — a player who focuses on building a scholarly or ruthless house gets legible feedback across lives."
+  ],
+  "staleness": [
+    "Late love arrives in nearly every single life examined across 38 lives and 12 dynasties. The 'a_meet_late' card fires as a near-universal template: love at 30-54, marriage shortly after, late child. The structural shape of the love arc is the same in Dynasty 1 as in Dynasty 10. Prose rotates but the pattern is inescapable. By dynasty 4 the beat is entirely predictable.",
+    "The elder reckoning 'Near the end, one old decision keeps returning to [name]' (cb_the_cost) fires in almost every life, because its conditions (chose_self, chose_others, chose_loyalty, a_kind_silence) are triggered by an enormous fraction of play paths. It has become a universal closing template rather than a payoff for distinctive lives.",
+    "The child card produces 'Had a child, [name], well past when he/she had thought that particular door had closed' in the overwhelming majority of reproductive lives. Checking across 12 dynasties, the 'late child' phrasing is the dominant outcome — it becomes the expected beat rather than a life-specific note.",
+    "Many binary choices within individual cards feel like flavour rather than divergence: a_belief (faith vs open question), m_who_became (like vs resolve to change one thing), a_fallow (make peace vs chase something), e_legacy (kind / built / here) all produce nearly equivalent outcomes and rarely gate subsequent content. These are pleasant prose moments but not the weight-bearing decisions they feel like they should be.",
+    "Soldier vocation is visibly overrepresented in the transcripts — approximately half of all vocations selected across the 38 lives examined — because the draw engine's priority logic nudges the calling card early and the soldier arc has high weight (w:4) with a broad age window. A player steering toward structural variety finds soldier disproportionately available.",
+    "The cb_lookaway / cb_home_keep / cb_left_home callbacks fire predictably in the same life-phase regardless of how a character was built; the callback system, while the strongest mechanic, is thin enough in total count (roughly 15 callbacks against ~100 cards) that several lives contain no callbacks at all, producing a template without payoffs."
+  ],
+  "improvements": [
+    {
+      "what": "Gate the late-love arc behind a flag that makes it mutually exclusive with early-love, and reduce a_meet_late's weight for characters who already resolved the y_love1 window one way or another. Allow some lives to be structurally solitary with distinct elder content that doesn't try to re-open love.",
+      "why": "Late love arriving in nearly every life collapses the diversity of life-shapes. A life that genuinely never finds love should play differently at 50-80 — different cards, different elder texture — not just a thinner version of the same arc.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the elder reckoning (cb_the_cost) a stricter memory gate: it should only fire if the player chose at least two of the four qualifying memories AND one of them was a 'hard' option (chose_self over family, chose_loyalty at visible cost to others, etc.). Lives that picked soft, consensus-friendly options throughout should not receive the same reckoning.",
+      "why": "Currently it fires near-universally because its conditions are met by almost every play path. Making it a genuine payoff for morally complicated lives (rather than a template ending) restores its weight.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 callbacks that reach across the dynasty boundary — specifically, content that fires only if an ancestor two or more generations back made a specific choice. E.g., if a founder strayed and kept the secret, a grandchild's 'inherited secret' card should eventually open a unique confrontation with the living original cost.",
+      "why": "The current callback system reaches within one life. Cross-generation callbacks would make the dynasty itself feel like a single long-arc story rather than a series of self-contained lives.",
+      "impact": "high"
+    },
+    {
+      "what": "Balance vocation draw weights — reduce soldier's effective draw advantage or add a short cooldown so that across a long dynasty, all four vocations appear roughly equally. Consider adding a vocation-specific 'founding' card that can only fire in the first generation of a new line, giving founders a structurally different shape from heirs.",
+      "why": "Soldier's dominance in the transcripts is a mechanical artifact, not a player choice. Balanced vocations would make each life's middle more structurally distinct.",
+      "impact": "med"
+    },
+    {
+      "what": "For the 'flavour' binary cards (a_belief, m_who_became, e_legacy), add at least one downstream consequence — a later card that only fires if the choice was made, or a stat threshold that the choice is what determined. 'Made a quiet peace with faith' should gate a death-scene card that 'Let the question rest unanswered' never sees.",
+      "why": "These are pleasant prose moments but they read as decoration because they don't echo. Even a single callback per card transforms them from flavour into decisions.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a beautiful prose machine with a genuinely good callback architecture, but by dynasty 4-5 the underlying template is fully legible: late love, late child, vocation arc, elder reckoning — the same skeleton appears under every life's clothing, and the binary choices within most cards are too often flavour rather than the life-shaping forks they're dressed as."
+}

@@ -1,0 +1,56 @@
+{
+  "profile": "dynasty_strategist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The bequest card is a genuine cross-generational lever — choosing 'every coin I can spare' vs 'their own freedom' has a real effect on the heir's starting stats and genuinely changes the next life's opening conditions. This is the clearest piece of strategic play available.",
+    "Seat progression is legible and diegetic: the house panel, the 'how things stand' readout, and houseAspirations() all surface concrete targets (reach seat 5, get a motto, build a reputation to 3.5) without breaking the prose register. A dynasty player can actually read direction.",
+    "houseCharacter() and the trajectory line ('has lasted — a little more of the same...') give meaningful feedback on reputation momentum mid-dynasty, so you're not steering blind across lives.",
+    "The reckoning card (x_reckoning) is the only card with genuine downside risk to the house's standing, and it fires at seat ≥ 3, exactly where the stakes matter. Choosing 'protect your own' costs a seat — that compound loss is felt across the bloodline.",
+    "Era drift (war/plague/plenty/hard/turning) structurally distinguishes a gen-8 life from a gen-2 one: the vocation × era intersection cards (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) are the game's best pieces of variety and only accessible if you play a long house.",
+    "The m_invest_name card (spend yourself to lift the seat) and s_patronage give the strategy player concrete, costly actions for house-building rather than only passive accumulation through stat drift.",
+    "The 'how things stand' popup (openStock) tells the player where the house needs to go next and what this life's fortune height is relative to the histories gate — a strategic readout that is actually useful for planning a run."
+  ],
+  "staleness": [
+    "The card draw structure produces a near-identical spine in most lives: childhood (stray/book/wonder/dark) → y_calling → y_love1 → a_child → a_marry → m_parent_age → e_legacy → e_bequest → die. Across 18+ dynasties in the transcripts, this five-beat skeleton dominates. Lives differ at the leaf level (which vocation, which childhood card) but the structural rhythm is the same every time.",
+    "The vocation system is the main engine of structural variety, but it produces three cards per vocation across three stages (adult/midlife/elder). A scholar runs cb_study_pays → m_scholar_legacy → e_scholar_old in every scholarly life. A soldier runs a_soldier_service → m_soldier_ghost → e_soldier_old. These arcs repeat precisely because they are once-per-life and vocation-gated — there is no within-vocation branching that diversifies a second scholar from a first.",
+    "The transcripts show that by dynasties 8–12, scholar reputation and 'earned the bread' / 'better a short blaze' mottos recur: Dynasties 2, 4, 8, 9, 12 all skew heavy scholar; Dynasties 3, 12 share the exact same motto text 'We earn the bread we eat' (seen verbatim at transcript lines 409 and 1271). The freshPick / MOTTOS multiple-variant system helps with per-motto variation but doesn't prevent the same reputation topology across houses.",
+    "From a dynasty_strategist perspective, the actual steering knobs are thin: (1) the bequest (once per life, 4 options), (2) the reckoning (once per life, 2 options), (3) m_invest_name (can fire ~twice per life, probabilistic), (4) a_make_name (once per life). That's it — everything else is character simulation, not house strategy. A player deliberately building toward seat 7 has very little to do beyond hoping to generate high peakMeans and avoiding facedReckoning='fell'.",
+    "Seat mechanics are mostly passive. peakMeans ≥ 80 lifts the seat; endMeans < 14 drops it. But means is determined by vocation choice and lucky card draws (u_windfall, w_plenty_ride), not by deliberate dynasty planning. A maker or scholar who happens to win the means gamble lifts the house; a wanderer who doesn't loses it. The player cannot meaningfully plan around this because the means outcome is heavily probabilistic.",
+    "The 'hard name' heirloom and ruthless reputation path (r_hard_name, r_name_cost, r_old_shame) promise a genuinely different dynasty flavor, but the transcripts show only one house (Thorne, dynasty 10) hitting this content — and it came from Vesna's random trait outcome producing an heirloom, not from a deliberate strategic choice. A player trying to *build* a hard-dealing house has no reliable mechanism to do so beyond hoping the a_affair + unconfessed path fires.",
+    "The motto crystallization is narratively satisfying but strategically inert once earned — the d_motto_test card (hold or break the family words) has no house-level consequence beyond aura and spirit, and the player cannot choose a different motto or steer which one crystallizes. For a strategy player, the motto is a readout, not a goal with actionable levers.",
+    "Succession is automatic to the eldest child; the player cannot choose which heir to pass the dynasty to even when multiple children exist. A strategist wanting to pass to the child with better seed stats or a specific trait has no agency here — the line simply goes to eldest."
+  ],
+  "improvements": [
+    {
+      "what": "Add 1–2 more deliberate house-steering choices per life: e.g., a 'concentrate the inheritance' decision (pass peakMeans × 0.7 to a chosen child instead of the eldest) or a 'sponsor the ambitious child' card that lets the player pick an heir with better traits at the cost of means.",
+      "why": "The dynasty player's complaint is not that the game is too hard but that there is almost nothing to *do* to steer the house. The bequest is the lone cross-life lever. One more intentional succession or investment decision per life would double the strategic surface area without breaking the literary tone.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the reckoning fire more reliably (lower the seat floor to seat ≥ 2, increase weight) and add a preparedness signal in the 'how things stand' readout so a strategy player can see the reckoning is coming and plan around it.",
+      "why": "The reckoning is the most interesting card strategically — it's the only real downside risk and the only card where a deliberate choice has a direct seat consequence. But at seat ≥ 3 with a 26-year cooldown, many lives at seats 2–3 never see it. Making it more common and more legible as a threat would give the dynasty player something to prepare for.",
+      "impact": "high"
+    },
+    {
+      "what": "Add one vocation-branching card per arc (a fork inside the scholar/soldier/maker/wanderer path) that produces a structurally different midlife. E.g., the scholar who chose to guard knowledge in m_scholar_legacy gets a different midlife card than the one who taught — maybe a 'your knowledge has a rival' card that fires only for the guarded path.",
+      "why": "Right now, two scholar dynasties run through nearly identical card sequences because the vocation arc is a fixed 3-card chain. A single branch per arc would make a second scholarly house feel structurally different from the first, not just prose-different.",
+      "impact": "high"
+    },
+    {
+      "what": "Expose the seat-7 gate mechanics (repPeak ≥ 3.5, peakMeans ≥ 76, seat ≥ 6) more concretely in the 'how things stand' readout — not as numbers, but as prose: 'This life's fortune would need to peak considerably higher to write the house into the histories.'",
+      "why": "The repPeak gate is invisible to the player. The houseCharacter() trajectory line hints at it but doesn't distinguish between 'your fortune this life is on track' and 'your fortune this life is too low regardless of reputation.' A clearer prose signal at seat 6 would make the pinnacle run feel like genuine strategy rather than opaque luck.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'choose your successor' elder card for lives with multiple children — present two or three named children with a brief trait description and let the player choose who inherits, with the unchosen children staying in the chronicle as non-heirs.",
+      "why": "The eldest-inherits rule is invisible and removes meaningful dynasty strategy. Choosing which child to pass the house to — a reckless son vs a bookish daughter — is precisely the kind of generational decision the dynasty-strategist profile wants.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a second distinct 'hard name / ruthless' midlife card for houses with ruthless reputation or hardname heirloom — something that fires for a *second* life in the dynasty (not just the first via r_hard_name) to reinforce the ruthless house identity rather than letting it fade after one generation.",
+      "why": "The ruthless path is the most interesting alternative reputation but produces content in only 1–2 lives of a dynasty. A second-generation ruthless house needs at least one more piece of content that makes it feel like an inherited character, not a single ancestor's decision.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life's dynasty layer has real bones — the bequest, reckoning, seat mechanics, and era system are thoughtfully built — but from a strategy-player perspective, the meaningful cross-life levers are too few (essentially just the bequest card and occasional invest-name spend), the vocation arcs repeat precisely across dynasties, and by dynasty 8–12 the structural shape of lives is too predictable to sustain the 'one more dynasty' pull this profile needs."
+}

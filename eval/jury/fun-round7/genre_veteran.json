@@ -1,0 +1,48 @@
+{
+  "profile": "genre_veteran",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation arc system (soldier/scholar/maker/wanderer) genuinely produces structurally different lives: a soldier's midlife is haunted by war ghosts; a scholar's elder reckons with the unanswered question; a maker gets the masterwork beat. This is the game's best variety engine and it works.",
+    "The callback system is the most satisfying mechanic in any life-sim I've played: 'cb_books_late' closing a circle 40 years after childhood, 'cb_outcast_return' paying back a childhood kindness, 'cb_unspoken' resurfacing a decades-old silence. When these fire, the game earns its literary ambition.",
+    "The era layer (war / plague / plenty / hard / turning) is lightweight but effective: the opening line shifts, vocation×era intersection cards unlock (vx_soldier_war, vx_scholar_turning), and the world feels inhabited rather than generic.",
+    "Dynasty goals — the seat ladder, reputation clustering into a motto, heirlooms accumulating over generations, a family secret threading across lives — provide genuine cross-life goals that make 'one more dynasty' feel purposeful, not just habitual.",
+    "Solitary and childless life-shapes are implemented as real content (m_solitary, a_chosen_family, e_solitary, e_childless) rather than dead-ends. A solitary wanderer-scholar elder life is genuinely distinctive from a married maker's.",
+    "The prose quality is exceptional throughout, and the 'observe' system (ambient stat reactions that fire once-per-life) does substantial work filling the quiet years with texture without repeating."
+  ],
+  "staleness": [
+    "The 'red and furious' first-child line appears in approximately 10 of 15 dynasties despite the onceDyn guard — one memorable line per dynasty still means the same memorable line in nearly every dynasty across a full session, and it becomes a joke by dynasty 6.",
+    "The marriage card (a_marry) has 6 text variants but 'Everyone has assumed it for years… Only the actual asking remains, absurdly undone.' lands in at least 10 of 15 dynasties in the transcripts. Two binary options (Ask / Not yet) and similar framing make every marriage beat feel identical regardless of how early or late the couple met.",
+    "The love mechanic is thin: y_love1 has 7 text rotations and a_meet_late has 3, but both resolve to the same binary (meet halfway / pretend not to notice) and the same logLine pool. There is no rival, no complicated history, no class-crossing, no second love after grief — just 'someone keeps appearing and you choose whether to let them in.' By dynasty 4 the love event is a formality.",
+    "The d_ancestor card fires in almost every second-generation-or-later life with the same two choices ('live up to the name' / 'step out of its shadow') — only the ancestor's name changes. Thirteen of fifteen dynasties show it. It should feel like a unique dynasty-memory beat; it reads as a recurring template.",
+    "The calling / y_calling card is structurally universal (correctly so) but the 4-road branch text is largely stable across all 15 founders. The era-coloured variants exist (war version, turning version, seat-5 version) but in practice 'settled' era fires most often, and the player faces the identical 4-option branch every single life. The vocations then diverge well — but the branch itself does not.",
+    "By dynasty 8–10 the once-per-dynasty beats (e_legacy, m_health, m_peer_dies, e_peace, e_garden, e_craft, e_journey, e_bequest) have all been seen. The second half of a long session is playing through a card pool that has lost most of its surprises, even with the vocation variation and era variation still running. The adult-midlife band feels thin at late dynasties because the repeatable cards are not numerous or varied enough to fill the gap left by exhausted onceDyn beats."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2–3 distinct love-event types beyond 'someone keeps appearing'. At minimum: a rival scenario (someone else is interested in the same person; player chooses a path), a grief-then-love beat (a widowed adult encounters a new person — separate from a_meet_late), and a love-across-difference card (class, calling, or era creates friction). Each should have its own text frame and consequences.",
+      "why": "The love system is the structural center of most lives — the sequence that generates marriage, children, and dynasty continuation — and it currently has one shape. A player plays through 15 dynasties and sees the same love opening 13+ times. Even modest structural variety here would change the feel of every life that includes it.",
+      "impact": "high"
+    },
+    {
+      "what": "Replace the single 'red and furious' dynasty-once birth line with a pool of 6–8 dynasty-memorable first-child lines, each tied to era or vocation (e.g., in war: 'born in a noisy year, into a noisier house'; in plague: 'arrived in the plague year, improbably alive and loud'). The onceDyn guard already exists — just widen the pool it draws from so a full 15-dynasty session never repeats.",
+      "why": "The 'red and furious' line is the most frequently repeated memorable moment in the transcripts — visible in 10 of 15 dynasties. Its memorability makes the repetition worse, not better.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3–4 distinct d_ancestor card variants keyed to the ancestor's life shape: one for a soldier ancestor, one for a scholar, one for a childless or solitary ancestor, one for an ancestor who held a secret. Each would name what the ancestor actually did (not a generic 'thing they did and what it cost') and tailor the two choices to that life's specific legacy.",
+      "why": "The d_ancestor card fires in nearly every dynasty 2+ life but is content-free — it references the ancestor by name but describes 'a thing they did' without specifying what. The player always faces the same two abstract options. It should feel like the dynasty's particular story reaching forward; instead it feels like boilerplate.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the repeatable adult/midlife card pool by 8–12 cards to replace exhausted onceDyn beats in late dynasties. Target: cards that reward the specific state the player has built (e.g., 'a ruthless-reputation house gets a shake-down artist at the door', 'a scholarly house gets a manuscript dispute', 'a wealthy elder heir gets an unexpected petition'). These should be seat-gated or reputation-gated so they unlock new content as the house rises rather than cycling through generic events.",
+      "why": "After dynasty 6–8 the onceDyn beats are largely exhausted and the adult-midlife band visibly thins. The existing seat-gated and repute-gated cards (s_great_burden, r_scholar_door, r_hard_name, s_patronage) are a good model — there are just too few of them to sustain a late-session session.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'marriage under stress' variant of a_marry that fires when the love relationship bond has already been damaged (e.g., by a_work repeatedly, or by a_affair cond met but not taken). In this variant the question is not whether to marry but whether to marry despite the fracture — a much harder choice with different long-term consequences for the child's starting bond.",
+      "why": "Currently a_marry reads identically whether the couple has been quietly eroded by work-neglect or still in full bloom. Stakes and texture are the same. A conditional variant would make the marriage event mean something about the specific life history rather than just being a milestone to check off.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely literary life-sim with a strong card pool and a working dynasty layer, but by dynasty 6–8 the unchanging shape of every life — same love beat, same calling fork, same marriage wording, same ancestor card — outpaces the structural variety the vocation and era systems provide, leaving the later session feeling like a polished template rather than a living world."
+}

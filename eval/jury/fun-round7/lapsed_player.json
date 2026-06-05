@@ -1,0 +1,48 @@
+{
+  "profile": "lapsed_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the strongest feature: cb_outcast_return, cb_principle, cb_lookaway, cb_strayed, cb_unspoken — when a choice made at age 6 echoes at age 47, the game briefly achieves what a generational sim should feel like. These moments feel earned and genuinely novel.",
+    "Era variation (war, plague, plenty, turning, hard) gives the opening of each life a different colouring. The plague-era vocation framing ('the blade — or wait, and have one chosen') is a legitimately fresh way to meet the same card.",
+    "The dynasty layer has real texture: seat levels, reputation drift, mottos, heirlooms, secrets — and the seat-gated cards (s_great_burden, s_inheritance_dispute, s_patronage) mean a house that climbs to seat 4+ genuinely faces different decisions than a struggling one. This is the 'one more dynasty' engine.",
+    "Prose rotation is generous and well-written. The 'red and furious' suppression, the RECENT_LINES deduplication for epitaphs, and freshPick pools mean you rarely read the exact same sentence twice, even when the card structure repeats.",
+    "Trait-gated cards (t_bookish, t_guarded, t_restless) and inherited heirlooms (soft spot for strays, habit of teaching) create genuine character differentiation across lives — a guarded frail scholar plays noticeably differently than a warm restless wanderer.",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the best pure-design moments: no clean answer, and the game knows it. They break the binary 'virtue vs. vice' grammar that most other cards use."
+  ],
+  "staleness": [
+    "The structural life-template is near-invariant by dynasty 5: origin → work ethic flashcard → love → vocation → child(ren) → midlife-career tension → aging parent → body failing → death. The prose changes but the skeleton does not. By dynasty 8 a lapsed player can predict the next card type before it draws.",
+    "Elder content collapses to the same 4-5 cards in almost every life: e_garden (tend it daily / sit in the window), e_peace (set things in order / rage against it), e_body (slow down / push on), e_craft (teach it / let it die), e_bequest (what to pass on). All 15 dynasty transcripts show some combination of these every single time. The end of life is the least differentiated phase.",
+    "The craft/trade cards repeat at high frequency regardless of vocation: 'one piece I have always meant to make' (masterwork) appears in dynasties 1, 3, 4, 6, 8, 10, 13 — seven of fifteen dynasties. A wanderer or scholar has no business facing a maker's masterwork card, yet they do.",
+    "Midlife thins badly. Outside the callback cards, the midlife band runs mostly on generic labour-vs-family tension (a_work), aging parent (m_parent_age), and random entropy (u_loss, u_windfall). A life in its 40s-50s feels like a waiting room between youth and elder.",
+    "The love arc is structurally obligatory and tonally samey: meet someone → wait → marry (or not). The marriage card fires in every single life in the transcript. There is no life where love is structurally absent and the life feels complete without it — which means the slot always plays the same way.",
+    "Repeat encounters across dynasties: 'Teach it to someone young / let it retire with you' (craft card) appears in dynasties 1, 3, 4, 6, 8, 10, 13, 15. 'The body has started keeping different hours' fires in 12 of 15 dynasties. Players who read the transcripts back-to-back notice these anchors within three or four dynasties."
+  ],
+  "improvements": [
+    {
+      "what": "Vocation-lock non-vocation cards. The masterwork card (once:true, maker only) and the war-deployment card (soldier only) are already gated; apply the same logic across midlife. A scholar should never face the 'hang your own name over your own door' card; a wanderer should never face the masterwork. Gate ~15-20 cards by P.flags.vocation so the midlife band diverges by calling.",
+      "why": "The single biggest driver of sameness is that most adult/midlife cards are vocation-agnostic. A soldier's 40s feel identical to a scholar's 40s except for one or two cards. Structural differentiation here would make the 'one more life' pull feel real — not just 'I wonder what prose variant I'll get' but 'I've never played a scholar midlife before.'",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 elder cards that are vocation-gated or memory-gated and replace some of the universal elder slots. Specifically: a soldier elder facing a young soldier asking what war was really worth (different from the current 'reckless youth' callback); a scholar elder gating a 'the question I never solved' card (partially done with cb_study_pays but the fail-path is thin); a wanderer elder facing the 'I have no fixed place to die' existential.",
+      "why": "Elder content is the phase where the life's defining character should peak, but currently all four vocations reach the same garden / craft / peace / body checklist. The end of life is the cheapest place to inject vocation-specific payoff because it only needs to fire once.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 5-6 genuinely mid-life-specific cards that have no elder or youth equivalent — the kind of moment that only a person in their 40s-50s faces: a long-time colleague's quiet fall from health; a moment of recognising you have become your parent; a choice about whether to stop carrying an old ideology. Make at least 2 of these memory-gated (e.g., fires only if cb_principle already fired, escalating the theme).",
+      "why": "Midlife is the leanest phase structurally. The current midlife band is mostly: aging parent card, one work-tension card, one money card, and whatever callbacks happen to trigger. There are 15 cards tagged stage:'midlife' but most are conditional on relationships or stats that don't always exist. A player who bounces off the game in midlife is a lapsed player.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 1-2 dynasty-level events that overwrite the era and are presented as a named historical moment the whole house lives through — a famine with a name, a specific war the family is remembered as surviving, a founding charter. Make these once-per-session and reference-able in later lives ('raised during the [event]').",
+      "why": "The era system already does good work but the eras are anonymous ('a plague', 'a war'). Named events would give the dynasty layer a living history feel and create an 'I wonder what my house will be remembered for' pull that transcends individual lives.",
+      "impact": "med"
+    },
+    {
+      "what": "For lives where the player chose 'No. This life, as it is.' to children AND never married, add a distinct late-life card path about voluntary solitude and what a life without heirs bequeaths. Currently the e_no_heir card exists but fires rarely and the game doesn't structurally acknowledge the choice. This life-shape (which the design intends to support) currently ends feeling like a slightly thinner version of the standard arc.",
+      "why": "One of the genre's pleasures is playing structurally different lives. The childless/unmarried life is supposed to be a valid path but currently produces only 2-3 unique cards vs. the standard arc's 8-10. Expanding it rewards the player for an intentional deviation.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The prose is genuinely beautiful and the callback architecture is the best thing in the game, but by dynasty 6 the structural template of any given life — especially its midlife and elder phases — is predictable enough that a lapsed player will feel they are watching the same play with new actors rather than living a new story."
+}

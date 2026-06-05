@@ -1,0 +1,54 @@
+{
+  "profile": "completionist",
+  "score": 6.5,
+  "fun_highlights": [
+    "Vocation arcs (soldier/scholar/maker/wanderer) create genuine structural divergence — a soldier life reads materially differently from a scholar life, with distinct mid- and late-life beats that only that path can reach.",
+    "Callback cards (cb_books_late, cb_outcast_return, cb_study_pays, cb_lookaway) provide satisfying long-arc resonance: a decision made at age 7 surfaces again at age 47, with full prose awareness of the gap.",
+    "The dynasty accumulation layer — seat, motto, heirlooms, secret, reputation — provides real 'one more dynasty' pull; Dynasty 9's five-generation rise to the histories and immediate lapse back is a genuinely satisfying arc to witness.",
+    "Solitary and childless life-shapes are content-bearing alternatives rather than dead-ends, each with their own elder beats; a wanderer who never settles and dies alone reads structurally different from a married householder.",
+    "The era system (war, plague, plenty, turning, hard) is a clever macro-layer: when a soldier is born into a war era the vx_soldier_war intersection fires, producing a life no other combination can produce.",
+    "The discovery counter ('X of 130 moments witnessed so far') on the title screen is a real completionist signal — it confirms there is more to find and gives a concrete target."
+  ],
+  "staleness": [
+    "The childhood fever card (c_sick, weight 1, once:true) appears in nearly every life across all 15 dynasties — it is functionally a universal opener despite its low weight, because the child stage has few competing once-per-life cards. By dynasty 4 the player has read all three of its outcome lines.",
+    "The four-road calling fork (y_calling) and the love-opening card (y_love1 or a_meet_late) appear in effectively every life that survives to youth and adulthood; the core structural pipeline — fever → calling → love → marry → child → midlife health scare → elder reckoning — repeats with high reliability across all 15 dynasties.",
+    "The 'returning to the old town' callback (cb_left_home) appears in 12 of 15 dynasties. Its three prose variants are all visible by dynasty 6. The callback that should feel like a rare payoff instead feels like a standard elder beat.",
+    "Approximately 40-50 of the 130 cards are gated behind conditions that require seat≥3 or seat≥4, a specific earned reputation ('ruthless', 'tainted', 'scholarly'), or a vocation-era intersection — none of these fire in any of the 15 transcripts except the one dynasty that reaches seat 7 (D9). A completionist playing naturally may finish 10+ dynasties without ever seeing a_affair, m_rival, x_reckoning, s_great_burden, s_patronage, s_inheritance_dispute, r_hard_name, r_old_shame, or any vx_ intersection other than vx_scholar_turning.",
+    "The discovery signal is a bare count, not an inventory. The title screen says '47 of 130 moments witnessed so far' but gives no indication which 83 are missing, what conditions unlock them, or which life-shapes or eras to pursue. A completionist cannot target rare content without external knowledge of the card conditions.",
+    "The 'teach it cheap / name your worth' scholar payoff card appears five times across 15 dynasties with only two prose alternates and two choice alternates; by dynasty 10 the player has read both outcomes in full. The same applies to the marriage prompt (3 text variants, all exhausted early) and the child-birth prompt (8 base variants, of which 'red and furious' is deliberately capped but the others repeat freely).",
+    "The era system, while richly designed, fires unevenly: 'settled' appears disproportionately (7 of 15 dynasties have no announced era change), which means the war, plague, and plenty cards — and especially the vocation×era intersections — are routinely invisible. A completionist who has seen the card list but not the era-gated content has no signal to 'try a war era' because eras are assigned randomly at dynasty start."
+  ],
+  "improvements": [
+    {
+      "what": "Replace the bare count ('47 of 130') with a discovery inventory showing card categories seen vs. total per category, without naming unseen cards — e.g. 'Vocation arcs: 8/12 · Era moments: 3/10 · Rare gated: 4/22'.",
+      "why": "The completionist drive requires knowing what kinds of content exist and which buckets are empty. A category breakdown lets the player know to 'try a war era' or 'build toward seat 4' without spoiling specific cards. Currently the count alone cannot motivate targeted play.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the current era on the heir screen alongside the house character and aspirations — 'The heir is born into [war years / a plague / fat years / a turning age]' — so the player knows the era before committing to the next life and can plan around vocation choices that unlock era intersections.",
+      "why": "Without knowing the era at birth, the vocation×era intersection cards (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) are invisible even to a player who knows they exist. The era is set at succession but never announced until the first birth line, by which point the vocation is already chosen.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a third child-stage card (or reduce c_sick's effective weight) so the fever is not the de-facto universal opener. A pool of 3-4 once-per-life openers drawn by weight (c_sick, c_wonder, c_grandparent, c_dark) would mean dynasty 5 still begins differently from dynasty 1.",
+      "why": "The fever card appearing in 14 of 15 dynasties is the single most visible staleness signal in the transcripts. The child stage has 12 cards but most are age-gated (6-12) or conditional; c_sick (age 3-10) wins the draw almost by default in early childhood.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a houseAspirations-style hint for rare card categories on the heir screen: 'The family has never faced a great reckoning' (when seat≥3 but x_reckoning not yet seen) or 'No life of this house has ever been born into wartime' — plain language that hints at unreached content without spoiling its text.",
+      "why": "The aspirations system already does this for seat and motto; extending it to one or two unreached rare-content categories gives the completionist a concrete nudge without a full spoiler. It also makes the 40 gated cards feel reachable rather than opaque.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the per-dynasty variety of the 'returning to the old town' callback (cb_left_home) by expanding its prose pool from 3 to 8 variants, and reduce its base weight slightly so it fires in roughly 7 rather than 12 of 15 dynasties.",
+      "why": "This single callback appears more often than any other non-core card and its prose is exhausted quickly. It is the clearest example of a 'should feel rare, reads as routine' beat.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'seen this dynasty' cooldown to f_fire so it fires at most once per dynasty, not once per 30 years. Currently a player can see two fires in a long life (Anouk Bjornsen, dynasty 7) and six fires across 15 dynasties.",
+      "why": "The fate fire is designed as a rare disruption, but its 30-year cooldown means long-lived characters see it twice and dynasties with multiple long-lived members see it repeatedly. A per-dynasty cap would preserve its impact.",
+      "impact": "low"
+    }
+  ],
+  "verdict": "A Life is a polished, genuinely moving literary sim that sustains play through 4-6 dynasties on prose quality and the dynasty accumulation layer alone, but goes detectably stale for a completionist by dynasty 8-10: the structural pipeline repeats with high fidelity, ~40 of the 130 cards are locked behind conditions (high seat, specific reputation, vocation×era) that produce no signal to pursue, and the discovery counter tells the player only how much they've missed — not what or how to find it."
+}

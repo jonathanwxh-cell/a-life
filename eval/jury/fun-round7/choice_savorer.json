@@ -1,0 +1,49 @@
+{
+  "profile": "choice_savorer",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the game's single strongest feature from a choice-savorer perspective: when a childhood kindness returns 20-30 years later as 'a door held open,' or when a corner cut in youth spawns a higher-stakes repeat in midlife, choices feel genuinely causal and character-defining rather than cosmetic.",
+    "The 'competing goods' cluster (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, x_favour) delivers real moral friction — both paths are virtuous, neither is clean, and the hint-line ('honesty over comfort,' 'loyalty') names the trade-off without resolving it. These are the moments the profile craves and they land.",
+    "Vocation-gated arcs (soldier/scholar/maker/wanderer) give each calling its own distinct adult cluster rather than the same universal midlife soup. A soldier life and a scholar life feel structurally different because they draw from different pools.",
+    "Era cards (war/plague/plenty/hard/turning) create macro-variety that crosses individual choice: two scholar lives can read differently because one is born in fat years and one in plague years, with entirely different fate events and moral pressures.",
+    "The bequest mechanic — choosing what to pass to the heir — is the clearest cross-generational lever, giving a player something concrete to build toward rather than just witness.",
+    "The 'fate' cards (fire, sudden_loss) that offer no real choice — only how to metabolize the blow — are dramatically right for the genre. They punctuate agency with genuine contingency."
+  ],
+  "staleness": [
+    "The structural skeleton of every life is nearly identical: child card cluster (origin, wonder/book/friend/sibling) → calling at 14-22 → fall in love → marry → child question → midlife money/promotion → aging parent → elder reconcile/legacy → death. By dynasty 4-5 the player can narrate the next beat before it arrives. The transcripts confirm this: all 15 dynasties hit the same 8-10 structural waypoints in the same order.",
+    "The love arc has almost no variation in its grammar. The prompt changes its surface phrasing across 7 variants, but the binary is always 'meet them halfway' vs 'pretend not to notice,' and the marry card follows with the same six phrasings. Across 30 characters in the transcripts, 28 get the same love → marry two-card sequence with no alternative shape (polyamory, serial love, arranged match, love without marriage).",
+    "The child card fires as a mechanical checkpoint in almost every adult life regardless of personality or circumstance. A guarded, low-heart wanderer who has never married still gets a near-identical 'the question of a child arrives' prompt. The situational framing does exist in the code (checking for spouse/love) but the emotional beat is recycled too uniformly.",
+    "Mid-life is the thinnest band. The work promotion (take it / refuse it), aging parent (take in / pay from afar), and money-compounding cards account for a disproportionate share of midlife events. In the transcripts, these three cards land in almost every life between 35-60, often in the same order. The 'band-filler' cards exist in the code but their weight (w:2) is low versus structural cards (w:3-4), so the fillers lose the draw lottery more often than not.",
+    "The 'guarded' trait card fires repeatedly across the whole transcript run with nearly identical framing: 'someone has gotten close enough to ask [name] the question the walls are up against.' It appears verbatim (or near-verbatim) in Dynasty 1 Gen 1 (age 33), Dynasty 1 Gen 2 (age 43), Dynasty 3 Gen 2 (age 29), Dynasty 3 Gen 1 (age 39), Dynasty 12 Gen 2 (age 40), Dynasty 15 Gen 1 (age 48). Six characters, same question. The surface alternates slightly but the card is effectively once-per-life-with-the-trait, not once-per-dynasty.",
+    "The 'scholar legacy' and 'guard vs give' knowledge question (m_scholar_legacy) fires in a strikingly high share of scholar lives in the transcript. Across Dynasties 1, 3, 7, 9, 12, 15 — all scholar-heavy — the 'give it all away / guard it' binary appears in nearly every one, often as the most memorable midlife beat. It is a good card but its near-universal penetration in scholar runs makes it feel like a mandatory genre beat rather than a discovered moment.",
+    "Observation lines (the passive prose that fires without choices) repeat noticeably by mid-run. 'Taught what she knew, and so outlived the knowing of it' and 'Poured what he knew into the young, and so refused, quietly, to die all the way' both appear multiple times across the 15 dynasties as epitaphs, despite the deduplication logic. The epitaph pool is deep but the 'teacher' and 'kind' clusters dominate because those memories are so commonly acquired."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 structurally alternative love paths beyond the binary meet/ignore: a slow-burn friendship-to-love arc (gated if a friend bond > 60 in adulthood), an arranged or pragmatic match (seat >= 3, no existing love), and the option to genuinely decline all romantic attachment and let that shape the solitary midlife arc from the start rather than treating it as a late catch.",
+      "why": "Currently every character who 'meets them halfway' follows the identical love → marriage path. The binary is fine for a single life but across 15+ lives it creates a monoculture in the adult years, the section players see most.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 new midlife cards with weight 3-4 to break the work-promotion / aging-parent / money-compound triumvirate that dominates age 35-60. Concrete candidates: a long illness (character or spouse) that forces months of caregiving or detachment; a crisis of purpose where the vocation itself is questioned; a public recognition that opens unexpected doors but costs privacy; a falling-out with the institution the character has served.",
+      "why": "Midlife is structurally the thinnest band per the transcripts. The existing filler cards (w:2) too often lose the draw to the structural pillars. Adding high-weight alternatives breaks the predictable midlife sequence.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the child card meaningful personality sensitivity. If a character has 'guarded' trait + low heart + no spouse (only a 'love'), the prompt should feel genuinely reluctant — perhaps a different framing where the character actively avoids the question rather than 'keeps almost raising it.' If a character has taken the wanderer calling and has been moving every 5 years, the child question should foreground the conflict with rootlessness, not elide it.",
+      "why": "Currently the child card's framing is cosmetically varied but structurally identical regardless of who the character is. A guarded wanderer and a warm settled maker get essentially the same moment.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the once-per-dynasty (not once-per-life) enforcement for the 'guarded wall' and 'scholar give-or-guard' cards by adding a house-level memory flag. Once a dynasty has seen that a character kept their wall, the next guarded character should get a different inflection — perhaps the wall is now a known family trait, or the next character has inherited a reputation for guardedness and others approach them differently.",
+      "why": "The transcripts show these two cards landing 5-6 times across 15 dynasties with near-identical framing. This is the most concrete staleness signal visible in the transcript run.",
+      "impact": "med"
+    },
+    {
+      "what": "Add one or two structural 'life shapes' that bypass the default love → marry → child progression entirely and are signaled from the calling choice. A 'devoted soldier' path (chose soldier + go where worst) could foreclose early marriage via a 'no time for this' flag, creating a life that hits elder without the standard domestic arc and instead leans into comrade-bonds, survivor guilt, and the m_soldier_ghost card as the primary emotional through-line.",
+      "why": "Currently the vocation fork differentiates adult content but doesn't meaningfully change the domestic arc that sits alongside it. A soldier still marries and has children on nearly the same schedule as a scholar.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life has genuine craft in its callback system and competing-goods choices, but the structural skeleton — calling, love, marry, child, work-promotion, aging-parent, death — is visible and predictable by dynasty 4, and the midlife band in particular repeats the same three beats across nearly every character regardless of who they are."
+}

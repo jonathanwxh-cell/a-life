@@ -1,0 +1,48 @@
+{
+  "profile": "replay_addict",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system (cb_outcast_return, cb_books_late, cb_lookaway, cb_strayed) genuinely delivers payoff moments that feel earned — a kindness at age 6 returning as an adult door-held-open is the game's best trick, and it fires differently each time because the remembered age is specific.",
+    "Era gating (war, plague, plenty, hard, turning, settled) gives each dynasty a distinct opening colour and gates real content (plague cards, war cards) that doesn't appear otherwise — a dynasty born into plague hits materially different beats than one born into plenty.",
+    "The heirloom and motto system provides cross-run meta-progression that a replay player can deliberately steer: spending yourself on reputation, choosing the bequest deliberately, watching the motto crystallize at dynasty 3 or 4 — this is the strongest hook for another run.",
+    "The dynasty seat-ascent and 'house written into the histories' goal gives a concrete long-arc ambition that genuinely pulls across 6-8 runs before it either lands or becomes obviously unreachable.",
+    "Trait-gated cards (t_bookish, t_guarded, t_restless) and vocation-specific elder moments (e_legacy framed by soldier/scholar/maker/wanderer) make characters feel distinctly themselves rather than interchangeable, especially in the first 3 dynasties.",
+    "The early-death lives (Adaline Ashby at 23, Henrik Halloran at 19, Cassian Okonkwo at 44) are genuinely punchy and create structural variety — a dynasty can collapse in two generations and feel like a real story rather than a failed run."
+  ],
+  "staleness": [
+    "The love-marriage-child pipeline is structurally present in every surviving life in the 15-dynasty transcript, and by dynasty 5 the player has seen all 7 y_love1 text variants at least twice. The card exists in two flavors (y_love1 and a_meet_late) but the shape — someone keeps showing up, player accepts or deflects, marriage follows — never varies. There is no life-shape in which a person is meaningfully constituted by not having love rather than having it: declining love just means a later love card fires.",
+    "The ambient observation lines (the passive prose fired by observe()) repeat verbatim and frequently across dynasties. 'Time has not yet managed to talk her out of being glad' appears in at least 8 of 15 dynasties; 'The body has begun sending its small bills' in 9 or more. These lines are finely written but become wallpaper by dynasty 6, especially since they fire unconditionally (no gate beyond the stat threshold) and reuse a fixed pool.",
+    "The vocation card (y_calling) is mandatory in every life and presents the same four options every time. Text rotates through 3-4 variants per vocation, but by dynasty 4 the player has read 'The years ahead want a shape. [Name] stands where the roads fork' many times. Vocation doesn't gate enough downstream content to feel like a meaningful fork — a soldier and a scholar mostly face the same adult/midlife cards.",
+    "The elder stage repeats most visibly: e_legacy, e_peace, e_body, e_last_walk, and the 'scholar makes peace with not knowing' card (y_scholar_peace) appear in nearly every life that reaches 65+. With only 3-4 prose variants each, by dynasty 7 the end of every life rhymes strongly with every other end.",
+    "The a_work (promotion dilemma) card fires with only 3 text variants and the mechanical output is the same both ways (means up or spirit up, family bond shifts). It appeared in at least 10 of the 15 dynasties' qualifying lives with nearly identical framing each time.",
+    "No truly divergent life-shapes exist beyond the standard template: childhood cards → vocation → love → marriage → child(ren) → midlife → elder. Lives that decline love or skip marriage don't acquire an alternate structural arc — they just have fewer cards. A childless life doesn't open a different kind of midlife; it's the same cards minus a_child and m_child_grown."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 alternate life-shape archetypes that replace the love-marriage-child pipeline with a structurally different sequence of cards: a 'solitary' arc (friendship-network deepens instead of family forming, with its own midlife and elder suite), a 'devoted' arc (a cause or craft becomes the primary relationship), or a 'failed family' arc (a marriage that breaks generates its own multi-card aftermath rather than just a bond penalty).",
+      "why": "Right now the player can decline love, but the game doesn't deliver an alternate arc — it waits and tries again with a_meet_late. A player who wants to play a genuinely solitary character has no supported path. The structural sameness (everyone ends up with a spouse or at least a love relationship) is the single biggest engine of run-to-run repetition.",
+      "impact": "high"
+    },
+    {
+      "what": "Pool the passive observation lines (in observe()) across the whole SESSION rather than resetting per life, and expand the pools to 15+ entries per cluster. The current per-life de-dupe prevents a line repeating within one life, but doesn't prevent the same line appearing in dynasty 3 and dynasty 11.",
+      "why": "The session-level RECENT_LINES guard is implemented for epitaphs but not for the ambient observe() lines. These fire multiple times per life and are the most visible repetition for a binge player — the same 9-line pool cycling across 15 dynasties.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 vocation-specific mid-life cards per calling (not just the y_calling and e_legacy endpoints) so that a soldier's adult years feel structurally different from a scholar's. Currently both paths hit the same a_work, a_marry, a_affair, m_health, m_reinvent cards. A soldier's midlife should include at minimum a 'commanded others into something terrible' or 'peacetime uselessness' card that a scholar never sees.",
+      "why": "Vocation is the most player-legible structural choice in the game (four options, prominent at age 14-22) but it gates almost no downstream content beyond the y_calling log line, the a_fork_career card, and the e_legacy text. The choice doesn't change the shape of the adult years — only the starting stats. Adding vocation-gated adult/midlife cards would make the four paths feel genuinely different to play.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the dynasty goals (seat level, current reputation, motto progress, heirlooms) on the dynasty/heir screen as legible aspirations with prose descriptions of what would advance them — not numbers, but something like 'a scholarly reputation needs one more life of study before it crystallizes into words the family can live by.' This screen already partially exists (houseAspirations) but the information is only shown at death.",
+      "why": "The meta-progression is the game's strongest replay hook, but a player can't plan toward it if they only see the dynasty's state at the moment of succession. Making the goals legible mid-life (or on the heir screen before confirming succession) would give each run a concrete ambition that varies by where the dynasty currently stands.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 cards gated on a failed-reckoning or falling-seat state that specifically play the dynasty-in-decline arc: a child who inherits debt and shame, a family member who blames the player's character for the fall, a creditor arriving. Currently a seat fall is announced in a log line but doesn't change which cards are available — a declining dynasty and a rising one face the same pool.",
+      "why": "Without downside content that's meaningfully different from upside content, losing feels like winning with worse numbers rather than a different kind of story. A dynasty collapsing from seat 4 to seat 1 should feel like a different game than one climbing from 1 to 4.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A beautiful game for 3-4 dynasties that becomes structurally repetitive by dynasty 7-8: the prose keeps rotating, but the skeleton — vocation fork, love pipeline, marriage, children, midlife scare, elder peace — repeats in nearly every life, and the observation lines that provide ambient texture are visible enough to wear out before the meta-progression goals resolve."
+}

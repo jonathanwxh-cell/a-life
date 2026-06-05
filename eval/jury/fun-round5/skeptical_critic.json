@@ -1,0 +1,49 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.5,
+  "fun_highlights": [
+    "The four vocation arcs (soldier/scholar/maker/wanderer) genuinely differentiate structural life-shapes — a soldier's adult band reads materially different from a scholar's, and the vocation-era crossings (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) are the game's most original design: content that only exists at the intersection of a choice and a world-condition.",
+    "The callback system is a real mechanical achievement. cb_lookaway (the child in the yard finally confronted as a sleeping rough stranger), cb_study_pays (the lean years cashing in), and the unspoken-love chain have genuine emotional payoff on first encounter — the long arc closing is the clearest instance of the genre's 'emergent story' promise actually landing.",
+    "The dynasty layer — mottos crystallizing, heirlooms propagating, the secret passing down — works as a meta-game. Watching a house climb from 'nothing but a name' to 'an old and famous house' across six generations via deliberate play gives the 'one more dynasty' pull real structural teeth. The aspirations list ('still ahead: a place in the histories') functions as a soft quest log.",
+    "Era events (war, plague, hard years, plenty, turning) add genuine ambient variety and gate era-specific cards that change the texture of the world a generation inhabits. Dynasty 4 (war founder) and Dynasty 12 (war + soldier + turning) read structurally differently from settled-era runs.",
+    "The prose quality is strong enough that even repeated beats carry on first read — the writing earns the game more replays than the systems alone would justify. The observe() ambient lines for extreme stats add characterization without a card being drawn."
+  ],
+  "staleness": [
+    "The mandatory structural skeleton — c_origin, y_calling, y_love1, a_marry, a_child, m_health, e_legacy, e_bequest — fires in the same order in the large majority of lives. By dynasty 7–8 a player can predict the first three cards of any new life before they appear. The game has ~130 cards but roughly 25–30 act as load-bearing pillars that every eligible life must pass through, so variety is cosmetic within a predictable arc rather than structural.",
+    "The c_steal card generates the identical log line ('Stole, once, and the taste was guilt as much as fruit') in every life that takes it — dynasties 1, 3, 5, 6 in the transcript, same text verbatim. This is the most visible evidence that the card pool, despite its size, has thin-variation traps that compound into repetition at scale.",
+    "The a_warm / t_warm 'people keep ending up at X's table' card fires across dynasties 2, 3, 4, 5, 7, 8, 11, 14, 15, 16 in the transcript — i.e., in nearly every run — because 'warm' and 'tender' traits are common and the cond is loose. The card itself is well-written but its ubiquity means it reads as a fixture of every life, not a characterizing moment.",
+    "The love/marry/child triplet near-universally resolves the same way (meet them halfway → ask build a life → yes make room) across 13 of 16 dynasties in the transcript. The engine nudges heavily toward this path, so the 'unspoken love' or 'solitary' divergences feel like the exception proving the rule rather than genuine life-shape variety. The 'late love' monoculture the engine comments on in its own code was only partially solved — many founders still meet love late and marry late even in the revised draw logic.",
+    "The e_window (grandchild) card fires in 6+ lives with identical setup text ('small, sticky, fearless'), and the most common choice ('Tell the better story' → 'Improved his/her own childhood a little') lands verbatim in dynasties 3, 5, 6, 8, 10, 11, 12. By dynasty 10 the player has seen both branches and both log lines. This is the epitome of a card that has no more surprise to offer.",
+    "The elder phase consolidates toward the same 3–4 cards in nearly every life: e_legacy (what do you want remembered — all three answers seen by dynasty 5), e_garden or e_window, e_bequest, e_peace or e_body. The elder band is the thinnest in experiential variety despite being emotionally the most loaded part of the arc.",
+    "By dynasty 10, most callbacks have been seen on both branches. The callback system is a one-time delight per callback; after that it becomes a pattern ('oh, the lookaway card fires — I remember this'). There is no second-order callback layer, no callback of a callback, no way the system deepens further.",
+    "The 'observe' ambient pool for common stat thresholds (vit declining after 45, spirit high/low, means high/low) starts generating repeated lines by dynasty 8–9 for lives with similar stat profiles. 'The stairs have started to ask a question of them' and 'she wears the years lightly' appear in multiple dynasties in close proximity."
+  ],
+  "improvements": [
+    {
+      "what": "Break the mandatory early arc by making y_calling and c_origin NOT both appear in the first 10 years of every life. Add 2–3 alternate 'entry frames' — a life that begins in the middle of a crisis (a dead parent at 5, a war already in progress), one that opens with youth already spent (a child-labor frame), one with an unusually long quiet childhood. Different arc openers would make the first third of each life feel less templated.",
+      "why": "The first 3 cards of any new life are currently predictable within 2–3 dynasties. Structural divergence at the start is what gives the whole life a different shape — a life that opens in crisis has a different emotional register for its entire arc, not just one card.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'once-per-session' burn to the most repetitive universal cards (c_steal, e_window, t_warm/table). If a card has fired 3+ times in a session without a resolved callback, suppress it and promote a rare alternative. The c_steal log line is already identical every time — either add 3 more distinct outcome lines, or make it a true once-per-dynasty card via onceDyn.",
+      "why": "c_steal's identical log line is the most visible staleness tell in the transcripts — it appeared verbatim in 4 of the first 6 dynasties. e_window's 'small, sticky, fearless' setup becomes a joke by dynasty 8. These are the seams where the template shows most.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 4th life-shape: the 'broken line' — a person who never found a calling, never fell in love, never had a child, and whose elder arc is accordingly different (more solitary, more about survival and quiet dignity). Currently the solitary/childless cards exist but feel like failure states or exceptions. A calling-less adult band (no vocation arc cards fire) with its own cluster of content would give every dynasty a genuine wildcard life alongside the templated ones.",
+      "why": "The calling is currently near-certain to fire and love is nudged toward firing in most lives. Structural variety means some lives should simply miss these rails entirely and have a coherent experience anyway — not just a thin version of the standard arc.",
+      "impact": "high"
+    },
+    {
+      "what": "Extend the callback system to second-order: if cb_lookaway has fired and the player chose 'Stop, don't look away this time,' add a much-later elder card (e_reckoning_kindness or similar) that references THAT choice — 'The stranger you stopped for once, years ago, has left you something.' Currently callbacks close arcs but never open new ones. A chain of two callbacks across one life would make late-game genuinely surprising.",
+      "why": "The callback system is the game's best mechanic and it is left at depth-1. Every callback closes; none opens. A chain callback would be the clearest possible signal that the systems are deeper than the player expected — the exact 'emergent story' the genre promises.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 10–15 adult band cards that are ANTI-domestic — cards that fire only for people who have no spouse, no children, and no calling, or who have all three and are now facing the plateau. The adult midband (28–55) in the transcripts is where staleness is most visible because the domestic cards cluster there. Cards about professional rivalry, civic failure, a creative project gone wrong, an inheritance dispute without wealth — material that doesn't require a relationship to land.",
+      "why": "The adult band is the thinnest in structural variety relative to how long it lasts. Most band-filler cards added were virtuous/contemplative. The missing material is conflict and consequence for the person in the middle of an ordinary working life.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a polished, often beautiful game that earns its first 4–5 dynasties fully — the vocation arcs, callback system, and dynasty meta-layer are genuine achievements — but by dynasty 8 the mandatory skeleton (calling → love → marry → child → health scare → legacy → bequest) becomes a predictable frame that cosmetic prose variety cannot disguise, and the player is watching the same template with new names rather than discovering new life-shapes."
+}
