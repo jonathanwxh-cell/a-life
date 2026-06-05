@@ -1,0 +1,48 @@
+{
+  "profile": "loop_designer",
+  "score": 6.0,
+  "fun_highlights": [
+    "The callback arc genuinely works: when cb_outcast_return fires and the narrator tells you 'a kindness done at age 6 came back, decades later, as a door held open', there is a real payoff that only this life could produce — it earns its emotion.",
+    "The dynasty layer adds a structural pull that is absent from most single-life narrative sims. Watching the seat climb from 'nothing but a name' to 'an old and famous house', seeing a motto crystallise ('We burn bright, and we burn'), and inheriting a family secret all give genuine 'one more dynasty' motivation.",
+    "The bequest mechanic at death — choosing what to hand the heir — is the loop's single strongest player-agency moment; it feels like a deliberate design decision that ripples forward, and it closes the generational loop with more intent than most games of this type.",
+    "The pool of 91 cards is genuinely large enough that many individual lives feel textually fresh; the rotational prose variants (7 love-opening variants, 6 marriage lines, 3 child-birth lines) do real work against rote repetition of individual sentences.",
+    "Rare early deaths (dynasties 3, 4, 8, 9 in the transcript) are both emotionally striking and mechanically clarifying — they remind the player that the dynasty, not the individual, is the real subject, which reframes loss as narrative rather than failure."
+  ],
+  "staleness": [
+    "The structural skeleton calcifies after about 4–6 lives. Every normal-length life in the 38-life transcript follows the same spine: childhood fever + book/friend/stray + youth trade/study + meet love + marry + child + body letter in midlife + body card at elder + legacy question + bequest. The props rotate but the armature does not. By dynasty 4 you are watching the same template with new names, not a different life.",
+    "The mentor card (y_mentor) appears in 23 of 38 lives in the transcript — more than 60% — making it feel like a standard beat rather than a surprise encounter. The 'was taken under a wing' log line is the single most repeated individual sentence. A once-per-life card should not dominate this reliably.",
+    "The 'honest or kind' card (x_honest_or_kind) and the marriage card (a_marry with its 'Ask. Build a life.' / 'Not yet. Maybe never.' choices) each appear in almost every adult life, to the point that seeing them again reads as obligation rather than event. In the transcripts, the marriage card fires 31 times across 38 lives.",
+    "The 'from nothing' card (s_from_nothing) fires in 10 lives — a quarter of all lives — because the house rarely rises above seat 1 for a founder. Combined with the mentor and love beats, the first 30 years of almost every founder have an identical shape: poverty, mentor, romance.",
+    "The dynasty meta-layer, which is the primary freshness driver across sessions, is shallow in practice: the only real levers are the seat (0-7), the motto (9 fixed options), and 5 heirloom tags. There is no meaningful differentiation between a 'scholarly' dynasty and a 'generous' one in what cards appear — the r_scholar_door and r_family_shadow cards exist but they are rare and low-weight, so most lives in a named dynasty never feel like they are living inside that dynasty's character.",
+    "There is almost no structural variation between a wealthy dynasty and a poor one from the player's perspective. Seat-gated cards (s_great_burden, s_patronage, s_inheritance_dispute) are a good idea but so thinly populated and conditionally restricted that in a 5-generation dynasty only 1-2 of them will fire per run. The great-house experience and the struggling-house experience share 85%+ of their moment pool.",
+    "The 'body sends its first real letter' (m_health) fires in nearly every life that reaches midlife, always at roughly the same age, and the two choices produce almost identical downstream outcomes. It reads as a genre obligation rather than a moment of choice."
+  ],
+  "improvements": [
+    {
+      "what": "Introduce 3–4 mutually exclusive life-path archetypes that structurally gate large card swaths. Example: a 'rootless' path (triggered by y_leave + no spouse by 30) that replaces the standard youth-romance beats with a different set of adult cards — itinerant work, chance encounters, late solitary elderhood. A 'devoted' path (early marriage, stays home) that replaces risk/gamble/reckless cards with home-and-hearth cards. The player doesn't choose the archetype; their choices in the first 10 years determine which pool opens. This breaks the 'same armature, different props' staleness without requiring the player to understand hidden stats.",
+      "why": "The deepest staleness in the transcripts is structural, not textual. The writing is already varied enough; what repeats is the sequence of card types. A path-divergence at youth level would make dynasty 8 feel mechanically different from dynasty 2, not just textually different.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap the y_mentor card at once per dynasty (not once per life). Currently it fires in 60%+ of lives because its conditions are nearly always met and its once-per-life reset means it comes back with every new heir. A dynasty-level lock prevents it from becoming a structural beat; an heir born into a 'teaching' heirloom dynasty might get a weaker variant instead ('grew up in a house that already knew how to teach').",
+      "why": "The mentor beat is the single most visible sign of the loop's staleness in the transcripts. It is the first thing a player who has run 6+ lives will notice: 'here comes the mentor again.' One fix here has outsized perceptual impact on freshness.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 6–8 cards that are gated by *combination* of dynasty age and reputation — not just seat level. A 'reckless' dynasty on its 4th generation could face a specific card about a young heir who is destroying the name ('The reckless name your grandfather built has come back to collect'); a 'scholarly' dynasty at seat 3+ gets a rare 'the family is asked to send a scholar to court' card. These should be impossible to encounter in dynasty 1 and guaranteed visible by dynasty 6 if the reputation is real.",
+      "why": "The motto and reputation systems are the game's most interesting generational mechanics but they currently produce almost no differentiated *play* — only differentiated *narration*. Tying rare, reputation-specific cards to dynasty-age milestones makes the dynasty meta-loop feel like it actually opens new content rather than just reframing the same content.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the 'body sends its first real letter' (m_health) card a second variant that only fires in dynasties where the founder lived past 80 — framing longevity as a dynastic trait that the current heir is either inheriting or breaking from. The current two choices ('change everything' vs 'carry on') are fine but the card itself needs stakes that vary with context.",
+      "why": "A card that fires in almost every midlife life needs either more outcome variance or a visible reason it is different this time. Dynasty context is the cleanest lever available without breaking the no-numbers identity.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'dynasty is in decline' structural mode: if the seat has dropped 2+ steps from its peak in the last 3 generations, unlock a dedicated pool of 4–5 'fall' cards that do not appear in ascending dynasties (a creditor appearing at the childhood door; a coming-of-age moment framed around recovering the name rather than building one). This gives the falling-dynasty arc the same structural freshness budget as the rising one.",
+      "why": "Decline is currently just the absence of rise — the same cards appear but with different stat outcomes. A dedicated fall-arc pool would make a collapsing dynasty feel like a distinct story, which is the second-strongest source of long-run freshness after path-divergence.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The writing and the dynasty meta-layer are genuinely good, but the loop calcifies into a recognisable armature — fever, mentor, love, marriage, body letter, bequest — that repeats across every normal life from dynasty 3 onward, and the game's structural variety mechanisms (seat-gating, reputation-gating) are too thinly populated to break the pattern."
+}

@@ -1,0 +1,53 @@
+{
+  "profile": "long_session",
+  "score": 5.5,
+  "fun_highlights": [
+    "The callback system is genuinely clever: early choices (looking away from a child, keeping a book, staying silent on love) echo back in later life with exact ages cited, creating a brief 'oh, that was me' recognition hit that works well through the first 2-3 dynasties.",
+    "High-standing house cards (seat>=4/5: s_patronage, s_inheritance_dispute, s_great_burden) and reputation-gated cards (r_hard_name, r_scholar_door) are meaningfully different content that only long-running dynasties encounter — a genuine reward for investment.",
+    "The bequest system (4 choices: knowledge, coin, warmth, freedom) is a well-designed inter-generational lever that actually changes how the next life begins statistically, giving the player a real decision that matters across lines.",
+    "The writing quality on individual cards is high and stays readable throughout — each prompt is economical and the choice framing rarely over-explains.",
+    "Occasional structural surprises — a founder dying at 7-8, a child dying in dynasty 2 ending that line cold — do create genuine unpredictability in the dynasty arc if not in the card text."
+  ],
+  "staleness": [
+    "The fever card (c_sick), the friend-outcast card (c_friend), the book card (c_book), the love card (y_love1/a_meet_late), the marry card (a_marry), the child card (a_child), the health-scare card (m_health), and the bequest card (e_bequest) appear in nearly every single life across all 12 dynasties. By dynasty 5 the player can predict 70% of a life before it happens.",
+    "x_honest_or_kind ('someone I love asks a direct question') has no once: flag and a cool of only 22 years. A 75-year life sees it 2-3 times; it appears dozens of times across the 38-life transcript and becomes invisible wallpaper by dynasty 3.",
+    "The life-shape is structurally invariant: child events (fever, friend/book/sibling) → youth love → adult marry/child/work cycle → midlife health scare + callbacks → elder bequest → death. After 3-4 lives the player is navigating a template, not discovering a person.",
+    "The observation-only filler sentences (no choice, just text) recycle from a pool of roughly 20-25 phrases. 'Somewhere in them a window the years usually close has stayed open,' 'the decades have arranged themselves around her and somehow never sat down,' and several others appear word-for-word in 6+ different lives in the transcript.",
+    "The 55 once-per-life cards are effectively exhausted by a player after 3-5 lives covering all variants. The remaining ~36 repeatable cards are the ones that stamp the template feeling: they are the cards that actually fire reliably.",
+    "Rare cards that create genuine variety — seat-gated (s_*), repute-gated (r_*), trait-gated (t_*), secret-gated — are either never seen in the 38-life run (t_bookish fires zero times), or appear only in specific dynasties with the right configuration. A casual player running short dynasties may never see them.",
+    "By dynasty 8-12 the transcript shows no structural novelty versus dynasty 1-3: the same 8-9 skeleton cards in the same life-stage order, the same filler phrases, the same callback beats. A 2-hour session comfortably covers 8+ dynasties and hits this wall."
+  ],
+  "improvements": [
+    {
+      "what": "Cap x_honest_or_kind at once:true or cool:35 minimum, and rotate its variants more aggressively (it currently has only 1 prompt text but fires 30+ times across 38 lives).",
+      "why": "It is the single most visible staleness offender: an identically-worded moral dilemma that appears as a generic filler card in virtually every adult and midlife. Reducing its frequency alone would make each appearance feel like an event again.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 15-20 new cards in the adult/midlife band with `once:true` — especially cards that are NOT relationship-anchored (work project, civic moment, creative failure, a stranger encountered once). The adult band (ages 26-58) is the thinnest in original content relative to how many years a typical life spends there.",
+      "why": "The transcript shows that 60% of a 70-year life is spent in 'adult' stage and those years are filled by the same 8-10 repeatable cards. More `once:true` material here would ensure lives feel different in their middle decades.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 2-3 dynasty-level surprise events that fire once per dynasty (not per life): a founding myth that emerges by generation 3, a scandal that arrives when repute is very high, a windfall or catastrophe that resets the house trajectory. These should be distinct from the per-life cards.",
+      "why": "Currently the dynasty layer (house standing, motto, heirlooms) is a consequence tracker rather than a story generator. A per-dynasty event would give each new dynasty a unique anchor memory — 'House Renner was the one where...' — and create the 'one more dynasty' pull the brief asks about.",
+      "impact": "high"
+    },
+    {
+      "what": "Prune or differentiate the observation-only filler sentences. The current ~25 rotating phrases appear too frequently and become obvious noise. Either reduce their frequency or replace half with sentences that are specific to the current character's stats/traits/memories.",
+      "why": "When a player reads 'The decades have arranged themselves around her and somehow never sat down' for the 8th time, it breaks immersion rather than building it. Filler that references what the character actually did ('She has never quite forgiven herself for looking away at 7') would feel personalized even if templated.",
+      "impact": "med"
+    },
+    {
+      "what": "Make trait-gated cards (t_bookish, t_guarded, t_restless, t_warm — only 3 currently exist) more numerous and ensure they fire. t_bookish never appeared in 38 lives in the transcript; t_guarded appeared twice. Traits should generate 2-3 unique moments each, not 0-1.",
+      "why": "Traits are presented to the player as character identity markers ('frail, shrewd'; 'guarded, stubborn') but currently have almost no mechanical payoff in the card draw. A 'bookish' character who never gets a bookish card feels like a label without a story.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'pivot' card type that fires exactly once per dynasty (not per life) at mid-dynasty (generation 3-4) and poses a question about what the family has become — with choices that redirect the reputation trajectory. Frame it as a reckoning with the dynasty's accumulated character.",
+      "why": "The reckoning card (x_reckoning) exists but only fires when seat>=3 and is a financial crisis. A thematic reckoning — 'Your family is known as ruthless; a member asks whether that's who you want to be' — would give the player active agency over the dynasty arc rather than just passively watching it accumulate.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "By dynasty 5 the life-template is so visible — fever, friend, love, marry, child, health scare, bequest, die — that a 2-hour session is mostly watching the same 8 skeleton cards in a new character's name, and the game's genuine strengths (callback chains, house-gated surprises, excellent prose) are not enough to sustain the loop past that point."
+}

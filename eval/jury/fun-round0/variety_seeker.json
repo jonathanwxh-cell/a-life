@@ -1,0 +1,47 @@
+{
+  "profile": "variety_seeker",
+  "score": 5.5,
+  "fun_highlights": [
+    "The callback system (cb_* cards) is the single strongest source of structural variety: a life that looked away from a lonely child gets a morally loaded return encounter decades later; a dishonest life gets escalating corner-cutting; a reckless youth gets an elder advisory moment. These genuinely change a life's shape rather than just its prose.",
+    "Early mortality creates real structural surprise — dynasties 3, 4, 8, 9 end at age 7-34, which is genuinely startling and feels different from the standard arc.",
+    "The hard-dealing/ruthless reputation arc unlocks seat-gated cards (r_hard_name, r_name_cost, s_great_burden) that a kind-hearted house never sees, making a deliberately ruthless dynasty play noticeably differently.",
+    "Prose rotation is deep — 5-7 logLine variants per beat, plus name substitution and rotI/rotN cycling — so the same card rarely reads identically across two lives.",
+    "The bequest choice (mind/means/heart/free) is a genuine cross-generational lever: a 'nothing but their own freedom' bequest vs. 'every coin I can spare' produces heirs who start from meaningfully different stat positions."
+  ],
+  "staleness": [
+    "Every full-length life follows the same structural skeleton: childhood illness → friend choice → youth path → fall in love → marry → child → midlife health scare → elder bequest → death. By dynasty 4 the next beat is predictable before it arrives. The template is the experience, not an emergent story.",
+    "The love → marry → child pipeline executes in essentially 100% of lives that survive youth. There is no vocation system and no structural path that skips or meaningfully delays this sequence — the engine even force-guarantees love and marriage cards near their window close to prevent 'line foreclosure'. The result is that every life has the same domestic arc.",
+    "The x_honest_or_kind dilemma card appeared in at least 25 of the 38 transcripted lives — it is functionally a mandatory midlife beat. Similarly m_health, e_bequest, and a_make_name appear in the vast majority of lives. These high-frequency universals make each life feel like the same quiz with different answers.",
+    "No vocation, geography, era, or circumstance differentiates lives structurally. A medieval farmer and a modern scholar would play identically — there is no world to be born into, only abstract 'means' and 'trade vs. study'. Lives have no job, no place, no time. This is the biggest single driver of sameness: every life is about the same kind of person.",
+    "Seat-gated content (s_great_burden, s_inheritance_dispute, s_patronage) only unlocks at seat 5+, which most dynasties never reach in 4-5 generations. In the 12-dynasty transcript only Dynasty 11 and Dynasty 10 touched this content. The majority of play is in the seat-1 to seat-3 band where no special cards exist.",
+    "The 'adult band' (ages 26-45) is the thinnest in structural variety: a_work (title or not), a_child (yes or no), a_marry (yes or no), plus whichever once-cards remain. Multiple lives in the transcripts show essentially the same four adult events in the same order."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 vocation archetypes (e.g., 'the trade', 'the craft', 'the public life', 'the wandering') chosen at youth and gating a distinct adult card cluster of 5-6 cards each",
+      "why": "Right now every life shares the same abstract career space. A merchant life, a soldier life, and a healer life should have different adult-band events — different risks, different relationships, different midlife reckonings. This is the single change that would most structurally differentiate lives.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the universal love→marry→child pipeline by making love a true branch, not a guaranteed beat. Add a 'chose solitude' or 'chose the work over the relationship' path with its own distinct elder content that doesn't dead-end",
+      "why": "The engine currently force-presents love and marriage near their window-close to prevent 'line foreclosure', which means every surviving life has the same domestic arc. A genuinely childless or unmarried life should have equal content and different structural shape — different midlife cards, a different bequest, a different elder beat.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the frequency of x_honest_or_kind to once per life maximum and replace its adult/midlife repeat slots with more situationally specific moral dilemmas that are gated on current relationships and memories",
+      "why": "Seeing 'a kindness and an honesty — and they will not both fit in the room' in 25 of 38 lives makes it feel like a recurring test rather than a specific human moment. The competing-goods grammar is good; the card needs to be rarer and its recurrences need to be triggered by specific prior choices, not fired on a 22-year cooldown regardless of context.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 genuinely divergent life structures gated on early choices: e.g., if 'y_leave' (left home for the city) fires and is taken, a city-specific card cluster becomes available; if 'y_principle' is taken, a political/public arc opens with its own midlife cards",
+      "why": "Currently cards like y_leave change a stat and a flag but don't gate meaningfully different downstream content. An early structural choice should create a different kind of life — different events, different relationships, a different flavor of midlife — not just different log lines.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase seat-gated content to activate at seat 3 (comfortable household) rather than seat 5 (grand estate), and add seat-1/seat-0 specific cards for founding generations scraping by",
+      "why": "Most dynasties live in the seat 1-3 band for their entire run. The interesting house-specific content (inheritance disputes, patronage, great-name burden) is locked behind a threshold most playthroughs never reach. The seat system should produce meaningfully different play at every tier, not just the top.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Lives share one structural template — born, loved, married, had children, aged, died — dressed in rotating prose, and by dynasty 4 a variety-seeking player is watching the same film with a new cast rather than living a new life."
+}

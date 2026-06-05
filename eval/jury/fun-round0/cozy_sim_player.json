@@ -1,0 +1,50 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the single best mechanic: when a childhood choice echoes 20-30 years later (the outcast friend returning, the corner-cut coming back, the book too hard for a child's hands), it creates exactly the 'my life has weight' feeling that cozy sims live on. These moments are genuinely delightful.",
+    "The prose variation within a single card is generous — the love card has 7 different framings, marry has 9, child-birth has 8+ — so even common beats read fresh on the third or fourth encounter.",
+    "Early death dynasties (Dynasties 3, 4, 8 child-age deaths; Dynasty 9's 34-year-old founder) create sharp tonal contrasts and break any feeling of formula. A life ending at 8 with 'Gone early, with the better part still ahead' lands hard.",
+    "Dynasty-level character (motto, heirlooms, standing) gives genuine 'one more dynasty' pull — I want to see if the Achterbergs can hold that grand estate, or watch House Ashcroft burn bright.",
+    "Trait-gated moments (bookish, guarded, restless) mean two lives with different inheritances genuinely diverge at specific beats, not just in stat totals.",
+    "The 'competing goods' cluster — honest-or-kind, loyalty-vs-truth, dream-vs-duty — provides the kind of agonising that cozy sim players love: no clean answer, just a quiet cost either way.",
+    "The bequest mechanic (choosing what the heir inherits) is an actual strategic lever that makes midlife feel important rather than just filler between youth and old age."
+  ],
+  "staleness": [
+    "The core life-shape is almost invariant across all 38 lives in the transcript: childhood card → fever → friend/yard decision → path fork (trade vs study) → early love → marry → work promotion → child → midlife health scare → bequest → die. By dynasty 5 or 6 you can predict which stage you are in before the card appears. Structural variety is low.",
+    "Six cards appear in nearly every single life regardless of stats or traits: c_sick (fever), c_friend (yard child), y_path (trade/study), a_marry, a_child, m_health. These once-per-life anchors make the arc feel templated — the same six pillars in every house.",
+    "The y_mentor card fires in approximately 80% of lives in the transcript. 'Was taken under a wing, and never forgot the debt of it' appears verbatim across Tamsin, Aldous, Mira, Matthias, Liv, Callo, Soren, Carys, Henrik, Sabine, Noor, Calla, Tobias, Theda, Linnea, Ambrose, Roman, Iris, Felix Achterberg — the line itself becomes white noise by dynasty 4.",
+    "The honest-or-kind card (x_honest_or_kind) with its two phrases 'Held a true thing back to spare someone pain...' and 'Told someone they loved a true thing that hurt...' appears in nearly every adult/midlife life. It is clearly over-weighted and the repeated log-line is visible in almost every dynasty.",
+    "The observation lines (from engine.js's observe() function) repeat across lives in a way that a careful reader notices quickly: 'The stairs have started to ask a question of them', 'Mornings take longer to arrive in the body', 'Books have become a country they can live in', 'The decades have arranged themselves around her'. These ambient beats are beautiful but their repetition across 38 lives exposes the pool as shallow.",
+    "There are no mechanics that genuinely change WHAT the player is asked to do — only what prose context wraps the same binary choices. Cozy sims stay fresh through unlockable content, branching arcs, or emergent combinations (BitLife's job paths, Reigns' quest chains). This game has 91 cards but roughly 50-55 actually fire in a typical 70-year life, leaving minimal discovery after dynasty 6-7.",
+    "The seat-gated and repute-gated cards (s_great_burden, s_patronage, s_inheritance_dispute, r_scholar_door, r_hard_name, r_name_cost) almost never appear in the first 8 dynasties of the transcript because most houses stay at seat 1-3. The content that would most differentiate dynasties is locked behind progression gates that the RNG rarely reaches."
+  ],
+  "improvements": [
+    {
+      "what": "Reduce the weight of y_mentor from 3 to 1 and make it conditional on NOT having had child_books already — it fires too universally and its single log-line phrase is among the most-repeated in the game.",
+      "why": "A card that appears in 80%+ of lives stops feeling like a discovery and starts feeling like a mandatory beat, undermining the 'new life, new story' feel that the cozy sim player most wants.",
+      "impact": "med"
+    },
+    {
+      "what": "Cap x_honest_or_kind at once-per-life (add once:true) and raise its cool from 22 to 30. Currently it appears 2-3 times in many long lives. The phrase 'held a true thing back to spare someone pain' is among the two most-repeated log-lines in the entire transcript.",
+      "why": "When the same moral question recurs with the same framing multiple times within a single life, it trains the player to skim it as filler rather than feel it as a genuine moment.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 more structurally distinct life templates. Specifically: a life where no love is ever found (currently the engine is biased heavily toward love firing), a life with two or more children where sibling dynamics actually branch further, and a life that starts at a grand estate (seat 5+) and must navigate keeping it. These would require a few seat/flag-gated cards that produce visibly different mid-life sequences.",
+      "why": "The core staleness problem is that every life hits roughly the same 6 structural beats in roughly the same order. Even with varied prose, the shape of 'born → friend → path → love → marry → child → health → die' is legible by dynasty 3. A cozy sim player needs to feel that this life might go a fundamentally different way.",
+      "impact": "high"
+    },
+    {
+      "what": "Lower the seat requirements on the interesting gated cards. s_patronage requires seat 5, s_great_burden requires seat 5, s_inheritance_dispute requires seat 4. In 12 dynasties only Dynasty 1 (Fenn, reached 'old and famous house') and Dynasty 10 (Achterberg, reached 'grand estate') touched this tier. Gate them at seat 3-4 instead, so at least one card from this cluster appears in a typical 3-generation dynasty.",
+      "why": "The content that makes dynasty-building feel meaningful and different from a single-life run is almost entirely invisible to a normal player. Moving the gates down makes the dynasty layer actually modulate the content visible in each life.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'wildcard' category of 2-3 cards with w:1 and no stage/condition constraints that fire very rarely — genuinely unexpected micro-moments (a stranger's letter, a fire, an unexpected inheritance from someone the character never met). These create the 'I've never seen THIS before' moments that keep a cozy sim player coming back.",
+      "why": "After 6-7 dynasties the player has seen every branch of the standard cards. A small wild pool — even 3 cards firing roughly once every 4-5 lives — would create memorable outlier stories that get remembered ('that was the life where the letter came').",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Beautifully written and emotionally resonant, but the underlying life-shape is a recognisable template by dynasty 4-5 — the same six structural pillars appear in nearly every life, and the cards most worth discovering are locked behind dynasty-standing gates most players will never reach."
+}

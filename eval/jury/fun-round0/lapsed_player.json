@@ -1,0 +1,53 @@
+{
+  "profile": "lapsed_player",
+  "score": 5.5,
+  "fun_highlights": [
+    "The callback card system is the best thing in the game for a returning player — a kindness at age 6 paying off at age 28, or the looked-away child returning decades later, creates genuine 'wait, I remember this' moments that no other system replicates.",
+    "Dynasty-level writing is distinctive: the motto that crystallises at the end, the standing that rises or falls, the heirlooms that accumulate across lives, all give a real sense of a house with a history rather than just a sequence of unrelated people.",
+    "The bequest card (e_bequest) is a small but satisfying lever — choosing what to hand down to the heir feels like a real decision with downstream consequences, and it creates one of the few moments of explicit cross-generation intent.",
+    "The prose is genuinely good and aged well on re-read. The observation lines ('Her legs know something the rest of her is not yet ready to hear') still land after twenty lives because they are attached to moments, not sprayed everywhere.",
+    "Child deaths (Ottilie Castellane at 7, Lazlo Aldecott at 8) are surprising, disorienting, and memorable — they break the expected shape and signal the game is not going to protect you."
+  ],
+  "staleness": [
+    "By dynasty 4–5 the structural skeleton is fully exposed and does not change: fever → friend/outcast → path choice → mentor → love → work/title → child → health scare → bequest → death. Every life hits this same sequence, differentiated only by which binary choice fills each slot. The transcripts confirm it: all 38 lives have the same scaffold even when the names and prose vary.",
+    "The 'honest-or-kind' card (x_honest_or_kind, cool:22) recurs mechanically throughout the transcript — Marguerite at 67, Tamsin at 41, Aldous at 66, Mira at 28, Soren at 36, Theda at 72, Linnea at 39... it is the most-seen card in the packet. The prose framing is nearly identical each time. A returning player will have seen it four times before finishing dynasty 2.",
+    "The 'meet them halfway / pretend not to notice' love card fires in almost every life, often before age 25, making romance feel automatic rather than earned. In the transcripts only a handful of lives skip it or get the late-love variant. The falling-in-love beat has zero structural surprise by dynasty 3.",
+    "'Ask. Build a life.' (a_marry) and 'Yes. Make room in the world.' (a_child) are near-universal. Nearly every character who lives past 30 marries and has a child. The game nominally allows staying single or childless but the transcript shows this almost never happens, which means the life shape is even more uniform than the card pool suggests.",
+    "The body-aging observations ('Her legs know something,' 'The stairs have started to ask a question,' 'The body keeps its own ledger') are evocative the first three times. By dynasty 5–6 a returning player will recognise these as the game's way of telling you someone is near the end — which converts a poetic observation into a mechanical signal and drains it of effect.",
+    "The seat-gated and repute-gated cards (s_great_burden, r_scholar_door, s_patronage, s_inheritance_dispute) almost never appear in the transcript because houses rarely climb high enough to unlock them before the dynasty ends. Of the 12 dynasties, only House Achterberg and House Ashcroft reach the levels where these fire. For a returning player, these richer content layers are theoretically present but practically inaccessible in most runs.",
+    "There is no cross-run meta-progression beyond the cosmetic 'houses raised' display on the title screen (persistence.js, renderHousesRaised). No unlocked cards, no new scenarios, no difficulty gradient, no 'this time I want to try building a scholarly house or an infamous house.' A returning player coming back after a break has the same possible card pool as on day one."
+  ],
+  "improvements": [
+    {
+      "what": "Add a cooldown or hard per-run cap of 2 on x_honest_or_kind. Currently cool:22 years does not prevent it appearing 4–5 times in a single long life, and across multiple lives in the same session it appears constantly.",
+      "why": "It is the single most-repeated beat in the 12-dynasty transcript and the one most likely to make a returning player think 'this again.' A per-life cap of 2 keeps it meaningful.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the structural life-shape less uniform by gating some mandatory-feeling beats on prior choices: e.g., a_child only appears if the player chose 'Meet them halfway' or 'Let it begin' (i.e., requires an existing relationship), and a_marry requires the love interest to still be alive and the bond above a threshold. This makes childless or unmarried lives emerge naturally rather than requiring the player to actively refuse.",
+      "why": "When 36 of 38 lives marry and have children, the game's stated variety of life shapes is illusory. Structural variety requires structural gates.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3–5 cards that are only available to dynasties being played by a returning player specifically — i.e., conditioned on S.marks.souls > 8 or S.marks.gens > 3 (already tracked). These could be moments that reference the dynasty's own history in a way a founder could never see.",
+      "why": "A returning player has nothing the first-time player doesn't. Adding content that only unlocks after sustained play creates a real reason to come back and a sense that the game rewards investment.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 1–2 'dynasty arc' cards that fire only once per entire dynasty (not per life), gated on the house having existed for 3+ generations, which explicitly name something that happened in an ancestor's life and force the current heir to reckon with it. The cb_inherited_secret card does this but fires too rarely and too passively.",
+      "why": "The game's best moments are when the past reaches forward. Formalising this as a dynasty-level event rather than a per-life callback gives the dynasty layer real weight for a returning player.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the seat-gated cards (s_great_burden, s_patronage, s_inheritance_dispute) a secondary unlock path so they can appear even at seat 3–4 if the house has a specific reputation type. Right now reaching seat 5 takes multiple generations of investment that often doesn't survive the dynasty's natural lifespan.",
+      "why": "The richest content in the deck is locked behind a progression gate that the transcript shows is rarely reached. Lower the floor.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'return hook' visible on the load screen: when loading an existing dynasty, show one or two specific unresolved threads from the last life — e.g. 'Carys confessed her betrayal to no one; Roman looked away from a stranger a second time.' This is not gameplay, just UI, but it immediately re-engages a lapsed player by reminding them what is unfinished.",
+      "why": "The lapsed player's core problem is re-entry friction: they remember they were playing something but not why they cared. A thread hook replaces the generic 'Continuing House X' message with actual investment.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Coming back after a break, I find an immaculately written machine that does the same thing every time: the scaffold is exposed, the most frequent cards are the most familiar, and there is nothing the game has saved for me that it didn't show a first-time player — the prose is beautiful but the game is done revealing itself by dynasty 3."
+}

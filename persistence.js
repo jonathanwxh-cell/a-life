@@ -86,7 +86,8 @@ async function startFreshGame(){
   SLOT=slot;
   document.getElementById('vTitle').classList.remove('show');
   document.getElementById('vLoad').classList.remove('show');
-  S={surname:pick(SURNAMES), vrot:ri(0,29), year:0, marks:{gens:1,souls:0,longest:0,peakMeans:0}, lineage:[], person:null, house:initHouse()};
+  S={surname:pick(SURNAMES), vrot:ri(0,29), year:0, marks:{gens:1,souls:0,longest:0,peakMeans:0}, lineage:[], person:null, house:initHouse(), seenDyn:{}};
+  setEra(chance(0.55)?'settled':rollEra(null), false);   // the world the first founder is born into
   const f=makeFounder(1);
   startLife(f);
   setPP(); renderAll(); scheduleTick(); save();

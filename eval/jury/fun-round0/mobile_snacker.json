@@ -1,0 +1,47 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "The 2-3 minute burst format is genuinely well-served by the pacing: you tap in, years pass in ambient text, then a card lands with a real question. The moment of pause before choosing is satisfying on a small screen.",
+    "Callback cards are a genuine delight when they fire — seeing 'A kindness done at 6 came back, decades later, as a door held open' closes a loop that landed in a previous session. That's the best hit the game delivers.",
+    "Early childhood cards (stray animal, the book too hard, the sibling arriving) have a specific warmth that makes the opening minutes of each life feel fresh and human.",
+    "Dying a founder at 7 or 8 (as in Dynasties 3, 4, 9) and immediately starting over is a sharp, honest jolt — it underlines the dynastic stakes without any ceremony.",
+    "The bequest choice (knowledge / coins / warmth / freedom) is the single best cross-session lever: it's a tiny decision with real downstream texture."
+  ],
+  "staleness": [
+    "By dynasty 4 or 5, the love-marriage-child spine has become fully predictable. Almost every life in the transcripts hits: meet someone in youth → marry late (40s-50s) → have one child late → child inherits. The engine strongly enforces this template even with player refusals. The 'one more life' pull fades when you know the skeleton in advance.",
+    "Several cards appear in almost every single life regardless of dynasty: c_sick (fever), y_mentor (show up every day), a_marry, a_child, x_honest_or_kind, a_conviction/keep it private. After 5-6 lives on a mobile device you are reading the same prose beats with different proper nouns.",
+    "The 'honest or kind' dilemma (x_honest_or_kind) fired in dynasty 1 life 1 at 67, dynasty 2 life 1 at 27 AND 52, dynasty 2 life 2 at 42, dynasty 5 life 1 at 35, dynasty 6 life 1 at 55, and many more. It has no cooldown long enough. By dynasty 3 you have memorized both options and the outcome text.",
+    "In a 2-3 minute snack session you often get 0-1 choices and mostly observe ambient lines, which are also recycled ('The stairs have started to ask a question of him', 'She still laughs like someone the years have not yet learned how to reach'). On a short burst this can mean nothing to interact with at all.",
+    "The dynasty-layer levers (seat investment, reputation gates, reckoning) rarely fire in a typical life — in 38 lives across 12 dynasties they appear sparsely. From a mobile snacker's view the dynasty feels passive, not steerable. Most sessions feel like witnessing rather than building.",
+    "Death-at-8 dynasties (3, 4, 9) give no satisfying hit — you get 2-3 cards and it's over. From a mobile angle this registers as wasted session time, not poignant fragility."
+  ],
+  "improvements": [
+    {
+      "what": "Add a hard floor cooldown of 20+ years to x_honest_or_kind and the other 'universal' competing-goods cards (x_loyalty_truth, x_dream_or_duty). Or make them once-per-dynasty rather than once-per-life.",
+      "why": "These are the cards that most visibly repeat across every life. Seeing the same dilemma prose with a different character name is the defining staleness signal after 4-5 sessions.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface one dynasty-layer metric visually at session start — e.g. 'House Fenn: seat 3, scholarly reputation' as a one-line header before the life begins. No numbers elsewhere needed.",
+      "why": "Mobile snackers returning after a day have no ambient context for what they're building. A single line of dynasty state would give each burst a goal ('I want to get to seat 4 this life') that transforms witnessing into steering.",
+      "impact": "high"
+    },
+    {
+      "what": "Raise the weight of the full-family-differentiation cards (c_sibling, c_animal, c_grandparent, y_dare, y_betray, a_affair) and lower the weight of the skeletal repeat cards (a_marry, a_child when they're forced anyway by the engine) so that the non-spine moments fill more of each short session.",
+      "why": "When a 2-minute session gives you only the fever card and a love card, you've played this session before. The rarer characterful moments are what make each life feel like a person — they need higher draw probability.",
+      "impact": "high"
+    },
+    {
+      "what": "Give child-death dynasties at least 3 guaranteed non-fever cards before age 8. Currently a life that ends at 8 often delivers 1-2 choices total (fever + maybe one more). On mobile this is a dead session.",
+      "why": "The fragility is dramatically interesting conceptually but experientially it means a returned player just burned their 3-minute slot on a life that never opened. Even one more card (the stray dog, the grandparent) would give the brief life texture.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'this time' variant pool to the 4-5 highest-repetition card texts (y_mentor, a_marry, x_honest_or_kind) — not new logic, just 3-4 additional text framings that the rotI system can cycle through across dynasties rather than lives.",
+      "why": "The rotI system rotates per-life but the repeat cadence on mobile (multiple lives per session) means you hit the same text twice in one sitting. A dynasty-level rotation index would break the pattern.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Each burst has a real quiet hit when a callback fires or a late-life card lands with unexpected weight, but by dynasty 4-5 the love-marry-child skeleton and the recycled 'honest or kind' dilemma have already made the template visible, and a 2-minute snack session is as likely to give you the same four familiar cards as something new."
+}

@@ -1,0 +1,49 @@
+{
+  "profile": "completionist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The dynasty layer provides a genuine collectible chase: 9 distinct mottos to earn (scholarly, kind, ruthless, industrious, generous, tainted, pious, artistic, reckless), and each requires a focused multi-life commitment to pull — you cannot accidentally stumble into 'We burn bright, and we burn' in a single run. Watching the family reputation meter tick toward words is a real pull.",
+    "Heirlooms accumulate meaningfully: 'a book too hard for a child's hands' passed down through multiple generations creates a satisfying callback chain. Dynasty 11 House Ashcroft reaches 5 heirlooms by generation 4 — a visible collection that compounds across the run.",
+    "The 14 callback cards ('cb_' prefix) are the best content in the game for a completionist. Seeing 'A kindness done at 6 came back, decades later, as a door held open' when you earlier chose to sit beside the lonely child is genuinely satisfying discovery. These feel earned, not random.",
+    "The 8 seat levels (from 'nothing but a name' to 'a house written into the histories') give a concrete ladder to climb and fall from. The seat-7 pinnacle that must be re-earned each generation is smart design — it keeps the top alive as a goal.",
+    "The 'houses raised' meta-screen persisting across all dynasties gives a collection to accumulate: surname, motto, peak seat. Over many runs this becomes a wall of past lives with distinct characters — this is exactly the completionist hook that works.",
+    "The reckless/tainted/secret paths (the affair, the unexposed secret, strayed+unconfessed) create genuinely different life-shapes with downstream consequences — a tainted house faces different cards than a scholarly one, which is real structural variety."
+  ],
+  "staleness": [
+    "The repeatable cards (non-once cards) form a core template that reasserts itself every single life, regardless of dynasty standing or repute: fever at 3-9, the lonely child at 6-12, youth love at 16-25, a_marry, a_child (multiple times), a_work (repeatedly), m_health at 45-68, and eulogy cards. By dynasty 5 in the transcripts these read identically. The 'Insist on being brave alone' / 'Let mother sit through the nights' choice appears verbatim in every dynasty — the exact same prose, the exact same stakes.",
+    "56 of 91 cards are once:true, but the remaining 35 non-once cards include the most frequently triggered ones (the fever, the work promotion, the child question, the honest-or-kind dilemma, the windfall/loss). These reappear constantly and share only modest prose variation. By dynasty 8, the 'x_honest_or_kind' card showing up at roughly the same age in nearly every adult life reads as pure template.",
+    "The 'a_child' card fires the same text variants across every generation and every dynasty. Transcripts show it appearing with nearly identical framing in dynasties 1, 2, 5, 6, 7, 10, 11, 12 — same three text options rotating. It is structurally unavoidable and unfreshened by dynasty state.",
+    "Seat-gated and repute-gated content exists but is rarely reached in the transcripts. Only dynasties 1 (seat 6), 10 (seat 5), and 11 (seat 6) access 's_great_burden', 's_patronage', or 'r_hard_name'. The r_scholar_door card appears once across 12 dynasties. For a completionist trying to 'collect' these rare gated cards, the path to unlocking them is slow and oblique — the game does not communicate that these cards exist, let alone what triggers them.",
+    "The motto collection has only 9 entries and by dynasty 12, three of them ('What the mind holds cannot be taken', 'By our own hands', 'We burn bright and we burn') have already been collected. A dedicated player might exhaust all 9 mottos within 20-25 dynasties. There is no signal when you have completed the motto set — no acknowledgment that anything has been 'finished'.",
+    "The observation/journal lines (non-choice passive text) repeat heavily: 'The stairs have started to ask a question of her' appears in Tamsin (D1), Matthias (D2 gen 2), Selma (D11 gen 2). 'Getting up has become the first real work of every day' appears in Sabine (D5 gen 2), Carys (D6 gen 4), Calla (D7 gen 2), Roman (D10 gen 2). These are passive flavor text, but their repetition in the transcript is audible.",
+    "There is no explicit achievement system, unlockable content, or collectibles screen beyond the 'houses raised' list. A completionist has no way to know they have 'discovered' the affair+secret path, the inherited secret reveal, the seat-7 pinnacle, or the trait-gated cards. The content to discover has no manifest — you cannot know what you have not seen or what remains to find."
+  ],
+  "improvements": [
+    {
+      "what": "Add a hidden 'chronicle of discoveries' — a persistent log of first-time events: first motto earned (with which house), first secret exposed, first seat-7 reached, first trait-gated card triggered, first inherited-secret confessed. Show this on the title screen alongside 'houses raised'.",
+      "why": "Right now a completionist who triggers 'cb_inherited_secret' for the first time has no awareness it was rare or that other analogous moments exist. A discoveries list makes the hidden pool visible, converts 'content to discover' into a collectible set, and gives replay a concrete goal beyond 'play again and see what happens'.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 seat-gated or combination-gated cards that only fire in a house that has *both* a high seat (4+) AND a specific repute (e.g., a scholarly house at seat 5 encounters a 'royal commission' card; a ruthless house at seat 4+ faces a 'vendetta' arc). These should be explicitly described nowhere — they are rewards for building specific house types.",
+      "why": "Currently the seat-gated cards (s_great_burden, s_from_nothing) exist but a player who builds a scholarly seat-5 house sees nearly identical content to a generous seat-5 house. Repute-AND-seat combinations would make 'build this specific house type' a meaningful completionist goal and reward focused dynasty building with actually different gameplay.",
+      "impact": "high"
+    },
+    {
+      "what": "For the 8-10 most frequently repeating non-once cards (particularly c_sick/fever, a_child, x_honest_or_kind, a_work, u_windfall/u_loss), add at least 2 more distinct text variants that are gated by dynasty state — e.g., the 4th a_child fires a unique 'the third child, the one nobody planned for' framing; the 3rd a_work fires a variant acknowledging the pattern explicitly. The 'rotI/rotN' rotation exists but the variant pool is too small for the high-frequency cards.",
+      "why": "The fever card fires in virtually every life and has exactly 3 text variants. After 10 lives it is purely mechanical. More variants gated by generation number, prior bequest, or house standing would give the same structural moment a fresh surface across long play.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce 1-2 genuinely rare 'black swan' life events with probability ~3-5% per life (e.g., a 'war arrives' card, a 'plague year' card, a 'famous house burns down' reckoning) that can drastically reshape a life and dynasty. These would surface roughly once per 10-15 lives and would be flagged in the 'chronicle of discoveries' when first encountered.",
+      "why": "After reading 38 lives across 12 dynasties, structural life-shapes are predictable: love → marriage → children → elder → death, with shuffled cards in between. A low-probability catastrophic or transformative card would create the 'I can't believe that just happened' story that a completionist would replay chasing.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the path to seat-7 ('a house written into the histories') more legible in the heir screen — show how close the current repPeak is to the 3.5 threshold, and show the seat-7 description as a visible goal from seat 5 onward. Currently seat-7 can be reached without the player understanding what conditions enable it.",
+      "why": "A completionist who does not know seat-7 exists has nothing to chase. A completionist who knows it exists but cannot read the dial has frustrating opacity. Making the target visible turns it into a compelling generational project.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely interesting collectible layer (9 mottos, heirlooms, a 'houses raised' archive, seat climbing) sits inside a life-simulator whose core repeating template — fever, youth love, marriage, children, elder decline — reasserts itself so reliably by dynasty 5 that the satisfying 'one more dynasty' pull competes against the distinct feeling of watching the same skeleton recostume itself; the completionist chase is real but the pool is small enough to see its edges, and without a discoverable manifest of what rare content exists, a player collecting their way through it has no way to know when they are done."
+}

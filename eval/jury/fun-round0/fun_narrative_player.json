@@ -1,0 +1,47 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback chain is the game's best trick: a kindness to a yard outcast at age 7 returns as a door held open at 26 (cb_outcast_return), and can echo again in a grandchild's story. Reading 'A kindness done at 6 came back, decades later' after personally making that choice feels like genuine authorship, not slot-machine output.",
+    "The dishonesty arc (cut_a_corner → cb_corner returning in midlife with higher stakes, then cb_the_cost at the end) is the clearest example of a 'system colliding into a story': one small choice at 45 comes back uglier at 54, and then sits in the death-room. That three-beat shape creates the 'one more life' pull.",
+    "The dynasty layer genuinely unlocks new content: once a house reaches seat 4-5, you encounter s_inheritance_dispute, s_great_burden, s_patronage, r_hard_name — cards that simply don't exist for a rented-room founder. The Achterberg dynasty climbing to a grand estate felt structurally different from the Calloway founding generation.",
+    "The bequest choice (mind / means / heart / freedom) is a small but real lever: it shapes what the next life starts with and which cards become eligible. Choosing 'Nothing but their own freedom' and watching the next heir navigate a no-heirlooms life is a distinct play experience.",
+    "The writing quality is high enough that individual lines land as discoveries rather than flavour text. 'Heard the warning, folded the doctor's letter away' vs 'Took the warning seriously — changed everything' feel like genuinely different people."
+  ],
+  "staleness": [
+    "The fever card (c_sick) appears in the first 10 years of almost every life across all 12 dynasties. By dynasty 5 it has ceased to be a moment and become a formality. Same for the yard-outcast card (c_friend) — present in roughly 70% of lives. The childhood band has only ~6 genuinely distinct cards, so every childhood reads as a rotation through the same short deck.",
+    "The love/marriage pipeline is near-universal and mechanically predictable: y_love1 or a_meet_late fires, then a_marry fires a few years later, with the marriage text cycling through 3-4 near-identical variants. By dynasty 6 the sequence 'fell in love / married late and meant it' appears so reliably it stops registering.",
+    "The mentor card (y_mentor) fires in roughly 75% of lives sampled; the child-arrival card fires in 90%+. These two cards, which should feel like meaningful life events, have become background texture. The child text has only 3 variants for 'late birth' and 8 for normal — not enough to survive 38 lives.",
+    "Observation lines (the passive prose interjections that fire once per life) recycle across dynasties. 'The decades have arranged themselves around her and somehow never sat down', 'The stairs have started to ask a question of him', and 'Mornings take longer to arrive in the body' each appear multiple times across the transcript. These are the game's ambient texture, so repetition here degrades the whole experience faster than repeated choice cards.",
+    "The structural life-shape is too uniform. Of 38 lives sampled: nearly all go childhood cards → fall in love in youth → marry in adult → child × 1-2 → work/midlife pressures → elder reckoning → die. The only structural variety comes from early deaths (Dynasties 3, 4, 9 founder dying at 7-8, effectively no life) or the rare 'no love' path. A player who wants to run a voluntarily childless, unmarried, city-leaving ascetic will still see most of the same cards — the cond gates don't open much alternative space.",
+    "The adult/midlife band, despite having the most cards, contains the most repeated combinatorial patterns. In particular: a_work (promotion), x_honest_or_kind (tell truth vs spare them), and a_conviction (public vs private belief) appear in roughly half the adult lives each. After a few dynasties these form a recognizable 'adult checklist' the player learns to expect."
+  ],
+  "improvements": [
+    {
+      "what": "Add 4-6 new childhood cards and reduce the frequency weight of c_sick and c_friend to cool:14 or once-per-dynasty. The childhood band is 6 cards for a 0-12 year window; it should be 10-12 to feel varied across even a single dynasty.",
+      "why": "The fever and yard-outcast cards appear so reliably that players begin every life already knowing what the first two moments will be. Breaking that pattern alone would restore the sense of discovery in early game.",
+      "impact": "high"
+    },
+    {
+      "what": "Add at least 3 alternative love/marriage paths with structural weight: a deliberate celibate path (a card that locks the love slot and gates different adult content), a widowhood path (spouse dies mid-adult, different remarriage or solitude cards), and a second-marriage-only path. Right now the 'marry once late' pattern repeats in roughly 60% of lives.",
+      "why": "The love pipeline is the single most repeated structural beat. Giving players a reason to consciously avoid it — and content that rewards that choice — would make each dynasty feel less like the same shape with different names.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a per-dynasty once:true gate to 2-3 of the most frequently recurring observation lines (the body/stairs/morning trio). If the previous ancestor's epitaph already used a given cluster, suppress those observation lines for one generation.",
+      "why": "The passive observation prose is what makes the game feel literary rather than mechanical. When those lines repeat across 3-4 consecutive lives the whole register degrades. The epitaph system already has a 'blocked' mechanism for exactly this; extend it to observations.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the child-arrival card (a_child) 4-5 additional text variants beyond the current 3+8, and add a conditional variant that fires if the parent has the 'lived_reckless' memory (surprised the recklessness still leaves room for this).",
+      "why": "With 90%+ of lives having at least one child, the child-arrival text is one of the highest-exposure strings in the game. More variants per life-context would keep it feeling fresh across a dynasty.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 'dynasty-arc' moments that only fire in a generation 3+ life within the same house: a card where the player is explicitly living in the shadow of a named ancestor the player controlled (referencing the actual ancestor's name and a decision they made), creating a direct cross-generational echo beyond the heirloom/motto system.",
+      "why": "The game's deepest pull is dynasty continuity, but the connection to past lives is mostly atmospheric (heirlooms, motto). A moment that names Marguerite specifically and recalls her choice at age 52 would make the generational stakes feel real rather than ornamental.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "The callback arcs and dynasty-gate content are genuinely fun and novel, but the childhood fever, yard-friend, mentor, love-marriage pipeline, and child-arrival cards have burned through their variants by dynasty 4-5, reducing the 'I wonder what happens next' feeling to 'I know what happens next' — and that kills the genre's core pleasure."
+}

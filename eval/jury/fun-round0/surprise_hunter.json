@@ -1,0 +1,47 @@
+{
+  "profile": "surprise_hunter",
+  "score": 5.5,
+  "fun_highlights": [
+    "The callback card system is genuinely delightful when it fires: a childhood kindness repaid decades later, the old book re-read at midlife, the looked-away child haunting a grown-up near a sleeping rough — these are the game's best moments because they feel causally earned and narratively unexpected.",
+    "The `once: true` flag on 56 of 91 cards means each individual life can't loop the same beat twice; no single life becomes a pure replay of itself.",
+    "Repute-gated and seat-gated cards (`s_great_burden`, `r_hard_name`, `s_patronage`, `r_old_shame`) represent real rarity — Dynasty 11's 'hard name' cards appearing twice in Sabine's line, shaped by her mother's ruthless play, is the closest the game gets to an emergent 'I've never seen this' moment for a player who built a feared house.",
+    "The affair card's choice of variant based on current spirit/heart stats (not a random roll) means the framing itself can surprise — the cold clinical version vs. the warm self-deceiving version feel like different people in different states.",
+    "Death age variance (seen from 7 to 91) is structurally unpredictable and the early-death dynasties (Calloway at 1 gen, Aldecott at 1 gen, dynasty 9 Matthias dying at 34) create jarring pace-breaks that a player genuinely couldn't anticipate."
+  ],
+  "staleness": [
+    "The core spine is fully predictable by dynasty 3: fever in childhood -> outcast-child choice -> trade-or-study -> love -> marry -> child -> work promotion -> midlife health -> elder bequest. These 8 cards collectively appear 23, 18, 26, 31, and similar hit-counts across 38 lives. The player is encountering the same structural skeleton on every person — only the prose variant and their choice changes, not the beat's place in the sequence.",
+    "The 'Meet them halfway' love-entry and 'Ask. Build a life.' marriage cards fire 26 and 31 times respectively across 38 lives (nearly every adult life). The player is hitting these in the same order with near-certainty. For a surprise-hunter this is the deepest problem: the 'there will be a love moment around age 16-25 and a marriage moment around 24-58' expectation becomes iron after dynasty 2.",
+    "The actual wildcard / rarity content — the house-reckoning (`x_reckoning`), the inherited secret (`cb_inherited_secret`), the old shame surfacing (`r_old_shame`), the patronage (`s_patronage`) — is almost entirely absent from the 38-life transcript. The inherited secret card fires zero times. The house reckoning fires once (dynasty 12 only). These are the cards that would create 'I've never seen this' moments, but seat-gating (requiring seat >= 3 or 5) and cool timers mean most players will never see them.",
+    "The observe() atmospheric lines (fever/body/means) have large pools but fire as passive log entries with no player agency — the player watches rather than chooses. By dynasty 4 you've seen 'the stairs have started to ask a question' three or four times already.",
+    "Trait-gated content (`t_bookish`, `t_guarded`, `t_restless`) is sparsely seeded in the transcripts — few lives carry traits that unlock these, and even when they do, the content is a single once-per-life card. The trait system promises a 'this character is different' experience but doesn't deliver repeated mechanical differentiation across the life.",
+    "No genuinely negative-spiral wildcard exists: there is no card that can wreck a life through a surprise external event the player didn't choose (epidemic, war, stranger, disaster). Every bad outcome is an option the player selected. A player who always picks the 'good' choice will see a largely identical positive-trajectory life every time."
+  ],
+  "improvements": [
+    {
+      "what": "Lower the seat gate on reckoning / inheritance-dispute / patronage from seat>=3-5 to seat>=2-3, AND add one surprise wildcard card for low-seat houses (a fire, a false accusation, a sudden windfall from a stranger) that fires at w:2 with cool:20 and no condition — something the player cannot see coming regardless of their choices.",
+      "why": "Right now the most surprising content is structurally locked behind 3-4 generations of grind. The reckoning fires once in 38 lives. If even one wildcard per dynasty could appear unexpectedly, the 'I've never seen this' frequency would double.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 alternative love-entry paths that replace the standard `y_love1`/`a_meet_late` for characters with specific flag combinations — e.g. if `chose_trade` and `looked_away` are both held, the love card should describe a coworker or a person with a difficult past; if `lived_reckless` is held, the love card might be dangerous or inappropriate. Gate them on memories, not just age, so different early choices produce a detectably different adult experience.",
+      "why": "The love/marriage pipeline is the most-seen repeated beat. Even small procedural variation in *who* the love interest is or how the card is framed (currently all variants are structurally identical — someone keeps appearing) would give the surprise-hunter something new to notice in a slot they currently skip mentally.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the inherited secret more aggressively: give it w:4 (up from 3) and add a second trigger path where the secret is discovered by the heir without being told — e.g. a found letter card (`c_found_letter`, child stage, once:true) that fires only if `S.house.secret && !S.house.secret.known`, creating a character who stumbles on the secret young rather than always receiving it from a dying elder.",
+      "why": "The `cb_inherited_secret` card fired zero times in 38 lives. A secret that never surfaces is not a secret — it's dead content. An alternative discovery path would make secret lineages feel alive across multiple generation gaps.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a low-weight (w:1) 'stranger event' card per life stage with no cond gate — a passing encounter, a stranger's act of cruelty or generosity, a moment that connects to nothing in the character's history. No callback. Just something external that happened. This breaks the 'all events are about your relationship network' predictability.",
+      "why": "Every card in the current set either gates on a relationship, a stat threshold, or a prior memory. A player who understands the system can predict which cards are possible. A truly condition-free stranger-card is invisible to system knowledge and restores genuine surprise.",
+      "impact": "med"
+    },
+    {
+      "what": "The cooldown on `x_honest_or_kind` is 22 years and it has no `once: true` — but in the transcript it appears identically worded 4-5 times per long-lived character (Aldous at 66, Tamsin at 41, Felix at 27 and 52, Matthias at 42, etc.). Either make it once:true or significantly expand its variant pool beyond 2 text variants, because the player sees 'Someone Marguerite loves asks a direct question...' and already knows which two options will appear.",
+      "why": "This card is the most-repeated non-structural card in the transcript. It has only 2 variants and fires multiple times per life. It has become background noise where it should be a recurring moral challenge.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Surprising callbacks and rare repute-gated moments are genuinely excellent when they land, but the core life-shape repeats so predictably across dynasties — with fever, outcast-child, love, marriage, and bequest forming an iron skeleton every life walks through — that by dynasty 4 the surprise-hunter is watching a familiar template with fresh names, and the rarest/best content (house reckoning, inherited secret, old shame) is so heavily gated it barely appears in 38 lives."
+}

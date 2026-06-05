@@ -1,0 +1,49 @@
+{
+  "profile": "replay_addict",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is genuinely satisfying: cb_lookaway, cb_outcast_return, cb_books_late, and cb_strayed create moments where an old choice returns with real weight — this is the closest the game comes to emergent story.",
+    "Dynasty-layer accumulation (seat, motto, heirlooms, reputation-gated cards) gives a meaningful reason to keep going: a life inside an 'old and famous house' with a 'hard-dealing' motto genuinely plays differently from a founder's, with unique cards (s_great_burden, r_hard_name, r_scholar_door) that only high-seat lines ever see.",
+    "The bequest mechanic is a well-designed cross-generational lever — choosing 'everything I know' vs. 'their own freedom' is a real decision with visible downstream effects on the heir screen.",
+    "Individual lives within a dynasty can be sharply differentiated: a reckless line producing the 'We burn bright and we burn' motto vs. a scholarly one reaching the learned motto feels structurally earned, not accidental.",
+    "The prose rotation system (rotI, rotN) and seven love-approach variants, five marriage variants, and so on keeps individual lines from literally repeating word-for-word, which matters for the reading pleasure.",
+    "The epitaph anti-repeat logic (no cluster landing twice in a row, stat-derived fallbacks) means the gravestone text genuinely varies across a long dynasty — small but appreciated."
+  ],
+  "staleness": [
+    "Five cards appear in close to 80-90% of all 38 transcribed lives in the same rough age band: c_sick (fever, age 3-10), a love-opening card (y_love1 or a_meet_late), a_marry, m_health ('body sends its first real letter', age 45-68), and e_bequest. By dynasty 5 or 6 a player can predict all five will arrive; they are waiting for them, not surprised by them.",
+    "The 'honesty vs. kindness' card (x_honest_or_kind) appeared in roughly 60% of lives in the transcripts. It fires as a repeatable card (cool: 22) and its text is identical each time — 'Someone loves asks a direct question, and the true answer would wound them.' After the third or fourth appearance, the framing is recognizable before you finish reading it.",
+    "'There is nothing behind X — no name that means a thing, no floor to fall back to' (s_from_nothing) appeared in a majority of early adult lives. As a once-per-life card it should feel special, but its near-universal occurrence at low-seat dynasties means it reads as standard issue.",
+    "The structural life-shape is predictable by dynasty 4: birth observation > childhood (2-4 cards) > first work + love (15-25) > marry + child (26-50) > health scare (45-65) > bequest + death. Roughly 40% of the lives in the 12-dynasty sample follow this skeleton with minimal deviation, the only variation being which text variant fires within each beat.",
+    "No explicit goal or curiosity hook survives beyond dynasty 3-4. The game never surfaces 'can you reach seat 7?' or 'can you earn the reckless motto?' as legible targets. A replay-driven player needs something to chase; the dynasty layer provides it implicitly but never names or celebrates the milestones loudly enough to sustain motivation past a half-dozen dynasties.",
+    "The trait system (bookish, restless, guarded, warm, frail, stubborn, etc.) gates only a small handful of cards (t_bookish, t_guarded, t_restless) and none of them recur — so a 'restless' heir and a 'bookish' heir differ by exactly one once-per-life moment. Traits promise differentiation they don't fully deliver.",
+    "Once a motto is crystallized and a dynasty's reputation type is established, subsequent lives in that dynasty play almost identically to prior same-reputation lives, since the reputation-gated cards (r_scholar_door, r_family_shadow) are also mostly once-per-life. A scholarly house at generation 4 and generation 7 will produce near-identical card sequences in the adult band."
+  ],
+  "improvements": [
+    {
+      "what": "Give m_health a 2-3 variant framing (not just 'the body sends its first real letter') and give x_honest_or_kind similarly distinct framings per occurrence — e.g., the second firing could be framed as 'this is not the first time' — so recurring cards feel re-earned rather than re-fired.",
+      "why": "These two cards appear so frequently that their identical opening line becomes a 'skip' cue rather than an engagement cue. A light text variant that acknowledges recurrence would convert them from stale to purposeful.",
+      "impact": "high"
+    },
+    {
+      "what": "Surface the dynasty goals explicitly on the heir screen: e.g., 'The house has never reached seat 5. Can this generation climb?' or 'The motto is close — one more scholarly life might crystallize it.' Show the gap between current state and the next milestone.",
+      "why": "A replay-addict needs a clear itch to scratch at the start of each new life. The systems support distinct goals (seat 7, motto, specific heirlooms) but never announce them. Making them visible would convert passive drift into active pursuit.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 new late-dynasty-only cards (seat 4+, gen 3+) that reference the accumulated lineage — e.g., a card that fires only when three prior ancestors chose the same thing on c_sick, or a card that fires only when a dynasty has both a 'hard-dealing' and a 'kind' ancestor in the lineage and must reconcile the contradiction.",
+      "why": "Right now the dynasty layer enriches the heir screen and the epitaph but contributes almost nothing to the event-card experience in lives 3-7. Cards that explicitly read the dynasty's specific history would make each generation feel earned rather than procedurally separate.",
+      "impact": "high"
+    },
+    {
+      "what": "Extend the trait-gated card set from 3 to ~8-10 cards per major trait, some of them repeatable with cooldowns, so a 'restless' character's life has a noticeably different texture across the adult band from a 'bookish' one rather than diverging on one card.",
+      "why": "Traits are named and shown on the heir screen, creating an expectation of structural difference they currently don't fulfill. Delivering on that promise would make each heir feel like a genuinely different playthrough rather than the same arc with a single personality beat.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'dynasty record' screen (between dynasties, not just the chronicle) that shows the highest seat reached, how many mottos earned, which heirlooms survived, and explicitly frames the next line as 'can you beat this?' — like a personal high-score table.",
+      "why": "Replay-addict motivation is sustained by legible progress and comparison. The chronicle does this within a dynasty, but between dynasties the continuity is invisible. A simple record of achievements would give the player a reason to say 'just one more' at the new-line screen.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely moving piece of writing that delivers 2-3 dynasties of fresh play before the structural skeleton — the same five cards arriving in the same age-bands, life after life — becomes predictable enough to shift the experience from discovery to confirmation."
+}

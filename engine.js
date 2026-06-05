@@ -193,6 +193,9 @@ function eligible(){
     if(c.age){ if(P.age<c.age[0]||P.age>c.age[1]) return false; }
     else if(c.stage!=='*'&&c.stage!==stage) return false;
     if(c.once && P.flags['card_'+c.id]) return false;
+    // once-per-DYNASTY: a "special" beat (a founding hardship, a defining dilemma) fires at most
+    // once across a whole house, so it stops being part of every single life's template.
+    if(c.onceDyn && typeof S!=='undefined' && S && S.seenDyn && S.seenDyn[c.id]) return false;
     // no-repeat cooldown: a non-`once` card can't redraw within ~10 years (or c.cool)
     if(!c.once && P.drewAt && P.drewAt[c.id]!=null && P.age-P.drewAt[c.id] < (c.cool||10)) return false;
     if(c.cond && !c.cond()) return false;
@@ -208,10 +211,19 @@ function drawCard(){
   // the chance. (cooldown still applies — the card must be in the eligible pool.)
   if(!rel('love')&&!rel('spouse')){
     const lc=pool.find(c=>c.opensLove);
-    // certain only in the window's LAST 3 years (so the line is never foreclosed), and just a
-    // light nudge otherwise — so love competes with the other youth moments instead of always
-    // pre-empting them, and two lives no longer march through the identical love→marry→child beats.
-    if(lc && ((lc.age && P.age>=lc.age[1]-3) || chance(0.18))){ presentCard(lc); return; }
+    // a NUDGE, never a guarantee. Most lives still find love through the ordinary weighted draw, but
+    // love is no longer force-offered at the window's edge — so some lives now reach its end single and
+    // live a solitary shape (a genuinely different life, not the same domestic arc with new names). The
+    // late-meeting card (a_meet_late) is the gentle second chance, also un-forced.
+    if(lc && chance(0.17)){ presentCard(lc); return; }
+  }
+  // a youth should almost always be offered a CALLING — the fork that gives a life its shape and gates a
+  // distinct adult arc (soldier / scholar / maker / wanderer). This is the engine of structural variety,
+  // so unlike love it IS near-certain: a light nudge early, then sure once past the window's midpoint. The
+  // player still chooses which road (and a life that dies young, or slips the draw, simply drifts uncalled).
+  if(!P.flags.vocation){
+    const vc=pool.find(c=>c.id==='y_calling');
+    if(vc && ((vc.age && P.age>=vc.age[1]-4) || chance(0.5))){ presentCard(vc); return; }
   }
   // a willing couple is still certainly offered marriage and a first child before those windows
   // shut, so a line is never foreclosed by draw-luck — but the forcing tail is short, leaving the
@@ -229,6 +241,13 @@ function drawCard(){
   // closes instead of being crowded out by ordinary moments.
   const cb=pool.find(c=>c.id.indexOf('cb_')===0);
   if(cb && chance(0.7)){ presentCard(cb); return; }
+  // SIGNATURE cards — the vocation arcs (soldier/scholar/maker/wanderer) and the era moments (a war, a
+  // plague, fat years) are the whole point of choosing a calling or being born into a time: they're what
+  // makes a soldier's life read differently from a scholar's, gen 8 from gen 2. They're once-per-life and
+  // stage-spread, so a firm preference makes them reliably LAND without ever dominating a life.
+  const SIG=/^(a_soldier|m_soldier|e_soldier|a_scholar|m_scholar|a_maker|m_maker|e_maker|a_wanderer|m_wanderer|w_)/;
+  const sig=pool.find(c=>SIG.test(c.id));
+  if(sig && chance(0.5)){ presentCard(sig); return; }
   // weighted pick
   let tot=0; for(const c of pool) tot+=c.w;
   let r=Math.random()*tot, chosen=pool[0];
@@ -240,6 +259,7 @@ function presentCard(c){
   P.sinceCard=0;
   P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age;   // for the no-repeat cooldown
   if(c.once) P.flags['card_'+c.id]=1;
+  if(c.onceDyn && typeof S!=='undefined' && S){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=1; }   // burn it for the whole house
   // once the player has made a choice, point them to where it's all recorded
   if(window.hintOnce && P.decisions && P.decisions.length>=1) hintOnce('seenChron',"Every choice is being written into your chronicle — tap “✦ the constellation” (top) to see the whole line.");
   if(window.hintOnce && P.decisions && P.decisions.length>=2) hintOnce('seenLog',"Tap the fading log below any time to read this life's full record.");

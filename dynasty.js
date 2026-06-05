@@ -64,6 +64,29 @@ const SEATS=[
 ];
 function seatOf(lvl){ let s=SEATS[0]; for(const x of SEATS) if(lvl>=x.min) s=x; return s; }
 
+/* ---------- the world's ERA — the times a generation is born into ----------
+   A light macro-layer so a long house lives through CHANGING times: a war, a hard
+   winter, fat years, a turning age. Eras gate their own cards (cond:()=>S.era==='war')
+   and colour the world a life opens in — so gen 8 is not gen 2 with new names. Most of
+   life is the same human business; the era only tilts which rare moments can happen and
+   how the world feels. The era drifts at each succession, so a house lives through history. */
+const ERAS={
+  settled:{line:"These are settled years — the country quiet, the roads safe, the seasons turning as they should."},
+  war:    {line:"There is a war on in these years. Far off, at first."},
+  plague: {line:"A sickness is moving through the country — slow, and close, and without much mercy."},
+  plenty: {line:"These are fat years — trade good, the granaries full, money loose and everywhere."},
+  hard:   {line:"These are lean years — thin harvests, long winters, every coin counted twice."},
+  turning:{line:"The age itself is turning — new ideas, new machines, new gods, and the old certainties coming loose."},
+};
+const ERA_KEYS=Object.keys(ERAS);
+// the next era: usually drifts back toward ordinary (most years are quiet), sometimes lurches into history.
+function rollEra(prev){ if(chance(0.4)) return 'settled'; const o=ERA_KEYS.filter(k=>k!=='settled'&&k!==prev); return o[ri(0,o.length-1)]; }
+function eraTone(k){ return (k==='war'||k==='plague'||k==='hard')?'loss':(k==='plenty'?'joy':'obs'); }
+function setEra(key,announce){ if(typeof S==='undefined'||!S) return false; const changed=S.era!==key; S.era=key;
+  if(announce && changed && ERAS[key] && typeof logLine==='function') logLine(ERAS[key].line, eraTone(key));
+  return changed; }
+function eraLine(){ return (typeof S!=='undefined'&&S&&S.era&&ERAS[S.era])?ERAS[S.era].line:null; }
+
 function initHouse(){
   return {
     seat:1,                 // 0..6, the family's standing/home
@@ -336,12 +359,15 @@ function succeed(childRel){
   let oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F), g=0;
   while(taken.has(oNm) && g++<20) oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F);
   addRel(otherKind, oNm, otherSex, 68, ri(22,34));
+  // the world turns between generations — the heir may be born into a changed age
+  if(chance(0.45)) setEra(rollEra(S.era), false);
   // opening lines reflect being born a child of the house it has become
   const seat=seatOf(h.seat);
   const births=["Was born into "+seat.name+", and a family that already had a story.",
     "Was born where the last life ended — into "+seat.name+", and even that already partly spent.",
     "Came into the world already inside a story someone else had begun, with "+seat.name+" for an inheritance."];
   logLine(births[rotI(child, births.length)],"obs");
+  if(S.era && S.era!=='settled' && eraLine()) logLine(eraLine(), eraTone(S.era));   // the times this generation is born into
   if(h.motto) logLine("Raised on the family words: “"+h.motto+"”","obs");
   showHeir(child, dead, inheritMeans, nurture+nurtureBeq, h);
 }
@@ -404,6 +430,7 @@ function startLife(p){
   if(window.AL_reseed) window.AL_reseed();
   seedParents(p);
   logLine("Was born.","obs");
+  if(S&&S.era&&S.era!=='settled'&&eraLine()) logLine(eraLine(), eraTone(S.era));   // born into a world already in motion
   // a gentle one-time orientation for a first-ever player (non-persisted; fades)
   if(window.hintOnce) setTimeout(()=>{ if(P&&P.alive) hintOnce('seenIntro',"The years move on their own — pause any time with the ▮▮ below. Now and then, a moment will ask something of you."); },1600);
   running=true; busy=false;
@@ -416,6 +443,8 @@ function beginNewLine(){
   document.getElementById('vHeir').classList.remove('show');
   S.surname=pick(SURNAMES);
   S.house=initHouse();
+  S.seenDyn={};                                              // the new house has seen none of the "once-per-dynasty" beats yet
+  setEra(chance(0.55)?'settled':rollEra(null), false);       // the world this house is founded into (announced at the first birth)
   const f=makeFounder(1);
   startLife(f);
   renderAll(); scheduleTick(); save();

@@ -1,0 +1,56 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system genuinely delivers on its promise: cb_books_late, cb_outcast_return, cb_lookaway, cb_strayed and others do create a felt sense that earlier choices shaped a specific person — not just a template. When Calla Renner (dynasty 7, gen 2) finally makes amends 'to a stranger, for a child she had ignored 51 years before,' that is a real payoff from a real decision.",
+    "Dynasty-level mechanics — seat climbing, reputation drift, motto crystallization, bequest, the reckoning — give multi-life play a structural goal the player can actually steer. House Achterberg (dynasty 10) reaching a grand estate in four generations while the motto 'An open door, an open hand' crystallized from Felix's decisions felt earned rather than accidental.",
+    "The hard-name / tainted-house gates (r_hard_name, r_family_shadow, s_inheritance_dispute, s_patronage) do unlock genuinely different content for high-standing dynasties. Dynasty 11 (Ashcroft) showing the 'use the name, close it hard' sequence for Lucan and Sabine is content that lower-seat houses never see.",
+    "The prose quality is high enough that the ambient observations ('The stairs have started to ask a question of her', 'Books have become a country she can live in') don't feel like filler even on repeated reads — though this advantage is borrowed against novelty.",
+    "Early-death paths (dynasty 3, 4, 8, 9) add genuine texture; a line that just ends because a founder dies at 7 or 34 is a different feeling from a managed succession, and the eulogies handle it well.",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the strongest design in the deck — both choices are real virtues with real costs, and cb_the_cost echoing them in old age is a strong structural touch."
+  ],
+  "staleness": [
+    "The structural spine is almost identical across all 38 lives: (1) childhood sickness, (2) book or stray or friend-at-the-yard, (3) trade vs. study, (4) love arrives, (5) marry, (6) child, (7) work promotion, (8) health scare, (9) bequest, (10) die. By dynasty 5 the player is predicting the next card category before it lands. The content varies the flavour but not the shape.",
+    "The y_mentor card fires in an overwhelming majority of lives — almost every life in the transcript takes 'Show up every day' or 'Teach yourself instead' between age 14 and 22. Over 38 lives this card appears roughly 25+ times, making it feel mandatory rather than meaningful. Similarly, a_marry fires in nearly every adult life, always with the same three rotation lines.",
+    "The 'child arrives' card (a_child) reads identically across the entire dataset — 'It arrives sideways, the way it does — not quite a question yet, not quite not.' fires as the framing in at least 15 consecutive lives because the text rotates only 3 variants but the card fires ~30 times. The 10-year cooldown doesn't prevent the repetition from being obvious to any player who watches multiple lives.",
+    "The love-arrival card pool (y_love1 / a_meet_late) has 7 and 3 variants respectively, but across 38 lives the same phrasing recurs visibly: 'fell in love, and was aware, with a cold clarity, of everything it now made possible to lose' appears in Dynasty 2/Matthias, 2/Liv, 5/Sabine, 6/Noor, 7/Theda, 10/Roman, 11/Selma, 12/Tomas — 8 times in 38 lives.",
+    "The x_honest_or_kind card fires in a huge proportion of adult lives (Dynasty 1/Marguerite, 1/Tamsin, 1/Aldous, 2/Felix, 2/Matthias, 6/Selma, 11/Selma, 12/Tomas). The card's 20+ year cooldown is not enough; with ~38 lives averaging 70 years each, a non-once card with cool:22 can fire 2-3 times per life and does.",
+    "The 's_from_nothing' card — 'there is nothing behind [name] — no name that means a thing' — fires in virtually every generation 1-3 life regardless of house standing, because the seat-gating only excludes seat>=2 founders, and many non-founders are still functionally building from scratch. It read as freshly written the first four times; by dynasty 8 it is a rote beat.",
+    "There is no structural asymmetry between a miserable life and a content one: both produce roughly the same number of cards in the same age-band order. A 'dark' life (low spirit, strained relationships) doesn't actually feel mechanically different from a warm one — the cards change their flavour text but the rhythm is the same.",
+    "The dynasty/house system has almost no downward drama in practice. Of 12 dynasties in the transcript, only one (Renner/dynasty 7) noticeably slips in seat between generations, and even it recovers. The reckoning card is gated at seat>=3 with cool:26 and only one use per life; in the full 38-life run it fires perhaps 3 times. The threat of dynastic collapse is theoretically present but nearly invisible in play.",
+    "No cards surface after dynasty 6 that weren't visible by dynasty 3. The seat-gated content (s_great_burden, s_patronage, s_inheritance_dispute) is real, but only activates for houses that reached seat>=5, which in the transcript is only houses Ashcroft and Achterberg. A player whose dynasties stay in the seat 2-4 range — likely most players — never accesses this content at all and thus has no discovery incentive past dynasty 3."
+  ],
+  "improvements": [
+    {
+      "what": "Mark y_mentor, a_child (first child), x_honest_or_kind, and a_marry as 'once-per-dynasty' rather than once-per-life, and replace the gap with 2-3 new cards per slot that cover the same life-territory with different situations",
+      "why": "These four cards account for roughly a third of all visible cards across the 38-life run. Making them once-per-dynasty forces the engine to surface under-used content and eliminates the most obvious repetition. The cool parameter alone is insufficient when the life-span averages 70+ years.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 6-8 cards that are gated on the current seat AND the current generation count (e.g. 'a house that has stood for five generations and now holds X') — content that literally cannot appear until late in a dynasty",
+      "why": "Right now the mid-game dynasty (seats 3-4, generations 3-6) is the weakest in terms of exclusive content. The player who plays carefully for 6 generations sees the same card pool as a player on generation 2. Long-run content with generation-count gates would reward persistence and give the 'one more dynasty' pull a concrete target.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 4-5 cards for lives where the house is actively declining (seat dropped 2+ in the last 2 generations) — framing the starting conditions as struggle, precarity, living in the shadow of better days",
+      "why": "Every heir screen currently frames inheritance in a positive or neutral light even when the house is slipping. A 'fallen house' card layer would make dynastic decline feel structurally different from ascent, giving the player a reason to play defensively and making losses feel meaningful rather than just slower progress.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 'what the dynasty is known for' callback cards that can only fire if the house motto has been set AND the current heir is acting against type — e.g. a 'We do not ask twice' house faced with an obvious act of mercy",
+      "why": "The motto is the most satisfying dynasty-layer output, but it currently has no gameplay consequence past the heir screen narration. A card that says 'your family's name is built on ruthlessness, and this is the moment that tests it' would give the dynasty layer teeth instead of just flavour.",
+      "impact": "med"
+    },
+    {
+      "what": "Reduce the weight on x_honest_or_kind from 2 to 0.5, increase cool from 22 to 35, and add 3 new 'competing goods' cards to the pool at different life stages",
+      "why": "This single card is the most repeated named card in the full transcript after the forced arcs. Its theme is good but it's saturated. More variety in the competing-goods category while throttling the frequency of this specific card would spread the payoff without losing the design intent.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'line at risk' narrative flag that activates when no heir has been born yet and the character is over 40 — surfacing 1-2 special cards about legacy anxiety, found family, or choosing not to continue the line — and make childlessness a structurally distinct path with its own terminal content",
+      "why": "Currently a childless life just ends the dynasty quietly. The engine already guards against it by forcing the child card near the end of its window. Making a deliberate childless choice a real branching path with its own cards would create genuine structural variety and a different kind of dynasty arc.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely polished piece of literary craft that delivers real pleasure for roughly three dynasties before the underlying card spine — always: sickness, friend, trade-or-study, love, marry, child, work, health, bequest, die — becomes so predictable that the prose novelty is doing all the work, and prose novelty alone is not enough to sustain the 'one more dynasty' pull the design is aiming for."
+}

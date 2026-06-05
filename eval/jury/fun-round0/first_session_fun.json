@@ -1,0 +1,49 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.5,
+  "fun_highlights": [
+    "The first life is genuinely absorbing: the prose is sharp, the stakes feel real, and the 'quiet but permanent' choice mechanic lands well — each decision feels weighty precisely because it can't be undone.",
+    "Callback cards are the best mechanic in the game. When the outcast child from age 6 returns as a grown adult holding a door open, or when the book too hard for a child's hands resurfaces at midlife, there's a genuine 'oh' moment of earned payoff. These are the high points of variety.",
+    "The bequest system (mind / means / heart / freedom) is a clean, meaningful dynasty-steering lever. It's simple enough to understand on first use, consequential enough to care about, and it makes the transition between lives feel purposeful rather than mechanical.",
+    "The 'one more life' pull is real for the first 2–3 generations. Watching a house name form, a motto crystallise ('What the mind holds cannot be taken'), and heirlooms accumulate gives a sense of longitudinal stakes that works well in the opening session.",
+    "Child-death lives (Dynasties 3, 4, 9 in the transcripts) produce genuine emotional weight on first encounter — short, bleak, but coherent as a life story rather than a failure state.",
+    "The observation lines between choices ('She still laughs like someone the years have not yet learned how to reach') are some of the best writing in the game and give lives texture even in the passive years."
+  ],
+  "staleness": [
+    "The structural skeleton of every life is nearly identical: childhood fever + childhood friendship/book/stray + first job or study fork + fall in love + marry + have child + health scare + bequest. By dynasty 4 you are watching the same scaffolding get new name-plates, not genuinely new shapes.",
+    "The core once-per-life cards (c_sick, y_path, a_marry, a_child, m_health, e_bequest) fire in almost every life in the same rough order. The transcripts confirm this: every single life in the 12-dynasty packet contains fever → path fork → love → marriage → child → health → bequest, with only the prose variants differing.",
+    "The prose rotation system (rotI, rotN) is shallow — there are typically 3–7 line variants per repeated event. By dynasty 6, the player has already seen most of the line variants for 'fell in love' and 'married X'. The text still reads beautifully, but it's no longer surprising.",
+    "There are 91 total cards in content.js. After accounting for once:true cards (roughly 55 of the 91), the reusable pool is small. A life draws roughly 10–16 events; a dynasty of 5 generations exhausts a large fraction of the card pool, especially the midlife and elder bands which are the thinnest.",
+    "The midlife and elder bands feel the most repetitive fastest. The adult band has 18+ cards but midlife has only about 12 distinct cards, several of which are gated by conditions that rarely trigger (seat >= 5, secret, tainted repute). Most midlife lives in the transcripts draw from the same ~7 cards: work promotion, health scare, parent aging, child growing, peer dying, midlife reinvent, and invest-in-name.",
+    "Dynasty-level differentiation is limited in practice. The seat/repute/heirloom system promises structural variety, but the transcripts show that most dynasties spend most of their lives at seat 0–2 (rented room / nothing but a name), meaning the seat-gated cards (s_great_burden, s_inheritance_dispute, s_patronage, r_scholar_door) almost never fire. Of 38 lives across 12 dynasties, fewer than 5 encounter seat-gated content.",
+    "The 'one more dynasty' pull weakens after the second or third completed house. There is no cross-dynasty meta-goal visible to the player (the Chronicle collects houses but gives nothing to strive for) and the ending of a line often feels like a shrug rather than a climax."
+  ],
+  "improvements": [
+    {
+      "what": "Break the midlife/elder structural sameness by adding 6–8 cards to each band, focusing on situations that can ONLY arise from earlier life choices — not generic gates like means > 40, but specific memory flags like 'took the public role AND had a child' or 'chose study AND never married'.",
+      "why": "The structural repeat is most obvious in the back half of each life. Midlife is where the player has invested in a character and wants to see consequences; instead they usually see the same health scare + work offer + parent care triptych regardless of who they were at 20.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a visible dynasty-spanning goal or 'achievement condition' visible from the title screen — e.g. reach seat 7 without ever choosing 'Be known as hard to cross', or have three consecutive generations all bequeath 'Everything I know'. This gives a player a reason to start dynasty 4 beyond idle curiosity.",
+      "why": "The 'one more dynasty' pull collapses once the player realises there is no accumulating meta-objective. The Chronicle collects houses but asks nothing of the player. A small set of optional goals would transform replays from passive witness-ing into purposeful runs.",
+      "impact": "high"
+    },
+    {
+      "what": "Thin out the structural guarantee on the core childhood beats. Currently almost every life draws fever + (friend or book or stray) in the first 12 years. Reduce combined child-band weight so ~30% of lives skip some of those anchors entirely — a childhood defined by the move (c_move) and the talent (c_talent) alone should be possible and feel different.",
+      "why": "The childhood sequence is the most mechanically transparent repeat. By dynasty 3 the player can predict 'fever first, then one of three things' with near-certainty. Thinning it out produces genuine childhood variety without adding a single new card.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3–4 dynasty-level milestone events that only fire when the house first crosses certain seat thresholds — a 'founding moment' card at seat 3, a 'the name has arrived' card at seat 5, a 'the histories will remember' card at seat 7. These should be long-form prose events, not choices, acting as narrative punctuation for the generational arc.",
+      "why": "Crossing a seat threshold currently produces only a one-line log entry ('The family climbed in the world this generation'). A milestone card would make the generational climb feel earned and would give high-seat content a memorable landmark to aim for.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the cool-down variety by letting 2–3 repeatable cards have alternate text that fires on the SECOND encounter within a life to acknowledge the repetition in-world (e.g. the a_work card on a third promotion should read differently than on the first). Several cards do this already (a_old_friend's 'it is not the first time') — expand that pattern more broadly.",
+      "why": "When a player sees 'There is a promotion, but it eats the evenings' for the fourth time across dynasties, the text itself should acknowledge the pattern. This turns repetition from a staleness signal into a characterisation signal.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The first life is genuinely captivating — the writing is sharp, the callback cards deliver real payoff, and the bequest lever makes succession feel meaningful — but by dynasty 3 the structural skeleton (fever, path fork, love, marry, child, health, bequest) is visible through the prose, and by dynasty 6 you are mostly watching the same template rename itself; the card pool is too thin in midlife and elder, and the dynasty layer lacks any meta-goal to pull you into a fifth run."
+}

@@ -1,0 +1,54 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system genuinely delivers emergent arcs when it fires: Carys Marlowe straying, breaking her marriage, and confessing near death is a shaped story the player caused rather than watched. Matthias Castellane looking away from a rough sleeper at 62 — repeating a cowardice from age 7 — lands as character revelation, not coincidence.",
+    "The dynasty layer has real emergent texture. House Ashcroft's 'We burn bright, and we burn' motto cohered with Selma's dishonesty cascade (cut a corner at 45, doubled down at 54 feeling 'almost nothing'), Lucan using the hard name twice and burning at death. The reputation/seat/heirloom system interacting with player choices creates genuinely different house flavors.",
+    "The seat-gated content ('The family's hard name goes into the room ahead of you') and reputation-gated cards unlock situations a struggling house never sees, giving high-seat play a different texture and a reason to build toward it.",
+    "The bequest mechanism is a real cross-generation lever: 'Nothing but your own freedom' spawning a fresh-trait heir vs. 'Everything I know' giving a mind-boosted child who may then unlock scholar cards feels like genuine strategic play.",
+    "Early deaths (Dynasty 3: Ottilie Calloway, age 8; Dynasty 4: Lazlo Aldecott, age 8; Felix Achterberg, age 41) produce sharp emotional beats that no scripted game would allow, and the engine handles them with grace."
+  ],
+  "staleness": [
+    "By dynasty 5, the individual-life template is almost completely legible: fever (age 3-10) -> childhood card -> mentor offer (14-22) -> love (16-25) -> marry -> child -> work offer with evenings-tradeoff -> honest-or-kind dilemma -> midlife health scare -> bequest -> death. In 38 lives across 12 dynasties, this arc appeared with minor variation in at least 30 of them. The engine's anti-foreclosure logic guarantees it.",
+    "The x_honest_or_kind card ('A kindness and an honesty — and they will not both fit in the room') fired in at least 12 of 38 lives with verbatim framing, only the character name changing. Its 22-year cooldown and '*' stage mean a long-lived character can see it twice, and across a session the player sees it constantly.",
+    "s_from_nothing ('There is nothing behind X — no name that means a thing') appeared in roughly 15 of 38 lives — every low-seat founder and heir. Two choices, neither particularly distinctive. It fills young-adult years for almost every character who starts from scratch.",
+    "The 'habit of teaching the young' heirloom propagated into every dynasty that touched the mentor path, which was most of them. This then reliably triggered y_mentor for nearly every heir, making the mentor card feel like part of the mandatory childhood template rather than a contingent discovery.",
+    "Observation lines (ambient prose) recycled heavily across dynasties. 'She still laughs like someone the years have not yet learned how to reach' appeared identically in 6+ different lives in the transcript. The epitaphs 'Gave away everything she knew, and so kept it' and 'Left people gentler than she found them' each appeared 4 times in 38 lives — the dynasty-internal deduplication works, but starting a new dynasty resets it, so the player sees these phrases constantly across a session.",
+    "The marriage card has 6 variants but they rotate predictably (by generation index), and in a long session every variant becomes familiar. The 'Married X late, and found the lateness made the vow weigh more, not less' variant appeared in at least 8 lives in the transcript.",
+    "Secrets (the 'strayed' + 'inherited_secret' chain) are the most narratively potent dynasty mechanic, but only one such secret appeared across all 12 dynasties (Carys Marlowe). The triggering condition (affair -> no confession -> secret passed down) requires several specific choices aligning; in practice it fires rarely enough that many multi-dynasty sessions may never see it.",
+    "Trait-gated cards (t_bookish, t_guarded, t_restless) only fire once per life and are thin — one card per trait. A 'bookish' dynasty promised distinct play but delivered one midlife card rather than a genuinely differentiated arc."
+  ],
+  "improvements": [
+    {
+      "what": "Give x_honest_or_kind a much longer cooldown (40+ years, effectively once-per-life), or split it into 3 distinct cards gated on relationship type (spouse, child, friend) with different framings. It currently crowds out other adult content while repeating near-verbatim.",
+      "why": "It's the single most repeated card in the transcript — present in roughly 1 in 3 lives. Its universality and verbatim framing are the primary cause of adult-band staleness.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 new s_from_nothing variants (or replace it with situation-specific low-standing cards): one for a family with a tainted reputation starting low, one for a family that recently fell from higher standing, one for a genuine nobody with no dynasty context. The current card fires 15 times in 38 lives with the same two choices.",
+      "why": "This card is the default fill for all young-adult years in low-seat lines and its lack of situational variation is the second biggest source of repetition after x_honest_or_kind.",
+      "impact": "high"
+    },
+    {
+      "what": "Tie the 'strayed' secret chain into the dynasty more reliably: if the house has a 'tainted' reputation (which accumulates from multiple ruthless/dishonest lives), give a 50%+ chance that an inherited_secret already exists at founding, so the secret mechanic fires in more dynasties.",
+      "why": "The secret/confession arc is the system's most emotionally potent cross-generation emergent story, but it appeared in only 1 of 12 dynasties. Lowering the entry barrier would surface this mechanic more regularly without making it mandatory.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 more callback cards that fire from the non-book heirlooms: 'a soft spot for strays' should have its own callback (someone brings a stray to an heir who carries the heirloom), 'a fortune and the fear of losing it' should have a callback in a rich heir's midlife, 'a name that opens doors by being feared' should have a reckoning callback beyond the existing r_name_cost.",
+      "why": "The book heirloom has two dedicated callbacks (cb_books_late plus grandchild echo in e_window); other heirlooms have none. Adding callbacks to the other heirlooms would make each dynasty's specific accumulation feel meaningfully different mid-play.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 1-2 trait-gated cards per trait rather than one, spread across different life stages. A 'bookish' character should face a bookish moment in youth (the mind vs. the body early on) and another in elder years, not just one midlife card.",
+      "why": "Traits currently feel cosmetic; they affect drift rates and gate one card. Two or three trait-specific moments spread across a life would let the player feel the trait shaping a whole arc rather than a single pivot.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase epitaph deduplication to span the entire session, not just the current dynasty. Track used epitaph clusters globally (in session/localStorage) and exclude them from the weighted pool when starting a new dynasty.",
+      "why": "'Gave away everything she knew, and so kept it' for Marguerite Fenn (D1), Matthias Castellane (D2), Cleo Marlowe (D6), and Felix Renner (D7) means a player who runs multiple dynasties sees the same epitaph as if encountering it for the first time each new house.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The dynasty layer and callback system can produce genuinely surprising emergent stories, but the individual life template is legible by dynasty 4-5 and a handful of near-universal cards (honest-or-kind, s_from_nothing, the book callback, the marriage-and-child guarantee) repeat so predictably that a session of 8+ dynasties increasingly feels like watching the same scaffold with fresh names."
+}

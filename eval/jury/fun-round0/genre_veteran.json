@@ -1,0 +1,57 @@
+{
+  "profile": "genre_veteran",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is the game's strongest mechanic — when a decision made at age 7 resurfaces as a structurally different card at age 56 (cb_books_late, cb_outcast_return, cb_lookaway, cb_corner), it genuinely delivers the 'time collapsed' pleasure that only the best of the genre achieves.",
+    "The dynasty layer has real teeth: seat-gated content (r_hard_name, s_great_burden, r_scholar_door) is content you can *only* see by building a specific kind of house, and that creates genuine replay incentive across dynasties.",
+    "Motto crystallisation is a small but effective punctuation mark — seeing 'We burn bright, and we burn' or 'By our own hands' emerge from actual play patterns earns a quiet satisfaction comparable to a Sunless Sea discovery.",
+    "The bequest mechanic is an elegant cross-generation lever; choosing what the heir inherits feels genuinely consequential and is rare enough in the genre to land as novel.",
+    "The prose has genuine compression — a single line like 'Felt the pull, and chose the marriage anyway' or 'Went hungry rather than take what wasn't given' does what a paragraph would in lesser text, and that density sustains the contemplative pace.",
+    "The affair card and its downstream callbacks (cb_strayed, cb_inherited_secret) create some of the strongest emergent story beats — a secret that passes three generations and is finally spoken or carried underground is structurally satisfying.",
+    "The 'competing goods' cards (x_honest_or_kind, x_dream_or_duty, x_loyalty_truth) are above-genre-average in moral texture; neither option is cleanly right, and cb_the_cost actually follows up on them."
+  ],
+  "staleness": [
+    "The childhood fever (c_sick) fires in almost every life across all 12 dynasties — it is effectively a universal opener, which makes the early game identical regardless of choices. Across the 38 lives in the transcript, it appears in roughly 30 of them. This is the single most visible staleness signal.",
+    "The 'yard child' card (c_friend) fires in nearly every life with similar frequency, and its callback (cb_outcast_return) then fires predictably in the adult years of those same lives. The sequence becomes a known template after dynasty 3.",
+    "x_honest_or_kind fires in close to every adult life (identified in 14 of the 38 lives), with near-identical prompt text and outcome lines each time. It is supposed to be a 'competing goods' moment but lands as the default adult beat by dynasty 5.",
+    "The structural arc is nearly universal: childhood fever or yard-child → love card (guaranteed by the engine's forced-offer) → marry → child → work card → midlife body check → bequest → death. This template is visible and predictable by dynasty 4, robbing later lives of the sense that 'this one could be different.'",
+    "The 'nothing behind you / s_from_nothing' card fires in the majority of modest-seat lives, which is most lives; it functions as a second universal opener for the adult stage. Combined with c_sick and c_friend, the first 30 years of most lives run on 3 near-universal rails.",
+    "The mentor card (y_mentor) fires in a very high fraction of lives, often producing the same 'was taken under a wing, and never forgot the debt of it' line back-to-back across generations without the line rotation preventing obvious repetition to an observant player.",
+    "Seat progression stalls for most dynasties below seat 4, which means the repute-gated and seat-gated cards (r_scholar_door, s_great_burden, s_inheritance_dispute, s_patronage, r_hard_name) are largely invisible to anyone not already deep in a focused run — the interesting content that *would* differentiate dynasties is locked behind a climb most lines never complete.",
+    "The 'one more dynasty' pull is present but thin: once the motto crystallises and the house is named, there is no stated long-arc goal (no equivalent to Sunless Sea's Judgement's Egg or 80 Days' completion), so the question 'why start another' defaults to 'to see the writing,' which is not the same as gameplay-driven curiosity.",
+    "Trait-gated content (t_bookish, t_guarded, t_restless) is only 3 cards — too sparse to make the inherited nature feel like it changes *which life you're playing*, rather than occasionally redirecting a scene."
+  ],
+  "improvements": [
+    {
+      "what": "Mark c_sick and c_friend as 'light once per dynasty' — one fires as a child opener per dynasty, the other is suppressed if the previous generation already fired it",
+      "why": "These two cards create the single most visible template effect. A player who has seen the fever and the yard child 12 times in a row can predict the first 10 years of every life. Rotating which childhood card opens each life — c_sick, c_sibling, c_move, c_grandparent, c_talent, c_animal, c_steal — would make the early game feel different by dynasty 5.",
+      "impact": "high"
+    },
+    {
+      "what": "Give x_honest_or_kind a hard per-dynasty once gate, or create 3 more 'competing goods' cards to replace its repeated draws",
+      "why": "It is the only 'competing goods' card with a cooldown short enough to fire every adult life, and the prompt text is nearly word-for-word the same each time. Either cap it to once-per-dynasty or write 3 siblings (an honesty-vs-loyalty shape, a courage-vs-kindness shape, a duty-vs-freedom shape) so the mid-adult band has genuine variation.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a visible dynasty-level goal mechanic beyond the motto — e.g., a 'house aspiration' that a player can set (scholarly lineage, notorious house, empire built from nothing) that unlocks a unique resolution card if achieved across 6+ generations",
+      "why": "The single strongest 'one more life' engine in the genre is a long-horizon goal the player is actively pulling toward (Sunless Sea's ambitions, BitLife's challenges). A consciously chosen dynasty arc would give each new line a declared shape, converting passive witnessing into active steering. The existing systems (seat, repute) move in this direction but never name a finish line.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 6-8 more trait-gated cards (bookish, warm, guarded, restless, frail, stubborn, shrewd, dreaming each getting 1-2 cards) across the full life arc",
+      "why": "Currently only bookish, guarded, and restless have a single trait-gated card each. A 'shrewd' trait has zero gated content despite appearing in 12 lives. Trait-specific moments are the clearest path to making each inherited nature feel like a distinct character class rather than a cosmetic label.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 4-6 'dynasty memory' cards that reference the specific cumulative history of the house — e.g., a card that can only fire if the same reputation tag has been earned by 3+ consecutive ancestors, surfacing a moment that names the family character explicitly and asks the current life to honour or break it",
+      "why": "The game tells you about the dynasty in the heir screen and the motto, but rarely *plays* the dynasty back at you during a life. A card that says 'three generations of this house have been scholars; you are about to be asked to be something else' turns passive inheritance into active drama.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the repeating mid-adult pool (a_work, u_windfall, u_loss, a_neighbour, a_small_lie, m_rival) with 4-6 more repeating cards that vary the texture of the working years without requiring a new memory flag",
+      "why": "The adult band (26-60) has the longest run and the most visible repetition. The existing repeating cards recycle every 10-22 years, meaning a long life sees the same 5-6 situations twice. More cards with the same cool mechanic would simply reduce the per-life repeat rate without any structural change.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A beautifully written game with a strong callback architecture and a real dynasty layer, but it goes stale around dynasty 4-5 because a small set of near-universal cards (the fever, the yard child, the honest-or-kind dilemma) make every life's first and middle acts read from the same template, and without a named long-arc goal, the 'one more dynasty' pull fades to prose appreciation rather than gameplay curiosity."
+}

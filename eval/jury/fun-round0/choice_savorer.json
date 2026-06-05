@@ -1,0 +1,46 @@
+{
+  "profile": "choice_savorer",
+  "score": 6.0,
+  "fun_highlights": [
+    "The callback cards are genuinely weighty: a choice at age 7 (looking away from the lonely child, keeping the difficult book, hiding the stray) resurfaces decades later with full memory and consequence. When 'cb_lookaway' fires at midlife and you're asked to look away a second time knowing exactly what it costs, that is a rare, satisfying thing in this genre.",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, cb_the_cost) break the usual open/closed grammar and offer choices where both roads are a genuine form of virtue. These are the sharpest moments in the deck — the player can't optimise, only reveal character.",
+    "The prose on individual choices is characterful and distinctive. 'Close the door' vs 'Walk through it' on the affair card; the three-way e_legacy card ('kind', 'built something', 'here at all'); the y_path card that frames trade vs study as 'eat today' vs 'gamble on the mind' — these feel like real decisions about real people, not flavour toggles.",
+    "The dynasty layer — heirlooms accumulating across generations, repute-gated cards unlocking different worlds for scholarly/ruthless/generous houses, the bequest card letting you actively shape what the next life starts from — gives a genuine sense of building something that persists. House Ashcroft's 'We burn bright, and we burn' motto earned through a line of ruthless/reckless choices gives real satisfaction.",
+    "Death can come early and the child-life (Dynasties 3, 4 — founder dying at 8) is genuinely surprising the first time. A one-generation dynasty that ends before adolescence feels like a different kind of story."
+  ],
+  "staleness": [
+    "The structural template is rigid and visible by dynasty 3. Across 38 lives the fever card appears 23 times, the mentor card 18 times, the fall-in-love moment 26 times, marriage 31 times, and the child-question card 30 times. Nearly every life that reaches adulthood hits: fever → (book or friend or sibling) → mentor → love → marriage → child. The player learns the pipeline fast and the surprise evaporates.",
+    "Almost every card is a binary open/closed choice: lean in vs pull back, be generous vs protect yourself, take the risk vs stay safe. The prose is excellent but the underlying decision-grammar is always the same shape. By dynasty 4-5 a player who reads closely can feel which option 'opens' the character and which 'closes' them — the moral valence is legible even when the content varies. This flattens the sense of genuine decision-weight.",
+    "The adult band (26-45) is the most congested and the most repetitive. The marriage card (weight 5) and child cards (weight 5) dominate draw probability, which means many adult lives cycle through the same 3-4 high-weight cards (a_marry, a_child, a_work, a_old_friend) and leave the more interesting once-per-life adult cards (a_affair, x_dream_or_duty, a_conviction, a_public_fall) to appear sporadically or not at all in a given life. Lives 8 through 15 in the transcript show near-identical adult bands.",
+    "The 'one more life' pull weakens around dynasty 5-6. The curiosity shifts from 'what choices will this person face?' to 'which callbacks will fire?' — a more passive pleasure. Once you have seen all the major callback chains (books, outcast, strayed, left_home, chose_trade) the sense of discovery diminishes because the callback set is finite and the player can now predict them from the setup choices.",
+    "The dynasty-layer content (seat-gated, repute-gated, trait-gated cards) is sparse relative to the base deck. In a 12-dynasty run covering ~38 lives, genuinely seat-gated cards (s_great_burden, s_patronage, s_inheritance_dispute) appear a handful of times. Most lives from dynasty 6 onward draw the same base-deck cards. The 'steering the house' layer feels thin in practice."
+  ],
+  "improvements": [
+    {
+      "what": "Add a third or fourth option to at least 8-10 of the most frequently recurring cards (a_marry, a_child, y_love1, a_work). Each option should produce a structurally different life-shape, not just a different tone of the same binary.",
+      "why": "The binary open/closed grammar becomes visible by dynasty 3. A third option that's genuinely sideways — e.g., on a_marry: 'Build a life with them but never formally ask' or on a_work: 'Quit everything, start over' — would break the player's ability to pattern-match the choice and restore genuine uncertainty about consequence.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the weight of a_marry and a_child in the adult draw pool from 5 to 3 each, and add a cooldown of at least 6 years between child-question draws. Use the freed draw probability to surface the once-per-life adult cards (a_affair, x_dream_or_duty, a_conviction, a_public_fall, a_fork_career) more reliably.",
+      "why": "In the current transcripts, roughly 60-70% of adult draw events are the marriage-child-work triangle. The most interesting adult content (the affair card, the competing-goods cards, the public fall) appears irregularly or skips entire lives. Rebalancing would make each adult band feel more textured.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 6-8 new callback cards for choices that currently have no downstream echo: c_steal (the early theft), c_talent (the hidden/shown gift), y_dare (the reckless leap), a_belief (the faith made or deferred). Each callback should surface in a much later stage and reframe the original choice.",
+      "why": "The callback mechanic is the strongest source of choice-weight in the game. Currently only about 12 of the ~90 cards have callbacks. Extending the echo-chain to more of the setup choices — especially youth choices — would make more decisions feel consequential across the whole arc and extend the discovery phase.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 cards that are structurally unlike binary open/closed: a true trilemma where all three options have comparable costs and benefits; a card with hidden information where the choice text doesn't reveal the stat consequence; a card where the player must choose between two people (not between an action and its opposite).",
+      "why": "The recognisable decision-grammar (open vs closed, generous vs self-protective) is the primary driver of staleness. Formally different choice structures — a three-way character conflict, an action with ambiguous outcome, a choice between relationships rather than between postures — would break the pattern and make even familiar topics feel fresh.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the dynasty-layer content (seat-gated and repute-gated cards) 2-3x the current weight when their conditions are met, and add at least 4 more seat-gated events at the mid-range (seat 3-4) which is where most long dynasties spend most of their generations.",
+      "why": "The dynasty steering layer is the strongest 'one more run' hook the game has, but it's thin in practice. Seat-5/6 events appear rarely; the mid-game of dynasty building (seats 2-4) offers almost no dynasty-specific content. Making the house's character and standing visibly gate different content earlier would make each dynasty's narrative arc feel structurally different from the last.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The individual choices are often genuinely beautiful to make — the callback cards and the competing-goods cards achieve real moral weight — but by dynasty 4 the rigid five-beat life template (fever, mentor, love, marry, child) and the binary open/closed decision grammar have become visible enough that the freshness of choosing drains away and the pleasure shifts to the more passive one of watching which callbacks fire."
+}

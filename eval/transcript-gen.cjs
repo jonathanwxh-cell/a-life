@@ -29,14 +29,17 @@ const body=`
     var chose=fmt(ch.t).replace(/<[^>]+>/g,'');
     var alts=c.choices.filter(function(o){return o!==ch;}).map(function(o){return fmt(o.t).replace(/<[^>]+>/g,'');});
     P.sinceCard=0; P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age; if(c.once) P.flags['card_'+c.id]=1;
+    if(c.onceDyn){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=1; }
     var before=Object.assign({},P.aura);
     ch.do(P);
     var dW=(P.aura.warmth-(before.warmth||0)), dL=(P.aura.light-(before.light||0));
     var tone=(dW+dL)>2?'joy':(dW+dL)<-2?'loss':'obs';
     P.decisions.push({age:P.age,q:q,chose:chose,alts:alts,tone:tone});
   };
-  function setupFounder(){ S={surname:pick(SURNAMES),vrot:ri(0,29),year:0,marks:{gens:1,souls:0,longest:0,peakMeans:0},lineage:[],person:null,house:initHouse()};
-    var f=makeFounder(1); S.person=f; P=f; firedObs={}; seedParents(f); }
+  function setupFounder(){ S={surname:pick(SURNAMES),vrot:ri(0,29),year:0,marks:{gens:1,souls:0,longest:0,peakMeans:0},lineage:[],person:null,house:initHouse(),seenDyn:{}};
+    setEra(chance(0.5)?'settled':rollEra(null), false);
+    var f=makeFounder(1); S.person=f; P=f; firedObs={}; seedParents(f);
+    if(S.era&&S.era!=='settled'&&eraLine()) logLine(eraLine(),eraTone(S.era)); }
   function playDynasty(maxGen){
     setupFounder(); var gen=1, lives=[];
     while(true){
@@ -59,7 +62,7 @@ const body=`
   for(var d=0; d<SEEDN; d++) DYN.push(playDynasty(5));
   DYN;
 `;
-const ctx={console, N:5}; vm.createContext(ctx);
+const ctx={console, N: parseInt(process.argv[2]||'5',10)}; vm.createContext(ctx);   // `node transcript-gen.cjs [dynasties]`
 const DYN=vm.runInContext(prelude+'\n'+read('core.js')+'\n'+read('content.js')+'\n'+read('engine.js')+'\n'+read('dynasty.js')+'\n'+body, ctx, {filename:'t.js'});
 
 function ordOf(n){const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
