@@ -71,9 +71,9 @@ const CARDS=[
  choices:[
   {t:"Ask. Build a life.",h:"two become a household",do:p=>{const l=rel('love');l.kind='spouse';p.flags.married=1;fx(p,{spirit:11,heart:6});
     const lines = p.age>48
-      ? ["Married "+l.given+" late, and found the lateness made the vow weigh more, not less.","Married "+l.given+" after both had long stopped expecting it, and meant it the more for that.","Married "+l.given+" with most of a life already behind them, and counted it the best thing in any of it."]
-      : ["Married "+l.given+". The day was small and the meaning was not.","Married "+l.given+". Nobody made a speech; the years that followed were the speech.","Married "+l.given+" on an ordinary day, and meant every word of it.","Married "+l.given+" in front of the few who mattered, and let the world find out after.","Married "+l.given+" without ceremony and without a single doubt.","Married "+l.given+", and the plain room felt larger for the promise made in it."];
-    logLine(lines[rotI(p,lines.length)],"joy");}},
+      ? ["Married "+l.given+" late, and found the lateness made the vow weigh more, not less.","Married "+l.given+" after both had long stopped expecting it, and meant it the more for that.","Married "+l.given+" with most of a life already behind them, and counted it the best thing in any of it.","Married "+l.given+" with grey already coming in, and found the promise none the lighter for it.","Married "+l.given+" long after the age for it, and was privately astonished to be so happy so late."]
+      : ["Married "+l.given+". The day was small and the meaning was not.","Married "+l.given+". Nobody made a speech; the years that followed were the speech.","Married "+l.given+" on an ordinary day, and meant every word of it.","Married "+l.given+" in front of the few who mattered, and let the world find out after.","Married "+l.given+" without ceremony and without a single doubt.","Married "+l.given+", and the plain room felt larger for the promise made in it.","Married "+l.given+" young, and spent the years proving it had not been rash.","Married "+l.given+" in a hurry and a downpour, and never once wished it grander."];
+    logLine(freshPick(lines,p),"joy");}},
   {t:"Not yet. Maybe never.",h:"",do:p=>{const l=rel('love');l.bond=clamp(l.bond-14);fx(p,{spirit:-6});logLine("Could not say yes, and watched a good thing strain.","loss");}},
  ]},
 {id:'a_child',stage:'adult',w:4,age:[26,50],cool:5,cond:()=>(rel('spouse')||rel('love'))&&rels('child').length<3,
@@ -324,10 +324,10 @@ const CARDS=[
  ]},
 
 /* ---- ADULT — the late road to love, and a settling life ---- */
-{id:'a_meet_late',stage:'adult',w:5,age:[26,54],opensLove:true,cond:()=>!rel('love')&&!rel('spouse'),
+{id:'a_meet_late',stage:'adult',w:3,age:[30,54],opensLove:true,cond:()=>!rel('love')&&!rel('spouse'),
  text:p=>["It is later than the stories say it should be. And still — across a room, across a counter, across an ordinary Tuesday — someone.","The time for this was supposed to have passed. And yet — a face, a second glance, an afternoon that refuses to end — someone.","Later than anyone plans for, it arrives anyway: across a table, across a season, across the better part of a life — someone."][rotI(p,3)],
  choices:[
-  {t:"Let it begin.",h:"the heart, still open",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,60,p.age+ri(-4,4));fx(p,{spirit:8,heart:6});logLine(["Found love later than expected, and was almost embarrassed by the size of it.","Let love in late, and was astonished how little the lateness seemed to matter to it.","Came to love past the age {they} thought it was meant for, and found it meant exactly the same."][rotI(p,3)],"joy");}},
+  {t:"Let it begin.",h:"the heart, still open",do:p=>{const s=p.sex==='m'?'f':'m';addRel('love',pick(s==='m'?GIVEN_M:GIVEN_F),s,60,p.age+ri(-4,4));fx(p,{spirit:8,heart:6});logLine(freshPick(["Found love later than expected, and was almost embarrassed by the size of it.","Let love in late, and was astonished how little the lateness seemed to matter to it.","Came to love past the age {they} thought it was meant for, and found it meant exactly the same.","Found, well into the second half, the thing {they} had quietly filed under never.","Met someone late, and discovered the heart had been keeping a room aired the whole time.","Fell in love at an unlikely age, and stopped, gratefully, being the exception {they}'d assumed {they} was."],p),"joy");}},
   {t:"It's too late for that.",h:"",do:p=>{remember('closed_to_love');fx(p,{spirit:-3,mind:2});logLine("Decided the time for that had passed, and built a life around the decision.");}},
  ]},
 {id:'a_home',stage:'adult',w:2,age:[28,50],once:true,cond:()=>P.stats.means>35,
@@ -640,7 +640,7 @@ const CARDS=[
   {t:"Soften. It's gone far enough.",h:"",do:p=>{fx(p,{heart:6,means:-6,spirit:3});remember('broke_with_house');logLine("Began, late, to spend the family's hard name back down — quietly, and at real cost to the purse.","obs");}},
   {t:"Let them fear it. It works.",h:"",do:p=>{fx(p,{means:8,heart:-4,spirit:-2});remember('cut_a_corner');logLine("Decided the fear was worth more than the warmth, and let the name keep its teeth.","obs");}},
  ]},
-{id:'cb_the_cost',stage:'elder',w:2,once:true,cond:()=>held('chose_self')||held('chose_others')||held('chose_loyalty')||held('a_kind_silence'),
+{id:'cb_the_cost',stage:'elder',w:2,once:true,onceDyn:true,cond:()=>held('chose_self')||held('chose_others')||held('chose_loyalty')||held('a_kind_silence'),
  text:"Near the end, one old decision keeps returning to {n} — not a wrong one, exactly, but the one with a cost {they} has never quite finished paying.",
  choices:[
   {t:"Decide it was right.",h:"",do:p=>{const which=held('chose_self')?"the life {they} took for {them}self":held('chose_others')?"the dream {they} set down for the people who needed {them}":held('chose_loyalty')?"the truth {they} kept for the sake of {their} own":"the kindness {they} told in place of the truth";echo("Decided, at the last, that "+which+" had been right — and mostly believed it.","obs");fx(p,{spirit:6,heart:3});}},
@@ -855,5 +855,96 @@ const CARDS=[
  choices:[
   {t:"Hold to the family words.",h:"the house, upheld",do:p=>{fx(p,{spirit:6,heart:3});remember('honored_line');remember('took_a_stand');logLine("Met the test the way the family words said to, and felt, for once, the old motto turn from a phrase into a thing {they} meant.","obs");}},
   {t:"Break with them. Be your own.",h:"the house, defied",do:p=>{fx(p,{spirit:5,mind:4,heart:-2});remember('own_way');remember('chose_self');logLine("Broke, in the moment that counted, with the words the family had handed {them}, and chose to be the first of a different kind.","obs");}},
+ ]},
+
+/* ============================================================
+   ANTI-STALENESS PASS 2 — break the late-love/elder monoculture:
+   distinct SOLITARY & CHILDLESS life-shapes (now ~a quarter / a
+   seventh of lives), elder arcs that differ by how a life was lived,
+   FATE events that simply happen (no choosing your way out), and
+   cards that exist only where a vocation meets an era.
+   ============================================================ */
+
+/* ---- SOLITARY & CHILDLESS: real shapes, not dead-ends ---- */
+{id:'m_solitary',stage:'midlife',w:3,age:[44,64],once:true,cond:()=>!rel('spouse')&&!rel('love'),
+ text:"It settles on {n} plainly, somewhere in midlife: the house is {their}s alone, and likely to stay that way. There is a grief in it, and — {they} is surprised to find — a width.",
+ choices:[
+  {t:"Claim the width. This is the life.",h:"solitude, chosen",do:p=>{fx(p,{spirit:7,mind:5,heart:2});remember('chose_solitude');logLine(["Stopped waiting for the other life to arrive, and moved properly into the one {they} had — which turned out to be wide.","Made a deliberate peace with a life lived single, and found it had rooms {they} had never had time to furnish before.","Quit grieving the family {they} never made, and started, instead, to inhabit the freedom {they} actually had."][rotI(p,3)],"joy");}},
+  {t:"Feel the cold of it.",h:"the unshared life",do:p=>{fx(p,{spirit:-3,mind:4,heart:-2});remember('knew_loss');logLine("Felt, in midlife, the particular cold of the unshared evening, and did not pretend otherwise.","obs");}},
+ ]},
+{id:'a_chosen_family',stage:'adult',w:3,age:[30,60],cool:16,cond:()=>!rel('spouse')&&!rels('child').length,
+ text:"The people who keep turning up for {n} — at the door, at the bad times, at the table — are not, strictly, family. {They} has begun to suspect that is a technicality.",
+ choices:[
+  {t:"Build a life around them.",h:"a family, chosen not given",do:p=>{const s=chance(0.5)?'m':'f';if(!rel('friend'))addRel('friend',pick(s==='m'?GIVEN_M:GIVEN_F),s,66,p.age);fx(p,{heart:8,spirit:6});remember('let_in');remember('chose_others');logLine("Built a life out of chosen people instead of given ones, and was held by it as well as anyone is held.","joy");}},
+  {t:"Keep them at arm's length.",h:"",do:p=>{fx(p,{spirit:-2,mind:3,heart:-3});remember('guarded_self');logLine("Kept even the willing ones at a careful arm's length, and called the distance independence.","obs");}},
+ ]},
+{id:'e_solitary',stage:'elder',w:3,age:[66,95],once:true,cond:()=>!rel('spouse')&&!rels('child').length,
+ text:"{n} comes to the end of it alone, more or less — no spouse at the bedside, no children in the doorway. The question is what to make of that, now, with the time {they} has left.",
+ choices:[
+  {t:"Count what the solitude built.",h:"a life entirely your own",do:p=>{fx(p,{spirit:6,mind:4});remember('made_peace');logLine(["Reckoned up a life lived mostly alone and found, to {their} own surprise, that it came out well ahead.","Looked back over a solitary life and counted the freedoms it had bought, which were many, and real.","Decided a life is not measured by who stands in the doorway at the end of it, and meant it."][rotI(p,3)],"obs");}},
+  {t:"Sit with the ache of it.",h:"",do:p=>{fx(p,{spirit:-2,heart:3});logLine("Sat, at the last, with the plain ache of an unshared life, and let it be exactly the size it was.","obs");}},
+ ]},
+{id:'e_childless',stage:'elder',w:3,age:[64,95],once:true,cond:()=>(rel('spouse')||P.flags.married)&&!rels('child').length&&(!P.childrenIds||!P.childrenIds.length),
+ text:"There will be no heir — {n} and the one {they} loved made a life, but not a child. What a life leaves, when it leaves no one, is a question {they} turns over now.",
+ choices:[
+  {t:"Leave the work, not a name.",h:"a different kind of inheritance",do:p=>{fx(p,{spirit:5,mind:5,means:-3});remember('made_art');remember('became_teacher');logLine("Left the world a thing made or a thing taught instead of a child, and decided that, too, is a way to outlast yourself.","obs");}},
+  {t:"Make peace with leaving nothing.",h:"",do:p=>{fx(p,{spirit:6,heart:4});remember('made_peace');logLine("Made an even peace with leaving no one and nothing in particular behind — having been here, fully, seemed enough.","obs");}},
+ ]},
+
+/* ---- ELDER CAPS for the remaining vocations (so a life ends in its own shape) ---- */
+{id:'e_scholar_old',stage:'elder',w:3,age:[66,93],once:true,cond:()=>P.flags.vocation==='scholar',
+ text:"At the end of a life spent thinking, {n} faces the oldest question {they} never quite cracked — and the plain fact that {they} is out of time to crack it.",
+ choices:[
+  {t:"Hand the question on, unanswered.",h:"the work outlives the worker",do:p=>{fx(p,{spirit:6,heart:4});remember('became_teacher');logLine("Handed {their} great unanswered question to someone younger, the way a runner hands on a flame, and was content to have carried it as far as {they} did.","joy");}},
+  {t:"Make peace with not knowing.",h:"",do:p=>{fx(p,{spirit:5,mind:4});remember('made_peace');logLine("Made, at the last, a scholar's peace with the size of what {they} would never know — which was most of it, and always had been.","obs");}},
+ ]},
+{id:'e_wanderer_old',stage:'elder',w:3,age:[66,92],once:true,cond:()=>P.flags.vocation==='wanderer'||P.flags.vocation==='settled'||held('left_home'),
+ text:"The road is mostly behind {n} now; the body has called {them} in for good. All those places, all that going — it asks to be added up.",
+ choices:[
+  {t:"Regret nothing. The going was the life.",h:"",do:p=>{fx(p,{spirit:6,heart:3});logLine(["Added up all the roads and all the leaving and regretted not one mile of it, even the cold ones.","Decided a life spent going had been a life, fully — that the horizon had been worth every door {they} closed to chase it."][rotI(p,2)],"joy");}},
+  {t:"Count the doors you closed to keep moving.",h:"",do:p=>{fx(p,{spirit:-2,heart:4,mind:3});remember('knew_loss');logLine("Counted, at the end of the road, the doors {they} had closed in order to keep walking — and felt each one, plainly, for the first time.","obs");}},
+ ]},
+
+/* ---- FATE: things that simply happen — no choosing your way out ---- */
+{id:'f_fire',stage:'*',w:1,age:[18,88],cool:30,cond:()=>P.stats.means>24,
+ text:"There is no warning, the way there never is. A fire — a lamp, a dry season, a neighbour's carelessness — and by morning a great deal of what {n} had is ash and stink.",
+ choices:[
+  {t:"Begin again from the ash.",h:"there is no other option",do:p=>{fx(p,{means:-18,spirit:-4,vit:-2});remember('knew_loss');logLine("Lost much of what {they} had to a fire {they} could not have prevented, stood in the wet ash a while, and began again.","loss");}},
+ ]},
+{id:'f_sudden_loss',stage:'*',w:1,age:[20,88],cool:28,cond:()=>P.rels.some(r=>r.alive&&r.bond>52&&r.kind!=='ex'),
+ text:p=>{const r=P.rels.filter(x=>x.alive&&x.bond>52&&x.kind!=='ex')[0];return (r?r.given:"Someone")+" is simply gone one morning — no illness anyone marked, no warning anyone caught. The world does this sometimes, without asking.";},
+ choices:[
+  {t:"Let it break you, and mend slow.",h:"",do:p=>{const r=P.rels.filter(x=>x.alive&&x.bond>52&&x.kind!=='ex')[0];if(r)r.alive=false;fx(p,{spirit:-7,heart:5});remember('knew_loss');logLine("Lost someone with no warning at all, let the grief have its full brutal say, and was a long time mending.","loss");}},
+  {t:"Go numb, and keep moving.",h:"",do:p=>{const r=P.rels.filter(x=>x.alive&&x.bond>52&&x.kind!=='ex')[0];if(r)r.alive=false;fx(p,{spirit:-4,heart:-3,means:4});remember('driven');logLine("Lost someone without warning, went somewhere cold and useful inside, and did not come fully back for years.","loss");}},
+ ]},
+{id:'f_grace',stage:'*',w:1,age:[14,90],cool:30,
+ text:"It comes unasked and undeserved, the way grace does: a stranger's plain kindness, a turn of pure luck, a door held open by no one {n} will ever be able to thank.",
+ choices:[
+  {t:"Take it, and pass it on someday.",h:"",do:p=>{fx(p,{spirit:6,heart:6,means:3});remember('let_in');logLine(["Was handed an undeserved kindness by a stranger, took it, and spent years quietly trying to be worthy of the luck.","Met plain grace from someone who wanted nothing back, and carried the small debt of it gladly for life."][rotI(p,2)],"joy");}},
+ ]},
+{id:'f_reversal',stage:'*',w:1,age:[26,80],cool:30,cond:()=>P.stats.means>48,
+ text:"It is nobody's fault {n} can name — a bank, a market, a far-off decision by people {they} will never meet — but the comfortable ground gives way underfoot all the same.",
+ choices:[
+  {t:"Take the fall. Rebuild from lower.",h:"",do:p=>{fx(p,{means:-20,spirit:-3,mind:3});remember('knew_loss');logLine("Watched a comfortable footing collapse through no fault of {their} own, took the fall without flinching much, and started the long climb back from lower down.","loss");}},
+ ]},
+
+/* ---- VOCATION x ERA: content that exists only at the intersection ---- */
+{id:'vx_scholar_turning',stage:'*',w:4,once:true,age:[34,70],cond:()=>P.flags.vocation==='scholar'&&typeof S!=='undefined'&&S&&S.era==='turning',
+ text:"The turning age does to {n} what it does to every scholar of the old kind: makes half of what {they} mastered suddenly quaint. The new thinkers are younger, and they are not entirely wrong.",
+ choices:[
+  {t:"Learn the new. Be a student again.",h:"humility, late",do:p=>{fx(p,{mind:9,spirit:3,heart:-2});remember('driven');remember('set_scholar_rep');logLine("Sat down, grey-haired, among the young and the new, and let {them}self be a student again — and was carried forward instead of left.","obs");}},
+  {t:"Defend the old knowing. It was true.",h:"the keeper of a fading lamp",do:p=>{fx(p,{spirit:4,mind:3,means:-3});remember('took_a_stand');logLine("Stood for the old learning while the age hurried past it, and became, with a kind of dignity, the keeper of a lamp the world was deciding to forget.","obs");}},
+ ]},
+{id:'vx_soldier_war',stage:'*',w:5,once:true,age:[18,52],cond:()=>P.flags.vocation==='soldier'&&typeof S!=='undefined'&&S&&S.era==='war',
+ text:"For most, the war is a rumour that reaches the house. For {n}, who chose the blade, it is the actual thing — the real war, arriving exactly as {they} half-knew it would.",
+ choices:[
+  {t:"Do the duty fully. Whatever it costs.",h:"the soldier's whole price",do:p=>{fx(p,{means:10,spirit:3,vit:-6,heart:-4});p.flags.peril=p.age+5;remember('soldier_blooded');remember('driven');logLine("Met the real war {they} had trained for and did the whole hard duty of it, and paid, in full, the price {they} had always known the blade might ask.","obs");}},
+  {t:"Refuse the worst of the orders.",h:"a soldier with a line",do:p=>{fx(p,{spirit:5,heart:4,means:-6});remember('took_a_stand');remember('stayed_straight');logLine("Found, in the real war, the one order {they} would not carry out, and refused it, and bore the cost of refusing among men who didn't.","obs");}},
+ ]},
+{id:'vx_maker_plenty',stage:'*',w:4,once:true,age:[28,60],cond:()=>P.flags.vocation==='maker'&&typeof S!=='undefined'&&S&&S.era==='plenty',
+ text:"The fat years are kind to a good pair of hands — everyone wants what {n} makes, and wants it now. {They} could grow the workshop into something far larger, or keep it a thing {they} can still put {their} hands on.",
+ choices:[
+  {t:"Grow it. Ride the good years.",h:"a bigger name, fewer hands",do:p=>{if(chance(0.6)){fx(p,{means:18,spirit:4,heart:-2});remember('built_the_name');remember('driven');logLine("Grew the workshop into a real concern while the good years lasted, and stopped, somewhere in it, being the one who actually made the things.","obs");}else{fx(p,{means:-8,spirit:-3});remember('self_made');logLine("Reached to grow the workshop in the fat years and overreached, and learned the hard edge of easy money.","loss");}}},
+  {t:"Keep it small. Keep your hands in it.",h:"the maker, still making",do:p=>{fx(p,{spirit:7,heart:4,means:5});remember('made_art');logLine("Let the fat years make other men big, and stayed small on purpose — still, at the end of every day, the one whose hands had made the thing.","joy");}},
  ]},
 ];

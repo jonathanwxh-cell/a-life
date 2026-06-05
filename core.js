@@ -124,6 +124,21 @@ function rotI(who, len){ who=who||(typeof P!=='undefined'?P:null);
 // so a repeating card shows a different face each time within one life — still
 // decorrelated across dynasties by the same house offset.
 function rotN(n, len){ return (((n|0)+houseOff())%len+len)%len; }
+// GLOBAL texture dedup: the ambient prose (observations, epitaphs, mottos) is the game's
+// main texture, and a juror reads many lives in a row — so the same line landing verbatim
+// across nearby lives is the single most visible staleness signal. freshPick keeps a rolling
+// memory of recently-emitted lines (across the WHOLE session, not just one dynasty) and prefers
+// a variant that hasn't been seen lately; only when the whole pool is exhausted does it reuse.
+let RECENT_LINES=[];
+function freshPick(pool, who){
+  if(!pool||!pool.length) return '';
+  const fresh=pool.filter(o=>RECENT_LINES.indexOf(o)<0);
+  const use=fresh.length?fresh:pool;
+  // rotI keeps it decorrelated per-house/generation; the filter keeps it un-repeated per-session
+  const choice=use[rotI(who,use.length)%use.length];
+  RECENT_LINES.push(choice); if(RECENT_LINES.length>18) RECENT_LINES.shift();
+  return choice;
+}
 const rel=kind=>P.rels.find(r=>r.kind===kind&&r.alive);
 const rels=kind=>P.rels.filter(r=>r.kind===kind&&r.alive);
 // the single oldest living parent who is genuinely old and not yet cared for (deterministic)

@@ -31,7 +31,11 @@ const body=`
     if(c.onceDyn){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=1; }
     var INTENT={y_love1:1,a_meet_late:1,a_marry:1,a_child:1,m_old_flame:1};
     var ch=INTENT[c.id]?c.choices[0]:c.choices[Math.floor(Math.random()*c.choices.length)];
+    var hadLove=P.rels.some(function(r){return r.alive&&(r.kind==='love'||r.kind==='spouse');});
+    var kids0=rels('child').length;
     ch.do(P);
+    if(!hadLove && P.rels.some(function(r){return r.alive&&(r.kind==='love'||r.kind==='spouse');})) rec.loveAges.push(P.age);
+    if(rels('child').length>kids0 && kids0===0) rec.childAges.push(P.age);
   };
   function setupFounder(){ S={surname:pick(SURNAMES),vrot:ri(0,29),year:0,marks:{gens:1,souls:0,longest:0,peakMeans:0},lineage:[],person:null,house:initHouse(),seenDyn:{}};
     S.era=ERA_KEYS[ri(0,ERA_KEYS.length-1)];   // force uniform coverage of all eras across the run, so era cards get violation-checked
@@ -43,8 +47,11 @@ const body=`
       while(P.alive && guard++<250){ tick(); }   // real tick(): ages, drifts, may draw, may die()
       rec.lives++; rec.deathAges.push(P.deathAge);
       if(P.deathAge<55) rec.before55++; if(P.deathAge<40) rec.before40++;
-      if(P.rels.some(function(r){return r.kind==='love'||r.kind==='spouse';})) rec.gotLove++;
-      if(P.rels.some(function(r){return r.kind==='child';})) rec.hadChild++;
+      var hasLove=P.rels.some(function(r){return r.kind==='love'||r.kind==='spouse';});
+      var hasKid=P.rels.some(function(r){return r.kind==='child';});
+      if(hasLove) rec.gotLove++;
+      if(hasKid) rec.hadChild++;
+      if(hasLove&&!hasKid) rec.coupledChildless++;
       if(gen>=2){ rec.heirLives++; if(P.startAge0) rec.heirStart0++; }
       var kids=rels('child').filter(function(r){return r.alive;});
       if(!kids.length||gen>=maxGen) break;
@@ -57,7 +64,7 @@ const body=`
     rec.peakSeat=Math.max(rec.peakSeat, S.house.seat);
   }
   function run(N,maxGen){
-    rec={lives:0,heirLives:0,heirStart0:0,before55:0,before40:0,gotLove:0,hadChild:0,deathAges:[],
+    rec={lives:0,heirLives:0,heirStart0:0,before55:0,before40:0,gotLove:0,hadChild:0,coupledChildless:0,deathAges:[],loveAges:[],childAges:[],
       ageViol:[],stageViol:[],coolViol:[],onceViol:[],dynViol:[],cardUse:{},gens:[],linesHeir:0,seats:{},peakSeat:0,lines:N};
     for(var n=0;n<N;n++) runLine(maxGen);
     return rec;
@@ -73,7 +80,10 @@ const gensAvg=R.gens.reduce((a,b)=>a+b,0)/R.gens.length;
 console.log('=== A LIFE — faithful sim over '+R.lines+' lines, '+R.lives+' lives (intentional dynasty play) ===');
 console.log('Early death <55: '+pct(R.before55,R.lives)+'   <40: '+pct(R.before40,R.lives)+'   (target 8-12%)');
 console.log('Death age min/med/max: '+Math.min(...R.deathAges)+' / '+med(R.deathAges)+' / '+Math.max(...R.deathAges));
-console.log('Ever had love/spouse: '+pct(R.gotLove,R.lives)+'   ever had a child: '+pct(R.hadChild,R.lives));
+console.log('Ever had love/spouse: '+pct(R.gotLove,R.lives)+'   ever had a child: '+pct(R.hadChild,R.lives)+'   coupled-but-childless: '+pct(R.coupledChildless,R.lives));
+const band=(a,lo,hi)=>pct(a.filter(x=>x>=lo&&x<=hi).length,a.length);
+if(R.loveAges.length) console.log('Age at first love  — <26: '+band(R.loveAges,0,25)+'  26-39: '+band(R.loveAges,26,39)+'  40+: '+band(R.loveAges,40,99)+'   (median '+med(R.loveAges)+')');
+if(R.childAges.length) console.log('Age at first child — <30: '+band(R.childAges,0,29)+'  30-39: '+band(R.childAges,30,39)+'  40+: '+band(R.childAges,40,99)+'   (median '+med(R.childAges)+')');
 console.log('Lines reaching gen>=2: '+pct(R.linesHeir,R.lines)+'   avg gens/line: '+gensAvg.toFixed(2)+'   max seat reached: '+R.peakSeat+'/6');
 console.log('VIOLATIONS age:'+R.ageViol.length+' stage:'+R.stageViol.length+' cooldown:'+R.coolViol.length+' once:'+R.onceViol.length+' onceDyn:'+R.dynViol.length);
 if(R.ageViol.length) console.log('  age e.g.: '+R.ageViol.slice(0,6).join(' | '));

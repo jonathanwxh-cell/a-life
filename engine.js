@@ -31,11 +31,15 @@ function haveChild(){
   const latePool=[
     "Had a child late, "+cn+", and felt the lateness itself as a kind of luck.",
     "Had a child, "+cn+", at an age {they} had stopped expecting it — and was the more undone.",
-    "Had a child, "+cn+", well past when {they} had thought that particular door had closed."];
+    "Had a child, "+cn+", well past when {they} had thought that particular door had closed.",
+    "Had a child, "+cn+", later than most — and met the small fierce fact of {them} without a single regret.",
+    "Had a child, "+cn+", when {they} had made a quiet peace with not — and unmade it gladly, overnight.",
+    "Had a child, "+cn+", late enough that {they} had stopped counting on it, and counted it twice the gift.",
+    "Had a child, "+cn+", in the back half of a life, and found the lateness changed nothing the child asked of {them}."];
   let firstLine;
   // 'red and furious' is a good line, but once a dynasty is plenty — otherwise it becomes a joke
   if(!S._usedFurious && !lateBirth && chance(0.4)){ S._usedFurious=true; firstLine="Had a child, "+cn+" — red and furious and entirely unimpressed by any of it."; }
-  else firstLine = lateBirth ? latePool[rotI(P,latePool.length)] : base[rotI(P,base.length)];
+  else firstLine = lateBirth ? freshPick(latePool,P) : freshPick(base,P);
   logLine(kn>=3 ? "Had another child, "+cn+". By now {they} knew the shape of it, and was no less moved."
         : kn===2 ? "Had a second child, "+cn+". The house made room again, more easily this time."
         : firstLine, "joy");
@@ -54,14 +58,14 @@ function observe(){
   const s=P.stats, a=P.age;
   // each line fires at most once per life; the pools are deep so that across a long dynasty the
   // same observation rarely lands twice — the ambient prose is the game's primary texture.
-  const ob=(key,cond,pool,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(Array.isArray(pool)?pool[rotI(P,pool.length)]:pool,cls||'obs');} };
-  if(a>40) ob('vit_tire',s.vit<35,["The stairs have started to ask a question of {them}.","The body has begun keeping its own quiet counsel.","{Their} legs know something the rest of {them} is not yet ready to hear.","Mornings take longer to arrive in the body than they once did.","{They} has started to plan the day around what the body will permit.","The body has begun sending its small bills, and expecting them paid."]);
+  const ob=(key,cond,pool,cls)=>{ if(!firedObs[key]&&cond){firedObs[key]=1;logLine(Array.isArray(pool)?freshPick(pool,P):pool,cls||'obs');} };
+  if(a>40) ob('vit_tire',s.vit<35,["The stairs have started to ask a question of {them}.","The body has begun keeping its own quiet counsel.","{Their} legs know something the rest of {them} is not yet ready to hear.","Mornings take longer to arrive in the body than they once did.","{They} has started to plan the day around what the body will permit.","The body has begun sending its small bills, and expecting them paid.","Some mornings the body answers the bell late, and grumbling.","{They} has started taking the stairs the way one takes a difficult conversation.","The weather has begun living in {their} joints, and forecasting badly.","{They} no longer trusts the body to do, unasked, what it always used to."]);
   if(a>55) ob('vit_neg',s.vit<18,["{Their} body has become a small daily negotiation.","Each day now asks a little more of {them} than the last one did.","The body keeps its own ledger now, and the sums are getting harder.","Getting up has become the first real work of every day.","The body has stopped being something {they} has, and become something {they} tends.","{They} has grown courteous with {their} own body, the way one is with the powerful."]);
-  ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does, and has become somewhere {they} goes.","{They} has grown used to being the most interested person in the room.","Thinking has become {their} favourite weather.","There is a whole life {they} keeps behind the eyes, and visits often."]);
+  ob('mind_hi',s.mind>78&&a>20,["Books have become a country {they} can live in.","The mind has become a room {they} can close the door of.","Reading has stopped being something {they} does, and has become somewhere {they} goes.","{They} has grown used to being the most interested person in the room.","Thinking has become {their} favourite weather.","There is a whole life {they} keeps behind the eyes, and visits often.","{They} has furnished, behind the eyes, a country no one else can quite get into.","An idea, in {them}, is a place to go and not come back from for hours.","{They} has learned to be alone without being lonely, which the mind makes possible.","Curiosity has worn {them} a set of grooves the years keep deepening."]);
   ob('means_lo',s.means<14,["The end of the month keeps arriving before the money does.","{They} has learned exactly how far a single coin can be made to stretch.","There is an arithmetic to being poor, and {they} knows it by heart.","Want has become a quiet, constant houseguest.","{They} counts things now that {they} once never had to count."]);
   ob('means_hi',s.means>82,["Money has stopped being a worry and become a kind of weather.","{They} has reached the strange country where money is no longer the question.","The old fear of not-enough has quietly left the house.","{They} no longer does the small arithmetic {they} once did at every till.","Means have stopped being a wall and become a wide, quiet field.","{They} has enough now that enough is no longer quite the word for it."]);
   ob('spirit_lo',s.spirit<22,["A greyness has moved quietly into {their} rooms.","Something has gone flat in the colour of the days.","{They} carries a weather {they} cannot quite step out of.","The light comes in the same as ever, and lands differently now.","A low tide has come into {them}, and stayed well past its hour."]);
-  ob('spirit_hi',s.spirit>88&&a>30,["{They} still laughs like someone the years have not yet learned how to reach.","The decades have arranged themselves around {them} and somehow never sat down.","Somewhere in {them} a window the years usually close has stayed open.","Whatever the years took, they did not take the lightness in {them}.","{They} has kept, against most of the evidence, a stubborn appetite for the days.","Time has not yet managed to talk {them} out of being glad."]);
+  ob('spirit_hi',s.spirit>88&&a>30,["{They} still laughs like someone the years have not yet learned how to reach.","The decades have arranged themselves around {them} and somehow never sat down.","Somewhere in {them} a window the years usually close has stayed open.","Whatever the years took, they did not take the lightness in {them}.","{They} has kept, against most of the evidence, a stubborn appetite for the days.","Time has not yet managed to talk {them} out of being glad.","{They} wears the years lightly, the way some people wear a coat they like.","There is a brightness in {them} the hard seasons kept failing to put out.","{They} has stayed, somehow, on speaking terms with joy.","The world has handed {them} the usual griefs, and {they} has gone on being glad anyway."]);
   ob('heart_lo',s.heart<20,["{They} has grown hard to reach, even for {them}self.","Something in {them} has closed a door and mislaid the key.","{They} keeps everyone now at the same careful distance.","Tenderness has become a language {they} no longer speaks with ease.","{They} has walled off the soft rooms, and rarely goes in."]);
 }
 
@@ -210,12 +214,15 @@ function drawCard(){
   // window. The player still chooses whether to take it; they're just never denied
   // the chance. (cooldown still applies — the card must be in the eligible pool.)
   if(!rel('love')&&!rel('spouse')){
-    const lc=pool.find(c=>c.opensLove);
-    // a NUDGE, never a guarantee. Most lives still find love through the ordinary weighted draw, but
-    // love is no longer force-offered at the window's edge — so some lives now reach its end single and
-    // live a solitary shape (a genuinely different life, not the same domestic arc with new names). The
-    // late-meeting card (a_meet_late) is the gentle second chance, also un-forced.
-    if(lc && chance(0.17)){ presentCard(lc); return; }
+    // The fix for the "everyone meets late, marries late, has a child late" monoculture is to spread love
+    // ACROSS ages rather than nudging whatever opensLove card is eligible (which in adulthood was always
+    // a_meet_late -> always late). Youth love gets the firm nudge (so most coupling happens young, at varied
+    // teen/twenties ages); late love gets only a faint chance (so it stays the rarer path, not the default);
+    // and the rest of lives stay solitary — a real, content-bearing shape, not the same domestic arc.
+    const yc=pool.find(c=>c.id==='y_love1');
+    if(yc && chance(0.34)){ presentCard(yc); return; }
+    const lc=pool.find(c=>c.id==='a_meet_late');
+    if(lc && chance(0.10)){ presentCard(lc); return; }
   }
   // a youth should almost always be offered a CALLING — the fork that gives a life its shape and gates a
   // distinct adult arc (soldier / scholar / maker / wanderer). This is the engine of structural variety,
@@ -225,16 +232,19 @@ function drawCard(){
     const vc=pool.find(c=>c.id==='y_calling');
     if(vc && ((vc.age && P.age>=vc.age[1]-4) || chance(0.5))){ presentCard(vc); return; }
   }
-  // a willing couple is still certainly offered marriage and a first child before those windows
-  // shut, so a line is never foreclosed by draw-luck — but the forcing tail is short, leaving the
-  // earlier years free to surface other content. The player still chooses yes or no.
+  // A coupled life is nudged toward a first child at a VARIED age: a moderate per-draw chance across the
+  // whole fertile window (so a young couple may have one in their twenties or thirties, not always the late
+  // 40s), strengthening into a safety-net in the final years so most lines still continue. The old hard force
+  // at the window's end is gone — it was what clustered every birth into the late 40s and made the "a child,
+  // past when they thought that door had closed" line land in nearly every life. ~A sixth of couples now stay
+  // childless (a real, content-bearing life-shape, not a foreclosure).
   if((rel('spouse')||rel('love')) && !rels('child').length){
     const cc=pool.find(c=>c.id==='a_child');
-    if(cc && cc.age && P.age>=cc.age[1]-6){ presentCard(cc); return; }   // keep the child offer well-guaranteed so lines don't fizzle — a childless line is the only true foreclosure
+    if(cc){ const late = cc.age && P.age>=cc.age[1]-3; if((late && chance(0.68)) || chance(0.42)){ presentCard(cc); return; } }
   }
   if(rel('love') && !P.flags.married){
     const mc=pool.find(c=>c.id==='a_marry');
-    if(mc && mc.age && P.age>=mc.age[1]-5){ presentCard(mc); return; }
+    if(mc && mc.age && P.age>=mc.age[1]-4 && chance(0.6)){ presentCard(mc); return; }
   }
   // callbacks are rare, memory-gated payoffs (cb_*) — the reach-back that gives a life its
   // particular shape. When one is finally eligible, strongly prefer it so the long arc
@@ -245,9 +255,9 @@ function drawCard(){
   // plague, fat years) are the whole point of choosing a calling or being born into a time: they're what
   // makes a soldier's life read differently from a scholar's, gen 8 from gen 2. They're once-per-life and
   // stage-spread, so a firm preference makes them reliably LAND without ever dominating a life.
-  const SIG=/^(a_soldier|m_soldier|e_soldier|a_scholar|m_scholar|a_maker|m_maker|e_maker|a_wanderer|m_wanderer|w_)/;
+  const SIG=/^(a_soldier|m_soldier|e_soldier|a_scholar|m_scholar|e_scholar|a_maker|m_maker|e_maker|a_wanderer|m_wanderer|e_wanderer|vx_|t_|w_)/;
   const sig=pool.find(c=>SIG.test(c.id));
-  if(sig && chance(0.5)){ presentCard(sig); return; }
+  if(sig && chance(0.48)){ presentCard(sig); return; }
   // weighted pick
   let tot=0; for(const c of pool) tot+=c.w;
   let r=Math.random()*tot, chosen=pool[0];

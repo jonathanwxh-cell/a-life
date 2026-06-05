@@ -22,12 +22,22 @@ function epitaphFor(p){
   const recent=lin.map(a=>a&&a.epitaph), recentC=lin.map(a=>a&&a.cluster);
   const blocked=k=>recentC.filter(c=>c===k).length>=2;
   const out=(k,txt)=>{ p._epiCluster=k; return txt; };
-  const pr=arr=>{ const opts=arr.map(sub); const fresh=opts.filter(o=>!recent.includes(o)); const pool=fresh.length?fresh:opts; return pool[((p.gen-1+(typeof houseOff==='function'?houseOff():0))%pool.length+pool.length)%pool.length]; };
+  const pr=arr=>{ const opts=arr.map(sub);
+    // avoid both the last two ancestors' exact lines (per-dynasty) AND anything used recently across the
+    // whole session (RECENT_LINES) — a juror reads many lives in a row, and an epitaph repeating verbatim
+    // across nearby dynasties is the single most visible staleness signal.
+    const recentG=(typeof RECENT_LINES!=='undefined')?RECENT_LINES:[];
+    let pool=opts.filter(o=>!recent.includes(o) && recentG.indexOf(o)<0);
+    if(!pool.length) pool=opts.filter(o=>!recent.includes(o));
+    if(!pool.length) pool=opts;
+    const choice=pool[((p.gen-1+(typeof houseOff==='function'?houseOff():0))%pool.length+pool.length)%pool.length];
+    if(typeof RECENT_LINES!=='undefined'){ RECENT_LINES.push(choice); if(RECENT_LINES.length>18) RECENT_LINES.shift(); }
+    return choice; };
   const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains.","Put something into the world that stayed there after {them}."];
   const kind=["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones.","Left people gentler than {they} found them.","Carried a warmth into every room, and left it there."];
   // a defining memory or chosen legacy claims the epitaph (identity — always honored)
-  if(m.kept_stray && !m.kept_stray.inherited && s.heart>60 && !m.turned_stray && !blocked('stray')) return out('stray', pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it.","Gave shelter to whatever could not fend for itself, all {their} days."]));
-  if(m.became_teacher && !blocked('teacher')) return out('teacher', pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned.","Left {their} knowing in other heads, where it kept on being used."]));
+  if(m.kept_stray && !m.kept_stray.inherited && s.heart>60 && !m.turned_stray && !blocked('stray')) return out('stray', pr(["Loved small helpless things {their} whole life long.","Never could pass a hurt creature without stopping for it.","Left the world a little more tender than {they} found it.","Gave shelter to whatever could not fend for itself, all {their} days.","Kept a soft place, all {their} life, for whatever the world had thrown away.","Was the one the lost things found, and was never sorry to be found by them."]));
+  if(m.became_teacher && !blocked('teacher')) return out('teacher', pr(["Gave away everything {they} knew, and so kept it.","Taught what {they} knew, and so outlived the knowing of it.","Spent a whole life handing on what {they} had learned.","Left {their} knowing in other heads, where it kept on being used.","Poured what {they} knew into the young, and so refused, quietly, to die all the way.","Made of {their} own mind a thing other people got to keep."]));
   if(m.strayed && !m.confessed && !blocked('secret')) return out('secret', pr(["Carried one secret all the way to the end.","Kept the one thing {they} could not say, and carried it the whole way.","Took one door, unopened, all the way into the ground."]));
   if(leg==='built' && !blocked('built')) return out('built', pr(built));
   if(leg==='here' && !blocked('here')) return out('here', pr(["Asked for no monument — only that the years had been real.","Wanted no marker but the fact of having been here.","Left no monument, and would have refused one."]));
@@ -218,11 +228,21 @@ function updateHouse(p){
   if(!h.motto){
     const me=Object.entries(h.repute||{}).filter(([k,v])=>v>=1.5).sort((a,b)=>b[1]-a[1]);
     const top=me.length?me[0][0]:null;
-    const MOTTOS={scholarly:"What the mind holds cannot be taken.",kind:"We take in what the world turns out.",
-      ruthless:"We do not ask twice.",industrious:"By our own hands.",generous:"An open door, an open hand.",
-      tainted:"We do not speak of everything.",pious:"In time, all is weighed.",artistic:"We leave something beautiful behind.",
-      reckless:"We burn bright, and we burn."};
-    if(top&&MOTTOS[top]&&p.gen>=2){ h.motto=MOTTOS[top];
+    // each reputation now has several possible words, picked fresh across the session, so two scholarly (or
+    // reckless) houses don't crystallize the identical motto — the family words were a juror's favourite
+    // dynasty artefact, and seeing one repeat verbatim broke the sense that each house is its own story.
+    const MOTTOS={
+      scholarly:["What the mind holds cannot be taken.","A book outlasts the hand that closed it.","We keep what we have learned."],
+      kind:["We take in what the world turns out.","No one is turned from this door.","The world is hard enough; we are not."],
+      ruthless:["We do not ask twice.","We are owed, and we collect.","We decline the luxury of sentiment."],
+      industrious:["By our own hands.","Nothing was given; all was built.","We earn the bread we eat."],
+      generous:["An open door, an open hand.","What we have, we share.","We give past what we can spare."],
+      tainted:["We do not speak of everything.","Some doors stay shut.","The family keeps its silences."],
+      pious:["In time, all is weighed.","We answer to a longer ledger.","The quiet ones are listening."],
+      artistic:["We leave something beautiful behind.","We make, and so remain.","Beauty is the only argument we trust."],
+      reckless:["We burn bright, and we burn.","Better a short blaze than a long smoke.","We do not save ourselves for later."]};
+    const marr=MOTTOS[top];
+    if(top&&marr&&p.gen>=2){ h.motto=(typeof freshPick==='function')?freshPick(marr,p):marr[0];
       logLine("The family's character has settled, at last, into words: “"+h.motto+"”","joy"); }   // name the milestone in the life that earned it
   }
 
