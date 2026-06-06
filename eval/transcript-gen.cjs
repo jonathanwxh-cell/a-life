@@ -65,9 +65,11 @@ const body=`
       snap.heirlooms=(S.house.heirlooms||[]).map(function(h){return h.name;});
       lives.push(snap);
       var kids=rels('child').filter(function(r){return r.alive;});
-      if(!kids.length||gen>=maxGen) break;
-      kids.sort(function(a,b){return b.age-a.age;});
-      succeed(kids[0]); gen++;
+      if(gen>=maxGen) break;
+      if(kids.length){ kids.sort(function(a,b){return b.age-a.age;}); succeed(kids[0]); }
+      else if(collateralAvailable(P)){ var sx=Math.random()<0.5?'m':'f'; succeed({given:pick(sx==='m'?GIVEN_M:GIVEN_F),sex:sx,age:0,bond:50,collateral:true}, true); }
+      else break;
+      gen++;
     }
     return {surname:S.surname, lives:lives, finalSeat:seatOf(S.house.seat).name, motto:S.house.motto};
   }

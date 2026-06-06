@@ -303,6 +303,21 @@ function recordAncestor(p){
   S.marks.souls=(S.marks.souls||0)+1;
   S.marks.gens=Math.max(S.marks.gens||1, p.gen);
 }
+// When a life ends without a DIRECT child, an established house can still pass sideways — to a niece,
+// nephew, or cousin raised on the same name and stories. This is the structural lever that lets solitary
+// and childless lives be a COMMON, real life-shape (the jury's standing complaint was that every life
+// converged on love -> marry -> child, because a childless line otherwise just ended) WITHOUT collapsing
+// the dynasty. A first-generation house with no standing and no kin genuinely ends; an established one,
+// or one where the life had a sibling, carries on through the wider family.
+function collateralAvailable(p){
+  if(typeof S==='undefined'||!S||!p) return false;
+  const established = (p.gen>=2) || ((S.house&&S.house.seat||0)>=2) || (P.rels&&P.rels.some(r=>r.kind==='sibling'));
+  // reliable enough that a childless life is usually NOT the end of the house, but not guaranteed —
+  // so a line still genuinely ends now and then (keeping the "raise another house" rhythm and the
+  // cross-run collection meaningful), and a higher-standing house, with more kin, holds on better.
+  const odds = 0.5 + ((S.house&&S.house.seat||0)>=3 ? 0.15 : 0) + ((p.gen>=3)?0.05:0);
+  return established && chance(odds);
+}
 function showEulogy(p){
   document.getElementById('dName').textContent=p.name;
   document.getElementById('dSpan').textContent=`${p.gen===1?'Founder of the line':ordinal(p.gen)+' of the line'} · lived ${p.deathAge} years`;
@@ -316,11 +331,14 @@ function showEulogy(p){
   } else stext='No one was left to grieve {them}.'.replace(/\{them\}/g,p.px.them);
   // a short life is framed as complete, not cut off — so an early death deepens the mood rather than punishing
   if(p.deathAge<45) stext = 'A short life — and, taken on its own terms, a whole one.  ' + stext;
-  // when the line ends here, close with a tally of what the house became — the run's summary
-  if(!kids.length){
+  // no DIRECT heir: an established house passes sideways (collateral); a young, standing-less, kin-less one ends.
+  const coll = !kids.length && collateralAvailable(p);
+  if(!kids.length && !coll){
     const mk=S.marks||{}, seat=seatOf((S.house&&S.house.seat)||0), rep=S.house?reputeTop(S.house):null;
     const gens=mk.gens||p.gen, souls=mk.souls||1;
     stext += '  House '+S.surname+' ends here — '+gens+' generation'+(gens>1?'s':'')+', '+souls+' live'+(souls>1?'s':'')+', risen to '+seat.name+(rep&&REPUTE_WORD[rep]?', and known as '+REPUTE_WORD[rep]:'')+'.';
+  } else if(coll){
+    stext += '  No child of '+p.px.their+' own — but the house does not end with '+p.px.them+': the name passes sideways, to one of the wider family, raised on the same stories.';
   }
   document.getElementById('dSurv').textContent=fmt(stext);
   const btn=document.getElementById('dNext');
@@ -328,6 +346,12 @@ function showEulogy(p){
     const heir=kids.slice().sort((a,b)=>b.age-a.age)[0];   // eldest — and the label must name the same child succession picks
     btn.textContent='Become '+heir.given;
     btn.onclick=()=>succeed(heir);
+  } else if(coll){
+    const sex=chance(0.5)?'m':'f';
+    const taken=new Set((S.lineage||[]).map(a=>a&&a.given)); taken.add(p.given);
+    let nm=pick(sex==='m'?GIVEN_M:GIVEN_F),g=0; while(taken.has(nm)&&g++<20) nm=pick(sex==='m'?GIVEN_M:GIVEN_F);
+    btn.textContent='Become '+nm+' — the line goes sideways';
+    btn.onclick=()=>succeed({given:nm,sex,age:0,bond:50,collateral:true}, true);
   } else {
     btn.textContent='The line ends. Begin anew.';
     btn.onclick=()=>{ S.lineage[S.lineage.length-1].extinct=true; beginNewLine(); };
@@ -336,15 +360,17 @@ function showEulogy(p){
 }
 function ordinal(n){const s=['th','st','nd','rd'],v=n%100;return n+(s[(v-20)%10]||s[v]||s[0]);}
 
-function succeed(childRel){
+function succeed(childRel, isCollateral){
   document.getElementById('vDeath').classList.remove('show');
   const dead=P;
   const h=S.house||initHouse();
   // estate passes with entropy — but the family SEAT sets a floor, so a great house
-  // cushions a poor heir and a fallen house gives even a rich parent's child less.
+  // cushions a poor heir and a fallen house gives even a rich parent's child less. A COLLATERAL heir
+  // (a niece/nephew/cousin) inherits the name and the house's STANDING, but far less of the personal
+  // fortune — the wider family carries the seat, not the dead's private estate.
   const seatFloor=[0,6,14,26,40,56,72,72][h.seat]||0;   // seat 7 grants prestige, not extra wealth — same floor as 6, so the pinnacle can't self-perpetuate on money
-  const inheritMeans = Math.max(seatFloor, Math.round(dead.peakMeans*0.55) - 6) - 6;
-  const nurture = Math.round((dead.stats.mind-50)*0.18 + (childRel.bond-50)*0.10);
+  const inheritMeans = Math.max(seatFloor, Math.round(dead.peakMeans*(isCollateral?0.30:0.55)) - 6) - 6;
+  const nurture = isCollateral ? Math.round((dead.stats.mind-50)*0.05) : Math.round((dead.stats.mind-50)*0.18 + (childRel.bond-50)*0.10);
   // THE BEQUEST — what the dying deliberately set aside (e_bequest) becomes the heir's real
   // starting conditions. This is the player's lever across the generation boundary: a choice made
   // at the end of one life that visibly shapes the beginning of the next.
@@ -360,7 +386,7 @@ function succeed(childRel){
     given:childRel.given, sex:childRel.sex, gen:dead.gen+1,
     parentName:dead.name,
     seedStats: childRel.seed || seedChildStats(dead,null),
-    traits: freeBeq ? rollTraits() : (childRel.traitsSeed || inheritTraits(dead.traits)),  // "their own freedom" — a nature wholly their own, not inherited
+    traits: freeBeq ? rollTraits() : (isCollateral ? (chance(0.5)?rollTraits():inheritTraits(dead.traits)) : (childRel.traitsSeed || inheritTraits(dead.traits))),  // "their own freedom" / a collateral cousin shares less blood — looser inheritance
     startAge: 0,
     inheritMeans: Math.max(0,inheritMeans+meansBeq),
     nurture: nurture+nurtureBeq,
@@ -382,24 +408,32 @@ function succeed(childRel){
   // a newborn with its own childhood family, seeded fresh like a founder's — but the
   // parent on the bloodline carries the departed ancestor's name, so the line continues
   // as a living echo rather than re-simulating the dead. No other relations carry over.
-  const lineKind = dead.sex==='m'?'father':'mother';
-  const otherSex = dead.sex==='m'?'f':'m', otherKind = dead.sex==='m'?'mother':'father';
-  // The bloodline parent IS the life just lived. Seed its age from the real arithmetic — the
-  // ancestor's age when this heir was born — and mark it a lineage echo that dies EXACTLY at the
-  // age the Chronicle recorded (see ageRelations). That makes the echo born and gone in precisely
-  // the years the lineage already holds, so an ancestor can never appear alive (and "frightened in
-  // the small hours") years after their recorded death — the world and the Chronicle never disagree.
-  const parentAgeAtBirth = Math.max(16, dead.deathAge - childRel.age);
-  const echoParent = addRel(lineKind, dead.given, dead.sex, 74, parentAgeAtBirth);
-  echoParent.given = dead.given; echoParent.name = dead.given;   // deliberately the ancestor — keep the name even though addRel now avoids lineage names
-  echoParent.lineageEcho = true; echoParent.diesAtAge = dead.deathAge;
-  if(beq==='heart') echoParent.bond = clamp(echoParent.bond+10);   // the warmth that was deliberately handed down
-  // the heir's other parent gets a name not already worn by an ancestor, so the
-  // chronicle never reads one given name in two unrelated roles down the generations
-  const taken=new Set((S.lineage||[]).map(a=>a&&a.given)); taken.add(dead.given);
-  let oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F), g=0;
-  while(taken.has(oNm) && g++<20) oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F);
-  addRel(otherKind, oNm, otherSex, 68, ri(22,34));
+  if(!isCollateral){
+    const lineKind = dead.sex==='m'?'father':'mother';
+    const otherSex = dead.sex==='m'?'f':'m', otherKind = dead.sex==='m'?'mother':'father';
+    // The bloodline parent IS the life just lived. Seed its age from the real arithmetic — the
+    // ancestor's age when this heir was born — and mark it a lineage echo that dies EXACTLY at the
+    // age the Chronicle recorded (see ageRelations). That makes the echo born and gone in precisely
+    // the years the lineage already holds, so an ancestor can never appear alive (and "frightened in
+    // the small hours") years after their recorded death — the world and the Chronicle never disagree.
+    const parentAgeAtBirth = Math.max(16, dead.deathAge - childRel.age);
+    const echoParent = addRel(lineKind, dead.given, dead.sex, 74, parentAgeAtBirth);
+    echoParent.given = dead.given; echoParent.name = dead.given;   // deliberately the ancestor — keep the name even though addRel now avoids lineage names
+    echoParent.lineageEcho = true; echoParent.diesAtAge = dead.deathAge;
+    if(beq==='heart') echoParent.bond = clamp(echoParent.bond+10);   // the warmth that was deliberately handed down
+    // the heir's other parent gets a name not already worn by an ancestor, so the
+    // chronicle never reads one given name in two unrelated roles down the generations
+    const taken=new Set((S.lineage||[]).map(a=>a&&a.given)); taken.add(dead.given);
+    let oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F), g=0;
+    while(taken.has(oNm) && g++<20) oNm=pick(otherSex==='m'?GIVEN_M:GIVEN_F);
+    addRel(otherKind, oNm, otherSex, 68, ri(22,34));
+  } else {
+    // a COLLATERAL heir has their own living parents (seeded fresh, like a founder); the dead is a
+    // deceased elder of the wider family — an aunt or uncle whose name and house the heir takes up.
+    seedParents(child);
+    const k=addRel(dead.sex==='m'?'uncle':'aunt', dead.given, dead.sex, 56, Math.max(20, dead.deathAge));
+    k.given=dead.given; k.name=dead.given; k.alive=false;   // already gone — a remembered elder, not a living echo
+  }
   // the world turns between generations — the heir may be born into a changed age. The era line is
   // announced ONLY when it changes (not re-stated at every birth, which made "there is a war" recur every
   // generation) — so a shift in the times reads as news, and a steady era stays quietly in the background.
@@ -407,7 +441,12 @@ function succeed(childRel){
   // opening lines reflect being born a child of the house it has become
   const seat=seatOf(h.seat);
   const sn=seat.name;
-  const births=["Was born into "+sn+", and a family that already had a story.",
+  const births = isCollateral ? [
+    "Was born off to the side of the main line — into "+sn+", and a name that would, by an accident of who outlived whom, come to rest on "+dead.px.them+".",
+    "Was born a cousin to the line that mattered, into "+sn+" — not the heir anyone expected, and the one the house got.",
+    "Came up in the wider family, into "+sn+", on stories of an aunt or uncle "+dead.px.they+" would grow up to replace.",
+    "Was born collateral to the house — into "+sn+", and a surname that would need "+dead.px.them+" sooner than anyone planned."]
+   : ["Was born into "+sn+", and a family that already had a story.",
     "Was born where the last life ended — into "+sn+", and even that already partly spent.",
     "Came into the world already inside a story someone else had begun, with "+sn+" for an inheritance.",
     "Was born to "+sn+" and a surname with some weight already on it.",
@@ -416,14 +455,16 @@ function succeed(childRel){
   logLine(freshPick(births,child),"obs");
   if(eraChanged && eraLine()) logLine(eraLine(), eraTone(S.era));   // only when the age itself has turned
   if(h.motto) logLine("Raised on the family words: “"+h.motto+"”","obs");
-  showHeir(child, dead, inheritMeans, nurture+nurtureBeq, h);
+  showHeir(child, dead, inheritMeans, nurture+nurtureBeq, h, isCollateral);
 }
-function showHeir(child, dead, inh, nur, h){
+function showHeir(child, dead, inh, nur, h, isCollateral){
   document.getElementById('heirKick').textContent=ordinal(child.gen)+' of '+(h?'House '+S.surname:'the line');
   document.getElementById('heirName').textContent=child.name;
   const t=[];
   // make the identity hand-off explicit — a first-timer needs to know they BECOME the heir
-  t.push(`You are no longer ${dead.given}. You are ${child.given}, ${dead.px.their} ${child.sex==='m'?'son':'daughter'} — born into the world ${dead.px.they} left behind.`);
+  t.push(isCollateral
+    ? `You are no longer ${dead.given}. You are ${child.given} — of the wider family, raised on ${dead.px.their} stories, and the one the name came to rest on when ${dead.px.they} left no child.`
+    : `You are no longer ${dead.given}. You are ${child.given}, ${dead.px.their} ${child.sex==='m'?'son':'daughter'} — born into the world ${dead.px.they} left behind.`);
   const rep = h?reputeTop(h):null;
   if(rep&&REPUTE_WORD[rep]) t.push('Of a family known as '+REPUTE_WORD[rep]+'.');
   if(child.traits.length) t.push('Said, already, to be '+child.traits.join(' and ')+'.');

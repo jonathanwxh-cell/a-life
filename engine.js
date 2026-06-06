@@ -220,7 +220,7 @@ function drawCard(){
     // teen/twenties ages); late love gets only a faint chance (so it stays the rarer path, not the default);
     // and the rest of lives stay solitary — a real, content-bearing shape, not the same domestic arc.
     const yc=pool.find(c=>c.id==='y_love1');
-    if(yc && chance(0.46)){ presentCard(yc); return; }   // youth love is the clear default — most lives that couple, couple young
+    if(yc && chance(0.30)){ presentCard(yc); return; }   // love is a nudge, not a guarantee — and stays young when it lands; with collateral succession a childless or solitary life no longer ends the house, so roughly half of lives now take a genuinely non-domestic shape
     const lc=pool.find(c=>c.id==='a_meet_late');
     if(lc && chance(0.05)){ presentCard(lc); return; }   // late love is the genuine exception, not the fallback
   }
@@ -240,7 +240,7 @@ function drawCard(){
   // childless (a real, content-bearing life-shape, not a foreclosure).
   if((rel('spouse')||rel('love')) && !rels('child').length){
     const cc=pool.find(c=>c.id==='a_child');
-    if(cc){ const late = cc.age && P.age>=cc.age[1]-3; if((late && chance(0.68)) || chance(0.42)){ presentCard(cc); return; } }
+    if(cc){ const late = cc.age && P.age>=cc.age[1]-3; if((late && chance(0.55)) || chance(0.33)){ presentCard(cc); return; } }   // ~a fifth of couples now stay childless too — the house can pass sideways
   }
   if(rel('love') && !P.flags.married){
     const mc=pool.find(c=>c.id==='a_marry');

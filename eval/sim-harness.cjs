@@ -56,9 +56,11 @@ const body=`
       if(hasLove&&!hasKid) rec.coupledChildless++;
       if(gen>=2){ rec.heirLives++; if(P.startAge0) rec.heirStart0++; }
       var kids=rels('child').filter(function(r){return r.alive;});
-      if(!kids.length||gen>=maxGen) break;
-      kids.sort(function(a,b){return b.age-a.age;});
-      succeed(kids[0]); P.startAge0=(P.age===0); gen++;
+      if(gen>=maxGen) break;
+      if(kids.length){ kids.sort(function(a,b){return b.age-a.age;}); succeed(kids[0]); rec.directSucc=(rec.directSucc||0)+1; }
+      else if(collateralAvailable(P)){ var sx=Math.random()<0.5?'m':'f'; succeed({given:pick(sx==='m'?GIVEN_M:GIVEN_F),sex:sx,age:0,bond:50,collateral:true}, true); rec.collSucc=(rec.collSucc||0)+1; }
+      else break;
+      P.startAge0=(P.age===0); gen++;
       if(Math.random()<0.5) S.era=ERA_KEYS[ri(0,ERA_KEYS.length-1)];   // the world turns between generations — exercise era shifts
     }
     rec.gens.push(gen); if(gen>=2) rec.linesHeir++;
@@ -83,6 +85,7 @@ console.log('=== A LIFE — faithful sim over '+R.lines+' lines, '+R.lives+' liv
 console.log('Early death <55: '+pct(R.before55,R.lives)+'   <40: '+pct(R.before40,R.lives)+'   (target 8-12%)');
 console.log('Death age min/med/max: '+Math.min(...R.deathAges)+' / '+med(R.deathAges)+' / '+Math.max(...R.deathAges));
 console.log('Ever had love/spouse: '+pct(R.gotLove,R.lives)+'   ever had a child: '+pct(R.hadChild,R.lives)+'   coupled-but-childless: '+pct(R.coupledChildless,R.lives));
+console.log('NON-DOMESTIC lives (no child of their own): '+pct(R.lives-R.hadChild,R.lives)+'   succession: '+(R.directSucc||0)+' direct / '+(R.collSucc||0)+' collateral (the house passing sideways)');
 const band=(a,lo,hi)=>pct(a.filter(x=>x>=lo&&x<=hi).length,a.length);
 if(R.loveAges.length) console.log('Age at first love  — <26: '+band(R.loveAges,0,25)+'  26-39: '+band(R.loveAges,26,39)+'  40+: '+band(R.loveAges,40,99)+'   (median '+med(R.loveAges)+')');
 if(R.childAges.length) console.log('Age at first child — <30: '+band(R.childAges,0,29)+'  30-39: '+band(R.childAges,30,39)+'  40+: '+band(R.childAges,40,99)+'   (median '+med(R.childAges)+')');
