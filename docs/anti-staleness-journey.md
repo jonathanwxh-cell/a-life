@@ -274,3 +274,29 @@ already reads ~7.5) — not something an autonomous content/tuning loop should c
 without the owner's call.
 
 - Verdicts (this continuation): `eval/jury/fun-round9/` … `fun-round11/` (45 receipts)
+
+### Decision & closure (2026-06-10)
+
+**Goal status: NOT MET as literally specified, and formally CLOSED by owner decision.**
+
+The literal yardstick — *15 distinct-profile agents each scoring fun ≥ 8/10 on a 15-dynasty
+read* — was **not** reached: 0/15 at ≥8 in every one of rounds 9, 10, and 11 (avg 6.63 →
+6.57 → 6.48; floor 5.8, ceiling 6.8). This is recorded plainly so the file doesn't overstate
+the outcome.
+
+After being shown the three-round evidence and the four paths forward (accept / re-scope the
+yardstick to real play / add structural features / authorize a 3–5× corpus expansion), the
+owner **explicitly chose to accept the current state and end the goal** ("accept and end
+goal"). That is the governing decision: the 8/10 bar is treated as a proven finite-corpus
+asymptote rather than a tuning gap, and the autonomous improve→jury loop is stopped here
+rather than re-run against an unreachable target.
+
+What ships as the accepted state: the game as committed at `b799bd7` (passes 1–13), which is
+measurably and substantially fresher than the baseline and reads ~7.5 over a realistic 2–3
+dynasty session. Reopen only by an explicit product decision (corpus expansion or a
+real-play-matched review bar) — do **not** re-grind the identical 15-dynasty tuning loop;
+see [[alife_antistaleness_asymptote]] in memory for why.
+
+(Unrelated same-session outcome, for the record: A Life's cloud saves were migrated off
+Supabase/Vercel onto the Hetzner box — Vercel now serves the static frontend only. Commit
+`c7f2472`; details in the `project-a-life-vercel` memory.)
