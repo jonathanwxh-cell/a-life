@@ -323,7 +323,12 @@ function recordAncestor(p){
 // or one where the life had a sibling, carries on through the wider family.
 function collateralAvailable(p){
   if(typeof S==='undefined'||!S||!p) return false;
-  const established = (p.gen>=2) || ((S.house&&S.house.seat||0)>=2) || (P.rels&&P.rels.some(r=>r.kind==='sibling'));
+  // A gen-1 founder used to be "established" (eligible for a collateral heir) only with a sibling or some
+  // standing — so a childless founder usually ENDED the house at gen 1. That left ~9 of 15 dynasties single-
+  // generation in a long read, which starves the whole dynasty layer (seat/motto/dyn_* content a strategist
+  // wants never fires). A founder plausibly has extended kin off-screen, so give them a real chance to pass
+  // the name sideways too — keeping the non-domestic life-shape intact while letting more lines reach depth.
+  const established = (p.gen>=2) || ((S.house&&S.house.seat||0)>=2) || (P.rels&&P.rels.some(r=>r.kind==='sibling')) || chance(0.42);
   // reliable enough that a childless life is usually NOT the end of the house, but not guaranteed —
   // so a line still genuinely ends now and then (keeping the "raise another house" rhythm and the
   // cross-run collection meaningful), and a higher-standing house, with more kin, holds on better.

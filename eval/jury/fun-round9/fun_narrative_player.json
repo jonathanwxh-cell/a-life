@@ -1,0 +1,50 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 7.2,
+  "fun_highlights": [
+    "The callback card system is genuinely thrilling for a narrative player: a childhood choice (the stray, the book, looking away from the outcast) resurfaces decades later in a way that feels like the game remembers who you were. 'cb_lookaway' and 'cb_books_late' in particular land with real emotional weight and feel like earned story payoff, not random events.",
+    "The epitaph system is the single best piece of design for staying power: each life ends with a line that crystallizes a whole arc in one sentence, and the anti-repetition logic means you rarely get the same line twice across a session. Reading a dynasty's roster of epitaphs feels like reading a real family chronicle.",
+    "The era layer (war/plague/plenty/hard/turning/settled) gives each generation a distinct atmosphere — a plague-era character's choices feel structurally different from a fat-years character's, and the era-gated cards (w_plague_tend, w_war_call, w_hard_winter) are among the most resonant in the game. They make adjacent generations feel like they belong to different histories.",
+    "Vocation arcs give the adult years genuine structural divergence: a soldier's life runs through 'service → ghost → old soldier's wisdom' in a way that is qualitatively different from a scholar's 'hungry question → legacy → teach or keep'. A maker's masterwork dilemma is different again. These are not flavour swaps — they are different shapes of life.",
+    "The dynasty-memory cards ('d_ancestor', 'd_motto_test') are the best cross-generation mechanic: when a life faces the question of whether to live up to or step out from a specific ancestor's story — one I can remember reading three generations back — the game briefly becomes something more than a card sequence. It is a family.",
+    "Writing quality is consistently high and the prose is the primary texture. Specific lines land and stick: 'Soaked up the early world whole, the way children do, before she could weigh any of it'; 'Let the road end, finally, in one place with one set of faces — and was surprised how much like relief it felt.' For a narrative player, this IS the fun.",
+    "The 'competing goods' cards (x_honest_or_kind, x_dream_or_duty, x_loyalty_truth) resist the easy moral grammar of most choices and feel genuinely irresolvable — the game declines to tell you which was right, and the echo callback 'cb_the_cost' later in elder years is one of the best uses of memory in the whole system."
+  ],
+  "staleness": [
+    "By dynasty 6-8, the STRUCTURAL shape of a life is almost always the same: c_origin early, y_calling in the teens, y_love1 or a_meet_late in the twenties, a_marry, a_child (unless declined), m_health in the forties-fifties, e_legacy or e_bequest late, e_peace or e_body at the end. The prose swaps — and it swaps well — but the skeleton does not change. A narrative player seeking structural surprise will have 'seen the template' well before dynasty 10.",
+    "The love/marriage beat is almost universal and almost always resolved the same way: meet someone, hesitate or don't, marry (or strain the bond). The 'a_affair' and 'cb_unspoken' variants add texture, but across 15 dynasties the love-and-marriage beat repeats identically in the vast majority of lives. There is no life-shape where love is structurally absent and the game compensates with something else of equal weight.",
+    "The a_child / no-child decision has virtually no mechanical downstream difference from the player's perspective. Declining children is a real choice, but the life that follows is essentially the same sequence with no child-specific content. A 'childless life' does not have its own shape — it is just the default shape minus a few cards.",
+    "Several high-probability 'universal' cards repeat verbatim across close-together dynasties even with the freshPick system. In the 15-dynasty transcript, 'Kept the ordinary work coming and the lights on, and let the masterwork stay, as it always had, a thing he would make next year' appears in Soren (D2), Tobias (D3), Annika Vane (D6), Lucan (D13). It is a good line the first time. By dynasty 13 it is a clear signal the pool is thinning.",
+    "The e_legacy / e_bequest / e_body / e_peace cluster means elder years are the most repetitive phase: nearly every life's final pages run the same sequence of legacy-question, body-acknowledgment, and end-choice. The observation lines in engine.js (body aging) are well-written but fire predictably in the same years with the same pattern, making the elder phase feel like a mandatory outro rather than a distinct life-stage.",
+    "The 'a_work' (promotion dilemma) card, the 'u_loss' / 'u_windfall' universal entropy cards, and the 'a_old_friend' money-ask card all have a recycled quality when they appear a second or third time within a dynasty: their once-and-then-again framing ('the second time', 'not the first time') partially masks the repetition but does not eliminate it. A narrative player still recognizes the skeleton.",
+    "The house/dynasty layer gives goals (seat, motto, reputation) but these are almost invisible in the prose texture of a life. A life inside a 'grand estate' versus a 'rented room' gets a slightly different c_origin framing and access to a handful of seat-gated cards — but the actual moment-to-moment experience of playing those lives is barely distinguishable. The dynasty layer is a scoreboard more than a story generator."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 life-shapes that are structurally distinct from the standard arc: the 'permanently single' life that gets its own elder content (chosen solitude, a different relationship to legacy), the 'early tragic' life that ends at 30-45 and plays as a compressed arc with different stakes, and the 'institutional' life (monastery, guild, army career) where the primary relationships are collective rather than familial.",
+      "why": "The most persistent staleness is not in the prose but in the skeleton: born, called, love, work, age, die. Even with richly varied writing, the skeleton is legible by dynasty 5. A life that structurally cannot reach marriage — or that ends before midlife becomes a pattern — would break the template without requiring more cards, only more routing logic.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate the 'a_child' and 'a_marry' beats so a childless or unmarried life actively unlocks alternative content instead of simply skipping beats — e.g., a childless character gets m_empty_house at 45-50 (already present but currently conditional on children having left), plus a unique elder card about inheritance and legacy without heirs, plus a different bequest card that hands things to a friend or cause rather than an heir.",
+      "why": "Right now 'No. This life, as it is.' is a meaningful moral choice but an empty mechanical one. Giving it a downstream shape — a different kind of midlife and elder — would make the choice feel like it truly changes the life's trajectory.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap the universal entropy cards (u_loss, u_windfall) to once per life, and replace their second occurrence with a new card that explicitly references the first: 'Another hard year — Emory has rebuilt from lower down before, and the shape of it is familiar now, which is almost worse.' The self-awareness should be in the card text itself, not just in a logged meta-note.",
+      "why": "The current 'sawLoss / sawWindfall' flag adds a first-repeat acknowledgment but the prose repetition is still visible. Making the second event explicitly reference the first would convert what reads as a repeated template into a narrative of accumulation.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the elder band (age 66+) 4-6 more structurally varied cards that do not all converge on 'the body slows, what do you want remembered, how do you meet the end.' Specific suggestions: a card about a public reckoning with the house's reputation after the life is largely over (someone finally says aloud what the family has always been); an elder card about a late intellectual reversal (a lifelong belief abandoned); an elder card about a reunion with someone the life never reconciled with.",
+      "why": "The elder band is the single most repetitive phase across the 15-dynasty transcript. Every elder life runs body-observation → e_legacy or e_bequest → e_body → e_peace/e_last_walk → die. The sequence is beautiful once and familiar by the third time.",
+      "impact": "med"
+    },
+    {
+      "what": "Make the dynasty-standing layer more audible in the moment-to-moment prose. Currently a 'grand estate' character and a 'rented room' character face almost identical cards outside the handful of seat-gated events. At minimum, inject 1-2 era/standing-specific observation lines per life at mid-adult and midlife that refer to what the house actually IS — the weight of a name vs. the freedom of having no name to protect — so the player feels the dynasty's position as atmosphere, not just as a header.",
+      "why": "The dynasty layer is the game's most original mechanic but it is mostly invisible during play. A narrative player who cares about the house-story needs to feel it in the texture of each life, not only at birth and death.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a beautifully written literary sim that stays genuinely fresh for 4-6 dynasties — the callback system, era layer, and vocation arcs are real structural variety — but by dynasty 8-10 the skeleton of every life is legible and the elder phase in particular runs on a nearly fixed template, placing it solidly below the 8-bar for a narrative player who comes back for structural surprise."
+}

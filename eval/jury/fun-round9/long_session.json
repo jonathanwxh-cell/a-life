@@ -1,0 +1,54 @@
+{
+  "profile": "long_session",
+  "score": 7.0,
+  "fun_highlights": [
+    "Callback cards genuinely surprise across a session: cb_books_late (rereading at 46 the book kept at 8), cb_outcast_return (kindness repaid decades later), cb_lookaway (the same moral failure twice, explicitly named), cb_principle (paying the same price a second time more dearly). These make individual lives feel inhabited rather than procedural.",
+    "Vocations create structurally distinct adult arcs. A soldier's ghost at 3am, a wanderer's two-stage return and homecoming, a scholar's unanswered question at the end — each calling gates 3 dedicated milestone cards that a non-vocation life never sees. The structural divergence is real.",
+    "The era system genuinely tilts content: war-era calling is framed as a conscription dodge vs. duty, plague-era forces a proximity-to-the-sick decision that reads as life-or-death differently than any other moment, plenty-era opens boom-riding with real stakes. Born into war vs. born into plenty is a different childhood opener.",
+    "The dynasty layer accretes genuine narrative texture. Mottos crystallizing mid-life ('The family's character has settled, at last, into words: We burn bright, and we burn'), heirlooms passing (the book too hard for a child's hands appearing as an inherited memory two generations on), secrets persisting then being exposed — these give a long house a feeling of authorship.",
+    "The ambient observation system (vit_tire, spirit_hi, means_lo, etc.) keeps quiet years alive without forcing a choice. Prose like 'The stairs have started to ask a question of him' or 'She has stayed, somehow, on speaking terms with joy' lands better than a blank timer.",
+    "Collateral succession means childless/solitary lives (roughly a quarter of the 30+ lives in the transcripts) contribute to the dynasty instead of dead-ending. A player who keeps choosing the wanderer's freedom or declining love still advances the house and sees the heir screen.",
+    "Trait affinity in card-weighting means a bookish child's childhood reads differently from a warm one's. The system is invisible but creates genuine texture: a stubborn youth gets the stubbornness tested, a dreaming adult is asked whether the elsewhere is worth pursuing."
+  ],
+  "staleness": [
+    "cb_corner fires in nearly every adult life across a long session. Its condition (held('cut_a_corner') and not held('stayed_straight')) is met by a_small_lie, a_make_name 'hard to cross' branch, t_shrewd, x_favour, r_hard_name, and cb_corner's own output — making it near-universal for any character who isn't conspicuously virtuous. In the transcripts it appears in at least 9 of the 30 lives across dynasties 1–15. The framing ('came back wearing a larger face — the same quiet dishonesty, more at stake, and the same certainty that no one need ever know') is almost word-for-word each time, breaking the illusion of discovery.",
+    "cb_the_cost elder reckoning fires constantly. Its condition covers chose_self || strayed || cut_a_corner || chose_loyalty — four very common paths. In the transcripts it lands in Cosima Reyes, Esme Reyes, Calla Holloway, Saoirse Castellane, Noor Vane, Roman Vane, Tobias Reyes, Liv Brandt, and more. The opening 'Near the end, one old decision keeps returning...' is identical prose, and by dynasty 6 the player recognises the beat before it resolves.",
+    "f_grace (stranger's plain kindness) appears in nearly every dynasty in the second half of the run. Its once:true prevents a double in one life but not across a session; it appeared across at least 8 of the last 10 dynasties. Once the player recognises 'a door held open by no one X will ever be able to thank / carry the small debt of it gladly for life,' it ceases to be a surprise and reads as filler.",
+    "The structural life template is visible by dynasty 6–8: origin card (era/seat-shaped) → 2–3 childhood cards → vocation fork at 14–22 → love opportunity → 2–3 adult work/family moments → midlife reckoning → elder contraction → death. Individual card prose varies richly, but the *shape* of a life through these named slots is recognisable. The 'one more life' pull depends on surprise at the slot level, and that diminishes faster than prose novelty.",
+    "Vocation arcs, while genuinely distinct, each exhaust within 3–4 lives. The maker's arc has three beats (open door / masterwork / handoff); by the 4th maker life (Soren Fenn, Tobias Reyes, Annika Vane gen1, Annika Vane gen5) the beats are known in advance. Scholar lives follow: study → pays off or teaches → scholar's legacy question → scholar's peace at end. These arcs are short enough that a player who has taken each calling twice has mapped the territory.",
+    "The elder closing register is tonally uniform. Whether a soldier, wanderer, or scholar, the final 10–15 years run the same emotional arc: body-limit observations (vit<40), one or two elder cards from the standard pool, then either e_peace or raging against it. Structural variation (which elder cards fire) exists, but the *feeling* of the closing is the same quiet-or-defiant acceptance regardless of how the life was lived, which dulls the sense that choices accumulate into a distinct ending."
+  ],
+  "improvements": [
+    {
+      "what": "Shard cb_corner into two flagged cards: cb_corner_first (first time the dishonesty returns, once:true per life) and cb_corner_escalate (the bigger version, onceDyn:4 or higher so it rotates out for 4 generations). The first-time card should have distinct prose from the escalated version.",
+      "why": "Currently cb_corner fires with near-identical framing whether it's the 2nd or 12th dynasty. Splitting it gives the first encounter freshness and the escalated version rarity, and the 3-generation onceDyn cooldown isn't long enough to prevent visible repetition in a 15-dynasty session.",
+      "impact": "high"
+    },
+    {
+      "what": "Tighten cb_the_cost's eligibility: require that the flagged choice be a defining one (strayed, chose_self_over_house, or a second-or-later cut_a_corner), not a first or minor cut_a_corner. Or give it onceDyn:5 so it genuinely rotates across a long session.",
+      "why": "chose_loyalty and a single cut_a_corner together make this card's condition nearly universal. A player in dynasty 8 can predict its arrival. Raising the bar ensures it lands for lives where the cost is genuinely unresolved rather than as a routine elder beat.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2–3 vocation-specific *elder* arcs that feel structurally distinct from the current e_peace/e_body/e_last_walk pool: e.g., a soldier's elder who must decide whether to pass on a weapon or bury it, a wanderer who is asked by a grandchild to name the best place they ever stood, a scholar who is asked to publicly recant something they spent a life believing. Gate these on vocation so they only replace the generic closing for characters who earned them.",
+      "why": "The current elder closing register is the most structurally uniform part of any life. Vocation-specific closings would mean a soldier's death and a scholar's death feel different at the end, not just at the mid-arc stage — which is where the vocation system currently runs out.",
+      "impact": "high"
+    },
+    {
+      "what": "Give f_grace onceDyn:6 (currently once:true per life, no dynasty cooldown). It appears in 8 of the last 10 dynasties in the transcript run because its cond is always true and it only fires once per life.",
+      "why": "Grace as a rare gift is tonally right; grace as a near-guaranteed adult beat that appears in every dynasty loses its character. Extending the generational cooldown would make it feel genuinely uncommon rather than infrastructural.",
+      "impact": "medium"
+    },
+    {
+      "what": "Add 2–4 adult/midlife cards that fire only for characters inheriting a specific combination of house state (e.g., a ruthless heirloom AND a falling seat, or a scholarly house reputation AND the inherited-secret flag). These would be emergent intersection cards — content that requires two dynasty-layer conditions to align.",
+      "why": "The dynasty layer currently gates content by seat level and top-reputation, but rarely requires two conditions simultaneously. Intersection cards would reward players who are actively shaping the house's character across lives, rather than making dynasty state feel like flavour text for generic card framing.",
+      "impact": "medium"
+    },
+    {
+      "what": "For the marriage/child structural slot: instead of rotating prose variants over an identical beat, add 2–3 alternative structural branches that can fire in place of the standard a_marry/a_child — e.g., a life where the child arrives before any formal commitment (no marriage card fires, the child question comes first), or a married couple who decide explicitly not to have children and get a late-life reckoning on that choice that is *different* from the generic e_childless. These shape the mid-life slot structurally, not just texturally.",
+      "why": "The marriage and first-child beats are the most structurally predictable moments in any life. Prose variety already exists; what would freshen a long session is occasionally having the beat not fire at all, or fire in a different order.",
+      "impact": "medium"
+    }
+  ],
+  "verdict": "A genuinely pleasurable literary sim that stays fresh through roughly 6–8 dynasties on the strength of its callback architecture, vocation arcs, and dynasty texture — but by dynasty 10–12 the player who pays attention will have mapped the callback cards and life-shape slots, at which point the game becomes more like reading a book you've read before than living a new life."
+}

@@ -1,0 +1,48 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 7.2,
+  "fun_highlights": [
+    "The callback system genuinely delivers: seeing a childhood choice (the book left on the desk, the stray hidden under the bed, the friend defended at the yard) echo back decades later in a card that names the exact age it happened creates real narrative warmth that cozy-sim players live for.",
+    "Era mechanics give each generation a different texture. A plague-era childhood opens differently from a war-era one, and the vocation x era intersections (soldier in war-time, scholar in a turning age) produce moments that feel genuinely situational rather than template.",
+    "The constellation of dynasty state — rising and falling seat, accumulating heirlooms, family motto crystallizing — provides the 'one more dynasty' pull effectively. Watching 'a rented room' climb to 'an old and famous house' across five generations is satisfying, and the motto emergence is a lovely cozy reward.",
+    "Vocation arcs (scholar/soldier/maker/wanderer) each have their own cluster of adult-to-elder cards, so a scholar life and a wanderer life feel structurally different — not just prose-coated differently.",
+    "The prose is consistently warm and specific without being cloying. The observation lines (the body-aging lines, the spirit lines) accumulate like gentle ambient brushstrokes that make quiet lives feel inhabited rather than empty.",
+    "Solitary and childless life-shapes are first-class citizens, not dead-ends, which broadens the genre range considerably."
+  ],
+  "staleness": [
+    "The youth-to-marriage pipeline hits in nearly every life with a romantic partner present. In the 15-dynasty transcript, the love card ('Someone keeps finding reasons to be where {n} is...') and the marriage card ('Ask. Build a life.') fire in 17 and 20 lives respectively. The prose variants cycle visibly — 'nobody made a speech; the years that followed were the speech' and 'the plain room felt larger for the promise made in it' appear in consecutive dynasties. For a cozy player reading a long session, the love-courtship-marriage beat becomes a reliable three-card sequence they start skimming.",
+    "The elder reckoning ('old decision keeps returning to {n}') fires in 10 of 15 dynasties and always presents the same binary. Once a player has seen it two or three times, it reads as a genre obligation rather than a moment of genuine surprise. The once:true flag prevents per-life repetition but the card's frequency across the dynasty run makes it structurally expected.",
+    "The calling card at youth (the four-vocation fork) is universal and almost every life presents exactly the same four-choice layout. The framing adapts well to era and seat, but the structure — soldier/scholar/maker/wanderer — becomes a genre beat the player fills in before the text finishes loading. This is the game's most visible 'I've seen this before' moment.",
+    "The cb_corner callback ('the corner {n} cut once') fires 22 times across the transcript — that is nearly every adult life that had any moral grey in it, giving it a formulaic feel: bad thing done young → same card escalated in midlife. The pattern is transparent enough that by dynasty 6 it reads as a mechanical loop rather than earned consequence.",
+    "Adult-band variety, while improved by the recent band-filler pass, still thins noticeably in the 28–48 range for lives without a strong vocation cluster. Many lives in the transcript share the same skeleton: windfall or loss event, work promotion fork, either a_old_friend or a_affair, then m_health. The filler cards (a_smallchoice, a_recognition, m_smaller_body, a_fallow) are gentle and welcome, but their weight is low enough that they don't guarantee they'll appear, and their choices are so consequence-light that they blend together in memory.",
+    "The cb_reckless callback ('tell them it was worth it / tell them to slow down') fires whenever 'lived_reckless' is held, which is common enough that it becomes a reliable elder beat for any reckless-tinted life. In the transcript it fires 7 times and the outcome lines are nearly identical. A cozy player notices."
+  ],
+  "improvements": [
+    {
+      "what": "Vary the love-arc entry point so not every romantic life hits the same three-beat sequence. Add one or two love-arc variants: a slow-burn that skips the 'someone keeps finding reasons to be where {n} is' card entirely and instead surfaces through the child card or the work card; or a love that arrives through grief (after a_friend_die or w_war_loss, a new connection, different prose register). The marriage card already has good late-love variants; the courtship phase needs similar structural divergence.",
+      "why": "The courtship-to-marriage pipeline is the most repeated structural sequence in the transcript. 17 love + 20 marriage appearances in 15 dynasties means nearly every long life hits the same shape. Varying the entry point would make paired lives feel less like the same template.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the elder reckoning (cb_the_cost) a conditional fork based on life-shape: if no major moral flag is held, replace it with a different elder question (a legacy-of-solitude version, a question about the body's cost, a wonder card). The current card only fires when at least one of chose_self/strayed/cut_a_corner/chose_loyalty is set, but those flags are easy to accumulate, making the card near-universal. Consider splitting it into 3–4 distinct late-life reflection cards each gated on a different cluster of earlier choices, so the elder reckoning one player sees is visibly not the one another player saw.",
+      "why": "The 'old decision keeps returning' framing is good but its near-universal appearance drains it of weight. When it fires in 10 of 15 dynasties with the same two choices, it becomes expected rather than earned.",
+      "impact": "high"
+    },
+    {
+      "what": "Add two or three adult-band 'intersection' cards that require a specific combination of earlier choices — not just a single flag. Example: a card that only fires if both 'chose_study' and 'had a child' are true, or if 'soldier_blooded' and 'married' are both present. These are not callback cards (which exist already) but new dilemma cards whose premise is only coherent given that specific combination of life-facts. This would reward players who notice the game can see their whole life.",
+      "why": "The current callback system is mostly one-flag lookbacks (child_books → cb_books_late). Multi-flag intersections would create genuinely surprising 'how did it know?' moments and would make the game feel emergent rather than procedural.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a second calling moment — or a calling-revision event in midlife — so a life is not permanently defined by the youth vocation choice. The m_reinvent card gestures at this but does not actually retag the vocation. A 'late calling' card that actually changes the vocation flag (and thus which elder arc fires) would let, for example, a soldier who returned home become a maker in their fifties, with the e_maker_handoff replacing e_soldier_old. This would make the dynasty's vocation diversity more structural.",
+      "why": "With one calling fork per life, the four vocations become four distinct rails rather than four possible starting points for divergent paths. A revision mechanism would give the adult band more structural variety.",
+      "impact": "med"
+    },
+    {
+      "what": "Cap the cb_corner callback so it can only fire once per dynasty (not once per life). In long dynasties, every generation that touched any dishonesty gets it, making 'the corner you cut once has come back larger' feel like a mechanical tax rather than a dramatic consequence. A once-per-dynasty cap would make it hit harder when it does fire.",
+      "why": "The callback fired 22 times across the transcript. Its power as a narrative moment is diluted by frequency — cozy players stop feeling the weight of it by the third or fourth dynasty that presents it.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life earns genuine cozy warmth and delivers it beautifully in bursts, but by dynasty 6–8 a careful player is recognising the skeleton beneath the prose — same courtship beat, same elder reckoning, same callback tax — and the 'one more dynasty' pull is running on accumulation mechanics rather than narrative surprise."
+}

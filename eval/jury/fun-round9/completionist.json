@@ -1,0 +1,55 @@
+{
+  "profile": "completionist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier / scholar / maker / wanderer) is the game's single strongest structural lever: each calling gates a genuinely distinct three-card adult arc, so a scholar's midlife reads differently from a soldier's in content, not just in name — the 'scholar's legacy' vs 'masterwork' vs 'wanderer return' cards are real divergences, not cosmetic.",
+    "Callback cards are the best thing in the game for a completionist. cb_books_late, cb_outcast_return, cb_study_pays, cb_lookaway, cb_strayed, cb_the_cost — these are payoffs that reach back years across a life and feel earned. When one fires, it is genuinely satisfying.",
+    "The dynasty layer has real depth: the 9-reputation / 27-motto system (USED_MOTTOS deduplication prevents exact repeats across dynasties), the secret that propagates through generations, heirlooms that acquire narrative framing at inheritance. The heir screen's 'still ahead for the house' section gives a completionist concrete targets.",
+    "The era system (war / plague / hard / plenty / turning) gates era-specific cards that change both the framing of universal beats (the calling card reads differently in war-time) and adds unique events (plague-tending, hard-winter sharing, war-call). Genuinely feels like a different world between eras.",
+    "The seenCount() / markMomentSeen() discovery system on the title screen — tracking 'N of the 144 moments witnessed' — is a genuine completionist hook. There is a real long-tail of rare-gated content (plague + specific trait + high seat combinations) that remains unseen after 15 dynasties.",
+    "The 'house written into the histories' (seat 7) is a credible long-term aspiration — unreached in the 15-dynasty playthrough — with a multi-condition gate (seat 6 + repPeak >= 3.5 + peakMeans >= 76 + chance(0.45)) that keeps it rare without feeling impossible.",
+    "Early mortality and childless / solitary lives via collateral succession mean the 'same domestic arc' is genuinely avoided in a meaningful fraction of lives, keeping the shape of a dynasty varied."
+  ],
+  "staleness": [
+    "The childhood opener (c_origin: 'Feel, even small, it could be otherwise' vs 'Take the world as it comes') appears in at least 40 of the ~50 lives in the transcript. By dynasty 6 it is the single most visible repeated beat — the completionist has memorised both branches and reads past it. The conditional variants (era / seat / trait) are excellent when they fire but the default branch is too common.",
+    "The love / marriage / child cluster (y_love1 → a_marry → a_child) forms a near-universal backbone. In the transcript these three cards appear in some form in roughly 80% of lives. The prose variants are good, but the 'Ask. Build a life.' / 'Not yet. Maybe never.' pairing for a_marry has been seen 25+ times by dynasty 8; the hint text becomes invisible because it is expected.",
+    "The elder checklist is visible by dynasty 5: nearly every elder life includes at least three of (a) body-keeping-different-hours observation, (b) the old-decision-returning card (cb_the_cost), (c) e_legacy ('what do you want remembered'), (d) e_peace ('set things in order / rage against it'), (e) e_body. These are individually good but collectively they form a recognisable end-of-life template that a completionist starts to anticipate around dynasty 4-5.",
+    "The 'corner cut / corner returned' cycle (a_small_lie → cb_corner) and the 'stood up for principle → principle returns' cycle (y_principle → cb_principle) repeat across dynasties with only 3-generation onceDyn cooldowns. After 12 dynasties the completionist has seen both cycles 3-4 times each; the second repetition reads as 'oh, the corner card again' not as discovery.",
+    "The a_work 'promotion eats the evenings' card, while gated to 2 appearances per life, appears in the majority of adult lives that have a spouse or child. Its three text variants are exhausted by dynasty 4, and the structural beat (take it / refuse it) is one of the most repeated in the game. A completionist starts to treat it as ambient noise.",
+    "No in-run signal when a rare moment fires for the first time. The discovery counter exists only on the title screen. During actual play, a first-ever encounter with w_plague_tend or r_scholar_door looks identical to a repeat — the completionist who wants to collect all 144 has no in-game confirmation of a new discovery, only the out-of-session counter. This dulls the 'hunt' feeling.",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) use a `cool:22` / `once:true` / `onceDyn:true` rhythm that means they fire reliably but not constantly. However, because they have no prerequisite, they land in lives with no context for the named relationships — 'someone you love asks a direct question' can feel disconnected from the life being played when the love relationship is absent or freshly formed."
+  ],
+  "improvements": [
+    {
+      "what": "Give c_origin a stronger conditional gate so the default 'ordinary childhood' branch fires significantly less. Expand the conditional pool: add a second ordinary-childhood variant that fires on, say, P.gen >= 4 (an heir born deep in an established house reads the world differently), or add 2-3 new trait/seat/era combinations so the unconditional fallback is hit far less often.",
+      "why": "c_origin is the single most-repeated sentence-pair in the game. A completionist has seen 'Feel, even small, it could be otherwise' vs 'Take the world as it comes' 40+ times by dynasty 15. Reducing its frequency or deepening its conditional branching would do more to reduce perceived staleness than almost any other single change.",
+      "impact": "high"
+    },
+    {
+      "what": "Add an in-run 'first encounter' signal when a card fires that the player has never seen before — a brief visual cue (a subtle star, a different glow on the card frame, or a one-line hint 'A moment you've never faced before') visible only to players who have already seen 20+ moments. Remove it after the choice is made.",
+      "why": "The completionist drive depends on knowing when a hunt succeeds. Currently the discovery counter sits outside the game session; inside the run, a rare w_plague_tend looks identical to a repeated a_marry. A signal creates a feedback loop that makes the 144-moment hunt feel active rather than passive.",
+      "impact": "high"
+    },
+    {
+      "what": "Extend the onceDyn cooldown for the three most-repeated elder beats — e_peace, e_legacy, and e_body — from 3 generations to 5. Alternatively, make e_legacy vocation-aware with 4 distinct text pools (one per calling) that are drawn from sequentially rather than randomly, so the elder legacy question feels different for a scholar's 4th heir than for a soldier's 3rd.",
+      "why": "The elder checklist is the second-most-visible staleness signal after c_origin. e_legacy, e_peace, and e_body form a near-universal triad that signals 'we are in the final act template.' Lengthening the cooldown or deepening vocation branching within these cards would let them land as milestones rather than checkboxes.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 8-12 new 'intersection' cards that require two specific memory flags simultaneously — for example, a card that fires only when held('chose_soldier') AND held('strayed') (a soldier who betrayed their marriage confronts it in a particular way), or held('child_books') AND held('chose_study') AND P.flags.vocation==='scholar' (a life shaped by books from start to finish gets its own elder reflection). These would sit in the 'I've never seen this' category permanently for most players.",
+      "why": "The completionist's primary joy is the rare encounter. Most current cards gate on a single memory flag or a stat threshold. Two-flag intersections (especially cross-life-shape combinations) produce moments that only specific playthroughs ever encounter, giving the 144-moment count real long-tail depth.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the a_work card's adult-band monopoly by raising its cool from the implicit default to 14-16 years AND lowering its weight from 2 to 1 while adding 2-3 new non-work adult-band cards (e.g., a card about a neighbourhood or community that develops only for settled lives, a card about a recurring creative habit, a card about ageing parents that fires earlier than m_parent_age). The goal is to break the 'love → child → work → work → health scare' template feeling in adult lives.",
+      "why": "The adult band (26-45) is where the 'same template' feeling is strongest after the calling arc resolves. a_work's moderate weight and broad condition means it crowds out newer, rarer cards. Diluting it while adding variety in the 28-50 window would make the adult arc feel less like a fixed questionnaire.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'house memory card' system: 1-2 cards per dynasty that explicitly invoke the most recent ancestor's defining choice (not just the generic 'family story' card that already exists, but a card that is generated from the lineage's actual last epitaph cluster). For example, if the last ancestor's epitaph cluster was 'teacher', an heir in their youth might face a card about a stranger who expects them to know things, because their parent was known for teaching.",
+      "why": "The dynasty layer's best feature is continuity (heirlooms, secrets, motto). But most lives feel like they start fresh with only the seat and inherited memory flags as context. Dynamically generated family-memory cards would make each heir feel like a specific response to the person who came before, deepening the dynasty narrative and giving the completionist a reason to shape each life toward a particular epitaph cluster.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine structural depth — vocations, eras, callbacks, and the dynasty layer are real sources of variety — but by dynasty 8 the completionist has identified the underlying skeleton (opener → calling → love → marriage → child → work → health → elder checklist), the in-run discovery signal is absent, and the most-played cards (c_origin, a_marry, e_peace, e_legacy) have exhausted their prose variants well before the 144-moment hunt feels complete."
+}

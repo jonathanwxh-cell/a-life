@@ -136,9 +136,33 @@ function freshPick(pool, who){
   const use=fresh.length?fresh:pool;
   // rotI keeps it decorrelated per-house/generation; the filter keeps it un-repeated per-session
   const choice=use[rotI(who,use.length)%use.length];
-  RECENT_LINES.push(choice); if(RECENT_LINES.length>150) RECENT_LINES.shift();
+  // a long jury read is many lives back-to-back; keep a deep memory (≈ a whole dynasty of moments)
+  // so a high-frequency ambient line can't resurface two or three dynasties later and read as wallpaper.
+  RECENT_LINES.push(choice); if(RECENT_LINES.length>260) RECENT_LINES.shift();
   return choice;
 }
+// AMBIENT observations (the body-aging / mood lines in observe()) are the text a reader meets MOST — they
+// fire in nearly every life — so they were the single loudest staleness signal ("the stairs have started to
+// ask a question" recurring across dynasties). They need their OWN anti-repeat memory: if they shared the
+// freshPick ring, the flood of card-outcome lines would push an ambient line out of the window within a life
+// or two and it would resurface. A dedicated, deep buffer keeps any one ambient line from returning for a
+// long stretch of lives. (Random-from-fresh, not rotI — these aren't per-house variants, just texture.)
+// Per-CATEGORY session dedup. The shared freshPick ring (260 lines, ALL cards) is flushed within a few
+// lives, so the highest-frequency beats (love, marriage, child, ambient body-aging) still resurfaced every
+// 5–6 lives across a long read. Giving each such beat its OWN buffer, sized to its own pool, GUARANTEES it
+// cycles through every variant before any repeats — the fix the long-session reviewers pointed straight at.
+const RECENT_BUCKETS={};
+function bucketPick(pool, bucket, cap){
+  if(!pool||!pool.length) return '';
+  const buf=RECENT_BUCKETS[bucket]||(RECENT_BUCKETS[bucket]=[]);
+  const fresh=pool.filter(o=>buf.indexOf(o)<0);
+  const use=fresh.length?fresh:pool;
+  const choice=use[Math.floor(Math.random()*use.length)];
+  // hold ~one full pool's worth so a line returns only after the whole pool has been spent
+  buf.push(choice); if(buf.length > (cap||Math.max(10,pool.length+2))) buf.shift();
+  return choice;
+}
+function obsPick(pool){ return bucketPick(pool, 'obs', 90); }
 const rel=kind=>P.rels.find(r=>r.kind===kind&&r.alive);
 const rels=kind=>P.rels.filter(r=>r.kind===kind&&r.alive);
 // the single oldest living parent who is genuinely old and not yet cared for (deterministic)

@@ -1,0 +1,53 @@
+{
+  "profile": "surprise_hunter",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system is the game's single best mechanical idea: a choice at age 7 (keeping the stray, befriending the outcast, reading the hard book) can materially alter a card you see at age 46 or 64. This is not flavour — the text changes, a relationship changes, a memory closes. No other life-sim I can think of does this across a single life's span.",
+    "Vocation x Era intersections (vx_ cards) produce genuinely unreachable content: a scholar in a turning age faces obsolescence; a soldier in a real war faces the full price of the blade. These moments feel architecturally rare, not just randomly different.",
+    "The dynasty accumulation layer — motto crystallisation, heirlooms as latent memories injected into the heir's starting state, collateral succession, the onceDyn generational cooldown — is a genuinely inventive answer to the 'why start another life' question. The motto appearing in a life's prose ('Raised on the family words') is a small, lovely thing.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) are structurally surprising because they have one choice or none. They cannot be optimised. They arrive as weather, not puzzles, which is exactly right for this genre.",
+    "The elder reckoning card cb_the_cost, which reads back the specific wrong a life committed from a dynamically-assembled list, and the affair-confession arc (strayed -> cb_strayed -> exposed_secret) are emergent stories the system generates rather than scripted — these are the moments that feel most alive.",
+    "Trait affinity weighting in the draw engine (a bookish child leans toward c_book, a warm child toward c_friend) makes the early years feel characterful rather than random."
+  ],
+  "staleness": [
+    "By dynasty 5-6, the structural skeleton is legible and expected: c_origin -> a childhood card cluster -> y_calling -> first love -> a_marry -> a_child -> m_health -> elder trio (e_body / e_peace / cb_the_cost). The vocation content varies the middle, but the frame itself is a recognisable template. The 'I've never seen this before' feeling shifts to 'I wonder which flavour this beat will use.'",
+    "The cb_corner dishonesty callback (the corner cut in adulthood returns in midlife) appears in Dynasties 3, 4, 5, 6, 7, and 8 of the fifteen-dynasty transcript — that is, in roughly 60% of long lives. By dynasty 7 it reads as near-inevitable rather than earned. The same applies to cb_the_cost (the elder reckoning over one unresolved moral choice), which fires in nearly every long life. These callbacks should be the exception that closes an arc, but their prevalence makes them a routine stop.",
+    "The ambient observe() body-aging lines cycle visibly within a single session. 'The stairs have started to ask a question of him/her' appears in Dynasties 2, 6, and 8; 'Some mornings the body answers the bell late' in Dynasties 5 and 8. The per-dynasty dedup works, but the pool of ~10 lines per observation type is too small for 15 consecutive dynasties. A careful player will hear the same sentences.",
+    "The adult band (ages 28-58) is the thinnest zone for surprise. After the vocation arc cards fire (once per life) and the callback is spent, the repeatable cards (a_neighbour, a_small_lie, a_fallow, a_friend_drift, etc.) are pleasant but do not produce the 'I have never seen this combination' feeling. They read as filler — well-written filler, but filler.",
+    "The e_peace / e_body / e_last_walk elder cluster is, in practice, a closing ceremony. In the transcript it appears in almost every life that reaches 66+. The choice within each card varies, but the sequence itself has lost surprise by dynasty 4.",
+    "Solitary and wanderer life-shapes, while mechanically supported and content-bearing, are statistically outnumbered in the transcripts — domestic arcs (love -> marry -> child) remain the majority path. The 'genuinely different structural shape' the code targets happens in perhaps 1 in 4 lives in the sample, which is not enough to keep a long session fresh by variety alone."
+  ],
+  "improvements": [
+    {
+      "what": "Widen the ambient observe() pools from ~10 lines per theme to ~20-25, and add a session-level ring buffer (already present as RECENT_LINES for epitaphs but not for observe()) that prevents any ambient line from repeating within 8 lives.",
+      "why": "These lines are the prose texture between cards — if they repeat, the world feels like a loop. The epitaph dedup code already has the right architecture; applying it to observe() is a direct port.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a global 'moral callback quota' so that cb_corner and cb_the_cost together can only fire in at most 1 of every 3 lives (or add a session-level cooldown of 3 dynasties between firings of each). These are the most visible repeat-pattern across the transcript.",
+      "why": "These callbacks are the game's most powerful structural move — but their power depends on rarity. When they fire in 6 of 10 lives, they become expected beats rather than earned closures.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 8-12 'structural wildcard' cards — events that fundamentally alter the life's shape rather than adding a moment to the standard arc. Examples: a life that loses its vocation mid-arc (injury forces a soldier to become a maker), a sudden-windfall that vaults a landless house to seat 4 in one generation, a political exile that forces a wanderer arc on a character who chose the scholar's road. These should be rare (w:1, cool:30, strict conds) but possible.",
+      "why": "The current cards vary the texture of the arc; nothing reliably breaks the arc itself. A surprise_hunter's core need is 'I've never seen a life shaped like this.' The vocation-fork does this once per life; nothing does it again mid-game.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the elder phase (age 66+) one randomly-chosen 'life-specific' card drawn from a pool of 15-20 that requires a specific combination of prior memories — cards that can only be earned by a particular intersection of choices (e.g., a life that strayed AND had a mentor AND chose the wanderer vocation gets a unique reconciliation card; a soldier who also became a teacher gets a late-career card no other life shape can reach).",
+      "why": "The elder phase currently uses a fixed set of universal cards (e_peace, e_body, e_window, e_last_walk, e_legacy, e_reconcile) that every long life will see in some order. One memory-intersection card per life that is genuinely unique to that life's choices would make the closing feel earned rather than templated.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the draw-weight of the solitary/childless content (m_solitary, a_chosen_family, e_solitary, e_childless) by 50% and reduce the love-nudge probability in drawCard from 30% to 20% for the y_love1 card, making the non-domestic life-shape appear in roughly 1 in 3 lives rather than 1 in 5-6.",
+      "why": "The domestic arc (love -> marry -> child) is structurally familiar. A higher rate of solitary/wanderer shapes would increase the 'I wonder what kind of life this will be' tension at birth.",
+      "impact": "med"
+    },
+    {
+      "what": "For the adult band filler cards (a_neighbour, a_small_lie, a_fallow, a_friend_drift, a_smallchoice, a_recognition), add 3-4 alternative text variants per card that are conditioned on prior life memories — so a life that 'looked away' from the outcast gets a different flavour of a_neighbour than one that didn't, and a life that 'lived reckless' gets a different flavour of a_fallow. This does not require new cards, only conditional text branching.",
+      "why": "These cards currently read as disconnected from the life's specific history. Memory-conditional prose variants would make even the filler feel like it belongs to this particular person.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely clever — the callback architecture and dynasty accumulation layer produce moments no comparable game offers — but by dynasty 6 the structural template (born, called, loved, aged, reckoned with, died) asserts itself over the variations, and the honest answer to 'does it stay fresh?' is: not quite fresh enough, not quite stale enough to quit, which lands it at a 6.5 rather than the 8 it is clearly reaching for."
+}

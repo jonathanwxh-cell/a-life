@@ -1,0 +1,48 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.4,
+  "fun_highlights": [
+    "The callback system genuinely closes arcs: 'cb_books_late' revisiting the childhood book at age 50+, 'cb_lookaway' returning the yard-child shame decades later as a homeless stranger, and 'cb_strayed' surfacing the affair guilt at death's door all land with real weight in the transcripts. Dynasty 4's Calla confessing at 67 the thing she did at 44 is a small masterpiece of delayed consequence.",
+    "The era layer gives different generations genuinely different flavour. The war framings (Elias Okonkwo drafted, Caleb Castellane's posting, the 'far off, and then not distant at all' line) and the plague variants (Hale Okonkwo's careful distance calculation, Vesna Thorne tending the dying) create structural contrast between gen 1 and gen 5 that a pure card-draw game can't fake.",
+    "The writing at sentence level is consistently above average for the genre. 'The marriage broke on what she did. Hale left, and was right to.' is devastating at seven words. 'Kept the question for evenings and the paid work for days, and made, between them, a sufficient life.' lands the tension in a single breath. The prose earns its meditative pace.",
+    "Vocation divergence is real. Scholars 'chose study and hunger and the long bet on their own head' then hit 'cb_study_pays' and the guard-vs-give knowledge fork; soldiers get the campaign card, the PTSD-return beat, the 'what do you want remembered' variant; wanderers get the road-ending beat. A Dynasty 6 Tomas (scholar) and a Dynasty 7 Caleb (soldier) read as recognisably different people.",
+    "The 'drifter' fifth arc (vocation='adrift') is handled with actual thematic coherence — the same no-calling life threads 'aching quietly for an anchor', 'leaning into the range', and the midlife reckoning 'grasping late for a single thing', creating a coherent character arc out of deliberate shapelessness. Dynasty 3's Cassian and Dynasty 6's Vesna are good examples.",
+    "Heirloom and motto crystallisation give dynasties a genuine identity spine that survives across five generations. House Okonkwo's 'We earn the bread we eat.' emerging at gen 3's death and being felt by gen 4 ('Raised on the family words') is exactly the genre's promised fantasy of accumulated dynasty character."
+  ],
+  "staleness": [
+    "The mid-life body-decline cluster is catastrophically overcrowded in the transcripts. In a single long read, 'The stairs have started to ask a question of them', 'The body has begun sending its small bills', 'The weather has begun living in their joints', 'Mornings take longer to arrive in the body', 'The body keeps its own quiet counsel' and a dozen more variants appear in nearly every life over 55. The per-life cap of 4 (P._obsN) does not prevent a reader across 15 dynasties from drowning in these. A random sample: Dynasty 2 Henrik at 85, Dynasty 4 Beatrix at 71, Dynasty 5 Ottilie at 64, Dynasty 6 Cassian at 57, Dynasty 9 Selma at 78, Dynasty 13 Idris at 55, Dynasty 13 Anders at 74 and 81 — every elder life has 2-3 body lines, and they all feel like the same paragraph.",
+    "The childhood checklist still reads as a recognisable template across dynasties. The opening sequence (c_origin + c_book OR c_wonder + c_sick/c_dark + c_friend/c_animal + c_sibling + y_job + y_calling) appears in some permutation in virtually every life. By Dynasty 8-10 a reader fluent in the template can guess the next card type before it arrives. The anti-repeat cooldowns and trait affinities reduce exact repetition but don't break the structural fingerprint.",
+    "The 'Meet them halfway / Pretend not to notice' love-opening choice is the single most repeated binary in all 15 dynasties. It appears near-verbatim across Saoirse (D1 never fires), Henrik (D2), Calla (D4), Elias (D4), Noor (D4), Beatrix (D4), Tomas (D6), Cassian (D6), Vesna (D6), Ingrid (D6), Mira (D6) and continues through every subsequent dynasty. The framing variants cycle well ('The reasons are getting thinner', 'the quiet has a shape', 'the person whose absence has become the loudest thing') but the player still sees the same two buttons extremely frequently.",
+    "A tight cluster of 'quiet moral crossroads' cards recur visibly: 'a figure adjusted, a thing left unsaid' (dishonesty), 'nothing dramatic, just a quiet chance to be a little better' (minor ethics), 'the right thing quietly / the easy thing just this once' appear across Dynasty 3, 9, 10, 12, 13, 14 with only light reframing. The minor-ethics beat lacks the callback anchoring that makes the 'lookaway' card compelling — it fires and disappears without consequence.",
+    "The epitaph pool is too small relative to the session length. 'Gave away everything they knew, and so kept it.' appears word-for-word on Selma Quint (D9, died 82) and the original transcript shows it was also used on other scholarly characters. 'Was elsewhere as often as here, and the elsewhere was wide.' closes both Dynasty 14's Anders Aldecott and Dynasty 6's Cassian Thorne. The RECENT_LINES dedup in dynasty.js works within a dynasty but the cross-dynasty pool runs out across 15 dynasties.",
+    "The legacy/epitaph conversation ('What do you want remembered: kind / built / here at all') fires in a majority of long lives and produces near-identical prose. 'Said they hoped to be remembered as kind' on Caleb Castellane (D7), Annika Holloway (D11), and the logLine variants for 'built' cluster across Dynasty 1's Saoirse, Dynasty 10's Tobias, and Dynasty 12's Mira. The moment is moving the first time; by the fifth occurrence the player knows the three options by heart and the choices feel formulaic."
+  ],
+  "improvements": [
+    {
+      "what": "Cap body-decline obs lines at 1 per life (not 4), and force them to use only lines not seen in the previous 3 lives cross-session (extend the RECENT_LINES anti-repeat logic into the observe() function, not just epitaphs)",
+      "why": "The body-decline cluster is the single loudest staleness signal in a long play session. A per-life hard cap of 1, combined with cross-session dedup, would cut the repetition by ~75% without touching any card content.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 new childhood card types that replace the book/wonder/dark/sick structural slots for specific trait combinations — e.g. a 'restless' child gets a 'heard a story about a far city and could not sleep' card instead of the generic c_wonder, a 'frail' child gets a convalescence-and-books card that merges c_sick and c_book into a new moment",
+      "why": "The childhood checklist is the most template-visible part of the game. Trait-affinity already exists in the engine (TRAIT_AFFINITY map) — the fix is merging low-differentiation cards into trait-specific variants, so a bookish childhood and a restless childhood feel structurally different, not just textually different.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the 'minor ethics' beat (the c_small_choice / quiet chance to be better or worse) a memory flag and a callback in elder stage, similar to cb_lookaway — so the quiet dishonesty at 35 has a chance to resurface at 70 as a pattern recognised in oneself",
+      "why": "Currently the minor-ethics cards fire and vanish. The lookaway callback is the template for why callbacks work — they convert a throwaway moment into a life-defining arc. The same structure applied to the dishonesty/integrity cards would create a second compelling long-arc thread without adding new card slots.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the epitaph pool by ~40% and extend RECENT_LINES dedup to cover the last 20 deaths (not just same-dynasty) — specifically the 'kind', 'built', 'teacher', and 'mind' clusters which are the most frequently earned and most visible when they repeat",
+      "why": "With 15 dynasties of 2-5 lives each, the current pool is exhausted. The existing dedup architecture is correct — it just needs more entries in the high-frequency clusters and a longer cross-dynasty memory window.",
+      "impact": "med"
+    },
+    {
+      "what": "Reduce the weight of a_marry nudge so that marriage does not reliably follow love within the same generation in nearly every life — let ~25% of love relationships stay unmarried long-term, which is a real life shape and would create structural variety in the adult arc",
+      "why": "Looking across all 15 dynasties, nearly every character who picks 'Meet them halfway' also marries within 10 years. The 0.55 per-draw nudge once-in-love produces a near-deterministic love->marry->child pipeline that makes the adult arc feel templated even when individual choices vary.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely well-written game with a strong callback architecture and real vocation divergence, but a long session (10+ dynasties) exposes the template hard. The body-decline observation cluster alone accounts for more repeated prose than the entire childhood section, and the childhood section itself still reads as a recognisable five-beat checklist. The minor-ethics and love-opening beats appear so frequently that a fluent player anticipates the two-button choice before the framing text completes. The score reflects a game that lands a 7.5 within any single dynasty but falls to a 5.5 by dynasty 12 — and 6.4 is the average that honest truth demands."
+}

@@ -1,0 +1,57 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier/scholar/maker/wanderer) creates genuine structural divergence: a soldier life reads differently from a scholar life, gates distinct adult/elder card clusters, and gives lives a shape that is actually different, not just differently decorated",
+    "The callback system is the game's best mechanic — moments from age 7 (the stray, the book, the looked-away child) echo credibly at 46 or 65, and when they land the player feels the arc closing in a way that is briefly and genuinely moving",
+    "The era system (war/plague/plenty/hard/turning) shifts tone, gates distinct cards, and makes some generations feel lived-in a different historical texture — a plague-born character faces a meaningfully different early life than a plenty-born one",
+    "The dynasty layer (seat climbing, motto crystallization, heirlooms, the secret) provides a real inter-life pull; watching 'We do not ask twice' crystallize for the Vane house after four generations of consistent choices is satisfying",
+    "Fate events (fire, sudden loss, unasked grace) interrupt the player's model of how a life goes and inject genuine surprise — the fire at age 74, the sudden death of a bonded relation, the stranger's grace at 14",
+    "The prose is excellent at the individual card level — lines like 'Married in a hurry and a downpour, and never once wished it grander' and 'Kept a whole country behind the eyes, and lived there often' are genuinely good writing",
+    "The competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) present choices without a clean right answer and are among the most interesting moments in the game",
+    "Solitary and childless life-shapes are now real — a wanderer who never settles, a midlifer who claims the width of solitude — and this structural variety is meaningfully different from the domestic arc"
+  ],
+  "staleness": [
+    "The love→marry→child sequence fires in the large majority of lives and is structurally identical every time. Across 15 dynasties and ~35 lives in the transcript, roughly 80% hit this arc. The text variants (17 love-arrival lines, 6 marriage framings) are good, but the player is answering the same three structural beats in the same order. By dynasty 5 this reads as template, not story.",
+    "The cb_corner arc (cut a corner → corner returns bigger → choose again) is the default moral skeleton for a plurality of lives. The transcript shows it firing in Dynasties 3, 5, 6, 7, 8, 11, 13, 14 — roughly every other life. It is a well-designed callback but its sheer frequency makes it the predictable moral throughline rather than a surprise earned by specific play.",
+    "The elder closer (cb_the_cost / 'Let it stay unsettled' / 'Decide it was right') fires in nearly every elder life — Dynasties 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 15 all exhibit it. By dynasty 6 the player knows a late-life reckoning card is coming and what its two options will feel like. It has become a punctuation mark, not a surprise.",
+    "The ambient observation lines repeat visibly across the session. 'The stairs have started to ask a question of him/her' appears in Dynasties 2, 3, 6, 7, 8, 9, 13. 'Time has not yet managed to talk her out of being glad' appears across 8+ lives. 'He has stayed, somehow, on speaking terms with joy' is similarly widespread. A player past dynasty 4 recognises these as furniture and stops reading them.",
+    "The childhood sequence, while varied in its specific card selection, follows a recognisable structure: c_origin at age 3-5, 2-3 childhood beats (c_book/c_friend/c_animal/c_sibling/c_unfair/c_dark/c_move), then y_calling reliably at 14-22. By dynasty 6 the opening of a new life does not feel like discovery — it feels like filling out a form with slightly different answers.",
+    "The e_bequest choice lands the same way every time: elder years, think about heir, pick 1 of 4 options. It is mechanically sensible but has no narrative surprise after the first encounter. It does not feel earned by the specific life that just happened.",
+    "Lives without a vocation (the rare uncalled life, or a wanderer who settled early) fall back on generic adult/midlife cards and feel thinner than vocation-shaped lives — the absence of a calling is not itself a distinct shape.",
+    "The 'hard season / reckoning' card (x_reckoning) and the inheritance dispute (s_inheritance_dispute) fire at high-seat houses but feel procedural — a test of accumulated stats rather than a narrative moment arising from specific choices."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 'dark side of the template' structural variants that replace the love→marry→child arc entirely. Concretely: a dedicated card cluster for a life spent in devotion to craft or cause (no love interest, career-as-identity), a cluster for a life of chosen family (a_chosen_family already exists as a single card — expand it into a 3-act arc with a midlife and elder beat), and a cluster for a genuinely renunciant life (religious, philosophical, or simply avoidant). Gate these with early flags so they replace, not supplement, the domestic arc for roughly 1-in-4 lives.",
+      "why": "The love→marry→child sequence is the biggest source of structural staleness. Players feel it by dynasty 4. These variants would make roughly 25% of lives read as a different shape of life, not a different version of the same shape.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce cb_corner's eligible-life footprint by tightening the cond: require either (a) the 'cut_a_corner' memory was earned by a specific, choice-that-mattered (not just any small dishonesty) or (b) the player explicitly took the 'shrewdness' path on a_make_name. Currently the memory is set by at least 6 different cards and the callback fires in most lives where any dishonesty occurred. Cap the dynasty-level firing of this arc to once every 3 generations via onceDyn.",
+      "why": "The cb_corner arc fires so frequently it becomes the default moral template. Tightening its trigger would make it feel earned when it does appear rather than expected.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the ambient observation pool significantly (at least double it) and add a session-wide dedup similar to the epitaph's RECENT_LINES mechanism. The current pool of ~80 observation lines is showing visible repetition by dynasty 5 in the transcript. Target: a player should not see the same observation line twice within a single session (10-15 lives).",
+      "why": "Ambient observations are the background texture of the game. When a player recognises them they stop reading, and the game's meditative quality depends on players actually reading. Repeated lines signal 'I have been here before' more loudly than repeated event-card types.",
+      "impact": "med"
+    },
+    {
+      "what": "Give the e_bequest a narrative hook earned by the specific life. Instead of presenting 4 generic options, read back 1-2 decisions that actually happened in this life ('You spent your adult years choosing the table over the ladder. What do you leave the one who comes after?') and frame the bequest options through that lens. At minimum, filter out the options that contradict the life's dominant pattern (a wanderer who never settled should not be offered 'the stories, and the warmth' as a domestic inheritance).",
+      "why": "The bequest is a generation-boundary moment but currently feels procedural rather than personal. A life-specific framing would make it feel like a conclusion, not a form.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 4-6 new elder cards that are structurally distinct from the current cluster. Specifically: (a) a card that fires only for lives that chose the same vocation as an ancestor in the dynasty (naming the ancestor), (b) a card for lives where the player consistently chose against the family's established reputation (broke_with_house memory), (c) a card that fires when a life's deathAge will likely be the dynasty's longest, and (d) a card specific to a childless-but-long-married life (the e_childless card exists but the married-without-children shape has almost no unique content after the couple years).",
+      "why": "Elder content currently collapses to the same 5-6 cards for most lives regardless of how different those lives were. These variants would make the last act of the life feel like a conclusion to that specific life.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a visible 'first time seen this' marker or the internal markMomentSeen counter exposed as an optional discovery sidebar — something that tells a returning player what percentage of distinct moments they have witnessed. This gives curious players a reason to make different choices and gives the game a meta-goal beyond dynasty-building.",
+      "why": "The game has ~130 distinct cards but the player cannot know that. A discovery indicator would reframe replaying as exploration, not repetition, and provide intrinsic motivation to choose the road not taken.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely good meditative sim with excellent prose and a strong structural foundation, but it goes stale by dynasty 5-6 because the love→marry→child arc fires in ~80% of lives, the cb_corner moral arc has become the default skeleton, and the ambient observation pool repeats visibly enough that a returning player stops reading — all of which make the game feel like a template-filler rather than an emergent story engine past the first session."
+}

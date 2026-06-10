@@ -1,0 +1,53 @@
+{
+  "profile": "skeptical_critic",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is the best thing here: when 'cb_lookaway' fires because you looked away from a child at age 8 and now pass a rough sleeper at 53, the echo lands genuinely. A handful of these (cb_books_late, cb_strayed, cb_outcast_return) create moments that feel structurally earned, not decorative.",
+    "Vocation arcs give real structural divergence: a soldier's life has a midlife trauma card, a scholar's life has the question-or-bread fork, a maker has the masterwork dilemma, a wanderer has the settle-or-keep-moving reckoning. Four fundamentally different adult skeletons is more than most life-sims manage.",
+    "The epitaph and observation systems are genuinely good prose engines. 'The stairs have started to ask a question of him' as a vitality observation is the kind of line that earns the literary framing. The variety pools are deep enough that identical trigger conditions read differently across lives.",
+    "Era-gating adds real structural variation: a plague life has a tend-or-distance card no other era sees; a war life has a call-or-dodge card; a turning-age life has a scholar x turning intersection card that only fires at that exact crossing. At 6 eras x 4 vocations there are 24 structural life-shapes in theory.",
+    "The dynasty trajectory — heirlooms, motto crystallisation, seat climbing, the d_ancestor card feeding back an ancestor's epitaph cluster as living context — gives a genuine 'one more dynasty' pull for players who read the house screen carefully."
+  ],
+  "staleness": [
+    "Structural backbone repeats by dynasty 3-4. Reading the transcripts adversarially: every life has c_origin → y_calling → y_love1 (or a_meet_late) → a_marry → a_child → m_health → cb_the_cost → e_legacy → die. The vocation layer branches the adult band, but the childhood and elder bands are nearly identical in shape across all 15 dynasties. Dynasties 7, 9, 11, 12, and 14 are 1-2 generation stubs that repeat the same 8-12 card template without ever diverging.",
+    "Critical once-per-life gates collapse the pool fast. The major structural cards (y_calling, a_marry, a_child, m_health, m_who_became, cb_the_cost, e_legacy, e_bequest, e_peace/e_body) are each once:true. A life of 70+ years sees at most 12-16 player choices. By dynasty 5, a reader has seen every structural beat. The prose varies; the shape does not.",
+    "The 'corner cut' callback (cb_corner) fires in an implausibly high fraction of lives in the transcripts: Dynasties 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14. It is the single most common callback by a large margin. The effect is that the mid-life moral reckoning reads as the same event with paint on it.",
+    "Childhood is too short and too samey. A life gets 2-4 childhood cards from a pool of roughly 10 (c_origin, c_book, c_sick, c_friend, c_steal, c_wonder, c_unfair, c_dark, c_animal, c_sibling, c_talent, c_move, c_grandparent). Once:true gates mean by dynasty 4 you've seen most variants. The opener (c_origin) is smart but fires at age 3-5 and then there are 8-9 silent years before the calling card. Childhood does not feel lived-through.",
+    "The adult band between calling (~age 14-22) and midlife (~age 46) is thin if you are not triggering relationship cards. The variety cards added (a_neighbour, a_small_lie, a_road_not_taken, a_fallow, a_home, a_role, a_sibling_drift, a_make_thing, a_conviction) are all weight 2 and most have conditions; a given life might see only 2-3 of them in the 25-year window. The age 28-46 stretch repeatedly feels like: marry, have child, maybe work card, maybe callback, then suddenly midlife.",
+    "The dynasty layer does not generate mechanical decisions worth planning around. Seat climbing is opaque (the player never sees the threshold), reputation building is too slow and too passive (most repute bumps are side effects of cards played for other reasons, not deliberate steers), and the reckoning card (x_reckoning) is weighted 3 but fires only once and with a cool:16 - in the 15-dynasty playthrough it appears only a handful of times. A player who wants to 'play the dynasty' has no real levers that feel consequential moment-to-moment.",
+    "The 'Ask. Build a life.' marriage choice appears verbatim in at least 25 instances across the transcripts. The multi-variant text pool for the marriage prompt is good, but the single choice button text never changes. A player who has made this choice 8 times in a session will feel it deeply."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 vocation-specific childhood cards that fire only when a calling has been chosen in a prior generation. A maker's child watches a parent at the bench; a soldier's child hears battle stories; a scholar's child finds the forbidden section of the library.",
+      "why": "Childhood currently has no memory of what the family is. The dynasty layer should reach backward into childhood, not just forward into the elder band. This would make the generational connection feel materially different rather than cosmetic.",
+      "impact": "high"
+    },
+    {
+      "what": "Weight or add a 2-3 midlife card that fires only once per dynasty (not once per life), rotating each generation — so dynasty 3 gets a different 'dynasty event' than dynasty 6.",
+      "why": "The session-wide staleness problem is fundamentally that the per-life structure repeats. A per-dynasty event that touches the whole house (a rival family, a public shame, a windfall year for the trade) would make generation 6 feel structurally unlike generation 2 even if the individual life-shape is similar.",
+      "impact": "high"
+    },
+    {
+      "what": "Replace the static 'Ask. Build a life.' choice button with per-variant button text that matches the prompt variant drawn. If the prompt is 'Greta fell asleep mid-sentence', the button should not read identically to when the prompt is 'Everyone has assumed it for years.'",
+      "why": "The single most visible mechanical repetition in the transcripts is the marriage choice button. The prompt text varies beautifully; the choice text reads as a form field. This is a line of code per variant.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 3rd outcome to the cb_corner callback beyond 'cut again / not this time': a 'confess it and lose something' branch that fires only if the player has cut corners twice, with a meaningful narrative and mechanical consequence (relationship damage, public fall).",
+      "why": "cb_corner is the most over-represented callback by far. It currently has exactly 2 choices and no mechanical escalation. Adding a third path for entrenched corner-cutters would make repeat-offender lives feel genuinely different from first-time slips.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 fate cards for the elder band that vary by what kind of life was lived — a soldier elder gets a different fate than a scholar elder — using the existing vocation flag. Currently the elder band has generic universal fates (f_fire, f_sudden_loss, f_grace) but no vocation-coloured fate events.",
+      "why": "The elder band is where staleness is most acute: the same 4-5 elder cards appear in nearly every long life regardless of how the earlier years went. A maker's late fire destroying the workshop should read differently than a wanderer's late fire destroying a rented room.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the dynasty levers (seat level, reputation trajectory, aspirations) more visibly during play, not only on the heir screen. A single recurring 'house status' observation line at major milestones would let players feel the dynasty layer as gameplay, not as post-life bookkeeping.",
+      "why": "The dynasty system is substantive in the code but nearly invisible during a life. Players have no moment-to-moment feedback that their choices are building toward something dynastically distinct. The aspiration list is excellent — it needs to be surfaced during play, not only at succession.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely good literary toy with beautiful prose and smart callback architecture, but by dynasty 4-5 the structural skeleton is fully visible and the session becomes an act of watching the same template run — it has earned 'pleasant to revisit occasionally' but not 'I want to keep playing.'"
+}

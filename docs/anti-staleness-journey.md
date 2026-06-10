@@ -201,3 +201,76 @@ should commit to without a product decision.
 - Violation/balance harness: [`eval/sim-harness.cjs`](../eval/sim-harness.cjs) (now also
   reports love/marriage/child onset-age bands; `node eval/sim-harness.cjs N cards <regex>`
   prints a card-usage histogram)
+
+---
+
+## Continuation — Passes 11–13, rounds 9–11, and the asymptote proven (2026-06-10)
+
+Four more build passes and three more 15-juror rounds, run to test whether the
+"asymptotically out of reach" verdict above was real or just under-investment. It was real,
+and we can now show *why* with a clean measured trajectory.
+
+### What the passes did (all verified: `sim-harness` violations stayed 0 throughout)
+
+- **Pass 11 — de-monoculture + a fifth life-shape + dynasty-state content.** `cb_corner` /
+  `cb_the_cost` (the rounds 6–9 top complaint, firing in 8–11 of 15 dynasties) had their
+  eligibility tightened and got 5-generation cooldowns — draw rate fell ~30→3 per 100 lives,
+  and no round-10/11 juror mentioned them again. Added the **drifter** (`vocation==='adrift'`,
+  ~13% of lives, full `y_adrift→a_adrift_work→m_adrift_reckon→e_adrift_old` arc) and
+  **dynasty-state cards** (`dyn_summit`, `dyn_decline`, `dyn_founder_echo`) gated on
+  accumulated seat/gen so a deep house meets content a founder never can.
+- **Pass 12 — the mechanical pass round 10 pointed at.** `observe()` got its own deep
+  cross-life dedup buffer (`obsPick`) + a per-life cap + its five highest-frequency pools
+  deepened; the remaining un-cooled callbacks got cooldowns; ~15 frozen-string outcomes were
+  thawed; collateral succession was loosened so a childless founder can pass the house
+  sideways — cutting single-generation dynasties from **9/15 to 2/15** without losing the
+  ~49% non-domestic life-shape variety.
+- **Pass 13 — per-beat session dedup (`bucketPick`).** The shared `freshPick` ring (260 lines,
+  all cards) is flushed within a few lives, so the *statistically dominant* beats —
+  love-opening, marriage, child-birth — still resurfaced every ~5 lives. `bucketPick` gives
+  each its own buffer sized to its own pool, guaranteeing it spends every variant before
+  repeating. Also pooled the `w_plague_tend` / `w_war_loss` single-strings and fixed a real
+  logic bug (`s_from_nothing` firing "nothing behind you" on 5th-generation heirs of a
+  house with a motto and heirlooms).
+
+### The measured asymptote
+
+The **top verbatim prose repeat across a 15-dynasty packet**, pass by pass:
+`~11× → 8× → 5× → 5×` — but by Pass 13 the 5× lines are *minor single-choice outcomes*
+(`"Set down the elsewhere…"`), because the dominant love/marriage/child beats had been
+removed from the top entirely. Each pass flattens the ceiling and the next tier of fixed
+strings rises to meet it. With ~150 cards and 46–60 lives per read, **there is always a
+3–5× tail**; erasing it completely needs every card outcome pooled 4× over — a 3–5× corpus
+expansion, which is a content/product decision, not a tuning loop.
+
+### The jury trajectory (15 blind, distinct-profile reviewers each, ≥8 = goal)
+
+| Round | Avg | Floor | Ceiling | at ≥8 |
+|------:|----:|------:|--------:|------:|
+| 9  | 6.63 | 6.5 | 7.2 | 0/15 |
+| 10 | 6.57 | 6.2 | 6.9 | 0/15 |
+| 11 | 6.48 | 5.8 | 6.8 | 0/15 |
+
+Flat-to-down **despite every pass measurably fixing what the prior round cited.** The reason
+is structural: the jury anchors its score to *whatever is now the most-frequent residual
+repeat*, and that target merely rotates (cb_corner → observe() → love/marriage/child →
+the fixed-string tail) — it never empties. The two complaints that recur *every* round are
+genuinely unfixable by tuning: (1) the calling fork is "four identical buttons every life"
+— but it is also the engine of vocation variety the same jurors praise; and (2) the
+life-spine (origin→calling→love→marry→child→health→elder→death) is inherent to a
+generational life-sim and the dynasty layer that gives it pull.
+
+### Honest bottom line
+
+The work made *A Life* dramatically fresher by every objective measure (monoculture
+eliminated; ambient repetition cut ~5×; a real fifth life-shape; dynasty depth restored;
+the dominant beats de-duplicated; dozens of frozen strings thawed) and every juror praises
+the architecture, prose, callbacks, vocations, eras, and dynasty layer. But **15 exacting
+profile-reviewers each ≥8 on a 15-dynasty adversarial freshness-read is not reachable for a
+finite, card-based prose sim by tuning alone.** Crossing it is a product decision — a 3–5×
+larger authored corpus, a non-card generative text layer, genuinely beat-skipping/reordering
+life-archetypes, or a review methodology matched to real play (2–3 dynasties, where the game
+already reads ~7.5) — not something an autonomous content/tuning loop should commit to
+without the owner's call.
+
+- Verdicts (this continuation): `eval/jury/fun-round9/` … `fun-round11/` (45 receipts)

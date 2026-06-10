@@ -1,0 +1,53 @@
+{
+  "profile": "lapsed_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is the game's best mechanic: decisions made at age 8 literally resurface at 46 (child_books returning as cb_books_late, looked_away returning as cb_lookaway). This creates genuine 'I did that' recognition and makes choosing matter beyond the immediate moment.",
+    "Dynasty momentum is real and legible. Watching a house climb from 'a rented room' to 'an old and famous house' across five generations, with a crystallised motto and heirlooms accruing, gives the multi-dynasty loop genuine purpose — the 'one more generation' pull is real.",
+    "The era system (war, plague, hard, plenty, turning) meaningfully differentiates generations structurally, not just cosmetically. A soldier born into a war era faces genuinely different choices than one in settled times (vx_soldier_war vs. a_soldier_service), and the calling-fork text itself shifts in voice.",
+    "The prose quality is consistently high enough that individual lines of observation ('Books have become a country he can live in', 'She negotiates with the body each morning, and loses a little more of each round') land as genuine pleasures — the game earns its slow pace with writing that rewards attention.",
+    "The bequest system (mind/means/heart/free) is a satisfying dynasty-layer lever — a real decision with downstream effects that makes the transition between lives feel agentive rather than automatic.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) — events with no choice-out — add welcome unpredictability and break the 'I am crafting an optimal character' mindset."
+  ],
+  "staleness": [
+    "107 of 144 cards are once:true per life. Once per dynasty there are 25 onceDyn cards. The repeatable pool is thin: roughly 37 cards fire across any number of lives. By dynasty 6-8, a returning player who reads the transcripts carefully will have seen the majority of available beats, and the adult/midlife band (ages 28-64) — the longest stretch — is heavily once-per-life. The 'band-filler' repeatable cards added in pass 7 (a_smallchoice, a_friend_drift, m_smaller_body, a_recognition, m_late_skill) are generically staged and arrive without enough situational texture to feel new.",
+    "The structural shape of every life is near-identical regardless of vocation: origin card (3-5), book/wonder/friend (8-12), y_calling (14-22), love (16-28), marry (24-58), child (26-50), midlife health/money scare (45-68), elder legacy (66-95), death. Vocations do add their own arcs (a_soldier_service, a_scholar_question, a_wanderer_settle) but those are once-per-life milestones, so after a first playthrough of each calling you've seen the structural variant. Reading dynasties 8-15 in the transcripts, the beat sequence remains very consistent even as the prose lines rotate.",
+    "The love/marriage/child cluster is structurally identical in almost every life that pursues it. y_love1 fires, a_marry fires, a_child fires — sometimes twice. The prose rotates (7 variants for y_love1, several for marriage lines) but the card sequence itself never varies, and the marriage prompt with the named spouse repeating the same six framings becomes recognisable by dynasty 4-5. The 'which dinner-table variant of the marriage card will I see' is not compelling choice.",
+    "Repeated log-line endings become a texture issue at scale. Across dynasties 1-15 in the transcripts, 'Slow down. Listen to it.' / 'Began, late, to move at the body's pace' (e_body), 'Not this time. / Stood, this once, on the side of the thing she had cut past before' (cb_corner), 'Told them it was worth it' (cb_reckless), and the three legacy lines ('That I was kind', 'That I built something', 'That I was here at all') each appear multiple times in close succession across different dynasties. The deduplication logic works within a life but not aggressively enough across dynasties in a single session.",
+    "There is no mechanical goal or external pressure that makes a player's dynasty choices feel like they are building toward anything reversible or at risk. House seat can fall, but the reckoning card (x_reckoning) fires once per life only, and decline is slow enough that a player can ignore the dynasty layer entirely and lose nothing. The 'histories' tier (seat 7, repPeak >= 3.5) is legible but reaching it provides no new content — the house just accrues a description. There is no 'and then what?'",
+    "Traits (bookish, restless, warm, guarded, shrewd, stubborn, dreaming, frail, tender, bright) each have exactly one or two gated cards. A 'guarded' character gets t_guarded (one occurrence, once:true). That's it for trait-specific content. The trait is then mechanically present in stat drift but ceases to gate new moments after its single card fires. Inherited traits feel like flavour labels rather than structural divergences."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 repeatable 'echo' cards per stage (child, youth, adult, midlife, elder) that vary their prompt based on previously fired once:true cards — not callback cards, but ambient cards that can draw on remembered context to feel situated. Example: an adult band card that varies based on whether 'child_books' was taken, without being the cb_books_late callback itself.",
+      "why": "The repeatable pool is the game's weakest structural point. Currently ~37 cards fire across any life after the once:true pool is exhausted. More situationally-inflected repeatable content means the adult/midlife band feels different in life 8 of a dynasty vs. life 2, even after all once:true beats have fired.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce a second vocation arc card per calling that fires only after the first vocation milestone has resolved — specifically a mid-career crisis or inflection that asks the player to revisit the original choice. The scholar could face a moment where a peer surpasses them; the soldier could face a decision to leave the profession; the wanderer to take on a settled apprentice. These would be once-per-dynasty, not once-per-life.",
+      "why": "Currently vocations gate a cluster of 3 cards (youth-adult-elder arc) and then are functionally done. The calling shapes the character but stops generating gated content after the elder cap fires. A second mid-arc card would extend vocation-specific texture into the long midlife band.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the elder legacy question (e_legacy) contextually sensitive to the full arc the player has lived, not just the vocation. A character who held 'unspoken_love', never married, and chose the road should face a legacy framing that acknowledges that shape. A character who strayed from their marriage, confessed, and rebuilt should see that history in the final question.",
+      "why": "e_legacy is the most emotionally loaded card in the game — the last major choice before death. It currently rotates vocation-specific framings but is otherwise static. Making it synthesise 2-3 major memories would give the elder arc genuine payoff and make the final moment feel earned rather than procedural.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce at least one 'rival house' or 'outside force' event that can only fire when the player's house is at seat 4 or higher and creates a cross-dynasty threat: another house whose actions constrain the player's options in the following generation. Specifically, an inheritance dispute that carries across a succession, or a competing house whose reputation directly shadows the player's reputeTop.",
+      "why": "The dynasty layer currently only involves internal mechanics (seat, repute, heirlooms, motto, secret). There is no external pressure that makes the dynasty feel like it exists in a world. A rival or event that persists across a succession would make high-seat play feel like navigating a landscape rather than managing an accumulation.",
+      "impact": "med"
+    },
+    {
+      "what": "Deepen trait-specific gating so each trait fires at least two distinct moments: one in youth/adult and one in midlife/elder, with the second explicitly referencing the first. The 'bookish' trait could gate a midlife moment where the character must choose whether to finish a book project or attend to a failing relationship — an echo of the childhood book choice but at adult stakes.",
+      "why": "Currently each trait gates one card and then becomes ambient stat drift. This makes inherited traits feel like flavour rather than structural divergence. A second gated moment that specifically references the trait's prior firing would make inherited natures feel like genuine character arcs.",
+      "impact": "med"
+    },
+    {
+      "what": "For the love/marriage/child cluster, add at least 3 variants of the marriage card that depend on how the relationship has gone: one for couples who faced the affair card (a_affair) and survived it, one for couples who met late (a_meet_late), and one for couples who repeatedly chose 'Not yet, maybe never' before finally asking. Currently all paths converge on the same six framings.",
+      "why": "The marriage card fires in almost every life and is structurally identical regardless of how the relationship unfolded. Adding relationship-history awareness to the marriage prompt would make the preceding choices matter retroactively and break the 'same sequence, different names' pattern.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is well-crafted and genuinely moving for two or three dynasties, but the once:true card architecture and thin repeatable pool mean that by dynasty 6-8 a returning player is watching the same structural template — origin, calling, love, marriage, child, midlife scare, elder legacy — replay with rotating prose rather than discovering lives that feel structurally new."
+}

@@ -1,0 +1,48 @@
+{
+  "profile": "genre_veteran",
+  "score": 6.4,
+  "fun_highlights": [
+    "The callback system is genuinely the best thing in the game. Moments like 'cb_lookaway' (seeing the child you once ignored in a doorway stranger 20+ years later), 'cb_books_late' (reading at ease the book you couldn't parse at 7), and 'cb_strayed' (the affair sitting in the room at death) create authentic emotional continuity across a life. In transcript Calla Okonkwo, the affair at 44 feeds directly into the deathbed confession at 67 — that's a real arc, not a template.",
+    "Prose quality is consistently high and often excellent. Lines like 'Married in a hurry and a downpour, and never once wished it grander' (Lucan Castellane) and 'Decided the kindest inheritance was none at all, and let the next life be wholly its own' land cleanly. The writing avoids sentimentality most of the time; it earns its quietness.",
+    "The era system gives a macro-texture that actually differentiates lives. A plague-era childhood produces genuinely different phrasing in the opener and gates the 'sickness in the next street' card — Hale Okonkwo's plague childhood reads categorically differently from Calla's settled one. This is structural variety working as intended.",
+    "The dynasty layer accumulates meaning in a satisfying way. Seeing House Okonkwo climb from rented room to 'old and famous house' over five generations, watching 'We earn the bread we eat' crystallize, and seeing Calla's book heirloom pass to Beatrix (who reread it at 47) and onwards — this produces a genuine pull to see the arc through.",
+    "The vocation system creates divergent adult lives. The scholar track (study pays callback, knowledge-guard choice, scholar's peace with not-knowing at the end) reads as a different life from the soldier track (campaign choice, war-PTSD night-terrors callback, veteran legacy question). Across 15 dynasties the vocational divergence is the primary engine of mid-transcript freshness.",
+    "Short lives and early deaths (Joaquin Castellane at 16, Theda Brandt at 10, Linnea Brandt at 18) provide genuine tonal variety — the 'gone too soon' note lands hard precisely because it's surrounded by full lives. The engine earns the sadness by making it rare."
+  ],
+  "staleness": [
+    "The 'reputation' choice (a_make_name: 'Be known as hard to cross / learned / open-handed') fires in at least 6 of 15 dynasties and uses near-identical framing every time: '{n} is at the age where a reputation sets, the way a face does.' By the fourth appearance, the player is reading past it. The phrasing is lovely once; it becomes a visible template seam by mid-session.",
+    "The drift/anchor loop is over-represented for characters with the 'adrift' vocation. Across the transcripts, the sequence 'drifted by default -> aches for anchor at midlife -> grasps late for single thing -> makes peace at death' fires with minor variations in nearly every drifter arc (Noor Okonkwo, Vesna Thorne, Mira Halloran, Anders Aldecott gen 2). The beats are distinct cards but the psychological throughline is identical and the player recognises it quickly.",
+    "The body/aging observation pool, while large, produces clustering visible in a single read. Within Dynasty 6 alone, the transcript hits 'Mornings take longer to arrive in the body,' 'The stairs have started to ask a question,' 'There is a small daily ceremony now to standing up,' and 'The body has begun sending its small bills' across Cassian, Vesna, and Ingrid. The per-life cap of 4 observations isn't enough to prevent this when several lives in the same dynasty read consecutively.",
+    "The war-loss card ('Lost someone to the war and put the loss away in work, where it kept, badly, for years') fires verbatim or near-verbatim in at least 5 dynasties during war eras. The logLine has no variation pool — it is the single sentence every time. This is among the most noticeable repeated beats in the entire transcript.",
+    "The 'masterwork deferred' card (kept the ordinary work, let the masterwork stay a thing he would make next year) appears word-for-word or with minimal variation in at least 6 makers/drifters: Cassian Achterberg (54), Cassian Thorne (55), Idris Lindqvist (57), Emory Quint (44), Lucan Castellane (56 — who does eventually make it), and others. The phrasing 'a thing he would make next year' is the most repeated distinctive phrase in the entire transcript.",
+    "The family-motto announcement is a strong dynasty moment that is undercut by appearing too early and too mechanically. In Dynasty 13, the motto crystallizes at the end of generation 3 (Idris, age 69) and is then re-invoked as 'Raised on the family words' at the opening of generations 4 and 5 with identical cadence. The reader sees the system rather than feeling the tradition."
+  ],
+  "improvements": [
+    {
+      "what": "Give the war-grief card a variation pool of at least 4-5 logLine alternatives, keyed to vocation or relationship type (soldier grieves differently than wanderer; losing a friend vs. a sibling vs. a child).",
+      "why": "It is the single most-repeated verbatim sentence across the transcripts — the exact wording 'put the loss away in work, where it kept, badly, for years' lands identically in Elias Okonkwo, Noor Okonkwo, Caleb Castellane, Mateo Lindqvist. One more pass through it and the player stops reading.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 variation pools to 'a_make_name' (the reputation card) that vary the framing by current era, vocation, or prior choices — a soldier choosing a reputation reads differently than a scholar doing it; a plague-era reputation is built differently than a fat-years one.",
+      "why": "The current framing ('the age where a reputation sets, the way a face does') is a strong line that becomes a template tell by repetition. The card fires often enough that it needs the same variation treatment the marriage card already received.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the adrift-vocation arc's mid-life convergence by adding a second distinct psychological shape for drifters: not just 'aches for anchor, grasps late' but an alternative path where the drifter finds the range itself was the answer (already present as a choice, but the logLine and subsequent cards should diverge more sharply from the aching-for-anchor branch).",
+      "why": "Every drifter in the transcripts ends up at the same reckoning beat. The choice exists but its downstream content is nearly identical. The drifter life-shape is interesting — it just needs two genuinely different midlife trajectories to prevent the 'I've seen this drift' recognition.",
+      "impact": "med"
+    },
+    {
+      "what": "Implement a session-level cooldown (similar to the existing onceDyn mechanism) specifically for the 'masterwork deferred' logLine so it cannot appear in more than 2 lives per session, and add 3 alternate lines for subsequent maker/adrift lives.",
+      "why": "'The masterwork stayed, as it always had, a thing he would make next year' is the most visible repeated phrase in the transcripts. Six appearances in 15 dynasties is too many for a line that draws attention to its own repetition.",
+      "impact": "med"
+    },
+    {
+      "what": "Deepen the body-observation pool cross-life deduplication by extending the existing anti-repeat memory from per-dynasty to per-session (or at least per-consecutive-dynasty-pair), and lower the per-life cap to 3 rather than 4 for lives within the same dynasty.",
+      "why": "The consecutive-generation problem is real: reading Dynasty 6 back-to-back, the reader encounters ~8 body-aging observations across 5 lives, and the pool is visibly finite. The per-life cap helps but the within-dynasty density is still too high.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely promising life-sim with better prose than most of its genre peers and a callback system that produces real emotional resonance. The dynasty layer — heirlooms, mottos, the gradual climb or fall of the house — creates the 'one more generation' pull the genre needs. The staleness problem is real and appears within a single session: three or four cards have verbatim or near-verbatim repetition that a reader will notice by mid-session (the war-grief card, the masterwork deferred, the reputation-sets framing), and the drifter arc converges to a predictable shape. At its best — a five-generation dynasty where callbacks close properly and the vocation shapes a genuinely different life — it scores an 8. At its worst — a drifter who hits the same anchor-ache and late-grasp as the last three drifters, then reads the same body-aging observations — it drops to a 5. The average lands in the high 6s: real strengths, containable staleness, playable now but in need of a variation pass on its ten most-repeated beats."
+}

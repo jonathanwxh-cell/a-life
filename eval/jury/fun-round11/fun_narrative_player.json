@@ -1,0 +1,48 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 6.8,
+  "fun_highlights": [
+    "The callback/memory system creates genuine narrative resonance: Calla Okonkwo keeps a childhood book at age 7 and reads it with ease at 50 (cb_books_late); Beatrix passes it to a grandchild; Mira Halloran looks away from a lonely child at 7 and stops for a street person at 49 (cb_lookaway). These long-arc payoffs are the game at its most moving.",
+    "Multi-generational dynasty texture genuinely accumulates: Hale Okonkwo (Dynasty 4, gen 5) consciously honoring Calla four generations back, the motto 'We earn the bread we eat.' crystallizing after Noor's death, and the next two lives raised on those words — this is the dynasty layer working as promised.",
+    "The prose quality is legitimately high: 'The marriage broke on what she did. Hale left, and was right to.' (Calla, D4); 'Decided the kindest inheritance was none at all, and let the next life be wholly its own.' (Lucan, D7); 'Asked only to be remembered as someone who had been gentle with people.' (Caleb, D7). These lines land.",
+    "The adrift/drifter arc is a genuinely different life-shape, not a thin vocation variant: Noor Okonkwo and Vesna Thorne read recognizably differently from soldier or scholar lives, and the arc's honest prose about the costs of the unanchored life earns its place.",
+    "Early and short lives are handled with quiet grace: Joaquin Castellane dying at 16 ('Gone too soon, with so much unspent'), Theda Brandt dying at 10 ('Left before the story had found its middle'). Brief lives don't feel like failures — they feel like part of the form.",
+    "The competing-goods cards (x_honest_or_kind, x_dream_or_duty, x_loyalty_truth) provide genuinely difficult choices without easy moral resolution, and they're the moments most likely to linger after a life ends."
+  ],
+  "staleness": [
+    "'Meet them halfway' appears as the love-response button and log-line framing in virtually every life that accepts a love interest across all 15 dynasties (D2 Henrik, D4 Calla/Elias/Noor, D6 Tomas/Vesna/Ingrid/Mira, D7 Caleb/Otto/Lucan/Cleo, D9 Selma, D10 Tobias/Felix, D11 Ren, D13 Idris/Anders, D14 Greta/Anders, D15 Annika/Saoirse). The button text is always visible; it becomes invisible through repetition.",
+    "The plague-era framing text is a single string with no pool: 'The sickness is in the next street, then the next house. Someone close has it, and tending them means breathing the same air.' fires verbatim for Hale Okonkwo (D4), Tomas Thorne, Cassian Thorne, Vesna Thorne, Ingrid Thorne (D6), Otto Castellane (D7), Greta Aldecott (D14), and others. Six-plus identical framings across a session is too many for card text with no variants.",
+    "The ambient body-aging observations become wallpaper: despite the 4-per-life cap and obsPick anti-repeat, phrases like 'The body has begun sending its small bills' and 'The stairs have started to ask a question of them' appear in nearly every mature life. By the fifth or sixth dynasty, readers stop seeing them.",
+    "War-loss grief phrasing repeats verbatim: 'Lost someone to the war and put the loss away in work, where it kept, badly, for years.' appears identically for Elias Okonkwo (D4, age 38), Noor Okonkwo (D4, age 53), and Caleb Castellane (D7, age 47). The w_war_loss card's 'Bury it in work' choice has only one log line.",
+    "Epitaph lines recycle across dynasties despite anti-repeat systems: 'Gave away everything they knew, and so kept it' is both Henrik Vane (D2) and Selma Quint (D9); 'Left people gentler than they found them' is both Elias Okonkwo (D4) and Idris Lindqvist (D13); 'Was elsewhere as often as here, and the elsewhere was wide' is both Noor Okonkwo (D4) and Anders Aldecott (D14). The RECENT_LINES buffer isn't large enough to prevent recycling across 10+ dynasties.",
+    "The c_origin era-variant childhood texts are single strings, not pools: the plague-era opener fires identically for Cassian Thorne (D6), Otto Castellane (D7), and others born in plague eras. Era-variant childhood text needs the same freshPick treatment the rest of the card system uses."
+  ],
+  "improvements": [
+    {
+      "what": "Add a 5-6 variant pool to the plague-era w_plague_tend card text (currently a single string), and similarly pool the war-era w_war_loss 'Bury it in work' log line",
+      "why": "These are the two most visibly repeated structural moments in the transcripts — the plague-tending framing fires 6+ times across 15 dynasties with identical text. Adding pools (even 3 variants each) would break the recognition pattern immediately.",
+      "impact": "high"
+    },
+    {
+      "what": "Replace the single 'Meet them halfway' love-response button text with a pool of 4-5 distinct phrasings ('Let it begin.', 'Meet them where they are.', 'Walk toward it.', etc.) that the button draws from per life or per dynasty",
+      "why": "This is the most-seen repeated phrase across the entire transcript set — it appears in almost every life. The button text is more visible than the log line because the player actively reads and clicks it. Even 3 variants would eliminate the recognition fatigue.",
+      "impact": "high"
+    },
+    {
+      "what": "Pool all era-variant c_origin childhood opener texts (currently single strings per era) using freshPick, adding 2-3 variants per era",
+      "why": "The c_origin card is the first thing seen in every life, making repetition maximally visible. The plague and turning eras in particular have only one opener string each, which fires identically for every life born into that era.",
+      "impact": "med"
+    },
+    {
+      "what": "Increase the RECENT_LINES epitaph buffer from 150 to 400+ entries, or add dynasty-index-aware blocking (not just last-2-ancestors) for the stat-derived epitaph themes",
+      "why": "Across 15 dynasties, the same epitaph lines recur despite the anti-repeat system. The 150-entry buffer fills and wraps within a long session. Larger buffer or harder cross-dynasty blocking would prevent the most jarring repetitions.",
+      "impact": "med"
+    },
+    {
+      "what": "Reduce the ambient body-observation frequency below the 4-per-life cap for elder lives, or gate them behind a 'first time this SESSION' check (similar to onceDyn) so the same body line doesn't appear in consecutive dynasties",
+      "why": "The body observations are currently the stalest element of the mid-to-late life experience. They fire in nearly every life and the reader stops registering them. Cutting to 2 per life and applying session-level deduplication would make the ones that do fire feel more earned.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine literary ambition and the callback/dynasty layer earns real emotional weight across a long session — the 5-generation Okonkwo run is the kind of dynasty-building the genre promises. But the template is visible within 3-5 dynasties: love is almost always accepted via the same button text, plague eras always use the same framing, war grief is often the same sentence, and body-aging observations paper every mature life with the same phrases. The prose is good enough that fixing the most-repeated structural moments (the plague card text, the love-response phrasing, era-variant childhood openers) would push this comfortably into the 7.5 range; as it stands, staleness accumulates in a session and blunts the genuine strengths."
+}

@@ -1,0 +1,50 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system (cb_books_late, cb_outcast_return, cb_lookaway, cb_study_pays, etc.) is the game's best mechanic — when a choice from age 8 echoes back at age 46 with specific prose referencing the exact age it happened, it delivers a genuine 'I made that' feeling that no other mechanic matches.",
+    "Vocation arcs genuinely differentiate the structural shape of a life. A soldier who goes where it's worst, develops PTSD at 55, and gets asked by a young one what it was really like reads structurally unlike a scholar who chased the question, got the payoff at 28, and then debated giving the knowledge away at 56.",
+    "The era system (war/plague/plenty/hard/turning) changes which cards can appear and colours the origin card text, creating real macro-level contrast — a life in plague years has a different texture from one in fat years, and era-gated cards (w_plague_tend, w_war_call, w_hard_winter) do not appear elsewhere.",
+    "Dynasty accumulation genuinely creates cross-session goals. Watching a motto crystallise ('We do not ask twice' in dynasty 6), tracking seat progression, and inheriting a family secret are the 'one more dynasty' pull the game needs — they work.",
+    "Trait affinity weighting is underrated. A bookish child leaning toward c_book, a warm one toward c_friend and c_animal — this is subtle but real and makes the early years read differently for different people across runs.",
+    "The competing-goods dilemmas (x_honest_or_kind, x_dream_or_duty, x_favour, x_loyalty_truth) are the best individual cards in the game. Both options are genuinely defensible, and the hint text ('honesty over comfort', 'the self') makes the trade legible without trivialising it.",
+    "The 'fate' cards (f_fire, f_sudden_loss, f_grace, f_reversal) that offer no real choice are structurally smart — they introduce genuine surprise and remove the sense that every outcome is player-authored."
+  ],
+  "staleness": [
+    "The structural skeleton is too visible by dynasty 4-5 and nearly transparent by dynasty 8. Every coupled life hits: birth origin → vocation fork (y_calling, near-certain by design) → love appears (y_love1 nudged at 30%) → marriage card (a_marry, ~55% per draw once in love) → child question (a_child) → health scare (m_health) → parent dies → elder reflection (e_legacy) → bequest → death. The prose rotates but the SHAPE does not. Reading fifteen dynasties of transcripts, the skeleton is visible by dynasty 3 and clockwork by dynasty 8.",
+    "The marriage card (a_marry) is the clearest example. It has 6 setup variants, but all six read as the same situation (hesitation, then asking). By dynasty 10 the player recognises 'fell asleep mid-sentence' or 'the question has been in the room for years' as the same beat wearing different clothes. There is no way the marriage can be contentious, cancelled, or happen off-screen.",
+    "The cb_corner callback fires across dynasties 2, 3, 4, 6, 8 because 'cut_a_corner' is among the most common memory flags (multiple paths set it). The text is nearly identical each time: 'the corner Emory/Esme/Roman cut once, years ago, comes back wearing a larger face — the same quiet dishonesty, more at stake.' By the fifth appearance it reads as a template, not a story.",
+    "The elder peace card (e_peace) fires in nearly every life that reaches old age: 'it is close now, and [name] can feel the shape of it. There is a way to meet it.' Six of the fifteen transcript dynasties show it verbatim. It is the most visible repeated beat in the transcript evidence.",
+    "The midlife health scare (m_health) fires in most lives: 'The body sends its first real letter. A scare, a doctor's careful voice, a word [name] has to look up.' By dynasty 8 this reads as a mandatory checkbox. The outcome differs (change everything vs carry on) but the framing is always the same.",
+    "For a mobile snacker specifically: the game has no natural pause points. A life runs at 2s/year for roughly 70-90 years — that is 2-3 real minutes of watching prose drift by before the next card. No 'fast-forward to next moment' button is surfaced prominently. The fastFwd tap-the-text mechanic is not discoverable in a first session. This means a mobile snacker picking up the game for 4 minutes either watches a lot of drifting prose or misses it entirely and gets only 1-2 decisions per session, which is not enough to form attachment to a life.",
+    "The callback system — the game's best feature — requires 2-3 full lives before a single callback fires. In short mobile sessions, a player may never see one. The payoffs that most distinguish A Life from a standard text-based life-sim arrive too late for the format."
+  ],
+  "improvements": [
+    {
+      "what": "Add a 'Moments only' fast-forward: a persistent button (or swipe gesture on mobile) that speeds the clock to 0.3s/year until the next card, then returns to 2s/year. Make it a labelled affordance ('Skip to next moment') rather than requiring discovery of the tap-on-text mechanic.",
+      "why": "Mobile snackers pick up the game for 4-8 minute bursts. At 2s/year with ~12-15 cards per life, roughly half of a session is watching prose drift with no interaction. The existing fastFwd exists but is not discoverable. An explicit button would let mobile players control their pacing and get more decisions per session without losing the meditative quality for those who want it.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the marriage card (a_marry) into at least two structurally different variants: the current 'hesitation resolved' version, and a second path where the asking happens suddenly in a crisis (illness, a near-death, the love is about to leave). Gate the second variant on certain flag combinations (e.g., if the love's bond has been declining, or if peril is active).",
+      "why": "a_marry is the most player-visible templated moment. It appears in nearly every coupled life and every variant describes the same emotional situation (prolonged hesitation → eventual asking). A structurally different second variant — urgent instead of prolonged — would break the template recognition without requiring new systemic machinery.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-3 anti-staleness variants to the elder peace card (e_peace) that gate on life history: one for soldier-vocations ('the body has kept its own ledger, and the blade's old debts'), one for lives with unresolved cb_strayed (the betrayal frames the dying), one for very-high-spirit lives. The current single framing appears verbatim in 6 of 15 dynasties.",
+      "why": "e_peace is the most frequently repeated single beat in the transcripts. Because it fires in nearly every life that reaches old age, even small textual variety has multiplied effect. Gating variants on the life already lived would make the dying feel earned rather than boilerplate.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the callback system's existence earlier. After the first callback fires in a session, add a brief hint: 'A choice from [age] is still with them — the game remembers every decision.' Consider adding one guaranteed callback-eligible moment at adult stage for all lives, even those that haven't yet earned a specific callback — a generic 'looking back' card that references whatever the strongest memory flag is.",
+      "why": "Callbacks are the feature that most distinguish A Life from a static text life-sim. For mobile snackers who may play only 2-3 lives per session, they may never fire. Surfacing the mechanic earlier, and guaranteeing at least one backward-looking moment per life, would increase the chance that every session contains the game's best feeling.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 'crossroads' adult cards that create genuinely different structural life-shapes rather than different prose for the same shape. Examples: a card that offers abandoning the existing family entirely (choosing a wholly different life mid-stream, with real consequences for the dynasty line); a card that surfaces only if no vocation was chosen (a 'drifter' arc with its own 3-card sequence); a card that fires only if the player has declined love twice (a chosen-solitude arc with its own elder bookend).",
+      "why": "The staleness complaint from the transcripts is structural, not prose-level — every life follows the same skeleton regardless of choices. New mechanics need to create different SHAPES of life, not different text for the same shape. These would require more development investment but would address the deepest source of staleness.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is a beautifully written literary sim whose prose machinery is genuinely impressive, but whose structural skeleton — birth, calling, love, marry, child, health scare, elder reflection, die — becomes transparent by dynasty 4 and clockwork by dynasty 8, meaning the game feels like rotating prose skins over an invariant template rather than genuinely different lives, which is not enough to hold a mobile snacker across many sessions."
+}

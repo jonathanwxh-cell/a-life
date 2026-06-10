@@ -1,0 +1,49 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback chain is the game's best mechanic: a childhood stray becomes a defining dynasty epitaph; 'looked away' from a lonely child surfaces 20-30 years later as a homeless-person encounter; the childhood book reappears on a midlife shelf. These are genuine system collisions that produce stories you didn't plan.",
+    "Vocation x Era intersections (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) are the strongest structural variety lever — a soldier in a war era plays nothing like a scholar in a turning era, and the divergence is felt in the log, not just the stat sheet.",
+    "Dynasty accumulation does create a real 'one more run' pull: watching a ruthless house crystallize 'We do not ask twice' across five generations, then watching the sixth heir either inherit the shadow or break from it, is the kind of emergent arc I came for.",
+    "Solitary and childless life-shapes are genuine content paths, not dead-ends — the m_solitary / e_solitary / a_chosen_family cluster gives these lives real texture.",
+    "The onceDyn generational cooldown on milestone cards (calling, love, mentor, etc.) prevents the most egregious beat-lockout; a later generation can still encounter an early card's sequel even if the original fired in generation 2.",
+    "The era system's prose framing — 'these are lean years' / 'a war somewhere past the edge' — lands as genuine world-texture before most major decisions, and the turning-era vocation intersection (vx_scholar_turning) is a particularly sharp piece of writing."
+  ],
+  "staleness": [
+    "The domestic arc (love → marry → child) dominates structurally. Of roughly 35 lives across the 15-dynasty transcript run, ~24-25 follow this chain. The engine nudges toward it, and despite the solitary-path additions, most lives still read: youth love, adult marriage, adult child, midlife career, elder bequest. The 'one more dynasty' pull diminishes as each new life slots back into the same skeleton.",
+    "cb_corner fires with clockwork regularity: any life that takes the small dishonesty (roughly half of adult lives) will predictably encounter 'the corner comes back bigger' midlife reckoning. By dynasty 6-8 the beat reads as scheduled rather than discovered — it's the dominant callback and it saturates the transcript.",
+    "The body/aging observation lines repeat verbatim across dynasties: 'The stairs have started to ask a question,' 'Some mornings the body answers the bell late,' 'The weather has begun living in her joints' appear three or more times in the 15-dynasty run. These lack onceDyn guards and accumulate as a recognisable wallpaper in the late-life years.",
+    "e_bequest + e_legacy together function as mandatory paperwork before the eulogy in almost every elder life with children. The bequest choice is meaningful on paper but in practice most players pick 'Everything I know' or 'The stories, and the warmth' — the 4-way choice collapses to 2 common paths and both land in the same epitaph cluster.",
+    "cb_reckless (counselling the next reckless young one) fires in five of the fifteen dynasties — too common once any ancestor took the reckless path, which many do. The callback pool is somewhat top-heavy: cb_corner and cb_reckless between them account for the majority of 'life echoes', while rarer callbacks (cb_unspoken, cb_inherited_secret) barely surface.",
+    "Era variety is real but thin outside soldier. War + soldier is the one fully realised intersection; plague + scholar, hard + wanderer, and most vocation/era pairs produce only the generic era cards (w_plague_tend, w_hard_winter) without a distinct vocation-flavoured moment. By dynasty 10 most era encounters feel cosmetic — they change the opening line but not the shape of the life.",
+    "The calling fork (y_calling) is the strongest structural lever but produces only 4 vocations with unequal depth. Soldier and scholar each have a satisfying 3-card arc with genuine emotional weight; maker and wanderer have 3 cards that are thinner in practice (the maker's masterwork dilemma and the wanderer's settle/return loop both feel resolved within 2 beats). A long dynasty eventually exhausts the vocation arcs for a given calling path."
+  ],
+  "improvements": [
+    {
+      "what": "Add a third callback cluster beyond cb_corner / cb_reckless — specifically, make 'cb_unspoken_love' and 'cb_inherited_secret' fire more reliably when eligible, and add 1-2 new memory-gated callbacks for less-used paths (e.g. 'cb_talent' for the child who hid their gift, 'cb_looked_up' for the bookish person who closed the book once).",
+      "why": "The discovery that a childhood decision shapes a midlife moment is the core of the emergence experience. Currently 2 callbacks (corner, reckless) dominate; expanding the pool and ensuring rarer ones surface would make the 'I didn't see that coming' moments more evenly distributed across a dynasty.",
+      "impact": "high"
+    },
+    {
+      "what": "Add onceDyn:2 guards to the body/aging observation lines that currently fire freely ('the stairs have started,' 'the weather in the joints,' 'the body answers the bell late'). These ambient lines should rotate as the generation pool, not repeat verbatim across consecutive lives.",
+      "why": "These are the most visible staleness signal in a long session — a juror or replay player will notice the same phrase in dynasty 3, 7, and 12. Making them rotate per-dynasty costs nothing and immediately raises the perceived freshness of the late-life years.",
+      "impact": "med"
+    },
+    {
+      "what": "Add at least 2 vocation x era intersections for the currently sparse pairs: a scholar in a plague era (distinct from the generic w_plague_tend — perhaps a dilemma about whether to study the sickness or flee it), and a wanderer in a war era (the road becomes a front line — does the wanderer carry messages or disappear into the countryside?). These sit at the mechanical level of vx_soldier_war and would give non-soldier vocations a structurally distinct war/plague experience.",
+      "why": "The vocation x era intersection is the system collision that generates the best emergent stories. Currently only soldier has a fully realised version; the others borrow the generic era cards, which means 3 of the 4 vocations lose their distinctive voice when a historical era lands.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce a 5th calling: the 'healer' or 'care-giver' path (someone whose vocation is tending others — a midwife, a physic, a keeper of the sick). Gate it behind a plague or hard era, or behind the 'warm/tender' trait cluster, so it arrives as a situational unlock rather than always-available. It would create a distinct adult arc that collides with plague/hard era content in ways the current 4 callings don't.",
+      "why": "Four vocations produce 4 structural shapes; after 8-10 dynasties you've seen each shape multiple times. A 5th that is era-or-trait-gated (rare, earnable) would reward long play with genuine novelty — exactly the 'one more dynasty' pull the game needs at mid-to-late session.",
+      "impact": "high"
+    },
+    {
+      "what": "Reduce the frequency nudge for a_marry and a_child in dynasties where a life has already taken the solitary path (m_solitary fired or chose_solitude is in memory). Currently the engine still nudges a_meet_late even after a life has explicitly settled into solitude, which produces the odd loop of refusing late love twice. Once a life has committed to solitude, suppress the love-opening cards entirely and let the solitary content cluster expand instead.",
+      "why": "This would make the solitary life-shape feel chosen rather than accidentally avoided — and would meaningfully increase the proportion of lives with a structurally different shape, which is the core staleness fix.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely moving piece of work with real emergent bones — the callback system and dynasty accumulation deliver moments I didn't plan — but the transcripts are honest: by dynasty 7 or 8 most lives are reading the same domestic skeleton (love, marry, child, bequest, epitaph) with callbacks firing on a predictable clock, and the wonder-of-discovery frequency has dropped enough that I'm no longer reaching for the next dynasty out of curiosity."
+}

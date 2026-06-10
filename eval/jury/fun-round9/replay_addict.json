@@ -1,0 +1,55 @@
+{
+  "profile": "replay_addict",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier/scholar/maker/wanderer) genuinely creates structurally different adult arcs — a soldier's midlife ghost-of-war card and an elder reckoning with it feel like a different life-shape than a scholar's question-that-never-resolved. This alone drives several playthroughs.",
+    "Dynasty meta-progression is a real hook: watching a house climb from 'a rented room' to 'an old and famous house,' a motto crystallize after 3-4 generations of consistent character, inherited secrets surfacing generations later — these deliver a cross-run 'one more try' pull that the individual lives don't always sustain.",
+    "The callback system (cb_books_late, cb_outcast_return, cb_lookaway, cb_strayed, cb_study_pays) is the single best mechanical idea in the game. When a childhood choice lands as a midlife payoff 30 years later, it produces genuine surprise and a sense that this life was specifically shaped. The cb_principle and cb_the_cost callbacks in particular land hard.",
+    "Era variety (war, plague, plenty, hard, turning) does meaningful work early: the w_war_call and w_plague_tend cards feel genuinely different from settled-era moments, and they colour the c_origin card beautifully. A plague dynasty feels different from a plenty dynasty at least for the first 2-3 generations.",
+    "Competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are among the best-written in the game. They produce real decision weight because neither option is cleanly right, and the prose on both branches is honest about the cost.",
+    "Trait affinity in card selection (bookish children lean toward c_book, guarded characters get t_guarded) does create personality-coherent childhoods. A bookish life genuinely does accumulate differently in its early years.",
+    "The bequest system at death is an elegant dynasty-layer lever — choosing 'Everything I know' vs 'Every coin I can spare' vs 'Nothing but their own freedom' is a meaningful decision that affects the next life's opening conditions and narrative framing."
+  ],
+  "staleness": [
+    "By dynasty 5-6, certain log lines repeat verbatim across unrelated lives, which breaks the illusion that each life is its own story. Specifically: 'Did, a second time and for far more, the quiet dishonest thing — and felt almost nothing, which was its own kind of answer' (cb_corner) appears in at least 8 of 15 dynasties in the transcripts; 'Returned to the town he fled at X, and found it both smaller and larger than memory' (cb_left_home) appears 4+ times word-for-word; 'Began, late, to move at the body's pace, and found a little more room inside the days' (e_body) recurs across roughly 6 lives. When you've read the same sentence for the third time, the prose's spell breaks.",
+    "The macro-structure of a life is nearly identical every run: born → origin card → 1-2 child cards → calling (15-22) → fall in love (y_love1) → marriage (a_marry) → child (a_child) → health scare (m_health) → elder legacy (e_legacy) → elder peace (e_peace/e_last_walk). The calling and era add flavour to this spine, but the spine itself is a recognisable template visible by dynasty 3. Once you know the template, the life becomes predictable in its rhythm even when individual cards are fresh.",
+    "The adult/midlife band (28-62) is too thin for its length. The once-per-life milestones (affair, work promotion, parent care, child-grown) fire once and are done. The repeatable band-fillers (a_neighbour, a_small_lie, a_fallow, a_recognition) don't draw often enough to fill the decade-long gaps. In the transcripts, many lives show 8-12 year stretches with nothing but ambient observations ('She has stayed, somehow, on speaking terms with joy'), especially after the milestone cards are spent. This is the span where staleness bites hardest — the middle years are the most lifeless.",
+    "The cb_the_cost elder card ('Near the end, one old decision keeps returning') fires in nearly every life that has any morally complex history, and always resolves to one of two near-identical lines: 'decided it was right — and mostly believed it' or 'let it stay unsettled.' By dynasty 4 you can predict it will come. The ambiguity feels intentional, but its near-universal presence and the flatness of its two options make it feel like a mandatory closing beat rather than an earned reflection.",
+    "Love, marriage, and child still cluster into a recognisable domestic arc in the majority of lives. While solitary and childless shapes exist, the 30% nudge toward y_love1 and strong marriage/child nudges mean most lives hit the love-marry-child sequence — just at somewhat varied ages. The structural difference between a solitary scholar and a domestic maker is real but shallow once you've played each shape twice.",
+    "The era system loses power after 2-3 generations. Once the initial war or plague is established, subsequent era cards (w_war_loss, w_hard_winter) become predictable beats within their era, and the 45% chance of era-drift means eras often flip to 'settled' between generations, neutering the world-building. By dynasty 8+ the era is mostly background flavour rather than a force that changes what a life is about.",
+    "Heirloom inheritance creates cosmetic rather than mechanical variety. A 'soft spot for strays' or 'a book too hard for a child's hands' arriving as an inherited memory does produce a callback card eventually, but it also silently biases the house reputation (fixed in a later pass) and — more noticeably — the heir-screen text lists heirlooms that never affect gameplay in a visible way. The promise of an inherited object exceeds its mechanical weight."
+  ],
+  "improvements": [
+    {
+      "what": "Expand the callback card pool substantially and add mid-career callbacks (not just elder/midlife ones). Add 8-10 new callbacks targeting adult-band memories: 'the choice you made at the calling fork' surfacing at 35-45, 'the friend you betrayed in youth' at 38-55, 'the stray you turned away' at 30-45. The once-per-life callback firing is the best moment in the game; more of them at more life-stages would dramatically reduce the adult trough.",
+      "why": "The adult 28-55 band is where staleness bites hardest. Callbacks are the mechanism that makes a life feel like it has a through-line rather than a sequence of episodes. More of them in the middle years would make every playthrough feel specifically earned.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 more log-line variants to the highest-frequency repeating cards: cb_corner ('did the dishonest thing again'), e_body ('body slows down'), cb_left_home ('returned to the old town'), and the elder 'cb_the_cost' card. Even 2 additional variants per card, selected via freshPick, would halve the visible repetition across a 15-dynasty session.",
+      "why": "Verbatim line repetition is the single most visible staleness signal in the transcripts. A player notices when they read the identical sentence for the third time. The underlying moments are still interesting; the prose just needs more rotation.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'dynasty secret' or 'house burden' card type that only fires once per house (not once per life) and creates a unique, named problem the dynasty must reckon with over multiple generations — a debt, a past injustice, a promise made to a rival house. Gate 2-3 resolution cards across subsequent generations. This would be the dynasty equivalent of the personal callback: something that makes a specific house feel like it has its own story.",
+      "why": "The house currently accumulates reputation and heirlooms but lacks a compelling generational narrative hook beyond the seat-climb. A persistent house-level secret or obligation would give a dynasty a unique identity the player wants to see resolved — the 'one more generation' pull that the current system only partially delivers.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 2-3 genuinely different adult life-shapes through new card clusters: a 'civic' path (someone who becomes embedded in their community, gaining and spending political capital); a 'reclusive' path (someone who withdraws from society, with its own costs and late satisfactions). These would sit alongside the calling arcs as optional shapes that not every life takes, gated on choices made in youth.",
+      "why": "The calling (soldier/scholar/maker/wanderer) gates structural variety well in youth and early adulthood, but by midlife all four callings converge on the same universal cards. Distinct midlife shapes would make dynasty 8 feel structurally different from dynasty 2 even when both are 'scholar' lives.",
+      "impact": "med"
+    },
+    {
+      "what": "Strengthen the era's effect on the adult-midlife band. Currently era gates good child/youth cards (w_war_call, w_plague_tend) but the adult era-specific cards (vx_scholar_turning, vx_soldier_war, vx_maker_plenty) only fire for vocation+era intersections, and the base era cards are few. Add 2-3 non-vocation adult era cards per era — 'fat years' temptations that appear regardless of calling; 'hard years' community solidarity choices; 'turning age' identity cards about whether to embrace or resist the new. This would make the world feel like it presses on a life in the middle years, not only the young ones.",
+      "why": "The era system's strongest effect is in childhood and youth. Adults in the transcripts mostly face the same universal cards regardless of whether they're in a war or a boom. Strengthening era's adult-band presence would make the world feel alive for longer.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a low-weight 'season' card type — a short, non-choice observation that fires 2-3 times per life and is entirely unique to that life's situation: referencing the specific name of a living relative, the current era, the house's reputation. No choice, just a prose image. This fills the ambient-log gap in the adult trough without requiring new event structure.",
+      "why": "The 'observe()' ambient observations are good but feel statistical (they fire on stat thresholds). Situationally-specific ambient lines — 'In the market, someone calls out a name that used to be {their} mother's' — would make the quiet years feel like they belong to this particular life, not any life.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely absorbing for 3-6 dynasties — the callback system and the vocation arcs deliver real discovery — but by dynasty 8 the template shows through: the same verbatim log lines surface, the domestic arc recurs on a predictable schedule, and the adult band goes quiet for years at a stretch; a replay addict will find the 'one more life' itch dulling before the dynasty systems have fully played out."
+}

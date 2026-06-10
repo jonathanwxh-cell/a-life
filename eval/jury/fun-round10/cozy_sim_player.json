@@ -1,0 +1,47 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 6.4,
+  "fun_highlights": [
+    "The prose writing is genuinely lovely in its best moments. Lines like 'Looked too hard at one small thing and fell, permanently, into a curiosity the years never cured' (Carys, Dynasty 1) and 'Heard the body out and rebuilt the life around it — the food, the pace, the priorities — and was repaid in time' have real warmth and a cozy specificity that rewards slow reading. The observe() pools in engine.js (spirit_hi, mind_hi, etc.) add ambient texture between choices that feel like small treats.",
+    "The callback system is the game's best structural idea. When Edmund Ashby (Dynasty 2) at age 57 'Made up, to a stranger, for a child he had ignored 47 years before' because the 'looked_away' memory fired cb_lookaway, or when the heirloom book travels from Ren Salvedi through Idris and Theda Quint, there is a genuine sense of life's long arc closing. These moments gave me genuine cozy warmth — they feel earned, not random.",
+    "Era variety does meaningful work. The war/plague/hard/plenty/turning contexts visibly alter how childhood and vocation cards frame themselves. Dynasty 6's war era shapes Ren Salvedi's whole arc differently from Dynasty 1's settled opening; the plague urgency behind Naima's marriage in Dynasty 11 ('the small certainties have all gone fragile') adds texture that a settled era would not give.",
+    "The vocation arcs (soldier/scholar/maker/wanderer) deliver genuine structural divergence. A soldier life reads differently from a scholar life — the m_soldier_ghost trauma card, the e_soldier_old 'songs vs. truth' choice, and the a_soldier_service fork give a soldier roughly three distinct beats that no scholar ever sees. This is the engine of replay variety and it works.",
+    "The dynasty layer — motto crystallization, heirloom passing, reputation drift — is the cozy game's real draw. Watching 'Nothing was given; all was built' emerge for House Brandt or 'We do not save ourselves for later' for House Okonkwo, and then seeing later heirs either embody or wrestle with those words, creates the 'one more dynasty' pull the genre promises."
+  ],
+  "staleness": [
+    "The mid-life structural template is highly predictable across dynasties. In 15 dynasties I saw the sequence: vocation-pays callback (cb_study_pays / a_maker_shop / a_soldier_service), then a_fork_career, then m_health, then m_mentor_young or m_maker_masterwork, then e_bequest. With minor shuffling this is the adult arc in perhaps 80% of lives. By Dynasty 8 I could predict the rough shape of each life before it happened.",
+    "The body-decline observation lines repeat verbatim across many lives in close sequence. 'The stairs have started to ask a question of them' appears in Dynasty 1 (Henrik, age 64), Dynasty 6 (Idris, age 60), Dynasty 7 (Junia, age 78). 'He/she has started taking the stairs the way one takes a difficult conversation' appears in Dynasty 5 (Lazlo, age 44) and Dynasty 8 (Cassian, age 42). The observe() pool in engine.js has ~9 vit_tire variants but the logs show only 3-4 actually landing, suggesting the rotation logic is not spreading them well enough across a multi-dynasty session.",
+    "Several decision outcomes reuse identical logLine text regardless of context. 'Refused to be repaid for a kindness she barely remembered giving' appears word-for-word in Dynasty 1 (Greta Ashby, age 39), Dynasty 7 (Junia, age 34), Dynasty 9 (Anders Sereno, age 36). The cb_outcast_return callback has only two outcome lines for the 'decline' choice, and the same phrasing recurs every time it fires. As a cozy player who is paying attention to the prose, this is the primary staleness signal.",
+    "The 'look away from lonely child / cb_lookaway payoff' arc is too common. In 15 dynasties it fires as a full sequence (look away -> decades later see rough sleeper -> look away again or redeem) in Dynasty 1 (Iris), Dynasty 2 (Edmund), Dynasty 11 (Annika), Dynasty 14 (Niall). The cb_lookaway card has `once:true` but not `onceDyn`, so it fires in most dynasties that ever choose 'look away.' Four distinct 'looked away a second time, and knew, now, exactly what it cost' beats in a session is too many.",
+    "The elder band feels thin compared to youth and adult. The elder cards in content.js are: e_reconcile, e_legacy, e_garden, e_craft, e_journey, e_peace, e_body, e_window, e_last_walk, e_bequest, and the vocation callbacks. Most lives collect only 3-4 of these, and e_legacy ('what do you want remembered?') and e_bequest fire in nearly every elder life with children. The last 20-30 years of most lives read as a predictable two-beat close: health warning, then legacy/bequest. For a cozy player who wants to linger in the old age seasons, this is a disappointment.",
+    "The 'family words' moment is a recurring structural beat that announces itself too plainly. 'The family's character has settled, at last, into words' fires in Dynasty 1 gen 3, Dynasty 2 gen 4, Dynasty 6 gen 2, Dynasty 8 gen 3, Dynasty 11 gen 3, Dynasty 15 gen 2. In a long session this logLine becomes furniture rather than a moment. The motto itself varies (and is often genuinely lovely), but the frame sentence is always the same, which trains the player to read past it."
+  ],
+  "improvements": [
+    {
+      "what": "Add `onceDyn: 4` to cb_lookaway, and add 2-3 new outcome lines to the 'look away again' and 'stop this time' choices so repeated fires within a dynasty read freshly.",
+      "why": "The lookaway arc fires in more than a quarter of all dynasties because 'look away' is a tempting child choice and the callback has no generational cooldown. Four near-identical 'knew, now, exactly what it cost' beats in one session is the single clearest example of staleness a cozy player will notice.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the elder band with 4-6 new elder cards spread across ages 68-90: e.g., a card about the question of how much of yourself to reveal before the end; a card where an old conviction is tested by a grandchild who holds the opposite view; a card about the specific texture of solitude vs. company in old age. Gate some behind vocation.",
+      "why": "The last quarter of most lives collapses to e_body + e_legacy + e_bequest, with e_garden and e_peace as the only variation. A cozy player who wants to spend time with an elder character finds the late game thin. Richer elder content is where the genre's contemplative mood should peak.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the observe() pool variety that actually lands in play: audit RECENT_LINES in observe() to confirm session-wide deduplication is working. Add 3-4 new lines to each observe pool (especially vit_tire and spirit_hi, the most commonly triggered), and consider a 'never fire the same observe key twice in any 3-generation window' rule similar to the existing epitaph cluster logic.",
+      "why": "'The stairs have started to ask a question of them' and 'he still laughs like someone the years have not yet learned how to reach' appeared in consecutive dynasties in the transcripts. The ambient observation layer is the game's primary cozy texture and repeated lines break the spell faster than any structural issue.",
+      "impact": "med"
+    },
+    {
+      "what": "Give cb_outcast_return and cb_principle 3-4 distinct outcome variants per choice branch (currently each branch has 1-2 echo() lines), and increase their onceDyn to 4.",
+      "why": "These callbacks are the game's most emotionally resonant moments, but they currently fire with identical prose in most dynasties. A cozy player who has played 8 dynasties has seen 'Refused to be repaid for a kindness she barely remembered giving' four times verbatim. The callbacks deserve the same variant-pool depth the marriage and child lines have.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 adult-band cards that are specific to the HOUSE's history rather than the individual life — cards that only fire for heirs of houses with mottos, or for lives born into a seat they didn't earn, or for heirs who are specifically the 5th-or-later generation. Use the existing 'five generations back stands [founder]' card (seen in Calla Brandt gen 5 and Calla Okonkwo gen 5) as a template for this generational reckoning.",
+      "why": "The dynasty layer currently influences opening lines and a few rep/seat-gated cards, but the middle of most lives is identical regardless of which house they're in. Moments that make a life feel like it belongs to THIS specific dynasty — not just any dynasty — are the core of the 'one more dynasty' pull.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has real warmth and a genuinely lovely prose voice — the callback system, the era variety, and the vocation arcs create enough structural divergence that the first 6-8 dynasties feel meaningfully different from each other, and the motto/heirloom layer delivers genuine 'one more dynasty' pull. But by dynasty 10-12, the template becomes visible: the mid-life adult arc follows a predictable sequence, a handful of observation lines repeat verbatim across lives, the lookaway arc fires in every other dynasty, and the elder band is thin enough that most lives end on the same two-beat close. The game earns a cozy recommendation for a short session; the staleness problem is real enough to blunt the pull over a long one."
+}

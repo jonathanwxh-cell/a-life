@@ -1,0 +1,50 @@
+{
+  "profile": "dynasty_strategist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The dynasty layer delivers genuine compounding texture: seat progression (landless → a house written into the histories), reputation accumulation toward a motto, heirlooms that ride down the generations, and a family secret — these are real strategic objects a house-builder can plan around and feel accumulating.",
+    "The bequest card is the cleanest cross-generation lever in the game. Choosing 'Everything I know' vs. 'Every coin I can spare' vs. 'Nothing but their own freedom' is a genuine strategic bet with visible downstream consequences in the heir screen — exactly the kind of decision a dynasty player wants.",
+    "Collateral succession (niece/nephew when no direct heir) prevents childless lives from being dead ends; combined with adjustable odds by seat level, this rewards building a strong house and makes the 'solitary life' a viable shape rather than a line-ender.",
+    "Era shifts (war, plague, plenty, turning) and vocation-gated arcs (soldier/scholar/maker/wanderer) do create structurally distinct lives. A soldier generation in a war era genuinely reads differently from a scholar generation in fat years.",
+    "The houseCharacter() trajectory prose ('has barely begun to settle... would take several more lives...') gives me legible forward visibility into what the dynasty needs — that's the dashboard a strategist wants.",
+    "The 'reckoning' card (x_reckoning, seat 3+) is a clean pressure mechanic: an established house faces a hard test and either pays the cost or sacrifices seat. This is real dynastic tension.",
+    "Dynasty-memory cards (d_ancestor, d_motto_test) that play the family's past back into the current life create continuity without just narrating it — a motto being tested IS the game."
+  ],
+  "staleness": [
+    "By dynasty 5-6, the life-template has calcified into a nearly invariant sequence: c_origin (age 3-5) → c_book or c_animal → y_calling (age 14-22) → y_love1 (if young) OR a_meet_late → a_marry → a_child → midlife health scare or work card → elder legacy/bequest → die. Reading the transcripts sequentially, dynasties 6 through 13 all hit these beats in the same order. The vocation and era add content inside the template but do not change the template's shape.",
+    "The calling card (y_calling) fires near-certainly in every life, which is correct structurally, but the four vocations are shallower than their billing: soldier gets 3 vocation cards, scholar 3, maker 3, wanderer 2 — and across 15 dynasties the same vocation cards appear in the same mid-to-late positions every time a given vocation is chosen. A scholar dynasty 3 and a scholar dynasty 11 share the same three milestone beats (question → pays off → legacy → handoff), which erases the sense that generation 11 is in a different chapter of any story.",
+    "The cb_corner / cb_strayed / cb_the_cost pattern recurs in nearly every life that makes a morally grey choice: cut a corner → cb_corner fires in midlife → cb_the_cost fires in elder. By dynasty 8 this three-beat arc is the most visible repetition in the transcripts. Across 30+ lives I counted cb_the_cost or its near-equivalent firing in roughly 60% of adult/elder lives.",
+    "Seat mechanics lack player agency between bequests. The seat rises on peakMeans and reputation passively; there is no explicit 'spend this life building the name' lever except m_invest_name (one card, cooldown 14, age 42-64) and s_from_nothing. A strategist wanting to orchestrate a 5-generation climb has almost no direct steering tool in the early and mid game — it just happens or it doesn't, depending on which cards the engine draws.",
+    "The reputation system's feedback loop to gameplay is too thin. A 'scholarly' house gets r_scholar_door (one extra card) and a slightly different calling-card framing. A 'ruthless' house gets r_hard_name and r_name_cost. That's it. There is no branching content cluster that makes a devout/artistic/reckless house feel substantively different to pilot across multiple generations. The motto is a trophy, not a steering force.",
+    "Seat 7 ('a house written into the histories') is gated behind repPeak ≥ 3.5 + seat ≥ 6 + peakMeans ≥ 76, but the only seat-7-exclusive content is the label itself. There is nothing that seat-7 gates that seat-6 does not. The summit is a number with no unique card cluster, quest content, or special narrative consequence — it is the game's most conspicuous missing floor.",
+    "The 'competing goods' dilemmas (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are good cards but their outcomes are nearly identical regardless of choice: both options nudge ±3-7 stats and leave a memory flag. By dynasty 10 these dilemmas read as flavour beats, not decisions that fork the life."
+  ],
+  "improvements": [
+    {
+      "what": "Add a seat-7 content cluster: 2-3 cards that ONLY fire when S.house.seat === 7, presenting the unique pressures of a house written into the histories — rivals trying to topple you, the weight of a storied name on the current heir, a dynastic test that can sustain or shatter the peak.",
+      "why": "The summit is the dynasty strategist's core goal and currently has no payoff content. A player who achieves seat 7 should encounter something new. Right now they get a label and the house immediately falls back to 6. Even one card (e.g. 'The name has become larger than any one life can fill. What does this heir do with it?') would make the climb feel worth completing.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2-4 reputation-specific card clusters so each of the 9 house characters gates distinct mid-game content. Currently scholarly/ruthless/generous each have 1-2 gated cards; pious/artistic/reckless/tainted have almost none. A pious house should meet a crisis of faith; an artistic house should face a patron or a legacy question; a reckless house should get a successor who inherits the fire.",
+      "why": "The reputation system promises that 'the family's character reaches forward into a life' but only scholarly and ruthless fulfill this at all. The other 7 reputations earn a motto and nothing else downstream. This is the biggest gap between the dynasty layer's stated ambition and its actual content.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the cb_corner → cb_the_cost two-beat recurrence by either: (a) branching cb_corner so cutting it AGAIN produces a genuinely different elder arc (a family secret, a debt called in, a reputation shift) versus redeeming it, giving cb_the_cost two distinct registers; or (b) adding a third moral-arc type (cb_loyalty_cost for 'chose_loyalty', cb_solitude_reckoning for 'chose_solitude') so not every grey life ends on the same elder 'one old decision' beat.",
+      "why": "This beat fires in ~60% of lives and is the single most visible repetition in the transcripts by dynasty 6. It collapses moral variety into one shape.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the strategist a mid-game seat-investment arc: a 2-card sequence (not just m_invest_name in isolation) where choosing to 'spend this generation on the house' opens a follow-up card 1-2 generations later that reveals whether the investment held or was squandered — a payoff the player can actively plan toward.",
+      "why": "The bequest works as a single-generation lever because its effect is visible in the heir screen immediately. The seat-building equivalent — spending peakMeans across generations — has no equivalent 'your bet paid off' moment. A strategist can't feel themselves steering the dynasty arc, only observing it.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce one 'dynasty endpoint' scenario that breaks the standard sequence: a genuine collapse path (seat drops to 0 from a reckoning, line nearing extinction) with its own content cluster about rebuilding from nothing vs. accepting the end — and a parallel pinnacle path with a 'legacy generation' card that appears only when seat ≥ 6 + motto + 4+ generations, asking what the house now stands for in the world.",
+      "why": "Without these, every dynasty's story ends the same way: the founder dies, the line continues or doesn't, new house begins. The extremes — true ruin and true greatness — have no distinct narrative territory, which means the dynasty arc has no emotional poles to aim at or fear.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has the architecture of a dynasty game — seat, reputation, motto, bequest, heirlooms — but delivers it as decor rather than as steerable machinery: by dynasty 6, the life-template is fixed, the vocation arcs repeat their three beats, and the most interesting strategic object (seat 7) has nothing behind the door, so a player who wants to actually build a house across generations runs out of new territory to discover before they run out of dynasties to play."
+}

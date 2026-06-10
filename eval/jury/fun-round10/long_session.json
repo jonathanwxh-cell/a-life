@@ -1,0 +1,84 @@
+{
+  "profile": "long_session",
+  "score": 6.4,
+  "fun_highlights": [
+    {
+      "what": "Vocation-gated arc clusters create genuinely different skeletal shapes",
+      "detail": "A soldier's life delivers a_soldier_service, m_soldier_ghost, e_soldier_old in sequence; a scholar gets a_scholar_question, m_scholar_legacy, cb_study_pays. Across 15 dynasties the transcript shows these branching correctly: Ren Salvedi (soldier) gets the war-call variant of the calling card, the front-line choice at 33, and the 3am war-trauma card at 55. Carys Brandt (soldier) gets the same vocation cluster but with different era framing and different stat pressures. These arcs give the session's first 6-7 dynasties a sense of genuine structural variety."
+    },
+    {
+      "what": "The callback system, when it fires, lands with real weight",
+      "detail": "The cb_books_late callback (Ren Salvedi at 49 re-reading the impossible book from age 11; Theda Quint at 55 doing the same from age 12) is the single most satisfying beat in the transcripts — a genuine echo that rewards having paid attention. cb_outcast_return (Greta Ashby at 39, Edmund Ashby at 57), cb_lookaway (Annika Okonkwo at 55), and cb_principle (Linnea Okonkwo at 53, Joaquin Lindholm at 53) all land similarly. These are the game's highest-quality moments."
+    },
+    {
+      "what": "Era framing productively colours familiar cards so they read differently",
+      "detail": "The calling card text genuinely changes: in a war era it reads 'there is a war on and it is hungry for the young'; in a hard era it reads 'the choice of what to be is also the choice of how to eat.' The marriage card similarly has war and plague framings. The transcript shows House Salvedi living through war (Ren's generation), House Okonkwo through plague (Naima's generation), and these shifts visibly alter the texture. The era system is the best anti-staleness tool in the design."
+    },
+    {
+      "what": "The bequest card is a genuine dynasty-level lever with felt downstream effects",
+      "detail": "e_bequest (elder, once) forces a meaningful choice about what the next life starts from — knowledge/means/warmth/freedom. The heirloom system (book, stray, fortune, teaching, hardname) then makes those choices tangible across multiple generations. Watching a book travel from Ren Salvedi at 11 through Idris Salvedi at 48 to Theda Quint is the game's most convincing multi-generational beat."
+    },
+    {
+      "what": "The prose quality on individual cards is consistently high",
+      "detail": "Individual lines like 'Left the largest question open, and found she could live there comfortably enough,' 'Married Anouk young, and spent the years proving it had not been rash,' and 'Took the warning seriously — changed the work, the food, the hours — and bought himself years' are quietly excellent writing. The freshPick pools are genuinely varied within a card; within a single life the prose does not feel mechanical."
+    },
+    {
+      "what": "Short and early-death lives (Dynasty 3 Aldous, Dynasty 10 Anouk at 9, Dynasty 12 Liv at 31, Dynasty 13 Soren at 18) break the rhythm productively",
+      "detail": "The early-death mechanic creates real tonal contrast — Anouk dying at 9 with one card played ('Gone early, with the better part still ahead') is genuinely affecting precisely because the normal structure is absent. These lives refresh the session's pace when they fall in the run."
+    }
+  ],
+  "staleness": [
+    {
+      "what": "The body-decline observation pool recurs almost every life and eventually feels wallpapered",
+      "detail": "The vit_tire and vit_neg observation pools each have 9-10 entries, but in a 15-dynasty session the reader encounters them in nearly every single life past age 40 — the transcripts show: 'The stairs have started to ask a question of them' (Idris Salvedi 60, Junia Calloway 78, Calla Okonkwo 60), 'The weather has begun living in his joints' (Henrik Brandt 64, Cassian Ashby 41), 'The body has begun keeping its own quiet counsel' (Annika Okonkwo 55, Calla Brandt 41), 'Mornings take longer to arrive in the body' (Niall Marchetti 71, Ottilie Quint 74, Naima Okonkwo 41). By dynasty 8 these are invisible to the reader; by dynasty 15 they actively undercut a dying life's weight."
+    },
+    {
+      "what": "The 'back to the hometown' beat (cb_left_home + m_wanderer_return) fires in almost every wanderer and many non-wanderer lives",
+      "detail": "The transcripts show Anders Salvedi returning at 50 and again at 56 (two different cards — cb_left_home and m_wanderer_return — both triggering for the same person on the same theme), Ronja Brandt at 52, Greta Ashby at 49 (choosing not to go), Noor Ashby at 48, Ottilie Quint at 46 and 58, Annika Okonkwo at 61 and 66, Joaquin Lindholm at 47 and 56. The 'smaller than I remembered' framing is so consistent that by the middle of a long session the player can predict it the moment a wanderer reaches midlife."
+    },
+    {
+      "what": "The 'give knowledge away vs. guard it' fork (m_scholar_legacy) appears across scholar life after scholar life with near-identical framing",
+      "detail": "Iris Brandt (55), Tobias Ashby (57), Ottilie Mercer (61), Otto Salvedi (40), Naima Okonkwo (50), Cassian Ashby (64), Niall Marchetti (55) — seven of the fifteen dynasties show this card. The prompt text is fixed ('a body of knowing, hard-won... give it away or guard it') and the result lines only have two or three variants. For a long-session player this becomes the single most recognizable beat in the game by dynasty 6."
+    },
+    {
+      "what": "The 'high-spirit observation' pool (spirit_hi) deploys visibly repeated phrases across mid-session dynasties",
+      "detail": "The transcripts show: 'She has kept, against most of the evidence, a stubborn appetite for the days' (Iris Brandt 51, Ren Salvedi 39, Cyrus Ashby 31), 'He still laughs like someone the years have not yet learned how to reach' (Henrik Brandt 31, Cassian Ashby 31, Pavel Ashby 31), 'Time has not yet managed to talk her out of being glad' (Ronja Brandt 31, Calla Brandt 31, Niall Marchetti 31, Linnea Salvedi 31, Yara Okonkwo 31). The age-31 cluster is particularly visible — these all land at the same age because spirit tends to peak there, making them feel like a scheduled announcement rather than characterization."
+    },
+    {
+      "what": "The 'quiet reckoning at the end' elder cards (e_peace, cb_the_cost, e_bequest) create a predictable closing pattern for most long lives",
+      "detail": "The structure of most 65+ lives in the transcripts follows: body-decline observation, then one of {e_peace/e_body/e_last_walk}, then e_bequest if there are children, then epitaph. This means the final quarter of nearly every life has the same approximate shape. Ronja Brandt's end (72/75/79/81/84), Greta Ashby's (65/72/73/77/82), Noor Ashby's (73/78/79), Cyrus Ashby's (77/79/84/86/90) — all follow the same skeletal sequence of body-then-peace-then-bequest. The reader stops feeling anticipation for old age."
+    },
+    {
+      "what": "The c_unfair childhood card and c_origin card together appear in almost every life, making early childhood feel templated",
+      "detail": "c_unfair fires once per life (ages 6-12) with fixed prompt text; c_origin fires at 3-5 with text that varies by era/standing/trait but the two choices remain identical ('Take the world as it comes' / 'Feel, even small, it could be otherwise'). These two cards appear in at least 12 of the 15 dynasty founders and heirs in the transcript. Because the prompt text of c_unfair never changes ('a punishment that wasn't earned, a thing taken that was theirs') and the result lines for c_origin's two choices have only 3 variants each, these form a recognizable fingerprint that opens almost every childhood. The session-reader learns to skim them."
+    }
+  ],
+  "improvements": [
+    {
+      "what": "Double the body-decline observation pool and enforce a per-session cap, or migrate the most-repeated lines (stairs, joints, mornings) into event cards with a single firing",
+      "why": "The vit_tire/vit_neg pools are the most-repeated text in a long session — 9-10 entries shared across every life that lives past 40. Expanding these pools to 20+ entries, or adding a session-level RECENT_LINES guard (as already applied to epitaphs) would prevent 'The stairs have started to ask a question of them' from appearing 4 times in a 15-dynasty run. Alternatively, the 3 most poetic lines could be promoted to once-per-session event cards that trigger on first vit drop, with a real choice attached, giving the body's decline some agency rather than just observation.",
+      "impact": "high"
+    },
+    {
+      "what": "Extend the RECENT_LINES guard already used for epitaphs to the spirit_hi observation pool, with special handling for age-clustered lines",
+      "why": "The spirit_hi pool fires predominantly at age 31 across many lives because that is when spirit peaks after early adult choices. The result is that 'Time has not yet managed to talk her out of being glad' and 'He still laughs like someone the years have not yet learned how to reach' appear back-to-back across dynasties. The RECENT_LINES mechanism exists but only applies to epitaphs; extending it to observation lines with a shorter window (e.g., block for 5 lives) would eliminate the most visible repeats.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a per-session cooldown to m_scholar_legacy so it cannot appear more than twice in a session, and add 4-5 new result-line variants to its prompt",
+      "why": "m_scholar_legacy is the single most-repeated interactive card in the transcripts — it appeared in 7 of 15 dynasties. Because it fires for every scholar vocation with mind>52, and scholars are extremely common, a 16+ dynasty session will see it nearly every other life. The card itself is structurally sound; the problem is exposure frequency. A session cooldown (not just a per-life 'once') and new result lines ('Took the knowing underground with them, and the knowing died there too' etc.) would keep it fresh.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the 'returning to the hometown' beat into two genuinely different experiences by making m_wanderer_return and cb_left_home mutually exclusive per life, and varying the return's emotional color by what the character found there (via memory gates)",
+      "why": "Anders Salvedi triggers both cards in the same life (cb_left_home at 50, m_wanderer_return at 56) — two 'return to origin' beats six years apart. Even in single-return lives the framing is too consistent: 'smaller than she remembered, and mostly gone' appears nearly verbatim in Ronja Brandt, Greta Ashby, Noor Ashby, Annika Okonkwo, Ottilie Quint. Adding a memory gate (e.g., 'if the character chose to stay home at youth, the return reads differently') and making the two cards mutually exclusive would prevent the most obvious doubling.",
+      "impact": "med"
+    },
+    {
+      "what": "Add two or three entirely new late-life card arcs for lives that reach 70+ without a spouse or children — the solitary elder currently has a much thinner card pool",
+      "why": "Looking at the transcripts, lives that end without spouse or children (Greta Ashby at 85, Junia Calloway at 87, Aldous Renner) cycle through e_garden, e_craft, e_peace, e_body faster and more visibly than family-having lives, because the family-interaction cards (e_window, m_estrange, m_child_grown, e_reconcile) are unavailable. Junia Calloway's long life particularly illustrates this — her elder years essentially reduce to e_garden and e_craft and two body-decline observations before the end. A card specifically for the solitary elder's relationship to legacy, or for a chosen person who is not kin, would extend this life-shape's texture.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a genuinely well-crafted generational sim with strong prose, a smart callback architecture, and vocation/era systems that create real structural divergence in the early-to-middle portion of a session. For the first 8-10 dynasties it holds up as interesting; the writing is above the genre norm and the callback moments — when they fire — are among the best in any text game of this type. But a 15-dynasty session exposes a structural staleness problem: the body-decline observation pool, the m_scholar_legacy fork, the 'smaller than I remembered' hometown return, and the predictable elder-arc skeleton create a recognizable template that the reader has memorized by the back half of the session. The game scores well on individual-life craft and poorly on cross-life freshness management — the RECENT_LINES mechanism applied to epitaphs needs to be extended aggressively to the observation pools and the most-fired interactive cards before a long-session player will feel genuinely surprised in dynasty 14."
+}

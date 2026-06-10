@@ -1,0 +1,48 @@
+{
+  "profile": "variety_seeker",
+  "score": 6.5,
+  "fun_highlights": [
+    "Vocation arcs (soldier/scholar/maker/wanderer) genuinely differentiate life-shapes: a soldier's midlife crisis at 3am ('m_soldier_ghost') is structurally unlike a scholar's question-vs-bread dilemma ('a_scholar_question'), and these do land reliably in the transcripts.",
+    "Callback cards are the game's best mechanic — when cb_books_late or cb_outcast_return fires, the payoff of a childhood choice arriving decades later creates a genuine 'I made that' feeling that a variety-seeker values.",
+    "Era system (war/plague/plenty/hard/turning) provides real structural variance across dynasties: Dynasty 3 opens 'the country is pinched', Dynasty 5 is born into war, Dynasty 8 into plague — these gate exclusive cards and colour the c_origin text differently, so Generation 1 genuinely reads unlike Generation 8.",
+    "Collateral succession (house passes sideways to niece/nephew) is elegantly implemented and means childless/solitary lives have structural dignity, not just a game-over. Dynasty 3's Hale Reyes (5th gen, died at 10) inheriting collaterally to a 'turning age' shows the system working.",
+    "The competing-goods cards (x_honest_or_kind, x_dream_or_duty) resist the binary virtue/flaw read that flattens most moment choices — both options feel authentically costly.",
+    "Epitaph de-duplication across dynasties (RECENT_CLUSTERS, RECENT_LINES pools) and motto variety (3 phrases per reputation, USED_MOTTOS dedup) are real anti-stale mechanics that a variety-seeker will notice working."
+  ],
+  "staleness": [
+    "The love/marry/child pipeline dominates. Across 15 dynasties and ~30+ lives, roughly 70% of lives run: fall in love (y_love1 or a_meet_late) → a_marry → a_child → a_work. The calling fork (y_calling) adds texture but the domestic skeleton recurs so reliably that the question 'did they marry?' becomes a checkbox rather than a surprise. Even when the player declines, the card re-appears — the engine nudges so hard that solitary/childless lives are still exceptions, not genuinely common shapes.",
+    "The adult/midlife band (ages 28-65) is where staleness concentrates. Once-per-life cards (a_affair, m_health, m_money, m_reinvent) mean every life hits roughly the same 4-5 pivots in this long band. By dynasty 6 the sequence 'body sends its first letter → cb_corner OR x_honest_or_kind → e_legacy' is a recognizable template. The band-fillers (a_smallchoice, a_fallow, m_smaller_body) are correctly flagged but they are thin: 1-2 binary choices that generate near-identical log lines and identical stat deltas across different lives.",
+    "Callback density is too low for the middle lives. In dynasties 4-8 (the repeat-play range), a given life typically only triggers 1-2 callbacks (often cb_corner and cb_the_cost), while the vocation cards and era cards provide only 2-3 unique beats. The remainder of the life is drawn from the ~15 repeatable 'universal' cards (u_windfall, u_loss, a_work, a_old_friend, a_neighbour) whose prose pools are large but whose structural choice is identical: give/keep, take/refuse. After 8 dynasties the player has seen all structural variants and is just reading new word-combinations of the same skeleton.",
+    "The c_origin card's per-era/per-seat branching is excellent in theory but the player sees the same c_origin text type in consecutive eras if the house's seat stays static (which it often does in dynasties 1-4 while the house climbs). In the transcripts, 'ordinary' c_origin fires in dynasty 2 (Soren), dynasty 7 (Sabine), dynasty 9 (Niall), dynasty 11 (Felix) — four times in the sample run — because no trait/era trigger applies.",
+    "The inheritance system (bequest, seedChildStats, heirlooms) shapes starting stats but rarely generates perceptibly different play. The book heirloom and stray heirloom (the two most common) inject inherited memories but the guard 'lived=k=>m[k]&&!m[k].inherited' correctly stops them scoring reputation; what it can't stop is that the player sees 'Inherits a soft spot for strays (from X)' on the heir screen for dynasty 3, 5, 6, 8, 9, 10, 13 — seven of fifteen dynasties. The material inheritance creates repetitive heir-screen reading.",
+    "No failure of novelty in the writing — the prose is excellent throughout — but a variety-seeker distinguishes structural novelty from textual novelty. The game has strong textual novelty (large variant pools, freshPick dedup) but structural novelty collapses after dynasty 5-6: the player cannot discover a life-shape they haven't seen a version of. The code has ~110 CARDS but the 'once-per-dynasty' (onceDyn) gates mean by generation 4+ only ~35-40 are eligible per life, and of those ~15 are nudged so hard (calling, love, marry, child, health, legacy, bequest) they're near-certain."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 'shape-breaking' life-paths that genuinely restructure the arc rather than varying moments within the same structure. Example: a 'devoted to cause' arc where y_calling fires into a vocation-like flag ('activist', 'healer', 'priest') that routes a cluster of adult cards distinct from soldier/scholar/maker/wanderer. Or a 'late bloomer' arc where no calling fires before 30 and a new card cluster opens.",
+      "why": "The four vocations are the game's strongest variety engine but they're the only structural divergence above the moment level. Every life that doesn't take a calling (or whose calling is 'wanderer') converges on the same adult template. Adding 1-2 more arcs would widen the space of recognizably different life-shapes.",
+      "impact": "high"
+    },
+    {
+      "what": "Raise the probability of the 'solitary life' and 'childless couple' outcomes to genuine parity (~25% and ~20% of lives respectively, up from the current ~15%/12%). The code has excellent content for these shapes (m_solitary, e_solitary, e_childless, a_chosen_family) but the engine's love-nudge and child-nudge suppress them. Either reduce nudge strength or add a counter-nudge for characters who trigger 'guarded'/'restless' traits.",
+      "why": "The transcripts show domestic lives in ~70% of cases. The code has written and specced a real 'solitary' shape but the draw-probability keeps it rare. A variety-seeker's primary complaint is structural sameness — increasing shape diversity at the succession level is higher-leverage than adding more moment cards.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the inheritance system structural teeth: rather than (or in addition to) stat bonuses, the bequest choice should unlock or lock card clusters for the heir. 'Everything I know' (mind bequest) could unlock a faster path to cb_study_pays OR a unique scholarly mentor card; 'Nothing but their own freedom' (free bequest) should increase the chance the heir's calling diverges from the parent's vocation. Currently the bequest produces different stat starting values but routes into the same card pool.",
+      "why": "The heir screen's bequest reveal is a meaningful moment that the player can plan toward. Connecting it to card-pool divergence (not just stats) would make the dynasty layer feel like it actually steers play, not just flavour.",
+      "impact": "med"
+    },
+    {
+      "what": "Extend the 'onceDyn' gate to the repeatable band-fillers that are structurally identical across generations. Cards like a_work (promotion/present), a_neighbour (step in/ignore), a_small_lie (tell it/refuse) have a 14-16 year cooldown within a life but fire in nearly every adult generation. Give each a 2-generation onceDyn so they rotate out, forcing the draw to reach deeper into the pool.",
+      "why": "By dynasty 8 a variety-seeker has made the 'take the promotion' / 'keep my hands clean' structural decision so many times its emotional register is flat. Forcing these to rotate out would push the draw toward the richer, less-seen cards (trait-gated, repute-gated, era-intersections) that currently lose weight competition to the universal repeatable cards.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 'house-shape' cards that fire only when the dynasty reaches specific seat+reputation combinations and materially change what the next heir's opening looks like. Example: a seat-5 + 'scholarly' house should occasionally produce an heir who opens with a rival-scholar antagonist already in the picture (a seeded relationship, not just a trait). A seat-3 + 'tainted' house should sometimes seed a community that already distrusts the name at the start of the heir's adulthood.",
+      "why": "The house's reputation and seat are tracked carefully but they surface mainly via gated cards (r_scholar_door, r_family_shadow) that are one-off moments. The house's character should feel like it changes the world the heir inhabits, not just the cards they're offered.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has exceptional writing and smart anti-stale mechanics, but for a variety-seeker the game's structural space collapses after dynasty 5-6: the vocation arc plus the domestic pipeline account for ~80% of every life's shape, the repeatable adult/midlife cards are structurally identical even when texturally varied, and the inheritance system adds flavour without meaningfully diverging play — a solid 6.5, not yet the 8 this genre of sim can reach."
+}
