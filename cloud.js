@@ -1,13 +1,15 @@
 /* ============================================================
    CLOUD SAVES — optional cross-device sync via a chronicle code.
    localStorage stays the source of truth; this shadows the active
-   save up to /api/chronicle (Supabase, service-role) and pulls it
-   back on another device. Never required: offline, or opened from
-   file://, every call no-ops and the game plays on localStorage.
+   save up to a small endpoint on the Hetzner box (Postgres, code-gated)
+   and pulls it back on another device. Never required: offline, or opened
+   from file://, every call no-ops and the game plays on localStorage.
+   The endpoint replaced the old Vercel /api/chronicle function (Supabase);
+   it does exact-code GET/PUT only and holds the DB creds server-side.
    Loaded after persistence.js; talks to its globals at runtime.
    ============================================================ */
 (function(){
-  const API='/api/chronicle';
+  const API='https://a-life-db.alyoechosys.dev/chronicle';
   const ENABLED = typeof location!=='undefined' && /^https?:$/.test(location.protocol);
   const CODE_RE=/^[a-z0-9]{8,40}$/;
 
