@@ -1,0 +1,49 @@
+{
+  "profile": "long_session",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is genuinely satisfying: 'looked away' at age 10 comes back at 49 as a stranger sleeping rough, and at 57 as a chance to redeem it — the reach-back across forty years feels earned and particular in a way that no other browser sim delivers.",
+    "Vocation x era intersections (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) produce genuinely distinct life-shapes: a soldier born into war reads nothing like a maker born in fat years, and the coloring is mechanical, not just cosmetic.",
+    "Dynasty-level accumulation creates real 'one more generation' pull in mid-run: watching a house climb from 'rented room' to 'old and famous house' across five lives (Quint, Thorne) with a crystallized motto and a specific reputation is the strongest motivation spike in the game.",
+    "The collateral succession mechanic and the ~20-25% childless/solitary life rate meaningfully break the domestic-arc monoculture visible in older versions; solitary elder cards (e_solitary, e_childless) give those lives a proper resolution rather than a dead end.",
+    "Prose line rotation (freshPick + RECENT_LINES dedup) genuinely keeps the ambient log from repeating verbatim across dozens of lives; the observation pool is deep enough that the ambient voice stays fresh well past dynasty 8.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) that simply happen — no choosing your way out — create memorable ruptures and break the player's sense that they control everything."
+  ],
+  "staleness": [
+    "Beat order within a life is functionally invariant by dynasty 4-5: c_origin (age 3-5) → 1-2 child cards → y_calling (age 14-22) → y_love1 or a_meet_late → a_marry → a_child → a_work or midlife cards → elder cards → death. The calling card and the love card are near-certain due to their boosted draw-weights. Across 40+ lives in the transcript, every single life that survived youth followed this five-beat spine. The genre licenses a gentle tempo, but sameness of arc shape (not just content) is the central staleness problem.",
+    "The calling card (y_calling) fires in literally every life, always in youth (14-22), always presenting the same four roads. The framing varies by era/seat, but the choice and its age-band are a fixed structural pillar every player encounters every life. By dynasty 6, the player already knows 'here comes the calling card' before the text resolves.",
+    "The love and marriage pipeline is heavily forced: even with 30% nudge on y_love1 and 5% on a_meet_late, the engine almost always routes a love card by adult stage (only 2 of 40+ lives in the transcript were genuinely solitary all the way through). The mechanical pressure means this is less a discovery than a scheduled event.",
+    "Callback cards, while individually good, repeat across dynasties: cb_lookaway fires in Dynasties 1, 2, 10, 12, 13, 14 — six times across fifteen dynasties. cb_corner fires four times. Because the memories that gate them (looked_away, cut_a_corner) are among the most-drawn choices, the 'long arc closing' payoff stops feeling like a payoff by dynasty 8 and starts feeling like a known sequence.",
+    "The elder band is structurally thin for non-domestic lives. Solitary/childless elders do get their own cards (e_solitary, e_childless, e_solitary), but vocation-specific elder caps (e_soldier_old, e_scholar_old, e_wanderer_old, e_maker_handoff) are once-per-dynasty and once the dynasty has burned them, all subsequent elders — of that calling — fall through to the generic pool (e_legacy, e_garden, e_peace, e_body, e_last_walk). By dynasty 5+ this makes elder years feel interchangeable regardless of calling.",
+    "Reputation monoculture persists at scale: across 15 dynasties, 9 mottos appear in the transcript. 'What we have, we share' appears TWICE (dynasties 3 and 9), and the dominant mottos are 'scholarly' and 'kind' variants. The reputation math, despite balancing efforts, still collapses many houses toward teaching/generosity arcs because those choices appear in the largest number of common cards.",
+    "The era system underdelivers. Of 15 dynasties, 6 are 'war', 2 'plague', 1 'hard', 1 'plenty', 1 'turning', and 4 'settled'. The war era in particular fires its two dedicated cards (w_war_call, w_war_loss) almost identically: 'go when called / find a way out' + 'let the grief in / bury it in work'. By the 4th war dynasty, these read as scheduled callbacks rather than surprising history."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 alternative structural spines so the beat ORDER itself varies: a 'late bloomer' life that skips calling and love until adult, a 'short fierce life' template that compresses to 5-7 cards before early death, a 'contemplative' life that draws more universal/entropy cards and fewer milestone cards. Gate these structurally — not via content gating — so the player cannot predict 'here comes the calling card' on every run.",
+      "why": "The single invariant spine (origin → calling → love → marry → child → work → midlife → elder) is the deepest staleness problem. Content variety cannot overcome it because the player learns the skeleton by dynasty 3. A differently-paced life feels like a different game, not just different text.",
+      "impact": "high"
+    },
+    {
+      "what": "Cap callback card frequency by gating on dynasty-count: cb_lookaway, cb_corner, and cb_books_late should each fire at most once across an entire session (using the global RECENT_LINES or a S.seenSession set), not just once per life. When the gate is burned, substitute a different thematically-adjacent callback instead of re-triggering the same arc.",
+      "why": "The 'long arc closing' feel of callbacks — their primary emotional value — depends on rarity. cb_lookaway firing six times in fifteen dynasties makes it a scheduled event, not a surprise. The onceDyn flag stops it repeating in the same house but not across different houses in the same session.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a second tier of era-specific cards for war and plague (the two most common eras): e.g., a war era 'years after' card (for adults who were children during the war), a plague era 'immunity survivor' card, a 'remembrance' card for a generation born after the war. Currently each era has only 2-4 dedicated cards that are once-per-life/dynasty; by dynasty 4 the era feels like a one-time flavour coat rather than a living historical backdrop.",
+      "why": "Era variety is the game's most structurally elegant lever — being born into 'war' vs. 'turning' should produce a meaningfully different set of possible moments, not just different framing on the calling card and two event cards. Deeper era card pools would make the macro-history layer do more work.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 2-3 'anti-domestic' life-shapes that reliably produce no calling/love/child arc — lives anchored instead around craft mastery, political identity, or intellectual obsession. These would use a different set of milestone cards entirely (an alternative to y_calling that gates a completely separate adult arc without love/family as scaffold). Currently ~20-25% of lives are childless but almost all still have love and calling; true structural alternatives remain rare.",
+      "why": "The 'variety of lives' criterion in this genre means structural variety, not just content variety. A scholar who married late and a scholar who never married but built a school are not structurally different under the current system — they draw from the same card pool with one branch missing.",
+      "impact": "med"
+    },
+    {
+      "what": "Deepen the elder band for players past dynasty 5 by adding once-per-session (not once-per-dynasty) elder cards: an 'old and famous' card available only to lives in seat-5+ houses, a 'dynasty historian' card where the elder reads the whole lineage and comments on it, a 'founding myth distortion' card where a great-grandchild's version of an ancestor's deed has drifted into legend. These would fire only once per session, providing a genuine 'I haven't seen this before' moment in the late game.",
+      "why": "The elder band is the session's closing act on every life, and it does the most work in long sessions. After dynasty 5, players have seen every elder card; the elder years become a wait for death rather than a final act with its own interest.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "The writing and the dynasty-accumulation arc are genuinely good, and the callback system delivers real pleasure through dynasty 4 — but by dynasty 6-8 the invariant five-beat life-spine (origin, calling, love, child, elder), the repeat-firing of the same callbacks, and the shallow era card pools converge into a recognizable template that patient content variety cannot fully disguise, putting a firm ceiling on long-session freshness."
+}

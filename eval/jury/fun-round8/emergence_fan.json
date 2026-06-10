@@ -1,0 +1,49 @@
+{
+  "profile": "emergence_fan",
+  "score": 6.5,
+  "fun_highlights": [
+    "Vocation × era collisions generate genuinely distinct life-shapes: a soldier born into a war era (w_war_call + vx_soldier_war) lives structurally differently from any other path, and the cards that fire reflect this at the scene level, not just in flavour-text.",
+    "Callback cards (cb_lookaway, cb_outcast_return, cb_books_late, cb_strayed) create the game's best emergent moments: a choice at age 8 surfaces as a moral reckoning at age 57, and the connection is legible and earned. This is genuine within-life emergence.",
+    "The bequest system (e_bequest) is a real cross-generational lever — 'Everything I know' vs 'their own freedom' produces observably different starting conditions for the heir, cascading into different card eligibility and stat profiles.",
+    "Fate cards (f_fire, f_sudden_loss, f_grace, f_reversal) interrupt the domestic arc with events that simply happen, giving lives an unplanned texture that resists the optimization instinct.",
+    "Competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the strongest moral moments — genuinely no clean answer, both roads cost something real, and they leave a residue that echoes in elder-stage callbacks.",
+    "The dynasty reputation → motto system creates a satisfying meta-arc: watching House Quint climb across five generations to 'a house written into the histories' with a crystallized motto is the closest the game gets to the dynasty-as-character arc an emergence fan craves.",
+    "Collateral succession (niece/nephew/cousin) means solitary and childless lives remain meaningful — the house doesn't always end, and a collateral heir inheriting a hard-name heirloom from a guarded ancestor creates a genuine generational handoff with observable downstream effects."
+  ],
+  "staleness": [
+    "The structural template of a life becomes legible by dynasty 4-5: calling (14-22) → love opens → marry → child → midlife reckoning (health, work/family tension, parent aging) → elder close (legacy, reconcile, bequest). Across the 15 transcripts, variance is mostly textural (which specific cards fire) rather than structural (what KIND of life it is). An emergence fan wants structural surprise, not prose variety within the same skeleton.",
+    "The adult/midlife band thins into a recognizable checklist regardless of vocation: m_health fires in almost every coupled life, a_work and m_parent_age are near-universal, and the filler cards (a_smallchoice, a_fallow, m_smaller_body) add texture but not divergence. The checklist feeling sets in around dynasty 6.",
+    "Epitaph phrases repeat visibly across dynasties despite the RECENT_LINES buffer: 'Taught what he/she knew, and so outlived the knowing of it' appears in dynasties 2, 5, 6, 7, 12, and 14 — six times across fifteen dynasties. The anti-repeat logic works within a dynasty but the cluster pools are too small for 15-dynasty play. This is the single most visible staleness signal in the transcripts.",
+    "War era is drastically overrepresented: dynasties 3, 7, 9, 12, and 15 all include war-generation lives, meaning w_war_call and w_war_loss become the most-seen 'rare' content. Plague, hard, turning, and plenty eras each have compelling unique cards that would create more structural variety if seen more evenly — the rollEra 30% settled-drift doesn't prevent long runs of war.",
+    "The reputation/motto system is passive accumulation rather than an active steering game. Most reputation drift is automatic (the house slides toward scholarly/generous across diverse play styles); only a_make_name and a few midlife cards offer direct steering. An emergence fan wants to PLAY the dynasty layer, not watch it accumulate.",
+    "The repute-gated and seat-gated cards (r_scholar_door, r_family_shadow, r_hard_name, s_great_burden, s_patronage, s_inheritance_dispute) are the most promising emergence generators — when they fire, lives feel genuinely distinct — but most dynasties in the transcripts never reach the seat≥3-4 or repute≥2.0 thresholds required, so these remain rare exceptions rather than reliable system-collision sites."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 'reputation collision' cards that fire when a house holds two competing strong reputations simultaneously (e.g., scholarly + ruthless, or generous + tainted). Card text puts the contradiction directly into the character's present scene: 'Your family is known for both its learning and its cruelty. Someone has come to ask which one you are.' Gate on any two opposing repute tags both exceeding 1.0.",
+      "why": "The reputation system currently accumulates tags in parallel without ever forcing them into conflict. An emergence fan's core pleasure is systems colliding — having the house's own contradictions become a dramatic scene is the most direct path to that experience, and it costs only a handful of cards.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand each epitaph cluster pool from 3-4 lines to 8-10, and add at least 4 new vocation-specific clusters (e.g., 'the wanderer who finally stayed', 'the soldier who outlived the war', 'the maker whose work outlasted the name'). The RECENT_LINES buffer of 110 entries is well-designed; it just needs deeper pools to draw from.",
+      "why": "Epitaph repetition is the single most noticeable staleness signal in the transcripts — 'Taught what she knew' appearing six times in fifteen dynasties breaks the illusion that each life is distinct. This is a high-leverage prose fix that directly addresses the primary legibility-of-template problem.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'dynasty reckoning' card — once per dynasty, at seat≥4 or repPeak≥2.5 — that explicitly names what the house has become and forces a structural choice: 'The family has built [X] across [N] generations. You can continue this line, or be the one who breaks it.' The 'break' choice should meaningfully reshape card eligibility for the rest of that life (e.g., suppressing vocation-arc cards, elevating fate cards).",
+      "why": "An emergence fan wants the dynasty layer to generate dramatic 'moments' — times when accumulated generational weight actually forces something on the current life. The dynasty layer is currently informational rather than generative; this card makes it a cause, not just a chronicle.",
+      "impact": "high"
+    },
+    {
+      "what": "Enforce that consecutive generations cannot share the same era: modify rollEra to reject any roll that returns the same era as the previous generation (re-roll once if collision). This alone would eliminate 5-dynasty war streaks.",
+      "why": "Era variety is the game's primary source of structural differentiation outside vocation. War currently dominates because its 70% non-settled probability compounds across generations. One re-roll per succession would distribute plague, hard, turning, and plenty eras far more evenly with minimal code change.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 2-3 callback cards that span dynasty-scale time rather than within-life memories — firing based on S.lineage entries (e.g., 'There is a grave in this town with your family's name on it, from three generations back. You know the story of what happened there.'). Gate on S.lineage.length >= 3 and a specific ancestral repute tag.",
+      "why": "The current callback system creates excellent within-life emergence but stops at the life boundary. True cross-generational callbacks — surfacing a specific ancestral choice as a present-tense scene — would give distant ancestors material impact on current lives, which is exactly the cross-system collision an emergence fan is looking for.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A well-crafted literary sim with genuine emergent machinery in its callback arcs, vocation × era collisions, and dynasty reputation system, but the structural template of a life — calling, love, child, midlife reckoning, elder close — becomes legible by dynasty five, and an emergence fan can predict the life-shape even when the prose varies, which is the exact staleness this genre needs to resist."
+}

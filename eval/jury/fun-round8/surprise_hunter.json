@@ -1,0 +1,56 @@
+{
+  "profile": "surprise_hunter",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier/scholar/maker/wanderer) creates structurally distinct adult arcs — a soldier's 3am ghost card, the scholar's 'chase the question' gamble, the maker's masterwork decision all read as genuinely different lives, not just different paint.",
+    "Era intersections (vx_ cards) are the game's best surprises: a scholar living through a 'turning' age who must sit among younger thinkers, a soldier-in-a-war card that escalates the stakes of the calling in ways the player did not choose.",
+    "Fate cards (fire, sudden loss, grace, reversal) are proper black swans — no-choice moments that simply happen. The fire at age 26 in Dynasty 11 or the sudden spousal death in Dynasty 5 land exactly as the genre's best shocks should.",
+    "Callback cards at their best are the game's peak: the 'looked away' callback 47 years later, the scholar's long bet paying out, the inherited-secret reveal are earned payoffs that reward memory and make a single life feel architecturally complete.",
+    "The dynasty layer — motto crystallization, seat climbing toward 'a house written into the histories,' heirlooms accumulating — extends the freshness window significantly. Building House Quint to the summit across 5 generations is the game doing what it was designed to do.",
+    "The 'onceDyn' system for burning key beats across a whole house is a smart staleness brake; seeing Edmund (D3 gen3) as a collateral heir 'raised on the same stories' rather than a direct child is a genuine structural surprise.",
+    "Trait affinity in card-drawing means a bookish child genuinely drifts toward the book card and a warm child toward the friend — the early years diverge by who the child already is."
+  ],
+  "staleness": [
+    "The life-shape template is legible by dynasty 5-6 and felt as a formula by dynasty 8-10: born → c_origin (age 3-5, universal) → childhood scatter → y_calling (age 14-22, universal) → y_love1 or a_meet_late → a_marry → a_child → a_work → m_health → e_legacy → die. Across 35 lives in the transcripts, this skeleton is almost never broken. The texture rotates; the skeleton does not.",
+    "The marriage/love sequence recurs in ~85% of lives across the 15-dynasty transcript run. The y_love1 and a_marry cards fire with near-certainty. 'Fell in love — the kind that quietly rearranges the furniture of a life' and 'Married X. The day was small and the meaning was not.' are among the most-repeated lines in the corpus. The engine's nudges, designed to prevent foreclosure, instead enforce the domestic arc as the default.",
+    "y_calling fires in literally every life in the transcript — no life drifts uncalled despite the code noting this is possible. This is the most predictable single beat in the game. A surprise-hunter notices it as a recurring gate rather than a moment.",
+    "The observe() ambient lines repeat visibly across dynasties. 'Books have become a country she can live in' appears in D1, D4, D7, D10, D12 and more. 'The stairs have started to ask a question of her/him' appears in D1, D7, D10, D12. By dynasty 8 these lines read as wallpaper rather than texture.",
+    "Scholar epitaphs collapse to 2-3 variants despite the rotation logic. In 15 dynasties, 'Taught what he/she knew, and so outlived the knowing of it' appears as the epitaph for at least 6 different lives (Tamsin D2, Elias D6, Lazlo D7, Henrik D12, Annika D12, and more). The de-duplication targets consecutive ancestors but scholar plays cluster scholars, overwhelming the guard.",
+    "The elder arc is formulaic in lives that survive past 65: m_health → e_body or m_smaller_body → e_garden or e_window → e_legacy → death. The only structural variable is whether e_reconcile fires. By the 8th dynasty a player can predict the shape of the final 25 years.",
+    "The a_child prompt text recycles visibly: 'The question of a child arrives, the way it does — half decision, half tide' appears verbatim across multiple lives in the corpus despite the pool of 6 variants. The 7-variant rotation is insufficient for the frequency at which this card fires across a 15-dynasty run.",
+    "The 'one more dynasty' pull diminishes sharply after the summit is reached. Once a house hits seat 7, there is no higher tier to climb and no new content gated there — the aspiration system runs out of goals. A player who builds to 'a house written into the histories' and then starts over faces a run of one-generation houses before the next multi-gen dynasty forms, and the early grind feels familiar rather than fresh."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2-3 alternative life-openers that replace or heavily modify the c_origin + y_calling sequence for specific conditions: a life born into war-era with no father could open on a different childhood; a house that already has a 'scholarly' reputation could offer the calling as a foregone conclusion stated in the heir screen rather than a drawn card.",
+      "why": "The calling fires in 100% of lives in the transcript. Making it conditional or delivering it differently for established houses would break the most predictable structural beat without removing vocation variety.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce 3-4 'black-swan dynasty events' that fire once per house (onceDyn) and restructure an entire generation's available cards: a house-wide scandal (all repute drops, new shame-gated content opens), a windfall year (all heirs that generation start with elevated means and a unique card about spending it), a famous ancestor (d_ancestor becomes prominent, adds a new gated card for the next 2 generations).",
+      "why": "The current fate cards (fire, sudden loss) are good but personal. A dynasty-level fate event would make generation 8 structurally different from generation 3 in ways the player can't predict and the era system doesn't fully deliver.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the observe() pool depth by 50% and add a hard per-session deduplication that prevents any observe line from firing more than once per 5 lives (not just per life). The current RECENT_LINES guard (size 110) is too shallow for a 15-dynasty run.",
+      "why": "'Books have become a country she can live in' appearing in dynasties 1, 4, 7, 10, and 12 is the single most visible staleness signal to a reader scanning across the transcript. The ambient prose is excellent; the repetition undermines it.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'post-summit' aspiration tier for seat-7 houses: specific gated content about managing decline, succession disputes, famous-family burden, the weight of a name written into histories — unique cards that only a house at the summit ever sees. Possibly add a seat-8 concept ('a house that shaped an age') as a long-shot target requiring multiple seat-7 generations.",
+      "why": "The dynasty layer's 'one more life' pull collapses once the summit is reached. A surprise-hunter who has built to the top has no further systemic goal. Post-summit content would extend the endgame and make the summit a beginning rather than an end.",
+      "impact": "high"
+    },
+    {
+      "what": "Introduce a 'called life' variant for y_calling: if a character has a particular trait (restless, bookish, warm) and the house has a matching reputation (industrious, scholarly, generous), offer a third choice that combines vocation and dynasty identity — 'Follow the family's road, your own way' — which gates a unique card later confirming or breaking that inherited direction.",
+      "why": "Currently traits affect card weighting but don't change the calling options themselves. A 'dreaming' child in a scholarly house should face a slightly different fork than a 'stubborn' child in an industrious one. This would make the calling feel like it responds to who this specific person is, not just a universal 4-way menu.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 4-6 'anti-domestic' callback cards that fire only for lives that declined y_love1 AND declined a_meet_late — making the solitary life have its own arc of callbacks rather than simply missing the relationship-chain callbacks. E.g., a midlife card about 'the unasked question coming back'; an elder card about chosen family proving sturdier than expected.",
+      "why": "Currently a player who consistently declines love gets fewer callbacks (which are heavily relationship-gated) and a thinner life-narrative. The solitary path needs its own satisfying arc of earned payoffs to feel like a real structural choice rather than a foreclosed option.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely well-crafted life-sim with a deep card pool and real dynasty ambition, but the life-shape skeleton (origin→calling→love→marry→child→work→health→legacy→die) is legible by dynasty 5 and felt as formula by dynasty 8, and the surprise-hunter's appetite for structural novelty runs ahead of what the rotation system can refresh."
+}

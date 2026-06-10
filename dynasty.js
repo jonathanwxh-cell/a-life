@@ -1,4 +1,6 @@
 /* A LIFE — death & succession, and the house that accrues across the line. */
+let RECENT_CLUSTERS=[];   // session-wide memory of recent epitaph THEMES, so a cluster can't dominate across dynasties
+let USED_MOTTOS=[];       // mottos already crystallized this session, so two houses don't earn the identical words
 
 /* ---------- death & succession ---------- */
 function die(){
@@ -20,7 +22,11 @@ function epitaphFor(p){
   const sub=t=>t.replace(/\{they\}/g,px.they).replace(/\{their\}/g,px.their).replace(/\{them\}/g,px.them);
   const lin=(typeof S!=='undefined'&&S.lineage)?S.lineage.slice(-2):[];
   const recent=lin.map(a=>a&&a.epitaph), recentC=lin.map(a=>a&&a.cluster);
-  const blocked=k=>recentC.filter(c=>c===k).length>=2;
+  // block a THEME (cluster) that the last two ancestors already shared (per-dynasty) OR that has dominated
+  // the last several deaths across the whole session — so e.g. the "teacher" or "kind" epitaph can't recur
+  // every few dynasties just because its memory flag is easy to earn.
+  const recentGC=(typeof RECENT_CLUSTERS!=='undefined')?RECENT_CLUSTERS:[];
+  const blocked=k=>recentC.filter(c=>c===k).length>=2 || recentGC.slice(-9).filter(c=>c===k).length>=3;
   const out=(k,txt)=>{ p._epiCluster=k; return txt; };
   const pr=arr=>{ const opts=arr.map(sub);
     // avoid both the last two ancestors' exact lines (per-dynasty) AND anything used recently across the
@@ -31,7 +37,7 @@ function epitaphFor(p){
     if(!pool.length) pool=opts.filter(o=>!recent.includes(o));
     if(!pool.length) pool=opts;
     const choice=pool[((p.gen-1+(typeof houseOff==='function'?houseOff():0))%pool.length+pool.length)%pool.length];
-    if(typeof RECENT_LINES!=='undefined'){ RECENT_LINES.push(choice); if(RECENT_LINES.length>110) RECENT_LINES.shift(); }
+    if(typeof RECENT_LINES!=='undefined'){ RECENT_LINES.push(choice); if(RECENT_LINES.length>150) RECENT_LINES.shift(); }
     return choice; };
   const built=["Built something that outlasted the building of it.","Made something real, and the making was the life.","Left more behind than {they} took, and the difference is what remains.","Put something into the world that stayed there after {them}."];
   const kind=["Remembered, above all, as kind.","Remembered, most of all, for a steady kindness.","Kind in the small daily ways that turn out to be the large ones.","Left people gentler than {they} found them.","Carried a warmth into every room, and left it there."];
@@ -261,8 +267,13 @@ function updateHouse(p){
       pious:["In time, all is weighed.","We answer to a longer ledger.","The quiet ones are listening."],
       artistic:["We leave something beautiful behind.","We make, and so remain.","Beauty is the only argument we trust."],
       reckless:["We burn bright, and we burn.","Better a short blaze than a long smoke.","We do not save ourselves for later."]};
-    const marr=MOTTOS[top];
-    if(top&&marr&&p.gen>=2){ h.motto=(typeof freshPick==='function')?freshPick(marr,p):marr[0];
+    let marr=MOTTOS[top];
+    if(top&&marr&&p.gen>=2){
+      // prefer a motto not already worn by another house this session, so two dynasties don't crystallize
+      // the identical words; only when every variant for this character is taken do we let one repeat.
+      const fresh=marr.filter(m=>USED_MOTTOS.indexOf(m)<0); if(fresh.length) marr=fresh;
+      h.motto=(typeof freshPick==='function')?freshPick(marr,p):marr[0];
+      USED_MOTTOS.push(h.motto); if(USED_MOTTOS.length>40) USED_MOTTOS.shift();
       logLine("The family's character has settled, at last, into words: “"+h.motto+"”","joy"); }   // name the milestone in the life that earned it
   }
 
@@ -286,6 +297,7 @@ function recordAncestor(p){
   // instead of recomputing, which would see this very life already in the lineage and
   // drift to a different variant.
   p.epitaph = fmt(epitaphFor(p));
+  if(p._epiCluster){ RECENT_CLUSTERS.push(p._epiCluster); if(RECENT_CLUSTERS.length>14) RECENT_CLUSTERS.shift(); }
   S.lineage.push({
     given:p.given, surname:S.surname, gen:p.gen, sex:p.sex,
     born:p.bornYear, died:p.bornYear+p.deathAge, span:p.deathAge,

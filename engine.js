@@ -197,9 +197,11 @@ function eligible(){
     if(c.age){ if(P.age<c.age[0]||P.age>c.age[1]) return false; }
     else if(c.stage!=='*'&&c.stage!==stage) return false;
     if(c.once && P.flags['card_'+c.id]) return false;
-    // once-per-DYNASTY: a "special" beat (a founding hardship, a defining dilemma) fires at most
-    // once across a whole house, so it stops being part of every single life's template.
-    if(c.onceDyn && typeof S!=='undefined' && S && S.seenDyn && S.seenDyn[c.id]) return false;
+    // once-per-DYNASTY, as a GENERATIONAL cooldown (not a permanent burn): a "special"/milestone beat
+    // rotates out for the next few generations after it fires, so it stops being part of every single
+    // life's template — but it can return in a LATER generation, so a long house doesn't run its heirs
+    // on thin filler once every milestone has fired once. Default 3 generations; `onceDyn:N` overrides.
+    if(c.onceDyn && typeof S!=='undefined' && S && S.seenDyn && S.seenDyn[c.id]!=null && (P.gen - S.seenDyn[c.id]) < (c.onceDyn===true?3:c.onceDyn)) return false;
     // no-repeat cooldown: a non-`once` card can't redraw within ~10 years (or c.cool)
     if(!c.once && P.drewAt && P.drewAt[c.id]!=null && P.age-P.drewAt[c.id] < (c.cool||10)) return false;
     if(c.cond && !c.cond()) return false;
@@ -276,7 +278,7 @@ function presentCard(c){
   P.sinceCard=0;
   P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age;   // for the no-repeat cooldown
   if(c.once) P.flags['card_'+c.id]=1;
-  if(c.onceDyn && typeof S!=='undefined' && S){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=1; }   // burn it for the whole house
+  if(c.onceDyn && typeof S!=='undefined' && S){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=P.gen; }   // record the generation it fired (generational cooldown, not a permanent burn)
   if(typeof markMomentSeen==='function') markMomentSeen(c.id);   // cross-run discovery: count the distinct moments witnessed
   // once the player has made a choice, point them to where it's all recorded
   if(window.hintOnce && P.decisions && P.decisions.length>=1) hintOnce('seenChron',"Every choice is being written into your chronicle — tap “✦ the constellation” (top) to see the whole line.");

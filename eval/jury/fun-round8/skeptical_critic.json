@@ -1,0 +1,48 @@
+{
+  "profile": "skeptical_critic",
+  "score": 7.0,
+  "fun_highlights": [
+    "The callback system (cb_lookaway, cb_books_late, cb_strayed, cb_principle, cb_outcast_return) is the best mechanic in the game: choices made at age 7 or 18 resurface with genuine weight decades later, and when they do, they surprise. This is what the genre is supposed to feel like.",
+    "Vocation arcs produce structurally distinct life-shapes. A soldier life and a scholar life hit almost entirely different card clusters (a_soldier_service, m_soldier_ghost, e_soldier_old vs a_scholar_question, m_scholar_legacy, e_scholar_old). Four vocations is thin, but the separation is real.",
+    "Era cards (war, plague, hard, plenty, turning) meaningfully change the texture of a generation's youth in ways that compound across a long dynasty — a war-era life and a fat-years life open on different anxieties, gate different adult cards, and close differently.",
+    "Life-shape variety is genuine, not cosmetic. The transcripts show solitary lives (Naima, Saoirse, Ronja), early deaths (Edmund at 52), childless but married households, late-love non-domestic lines. Roughly a quarter of lives take a non-domestic shape, which is enough to break the 'born → child → elder' monoculture most games of this type suffer.",
+    "The ambient observation prose (once-per-stat, fired by condition) is excellent and produces the quiet contemplative texture the genre requires. Lines like 'Reading has stopped being something he does, and has become somewhere he goes' arrive at the right moment and earn their keep.",
+    "The house aspiration layer — motto, heirlooms, seat progression — does provide a cross-dynasty goal even if it's thin as a lever. The d_ancestor and d_motto_test callbacks that reference specific ancestors and play the family words back at the heir are genuinely elegant."
+  ],
+  "staleness": [
+    "The calling card (y_calling) is the same four-option choice framed nearly identically in every life, regardless of prior choices or the player's stated interests. Four vocations for 20+ lives is a thin vocabulary. By dynasty 8 the player is picking between known arcs, not discovering new life-shapes.",
+    "The adult domestic cluster (love → marry → child → parent-age) fires in the majority of lives in a recognisably similar sequence. Even when individual beats vary, the shape is familiar by dynasty 5. The 30% youth-love nudge and 33% child-push in the engine mean most coupled lives follow the same skeletal arc.",
+    "The competing-goods dilemma cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, x_promise, x_mercy, x_favour) are individually good but collectively over-expose. A player who reads dynasties 8–15 will have seen all of them multiple times; the cooldowns and once-per-dynasty flags are insufficient for a player consuming the game in a continuous sitting.",
+    "The epitaph pool collapses by dynasty 12. 'Taught what she knew, and so outlived the knowing of it' appears at least 4 times in the 15-dynasty transcript; 'Left people gentler than he found them' appears 3 times; 'Kind in the small daily ways that turn out to be the large ones' appears twice. The RECENT_LINES dedup window appears to be ~110 lines, which is too short for a session-length run. The repeated epitaph is the single most visible staleness signal — it lands at the emotional peak of each life.",
+    "The house dynasty layer is thin as a player lever. Seat levels gate only two cards (s_great_burden, s_patronage) that are substantially novel. Heirlooms pass down but rarely gate new content — the 'book too hard for a child's hands' heirloom produces the cb_books_late callback, which is elegant, but most heirlooms are atmospheric text. A player who wants to steer the dynasty must work mostly through generic adult choices, which is no different from steering nothing.",
+    "The body-aging observation lines blur together across lives. The vit<35 pool ('The stairs have started to ask a question', 'Her legs know something', 'Mornings take longer to arrive') fires one variant per life, but across a multi-generation read the distinctions collapse into a single recurring beat. Long-lived characters generate 2–3 body-aging lines that feel like the same observation at different depths."
+  ],
+  "improvements": [
+    {
+      "what": "Expand the vocation count from 4 to 6–7 by adding mid-specificity callings — 'the healer', 'the keeper of the books' (a clerk/administrator distinct from the scholar), or 'the devoted' (religious life). Each needs only 3 new adult-arc cards to create a structurally distinct life-shape.",
+      "why": "After dynasty 8, a player has effectively seen all four vocation arcs multiple times. Two new callings that gate genuinely distinct adult card clusters would restore the 'I've never seen this shape before' feeling that decays fastest.",
+      "impact": "high"
+    },
+    {
+      "what": "Triple the epitaph pool. The current ~60 lines are far too few for a continuous 15-dynasty session. Aim for ~180 lines, preferably differentiated by vocation (a soldier's epitaph pool, a scholar's, a wanderer's) so that the summary moment at each life's end doesn't repeat verbatim within a dynasty.",
+      "why": "The repeated epitaph is the most visible staleness signal in the transcript. It occurs at the highest-stakes moment — the end of a life — and the repetition undermines the preceding 80 years of distinct prose.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 2–3 dynasty-level events gated on the current seat tier and visible in a single 'this generation' moment that actually alters available adult-band cards for that life. For example: a seat-5 house generates a d_great_marriage event offering an alliance card that opens a new mid-life arc unavailable to low-seat houses.",
+      "why": "The dynasty layer currently changes the flavour text but not the felt texture of individual lives at high standing. A storied house and a struggling house play almost the same mid-life cards. Tier-gated life content would give the dynasty climb a tangible mechanical payoff.",
+      "impact": "high"
+    },
+    {
+      "what": "Rotate the competing-goods dilemma cards (x_promise, x_mercy, x_loyalty_truth, x_favour, x_honest_or_kind, x_dream_or_duty) onto stricter once-per-dynasty locks, not once-per-life. The player should face each moral category at most once per dynasty across all lives.",
+      "why": "A player reading dynasties 8–15 encounters these cards so frequently that their initial moral weight dissolves. They become 'which flavour of difficult choice' rather than 'a situation I haven't faced before'.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 5th calling — 'the wandering healer' or 'the keeper' (someone who stays and tends a place, a people, or a tradition) — that generates a distinct adult arc focused on community, obligation, and institutional decay rather than personal ambition or adventure.",
+      "why": "The four current vocations all have an individual-achievement or survival flavour. A care-and-institution arc would produce a structurally different life-shape (and dynasty character) unavailable from any existing calling, expanding replay variety.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely accomplished literary sim that earns its 7 by keeping lives structurally distinct across the first 8–10 dynasties through vocation arcs, era variation, and a callback system that is the best thing in the game — but the dynasty ceiling is real: by dynasty 12 the competing-goods dilemmas recycle, the epitaphs repeat, and the domestic arc template reasserts itself until the game feels less like a life and more like a very well-written life-template."
+}

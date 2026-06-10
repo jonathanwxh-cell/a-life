@@ -42,7 +42,7 @@ const body=`
     var chose=fmt(ch.t).replace(/<[^>]+>/g,'');
     var alts=c.choices.filter(function(o){return o!==ch;}).map(function(o){return fmt(o.t).replace(/<[^>]+>/g,'');});
     P.sinceCard=0; P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age; if(c.once) P.flags['card_'+c.id]=1;
-    if(c.onceDyn){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=1; }
+    if(c.onceDyn){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=P.gen; }
     var before=Object.assign({},P.aura);
     ch.do(P);
     var dW=(P.aura.warmth-(before.warmth||0)), dL=(P.aura.light-(before.light||0));

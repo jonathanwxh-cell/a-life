@@ -1,0 +1,48 @@
+{
+  "profile": "choice_savorer",
+  "score": 6.5,
+  "fun_highlights": [
+    "Callback cards are the game's best mechanic: when 'the corner you cut once comes back' or 'the child in the yard you ignored' reappears, the choice genuinely accumulates into a person. The 40-year gap between c_friend and cb_lookaway is the kind of long-arc payoff that makes narrative games worth replaying.",
+    "Vocation gating works. A soldier's life reads genuinely differently from a scholar's — the arc cards (a_soldier_service, m_soldier_ghost, e_soldier_old) land as a distinct shape, not a cosmetic reskin. Choosing 'the blade' at 14 and then facing the 3am war memory at 62 is exactly the 'choices shape a distinct person' promise delivered.",
+    "The 'bequest' choice (e_bequest) is the game's smartest dynasty lever: deciding what to leave — knowledge, money, warmth, or nothing — is the one moment where a dying life visibly engineers the next. It is legible, cross-generational, and feels meaningful rather than mechanical.",
+    "Competing-goods cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are the most characterful in the deck. Neither option is coded 'good'; both feel like someone a real person might be. These reward the choice-savorer most directly.",
+    "Dynasty-memory cards (d_ancestor, d_motto_test) create genuine continuity texture: being handed a motto and then choosing whether to live by it or break with it is the kind of inheritance-as-choice that makes the generational framing earn its keep.",
+    "Trait-gated moments (t_bookish, t_guarded, t_shrewd, t_restless) make the marked-nature system feel real when they land — a 'guarded' character facing the 'let them in, just this once' card is exactly the self-portrait moment the profile craves."
+  ],
+  "staleness": [
+    "The calling choice (y_calling) presents four options that look different on the label but collapse into nearly identical downstream life-shapes by dynasty 6-8. The transcripts show that maker and wanderer and scholar all converge on: find love (late), marry, face a_work, face m_health, do e_legacy, die. The vocation cards are real but sparse — three per vocation across an 80-year life — and the bulk of the remaining 60+ cards are vocation-neutral, so the claimed structural divergence is shallower than it appears from the code.",
+    "The love/marriage/child pipeline dominates every dynasty regardless of player choices. Of the 15 dynasties and 30+ lives in the transcripts, roughly 80% pass through fall-in-love → a_marry → a_child in that order. The engine comments acknowledge the monoculture fix attempt, but the transcripts show it is only partially fixed: late love is common, not rare; a_meet_late fires in dynasties 1, 3, 4, 5, 7, 8, 10, 11, 12 as a near-universal fallback. For a choice-savorer the question 'will I fall in love' stops feeling like a real choice by dynasty 4.",
+    "Binary framing on most cards produces flavour, not meaningful divergence. 'Keep the promise / release yourself' and 'keep your hands clean / take the easy gain' and 'tend it daily / sit in the window' are thematically legible but mechanically symmetric: both options move different stats by similar magnitudes, and the downstream consequences rarely surface in a callback. The hint text promises stakes ('fortune is fickle,' 'a door that won't close again') that the game rarely delivers as felt consequence.",
+    "Callback density is too low and too predictable. Only six or seven life-choices reliably generate a callback (child_books, looked_away, unspoken_love, strayed, chose_study, took_a_stand). Most adult choices — the bulk of the card draw — disappear without echo. In a run of 15 dynasties you watch the same callbacks (cb_lookaway, cb_books_late, cb_study_pays) recur almost mechanically, which makes the system feel more like a checklist than a web of consequence.",
+    "The adult band (28-58) is the weakest zone for choice salience. Once vocation and love are established, the player faces: work promotion (binary), the health scare (binary), windfall/loss (universal), m_reinvent (binary), m_rival (binary), m_peer_dies (binary). These cards read as life-events that happen to the character rather than decisions that reveal who they are. By dynasty 6 the player has seen every adult card and is waiting for elder content.",
+    "Motto convergence narrows the dynasty layer. Of the 15 dynasties in the transcripts, two use 'What we have, we share,' two are 'Sereno' houses (same family name from different starts), and the scholarly/kind/generous mottos recur across unrelated houses. The motto is designed to feel like 'what this family is' but reads, by dynasty 8, as 'which pool of phrasing did I happen to hit.' The epitaph system has the same problem: 'Taught what she knew, and so outlived the knowing of it' appears in dynasties 2, 6 (two lives), 7, 12 (two lives), and 14 — six times in 30 lives."
+  ],
+  "improvements": [
+    {
+      "what": "Double the callback count by treating more adult choices as 'callback seeds.' Right now only ~8 seeds reliably generate a callback. Add callbacks for: a_work (took the promotion obsessively → face a dying-at-desk moment at elder), a_affair (closed the door → elder reckoning about the road not taken, not just the road taken), a_home (bought it → cb_home_keep already exists but fires rarely; seed it from more paths), m_reinvent (changed everything → elder card comparing the two selves).",
+      "why": "The single thing that makes choices feel characterful is consequence that surfaces later. The transcripts show that most adult decisions vanish without trace — the player chooses and forgets. Each new callback retroactively charges a prior choice with meaning.",
+      "impact": "high"
+    },
+    {
+      "what": "Differentiate the four vocations with 2-3 more exclusive dilemmas in the adult band, not just elder caps. Specifically: scholars need a mid-career 'publish or protect' card (do you publish the dangerous finding?); makers need a client-versus-integrity card; wanderers need a 'someone needs you to stay' choice that actually strains the vocation identity; soldiers need a morally contaminated-order card that isn't only present when era=war.",
+      "why": "The transcripts show that by adulthood, all four vocations are drawing from the same 60-card pool. The vocation is a label that gates 3 unique moments but doesn't structurally reshape the adult band. A scholar's adult life and a maker's adult life look nearly identical in cards 10-20.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the late-love monoculture more aggressively. The current 5% nudge toward a_meet_late is supposed to make it rare; the transcripts show it fires in ~60% of lives that don't get y_love1. Either remove a_meet_late from the default pool entirely (love is youth-only; after that, you live without it or with an existing relationship), or introduce a genuine 'solitary arc' that generates as much late-game content as the domestic arc — so closing the door on late love is a real choice, not a penalty.",
+      "why": "For a choice-savorer, the most painful staleness is when a nominally meaningful choice (will I let love in?) has a mechanically dominant answer. The game is trying to say solitary lives are real, but the content doesn't yet support it.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 cards that generate distinctly different outcome text depending on 2 or more prior choices in combination — cards that only exist at the intersection of, e.g., (took-the-promotion AND strayed) or (became-teacher AND childless). These 'crossroads' cards would be the game's most characterful moments because they address who this specific person is, not who any person might be.",
+      "why": "Currently the game's combinatorics run in one direction: past choices gate whether a card appears. What's missing is cards whose text and stakes change based on the accumulated profile, so the player feels they are living a person rather than completing a tree.",
+      "impact": "med"
+    },
+    {
+      "what": "Expand the epitaph pool substantially and break the 'became_teacher' attractor. The m.became_teacher check fires on at least 6 separate card choices, making it the single most common epitaph trigger. Add a tiebreaker: if became_teacher already appeared in the last 4 lives of the lineage, skip it regardless of the stat check, forcing the system to find a more specific line.",
+      "why": "The same epitaph appearing in 6 of 30 lives is the single most visible 'I have seen this before' signal in the transcripts. The existing anti-repeat logic is per-dynasty, not cross-dynasty, so an inter-dynasty career of 'teacher' epitaphs is not currently blocked.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "Choices are often well-written and thematically distinct, but their consequences are too shallow and too rarely echo forward — by dynasty 5 the player is curating prose styles rather than building a person, because most decisions dissolve without trace and the domestic pipeline reasserts itself in nearly every life."
+}

@@ -1,0 +1,49 @@
+{
+  "profile": "mobile_snacker",
+  "score": 6.5,
+  "fun_highlights": [
+    "The calling system (soldier/scholar/maker/wanderer) genuinely differentiates lives structurally — a soldier's arc has distinct moments (m_soldier_ghost, vx_soldier_war, e_soldier_old) that a scholar never sees, so picking up the phone and finding a soldier life actually reads differently from a scholar one.",
+    "Era cards (war/plague/plenty/hard/turning) are a good macro-layer: being born into a war year produces a texturally different childhood opening and gates specific cards (w_war_call, w_war_loss, vx_soldier_war) that stay invisible in settled years. For a snacker who plays in short bursts, the era announcement on birth is a quick orientation signal that this run will be distinct.",
+    "Callback cards are the game's best feature for the mobile_snacker: they close arcs from 20-40 years prior with precise prose that references the original choice. cb_books_late, cb_lookaway, cb_strayed, cb_home_keep all land with a satisfying click of recognition. In a 5-minute session these are the 'wow' moments.",
+    "The dynasty layer provides a real cross-session pull for short-session players: the motto crystallising mid-session (The family's character has settled into words: 'Beauty is the only argument we trust'), the house rising a seat, heirlooms accumulating — these are legible one-sentence milestones that make each pickup feel like forward motion.",
+    "Prose variety within cards is genuinely high. The marriage lines alone have 8 variants, child-birth lines have 8+ with a separate late-birth pool. freshPick() with session-level deduplication means within a single sitting the same line rarely repeats, which is the most important thing for a snacker reading on a phone.",
+    "The constellation / star-map and the chronicle make a session feel substantial even if it was only 4 choices — there is an artefact, not just a score."
+  ],
+  "staleness": [
+    "The structural template is rigid and becomes visible by dynasty 4-5. Every life follows: childhood card (c_origin always fires 3-5) → y_calling (14-22) → y_love1 or a_meet_late → a_marry → a_child → a_work or midlife fillers → m_health or m_parent_age → elder cap → die. Even with different vocation arcs layered on top, the skeleton is the same. By dynasty 8 (House Holloway, Esme) and dynasty 11 (Iris Bjornsen) the transcript shows the same scaffolding re-emerging with only the vocation arc and a handful of trait/era cards changing the flavour.",
+    "107 of 144 cards are once-per-life, and 25 are once-per-dynasty. That means the repeatable pool servicing the adult/midlife band (ages 28-64, roughly half a life) is only about 37 cards — and several of those have 14-18 year cooldowns. The transcripts show the thin patch plainly: adult lives in dynasties 4-10 repeatedly draw a_work, a_neighbour, a_small_lie, a_fallow, m_who_became in nearly the same order. The mid-life years feel like filler between the structural pillars.",
+    "The love/marry/child sequence fires in virtually every coupled life, and the engine's own nudges (30% push on y_love1 each draw, 55-62% push on a_marry once in love, 33% push on a_child once married) make it near-certain. Out of 30+ lives in the transcript only a handful are genuinely solitary. For the mobile_snacker who has played 6-7 dynasties, the domestic arc is already a known quantity — the interest is in which vocation arc sits on top of it, not the arc itself.",
+    "The once-per-dynasty gate on 25 cards, while well-intentioned, creates a specific staleness pattern for long-running dynasties: by generation 3-4 the best structural variety cards (s_from_nothing, d_ancestor, d_motto_test, cb_books_late, e_craft, e_journey, e_peace, m_peer_dies) have been burned and cannot return. Dynasty 6 (House Quint, 5 gens) and Dynasty 12 (House Thorne) show noticeably thinner cards in later generations — later heirs draw more generic filler (a_fallow, m_smaller_body, a_recognition) because the interesting once-per-dynasty beats are exhausted.",
+    "The c_origin opener fires every life at age 3-5. Despite its 8-variant text, the mobile reader encounters it as the first card every single life. After 10+ lives this pattern is conditioned — 'oh, the origin card again' — even when the text variant is different. The opener loses its freshness as an event and becomes infrastructure.",
+    "Surnames and given names are drawn from small pools (30 each, 30 surnames). In the transcripts within 15 dynasties: 'Cleo' appears as a given name in Dynasty 3, 4, 9, 10, and 12; 'Otto' in Dynasty 4, 6, 9, 10, 12; 'Emory' in Dynasty 10, 11, 12. For a snacker reading the chronicle, repeated names across unrelated dynasties dilute the sense that each house is its own story.",
+    "The observation system (ambient prose from observe()) fires on stat thresholds and is not gated on once-per-life. The transcripts show lines like 'Books have become a country she can live in' and 'He has kept, against most of the evidence, a stubborn appetite for the days' repeating across multiple lives in a single session. These are background texture, but after several sessions the same lines become wallpaper."
+  ],
+  "improvements": [
+    {
+      "what": "Add 15-20 mid-adult/midlife repeatable cards with longer cooldowns (20-22 years) focused on the work/craft/relationship maintenance band (ages 32-58). These do not need to be structurally significant — short, 2-choice moments that vary the filler years. The current filler cards (a_fallow, a_neighbour, a_small_lie, m_smaller_body, a_recognition) are good but too few for how much time a life spends in that band.",
+      "why": "107/144 cards are once-per-life. The repeatable pool for the longest band of a life (mid-adult to midlife, ~30 years) is thin enough that a long-session player on dynasty 5+ will see the same 4-5 cards cycling. This is the most immediately fixable staleness.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase the given-name and surname pools — double them. Given names: 60 each gender. Surnames: 60. The current 30/30/30 pools produce name collisions across dynasties by session 8-10.",
+      "why": "For a snacker reading the chronicle after a session, seeing 'Cleo' as founder of Dynasty 3, heir of Dynasty 4, heir of Dynasty 9, and two others breaks the immersion that each house is a unique lineage. Name collisions are the cheapest form of staleness to fix.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a second 'opener' variant that can fire instead of c_origin on second+ playthroughs: a card that positions the heir specifically within the house's existing reputation/era/seat rather than restating early childhood generically. Gate it on gen>=2 and randomise which opener fires (50/50).",
+      "why": "c_origin fires every life at age 3-5 with no dynasty-awareness. After 10 lives the player knows this card is coming before they can walk. A second opener that starts from 'born into a house known for X' would make the opening feel different between sessions.",
+      "impact": "med"
+    },
+    {
+      "what": "Promote 5-8 of the best once-per-dynasty cards (d_ancestor, d_motto_test, e_craft, e_journey, e_peace, m_peer_dies) to a soft-repeat system: eligible again after 3 generations, with different text variants, rather than burned forever. Flag the variant so the prose acknowledges it is a recurring pattern ('Again the question comes, as it did to [ancestor].') rather than pretending it's novel.",
+      "why": "Long dynasties (gens 4-6) are penalised by card exhaustion — the most interesting structural beats are all burned. The fix should acknowledge recurrence rather than hide it.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 3-4 cross-dynasty callbacks that reference a specific ancestor by name and epitaph: 'Your grandmother [name] — [epitaph] — left a question no one in the family has answered.' These should fire once per dynasty and produce a choice that either continues, reverses, or ignores the ancestor's theme. Currently d_ancestor references lineage narratively but not directly enough to feel personal.",
+      "why": "The dynasty layer's strongest pull for a snacker is the accumulation of specific named ancestors. A callback that uses a stored epitaph verbatim would make the lineage feel like a real through-line rather than a reputation meter.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is a beautifully written generational sim with real structural variety in its vocation and era systems, but by dynasty 5 the life-template (origin → calling → love → marry → child → midlife fillers → elder cap) is clearly visible through the prose, and the thin repeatable card pool for the 32-58 age band means most of a life is filler between the memorable once-only beats — genuinely fun for 3-4 dynasties, stale before 8."
+}

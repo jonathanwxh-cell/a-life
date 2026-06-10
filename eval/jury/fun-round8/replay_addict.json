@@ -1,0 +1,56 @@
+{
+  "profile": "replay_addict",
+  "score": 6.5,
+  "fun_highlights": [
+    "The vocation system (soldier / scholar / maker / wanderer) is the single strongest replay lever — it genuinely changes the adult cadence: a soldier gets m_soldier_ghost at 3am and e_soldier_old's truth-or-songs fork; a scholar gets a_scholar_question's hungry bet and m_scholar_legacy's give-or-guard; these are structurally distinct arcs, not cosmetic.",
+    "The era layer (war / plague / hard / plenty / turning) creates real variety across dynasties at almost no cost — the w_war_call, w_plague_tend, w_hard_winter, vx_soldier_war, vx_scholar_turning cards change the texture of a generation and gate content you cannot see without that era.",
+    "The callback system is the game's most satisfying mechanical conceit. cb_lookaway paying off 47 years after a childhood cowardice, cb_books_late circling back to the child who read too far above themselves, cb_study_pays calling in the hungry bet — these are genuine payoffs that make earlier choices feel retroactively meaningful.",
+    "Dynasty accumulation (seat climb, reputation crystallising into a motto, heirlooms, buried secrets) provides the 'one more run' pull effectively for the first 6-8 dynasties. Watching House Quint climb from nothing to 'a house written into the histories' across 5 generations with 'Beauty is the only argument we trust' as its motto is genuinely satisfying.",
+    "The collateral succession mechanic (no direct heir? the house passes sideways) removes the main structural deterrent to playing solitary or childless lives, opening up real life-shape variety.",
+    "The bequest system (bequeath mind / means / heart / freedom) gives the player a concrete lever at the generation boundary that visibly shapes the next life's starting conditions — this is an underrated replay-engagement hook.",
+    "The epitaph and ancestor-memory cards (d_ancestor, d_motto_test) create genuine cross-generational texture: Lucan Bjornsen breaking with the family motto 'We give past what we can spare' after four generations of honoring it is a small emergent story that no script could write."
+  ],
+  "staleness": [
+    "The once-per-life flag on ~107 of 144 cards means a typical life burns through most of the interesting content in one pass, and a mature dynasty (8+ generations) is playing a much thinner pool. By Dynasty 9-10 in the transcripts, lives are visibly hitting the same skeleton: c_origin → y_calling → y_love1 → a_marry → a_child → m_health → e_legacy → death, with only 3-5 distinctive once-per-life cards filling the middle.",
+    "The love / marriage / child template is inescapable and reads identically across dynasties. The y_love1 prompt ('Someone keeps finding reasons to be where {n} is…') and the a_marry choices ('Ask. Build a life / Not yet. Maybe never.') appear in nearly every life in the transcripts. By Dynasty 6 these are boilerplate — the player has made this exact pair of choices a dozen times.",
+    "The scholar vocation arc exhausts itself quickly within a dynasty. a_scholar_question, cb_study_pays, m_scholar_legacy, e_scholar_old are all once-per-life. After the second scholar life in a house, the arc is stripped bare — subsequent scholars hit only the generic adult band.",
+    "Epitaph clustering is visible in the raw transcripts and breaks the illusion of unique lives. 'Taught what she knew, and so outlived the knowing of it' appears as epitaph for Tamsin (D2), Greta (D5), Anouk (D6), Lazlo (D7) — four of fifteen dynasties. 'Left people gentler than he found them' also appears multiple times. The freshPick dedup works within a dynasty but not across the session.",
+    "There is no new goal structure after reaching the pinnacle seat (seat 7, 'a house written into the histories'). The house slips back to seat 6 next generation and you re-climb the same ladder. There is no unlocked content, no new card tier, no alternate ending for houses that have already peaked. The replay motivation evaporates sharply after D6.",
+    "The adult band (ages 28-58) is genuinely thin after the first 4-5 dynasties have burned through the once-per-dynasty fillers (m_peer_dies, x_promise, x_dream_or_duty, cb_principle etc.). The remaining repeatable cards in this band (a_neighbour, a_small_lie, a_fallow, a_friend_need) are low-stakes and feel like padding rather than characterful moments.",
+    "Trait variety is shallow. The engine's trait-affinity draw does tilt which childhood a 'bookish' or 'warm' child has, but with ~10 trait tags and most of them landing on the same 4-5 cards (c_book for bookish, c_animal for tender, c_friend for warm), the childhood band stops feeling different after you've seen all the traits cycle once.",
+    "Once-per-dynasty (onceDyn) cards fire early and then vanish, making mid-to-late-dynasty lives feel emptier than early ones. By generation 4 of a long house, the distinctive 'this only happens once' moments are all spent and the dynastic layer no longer surprises."
+  ],
+  "improvements": [
+    {
+      "what": "Add a second vocation tier: after 10+ years in a calling, gate a 'mastery' card that unlocks a new branch unavailable at the calling fork. E.g. a soldier who survived w_war and m_soldier_ghost can face a late s_soldier_command card; a scholar who chased the question gains access to a 'school' arc that can outlast their death as an institution. Make these once-per-dynasty at most.",
+      "why": "Vocation is the strongest structural variety driver but exhausts itself too early. A mastery layer would give long-dynasty lives in the same calling something genuinely new rather than replaying the same 3 vocation cards.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4-6 purely repeatable (no 'once', cool: 15-20) adult-band cards that change text based on accumulated dynasty state — e.g. 'The family name opens a door it could not have opened a generation ago' with the specific text of the house's seat and reputation woven in. Make them feel like the dynasty's own story, not generic filler.",
+      "why": "The adult 28-58 band is the staleness problem's epicentre. The current band-fillers are once-per-life and quickly exhausted; what's needed is endlessly-renewable content that still reads differently because the dynasty has changed.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a post-pinnacle goal tier: once a house has reached seat 7 and maintained a motto for 3+ generations, unlock a small set of 'legacy' cards about the house's long-term fate — schism, reform, a famous scandal, an heir who rejects the name entirely. Give the player something to steer toward or against after the climb is done.",
+      "why": "The 'one more dynasty' pull collapses after reaching the top because there is nothing new to pursue. A handful of high-seat-gated, late-reputation-gated outcomes would restore a goal structure for the endgame.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 10-15 more epitaph clusters and enforce a stricter cross-session dedup. The RECENT_LINES buffer (currently 110 entries) is shared for all log lines, not just epitaphs; a dedicated RECENT_EPITAPHS set (size 20) that prevents any epitaph repeating within the same play session would eliminate the most visible staleness signal.",
+      "why": "Repeated epitaphs across nearby dynasties are the single most jarring 'it's the same template' signal a replay player notices. The fix is cheap and the impact on perceived variety is outsized.",
+      "impact": "med"
+    },
+    {
+      "what": "Make the love / marriage arc text more sensitive to dynasty history. If S.lineage shows 3+ ancestors who married, vary the a_marry framing around the dynasty's pattern: 'Everyone in this family marries young and everyone says it wasn't rash' / 'The family has an odd habit of waiting until it's nearly too late.' The choice stays the same; the framing becomes the house's own story.",
+      "why": "The love/marry beats are unavoidable without removing them; making them reference the dynasty's pattern would transform boilerplate into dynasty texture without touching the card count.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 3-4 scholar × maker × soldier × wanderer CROSS-vocation cards for children of a different calling than the parent: e.g. a scholar's maker-child who inherits a library but not the temperament for it, or a soldier's scholar-child who must reckon with the violence in the family's past. Gate on parent vocation stored in heirlooms/repute.",
+      "why": "Right now vocation variety is generated at the calling fork, but lives in the same house with different callings don't interact. Cross-vocation cards would make the dynasty's accumulated calling history matter as content, not just stat inheritance.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely moving literary sim with a strong first-arc pull — the vocation system, callbacks, and dynasty accumulation create real 'one more dynasty' momentum for 6-8 houses — but the once-per-life card model burns through the interesting content too fast, leaving mid-to-late dynasties playing a visibly thinner version of the same skeletal template."
+}

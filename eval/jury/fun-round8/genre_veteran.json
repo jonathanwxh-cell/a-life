@@ -1,0 +1,54 @@
+{
+  "profile": "genre_veteran",
+  "score": 6.8,
+  "fun_highlights": [
+    "The vocation system genuinely works: a soldier's life plays structurally different from a scholar's. The vx_ cross-cards (soldier x war era, scholar x turning era, maker x plenty era) are the game's best moments — rare, earned, and surprising.",
+    "Callback chains create real emotional payoff. The 'looked away as a child / sees the rough sleeper as an adult / looks away again / or finally stops' arc is one of the finest things a text life-sim can do. When it fires, it earns its place.",
+    "The solitary and childless life-shapes are genuine content, not dead-ends. m_solitary, a_chosen_family, e_solitary give a non-domestic life its own texture. That collateral succession doesn't end the house is the right design call.",
+    "The dynasty layer adds real cross-life stakes. Watching a house climb from 'a rented room' to 'a house written into the histories' over five generations (House Quint) is genuinely satisfying. The motto crystallisation feels earned.",
+    "Prose variety within repeated cards is excellent. The seven variants of y_love1, the age-aware marriage lines, the late-birth pool — these prevent sentence-level repetition. freshPick with global dedup is doing real work.",
+    "Era system changes the world's texture generation to generation. A war-era childhood reads differently from a plague-era one. The six era types and their gated cards are light but effective macro-variety.",
+    "The 'competing goods' cards (x_honest_or_kind, x_dream_or_duty, x_loyalty_truth) are the genre at its best — no clean answer, both roads carry weight."
+  ],
+  "staleness": [
+    "The structural skeleton repeats too visibly by dynasty 5–6. Every life: c_origin → childhood scatter → y_calling → love card → marry → child → midlife health/work → elder legacy → die. This is the exact 'same template with new names' the brief asks about. The vocation arc adds a layer but not enough to disguise the scaffold. By dynasty 8 I was predicting the shape before reading the text.",
+    "The calling card (y_calling) fires with near-certainty in every life, and its four choices (blade/book/hands/road) are the only structural fork. Every life ends up in one of four vocation channels. With 15+ dynasties all four channels exhaust themselves: by dynasty 10 I had seen every vocation arc multiple times, and the once-per-dynasty guard on vocation arc cards (a_soldier_service, a_scholar_question, a_maker_shop, a_wanderer_settle) means late-dynasty lives in a given vocation hit the same 3-card arc every time.",
+    "High repeat rate on certain universal beats. In the 15-dynasty transcript: cb_lookaway (looked away / rough sleeper callback) fires in dynasties 1, 2, 9, 10, 13, 14 — six times. The m_health 'body sends its first real letter' fires in nearly every life with moderate vit. The u_windfall / u_loss cards recycle constantly in the adult years. These are cooldown-gated, not once-per-dynasty, so they reappear every 14-16 years of game time, which means once per generation reliably.",
+    "The adult/midlife band (roughly ages 28–64) is the thinnest. The work promotion card (a_work) fires repeatedly on the same 2-choice structure. The wealth cards (a_fork_career, m_money, m_invest_name) feel like the same decision rephrased. Despite the anti-staleness passes, most adult lives still hit: love → marry → child → work promotion → health scare → aging parent. The variety cards (a_small_lie, a_neighbour, a_belief, a_fallow, m_rival) are low-weight fillers and often cluster in the same sequence.",
+    "Epitaph clustering is still noticeable. 'Taught what she knew, and so outlived the knowing of it' appears for Tamsin (D2), Cleo (D4), Anouk (D6), Greta (D5), Lazlo (D7), Annika (D12) — six times in 15 dynasties despite the freshPick dedup. The dedup operates per-session but with a 110-line window; at dynasty 10+ the window has cycled and lines recur. The epitaph pool is genuinely smaller than the play variety suggests.",
+    "The dynasty mechanics lack legible negative arcs. A house falls to 'nothing but a name' several times but there are no materially different cards for a FALLEN house vs. a rising one. The repute-gated and seat-gated cards (r_scholar_door, s_great_burden, s_patronage) only fire for high-seat houses. A house in decline never faces structurally different content from a house at seat 1 — it's just the same cards with different seat-based opening text."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2–3 'alternative calling' cards for adult lives with no vocation — a 'late calling' card (age 30–45) that gates a distinct mid-career cluster, parallel to y_calling. This would let a life that missed the youth fork still diverge structurally, and give the adult band a second major fork.",
+      "why": "Right now a life that somehow slips the y_calling draw (or dies young) and one that took 'the road' as a teenager both end up in a formless adult band. A second structural fork in the 30s would break the template.",
+      "impact": "high"
+    },
+    {
+      "what": "Mark cb_lookaway and m_health as onceDyn (once per dynasty), not once-per-life with a cooldown. They currently fire in nearly every generation of a long house. Once per dynasty is enough for each to feel special.",
+      "why": "In the transcript cb_lookaway fires 6 times across 15 dynasties. This is the most visible single source of the 'same beat again' feeling.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a low-seat content track: 2–4 cards gated on seat <= 1 that paint a world of genuine scarcity and social invisibility. These should unlock situations inaccessible to wealthy houses (c_steal already does this at age 6, but nothing comparable exists for adult/midlife). Low houses would then feel structurally different from high ones in both directions, not just in the opening text.",
+      "why": "Right now a seat-0 house and a seat-4 house play the same adult cards (minus the seat >= 3 gates). The asymmetry only runs upward. A house that has *fallen* should meet different content from one that was always low.",
+      "impact": "high"
+    },
+    {
+      "what": "Expand the epitaph pool for the 'teacher' cluster (currently 6 lines) and the 'kind' cluster (currently 5 lines). These two clusters account for roughly a third of all epitaphs in the transcript. Double each pool, and add a dynasty-offset to the freshPick selection so the same cluster can't land on the same line twice in the same house.",
+      "why": "The 110-line RECENT_LINES window resets between dynasties effectively, so epitaph lines recur every 4–6 dynasties. A player reading a long run notices the same final sentence.",
+      "impact": "med"
+    },
+    {
+      "what": "Add 1–2 'negative dynasty legacy' cards: content that only appears when a house has DECLINED (seat fell this generation, or facedReckoning==='fell'). For example, a card that acknowledges shame, a reputational scar, or a specific hardship the falling house must navigate. This makes the downward arc as content-rich as the upward one.",
+      "why": "The current dynasty layer rewards building and is nearly silent on decline. A house that slips from seat 4 to seat 2 faces no new content — the player just sees the standing readout change. Loss should have texture.",
+      "impact": "med"
+    },
+    {
+      "what": "Reduce the y_calling draw probability from 0.5 (and near-certain at window end) to something that lets ~15% of lives genuinely miss the fork — and write a small 'drifted life' arc (2–3 cards) for uncalled lives that gives them their own identity rather than playing as structurally undefined adults.",
+      "why": "The near-certainty of the calling draw means the four vocation channels exhaust rapidly in a long run. Rare uncalled lives would add structural variety without breaking the dominant pattern.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has genuine craft and some excellent moments — the callback arcs, the vocation x era intersections, the competing-goods cards — but by dynasty 6 the structural skeleton (origin → calling → love → marry → child → midlife → elder → die) is predictable enough that a genre veteran is anticipating beats rather than discovering them, and the card pool's repeat rate across a 15-dynasty run exposes the seams the prose is working hard to hide."
+}

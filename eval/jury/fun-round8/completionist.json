@@ -1,0 +1,55 @@
+{
+  "profile": "completionist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is the single strongest fun mechanic: looking_away at age 10 returns as cb_lookaway in midlife; chose_study at 14 returns as cb_study_pays in adulthood; the book heirloom passes three generations and becomes cb_books_late. These cross-life echoes genuinely deliver the 'one more life' feeling when they land.",
+    "The vocation x era intersection cards (vx_soldier_war, vx_scholar_turning, vx_maker_plenty) are a high-value completionist target — they exist only when the calling matches the world, so a player pursuing all four callings across eras gets structurally different lives. House Quint's 5-generation run reaching 'a house written into the histories' with motto 'Beauty is the only argument we trust' is the clearest example of a genuinely earned, non-repeating dynasty arc.",
+    "The era system meaningfully colors every life's childhood text (c_origin reads six different ways), the calling card text, and what rare events can fire — so dynasty 3 (war era) and dynasty 10 (plenty era) open on different prose and unlock different cards. A completionist will want to see all six eras.",
+    "The dynasty-memory moments (d_ancestor, d_motto_test) are elegant: reading the ancestor card pulls a specific cluster word from prior lives and asks the heir to live up to or defy it. This makes the chronicle feel like a living document rather than decorative.",
+    "Solitary and childless life-shapes are real arcs (m_solitary, e_solitary, e_childless, a_chosen_family) with genuine prose payoffs, not dead-ends. A completionist can run a whole dynasty of hermits and get distinct late-game content.",
+    "The 'fate' cards (f_fire, f_sudden_loss, f_grace, f_reversal) with no choices break the binary grammar usefully; sudden death of a bonded NPC mid-dynasty hit hard in the transcripts (Matthias gone at 44 in Dynasty 5).",
+    "Traits surface as actual content: t_bookish, t_guarded, t_restless, t_warm, t_shrewd, t_stubborn, t_dreaming, t_frail each have dedicated moment cards. A completionist will notice that a 'guarded, warm' character like Felix Sorrelle plays differently from a 'shrewd, bright' Anouk Quint."
+  ],
+  "staleness": [
+    "108 of 144 cards are once:true — they can never fire again in a given life. That leaves 36 non-once cards to cover the 28–64 adult/midlife band across dynasty after dynasty. In practice, by dynasty 8–10 the mid-life band (28–64) is noticeably thin: the same handful of repeatable cards (a_work, a_child, a_neighbour, u_windfall, u_loss, a_small_lie, a_fallow, a_friend_need) cycle through every life because the once-per-dynasty milestones have already fired. The transcripts confirm this: dynasty 10 (Mercer, 5 gens) and dynasty 12 (Thorne, 5 gens) produce lives with 8–10 moments total, of which 3–4 are the same mid-range repeatable cards.",
+    "The structural arc of every life is near-identical: origin → vocation choice → love encounter → child question → work/promotion card → midlife health scare → parent care → elder legacy → bequest. All 15 dynasties follow this spine. Variation is in the writing and the occasional callback, not in the shape. By dynasty 6 a completionist has mapped the spine completely and the remaining surprise is 'which variant text' not 'what happens next.'",
+    "Marriages converge: across 30+ lives in the transcripts, all but 3 result in marriage (the exceptions are solitary paths). The 'pretend not to notice / let it pass' branches on y_love1 and a_meet_late technically exist but their downstream content (no spouse, then m_solitary later) is thin. The marriage arc — love → many years of assumed certainty → ask/not ask — feels formulaic by dynasty 4.",
+    "The 'hard name' and 'tainted' reputation paths (r_hard_name, r_old_shame, r_name_cost, r_family_shadow) are gated behind seat>=3 and a ruthless/tainted repute that is very hard to reach intentionally before dynasty 5+. In 15 dynasties, only Ronja Thorne (dynasty 12, gen 5) visibly uses r_hard_name. Most runs never see these cards, leaving a whole content tier effectively invisible.",
+    "Motto repetition is partially solved (multiple mottos per reputation now), but in the 15-dynasty transcript 'What we have, we share' appears in both dynasty 3 and dynasty 9, and dynasty 6 and dynasty 12 both reach 'scholarly' fame though with different mottos. The convergence pressure is real: generous/scholarly houses dominate because their reputation paths have more input cards than ruthless or tainted.",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, x_promise, x_mercy, x_favour) are among the best writing in the game, but most have once:true or run on onceDyn=true with age gaps. A completionist can see all six in one long dynasty but they fire too rarely to sustain mid-life variety across a multi-dynasty session.",
+    "There is no macro-surprise in later dynasties: once seat, repute, heirlooms, and motto mechanics are understood (by dynasty 4–5), the dynasty layer becomes a tracker rather than a source of tension. The reckoning card (x_reckoning) fires once per life and is the only real high-stakes dynasty mechanic; the aspiration list tells you what to do but there is no adversarial pressure or unexpected reversal beyond the fire/reversal fate cards."
+  ],
+  "improvements": [
+    {
+      "what": "Add 8–12 new adult/midlife repeatable cards with cooldowns of 6–10 years, targeting the specific gap between ages 28–55 where the once:true cards have run out. Subjects that don't exist yet: a neighborhood dispute, a difficult conversation with a grown sibling that was never had, a professional rivalry resolved or not, a season of illness (not the once-per-life health scare but a milder recurring one), taking on debt to help someone.",
+      "why": "The transcripts show that by dynasty 6+ the 28–55 band produces 4–6 moments max, with a_work, a_child, a_neighbour, and u_windfall carrying most of the weight. Adding repeatable band-fillers here is the highest-impact intervention for keeping mid-dynasty lives feeling alive.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate 2–3 of the 'competing goods' cards (x_dream_or_duty, x_loyalty_truth, x_favour) as cooldown-repeatable rather than once:true. Reduce cooldown on x_honest_or_kind from 22 to 14. These are the most morally interesting cards in the game and their current scarcity means most lives get only one or two of them.",
+      "why": "The competing-goods cards have no clean answer and the writing is sharper than most binary cards — they feel like real dilemmas. Making them cycle every 14–16 years instead of once keeps the mid-section morally alive without repeating a specific scenario.",
+      "impact": "high"
+    },
+    {
+      "what": "Add a 'dynasty crisis' layer: a proactive antagonist event (a rival house, a legal challenge to the name, a scandal that attaches to the heirloom) that targets established houses (seat >= 4) every 2–3 generations and cannot be fully resolved in one life. This should be distinct from x_reckoning and require 2+ generations to either defeat or absorb.",
+      "why": "Once a house reaches a grand estate or higher, the dynasty layer becomes purely additive (only rises happen, falls are rare). The existing reckoning fires once and passes. A multi-generational antagonist creates the 'one more dynasty to settle this' pull the game currently lacks at high seat levels.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4–6 more vocation x era intersection cards, specifically: maker in war (forced to make weapons or refuse), scholar in plague (write about the dying or maintain silence), wanderer in hard times (stay to help or move to easier ground), soldier in plenty (paid mercenary work or honorable discharge). Currently only 4 intersection cards exist for 4 vocations x 6 eras = 24 possible intersections, and most are empty.",
+      "why": "The vocation x era design is the game's most structurally clever anti-staleness mechanism but it's severely underbuilt. A completionist specifically chasing all intersections will run out after about 4 cards.",
+      "impact": "med"
+    },
+    {
+      "what": "Make the 'secret' mechanic interactive for the heir: when a secret exists in the house, add a 1–3 choice chain across the heir's life (discover a clue, investigate, confront a relative, expose or bury it) rather than the current single card (cb_inherited_secret). The secret should be nameable in the chronicle, not just flagged as 'the thing the family never speaks of.'",
+      "why": "The secret is one of the game's most interesting dynasty artefacts but its mechanical impact is thin: it sets a tainted reputation and gates cb_inherited_secret once. A multi-step investigative arc would make a house with a secret feel genuinely different to play.",
+      "impact": "med"
+    },
+    {
+      "what": "For the completionist specifically: add a visible 'discovery index' or constellation marker for rare/gated card types (first vocation x era card fired, first seat-7 life, first deliberately solitary dynasty, first tainted motto earned). This is not a score — it's a record of structural territory visited, creating a concrete 'have I seen everything' goal.",
+      "why": "The game has deep content (vx_ cards, s_ gate cards, high-seat-7 runs, tainted lines) that most players will never see. Signaling that this territory exists and giving it a marker would make the completionist pull real rather than hypothetical.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life has outstanding sentence-level writing and a cleverly designed callback system that genuinely delivers surprising emotional moments across dynasties, but after 6–8 dynasties the structural repetition of the life-arc (the same spine, the same 28–55 band thinning to 4–6 repeatable cards) outpaces the content variety, and the game's most distinctive mechanics — the tainted/ruthless reputation paths, the vocation x era intersections, the multi-generation secret — are either too hard to reach or too thin to sustain the play the completionist comes for."
+}

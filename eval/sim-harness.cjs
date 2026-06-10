@@ -24,11 +24,11 @@ const body=`
     if(c.age){ if(P.age<c.age[0]||P.age>c.age[1]) rec.ageViol.push(c.id+'@'+P.age+' ['+c.age+']'); }
     else if(c.stage!=='*'&&c.stage!==stage) rec.stageViol.push(c.id+'@'+P.age+' '+c.stage);
     if(c.once && P.flags['card_'+c.id]) rec.onceViol.push(c.id+'@'+P.age);
-    if(c.onceDyn && S && S.seenDyn && S.seenDyn[c.id]) rec.dynViol.push(c.id+'@gen'+P.gen);   // a once-per-dynasty beat fired twice in one house
+    if(c.onceDyn && S && S.seenDyn && S.seenDyn[c.id]!=null && (P.gen-S.seenDyn[c.id])<(c.onceDyn===true?3:c.onceDyn)) rec.dynViol.push(c.id+'@gen'+P.gen);   // a once-per-dynasty beat fired again inside its generational cooldown
     if(!c.once && P.drewAt && P.drewAt[c.id]!=null && (P.age-P.drewAt[c.id])<(c.cool||10)) rec.coolViol.push(c.id+' '+(P.age-P.drewAt[c.id]));
     rec.cardUse[c.id]=(rec.cardUse[c.id]||0)+1;
     P.sinceCard=0; P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age; if(c.once) P.flags['card_'+c.id]=1;
-    if(c.onceDyn){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=1; }
+    if(c.onceDyn){ S.seenDyn=S.seenDyn||{}; S.seenDyn[c.id]=P.gen; }
     var INTENT={y_love1:1,a_meet_late:1,a_marry:1,a_child:1,m_old_flame:1};
     var ch=INTENT[c.id]?c.choices[0]:c.choices[Math.floor(Math.random()*c.choices.length)];
     var hadLove=P.rels.some(function(r){return r.alive&&(r.kind==='love'||r.kind==='spouse');});

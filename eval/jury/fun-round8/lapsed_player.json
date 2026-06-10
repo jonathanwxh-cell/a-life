@@ -1,0 +1,47 @@
+{
+  "profile": "lapsed_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback system (cb_* cards) is the single best mechanic — when a choice at age 10 returns at age 57 with different weight, it creates a genuine narrative arc that feels authored rather than procedural. The lookaway/cb_lookaway loop is a standout example.",
+    "Vocation-gated arcs (soldier/scholar/maker/wanderer) give each life a structurally different mid-band. A soldier life and a scholar life are genuinely different sequences of events, not just different flavour text on the same skeleton.",
+    "Dynasty 6 (House Quint) is the most compelling 15-dynasty stretch: the reputation system grinding toward 'a house written into the histories' over five generations gives the player a concrete long-horizon goal. The motto crystallization moment ('Beauty is the only argument we trust') is one of the game's best beats.",
+    "Era cards (war, plague, plenty, turning) are economical and effective — they tile the world-layer without dominating lives, and the vocation-x-era combos (vx_soldier_war, vx_scholar_turning) create moments that genuinely exist only at their intersection.",
+    "Solitary and childless life-shapes now feel like real content rather than dead-ends; e_solitary and m_solitary give those lives their own reckoning instead of a truncated domestic arc."
+  ],
+  "staleness": [
+    "By dynasty 8–10 the early-life checklist is visibly the same template on different names: c_origin fires at 3–5, y_calling fires at 14–22, y_love1 or a_meet_late fires shortly after, a_child follows, a_marry follows, m_health fires at 45–68, e_legacy fires late. The order is near-invariant because the cards are age-banded and the nudges in drawCard() near-guarantee it. Reading the transcript, Dynasty 8 Esme Holloway, Dynasty 9 Cassian Halloran, and Dynasty 10 Vera Mercer hit a rhythm any lapsed player will recognise by their fourth life.",
+    "The 'meet them halfway / pretend not to notice' love card fires in every single dynasty — eleven out of fifteen in the transcript — with only modest text variation. The prose is good but the choice is almost always answered the same way (fall in love) and the moment reads as a required checkbox. Even the late-love variant (a_meet_late) is just the same fork with different framing.",
+    "The marriage card (a_marry) has identical mechanical stakes in every life: a bond adjustment and a flag. The six text variants are clever, but across 15 dynasties 'Ask. Build a life.' / 'Not yet. Maybe never.' is the second-most-repeated binary in the game. The structural choice is thin: the game strongly pressures 'yes' and the consequences of 'no' are mild (bond decay, no child nudge). There is no version of marriage that reshapes the subsequent card pool meaningfully.",
+    "The 'u_windfall' and 'u_loss' cards are mechanically repeatable fillers that appear in a significant fraction of lives. By dynasty 6 they feel like noise rather than story — the prose is fine but the player has nothing new to discover.",
+    "The observe() ambient lines (vit_tire, mind_hi, means_lo, spirit_hi, etc.) repeat verbatim across lives with high frequency. 'Books have become a country she can live in', 'The stairs have started to ask a question', and 'She still laughs like someone the years have not yet learned how to reach' each appear three or more times in the fifteen-dynasty transcript. These are the most visible staleness signal because they are out-of-choice passages — the player sees them but cannot engage with them.",
+    "The cb_principle, cb_corner, and cb_reckless callbacks are onceDyn (once per dynasty) but the underlying principle/reckless memories are set in so many life-paths that almost every dynasty triggers at least one of them. They cease to feel like the rare closing-of-a-circle they're designed to be and start to read as expected midlife/elder filler."
+  ],
+  "improvements": [
+    {
+      "what": "Break the love-and-marriage checkpoint into a 3-tier split: ~40% of lives never see y_love1 at all (redirecting to the solitary/chosen-family path from the start), ~40% get the current youth love path, ~20% get only late love. Remove the strong drawCard() nudge for a_marry and let marriage arrive as one possible beat rather than an almost-inevitable checkpoint.",
+      "why": "Right now every dynasty has a 'love arrives → marry → child' spine that the vocation and era cards merely decorate. Breaking this spine forces each life to have a structurally distinct shape. The solitary and childless paths are already coded; they just need equal probability weight.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the observe() ambient lines a per-session deduplication budget of 2 uses per line-cluster (vit_tire, mind_hi, etc.), matching the epitaph deduplication logic already in dynasty.js (RECENT_LINES). After 2 uses, retire that line cluster for the session and rotate to an alternative observation about the same underlying stat.",
+      "why": "'Books have become a country she can live in' is a beautiful line — but reading it verbatim in dynasties 4, 7, 10, and 13 is the single most obvious staleness signal for a player who sits down for a long session. The fix is already modelled in dynasty.js; it just needs to be ported to engine.js observe().",
+      "impact": "high"
+    },
+    {
+      "what": "Add 6–8 new midlife/adult cards that are only accessible to characters who did NOT take any of the four vocations (died without vocation, or in rare cases where the draw was missed). These 'drifter' lives currently get the same adult card pool as everyone else despite having no vocation identity.",
+      "why": "The vocation fork is the main engine of structural variety. Lives that slip through without one feel thin. A small 'uncalled life' card cluster (e.g., finding meaning in small habitual work, or the late ache of having never chosen) would make vocation-less lives their own recognisable shape.",
+      "impact": "med"
+    },
+    {
+      "what": "Make the u_windfall and u_loss filler cards once-per-dynasty rather than cooldown-only. After the house has experienced one windfall and one loss, retire both cards for that dynasty and replace their slot in the pool with a dynasty-specific variant that references what the house has accumulated (e.g., a fire that threatens the heirloom rather than a generic windfall).",
+      "why": "These are the most generic cards in the pool and the only ones that feel explicitly like filler. Making them onceDyn forces the engine to draw from the richer character-specific pool in later lives, increasing the freshness of the 8th dynasty relative to the 2nd.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a small set of 'house echo' cards — 3 to 4 cards that can only fire in generations 4+ and directly reference the specific heirlooms, motto, or lineage cluster of this dynasty, not just the generic d_ancestor or d_motto_test. For example: if the heirloom is 'a fortune and the fear of losing it', a card that surfaces that specific fear by name in a financial crisis moment.",
+      "why": "The dynasty layer's most interesting content (mottos, heirlooms, secrets) is currently delivered through 2 generic cards (d_ancestor, d_motto_test). Specific callbacks to what this dynasty has actually accumulated would make the generational layer feel like a living entity rather than a score counter.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is genuinely good at what it does — the writing, the callback architecture, the vocation arcs — but by the eighth dynasty a returning player will be watching the same love-calling-marriage spine decorated with increasingly familiar prose, and that repetition is not offset by enough structural divergence to keep the 'one more life' pull alive."
+}

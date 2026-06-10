@@ -1,0 +1,51 @@
+{
+  "profile": "dynasty_strategist",
+  "score": 6.5,
+  "fun_highlights": [
+    "The seat climb feels genuinely purposeful early on: the gap between 'nothing but a name' (seat 0) and 'an old and famous house' (seat 6) is wide enough that the first 4-5 dynasties have a clear goal pulling you forward.",
+    "The bequest system (mind/means/heart/free) gives the dynasty_strategist a real decision each generation with legible downstream effects — nurture bequest is especially satisfying to watch compound over 3-4 heirs.",
+    "x_reckoning is the best dynasty-lever in the game: a high-stakes, cooldown-gated card that forces a genuine trade-off (lose seat vs. lose means), and seeing it fire in Dynasty 6 gen 4 and Dynasty 12 gen 4 at critical moments gives the 'steering' fantasy its strongest hit.",
+    "Collateral succession when a life ends childless feels emergent and surprising — the house continuing through a sibling's line despite no direct heir is the kind of unexpected story the genre promises.",
+    "The SEATS prose array (8 levels, each a distinct social register) gives the seat climb a narrative payoff, not just a number ticking up — arriving at 'a house written into the histories' feels earned.",
+    "Era drift at succession means a house that rose in plague times faces a different landscape than one that crested in plenty, creating cross-dynasty texture the strategist can read and attempt to navigate.",
+    "The 9-tag reputation system with 27 mottos means a ruthless house and a scholarly house accumulate genuinely different identities — the motto crystallization moment is a quiet highlight."
+  ],
+  "staleness": [
+    "The dynasty-steering levers are too few and too infrequent: across ~155 cards, roughly 4-5 directly interact with the house's seat or repute in a way the player can feel steering (x_reckoning, a_make_name, d_motto_test, s_great_burden, e_bequest). A dynasty_strategist playing 10+ dynasties will exhaust the 'new dynasty mechanic to discover' budget by dynasty 5.",
+    "Seat advancement is driven more by peakMeans passively accumulating than by strategic choice: the code path is peakMeans>=80 -> seat climbs, peakMeans>=92 -> climbs by 2. A player who wants to feel like a house-builder quickly learns to just pick means-boosting options, which are not the strategically interesting ones.",
+    "The motto repeat is a concrete staleness signal: both Dynasty 3 (Sorrelle) and Dynasty 9 (Halloran) received 'What we have, we share' — the same motto appearing in separate dynasties with distinct characters breaks the illusion that the house's character is uniquely earned.",
+    "Seat 7 ('a house written into the histories') is transient by design — it must be RE-EARNED each generation — but the re-earning mechanic is invisible to the player. You can lose the pinnacle without any moment where you feel the fumble. This makes the highest dynasty goal feel slippery rather than dramatic.",
+    "houseAspirations() generates up to 5 prose goals per dynasty but is purely flavor — no card fires because you hit one, no reckoning triggers because you haven't. After reading 2-3 aspiration sets the player learns they carry no weight, and the 'one more dynasty to hit this goal' pull deflates.",
+    "The marriage beat ('Ask. Build a life.') appears 29 times in 15 dynasties, the child beat ('Make room in the world.') 22 times, love acceptance ~21 times. By dynasty 6 a dynasty_strategist has internalized the life-template: birth → calling → love → maybe marry → work → midlife → elder → die → succession. The template itself is the staleness.",
+    "No cross-dynasty memory for the player-as-strategist: the game tracks house.heirlooms and house.repute internally, but these never surface as a strategic situation the player can read and respond to. A dynasty_strategist wants to know 'my house is tainted and scholarly — what does that mean for the next heir?' The current system does not give that.",
+    "d_ancestor and d_motto_test are the only cards that explicitly reference dynasty history, and their pool is small. A player who has seen both by dynasty 4 has exhausted the 'dynasty remembers itself' mechanic."
+  ],
+  "improvements": [
+    {
+      "what": "Add 3-4 dynasty-state reaction cards that fire based on the current house profile (e.g., a card that fires only for seat>=4 AND repute.ruthless>=1.5 presenting a dilemma about the house's feared name, or a card for seat>=2 AND repute.scholarly>=1.5 presenting a patron's request). These should fire once-per-dynasty (onceDyn), not once-per-lifetime.",
+      "why": "The dynasty_strategist's core want is 'my choices shape the house and the house shapes my choices.' Right now the house state mostly determines which seat/repute prose you read; very few cards change behavior based on who the house has become. Adding 6-8 such cards would make the house feel like an active constraint and opportunity, not just a counter.",
+      "impact": "high"
+    },
+    {
+      "what": "Gate seat-7 loss behind a visible moment: when a house fails to hold the pinnacle, fire a dedicated card ('The name slips from the histories') that names the cause and offers a response. This turns the transient-pinnacle mechanic from invisible drift into a dramatic event the player can engage with.",
+      "why": "Currently losing seat 7 is silent — the player just notices the seat description changed. A crisis card would make the highest-stakes dynasty moment actually feel like a moment, and give the dynasty_strategist a reason to read each succession carefully.",
+      "impact": "high"
+    },
+    {
+      "what": "Decouple means-accumulation from seat advancement: add an explicit 'invest in the name' choice point (probably in the midlife range) that lets the player trade current means for a direct seat-bump or repute boost. This makes the player's strategic allocation visible rather than automatic.",
+      "why": "The dynasty_strategist wants to feel the house rising because of their decisions. Currently peakMeans drives seat passively — the player can't actually choose to sacrifice wealth for standing or standing for wealth. A fork card that makes this trade explicit would give the 'steering' fantasy real teeth.",
+      "impact": "high"
+    },
+    {
+      "what": "Fix the motto pool: ensure no motto can repeat across dynasties within the same run by tracking which mottos have been awarded (a small Set in the dynasty object), and drawing only from unawarded options. If the pool is exhausted, generate a composite or leave the house with a 'still-unnamed character.'",
+      "why": "Two dynasties in the same run receiving 'What we have, we share' is the single most visible staleness signal in the transcripts. It breaks the fiction that each house's character is unique. The fix is small (a 27-slot exclusion set) and the impact on immersion is disproportionately large.",
+      "impact": "med"
+    },
+    {
+      "what": "Surface the houseAspirations() prose as a strategic framing device at succession rather than decoration: show it as 'what the house has not yet done' and wire at least one aspiration per category to a real unlock condition. For example, 'no scholar in the family yet' could gate a first-generation scholar to a boosted r_scholar_door card.",
+      "why": "houseAspirations() currently generates believable goals but none carry mechanical weight. The dynasty_strategist reads it once, learns it's flavor, and stops reading. Wiring even 2-3 aspirations to conditional bonuses would restore the 'one more dynasty' pull that fades around dynasty 5.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A graceful and genuinely moving life-sim that gives the dynasty-steerer a real first-act — roughly 5 dynasties of escalating house identity and seat-climbing — but fades to pleasant passivity thereafter, because the levers that let a strategist actually steer (reckonings, bequests, reputation choices) are too sparse and too disconnected from the house's visible state to sustain the compounding-agency fantasy across many runs."
+}

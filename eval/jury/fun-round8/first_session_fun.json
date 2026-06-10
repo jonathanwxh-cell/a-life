@@ -1,0 +1,49 @@
+{
+  "profile": "first_session_fun",
+  "score": 6.5,
+  "fun_highlights": [
+    "The first life is genuinely engaging: the opening card adapts to era, house standing, and trait, so Linnea's 'ordinary childhood' reads differently from Felix's 'war years' or Otto's 'house with a name.' The prose is immediately alive and the binary choices feel consequential.",
+    "The four vocations (soldier/scholar/maker/wanderer) create real structural divergence. A soldier's arc — the campaign, the blooding, 'the war at three in the morning' — reads nothing like a scholar's arc, and the player feels that from dynasty one.",
+    "Callback cards are the game's best mechanic. When 'cb_outcast_return' fires three decades after a childhood choice, or 'cb_lookaway' replays the lonely child in the yard, a first-session player feels the life-as-coherent-object without being told to.",
+    "The dynasty layer gives a newcomer something to chase past the first life: the motto crystallising, the house standing climbing a notch, a bequest deliberately made. The heir screen names these legibly and creates the 'one more life' pull immediately.",
+    "The era system provides genuine surprise. A plague-era life (w_plague_tend) or a fat-years maker (vx_maker_plenty) delivers content no other run hits, and a first-session player encounters these as fresh.",
+    "Solitary and childless life-shapes are content-bearing rather than dead-ends. The 'm_solitary' and 'e_solitary' cards make a spinster's life feel like a deliberate shape, not a failed domestic arc — a rare design choice that rewards non-standard play.",
+    "The 'observe()' ambient lines — 'The stairs have started to ask a question of her' — add texture without demanding interaction, and sustain the meditative register across long quiet stretches."
+  ],
+  "staleness": [
+    "The calling card (y_calling) fires in 26 of 26 complete lives across 15 dynasties. Its phrasing rotates, but the four roads and their outcomes are always identical. By dynasty four the player is selecting a vocation template, not discovering one. Worse: the card text for 'plenty' and 'war' eras is distinctive, but the choices themselves never change regardless of era or prior life — a soldier-in-peacetime and a soldier-in-wartime start identically.",
+    "A skeletal template is visible in nearly every life regardless of choices: c_origin → c_friend or c_book → y_calling → y_love1 or a_meet_late → a_marry → a_child → m_health or m_peer_dies → e_legacy or e_window → death. The cards within each slot vary, but the slot sequence persists. In 15 dynasties I counted at least 12 lives that followed this exact staging order, with at most one segment displaced. By dynasty five a careful player will recognise they are selecting flavours of a preset biography rather than shaping one.",
+    "The 'm_health' card ('the body sends its first real letter') appears in 8 of the 26 lives and the resolution lines are narrow: change everything or carry on. Together with 'm_peer_dies', 'm_who_became', 'm_smaller_body', and 'm_empty_house', the midlife band tends to feel like a timed checklist of mortality-adjacent reflections rather than a lived surprise. The card pool here is large, but the tone register is almost identical across all of them.",
+    "Epitaph recycling is a visible staleness signal. In the 30 epitaphs across 15 dynasties, 'Taught what she knew, and so outlived the knowing of it' appears 4 times and 'Left people gentler than he found them' appears 3 times. The dedup logic (RECENT_LINES, per-dynasty cluster blocking) reduces same-dynasty repetition but does not prevent cross-dynasty repetition for a multi-session player, because RECENT_LINES resets with the page. A player re-opening the game sees 'Kind in the small daily ways' again.",
+    "The adult 'a_marry' card has six text variants but a narrow emotional register (quiet certainty, an undone question, a downpour). After three or four marriages the player registers 'marriage proposal' as a menu option, not a moment. The weight-based draw means love → marriage → child fires in this order in the majority of adult lives, making the domestic arc feel structurally mandatory even when you've declined children before.",
+    "The first session's opening 20 minutes spans approximately two lives. In that window the player will almost certainly see: c_origin, c_friend or c_book, y_calling, y_love1, a_marry, a_child, m_health, e_legacy. This is not enough variety to anchor a 'never seen this before' feeling past life two. The extraordinary callbacks (cb_outcast_return, cb_strayed, cb_inherited_secret) fire in midlife or elder, outside the first-session window — so the strongest evidence of freshness is invisible to a newcomer."
+  ],
+  "improvements": [
+    {
+      "what": "Add two or three sharply differentiated calling framings that change the adult card pool, not just the text. A 'soldier in wartime' should draw from a different set of adult cards than a 'soldier in peacetime' — right now the vocation_x_era intersection cards (vx_soldier_war) are correctly designed but there are only a handful, and the base vocation arc is identical regardless of the world born into.",
+      "why": "The vocation is the game's primary structural lever, but it currently delivers thematic flavour on top of an identical skeleton. Making a peacetime soldier feel like a constrained, slightly obsolete life and a wartime scholar feel like a dangerous, principled one would make the calling feel like a genuine life-fork rather than a paint selection.",
+      "impact": "high"
+    },
+    {
+      "what": "Break the y_calling → y_love1 → a_marry → a_child sequence by gating at least one of these on the previous entry having fired (i.e., love cannot open until the vocation is settled, child cannot open until the marriage is at least a decade old). Also, introduce a 10% chance per life that the 'love' slot is genuinely suppressed — the person simply does not meet someone young, and the late-love path becomes the only option — so domestic-arc lives are not just the universal template with varying timing.",
+      "why": "The predictable sequence is the single largest contributor to template-feeling. The current engine nudges love early and marriage follows within a few draw cycles; a player past dynasty three knows which cards are 'pending' and the life feels like a checklist being worked through rather than a story unfolding.",
+      "impact": "high"
+    },
+    {
+      "what": "Persist RECENT_LINES across browser sessions (localStorage) and expand the epitaph pool to 5–6 variants per cluster. The current 3–4 variants per cluster plus a 110-line global dedup window is adequate within a single session but fails the returning player who re-opens the game to a familiar epitaph on their fifth life.",
+      "why": "Epitaph repetition is the most visible staleness signal — players see it at the death screen after every life, when emotional resonance is highest. It is also the easiest thing to fix.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'first session hook' card that fires once, in the very first life, in the adult band — a card with no equivalent in subsequent lives that makes the first life feel unique and irreplaceable. Candidates: a founding vision (a moment of 'this is the life I mean to build'), or a generational rupture (the player explicitly choosing what the house will stand for, with consequences that surface in the heir screen).",
+      "why": "The first-session player has no dynasty layer to orient toward yet. The first life is necessarily the least varied (no callbacks, no inherited secrets, no motto to test). A bespoke 'this is the beginning' card would give the first life narrative weight that subsequent lives earn through the callback system.",
+      "impact": "med"
+    },
+    {
+      "what": "In the midlife band, reduce the weight of mortality-reflective cards (m_health, m_peer_dies, m_who_became, m_smaller_body, m_empty_house) such that only one fires per life. Currently 3–4 of these may appear in a single life, creating a tonal monoculture of 'body and time' in the 45–65 window. The space freed should be filled by a midlife-specific surprise card with no elder equivalent — something that can only happen to a person still capable of consequence.",
+      "why": "The midlife band is where players spend the most accumulated time. Its current repetitiveness is the largest source of 'same template, new names' fatigue across lives 3–8.",
+      "impact": "high"
+    }
+  ],
+  "verdict": "A Life is a beautifully written meditative sim with a genuinely strong first life, but by dynasty four the underlying template — calling, love, marriage, child, health scare, legacy question — becomes visible enough that subsequent lives feel like variations on a form rather than fresh stories, and the first-session window is too short to encounter the callbacks and dynasty mechanics that are the game's best arguments for freshness."
+}

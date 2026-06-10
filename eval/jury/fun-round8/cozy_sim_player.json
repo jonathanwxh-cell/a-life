@@ -1,0 +1,48 @@
+{
+  "profile": "cozy_sim_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The prose is genuinely warm and individually flavoured — 'Had a child, Naima — red and furious and entirely unimpressed by any of it' lands as a specific human moment, not filler, and that register is consistent enough to make the quiet years feel inhabited rather than empty.",
+    "The callback system earns its keep. When the looked-away-from child comes back as a sleeping rough stranger 47 years later (Dynasty 1, Linnea), or when the childhood book reappears in midlife, it creates a real 'oh' moment — the game briefly feels like it is reading your particular life back to you, which is the cozy sim's highest pleasure.",
+    "Vocation arcs genuinely differentiate lives at the structural level. A soldier's life and a scholar's life do not hit the same beats: the soldier gets the 3am ghost card, the late reckless-youth callback, the elder who tells the true cost of the songs; the scholar gets the hungry-years payoff, the great-question-unanswered closer, the teach-or-guard fork. Across five dynasties you do feel this.",
+    "Eras add a light but real macro-texture. Dynasty 12 being born into war years changes the Calling card's framing and gates the w_war_call / w_war_loss moments; the 'turning' era produces the vx_scholar_turning card that only exists at the intersection. These are small, but they prevent the world from being wholly static.",
+    "The dynasty layer — motto crystallising, the reckoning card, the bequest choice visibly shaping the heir's starting stats — gives a genuine 'one more' pull that a single-life game would lack. Watching House Quint climb from nothing to 'a house written into the histories' over five generations and earn 'Beauty is the only argument we trust' is satisfying as a medium-term arc.",
+    "Solitary and childless life-shapes are real, content-bearing paths, not dead-ends. Tamsin Aldecott (Dynasty 2), Naima Bjornsen (4th), Saoirse Mercer (10th) all feel like complete, differently-shaped lives rather than pruned versions of the domestic template."
+  ],
+  "staleness": [
+    "The structural skeleton repeats more than it varies. Across the 15 dynasties in the transcripts, the overwhelming majority of lives hit: c_origin → one or two childhood cards → y_calling → a_marry or late-love → a_child → a_work or vocation card → midlife health scare or parent → elder legacy → death. The names and prose change; the shape of the life does not change nearly enough. By dynasty 8 the scaffold is familiar enough that discovery has given way to pattern-recognition.",
+    "The y_calling card is nearly always the pivot-point for every life, and the four paths (soldier/scholar/maker/wanderer) are the only real structural divergence the game has. With only four vocations and fifteen dynasties, a disproportionate number of lives share a vocation. The transcripts show: scholars appear in at least 7 lives across the 15 dynasties; soldiers in at least 6; wanderers in at least 5. The four-road fork stops feeling like discovery and starts feeling like a menu you already know.",
+    "Callback cards are the game's best feature, but once-per-dynasty gating means they mostly vanish after generation 2 or 3 of a house. From dynasty 8 onward in most houses, the callback density drops sharply and the life becomes more generic — a steady stream of universal moments (a_smallchoice, a_fallow, m_peer_dies, m_smaller_body) that don't reach back to who this person specifically was. The richest texture is in dynasties 3–6; later lives feel thinner.",
+    "Several once-per-dynasty cards recur across different dynasties and feel stale even so. 'cb_outcast_return' (the helped child grown up) fires in Dynasty 3 (Felix at 35), Dynasty 4 (Cleo at 31), Dynasty 10 (Iris at 44) — same arc, same beat, same warm resolution across different houses. 'cb_books_late' (the old book on the high shelf) appears in Dynasty 4 (Ren at 58), Dynasty 7 (Rafael at 54), and is seeded in multiple others. By the 8th-10th dynasty these landmarks feel like recurrent set-pieces rather than earned surprises.",
+    "The marriage and child beats are remarkably uniform in their framing despite text variation. Across the transcripts, at least 12 of the 15+ founders or heirs go through the 'quiet certainty for years, X is waiting for a question' / 'Ask. Build a life.' sequence. Even when played differently (delayed marriage, no marriage), the moments that surround them — love finding them late, then the child question arriving — run on the same schedule. A cozy player who has played 6+ lives knows exactly when the marriage card will come and roughly what it will say.",
+    "The absence of world-level consequences or visible accumulation beyond the house seat means the dynasty layer is thinner than the writing promises. You can see the motto arrive and the house climb, but after dynasty 10 neither the world nor the cards reflect that your house is old — the 's_great_burden' and 's_patronage' seat-gated cards do appear but only occasionally, and the difference between playing House Sorrelle at seat 2 and House Quint at seat 6 is less than expected from a long-running generational sim."
+  ],
+  "improvements": [
+    {
+      "what": "Add 2–3 more calling paths or major life-shapes that create structurally distinct adult card clusters — e.g., a 'healer/midwife', a 'merchant/trader', or a 'keeper/hermit' — each with its own 3-card adult arc and 1-card elder cap",
+      "why": "Four vocations across 15+ dynasties is too few; the structural variety the game promises mostly lives in those arcs, and once the player has seen all four, every new life is a re-run of a known shape. A fifth or sixth path would add ~3 years before the skeleton becomes familiar.",
+      "impact": "high"
+    },
+    {
+      "what": "Increase callback card density in later generations by creating 'dynasty-chain' callbacks that reach two or three generations back — e.g., a life that inherits the 'looked_away' shame from a grandparent's lineage echo, not just a parent's",
+      "why": "The best moments in the transcripts are when a specific past decision echoes forward. Currently this mechanism weakens after dynasty 3 because the once-per-dynasty flag prevents re-firing. Making some callbacks reach further back (keyed to dynasty lineage rather than per-person memory) would restore the 'the game remembers who we were' feeling in mid-to-late dynasties.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 4–6 repeatable 'season of life' cards for the adult/midlife band (ages 28–64) that each have 4+ text variants and feel fresh across plays — specifically cards that vary by the house's current character (seat/repute) and the person's vocation, rather than being universal",
+      "why": "The adult band is the longest and the thinnest; once once-per-dynasty milestones have fired, the mid-years are mostly universal band-fillers (a_smallchoice, a_fallow, a_fallow text variants). A soldier-in-midlife and a scholar-in-midlife currently face the same set of generic moments. Vocation-gated repeatable cards would make the middle years feel like the right life's middle years.",
+      "impact": "high"
+    },
+    {
+      "what": "Make the family motto appear in more card framings after it crystallises — at least 2–3 additional moments should quote or directly challenge the family words beyond the single d_motto_test card",
+      "why": "The motto is the game's most distinctive dynasty artefact — 'Beauty is the only argument we trust' or 'We do not ask twice' should be a living pressure the next generation actually feels in more than one moment. Currently it arrives, fires once in d_motto_test, and becomes background decoration. More motto-interaction moments would make the dynasty layer feel like it genuinely governs the house rather than labelling it.",
+      "impact": "med"
+    },
+    {
+      "what": "Introduce at least one 'dynasty failure arc' — a cluster of cards gated on a house that has been falling for 2+ generations (seat declining, repute tainted or thin) that frames the life explicitly as a decline to witness or reverse, rather than just the same generic cards with a lower seat floor",
+      "why": "The transcripts show that falling dynasties (Mercer collapsing from seat 2 back to nothing) are narratively interesting but mechanically identical to founding dynasties; you just have less money. A decline arc with its own content — cards about living in the shadow of a better ancestor, the particular shame of a house that peaked before you — would make falling feel as rich as rising.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A Life is a quietly beautiful game that earns genuine warmth and occasional true surprise in its first four or five dynasties, but the structural skeleton — calling fork, domestic arc, elder cap — becomes visible by dynasty 6 and familiar by dynasty 10, and the game does not have enough divergent paths or late-dynasty freshness to sustain the 'one more life' pull past that horizon."
+}

@@ -1,0 +1,47 @@
+{
+  "profile": "fun_narrative_player",
+  "score": 6.5,
+  "fun_highlights": [
+    "The callback card system is the game's best narrative trick: a choice made at age 9 (keeping the stray, befriending the outcast, looking away from a lonely child) resurfaces 40–50 years later with genuine emotional resonance — this is the emergent story engine that literary sim players live for.",
+    "Vocation × era intersections are exactly the kind of structural variety that makes replaying interesting: a soldier-in-wartime plays structurally differently than a maker-in-plenty, and these combinations are gated content most plays will never see.",
+    "The dynasty layer — motto crystallisation, seat rises and falls, inherited heirlooms and secrets — gives a 'one more dynasty' pull that single-life sims lack entirely. Watching House Quint climb to 'a house written into the histories' over five deliberate generations has real momentum.",
+    "The prose itself, when fresh, is genuinely literary: the observation lines ('the stairs have started to ask a question of her'; 'thinking has become his favourite weather') land as real character notes, not filler, and the variant pools for major beats (having a child, falling in love) are wide enough that the same card reads differently across lives.",
+    "Solitary and childless life-shapes are coded as real, content-bearing paths rather than dead-ends — Tamsin's solitary elder arc, Saoirse's chosen-family life — which adds meaningful structural variety compared to the domestic monoculture that would otherwise dominate."
+  ],
+  "staleness": [
+    "The core life template is still recognisably the same in most lives: c_origin → a child card or two → y_calling → y_love1 or a_meet_late → a_marry → a_child → a_work → m_health → e_legacy/e_garden/e_peace → death. After five or six lives the beats arrive in a predictable rhythm even when the prose rotates. By dynasty 10-12 the reader can accurately anticipate that a middle-aged life will face a work/family trade-off, a midlife health scare, and an elder reflection card, in roughly that order, regardless of vocation.",
+    "The 'once-per-dynasty' (onceDyn) guard on the freshest cards fires too early. In a 5-generation dynasty (Bjornsen, Quint, Mercer, Thorne), the most structurally interesting cards — cb_books_late, m_peer_dies, e_craft, e_journey, cb_reckless — are burned in generation 2 or 3 and simply absent for the rest of the line. By generation 4-5 the pool is noticeably thinner and lives feel under-furnished.",
+    "Love and marriage still cluster: scanning the transcripts, roughly 80% of lives fall in love (y_love1 or a_meet_late) and 75%+ marry. The engine tries to give ~50% solitary and ~16% childless lives, but in practice the nudge weights for y_love1 (30% per draw when single) and a_marry (55-62% per draw when in love) mean that solitary lives are most often those who die young, not a distinct romantic shape in long-lived characters.",
+    "Several high-weight cards repeat verbatim too often across proximate dynasties. In the 15 dynasties sampled: 'w_war_loss' fires in dynasties 2, 3, 7, 9, 12 with nearly identical prose; 'cb_outcast_return / cb_lookaway' fires in dynasties 1, 2, 3, 4 consecutively; 'a_work' (work vs. family trade-off) appears in virtually every coupled adult life. The RECENT_LINES dedup in epitaphFor() is the right idea but doesn't extend to the body of the log — the same three or four mid-life card outcomes appear in nearly every life.",
+    "The wealth-and-seat track lacks downside narrative drama. Falls are announced ('"This generation cost the family a step"') but generate no unique loss content — the same cards fire whether the house is at seat 1 or falling from seat 5. A house in genuine decline should feel different from a founder struggling up; right now the text is symmetric.",
+    "The 'competing goods' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty) are tagged onceDyn or once-per-life, which means a player who wants to explore moral complexity across a dynasty sees each of these exactly once. These are the most interesting cards for a literary player; capping them so aggressively underserves the genre."
+  ],
+  "improvements": [
+    {
+      "what": "Extend the onceDyn cooldown rather than burning cards permanently: instead of S.seenDyn[c.id]=1 (never again in the dynasty), rotate onceDyn cards on a per-generation cooldown of 3–4 generations. The callback cards (cb_books_late, cb_reckless, e_craft, e_journey, d_ancestor) are the most literary moments in the game — exhausting them in gen 2 leaves a 5-gen dynasty on a thin diet.",
+      "why": "By dynasty 4-5 in the transcripts the life log is visibly shorter and the beats more generic. The per-dynasty burn is the mechanical root cause.",
+      "impact": "high"
+    },
+    {
+      "what": "Add 6–8 dynasty-arc cards that only unlock at specific seat thresholds AND generation counts (e.g., seat≥4 AND gen≥4): 'a famous house is asked to put its name to something it should refuse', 'the family is invited to marry into a rival house', 'a distant branch contests the inheritance across all lines'. These are the macro-arc moments that make a dynasty feel like a saga rather than a sequence of individual lives.",
+      "why": "The dynasty layer currently provides context (standing, motto, heirlooms) but not new content as a dynasty matures. A gen-8 house and a gen-2 house face the same cards.",
+      "impact": "high"
+    },
+    {
+      "what": "Give the four vocations one more unique mid-life card each — specifically a 'vocation at midlife crisis' card that only fires if the player has held the vocation for 20+ years AND has one of its signature memories. Soldier: the old commander asks one last favour. Scholar: a younger scholar proves them wrong publicly. Maker: the tools begin to feel heavy and slow. Wanderer: a place they've avoided for 30 years is unavoidable now.",
+      "why": "Vocation cards currently cluster in adult and elder stages. The midlife band (44–65) is the game's thinnest arc regardless of calling, and a vocation-specific card there would make the structural difference between callings feel real through the whole life rather than only at the beginning and end.",
+      "impact": "med"
+    },
+    {
+      "what": "For the 'moral weight' cards (x_honest_or_kind, x_loyalty_truth, x_dream_or_duty, x_promise), drop the onceDyn flag and replace it with a long cooldown (25+ years) and a different framing each time (the second occurrence of x_dream_or_duty should know it's the second, reference the earlier choice). These are precisely the cards a literary player wants to revisit and explore from different life positions.",
+      "why": "Capping the most interesting moral dilemmas at once-per-dynasty is a direct contradiction of what a narrative player comes for — the ability to live the same hard question in a different character.",
+      "impact": "med"
+    },
+    {
+      "what": "Add a 'falling house' content tier: 2–3 cards that only fire when seat has dropped 2+ steps in a single dynasty (x_shame_of_descent: 'the house that once held a grand estate is now known by the rooms it no longer keeps; someone in the family blames you'). Mirror the house-rising narrative beats with house-falling ones of equal specificity.",
+      "why": "The transcripts show falls (Bjornsen gen 3 losing a step, Mercer gen 4 collapsing) pass without distinct narrative weight. The loss beats are generic. A literary player cares as much about how a dynasty falls as how it rises.",
+      "impact": "med"
+    }
+  ],
+  "verdict": "A genuinely literary, technically accomplished sim that delivers real 'one more life' pull for the first 4–6 dynasties, then runs into structural repetition as its best onceDyn cards burn out and the underlying life template becomes predictable — the prose is fresh but the shape is familiar, which is a different and harder problem to solve."
+}
