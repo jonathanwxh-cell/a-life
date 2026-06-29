@@ -56,7 +56,7 @@ python3 -m http.server 8000
 
 ## Deploying
 
-Hosted on **Vercel** — every push to `main` auto-deploys. It's also a plain static site, so GitHub Pages (or any static host) works. Optional cloud saves need `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` set on the host — see [`docs/cloud-saves.md`](./docs/cloud-saves.md).
+Hosted on **Vercel** — every push to `main` auto-deploys. It's also a plain static site, so GitHub Pages (or any static host) works. Optional cloud saves use the external chronicle endpoint configured in `cloud.js` — see [`docs/cloud-saves.md`](./docs/cloud-saves.md).
 
 ## Project layout
 
@@ -74,7 +74,6 @@ Hosted on **Vercel** — every push to `main` auto-deploys. It's also a plain st
 | `scene.js` | The living scene — sky, sun and moon, the growing tree, and particles, on the background canvas. |
 | `constellation.js` | The bloodline star-map. |
 | `audio.js` | Optional, opt-in ambient music — loops the piece that fits the moment (title, the living years, the eulogy, the heir), off by default. |
-| `api/chronicle.js` | Serverless route (Vercel) that reads/writes a save to Supabase with the service-role key — the only thing that touches the database. |
 | `assets/*.webp` | The painterly backdrop images (title, eulogy, heir, and the five life stages). |
 | `assets/music/*.mp3` | Four instrumental pieces for the game's moments (with a `preview.html` to audition them). |
 | `index.html` | A small entry page that opens `a-life.html` (so GitHub Pages / Vercel serves the game at the root). |
@@ -92,7 +91,7 @@ Hosted on **Vercel** — every push to `main` auto-deploys. It's also a plain st
 
 The frontend is plain HTML, CSS, and vanilla JavaScript — split into small scripts loaded in dependency order, with no ES modules, so it still runs straight off the filesystem. No build step, no framework, no client dependencies. All rendering is Canvas 2D; fonts come from Google Fonts.
 
-Optional **cloud saves** add one serverless function (`api/chronicle.js` on Vercel) talking to **Supabase** with a service-role key — the browser never sees the key, and the table is service-role-only. If the function or network is unavailable (e.g. opened as a local file), the game falls back to local-only saves and plays exactly the same. See [`docs/cloud-saves.md`](./docs/cloud-saves.md).
+Optional **cloud saves** use an external chronicle endpoint from `cloud.js`; the browser only holds a per-dynasty chronicle code, never database credentials. If the endpoint or network is unavailable (e.g. opened as a local file), the game falls back to local-only saves and plays exactly the same. See [`docs/cloud-saves.md`](./docs/cloud-saves.md).
 
 **Working on the code (human or agent)?** Start with [`AGENTS.md`](./AGENTS.md) — architecture, the file/load-order map, conventions, deployment, and the non-obvious gotchas.
 

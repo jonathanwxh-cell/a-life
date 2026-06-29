@@ -24,6 +24,7 @@ function slotMeta(){
 async function save(){
   if(SLOT==null) return;
   try{
+    S.rev=(S.rev||0)+1;
     S.lastSaved=Date.now();
     await window.storage.set('alife:slot:'+SLOT, JSON.stringify(S));
     const idx=await readIndex();
@@ -106,10 +107,21 @@ async function openLoadMenu(){
     const row=document.createElement('div'); row.className='slot'; row.setAttribute('role','listitem');
     const when=timeAgo(m.updated);
     const status = m.alive ? `${m.living}, age ${m.age}` : `${m.living} — the line rests`;
-    row.innerHTML=`<div class="body" tabindex="0" role="button" aria-label="Load House ${m.surname}"><div class="nm">House ${m.surname}</div>
-      <div class="sub">${m.gens} generation${m.gens>1?'s':''} · ${m.souls} live${m.souls===1?'':'s'} lived · ${seatOf(m.seat).adj}<br>
-      <span class="${m.alive?'':'dead'}">${status}</span> · ${when}</div></div>
-      <button class="del" type="button" aria-label="Delete House ${m.surname}" title="delete House ${m.surname}">✕</button>`;
+    row.innerHTML=`<div class="body" tabindex="0" role="button"></div>
+      <button class="del" type="button">✕</button>`;
+    const body=row.querySelector('.body');
+    const safeSurname=safePlain(m.surname,'unnamed');
+    body.setAttribute('aria-label','Load House '+safeSurname);
+    const nm=document.createElement('div'); nm.className='nm'; nm.textContent='House '+safeSurname;
+    const sub=document.createElement('div'); sub.className='sub';
+    sub.appendChild(document.createTextNode((m.gens||1)+' generation'+(m.gens>1?'s':'')+' · '+(m.souls||0)+' live'+(m.souls===1?'':'s')+' lived · '+seatOf(m.seat).adj));
+    sub.appendChild(document.createElement('br'));
+    const st=document.createElement('span'); st.className=m.alive?'':'dead'; st.textContent=safePlain(status,'the line rests');
+    sub.appendChild(st); sub.appendChild(document.createTextNode(' · '+when));
+    body.appendChild(nm); body.appendChild(sub);
+    const del=row.querySelector('.del');
+    del.setAttribute('aria-label','Delete House '+safeSurname);
+    del.setAttribute('title','delete House '+safeSurname);
     const _loadRow=async()=>{
       const ok=await loadSlot(m.slot);
       if(ok){
@@ -208,8 +220,35 @@ function decodeSave(code){
   s=s.replace(/\s+/g,'');
   const json=decodeURIComponent(escape(atob(s)));
   const obj=JSON.parse(json);
-  if(!obj || !obj.person || !obj.surname) throw new Error('not a valid A Life save');
-  return obj;
+  return validateSaveObject(obj);
+}
+function validateSaveObject(obj){
+  if(!obj || typeof obj!=='object' || !obj.person || typeof obj.person!=='object') throw new Error('not a valid A Life save');
+  const copy=JSON.parse(JSON.stringify(obj));
+  copy.surname=safePlain(copy.surname,'unnamed');
+  if(!copy.surname) throw new Error('save is missing a house name');
+  const p=copy.person;
+  p.given=safePlain(p.given,'unnamed');
+  if(!p.given || (p.sex!=='m'&&p.sex!=='f')) throw new Error('save is missing a valid person');
+  p.name=p.given+' '+copy.surname;
+  if(copy.code && !/^[a-z0-9]{8,40}$/.test(String(copy.code))) delete copy.code;
+  if(!p.stats || ['vit','mind','heart','means','spirit'].some(k=>typeof p.stats[k]!=='number' || !isFinite(p.stats[k]))) throw new Error('save has invalid stats');
+  if(!Array.isArray(p.traits)) p.traits=[];
+  if(!Array.isArray(p.rels)) p.rels=[];
+  for(const r of p.rels){ if(r&&typeof r==='object'){ r.given=safePlain(r.given,'unnamed'); r.name=safePlain(r.name||r.given,'unnamed'); } }
+  if(!Array.isArray(p.log)) p.log=[];
+  for(const e of p.log){ if(e&&typeof e==='object'){ e.text=safePlain(e.text,''); e.cls=safePlain(e.cls,''); } }
+  if(!Array.isArray(p.decisions)) p.decisions=[];
+  for(const d of p.decisions){ if(d&&typeof d==='object'){ d.chose=safePlain(d.chose,''); d.alts=Array.isArray(d.alts)?d.alts.map(a=>safePlain(a,'')):[]; d.tone=safePlain(d.tone,'obs'); } }
+  if(!Array.isArray(p.childrenIds)) p.childrenIds=[];
+  if(!p.flags || typeof p.flags!=='object') p.flags={};
+  if(!p.aura || typeof p.aura!=='object') p.aura={warmth:0,light:0,turns:0,lastDelta:null};
+  if(!copy.marks || typeof copy.marks!=='object') copy.marks={gens:1,souls:0,longest:0,peakMeans:0};
+  if(!Array.isArray(copy.lineage)) copy.lineage=[];
+  for(const a of copy.lineage){ if(a&&typeof a==='object'){ a.given=safePlain(a.given,'unnamed'); a.surname=safePlain(a.surname||copy.surname,'unnamed'); a.epitaph=safePlain(a.epitaph,''); if(!Array.isArray(a.log)) a.log=[]; for(const e of a.log){ if(e&&typeof e==='object'){ e.text=safePlain(e.text,''); e.cls=safePlain(e.cls,''); } } if(!Array.isArray(a.decisions)) a.decisions=[]; for(const d of a.decisions){ if(d&&typeof d==='object'){ d.chose=safePlain(d.chose,''); d.alts=Array.isArray(d.alts)?d.alts.map(x=>safePlain(x,'')):[]; d.tone=safePlain(d.tone,'obs'); } } } }
+  if(!copy.house || typeof copy.house!=='object') copy.house=initHouse();
+  if(!copy.seenDyn || typeof copy.seenDyn!=='object') copy.seenDyn={};
+  return copy;
 }
 function setBackupMsg(t,warn){ const m=document.getElementById('backupMsg'); m.textContent=t; m.classList.toggle('warn',!!warn); }
 
@@ -271,11 +310,13 @@ async function importFromCode(){
 // write a save into a free slot, load it, and resume play
 async function adoptIntoSlot(obj, okMsg){
   try{
-    let slot=await nextFreeSlot(); if(slot==null) slot=1;
+    obj=validateSaveObject(obj);
+    let slot=await nextFreeSlot();
+    if(slot==null){ setBackupMsg('All six chronicles are full — delete one before importing another.',true); openLoadMenu(); return; }
     await window.storage.set('alife:slot:'+slot, JSON.stringify(obj));
     const idx=(await readIndex()).filter(e=>e.slot!==slot);
     idx.push({slot, surname:obj.surname, gens:(obj.marks&&obj.marks.gens)||1, souls:(obj.marks&&obj.marks.souls)||0,
-      seat:(obj.house&&obj.house.seat)||1, living:obj.person.given, age:obj.person.age,
+      seat:(obj.house&&obj.house.seat)||1, living:safePlain(obj.person.given,'—'), age:obj.person.age,
       alive:obj.person.alive!==false, updated:Date.now()});
     await writeIndex(idx);
     const ok=await loadSlot(slot);
@@ -311,8 +352,9 @@ async function inspectStorage(){
     recovered.forEach(r=>lines.push('  • House '+r.surname+' — '+r.given+', age '+r.age+' (gen '+r.gens+')'));
     const idx=await readIndex();
     for(const r of recovered){
-      let slot; const mm=r.key.match(/alife:slot:(\d+)/); slot = mm? +mm[1] : ((await nextFreeSlot())||1);
-      if(r.key==='alife:v1'){ const v=await window.storage.get('alife:v1'); await window.storage.set('alife:slot:'+slot, v.value); }
+      let slot; const mm=r.key.match(/alife:slot:(\d+)/); slot = mm? +mm[1] : (await nextFreeSlot());
+      if(!slot){ lines.push('  • Legacy save found, but all six slots are full — delete a chronicle before recovering it.'); continue; }
+      if(r.key==='alife:v1'){ const v=await window.storage.get('alife:v1'); const clean=validateSaveObject(JSON.parse(v.value)); await window.storage.set('alife:slot:'+slot, JSON.stringify(clean)); }
       if(!idx.some(e=>e.slot===slot)){
         const v=await window.storage.get('alife:slot:'+slot); const d=JSON.parse(v.value);
         idx.push({slot, surname:d.surname, gens:(d.marks&&d.marks.gens)||1, souls:(d.marks&&d.marks.souls)||0,
@@ -335,17 +377,17 @@ async function migrateLegacy(){
     if(!r) return idx;                         // nothing old to recover
     const already = idx.some(e=>e.migrated);
     if(already) return idx;                    // already brought across
-    const old=JSON.parse(r.value);
+    const old=validateSaveObject(JSON.parse(r.value));
     if(!old || !old.person) return idx;
-    // find a free slot (or reuse 1)
+    // find a free slot; never overwrite a modern slot automatically
     let slot=1; const used=new Set(idx.map(e=>e.slot));
     while(used.has(slot)&&slot<=6) slot++;
-    if(slot>6) slot=1;
+    if(slot>6) return idx;
     await window.storage.set('alife:slot:'+slot, JSON.stringify(old));
-    const meta={ slot, surname:old.surname, migrated:true,
+    const meta={ slot, surname:safePlain(old.surname,'unnamed'), migrated:true,
       gens:(old.marks&&old.marks.gens)||1, souls:(old.marks&&old.marks.souls)||0,
       seat:(old.house&&old.house.seat)||1,
-      living:old.person?old.person.given:'—', age:old.person?old.person.age:0,
+      living:old.person?safePlain(old.person.given,'—'):'—', age:old.person?old.person.age:0,
       alive:old.person?old.person.alive!==false:false, updated:(old.lastSaved||Date.now()) };
     const ni=idx.filter(e=>e.slot!==slot); ni.push(meta);
     await writeIndex(ni);
@@ -384,8 +426,8 @@ function renderHousesRaised(){
   if(hs.length){
     const peak=seatOf(Math.max(0,...hs.map(h=>h.seat||0)));
     const mottos=[...new Set(hs.filter(h=>h.motto).map(h=>h.motto))].slice(-5);
-    html+='<div class="hr-title">'+hs.length+(hs.length===1?' house':' houses')+' raised — highest, '+peak.name+'</div>';
-    if(mottos.length) html+='<div class="hr-mottos">'+mottos.map(m=>'“'+m+'”').join('<br>')+'</div>';
+    html+='<div class="hr-title">'+hs.length+(hs.length===1?' house':' houses')+' raised — highest, '+htmlEscape(peak.name)+'</div>';
+    if(mottos.length) html+='<div class="hr-mottos">'+mottos.map(m=>'“'+htmlEscape(m)+'”').join('<br>')+'</div>';
   }
   // the discovery line — a gentle "there is more to find," shown once a few moments are in
   if(seen>=4 && total) html+='<div class="hr-seen">'+seen+' of the '+total+' moments a life can hold, witnessed so far.</div>';

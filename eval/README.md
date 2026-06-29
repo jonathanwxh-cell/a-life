@@ -58,9 +58,9 @@ git-ignored runtime artifact; **`eval/sample-transcripts.txt`** is a committed r
 
 The harness can't see the DOM/CSS. For anything UI-facing, also load the page (e.g. `python -m http.server`
 then a headless browser) and check via DOM / `getComputedStyle`. Headless **screenshots time out** on the
-always-animating canvas — assert against the DOM instead (see `AGENTS.md`). A benign `PUT … /api/chronicle
-501` in the console is expected on a static local server (no serverless cloud-save function) — it is not a
-code error.
+always-animating canvas — assert against the DOM instead (see `AGENTS.md`). Cloud saves use the external
+chronicle endpoint from `cloud.js` when served and no-op from `file://`; endpoint/network failures should stay
+non-blocking.
 
 ---
 

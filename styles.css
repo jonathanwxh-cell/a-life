@@ -94,9 +94,9 @@
   .pp:active{transform:scale(0.93);}
   .pp svg{width:14px;height:14px;}
   .veil{position:fixed;inset:0;z-index:10;background:rgba(12,9,7,0.86);backdrop-filter:blur(7px);
-    display:flex;align-items:center;justify-content:center;padding:26px;opacity:0;pointer-events:none;
+    display:flex;align-items:center;justify-content:center;padding:26px;opacity:0;visibility:hidden;pointer-events:none;
     transition:opacity .6s;}
-  .veil.show{opacity:1;pointer-events:auto;}
+  .veil.show{opacity:1;visibility:visible;pointer-events:auto;transition:opacity .6s;}
   .sheet{max-width:430px;width:100%;text-align:center;max-height:88vh;overflow-y:auto;}
   .sheet::-webkit-scrollbar{width:0;}
   .sheet h1{font-family:'Fraunces',serif;font-weight:500;font-size:40px;letter-spacing:0.5px;margin-bottom:6px;}

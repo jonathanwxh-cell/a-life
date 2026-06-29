@@ -24,7 +24,9 @@ const body=`
     if(c.age){ if(P.age<c.age[0]||P.age>c.age[1]) rec.ageViol.push(c.id+'@'+P.age+' ['+c.age+']'); }
     else if(c.stage!=='*'&&c.stage!==stage) rec.stageViol.push(c.id+'@'+P.age+' '+c.stage);
     if(c.once && P.flags['card_'+c.id]) rec.onceViol.push(c.id+'@'+P.age);
-    if(c.onceDyn && S && S.seenDyn && S.seenDyn[c.id]!=null && (P.gen-S.seenDyn[c.id])<(c.onceDyn===true?3:c.onceDyn)) rec.dynViol.push(c.id+'@gen'+P.gen);   // a once-per-dynasty beat fired again inside its generational cooldown
+    if(c.onceDyn && S && S.seenDyn && S.seenDyn[c.id]!=null){
+      if(c.onceDyn===true || (P.gen-S.seenDyn[c.id])<c.onceDyn) rec.dynViol.push(c.id+'@gen'+P.gen);
+    }
     if(!c.once && P.drewAt && P.drewAt[c.id]!=null && (P.age-P.drewAt[c.id])<(c.cool||10)) rec.coolViol.push(c.id+' '+(P.age-P.drewAt[c.id]));
     rec.cardUse[c.id]=(rec.cardUse[c.id]||0)+1;
     P.sinceCard=0; P.drewAt=P.drewAt||{}; P.drewAt[c.id]=P.age; if(c.once) P.flags['card_'+c.id]=1;
@@ -58,8 +60,7 @@ const body=`
       var kids=rels('child').filter(function(r){return r.alive;});
       if(gen>=maxGen) break;
       if(kids.length){ kids.sort(function(a,b){return b.age-a.age;}); succeed(kids[0]); rec.directSucc=(rec.directSucc||0)+1; }
-      else if(collateralAvailable(P)){ var sx=Math.random()<0.5?'m':'f'; succeed({given:pick(sx==='m'?GIVEN_M:GIVEN_F),sex:sx,age:0,bond:50,collateral:true}, true); rec.collSucc=(rec.collSucc||0)+1; }
-      else break;
+      else { var ch=collateralHeirFor(P); if(ch){ succeed(ch, true); rec.collSucc=(rec.collSucc||0)+1; } else break; }
       P.startAge0=(P.age===0); gen++;
       if(Math.random()<0.5) S.era=ERA_KEYS[ri(0,ERA_KEYS.length-1)];   // the world turns between generations — exercise era shifts
     }
@@ -90,8 +91,9 @@ const band=(a,lo,hi)=>pct(a.filter(x=>x>=lo&&x<=hi).length,a.length);
 if(R.loveAges.length) console.log('Age at first love  — <26: '+band(R.loveAges,0,25)+'  26-39: '+band(R.loveAges,26,39)+'  40+: '+band(R.loveAges,40,99)+'   (median '+med(R.loveAges)+')');
 if(R.childAges.length) console.log('Age at first child — <30: '+band(R.childAges,0,29)+'  30-39: '+band(R.childAges,30,39)+'  40+: '+band(R.childAges,40,99)+'   (median '+med(R.childAges)+')');
 if(R.marriageAges.length) console.log('Age at marriage    — <30: '+band(R.marriageAges,0,29)+'  30-44: '+band(R.marriageAges,30,44)+'  45+: '+band(R.marriageAges,45,99)+'   (median '+med(R.marriageAges)+')');
-console.log('Lines reaching gen>=2: '+pct(R.linesHeir,R.lines)+'   avg gens/line: '+gensAvg.toFixed(2)+'   max seat reached: '+R.peakSeat+'/6');
-console.log('VIOLATIONS age:'+R.ageViol.length+' stage:'+R.stageViol.length+' cooldown:'+R.coolViol.length+' once:'+R.onceViol.length+' onceDyn:'+R.dynViol.length);
+console.log('Lines reaching gen>=2: '+pct(R.linesHeir,R.lines)+'   avg gens/line: '+gensAvg.toFixed(2)+'   max seat reached: '+R.peakSeat+'/7');
+console.log('Heirs started at age 0: '+R.heirStart0+'/'+R.heirLives);
+console.log('VIOLATIONS age:'+R.ageViol.length+' stage:'+R.stageViol.length+' cooldown:'+R.coolViol.length+' once:'+R.onceViol.length+' onceDyn:'+R.dynViol.length+' heirStart:'+(R.heirLives-R.heirStart0));
 if(R.ageViol.length) console.log('  age e.g.: '+R.ageViol.slice(0,6).join(' | '));
 if(R.coolViol.length) console.log('  cool e.g.: '+R.coolViol.slice(0,6).join(' | '));
 if(R.onceViol.length) console.log('  once e.g.: '+R.onceViol.slice(0,6).join(' | '));

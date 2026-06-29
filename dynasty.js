@@ -335,6 +335,17 @@ function collateralAvailable(p){
   const odds = 0.5 + ((S.house&&S.house.seat||0)>=3 ? 0.15 : 0) + ((p.gen>=3)?0.05:0);
   return established && chance(odds);
 }
+function collateralHeirFor(p){
+  p.flags=p.flags||{};
+  if(p.flags.collateralChecked) return p.flags.collateralHeir||null;
+  p.flags.collateralChecked=true;
+  if(!collateralAvailable(p)){ p.flags.collateralHeir=null; return null; }
+  const sex=chance(0.5)?'m':'f';
+  const taken=new Set((S.lineage||[]).map(a=>a&&a.given)); taken.add(p.given);
+  let nm=pick(sex==='m'?GIVEN_M:GIVEN_F),g=0; while(taken.has(nm)&&g++<20) nm=pick(sex==='m'?GIVEN_M:GIVEN_F);
+  p.flags.collateralHeir={given:nm,sex,age:0,bond:50,collateral:true};
+  return p.flags.collateralHeir;
+}
 function showEulogy(p){
   document.getElementById('dName').textContent=p.name;
   document.getElementById('dSpan').textContent=`${p.gen===1?'Founder of the line':ordinal(p.gen)+' of the line'} · lived ${p.deathAge} years`;
@@ -349,7 +360,8 @@ function showEulogy(p){
   // a short life is framed as complete, not cut off — so an early death deepens the mood rather than punishing
   if(p.deathAge<45) stext = 'A short life — and, taken on its own terms, a whole one.  ' + stext;
   // no DIRECT heir: an established house passes sideways (collateral); a young, standing-less, kin-less one ends.
-  const coll = !kids.length && collateralAvailable(p);
+  const collHeir = !kids.length ? collateralHeirFor(p) : null;
+  const coll = !!collHeir;
   if(!kids.length && !coll){
     const mk=S.marks||{}, seat=seatOf((S.house&&S.house.seat)||0), rep=S.house?reputeTop(S.house):null;
     const gens=mk.gens||p.gen, souls=mk.souls||1;
@@ -364,11 +376,8 @@ function showEulogy(p){
     btn.textContent='Become '+heir.given;
     btn.onclick=()=>succeed(heir);
   } else if(coll){
-    const sex=chance(0.5)?'m':'f';
-    const taken=new Set((S.lineage||[]).map(a=>a&&a.given)); taken.add(p.given);
-    let nm=pick(sex==='m'?GIVEN_M:GIVEN_F),g=0; while(taken.has(nm)&&g++<20) nm=pick(sex==='m'?GIVEN_M:GIVEN_F);
-    btn.textContent='Become '+nm+' — the line goes sideways';
-    btn.onclick=()=>succeed({given:nm,sex,age:0,bond:50,collateral:true}, true);
+    btn.textContent='Become '+collHeir.given+' — the line goes sideways';
+    btn.onclick=()=>succeed(collHeir, true);
   } else {
     btn.textContent='The line ends. Begin anew.';
     btn.onclick=()=>{ S.lineage[S.lineage.length-1].extinct=true; beginNewLine(); };
@@ -549,6 +558,11 @@ function beginNewLine(){
   document.getElementById('vDeath').classList.remove('show');
   document.getElementById('vHeir').classList.remove('show');
   S.surname=pick(SURNAMES);
+  S.vrot=ri(0,29);
+  S.marks={gens:1,souls:0,longest:0,peakMeans:0};
+  S.lineage=[];
+  S.person=null;
+  delete S.code; delete S.cloudUpdatedAt; delete S.cloudRev; delete S.rev;
   S.house=initHouse();
   S.seenDyn={};                                              // the new house has seen none of the "once-per-dynasty" beats yet
   setEra(chance(0.55)?'settled':rollEra(null), false);       // the world this house is founded into (announced at the first birth)

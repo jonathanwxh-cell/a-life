@@ -10,8 +10,9 @@ player-facing overview is in [README.md](./README.md); design specs live in
 
 A meditative, generational life-sim. It is a **static site — no build step, no
 framework, no client dependencies, vanilla HTML/CSS/JS.** It is hosted on Vercel
-and has *optional* cloud saves via one serverless function + Supabase. Crucially,
-it must also run by **opening `a-life.html` straight off disk (`file://`)**.
+and has *optional* cloud saves via the external chronicle endpoint configured in
+`cloud.js`. Crucially, it must also run by **opening `a-life.html` straight off
+disk (`file://`)**.
 
 ## Golden rules (do not break these)
 
@@ -22,7 +23,7 @@ it must also run by **opening `a-life.html` straight off disk (`file://`)**.
    Anything cloud/network must degrade gracefully to local-only.
 3. **Keep the aesthetic.** Minimal, text-first, contemplative. The writing, the
    living canvas, and the constellation are the point. New UI should whisper, not shout.
-4. **Never commit secrets.** The Supabase service-role key lives only in Vercel env vars.
+4. **Never commit secrets.** The chronicle endpoint holds any database credentials server-side; none belong in this repo.
 
 ## File map & load order
 
@@ -46,7 +47,7 @@ Supporting files:
 - `index.html` — tiny redirect → `a-life.html` (so the site root opens the game).
 - `styles.css` — all styling (was inline; extracted).
 - `assets/*.webp` — the 8 painterly images. See [docs/images.md](./docs/images.md).
-- `api/chronicle.js` — the Vercel serverless route for cloud saves; the **only** code that touches Supabase.
+- `cloud.js` — optional cloud-save client for the external chronicle endpoint; it no-ops on `file://`.
 - `vercel.json` — cache headers (revalidate html/css/js).
 - `gallery.html` — dev-only preview of the image set; **not** part of the game.
 - `docs/` — design specs ([cloud-saves](./docs/cloud-saves.md), [images](./docs/images.md)).
@@ -118,13 +119,12 @@ Supporting files:
   otherwise `core.js` shims it with `localStorage`. Keys: `alife:index` (slot
   summaries) and `alife:slot:N` (full save `S`, slots 1–6). Self-contained base64
   backup codes (`ALIFE1:…`) via export/import.
-- **Cloud saves (`cloud.js` + `api/chronicle.js`).** Optional and login-free. Each
-  dynasty gets a 20-char **chronicle code** stored in its save; `cloud.js`
-  debounce-pushes the save to `/api/chronicle` (PUT) and adopts a newer copy on
-  load (GET). The route uses the **service-role key (server-side only)** to upsert
-  into Supabase `public.alife_saves` (RLS enabled, no policies = service-role
-  only). Falls back to local-only when offline / on `file://`. Full design + env
-  vars: [docs/cloud-saves.md](./docs/cloud-saves.md).
+- **Cloud saves (`cloud.js`).** Optional and login-free. Each dynasty gets a
+  20-char **chronicle code** stored in its save; `cloud.js` debounce-pushes the
+  save to `https://a-life-db.alyoechosys.dev/chronicle` and adopts a newer copy on
+  load. The endpoint holds database credentials server-side. Falls back to
+  local-only when offline / on `file://`. Full design:
+  [docs/cloud-saves.md](./docs/cloud-saves.md).
 - **Living scene & constellation.** Canvas 2D, ambient. The scene reads age + aura
   (and shows the per-stage image at transitions); the constellation plots every
   life's decisions as a star-map.
@@ -154,8 +154,8 @@ Supporting files:
   **Pushing to `main` auto-deploys.** Manual: `vercel deploy --prod --yes --scope jons-projects-0e19e128`.
 - `vercel.json` sets `Cache-Control: public, max-age=0, must-revalidate` on
   html/css/js so edits show on a normal refresh.
-- Cloud env vars (in the Vercel project, **not** the repo): `SUPABASE_URL`,
-  `SUPABASE_SERVICE_ROLE_KEY`.
+- Cloud saves use the external endpoint in `cloud.js`; no cloud-save env vars are
+  required in this Vercel project.
 - Live: **https://a-life-chi.vercel.app** · also works on GitHub Pages (static).
 
 ## Common tasks
@@ -195,14 +195,14 @@ Supporting files:
   when testing locally. The live site is fine (`vercel.json` revalidates).
 - **Image cost-safety:** regenerate images via Codex's built-in `image_gen` tool —
   **not** the OpenAI Images API, which spends the maintainer's `OPENAI_API_KEY`.
-- **Shared Supabase:** the `zo-playground` project holds other apps' tables too —
-  namespace anything new as `alife_*`.
+- **Cloud endpoint:** `cloud.js` targets `https://a-life-db.alyoechosys.dev/chronicle`;
+  keep all network failure paths local-only and non-blocking.
 
 ## Known issues / TODO
 
 - The Load-menu ✕ deletes **locally only** — a synced dynasty's cloud row persists
   under its chronicle code (re-importing that code would bring it back). A full
-  delete would need a `DELETE /api/chronicle` plus a call to it from `deleteSlot`.
+  delete would need endpoint support plus a call to it from `deleteSlot`.
 
 *Fixed previously: deleting the **active** save now stops the tick and clears
 `S`/`P`/`SLOT` (it used to keep ticking and re-save itself).*

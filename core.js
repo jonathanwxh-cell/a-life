@@ -213,3 +213,10 @@ function held(key){ return !!(P.mem && P.mem[key]); }
 function yearsSince(key){ const m=recall(key); return m? P.age-m.age : null; }
 // an echo is a line that consciously reaches back across the years
 function echo(text, cls){ logLine(text, cls||'echo'); }
+function htmlEscape(v){
+  return String(v==null?'':v).replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+}
+function safePlain(v, fallback){
+  const s=String(v==null?'':v).replace(/[<>&"\u0000-\u001f\u007f]/g,'').trim();
+  return (s||fallback||'').slice(0,80);
+}

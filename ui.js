@@ -304,10 +304,13 @@ function openStock(){
 // show/hide call-sites stay untouched.
 (function(){
   if(typeof MutationObserver==='undefined') return;
-  const FOCUSABLE='a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  const FOCUSABLE='a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), summary, [tabindex]:not([tabindex="-1"])';
   const ESC_CLOSE={vChron:'chronClose', vLoad:'loadBack', vStock:'stockClose'};   // dismissable modals (not the narrative gates)
-  const visibles=v=>[...v.querySelectorAll(FOCUSABLE)].filter(el=>el.offsetParent!==null || el===document.activeElement);
-  const focusIn=v=>{ const el=v.querySelector(FOCUSABLE); if(el&&el.focus) setTimeout(()=>{ try{ el.focus(); }catch(e){} },40); };
+  const visibles=v=>[...v.querySelectorAll(FOCUSABLE)].filter(el=>{
+    const cs=window.getComputedStyle?getComputedStyle(el):null;
+    return (el.offsetParent!==null || el.getClientRects().length || el===document.activeElement) && (!cs || (cs.visibility!=='hidden'&&cs.display!=='none'));
+  });
+  const focusIn=v=>{ const el=visibles(v)[0]; if(el&&el.focus) setTimeout(()=>{ try{ el.focus(); }catch(e){} },40); };
   let stack=[]; const top=()=>stack[stack.length-1]||null;     // support nested veils (e.g. chronicle over eulogy)
   document.addEventListener('keydown',e=>{
     const v=top(); if(!v) return;

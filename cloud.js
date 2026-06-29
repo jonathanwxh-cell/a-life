@@ -40,12 +40,18 @@
     if(!S.code) S.code=mintCode();
     if(pushing){ again=true; return; }
     pushing=true;
+    const pushedRev=S.rev||0;
     const body={ data:S, surname:S.surname,
       gens:(S.marks&&S.marks.gens)||1, souls:(S.marks&&S.marks.souls)||0,
       alive: S.person? S.person.alive!==false : true };
     try{
       const r=await timed(sig=>fetch(API+'?code='+encodeURIComponent(S.code),
         {method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:sig}), 8000);
+      if(r.ok){
+        let j=null; try{ j=await r.clone().json(); }catch(_){}
+        const serverT=Date.parse((j&&j.updated_at)||r.headers.get('Date')||'')||0;
+        if(serverT){ S.cloudUpdatedAt=serverT; S.cloudRev=pushedRev; if(typeof SLOT!=='undefined'&&SLOT!=null) await window.storage.set('alife:slot:'+SLOT, JSON.stringify(S)); }
+      }
       setStatus(r.ok?'✦ synced':'saved on this device', r.ok?'ok':'dim');
     }catch(e){ setStatus('offline — saved on this device','dim'); }
     finally{ pushing=false; if(again){ again=false; schedulePush(); } }
@@ -61,8 +67,10 @@
       const r=await timed(sig=>fetch(API+'?code='+encodeURIComponent(S.code),{signal:sig}), 3500);
       if(!r.ok){ if(r.status===404) schedulePush(); return; }
       const j=await r.json(); if(!j||!j.data) return;
-      const cloudT=Date.parse(j.updated_at||'')||0, localT=S.lastSaved||0;
-      if(cloudT > localT + 1500){
+      const cloudT=Date.parse(j.updated_at||'')||0;
+      const cloudRev=(j.data&&j.data.rev)||0, localRev=S.rev||0, localCloudT=S.cloudUpdatedAt||0;
+      if(cloudRev>localRev || (cloudRev===localRev && cloudT && cloudT>localCloudT)){
+        j.data.cloudUpdatedAt=cloudT; j.data.cloudRev=cloudRev||j.data.rev||0;
         await window.storage.set('alife:slot:'+SLOT, JSON.stringify(j.data));
         await loadSlot(SLOT);                 // tested normalization path
         if(window.AL_reseed) window.AL_reseed();
